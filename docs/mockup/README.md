@@ -1,6 +1,6 @@
 # Apresentação do Ponto a Ponto a Osmar
 
-Documento de oito páginas para apresentar o fluxo conceitual e solicitar sugestões da comunidade externa. As oito imagens são acessadas por `imgs`, um link simbólico relativo para `../relatorio_parcial/imgs/`. O relatório e esta apresentação usam os mesmos arquivos, sem cópias independentes. Edite as imagens no diretório do relatório e recompile os dois PDFs. Mantenha essa estrutura e preserve links simbólicos ao clonar ou copiar o projeto.
+Documento de oito páginas para apresentar o fluxo conceitual e solicitar sugestões da comunidade externa. As oito imagens são acessadas por `imgs`, um link simbólico relativo para `../imagens/`. O relatório e esta apresentação usam os mesmos arquivos, sem cópias independentes. Edite as imagens no diretório central `docs/imagens/` e recompile os dois PDFs. Mantenha essa estrutura e preserve links simbólicos ao clonar ou copiar o projeto.
 
 ## Gerar o PDF
 

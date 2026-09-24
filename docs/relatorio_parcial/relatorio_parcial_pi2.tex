@@ -24,6 +24,23 @@
 \tipotrabalho{Relatório Técnico-Científico Parcial}
 \preambulo{Relatório parcial apresentado à disciplina de Projeto Integrador em Computação II.}
 \orientador[Orientadora:]{Dra. Aline Monteiro Campos Garcia}
+% Logotipo oficial apenas na capa; imagens compartilhadas em docs/imagens.
+\renewcommand{\imprimircapa}{%
+  \begin{capa}
+    \centering
+    \includegraphics[width=5cm,keepaspectratio]{Univesp_logo_png_rgb.png}\par
+    \vspace{0.6cm}
+    {\ABNTEXchapterfont\large\imprimirinstituicao\par}
+    \vspace{1cm}
+    {\ABNTEXchapterfont\large\imprimirautor\par}
+    \vfill
+    {\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo\par}
+    \vfill
+    {\large\imprimirlocal\par}
+    {\large\imprimirdata\par}
+    \vspace*{1cm}
+  \end{capa}
+}
 \begin{document}
 \selectlanguage{brazil}\frenchspacing
 \imprimircapa

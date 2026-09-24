@@ -7,8 +7,9 @@ Fontes do relatório parcial do Ponto a Ponto (PaP), com as imagens e o diagrama
 ## Estrutura
 
 - `relatorio_parcial_pi2.tex`: documento principal, referências, glossário e apêndice técnico.
-- `imgs/`: imagens efetivamente referenciadas pelo relatório.
-- `imgs/diagrama_banco.tex`: diagrama vetorial do esquema SQLite, desenhado com TikZ.
+- `../imagens/`: diretório central de imagens dos documentos.
+- `imgs/`: link simbólico relativo para `../imagens/`.
+- `../imagens/diagrama_banco.tex`: diagrama vetorial do esquema SQLite, desenhado com TikZ.
 
 ## Instalação
 
@@ -41,7 +42,7 @@ Esta pasta contém os arquivos necessários para compilar o relatório. O códig
 
 ## Imagens compartilhadas com a apresentação
 
-As imagens `imgs/mockup1.png` a `imgs/mockup8.png` são a fonte única para este relatório e para `../mockup/mockup_ponto_a_ponto.tex`. O diretório `../mockup/imgs` é um link simbólico relativo para `imgs` deste relatório. Após editar uma tela, recompile ambos os documentos para atualizar os PDFs.
+Todas as imagens e o fonte do diagrama ficam em `docs/imagens/`. Os diretórios `docs/relatorio_parcial/imgs` e `docs/mockup/imgs` são links simbólicos relativos para `../imagens`, de modo que ambos os documentos utilizam os mesmos arquivos. Preserve os links ao copiar o projeto e recompile ambos os PDFs após alterar uma imagem. O logotipo oficial da UNIVESP é utilizado apenas na capa do relatório; sua origem está registrada em `docs/imagens/README.md`.
 
 ## Citações e referências
 
