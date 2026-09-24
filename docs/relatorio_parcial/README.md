@@ -38,3 +38,13 @@ Edite os arquivos desta pasta (`docs/relatorio_parcial`) para registrar as próx
 As mensagens dos commits devem ser escritas em português. Os mockups e dados simulados devem permanecer identificados como ilustrativos; a origem das capturas e os limites dos dados estão documentados no relatório.
 
 Esta pasta contém os arquivos necessários para compilar o relatório. O código e os dados do Ponto a Ponto (PaP) permanecem nas respectivas pastas do mesmo projeto; a tese consultada não é necessária à compilação. A documentação das importações está em [IMPORTACOES_E_GEOLOCALIZACAO.md](../IMPORTACOES_E_GEOLOCALIZACAO.md).
+
+## Imagens compartilhadas com a apresentação
+
+As imagens `imgs/mockup1.png` a `imgs/mockup8.png` são a fonte única para este relatório e para `../mockup/mockup_ponto_a_ponto.tex`. O diretório `../mockup/imgs` é um link simbólico relativo para `imgs` deste relatório. Após editar uma tela, recompile ambos os documentos para atualizar os PDFs.
+
+## Citações e referências
+
+O relatório usa `natbib` em modo autor-data e `\citep{chave}` para chamadas entre parênteses. As referências permanecem no ambiente `thebibliography` do `.tex`, sem BibTeX, em ordem alfabética de autoria e, para uma mesma autoria, por título. Ao acrescentar uma fonte, mantenha essa ordem e o rótulo `\bibitem[{Autor}(ano)]{chave}`. Obras da mesma autoria e ano recebem letras correspondentes no rótulo e na referência (2026a, 2026b etc.). Fontes sem data identificada usam `s.d.`; a data de acesso não é usada como data de publicação.
+
+Os intervalos da entrevista são preservados como localizadores: `\citep[181--222 s; 739--853 s]{entrevistaosmar2026}`. A ordenação e o sistema autor-data seguem a orientação e os exemplos da Live da Quinzena 4; isso não substitui a conferência dos metadados bibliográficos de cada fonte.

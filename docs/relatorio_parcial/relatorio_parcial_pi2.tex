@@ -3,6 +3,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,microtype,indentfirst,graphicx,url,enumitem,float}
 \usepackage{longtable,array,amsmath,xurl,tikz}
+% Autor-data conforme os exemplos da Live da Quinzena 4.
+\usepackage[authoryear,round]{natbib}
+\setcitestyle{aysep={,},citesep={;}}
+\setlength{\bibhang}{0pt}
+\setlength{\bibsep}{\baselineskip}
 \usepackage{hyperref}
 \hypersetup{hypertexnames=false}
 \graphicspath{{imgs/}}
@@ -48,15 +53,15 @@ Este projeto desenvolve o Ponto a Ponto (PaP), aplicação web que associa um QR
 \chapter{Introdução}
 O projeto denomina-se \textbf{Ponto a Ponto (PaP)} e tem como frase de apresentação \textit{``Deslocamento facilitado entre origem e destino.''} O nome sintetiza a proposta de apoiar o passageiro na escolha do percurso, desde a identificação do ponto de embarque até o destino desejado, incluindo eventuais trocas de ônibus. A frase expressa o propósito do projeto; os benefícios para os passageiros ainda deverão ser avaliados com a comunidade.
 
-O projeto está alinhado ao tema norteador de Projeto Integrador em Computação II, conforme registrado no Plano de Ação do grupo: \textit{``Desenvolvimento de um software com framework web que utilize noções de banco de dados, praticando controle de versão''} \cite[p.~1]{planoacao2026}. No PaP, esses componentes são concretizados pelo backend Django, integrado à interface React, pela persistência de paradas, linhas e registros de execução em SQLite e pelo controle de versão com Git e GitHub, utilizando branches, commits e pull requests. O acesso às informações do transporte público constitui o recorte de aplicação escolhido pelo grupo para desenvolver essas competências em um problema da comunidade.
+O projeto está alinhado ao tema norteador de Projeto Integrador em Computação II, conforme registrado no Plano de Ação do grupo: \textit{``Desenvolvimento de um software com framework web que utilize noções de banco de dados, praticando controle de versão''} \citep[p.~1]{planoacao2026}. No PaP, esses componentes são concretizados pelo backend Django, integrado à interface React, pela persistência de paradas, linhas e registros de execução em SQLite e pelo controle de versão com Git e GitHub, utilizando branches, commits e pull requests. O acesso às informações do transporte público constitui o recorte de aplicação escolhido pelo grupo para desenvolver essas competências em um problema da comunidade.
 
-A informação em tempo real pode reduzir tempos de espera, influenciar escolhas de trajetos e aumentar a satisfação dos passageiros \cite{brakewood2019}. Este PI aborda o problema a partir do próprio ponto: o QR Code funciona como uma ligação entre o ambiente físico e informações digitais úteis à decisão de viagem. Ao ler o código, o passageiro deverá acessar no navegador uma interface que já identifica a parada e apresenta as alternativas disponíveis. O acesso inicial deverá dispensar conhecimento prévio do nome ou número da linha, do nome do ponto e de seu endereço, assim como a instalação de um aplicativo. Dessa forma, a presença do passageiro no local torna-se suficiente para definir o contexto inicial da consulta, desde que ele disponha de um celular capaz de ler o código e acessar a internet.
+A informação em tempo real pode reduzir tempos de espera, influenciar escolhas de trajetos e aumentar a satisfação dos passageiros \citep{brakewood2019}. Este PI aborda o problema a partir do próprio ponto: o QR Code funciona como uma ligação entre o ambiente físico e informações digitais úteis à decisão de viagem. Ao ler o código, o passageiro deverá acessar no navegador uma interface que já identifica a parada e apresenta as alternativas disponíveis. O acesso inicial deverá dispensar conhecimento prévio do nome ou número da linha, do nome do ponto e de seu endereço, assim como a instalação de um aplicativo. Dessa forma, a presença do passageiro no local torna-se suficiente para definir o contexto inicial da consulta, desde que ele disponha de um celular capaz de ler o código e acessar a internet.
 
-A motivação possui antecedente na Hackatona do Ônibus de 2013, para a qual um integrante submeteu individualmente uma proposta que não foi selecionada para a etapa presencial. O evento utilizava dados reais da SPTrans e desafios derivados das necessidades dos usuários \cite{hackatona2013}. Em notícia de 24 de junho de 2014, a Prefeitura de São Paulo descreve o acesso por QR Code à página da parada, com suas linhas e, após a escolha de uma delas, trajeto e veículos no Olho Vivo. A publicação vincula a iniciativa à Hackatona da SPTrans \cite{qrsptrans2014}. Esse registro constitui um antecedente da proposta e não comprova vínculo entre a contribuição individual mencionada e o sistema implantado.
+A motivação possui antecedente na Hackatona do Ônibus de 2013, para a qual um integrante submeteu individualmente uma proposta que não foi selecionada para a etapa presencial. O evento utilizava dados reais da SPTrans e desafios derivados das necessidades dos usuários \citep{hackatona2013}. Em notícia de 24 de junho de 2014, a Prefeitura de São Paulo descreve o acesso por QR Code à página da parada, com suas linhas e, após a escolha de uma delas, trajeto e veículos no Olho Vivo. A publicação vincula a iniciativa à Hackatona da SPTrans \citep{qrsptrans2014}. Esse registro constitui um antecedente da proposta e não comprova vínculo entre a contribuição individual mencionada e o sistema implantado.
 
-O uso do QR Code e do ponto físico como contexto inicial é, portanto, uma abordagem já existente. A contribuição pretendida deste PI inclui a aplicação dessa abordagem ao contexto de Mauá e a construção e avaliação, com a comunidade externa, de um fluxo integrado que apresente as alternativas do ponto e permita filtrá-las pelo destino desejado. A proposta prevê a visualização conjunta dos veículos que se aproximam, destacando o mais próximo de cada linha, para permitir a comparação das alternativas sem consultas sucessivas por linha. A personalização por destinos favoritos no navegador complementa esse fluxo no protótipo. Essas funcionalidades deverão ser avaliadas, sem alegação de ineditismo ou de superioridade já demonstrada.
+O uso do QR Code e do ponto físico como contexto inicial é, portanto, uma abordagem já existente. A contribuição pretendida deste PI inclui a aplicação dessa abordagem ao contexto de Mauá e a construção e avaliação, com a comunidade externa, de um fluxo integrado que apresente as alternativas do ponto e permita filtrá-las pelo destino desejado. A proposta prevê a visualização conjunta dos veículos que se aproximam, destacando o mais próximo de cada linha, para permitir a comparação das alternativas sem consultas sucessivas por linha. A personalização por destinos favoritos no navegador complementa esse fluxo no protótipo. Essas funcionalidades deverão ser avaliadas, sem alegação de ineditismo ou de superioridade já demonstrada. A análise posterior das telas do Cittamobi confirmou a existência de busca por destino e planejamento com conexões. Diante dessa evidência, a principal contribuição pretendida concentra-se em facilitar a identificação da parada física por QR Code e o início da consulta no navegador.
 
-A proposta atual foi delimitada após interação com a comunidade externa, especialmente a conversa com Osmar, profissional com passagem pela EMTU e experiência no transporte público. Segundo o relato do grupo sobre o contexto local, Mauá não dispõe dessa forma de acesso às informações por QR Codes nos pontos de ônibus. Na conversa inicial, Osmar demonstrou entusiasmo com a ideia, o que motivou o desenvolvimento da proposta para avaliação local. A solução implementada é uma aplicação web responsiva com backend Django/Python e frontend React, baseada em dados do OpenStreetMap e em catálogos públicos complementares. A implementação técnica não equivale à validação com a comunidade.
+A proposta atual foi delimitada após interação com a comunidade externa, especialmente a entrevista de André Meneghelli Vale com Osmar, profissional com experiência no transporte público de Mauá, registrada em arquivo identificado com a data de 20 de agosto de 2026. Segundo seu relato, a cidade já dispunha de rastreamento dos ônibus e consulta por aplicativo; a oportunidade discutida foi facilitar o acesso a essas informações a partir do ponto físico. Osmar considerou útil a proposta do QR Code e relatou não conhecer aplicação semelhante em seu contexto de atuação, o que não demonstra ausência em toda a cidade nem ineditismo da solução \citep[181--222 s; 739--853 s]{entrevistaosmar2026}. A solução implementada é uma aplicação web responsiva com backend Django/Python e frontend React, baseada em dados do OpenStreetMap e em catálogos públicos complementares. A implementação técnica não equivale à validação com a comunidade.
 
 \chapter{Desenvolvimento}
 \section{Objetivos}
@@ -79,24 +84,24 @@ Desenvolver e avaliar um protótipo web de informação ao passageiro, acessíve
 \section{Justificativa e delimitação do problema}
 \textbf{Pergunta de pesquisa:} \textit{Como o acesso a uma aplicação web por QR Code no ponto de ônibus pode ampliar as informações disponíveis no local e facilitar a escolha do deslocamento por passageiros sem conhecimento prévio das linhas, da identificação da parada ou de seu endereço, e sem aplicativo instalado?}
 
-A ausência dessa tecnologia em Mauá, conforme relatada pelo grupo, constitui uma motivação local para o projeto. A existência de uma iniciativa anterior em São Paulo oferece uma referência para o desenvolvimento, enquanto a pertinência da proposta em Mauá decorre das necessidades identificadas no território e do interesse manifestado na interação com a comunidade externa.
+A motivação local é a distância entre a existência de informações operacionais e a facilidade de acessá-las no momento do embarque. Na entrevista, Osmar descreveu serviços de monitoramento já disponíveis e avaliou positivamente a consulta iniciada por QR Code na parada \citep[739--853 s; 961--983 s]{entrevistaosmar2026}. O PaP pretende complementar esse acesso, sem pressupor inexistência de tecnologia em Mauá. A iniciativa anterior em São Paulo oferece uma referência para o desenvolvimento; a adequação do fluxo proposto ao passageiro local ainda exige avaliação.
 
-O escopo desta etapa compreende uma aplicação web funcional, um catálogo rastreável de fontes públicas e cenários operacionais simulados para apresentação a Osmar. A contribuição central é apoiar a decisão a partir do destino, com informação compreensível sobre linhas, sentido, espera e trocas, em vez de exigir que o passageiro reconheça previamente a linha adequada. A hipótese de melhoria da compreensão deverá ser testada localmente; a literatura orienta o projeto, mas não comprova seus resultados em Mauá.
+O escopo desta etapa compreende uma aplicação web funcional, um catálogo rastreável de fontes públicas e cenários operacionais simulados para apresentação a Osmar. Após a análise das funcionalidades do Cittamobi, a contribuição central foi delimitada como facilitar a identificação do ponto físico e o início da consulta por QR Code. A escolha por destino, com informação sobre linhas, sentido, espera e trocas, complementa esse acesso e permanece no escopo do protótipo, sem ser apresentada como diferencial exclusivo. A hipótese de melhoria da compreensão deverá ser testada localmente; a literatura orienta o projeto, mas não comprova seus resultados em Mauá.
 
-O planejamento demonstrativo e o catálogo importado são camadas distintas: possuir uma linha ou uma coordenada no banco não assegura itinerário completo, horário vigente ou conexão operacional válida. Não integram a entrega atual previsões reais de chegada, cobertura integral validada da cidade, implantação autorizada de placas, aplicativo Android ou levantamento populacional de origem e destino. Favoritos já são armazenados no navegador, sem conta nem sincronização entre dispositivos. O acesso inicial pelo QR Code permanece independente dessa personalização.
+O planejamento demonstrativo e o catálogo importado são camadas distintas: possuir uma linha ou uma coordenada no banco não assegura itinerário completo, horário vigente ou conexão operacional válida. Não integram a entrega atual previsões reais de chegada, cobertura integral validada da cidade, implantação autorizada de placas, aplicativo Android ou levantamento populacional de origem e destino. O retorno de Osmar sobre a bilhetagem motivou uma investigação futura de consultas agregadas de origem e destino, descrita nos resultados preliminares, sem equipará-las a deslocamentos efetivamente realizados. Favoritos já são armazenados no navegador, sem conta nem sincronização entre dispositivos. O acesso inicial pelo QR Code permanece independente dessa personalização.
 
 \section{Fundamentação teórica}
 \subsection{Informação ao passageiro e tempo real}
-Sistemas de informação ao passageiro combinam dados estáticos com informações dinâmicas como atrasos, previsões e localização. Brakewood e Watkins sintetizam evidências sobre benefícios da informação em tempo real \cite{brakewood2019}.
+Sistemas de informação ao passageiro combinam dados estáticos com informações dinâmicas como atrasos, previsões e localização. Brakewood e Watkins sintetizam evidências sobre benefícios da informação em tempo real \citep{brakewood2019}.
 
 \subsection{GPS, AVL e localização dos veículos}
-Sistemas AVL acompanham a frota por dados de posição. O GTFS-Realtime prevê posições de veículos, atualizações de viagens e alertas \cite{gtfs}. A API Olho Vivo é um exemplo brasileiro de consultas de linhas, paradas, posições e previsões por HTTP/JSON \cite{sptransapi}.
+Sistemas AVL acompanham a frota por dados de posição. O GTFS-Realtime prevê posições de veículos, atualizações de viagens e alertas \citep{gtfs}. A API Olho Vivo é um exemplo brasileiro de consultas de linhas, paradas, posições e previsões por HTTP/JSON \citep{sptransapi}.
 
 \subsection{Dados abertos e GTFS/GTFS-Realtime}
-GTFS é um padrão aberto para informação de transporte. GTFS Schedule descreve paradas, rotas, viagens e horários; GTFS-Realtime complementa com atualizações, alertas e posições \cite{gtfs}. Estudos mostram aplicações de GTFS em análise e visualização de redes \cite{pereira2023,ma2020}.
+GTFS é um padrão aberto para informação de transporte. GTFS Schedule descreve paradas, rotas, viagens e horários; GTFS-Realtime complementa com atualizações, alertas e posições \citep{gtfs}. Estudos mostram aplicações de GTFS em análise e visualização de redes \citep{pereira2023,ma2020}.
 
 \subsection{Redes de transporte e grafos}
-O planejamento implementado utiliza Dijkstra sobre estados de viagens e paradas, com tempos não negativos em segundos. A prioridade é a chegada mais cedo ao destino no cenário e na janela de serviço considerados, e não a menor distância geográfica. O uso de estados temporais permite representar espera e compatibilidade entre conexões \cite{sedgewicksp,transitplanner}.
+O planejamento implementado utiliza Dijkstra sobre estados de viagens e paradas, com tempos não negativos em segundos. A prioridade é a chegada mais cedo ao destino no cenário e na janela de serviço considerados, e não a menor distância geográfica. O uso de estados temporais permite representar espera e compatibilidade entre conexões \citep{sedgewicksp,transitplanner}.
 
 No PaP, o estado identifica a viagem, a posição na sequência de paradas e a quantidade de embarques. Continuar na mesma viagem não constitui baldeação. Uma troca exige outro veículo na mesma parada e partida posterior à chegada acrescida do intervalo mínimo configurado, de 120 segundos por padrão. O limite de baldeações é configurável. Transferências a pé entre paradas distintas ainda não são representadas; para um destino indicado por coordenada, admite-se caminhada final a partir de paradas até 500 metros, com velocidade suposta de 1,3 m/s. Esses parâmetros são hipóteses do cenário, não medidas de acessibilidade ou da operação local.
 
@@ -105,29 +110,29 @@ O resultado separa espera, tempo a bordo, caminhada final e trocas, sem duplicar
 Dijkstra escolhe entre os tempos fornecidos; não prevê trânsito. As seis linhas demonstrativas utilizam horários e durações simulados. O cadastro público importado permanece fora desse planejamento quando não oferece sequência, geometria e tempos suficientes. Não encontrar caminho significa ausência de conexão nos dados e na janela consultados, e não prova de inexistência de serviço real. A inclusão de tempos operacionais exigirá atualização das entradas e nova verificação das conexões.
 
 \subsection{QR Code como interface físico-digital}
-Em Southampton, QR Codes únicos foram instalados em 44 pontos para acesso a informações de chegada \cite{southampton}. O caso da SPTrans documenta o uso do QR Code junto à sinalização física, com manutenção dos informativos tradicionais. A notícia de 2014 orientava instalar um aplicativo para ler o código; essa orientação se refere ao leitor de QR Code \cite{qrsptrans2014}. Neste PI, o QR Code é concebido como uma interface que estende o ambiente real com dados úteis ao passageiro: o próprio local fornece o contexto que, em uma busca convencional, precisaria ser informado manualmente. A proposta é que o código contenha um endereço web vinculado à parada, permitindo identificá-la sem exigir que o usuário conheça seu nome, endereço ou linhas atendidas. A consulta inicial deverá ocorrer no navegador, sem cadastro obrigatório ou instalação de aplicativo específico do projeto. O acesso pressupõe que o dispositivo disponha de um recurso capaz de ler QR Codes, além de conexão à internet.
+Em Southampton, QR Codes únicos foram instalados em 44 pontos para acesso a informações de chegada \citep{southampton}. O caso da SPTrans documenta o uso do QR Code junto à sinalização física, com manutenção dos informativos tradicionais. A notícia de 2014 orientava instalar um aplicativo para ler o código; essa orientação se refere ao leitor de QR Code \citep{qrsptrans2014}. Neste PI, o QR Code é concebido como uma interface que estende o ambiente real com dados úteis ao passageiro: o próprio local fornece o contexto que, em uma busca convencional, precisaria ser informado manualmente. A proposta é que o código contenha um endereço web vinculado à parada, permitindo identificá-la sem exigir que o usuário conheça seu nome, endereço ou linhas atendidas. A consulta inicial deverá ocorrer no navegador, sem cadastro obrigatório ou instalação de aplicativo específico do projeto. O acesso pressupõe que o dispositivo disponha de um recurso capaz de ler QR Codes, além de conexão à internet.
 
 \clearpage
 \subsection{QRCodeAdesivo: acesso por QR Code no ponto de ônibus}
 \label{sec:analise-qrcodeadesivo}
 O levantamento considera separadamente duas soluções vinculadas à SPTrans. A primeira é o QRCodeAdesivo, página de informações da parada acessada pelo QR Code instalado no ponto; a segunda é o Olho Vivo, sistema de consulta de ônibus, previsões e mapas, analisado na subseção seguinte. Embora a página do QRCodeAdesivo contenha links para o Olho Vivo, essa ligação não torna as capturas dos dois ambientes uma única sequência de uso.
 
-O QRCodeAdesivo é um antecedente direto do acesso físico-digital proposto pelo PI. A notícia de 2014 documenta sua implantação \cite{qrsptrans2014}. O grupo levanta a hipótese de que sua evolução tenha sido descontinuada ou limitada, com base nos indícios técnicos apresentados após a captura; a hipótese não equivale à confirmação de encerramento do serviço.
+O QRCodeAdesivo é um antecedente direto do acesso físico-digital proposto pelo PI. A notícia de 2014 documenta sua implantação \citep{qrsptrans2014}. O grupo levanta a hipótese de que sua evolução tenha sido descontinuada ou limitada, com base nos indícios técnicos apresentados após a captura; a hipótese não equivale à confirmação de encerramento do serviço.
 
 \textbf{Acesso contextualizado pela leitura do QR Code.}
-A página da parada 70016782, na Avenida Paulista, número 200, apresenta as linhas e os acessos individuais de localização, previsão e informações (Figura~\ref{fig:sptrans-parada}). O QR Code dispensa a digitação da origem, mas essa página não relaciona automaticamente as linhas ao destino pretendido pelo passageiro \cite{sptransparada70016782}.
+A página da parada 70016782, na Avenida Paulista, número 200, apresenta as linhas e os acessos individuais de localização, previsão e informações (Figura~\ref{fig:sptrans-parada}). O QR Code dispensa a digitação da origem, mas essa página não relaciona automaticamente as linhas ao destino pretendido pelo passageiro \citep{sptransparada70016782}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,height=0.46\textheight,keepaspectratio]{qrcodeadesivo.extapps.sptrans.com.br-QRCodeAdesivo-adesivo.png}
     \caption{QRCodeAdesivo: ponto identificado pelo QR Code e opções de consulta organizadas por linha.}
     \label{fig:sptrans-parada}
-    \fonte{SPTrans, captura de tela fornecida pelo grupo \cite{sptransparada70016782}.}
+    \fonte{SPTrans, captura de tela fornecida pelo grupo \citep{sptransparada70016782}.}
 \end{figure}
 
 \clearpage
 \textbf{QRCodeAdesivo: hipótese de descontinuidade da evolução da interface.}
-Na verificação técnica de 23 de setembro de 2026, os cabeçalhos HTTP dos arquivos públicos da aplicação do adesivo informaram as datas de última modificação apresentadas na Tabela~\ref{tab:sptrans-modificacao}. O arquivo de código da página e o de configuração indicaram 3 de junho de 2021, enquanto os estilos e uma biblioteca apresentaram datas de 2014 e 2012, respectivamente \cite{sptransadesivojs,sptransgxcfg,sptranscss,sptransgxgral}.
+Na verificação técnica de 23 de setembro de 2026, os cabeçalhos HTTP dos arquivos públicos da aplicação do adesivo informaram as datas de última modificação apresentadas na Tabela~\ref{tab:sptrans-modificacao}. O arquivo de código da página e o de configuração indicaram 3 de junho de 2021, enquanto os estilos e uma biblioteca apresentaram datas de 2014 e 2012, respectivamente \citep{sptransadesivojs,sptransgxcfg,sptranscss,sptransgxgral}.
 
 \begin{table}[H]
     \centering
@@ -240,46 +245,181 @@ O QRCodeAdesivo é a referência para identificar a origem pelo QR Code; o Olho 
 
 
 \clearpage
+\subsection{Cittamobi: consulta de paradas e planejamento por destino}
+A pesquisa documental identificou o Cittamobi como aplicativo com atendimento às linhas da Suzantur em Mauá. O próprio serviço mantém um catálogo da operadora na cidade \citep{cittamobimaua}. As capturas fornecidas pelo grupo documentam a consulta de paradas em Mauá e, em uma exploração complementar, a busca de destinos e rotas. As telas de chegadas incluem linhas com destinos intermunicipais; não se restringem, portanto, ao catálogo municipal importado pelo PaP. A documentação geral do aplicativo descreve previsões, favoritos e planejamento de rotas \citep{cittamobiajuda}.
+
+\textbf{1. Localizar o ponto e consultar as chegadas.} O mapa inicial apresenta marcadores de paradas e um campo denominado ``Linhas e Destinos''. A consulta da parada cujo cabeçalho exibe a Avenida João Ramalho reúne chegadas de diferentes linhas: 040, 063 e 063EX1, com indicações de 5 e 8 minutos na captura (Figura~\ref{fig:cittamobi-ponto-chegadas}). O Cittamobi já oferece, nesse fluxo, uma visão conjunta das previsões do ponto. Os valores registrados são evidências da tela, não uma medição da precisão das previsões.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.46\textheight,keepaspectratio]{cittamobi_selecao_ponto.jpeg}
+\par\small (a) Mapa e campo ``Linhas e Destinos''.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.46\textheight,keepaspectratio]{cittamobi_chegadas_tempo_real.jpeg}
+\par\small (b) Chegadas de diferentes linhas no ponto.
+\end{minipage}
+\caption{Cittamobi: localização da parada e consulta de chegadas em tempo real.}
+\label{fig:cittamobi-ponto-chegadas}
+\fonte{Cittamobi; capturas de tela fornecidas pelo grupo.}
+\end{figure}
+
+\clearpage
+\textbf{2. Distinguir horários programados e detalhar uma linha.} Outra tela apresenta ``Chegadas programadas'', com horários como 10h27, 10h38 e 11h06. A captura do mapa detalha a linha 040, com marcadores de paradas e de veículo (Figura~\ref{fig:cittamobi-programacao-mapa}). O conjunto diferencia previsão em tempo real e programação, distinção também necessária no PaP. O mapa fornecido mostra uma linha selecionada; essa imagem isolada não permite concluir que toda visualização do aplicativo esteja limitada a uma linha.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.46\textheight,keepaspectratio]{cittamobi_chegadas_programadas.jpeg}
+\par\small (a) Horários de chegadas programadas.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.46\textheight,keepaspectratio]{cittamobi_proximo_onibus.jpeg}
+\par\small (b) Mapa da linha 040 selecionada.
+\end{minipage}
+\caption{Cittamobi: programação de chegadas e detalhamento de uma linha no mapa.}
+\label{fig:cittamobi-programacao-mapa}
+\fonte{Cittamobi; capturas de tela fornecidas pelo grupo.}
+\end{figure}
+
+\clearpage
+\textbf{3. Distinguir a busca de linhas da busca de rotas.} A tela ``Buscar'' oferece as abas ``Linhas'', ``Rotas'' e ``Favoritos''. Na aba ``Linhas'', a pesquisa por ``04'' retorna serviços de diferentes localidades (Figura~\ref{fig:cittamobi-busca-linhas}). Apesar do nome do arquivo dessa captura mencionar rota, a interface exibida corresponde à busca de linhas. O pedido de login mostrado na tela refere-se ao histórico de buscas; a imagem não demonstra exigência de autenticação para planejar uma viagem.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamobi_selecao_linha_destino_inicial.jpeg}
+\par\small (a) Abas de busca e acesso ao histórico.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamob_selecao_rota.jpeg}
+\par\small (b) Resultados na aba ``Linhas.
+\end{minipage}
+\caption{Cittamobi: entrada da busca e pesquisa de linhas.}
+\label{fig:cittamobi-busca-linhas}
+\fonte{Cittamobi; capturas de tela fornecidas pelo grupo.}
+\end{figure}
+
+\clearpage
+\textbf{4. Escolher um destino e comparar trajetos.} Na aba ``Rotas'', a busca textual apresenta locais candidatos. Outra captura mostra um destino preenchido, origem definida como ``Minha Localização'' e alternativas de 38, 41 e 44 minutos, combinando caminhada e linhas de transporte (Figura~\ref{fig:cittamobi-destino-rotas}). Há indicação dos locais e horários de embarque e de conexões entre serviços. Assim, as novas evidências confirmam a existência de planejamento por destino e de alternativas com baldeações; a dificuldade inicial do grupo foi superada na exploração posterior.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamobi_selecao_destino.jpeg}
+\par\small (a) Busca de local na aba ``Rotas.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\vspace{0pt}\centering
+\includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamob_destino_selecionado.jpeg}
+\par\small (b) Alternativas até o destino selecionado.
+\end{minipage}
+\caption{Cittamobi: busca de destino e comparação de trajetos com conexões.}
+\label{fig:cittamobi-destino-rotas}
+\fonte{Cittamobi; capturas de tela fornecidas pelo grupo.}
+\end{figure}
+
+Os embarques exibidos nos resultados ficam em São Bernardo do Campo. Essas capturas comprovam funcionalidades do aplicativo, mas não uma viagem com origem na parada de Mauá examinada anteriormente. As telas são organizadas por tarefa, sem presumir uma sessão contínua: os horários visíveis variam, e data e versão do aplicativo não foram informadas pelo grupo.
+
+\clearpage
+\textbf{Contribuição pretendida do PaP após a comparação.} O Cittamobi já reúne consulta de chegadas, busca por destino e planejamento com conexões. A principal oportunidade identificada pelo grupo passa a ser facilitar a identificação da parada física na qual o passageiro se encontra. O QR Code do PaP associa diretamente o local a um identificador de parada e abre a consulta no navegador, evitando a procura inicial entre marcadores, nomes ou endereços e dispensando instalação de aplicativo para esse acesso.
+
+O planejamento por destino, os favoritos e as baldeações permanecem funcionalidades de apoio do protótipo, sem serem apresentados como novidades em relação ao Cittamobi. As capturas não demonstram que o acesso por QR Code esteja ausente de todas as versões ou implantações desse serviço; a seleção facilitada do ponto é a contribuição prioritária a avaliar, não uma afirmação de lacuna exclusiva ou de superioridade comprovada. Uma comparação por tarefas deverá observar se o QR Code reduz ações, tempo, pedidos de ajuda e erros de identificação da parada e do sentido, mantendo o mesmo contexto de viagem.
+
+Essa delimitação também admite discutir com o fornecedor existente uma futura integração do acesso pelo ponto, conforme sugerido por Osmar, sem pressupor API ou parceria já disponíveis. O PaP mantém sua implementação web demonstrativa como instrumento de desenvolvimento e avaliação acadêmica. As análises do Cittamobi, do Olho Vivo e do QRCodeAdesivo permanecem independentes: um recurso identificado em uma solução não implica sua presença ou ausência nas demais.
+
 \subsection{OpenStreetMap e Overpass API}
-O OpenStreetMap é uma base aberta sob ODbL \cite{osmlicense}. Sua modelagem distingue, entre outros elementos, \texttt{stop\_position} e \texttt{platform} \cite{osmpt}. A Overpass API permite consultar elementos por localização, tipo, tags e proximidade \cite{overpass}. O protótipo utiliza Leaflet para a visualização do mapa e das geometrias armazenadas.
+O OpenStreetMap é uma base aberta sob ODbL \citep{osmlicense}. Sua modelagem distingue, entre outros elementos, \texttt{stop\_position} e \texttt{platform} \citep{osmpt}. A Overpass API permite consultar elementos por localização, tipo, tags e proximidade \citep{overpass}. O protótipo utiliza Leaflet para a visualização do mapa e das geometrias armazenadas.
 
 \subsection{Geolocalização e responsividade}
-A Geolocation API permite solicitar a posição do dispositivo mediante autorização \cite{geolocation}. Como o uso ocorrerá principalmente em smartphones, a interface deverá seguir princípios de Responsive Web Design \cite{responsive}.
+A Geolocation API permite solicitar a posição do dispositivo mediante autorização \citep{geolocation}. Como o uso ocorrerá principalmente em smartphones, a interface deverá seguir princípios de Responsive Web Design \citep{responsive}.
 
 \subsection{React no frontend}
-React é uma biblioteca JavaScript para construção de interfaces por componentes reutilizáveis \cite{react}. Mapa, ponto selecionado, lista de linhas, trajeto e busca de destino podem ser componentes independentes.
+React é uma biblioteca JavaScript para construção de interfaces por componentes reutilizáveis \citep{react}. Mapa, ponto selecionado, lista de linhas, trajeto e busca de destino podem ser componentes independentes.
 
 \subsection{Django/Python no backend}
-Django é um framework web em Python que oferece uma camada de modelos e ORM para acesso ao banco \cite{django}. No PaP, o backend concentra regras de negócio, persistência, importações e respostas à interface React.
+Django é um framework web em Python que oferece uma camada de modelos e ORM para acesso ao banco \citep{django}. No PaP, o backend concentra regras de negócio, persistência, importações e respostas à interface React.
 
 \subsection{Banco de dados}
-A implementação utiliza SQLite, no arquivo \texttt{db.sqlite3}, acessado pelo ORM do Django. O banco guarda paradas, linhas, sequências, documentos de origem, estimativas de localização e controles da simulação. Os dados apresentados na aplicação são montados a partir desses registros. PostgreSQL/PostGIS poderá ser considerado se a implantação exigir consultas espaciais ou concorrência mais complexas, mas não compõe a arquitetura atual \cite{postgis}.
+A implementação utiliza SQLite, no arquivo \texttt{db.sqlite3}, acessado pelo ORM do Django. O banco guarda paradas, linhas, sequências, documentos de origem, estimativas de localização e controles da simulação. Os dados apresentados na aplicação são montados a partir desses registros. PostgreSQL/PostGIS poderá ser considerado se a implantação exigir consultas espaciais ou concorrência mais complexas, mas não compõe a arquitetura atual \citep{postgis}.
 
 \subsection{APIs e integração de dados}
-A aplicação importa OSM/Overpass e documentos públicos de catálogos complementares, com normalização antes da gravação no SQLite. Documentos históricos e páginas de conferência não são automaticamente tratados como cadastro operacional. GTFS e APIs de localização continuam como possibilidades de integração, sem fornecimento operacional confirmado para Mauá. A API Olho Vivo é uma referência técnica de dados e endpoints, não a fonte dos veículos simulados do PaP \cite{sptransapi}.
+A aplicação importa OSM/Overpass e documentos públicos de catálogos complementares, com normalização antes da gravação no SQLite. Documentos históricos e páginas de conferência não são automaticamente tratados como cadastro operacional. GTFS e APIs de localização continuam como possibilidades de integração, sem fornecimento operacional confirmado para Mauá. A API Olho Vivo é uma referência técnica de dados e endpoints, não a fonte dos veículos simulados do PaP \citep{sptransapi}.
 
 \subsection{Clareza da informação e familiaridade do passageiro}
-O documento de Haylett é uma tese de doutorado em Engenharia, apresentada à University of Southampton em 2018. A autora investiga como a familiaridade com o ambiente e com a operação do transporte interfere nas necessidades de informação. Seu quadro \textit{Traveller Planning Types} articula familiaridade e etapas da viagem, e a investigação de planejadores examina a compreensão e a confiança ao planejar deslocamentos conhecidos e desconhecidos \cite{haylett2018}. O PI adapta essas contribuições ao acesso pelo ponto de ônibus; os estudos da tese, especialmente de planejamento prévio no contexto britânico, não demonstram por si só a eficácia do protótipo em Mauá.
+O documento de Haylett é uma tese de doutorado em Engenharia, apresentada à University of Southampton em 2018. A autora investiga como a familiaridade com o ambiente e com a operação do transporte interfere nas necessidades de informação. Seu quadro \textit{Traveller Planning Types} articula familiaridade e etapas da viagem, e a investigação de planejadores examina a compreensão e a confiança ao planejar deslocamentos conhecidos e desconhecidos \citep{haylett2018}. O PI adapta essas contribuições ao acesso pelo ponto de ônibus; os estudos da tese, especialmente de planejamento prévio no contexto britânico, não demonstram por si só a eficácia do protótipo em Mauá.
 
-Haylett recomenda separar a visão geral das opções dos detalhes necessários para realizar a viagem, apresentar o percurso geográfico e tornar compreensíveis disponibilidade, sentido e complexidade das conexões (p.~138--144). Isso fundamenta um fluxo em que o passageiro reconhece a origem, indica o destino, compara alternativas e então consulta embarque, baldeações e desembarque. A menor duração deve ser apresentada junto às trocas: o caminho mais rápido não é necessariamente o mais simples para quem desconhece a rede \cite{haylett2018}.
+Haylett recomenda separar a visão geral das opções dos detalhes necessários para realizar a viagem, apresentar o percurso geográfico e tornar compreensíveis disponibilidade, sentido e complexidade das conexões (p.~138--144). Isso fundamenta um fluxo em que o passageiro reconhece a origem, indica o destino, compara alternativas e então consulta embarque, baldeações e desembarque. A menor duração deve ser apresentada junto às trocas: o caminho mais rápido não é necessariamente o mais simples para quem desconhece a rede \citep{haylett2018}.
 
-A tese também recomenda recuperar consultas sem perda de contexto, evitar resultados antigos após mudanças de destino e explicitar a origem das notificações (p.~144--152). Recomenda agrupar partidas de um mesmo serviço e sentido, preservando diferenças entre trajetos, e reduzir informações periféricas (p.~152--156). No PaP, essas orientações justificam mostrar próximas partidas sem repetir desnecessariamente opções, manter a seleção coerente entre lista e mapa e distinguir dados simulados, posições aproximadas e indisponibilidade de informação \cite{haylett2018}.
+A tese também recomenda recuperar consultas sem perda de contexto, evitar resultados antigos após mudanças de destino e explicitar a origem das notificações (p.~144--152). Recomenda agrupar partidas de um mesmo serviço e sentido, preservando diferenças entre trajetos, e reduzir informações periféricas (p.~152--156). No PaP, essas orientações justificam mostrar próximas partidas sem repetir desnecessariamente opções, manter a seleção coerente entre lista e mapa e distinguir dados simulados, posições aproximadas e indisponibilidade de informação \citep{haylett2018}.
 
 \textbf{Requisitos de escopo derivados da leitura.} A revisão estabelece como critérios de evolução e avaliação: consulta inicial sem identificação manual da linha; resumo do deslocamento antes dos detalhes; indicação textual do sentido e das trocas, além das cores do mapa; agrupamento sem misturar variantes ou sentidos; manutenção de origem e destino ao alternar visualizações; e mensagens que distingam falha de consulta, cobertura incompleta e ausência de conexão no cenário. Esses critérios não significam que todos já estejam integralmente atendidos pela interface. Sua verificação com passageiros é uma entrega da próxima etapa, junto à avaliação dos favoritos opcionais em viagens recorrentes.
 
 \subsection{Git e GitHub}
-Git é um sistema distribuído de controle de versão, com histórico completo nos clones e suporte a branches para desenvolvimento paralelo \cite{git}.
+Git é um sistema distribuído de controle de versão, com histórico completo nos clones e suporte a branches para desenvolvimento paralelo \citep{git}.
 
 \section{Metodologia}
-A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prototipar, implementar e testar, orientadas pelo Design Thinking. Essa abordagem parte das necessidades das pessoas, explora alternativas e utiliza protótipos para aprender por iteração, considerando também viabilidade técnica e condições de continuidade da solução \cite{ideo-designthinking}. O modelo Double Diamond distingue descoberta, definição, desenvolvimento e entrega, com possibilidade de retorno às etapas anteriores \cite{designcouncil}. Neste relatório, essas referências ajudam a organizar as decisões do PaP; não se afirma que o grupo tenha executado integralmente um protocolo formal dessas instituições.
+A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prototipar, implementar e testar, orientadas pelo Design Thinking. Essa abordagem parte das necessidades das pessoas, explora alternativas e utiliza protótipos para aprender por iteração, considerando também viabilidade técnica e condições de continuidade da solução \citep{ideo-designthinking}. O modelo Double Diamond distingue descoberta, definição, desenvolvimento e entrega, com possibilidade de retorno às etapas anteriores \citep{designcouncil}. Neste relatório, essas referências ajudam a organizar as decisões do PaP; não se afirma que o grupo tenha executado integralmente um protocolo formal dessas instituições.
 
 A revisão de Haylett acrescenta critérios de clareza da informação e um protocolo de avaliação por tarefas. A descrição a seguir sistematiza o percurso registrado do projeto, distinguindo relatos da comunidade, observações do grupo sobre interfaces e dados, hipóteses de uso e evidências de implementação. O ciclo de validação com passageiros permanece aberto. Não há registro, nesta etapa, de oficina formal de ideação, mapa de empatia ou personas produzidos com participantes, e esses instrumentos não são apresentados como atividades realizadas.
 
 \subsection{Ouvir e interpretar o contexto}
-Na conversa inicial relatada pelo grupo, Osmar, profissional com passagem pela EMTU, demonstrou interesse pelo acesso às informações por QR Codes nos pontos. Esse contato orientou a proposta, mas não constitui teste de usabilidade nem autorização de implantação. Data, participantes e registro detalhado da conversa ainda precisam ser consolidados. A alegação de ausência da tecnologia em Mauá permanece uma observação do grupo, sem levantamento exaustivo de todos os pontos.
+A escuta inicial foi realizada em conversa remota entre André Meneghelli Vale e Osmar, interlocutor com experiência no transporte público de Mauá. O registro foi incorporado ao projeto como transcrição com identificação de falantes e marcações temporais. O nome do arquivo indica 20 de agosto de 2026, às 14h00min44s, e a transcrição alcança 2.861 segundos, aproximadamente 47 minutos e 41 segundos. A data é a identificação do registro fornecido pelo grupo, não uma verificação independente dos metadados da gravação \citep{entrevistaosmar2026}.
+
+\textbf{Tratamento do registro.} André informou ter revisado os trechos sinalizados como \texttt{[REVISAR]} e considerado seu conteúdo adequado, com baixa ocorrência de erros de transcrição. Essas marcas remanescentes no arquivo são registros do processamento automático e não são tratadas neste relatório como pendências de revisão do conteúdo. A análise utiliza sínteses temáticas e intervalos em segundos para permitir a localização das passagens. A revisão pelo participante não transforma as informações operacionais relatadas em cadastro oficial nem substitui a avaliação do protótipo com passageiros.
+
+\textbf{Principais contribuições à definição do problema.} Osmar informou que o monitoramento dos veículos e a consulta pelo passageiro já existiam em Mauá. A conversa deslocou, portanto, o foco da criação de rastreamento para o acesso contextualizado à informação disponível. Ele avaliou favoravelmente a ideia de iniciar a consulta pelo QR Code da parada e sugeriu organizar a proposta por escrito e apresentá-la à empresa responsável pelo rastreamento \citep[447--589 s; 739--853 s; 1135--1163 s]{entrevistaosmar2026}.
+
+Ao discutir integração, o interlocutor distinguiu informações destinadas ao público de dados utilizados pela prefeitura e pela operadora. Não confirmou a existência de API acessível ao projeto. Ao final, dispôs-se a procurar um contato da empresa e a colaborar com a continuidade do trabalho. Essas manifestações indicam encaminhamentos para articulação, sem comprovar entrega de credenciais, assinatura de parceria ou autorização de implantação \citep[861--919 s; 2293--2425 s]{entrevistaosmar2026}.
+
+A Tabela~\ref{tab:entrevista-osmar} registra a relação entre os temas da entrevista e as decisões do grupo. As implicações de projeto são interpretações da equipe, não requisitos formalmente aprovados por Osmar.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}>{\raggedright\arraybackslash}p{0.39\textwidth}}
+\caption{Contribuições da entrevista inicial e implicações para o PaP}\label{tab:entrevista-osmar}\\
+\hline
+Intervalo do registro & Tema discutido & Implicação delimitada pelo grupo \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small Tabela \thetable{} -- continuação}\\
+\hline
+Intervalo do registro & Tema discutido & Implicação delimitada pelo grupo \\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{\small Continua na próxima página}\\
+\endfoot
+\hline
+\multicolumn{3}{p{0.95\textwidth}}{\footnotesize Fonte: síntese do grupo a partir da transcrição da entrevista \citep{entrevistaosmar2026}; intervalos em segundos.}\\
+\endlastfoot
+181--222; 739--853 & Monitoramento existente e receptividade à consulta pelo ponto físico. & Priorizar QR Code associado à parada e acesso simples; avaliar a compreensão com passageiros.\\
+\hline
+773--795 & Referência aproximada a 1.600 paradas e distinção entre ponto de parada e abrigo. & Não condicionar o cadastro à existência de abrigo; conferir identificação, local e autorização da sinalização. A estimativa oral não valida a contagem importada.\\
+\hline
+861--919; 1135--1163; 2293--2425 & Separação entre informações públicas e internas; sugestão de apresentação e contato com o fornecedor. & Documentar a proposta, solicitar cadastro e condições de integração; manter simulação enquanto o acesso operacional não estiver confirmado.\\
+\hline
+1647--1785 & Discussão de anúncio das paradas e orientação de quem desconhece o percurso. & Considerar legibilidade e identificação de embarque e desembarque na avaliação; anúncio sonoro embarcado permanece fora da entrega atual.\\
+\hline
+2499--2543 & Programação por ordem de serviço e diferenças entre dias úteis, sábados e domingos. & Solicitar calendários e horários por tipo de dia para integração futura; o cenário demonstrativo não representa a programação vigente.\\
+\hline
+2583--2679 & Efeitos do trânsito, chuva e alagamentos sobre a operação. & Distinguir horário programado de previsão; explicitar indisponibilidade e atualização dos dados. Dijkstra com tempos simulados não mede atrasos reais.\\
+\end{longtable}
+\endgroup
+
+Também foram levantadas, por André, ideias de relatos de lotação com pontuação e de orientação sonora de paradas. Essas possibilidades integram a exploração inicial de alternativas, mas não foram incorporadas como funcionalidades entregues ou compromissos de implementação. O recorte atual concentra-se no acesso web pelo ponto e no planejamento demonstrativo \citep[112--153 s; 1647--1785 s]{entrevistaosmar2026}.
 
 
-\textbf{Compreensão das necessidades e delimitação do desafio.} A conversa com Osmar é um relato inicial de receptividade profissional. As capturas do QRCodeAdesivo e do Olho Vivo constituem observações documentais de fluxos específicos, enquanto a cobertura incompleta das fontes públicas é uma constatação técnica do levantamento. A hipótese de que o passageiro desconheça a linha adequada, tenha dificuldade para interpretar muitas opções ou necessite de ajuda em uma baldeação ainda deverá ser investigada com usuários. A familiaridade tratada por Haylett fundamenta essa investigação, sem substituir evidências locais.
+\textbf{Compreensão das necessidades e delimitação do desafio.} A entrevista com Osmar documenta receptividade à ideia, informações sobre o contexto operacional e sugestões de encaminhamento, anteriores à avaliação da interface. As capturas do QRCodeAdesivo e do Olho Vivo constituem observações documentais de fluxos específicos, enquanto a cobertura incompleta das fontes públicas é uma constatação técnica do levantamento. A hipótese de que o passageiro desconheça a linha adequada, tenha dificuldade para interpretar muitas opções ou necessite de ajuda em uma baldeação ainda deverá ser investigada com usuários. A familiaridade tratada por Haylett fundamenta essa investigação, sem substituir evidências locais.
 
 O desafio de projeto foi delimitado como: \textit{como ajudar uma pessoa que está no ponto de ônibus a reconhecer alternativas para chegar ao destino, sem precisar conhecer previamente linhas ou a identificação da parada?} A necessidade central é compreender o deslocamento. O QR Code é uma resposta proposta para identificar a origem; a seleção do destino, a comparação de alternativas e as instruções de troca respondem às decisões seguintes. O entusiasmo de um interlocutor não confirma que essa combinação atende a todos os passageiros.
 
@@ -287,6 +427,8 @@ Para ampliar a escuta, a próxima etapa deverá investigar com passageiros como 
 
 \subsection{Criar e prototipar}
 Foram produzidos mockups conceituais e implementado o PaP com Django, React, Leaflet e SQLite. O fluxo associa o QR Code à origem, apresenta alternativas e permite escolher o destino e consultar um percurso. As imagens geradas automaticamente documentam a intenção de interface, enquanto o código e os testes documentam a implementação. Favoritos locais apoiam consultas recorrentes; não se desenvolve aplicativo Android nesta etapa.
+
+Em paralelo à evolução do protótipo web, o grupo está desenvolvendo um mockup interativo no Figma para representar a navegação e apoiar a discussão das telas. As duas frentes têm finalidades complementares: o Figma permite explorar a sequência de interação, enquanto a aplicação Django/React executa a consulta aos dados e o planejamento no cenário demonstrativo. Nesta etapa, o mockup interativo está em elaboração; as figuras deste relatório continuam sendo as imagens conceituais já produzidas, não capturas de uma versão concluída no Figma.
 
 A preparação dos dados compreende coleta e preservação das fontes, normalização de identificadores e sequências, importação no banco e geolocalização aproximada dos registros sem coordenadas. Fonte, data, evidências e pendências são mantidas para revisão. Os horários e veículos do cenário de demonstração são separados do cadastro público. A administração controla ativação, relógio e velocidade da simulação; a interface do passageiro informa a natureza demonstrativa dos dados.
 
@@ -326,9 +468,9 @@ Observação ou hipótese & Necessidade interpretada & Solução proposta ou imp
 \hline\multicolumn{4}{r}{\small Continua na próxima página}\\
 \endfoot
 \hline
-\multicolumn{4}{p{0.95\textwidth}}{\footnotesize Fonte: elaboração do grupo a partir do relato inicial, das capturas analisadas e das decisões documentadas do PaP (2026).}\\
+\multicolumn{4}{p{0.95\textwidth}}{\footnotesize Fonte: elaboração do grupo a partir da entrevista inicial, das capturas analisadas e das decisões documentadas do PaP (2026).}\\
 \endlastfoot
-Relato de interesse de Osmar no QR Code e hipótese de desconhecimento da parada pelo passageiro.
+Entrevista registra interesse de Osmar no acesso pelo ponto; o desconhecimento da parada pelo passageiro permanece hipótese de uso.
 & Iniciar a consulta a partir do local físico.
 & QR Code identifica a origem e abre o navegador; acesso implementado, implantação física pendente.
 & Solicitar consulta sem fornecer nome da parada ou linha; observar conclusão e pedidos de ajuda.\\
@@ -446,9 +588,13 @@ A verificação técnica abrange importação, preservação das sequências, es
 
 O planejamento deve permanecer verificável por cenários de viagem direta, baldeação, conexão perdida, permanência no mesmo veículo e ausência de caminho. A comparação com resultados calculados manualmente e o caso de uma partida posterior com chegada anterior permitem conferir a lógica temporal. Alterações futuras dos dados e do algoritmo exigirão repetição dos casos pertinentes.
 
+\textbf{Andamento da segunda interação com Osmar.} Após a entrevista, o grupo recebeu uma resposta por e-mail de Osmar sobre registros de bilhetagem e estimativas de desembarque, incorporada à discussão de origem e destino. Esse esclarecimento complementa o levantamento de requisitos, mas não contém avaliação das telas ou do protótipo. O retorno sobre a solução atual permanece pendente, enquanto o grupo desenvolve o mockup interativo no Figma e aprimora o protótipo web. O registro do retorno deverá identificar data, participantes, material ou versão examinada e modalidade de apresentação, distinguindo comentários sobre o PDF, navegação no Figma e uso da aplicação.
+
+A consulta deverá registrar o que Osmar compreendeu da proposta, quais aspectos considerou úteis, o que modificaria, sua percepção de viabilidade e limitações, a contribuição do QR Code em relação ao acesso já oferecido pelo Cittamobi e as possibilidades de integração com o fornecedor. Para cada sugestão, o grupo deverá documentar a decisão de incorporá-la, adiá-la ou não adotá-la, com justificativa e indicação da alteração correspondente. Esses itens constituem um roteiro de coleta, não respostas já obtidas. O retorno profissional será analisado separadamente de testes de compreensão realizados com passageiros.
+
 \textbf{Protocolo proposto para avaliação com a comunidade.} A demonstração a Osmar deverá preceder uma avaliação exploratória com passageiros que relatem diferentes graus de familiaridade com os trajetos, sem tratar essa familiaridade como característica fixa de cada pessoa. Propõem-se as seguintes tarefas:
 \begin{enumerate}
-\item iniciar a consulta por QR Code sem receber o nome do ponto ou das linhas e indicar um destino;
+\item iniciar a consulta por QR Code sem receber o nome do ponto ou das linhas e indicar um destino; comparar a identificação da mesma parada no aplicativo existente, registrando ações, tempo, erros de sentido e pedidos de ajuda;
 \item comparar uma alternativa direta com outra que contenha baldeação e explicar a escolha;
 \item identificar linha, sentido, embarque, eventual troca e desembarque no percurso escolhido;
 \item alterar o destino e verificar a coerência entre lista, mapa e detalhes, sem reutilizar indevidamente o resultado anterior;
@@ -460,13 +606,13 @@ Serão registrados conclusão sem ajuda, tempo por tarefa, erros de interpretaç
 
 \textbf{Retorno e iteração.} Após cada sessão de avaliação, o grupo deverá registrar a versão do protótipo e o cenário utilizado, a tarefa proposta, o comportamento observado, a dificuldade relatada e a interpretação dos responsáveis pela análise. Cada alteração deverá indicar a evidência que a motivou e a tarefa a repetir. Erros que levem à escolha de sentido, embarque ou conexão inadequados terão prioridade sobre ajustes estéticos. Caso a dificuldade esteja na compreensão do problema ou na qualidade dos dados, o processo deverá retornar à escuta e à revisão dos requisitos, em vez de se limitar a modificar a interface.
 
-A avaliação com Osmar e passageiros ainda não foi realizada. O retorno deverá ser documentado, convertido em requisitos e confrontado com os critérios de Haylett. Não se avaliará precisão de previsão real usando horários simulados. A validação operacional das paradas, dos sentidos e dos itinerários será uma atividade distinta, dependente de cadastro autorizado e conferência pelos responsáveis pelo serviço.
+A entrevista inicial já forneceu retorno sobre a ideia. A avaliação dos mockups e do protótipo funcional com Osmar, assim como os testes com passageiros, ainda não está documentada como realizada. O retorno deverá ser documentado, convertido em requisitos e confrontado com os critérios de Haylett. Não se avaliará precisão de previsão real usando horários simulados. A validação operacional das paradas, dos sentidos e dos itinerários será uma atividade distinta, dependente de cadastro autorizado e conferência pelos responsáveis pelo serviço.
 
 \section{Resultados preliminares: solução inicial}
 
-Os resultados desta etapa incluem o protótipo web funcional, a persistência em SQLite, o catálogo importado de fontes públicas, a estimativa auditável de parte das coordenadas e os cenários de planejamento com dados simulados. O acesso por QR Code, a seleção de origem e destino, a consulta de alternativas e os favoritos no navegador estão implementados. A demonstração e a avaliação com a comunidade ainda precisam ocorrer; os mockups não substituem essa evidência.
+Os resultados desta etapa incluem o protótipo web funcional, a persistência em SQLite, o catálogo importado de fontes públicas, a estimativa auditável de parte das coordenadas e os cenários de planejamento com dados simulados. O acesso por QR Code, a seleção de origem e destino, a consulta de alternativas e os favoritos no navegador estão implementados. A entrevista inicial documenta participação da comunidade na definição da proposta. A demonstração e a avaliação da solução desenvolvida ainda precisam ser registradas; o retorno sobre a ideia e os mockups produzidos não substituem essa evidência.
 
-A contribuição pretendida reúne acesso contextualizado e escolha por destino. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O PaP busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
+A contribuição prioritária é o acesso contextualizado pelo ponto físico, com identificação da origem por QR Code e abertura no navegador. As novas capturas do Cittamobi confirmam que escolha por destino e planejamento com conexões já são oferecidos por esse aplicativo; no PaP, esses recursos dão continuidade à consulta, sem constituírem novidade funcional comprovada. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O PaP busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
 
 \subsection{Base de dados OSM utilizada no desenvolvimento}
 
@@ -501,11 +647,11 @@ Total de registros & 233 & --- \\
 \fonte{Banco do PaP e registros de importação do grupo, 24 set. 2026.}
 \end{table}
 
-O Cittamobi fornece identificadores, endereços e sequências; a Suzantur, catálogos e páginas de linhas. A publicação municipal registra alterações das linhas 71, 75 e 76, enquanto a consulta da EMTU cobre apenas o resultado de um logradouro. PlanMob de 2017, Moovit, Ônibus Online e Bus2 foram preservados como referências ou documentos de conferência. O PlanMob não foi convertido em operação vigente. A consulta de dados do painel Bus2 retornou erro HTTP 500 e não forneceu dados operacionais. As fontes e seus limites estão descritos no manifesto \texttt{fonts/sources.json} e no documento técnico de importações \cite{mbmimportacoes}.
+O Cittamobi fornece identificadores, endereços e sequências; a Suzantur, catálogos e páginas de linhas. A publicação municipal registra alterações das linhas 71, 75 e 76, enquanto a consulta da EMTU cobre apenas o resultado de um logradouro. PlanMob de 2017, Moovit, Ônibus Online e Bus2 foram preservados como referências ou documentos de conferência. O PlanMob não foi convertido em operação vigente. A consulta de dados do painel Bus2 retornou erro HTTP 500 e não forneceu dados operacionais. As fontes e seus limites estão descritos no manifesto \texttt{fonts/sources.json} e no documento técnico de importações \citep{mbmimportacoes}.
 
 As respostas originais são preservadas em \texttt{fonts/raw/}, com endereço de origem, data de coleta e hash SHA-256; a normalização é registrada antes da importação. O banco relaciona documentos, paradas, linhas e posições na sequência. Uma parada pode aparecer mais de uma vez no mesmo itinerário, sem perda dessa ordem. Reimportações preservam a identidade dos registros por fonte; o desaparecimento de uma página não é tratado automaticamente como encerramento de uma linha.
 
-A geolocalização utiliza a versão \nolinkurl{osm-address-directed-v1.1}, documentada no projeto \cite{mbmimportacoes}. O procedimento normaliza rua e número, procura endereços numerados no recorte OSM e gera candidatos na via. Quando possível, usa o número exato ou interpolação entre endereços conhecidos; não extrapola a numeração. Em seguida, considera conjuntamente os candidatos pela sequência das paradas e pela conectividade de um grafo viário direcionado, respeitando os sentidos e restrições reconhecidos. Nessa etapa auxiliar usa-se busca A* para distâncias viárias; o planejador de viagens continua utilizando Dijkstra.
+A geolocalização utiliza a versão \nolinkurl{osm-address-directed-v1.1}, documentada no projeto \citep{mbmimportacoes}. O procedimento normaliza rua e número, procura endereços numerados no recorte OSM e gera candidatos na via. Quando possível, usa o número exato ou interpolação entre endereços conhecidos; não extrapola a numeração. Em seguida, considera conjuntamente os candidatos pela sequência das paradas e pela conectividade de um grafo viário direcionado, respeitando os sentidos e restrições reconhecidos. Nessa etapa auxiliar usa-se busca A* para distâncias viárias; o planejador de viagens continua utilizando Dijkstra.
 
 A escolha exige evidência suficiente e separação entre alternativas ambíguas. Estimativas de um mesmo identificador são conciliadas entre variantes; divergências de posição ou sentido impedem sua publicação como coordenada consensual. Um deslocamento lateral de três metros à direita do sentido inferido é uma hipótese geométrica, não confirmação do lado de embarque ou da calçada. A aplicação identifica as posições estimadas como aproximadas e preserva as evidências para revisão. Nenhuma estimativa é marcada automaticamente como validada.
 
@@ -534,7 +680,7 @@ A API Olho Vivo da SPTrans demonstra a viabilidade técnica desse tipo de intera
 
 \clearpage
 \subsection{Mockups gerados automaticamente: sequência de uso}
-As Figuras~\ref{fig:mockup-origem} a~\ref{fig:mockup-detalhes} apresentam oito imagens conceituais geradas automaticamente, organizadas em quatro pares para orientar a implementação e a apresentação a Osmar. Não são capturas de um sistema já implementado. Nomes de linhas, endereços, mapas, horários e tempos são ilustrativos e não comprovam correspondência com a operação de Mauá ou com os registros do OSM. Os elementos de identificação municipal da primeira imagem não representam instalação ou aprovação oficial, e o QR Code desenhado não é apresentado como código funcional.
+As Figuras~\ref{fig:mockup-origem} a~\ref{fig:mockup-detalhes} apresentam oito imagens conceituais geradas automaticamente, organizadas em quatro pares para orientar a implementação e a apresentação a Osmar. As telas foram revisadas para apresentar o nome Ponto a Ponto (PaP) e também compõem o documento de apresentação preparado para Osmar. Não são capturas de um sistema já implementado. Nomes de linhas, endereços, mapas, horários e tempos são ilustrativos e não comprovam correspondência com a operação de Mauá ou com os registros do OSM. Os elementos de identificação municipal da primeira imagem não representam instalação ou aprovação oficial, e o QR Code desenhado não é apresentado como código funcional.
 
 \textbf{1. Ler o QR Code e reconhecer a origem.}
 O primeiro par mostra a sinalização imaginada para o ponto e a interface aberta com a origem identificada. A intenção é dispensar a pesquisa prévia do nome, código ou endereço da parada e oferecer acesso às linhas ou à escolha do destino (Figura~\ref{fig:mockup-origem}).
@@ -634,18 +780,40 @@ O diagrama da Figura~\ref{fig:banco-mbm}, no Apêndice~\ref{ap:importacao}, apre
 
 A simulação possui administração separada, com autenticação, para ativação, relógio e velocidade. O passageiro não precisa habilitá-la na tela principal. Quando desligada, veículos e previsões demonstrativas ficam indisponíveis; não há substituição automática por dados reais. O catálogo continua acessível. O isolamento dos cenários permite repetir a apresentação a Osmar e comparar o comportamento após alterações.
 
+\subsection{Acesso por QR Code e integração futura com aplicativo existente}
+Em uma implantação futura, o QR Code poderá conter uma URL HTTPS estável associada ao identificador da parada. Esse endereço poderá abrir diretamente a consulta de linhas da parada em um aplicativo compatível já instalado, por mecanismos de \textit{deep linking}, como Android App Links, que associam um domínio verificado ao aplicativo \citep{androidapplinks}. O QR Code identifica o contexto; o sistema operacional e a configuração do aplicativo determinam o tratamento do link.
+
+Quando o aplicativo não estiver instalado, a URL poderá apresentar uma página web com a consulta disponível e uma opção de instalação pela loja. O download e a instalação dependem da ação do usuário. Retomar automaticamente a mesma parada após instalar exige um mecanismo adicional de preservação do contexto, não garantido pelo link comum; uma alternativa simples é ler novamente o QR Code após a instalação. O acesso web permanece disponível no escopo do PaP para que instalar um aplicativo não seja condição para a consulta inicial.
+
+Para abrir especificamente uma parada no Cittamobi, será necessário confirmar com o fornecedor a existência de links suportados, os identificadores de paradas e as condições de integração. Um redirecionamento no servidor, sozinho, não cria uma função que o aplicativo não reconheça. A proposta corresponde a uma entrada contextualizada para o serviço existente; não implica implementação Android nesta etapa nem integração já realizada.
+
 \subsection{Favoritos no navegador e evolução futura}
 O protótipo permite salvar destinos com nomes como Casa, Trabalho e Escola, além de preferências de linhas e limite de baldeações. Os dados ficam no navegador, sem conta ou sincronização entre aparelhos. O recurso é opcional: o passageiro ocasional pode iniciar uma consulta pelo QR Code e escolher um destino no mapa sem cadastrar favoritos.
 
 Um aplicativo Android permanece fora do escopo atual. Sua conveniência será avaliada após a validação do fluxo web, considerando necessidades que não sejam atendidas pelo navegador. A futura aplicação poderá reutilizar a API Django, mas tecnologia, distribuição e eventual sincronização ainda não foram definidas. A existência de favoritos web não depende dessa evolução.
 
-\subsection{Objetivos da apresentação a Osmar}
-A apresentação utilizará o protótipo funcional e explicitará quais informações pertencem ao cenário. Deverá discutir a utilidade do acesso sem conhecimento prévio, a comparação dos próximos ônibus e a compreensão de sentido e baldeações. O retorno profissional de Osmar será separado dos resultados de tarefas realizadas por passageiros.
+\subsection{Retorno inicial e objetivos da apresentação a Osmar}
+A entrevista registrou interesse pelo acesso por QR Code e a sugestão de formalizar a proposta para discussão com o fornecedor. Em resposta a esse encaminhamento, foi preparado um PDF com a sequência dos mockups, explicações do fluxo e perguntas para avaliação. Osmar já respondeu por e-mail à pergunta sobre dados de embarque e desembarque. O grupo ainda aguarda a avaliação da solução atual; a resposta técnica sobre bilhetagem não é tratada como teste ou aprovação dos mockups. A análise dessa segunda interação será registrada separadamente da entrevista de definição do problema \citep[1135--1163 s; 2293--2425 s]{entrevistaosmar2026}.
+
+Os materiais de apoio incluem o PDF dos mockups, o mockup interativo em desenvolvimento no Figma e o protótipo web. Na apresentação, deverá ser identificada a versão efetivamente examinada, explicitando quais informações pertencem ao cenário. A discussão priorizará a contribuição do QR Code para identificar a parada em comparação com o Cittamobi, a compreensão do fluxo, a viabilidade percebida e os limites da eventual integração. O retorno profissional de Osmar será separado dos resultados de tarefas realizadas por passageiros.
 
 Também deverão ser levantados os responsáveis e as condições de acesso ao cadastro operacional: identificadores e coordenadas de plataformas por sentido; linhas e variantes vigentes; sequência de paradas e geometrias; horários, calendários e exceções; regras de transferência; localização e previsão, quando disponíveis; periodicidade de atualização e condições de uso. O acesso a esses dados ainda não está confirmado. Qualquer piloto físico exigirá definição de responsáveis, autorização para as placas e manutenção dos QR Codes e das informações.
 
+\subsection{Informações de origem e destino a partir das consultas}
+Em resposta ao e-mail do grupo, Osmar Junior esclareceu que, no contexto operacional descrito, a bilhetagem registra a validação do cartão, sua data e hora e a linha ou o veículo, podendo associar uma posição aproximada ao embarque quando integrada ao GPS. Segundo o interlocutor, o desembarque não é registrado diretamente, e, no Terminal Central de Mauá, a validação ocorre no acesso à área paga, sem identificar necessariamente o veículo utilizado depois. Essas informações constituem relato do interlocutor sobre o sistema discutido, não uma conclusão sobre todos os sistemas de bilhetagem \citep{osmaremailod}.
+
+O retorno também menciona pesquisas de ``sobe e desce'' e inferências a partir de embarques em viagens posteriores como meios de apoiar o planejamento. A contagem de embarques e desembarques por parada descreve movimentos agregados, mas não associa necessariamente cada origem ao destino de uma mesma pessoa. O e-mail, cuja data não foi fornecida no material incorporado ao relatório, reforça a pertinência de investigar uma fonte complementar de informação: os pares de origem e destino informados durante o planejamento no PaP \citep{osmaremailod}.
+
+\textbf{Oportunidade e significado dos dados.} Ao ler o QR Code, a consulta recebe o identificador da parada de origem; ao escolher um destino, o usuário informa uma intenção de deslocamento. O agrupamento dessas consultas por origem, destino e faixa horária poderia indicar destinos procurados, relações recorrentes entre regiões e necessidades de conexão. Essa contribuição potencial amplia o interesse do acesso contextualizado: além de facilitar a consulta, ele pode produzir dados para investigar a demanda informacional dos usuários.
+
+Esses registros deverão ser denominados \textit{consultas ou intenções de viagem}, e não viagens realizadas. Abrir o QR Code não comprova embarque; selecionar um destino não comprova desembarque. Uma pessoa pode comparar vários destinos, consultar repetidamente ou desistir da viagem, e uma consulta pode atender a mais de um passageiro. O conjunto representa apenas quem utiliza a ferramenta, sujeito a diferenças de acesso à internet e de adesão. Portanto, contagens de consultas não equivalem a contagens de passageiros nem a uma matriz origem-destino representativa da população.
+
+\textbf{Delimitação da investigação futura.} Antes de coletar dados para essa finalidade, deverão ser definidos objetivo, informação ao usuário, participação voluntária, retenção e acesso aos registros. Uma estrutura mínima a avaliar incluiria identificadores da origem e do destino, faixa de tempo e indicação de consulta simulada ou real, sem exigir nome, cartão de transporte ou rastreamento contínuo. Destinos salvos como Casa e Trabalho não deverão ser publicados individualmente; mesmo sem nomes, pares precisos de locais podem permitir associações pessoais. A divulgação deverá priorizar agrupamentos por região e período, com tratamento de grupos pouco frequentes e regras de qualidade para repetições e consultas de teste.
+
+O protótipo já recebe origem e destino para calcular trajetos, mas isso não significa que exista armazenamento analítico dessas consultas ou geração de indicadores de demanda. Essa possibilidade passa a integrar a investigação do projeto, sem ampliar a entrega atual para uma pesquisa populacional. Sua utilidade deverá ser discutida com Osmar e responsáveis pelo planejamento, definindo quais decisões os indicadores poderiam apoiar e como confrontá-los com levantamentos operacionais. Uma eventual confirmação voluntária de embarque ou desembarque seria um dado adicional autodeclarado, sujeito a validação própria.
+
 \subsection{Próximas etapas e limites}
-As prioridades são consolidar os registros do contato inicial, apresentar o PaP a Osmar, executar as tarefas de compreensão com passageiros e corrigir os problemas observados. Capturas da versão efetivamente avaliada deverão complementar os mockups, com identificação da versão e do cenário. A avaliação deve verificar especialmente se o usuário reconhece a diferença entre dados reais de catálogo, coordenadas aproximadas e tempos simulados.
+A prioridade é obter e documentar o retorno de Osmar sobre a solução atual, complementando a apresentação conforme necessário. Em paralelo, o grupo desenvolverá o mockup interativo no Figma e aprimorará o protótipo web. As tarefas de compreensão com passageiros permanecem uma etapa posterior, a ser realizada com planejamento e registro próprios; até sua execução, não serão apresentadas como validação concluída. Capturas da versão efetivamente avaliada deverão complementar os mockups, com identificação da versão e do cenário. A avaliação deve verificar especialmente se o usuário reconhece a diferença entre dados reais de catálogo, coordenadas aproximadas e tempos simulados.
 
 Em paralelo, será necessário obter e confrontar o cadastro operacional, revisar os 1.444 registros ainda sem coordenadas e validar as 30 estimativas, sem presumir corretude dos objetos OSM. Cobertura, duplicidades entre fontes, lado da via, acessibilidade de embarque, vigência e sentido precisam ser conferidos antes de habilitar planejamento real. O processo de atualização e de revisão das divergências deve preceder a substituição dos dados simulados.
 
@@ -653,35 +821,41 @@ O relatório registra uma implementação funcional em ambiente de demonstraçã
 
 \postextual
 \begin{thebibliography}{99}
-\bibitem{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Plano de Ação: Projeto Integrador em Computação II}. Universidade Virtual do Estado de São Paulo -- UNIVESP, 2026. Documento do grupo, arquivo \texttt{Plano\_de\_Acao\_PI2.pdf}.
-\bibitem{ideo-designthinking} IDEO. \textit{What is design thinking?} Disponível em: \url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.
-\bibitem{designcouncil} DESIGN COUNCIL. \textit{Framework for Innovation}. Disponível em: \url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.
-\bibitem{haylett2018} HAYLETT, Amanda Jane. \textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018.
-\bibitem{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
-\bibitem{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \textit{Transport Reviews}, v. 39, n. 3, p. 327--356, 2019. DOI: 10.1080/01441647.2018.1472147.
-\bibitem{gtfs} MOBILITYDATA. \textit{General Transit Feed Specification: Overview}. Disponível em: \url{https://gtfs.org/documentation/overview/}. Acesso em: 23 set. 2026.
-\bibitem{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \textit{Journal of Geographical Systems}, v. 25, p. 453--466, 2023.
-\bibitem{ma2020} MA, X. et al. Visualizing public transit system operation with GTFS data: a case study of Calgary, Canada. \textit{Heliyon}, v. 6, n. 4, e03729, 2020.
-\bibitem{southampton} UNIVERSITY OF SOUTHAMPTON. \textit{Study of QR Codes in Southampton Bus Stops}. 2012. Disponível em: \url{https://blog.soton.ac.uk/data/2012/03/27/studey-of-qr-codes-in-southampton-bus-stops/}. Acesso em: 23 set. 2026.
-\bibitem{hackatona2013} SÃO PAULO (Município). \textit{Hackatona do Ônibus reúne jovens para desenvolvimento de aplicativos para o transporte}. 2013. Disponível em: \url{https://prefeitura.sp.gov.br/w/noticia/hackatona-do-onibus-reune-jovens-para}. Acesso em: 23 set. 2026.
-\bibitem{qrsptrans2014} SÃO PAULO (Município). \textit{Nova tecnologia, QR Code já fornece informações por celular aos usuários de ônibus}. 24 jun. 2014. Disponível em: \url{https://prefeitura.sp.gov.br/web/mobilidade/w/noticias/173515}. Acesso em: 23 set. 2026.
-\bibitem{sptransparada70016782} SÃO PAULO TRANSPORTE S.A. \textit{Informações desta parada: Av. Paulista, n. 200, código 70016782}. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.aspx?70016782}. Acesso em: 23 set. 2026.
-\bibitem{sptransadesivojs} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: adesivo.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.js?2021631733832}. Acesso em: 23 set. 2026.
-\bibitem{sptransgxcfg} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: gxcfg.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxcfg.js?54798}. Acesso em: 23 set. 2026.
-\bibitem{sptranscss} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: GeneXusXEv2.css}. Recurso público; cabeçalho HTTP Last-Modified consultado. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/Resources/Portuguese/GeneXusXEv2.css?14585136}. Acesso em: 23 set. 2026.
-\bibitem{sptransgxgral} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: gxgral.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxgral.js?54798}. Acesso em: 23 set. 2026.
-\bibitem{sptransapi} SÃO PAULO TRANSPORTE S.A. \textit{API do Olho Vivo: guia de referência}. Disponível em: \url{https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/}. Acesso em: 23 set. 2026.
-\bibitem{osmlicense} OPENSTREETMAP FOUNDATION. \textit{Direitos autorais e licença}. Disponível em: \url{https://www.openstreetmap.org/copyright?locale=pt}. Acesso em: 23 set. 2026.
-\bibitem{osmpt} OPENSTREETMAP WIKI. \textit{Key:public transport}. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Key:public_transport}. Acesso em: 23 set. 2026.
-\bibitem{overpass} OPENSTREETMAP WIKI. \textit{Overpass API}. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Overpass_API}. Acesso em: 23 set. 2026.
-\bibitem{geolocation} MDN WEB DOCS. \textit{Geolocation API}. Disponível em: \url{https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API}. Acesso em: 23 set. 2026.
-\bibitem{responsive} MDN WEB DOCS. \textit{Responsive web design}. Disponível em: \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design}. Acesso em: 23 set. 2026.
-\bibitem{react} REACT. \textit{React documentation}. Disponível em: \url{https://react.dev/}. Acesso em: 23 set. 2026.
-\bibitem{django} DJANGO SOFTWARE FOUNDATION. \textit{Django documentation}. Disponível em: \url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.
-\bibitem{postgis} POSTGIS PROJECT. \textit{PostGIS Manual}. Disponível em: \url{https://postgis.net/docs/en/}. Acesso em: 23 set. 2026.
-\bibitem{sedgewicksp} SEDGEWICK, R.; WAYNE, K. \textit{Algorithms, 4th edition: 4.4 Shortest Paths}. Disponível em: \url{https://algs4.cs.princeton.edu/44sp/}. Acesso em: 23 set. 2026.
-\bibitem{transitplanner} UNIVERSITÄT FREIBURG. \textit{Transit Planner: Basic Concepts}. Disponível em: \url{https://ad-publications.cs.uni-freiburg.de/student-projects/transfer-patterns-robustness/concepts.html}. Acesso em: 23 set. 2026.
-\bibitem{git} CHACON, S.; STRAUB, B. \textit{Pro Git}. 2. ed. Disponível em: \url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.
+\SingleSpacing
+\bibitem[{Brakewood; Watkins}(2019)]{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \textit{Transport Reviews}, v. 39, n. 3, p. 327--356, 2019. DOI: 10.1080/01441647.2018.1472147.
+\bibitem[{Chacon; Straub}(s.d.)]{git} CHACON, S.; STRAUB, B. \textit{Pro Git}. 2. ed. [s.d.]. Disponível em: \url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.
+\bibitem[{Cittamobi}(2022)]{cittamobiajuda} CITTAMOBI. \textit{Como o Cittamobi funciona?} Central de Ajuda. 2022. Disponível em: \url{https://cittamobi.zendesk.com/hc/pt-br/articles/9379145018519-Como-o-Cittamobi-funciona}. Acesso em: 24 set. 2026.
+\bibitem[{Cittamobi}(s.d.)]{cittamobimaua} CITTAMOBI. \textit{Suzantur -- Mauá: horários de ônibus, linhas, itinerários e paradas}. [s.d.]. Disponível em: \url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}. Acesso em: 24 set. 2026.
+\bibitem[{Design Council}(s.d.)]{designcouncil} DESIGN COUNCIL. \textit{Framework for Innovation}. [s.d.]. Disponível em: \url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.
+\bibitem[{Django Software Foundation}(s.d.)]{django} DJANGO SOFTWARE FOUNDATION. \textit{Django documentation}. [s.d.]. Disponível em: \url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.
+\bibitem[{Equipe do Projeto Integrador II}(2026a)]{entrevistaosmar2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Conversa com Osmar sobre informações do transporte público de Mauá}. Entrevista conduzida por André Meneghelli Vale. Registro identificado com a data de 20 ago. 2026a, 14h00min44s. Transcrição com marcações temporais até 47min41s, com revisão dos trechos sinalizados informada pelo entrevistador. Documento interno, arquivo \texttt{Conversa com o Osmar - Gerente de Transportes Públicos - MAUA 2026-08-20 14-00-44.txt}, no diretório \texttt{docs/entrevistas}.
+\bibitem[{Equipe do Projeto Integrador II}(2026b)]{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Plano de Ação: Projeto Integrador em Computação II}. Universidade Virtual do Estado de São Paulo -- UNIVESP, 2026b. Documento do grupo, arquivo \texttt{Plano\_de\_Acao\_PI2.pdf}.
+\bibitem[{Equipe do Projeto Integrador II}(2026c)]{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026c. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
+\bibitem[{Google}(2026)]{androidapplinks} GOOGLE. \textit{About deep links}. Android Developers. 2026. Disponível em: \url{https://developer.android.com/training/app-links}. Acesso em: 24 set. 2026.
+\bibitem[{Haylett}(2018)]{haylett2018} HAYLETT, Amanda Jane. \textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018.
+\bibitem[{IDEO}(s.d.)]{ideo-designthinking} IDEO. \textit{What is design thinking?} [s.d.]. Disponível em: \url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.
+\bibitem[{Ma et al.}(2020)]{ma2020} MA, X. et al. Visualizing public transit system operation with GTFS data: a case study of Calgary, Canada. \textit{Heliyon}, v. 6, n. 4, e03729, 2020.
+\bibitem[{MDN Web Docs}(s.d.a)]{geolocation} MDN WEB DOCS. \textit{Geolocation API}. [s.d.a]. Disponível em: \url{https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API}. Acesso em: 23 set. 2026.
+\bibitem[{MDN Web Docs}(s.d.b)]{responsive} MDN WEB DOCS. \textit{Responsive web design}. [s.d.b]. Disponível em: \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design}. Acesso em: 23 set. 2026.
+\bibitem[{MobilityData}(s.d.)]{gtfs} MOBILITYDATA. \textit{General Transit Feed Specification: Overview}. [s.d.]. Disponível em: \url{https://gtfs.org/documentation/overview/}. Acesso em: 23 set. 2026.
+\bibitem[{OpenStreetMap Foundation}(s.d.)]{osmlicense} OPENSTREETMAP FOUNDATION. \textit{Direitos autorais e licença}. [s.d.]. Disponível em: \url{https://www.openstreetmap.org/copyright?locale=pt}. Acesso em: 23 set. 2026.
+\bibitem[{OpenStreetMap Wiki}(s.d.a)]{osmpt} OPENSTREETMAP WIKI. \textit{Key:public transport}. [s.d.a]. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Key:public_transport}. Acesso em: 23 set. 2026.
+\bibitem[{OpenStreetMap Wiki}(s.d.b)]{overpass} OPENSTREETMAP WIKI. \textit{Overpass API}. [s.d.b]. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Overpass_API}. Acesso em: 23 set. 2026.
+\bibitem[{Pereira; Andrade; Vieira}(2023)]{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \textit{Journal of Geographical Systems}, v. 25, p. 453--466, 2023.
+\bibitem[{Osmar Junior}(s.d.)]{osmaremailod} OSMAR JUNIOR. \textit{Esclarecimentos sobre bilhetagem, embarque, desembarque e estimativas de origem e destino em Mauá}. [s.d.]. Resposta por e-mail a André Meneghelli Vale, reproduzida pelo destinatário para atualização do relatório. Título descritivo atribuído pelo grupo; data da mensagem não informada. Síntese documental em \texttt{docs/entrevistas/retorno\_osmar\_bilhetagem.md}.
+\bibitem[{PostGIS Project}(s.d.)]{postgis} POSTGIS PROJECT. \textit{PostGIS Manual}. [s.d.]. Disponível em: \url{https://postgis.net/docs/en/}. Acesso em: 23 set. 2026.
+\bibitem[{React}(s.d.)]{react} REACT. \textit{React documentation}. [s.d.]. Disponível em: \url{https://react.dev/}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo (Município)}(2013)]{hackatona2013} SÃO PAULO (Município). \textit{Hackatona do Ônibus reúne jovens para desenvolvimento de aplicativos para o transporte}. 2013. Disponível em: \url{https://prefeitura.sp.gov.br/w/noticia/hackatona-do-onibus-reune-jovens-para}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo (Município)}(2014)]{qrsptrans2014} SÃO PAULO (Município). \textit{Nova tecnologia, QR Code já fornece informações por celular aos usuários de ônibus}. 24 jun. 2014. Disponível em: \url{https://prefeitura.sp.gov.br/web/mobilidade/w/noticias/173515}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.a)]{sptransapi} SÃO PAULO TRANSPORTE S.A. \textit{API do Olho Vivo: guia de referência}. [s.d.a]. Disponível em: \url{https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.b)]{sptransadesivojs} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: adesivo.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [s.d.b]. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.js?2021631733832}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.c)]{sptranscss} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: GeneXusXEv2.css}. Recurso público; cabeçalho HTTP Last-Modified consultado. [s.d.c]. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/Resources/Portuguese/GeneXusXEv2.css?14585136}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.d)]{sptransgxcfg} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: gxcfg.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [s.d.d]. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxcfg.js?54798}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.e)]{sptransgxgral} SÃO PAULO TRANSPORTE S.A. \textit{Aplicação QRCodeAdesivo: gxgral.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [s.d.e]. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxgral.js?54798}. Acesso em: 23 set. 2026.
+\bibitem[{São Paulo Transporte S.A.}(s.d.f)]{sptransparada70016782} SÃO PAULO TRANSPORTE S.A. \textit{Informações desta parada: Av. Paulista, n. 200, código 70016782}. [s.d.f]. Disponível em: \url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.aspx?70016782}. Acesso em: 23 set. 2026.
+\bibitem[{Sedgewick; Wayne}(s.d.)]{sedgewicksp} SEDGEWICK, R.; WAYNE, K. \textit{Algorithms, 4th edition: 4.4 Shortest Paths}. [s.d.]. Disponível em: \url{https://algs4.cs.princeton.edu/44sp/}. Acesso em: 23 set. 2026.
+\bibitem[{Universität Freiburg}(s.d.)]{transitplanner} UNIVERSITÄT FREIBURG. \textit{Transit Planner: Basic Concepts}. [s.d.]. Disponível em: \url{https://ad-publications.cs.uni-freiburg.de/student-projects/transfer-patterns-robustness/concepts.html}. Acesso em: 23 set. 2026.
+\bibitem[{University of Southampton}(2012)]{southampton} UNIVERSITY OF SOUTHAMPTON. \textit{Study of QR Codes in Southampton Bus Stops}. 2012. Disponível em: \url{https://blog.soton.ac.uk/data/2012/03/27/studey-of-qr-codes-in-southampton-bus-stops/}. Acesso em: 23 set. 2026.
 \end{thebibliography}
 
 
@@ -720,7 +894,7 @@ Este glossário reúne os principais termos técnicos e siglas utilizados no rel
 \begin{apendicesenv}
 \chapter{Conversão e geolocalização dos dados}
 \label{ap:importacao}
-Este apêndice descreve a implementação registrada em 24 de setembro de 2026, em complemento à Seção~\ref{sec:conversao}. Os parâmetros são heurísticos da versão \nolinkurl{osm-address-directed-v1.1}; não representam percentuais de acerto nem calibração com a operadora. Código e documentação interna permanecem como registro técnico de apoio \cite{mbmimportacoes}.
+Este apêndice descreve a implementação registrada em 24 de setembro de 2026, em complemento à Seção~\ref{sec:conversao}. Os parâmetros são heurísticos da versão \nolinkurl{osm-address-directed-v1.1}; não representam percentuais de acerto nem calibração com a operadora. Código e documentação interna permanecem como registro técnico de apoio \citep{mbmimportacoes}.
 
 \section*{A.1 Mapeamento para o SQLite}
 \begingroup\small
