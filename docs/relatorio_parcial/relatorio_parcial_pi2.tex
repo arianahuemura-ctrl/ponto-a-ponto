@@ -256,16 +256,89 @@ A tese também recomenda recuperar consultas sem perda de contexto, evitar resul
 Git é um sistema distribuído de controle de versão, com histórico completo nos clones e suporte a branches para desenvolvimento paralelo \cite{git}.
 
 \section{Metodologia}
-A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prototipar, implementar e testar. A revisão da tese de Haylett acrescenta critérios de clareza da informação e um protocolo de avaliação por tarefas. Mantêm-se separados os registros de implementação e as evidências de uso pela comunidade.
+A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prototipar, implementar e testar, orientadas pelo Design Thinking. Essa abordagem parte das necessidades das pessoas, explora alternativas e utiliza protótipos para aprender por iteração, considerando também viabilidade técnica e condições de continuidade da solução \cite{ideo-designthinking}. O modelo Double Diamond distingue descoberta, definição, desenvolvimento e entrega, com possibilidade de retorno às etapas anteriores \cite{designcouncil}. Neste relatório, essas referências ajudam a organizar as decisões do PaP; não se afirma que o grupo tenha executado integralmente um protocolo formal dessas instituições.
+
+A revisão de Haylett acrescenta critérios de clareza da informação e um protocolo de avaliação por tarefas. A descrição a seguir sistematiza o percurso registrado do projeto, distinguindo relatos da comunidade, observações do grupo sobre interfaces e dados, hipóteses de uso e evidências de implementação. O ciclo de validação com passageiros permanece aberto. Não há registro, nesta etapa, de oficina formal de ideação, mapa de empatia ou personas produzidos com participantes, e esses instrumentos não são apresentados como atividades realizadas.
 
 \subsection{Ouvir e interpretar o contexto}
 Na conversa inicial relatada pelo grupo, Osmar, profissional com passagem pela EMTU, demonstrou interesse pelo acesso às informações por QR Codes nos pontos. Esse contato orientou a proposta, mas não constitui teste de usabilidade nem autorização de implantação. Data, participantes e registro detalhado da conversa ainda precisam ser consolidados. A alegação de ausência da tecnologia em Mauá permanece uma observação do grupo, sem levantamento exaustivo de todos os pontos.
+
+
+\textbf{Compreensão das necessidades e delimitação do desafio.} A conversa com Osmar é um relato inicial de receptividade profissional. As capturas do QRCodeAdesivo e do Olho Vivo constituem observações documentais de fluxos específicos, enquanto a cobertura incompleta das fontes públicas é uma constatação técnica do levantamento. A hipótese de que o passageiro desconheça a linha adequada, tenha dificuldade para interpretar muitas opções ou necessite de ajuda em uma baldeação ainda deverá ser investigada com usuários. A familiaridade tratada por Haylett fundamenta essa investigação, sem substituir evidências locais.
+
+O desafio de projeto foi delimitado como: \textit{como ajudar uma pessoa que está no ponto de ônibus a reconhecer alternativas para chegar ao destino, sem precisar conhecer previamente linhas ou a identificação da parada?} A necessidade central é compreender o deslocamento. O QR Code é uma resposta proposta para identificar a origem; a seleção do destino, a comparação de alternativas e as instruções de troca respondem às decisões seguintes. O entusiasmo de um interlocutor não confirma que essa combinação atende a todos os passageiros.
+
+Para ampliar a escuta, a próxima etapa deverá investigar com passageiros como escolhem o ônibus, reconhecem o sentido e lidam com conexões; com Osmar e responsáveis pelo serviço, deverá verificar quais dados existem e quem pode mantê-los. Datas, participantes, perguntas e observações deverão ser registrados com consentimento, distinguindo a fala ou o comportamento observado da interpretação do grupo.
 
 \subsection{Criar e prototipar}
 Foram produzidos mockups conceituais e implementado o PaP com Django, React, Leaflet e SQLite. O fluxo associa o QR Code à origem, apresenta alternativas e permite escolher o destino e consultar um percurso. As imagens geradas automaticamente documentam a intenção de interface, enquanto o código e os testes documentam a implementação. Favoritos locais apoiam consultas recorrentes; não se desenvolve aplicativo Android nesta etapa.
 
 A preparação dos dados compreende coleta e preservação das fontes, normalização de identificadores e sequências, importação no banco e geolocalização aproximada dos registros sem coordenadas. Fonte, data, evidências e pendências são mantidas para revisão. Os horários e veículos do cenário de demonstração são separados do cadastro público. A administração controla ativação, relógio e velocidade da simulação; a interface do passageiro informa a natureza demonstrativa dos dados.
 
+
+
+\textbf{Alternativas consideradas e critérios de escolha.} As definições registradas no desenvolvimento permitem explicitar as seguintes decisões, sem atribuí-las a uma oficina de cocriação ainda não realizada:
+\begin{itemize}
+\item \textbf{Navegador ou aplicativo instalado:} priorizou-se o acesso web por QR Code para iniciar a consulta sem instalação. Android permanece uma evolução futura; favoritos locais atendem inicialmente às consultas recorrentes.
+\item \textbf{Escolha por linha ou por destino:} manteve-se a consulta das linhas do ponto, mas acrescentou-se o destino como filtro. A intenção é reduzir a exigência de conhecimento prévio, preservando a possibilidade de comparação.
+\item \textbf{Mapa individual ou visão conjunta:} a comparação reúne alternativas relevantes; o mapa de uma linha permanece como detalhamento. A análise dos serviços da SPTrans motivou essa escolha, sem demonstrar superioridade de usabilidade do PaP.
+\item \textbf{Ligação reta ou percurso nas ruas:} adotaram-se geometrias viárias para tornar o caminho mais interpretável. Os percursos demonstrativos continuam sem homologação operacional.
+\item \textbf{Integração real imediata ou cenário controlado:} diante das lacunas de dados, optou-se por simulação identificada, controlada na administração. Assim, a apresentação pode avaliar o fluxo sem tratar horários fictícios como previsões reais.
+\end{itemize}
+
+Os critérios adotados foram acesso inicial simples, clareza para escolher o deslocamento, viabilidade com os dados disponíveis e possibilidade de repetir a demonstração. A manutenção do cadastro, a autorização para sinalização física e a disponibilidade de dados operacionais continuam condicionantes de implantação, e não resultados resolvidos pela escolha tecnológica.
+
+\textbf{Evolução dos protótipos.} O material registra a passagem da concepção de acesso pelo ponto para mockups visuais e, em seguida, para uma aplicação web interativa. As revisões acrescentaram a organização das alternativas por destino, trajetos sobre ruas, controle administrativo da simulação e favoritos no navegador. A incorporação de fontes públicas e de coordenadas aproximadas levou à separação entre catálogo, inferência geográfica e cenário demonstrativo. Essas mudanças decorreram de decisões do desenvolvimento e de limitações técnicas identificadas; ainda não são resultados de testes com passageiros.
+
+A Tabela~\ref{tab:design-thinking} relaciona as bases dessas decisões aos requisitos e à avaliação proposta. A coluna de validação descreve atividades futuras com a comunidade; a implementação existente, por si só, não confirma as hipóteses de uso.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.23\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\caption{Relação entre observações, necessidades, decisões e validação proposta}\label{tab:design-thinking}\\
+\hline
+Observação ou hipótese & Necessidade interpretada & Solução proposta ou implementada & Forma de validação prevista \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small Tabela \thetable{} -- continuação}\\
+\hline
+Observação ou hipótese & Necessidade interpretada & Solução proposta ou implementada & Forma de validação prevista \\
+\hline
+\endhead
+\hline\multicolumn{4}{r}{\small Continua na próxima página}\\
+\endfoot
+\hline
+\multicolumn{4}{p{0.95\textwidth}}{\footnotesize Fonte: elaboração do grupo a partir do relato inicial, das capturas analisadas e das decisões documentadas do PaP (2026).}\\
+\endlastfoot
+Relato de interesse de Osmar no QR Code e hipótese de desconhecimento da parada pelo passageiro.
+& Iniciar a consulta a partir do local físico.
+& QR Code identifica a origem e abre o navegador; acesso implementado, implantação física pendente.
+& Solicitar consulta sem fornecer nome da parada ou linha; observar conclusão e pedidos de ajuda.\\
+\hline
+Nas capturas do Olho Vivo, a lista por ponto apresenta várias linhas e o mapa mostra uma linha selecionada.
+& Reconhecer quais alternativas atendem ao destino, sem conhecer previamente seus códigos.
+& Filtragem por destino e comparação das alternativas no cenário demonstrativo.
+& Pedir que o participante escolha uma opção e explique por que ela o leva ao destino.\\
+\hline
+Hipótese de dificuldade para interpretar sentido, percurso e trocas; motivada também pela leitura de Haylett.
+& Compreender onde embarcar, trocar e desembarcar.
+& Trajetos sobre ruas e planejamento com etapas e baldeações simuladas.
+& Solicitar explicação do percurso; registrar erros de sentido e de identificação da troca.\\
+\hline
+Hipótese de repetição de destinos como Casa, Trabalho e Escola.
+& Reutilizar consultas sem limitar destinos novos.
+& Favoritos opcionais no navegador; Android adiado.
+& Salvar e reutilizar um destino, depois escolher outro; observar ações e dificuldades.\\
+\hline
+Levantamento constatou lacunas de coordenadas e ausência de integração operacional confirmada.
+& Distinguir informação disponível, aproximada e simulada.
+& Catálogo separado, posições sinalizadas como aproximadas e simulação administrada fora da tela principal.
+& Pedir que o participante identifique a natureza dos dados; com os responsáveis, conferir cadastro e atualização.\\
+\end{longtable}
+\endgroup
 
 \subsection{Coleta, conversão e persistência dos dados}
 \label{sec:conversao}
@@ -369,6 +442,8 @@ O planejamento deve permanecer verificável por cenários de viagem direta, bald
 \end{enumerate}
 
 Serão registrados conclusão sem ajuda, tempo por tarefa, erros de interpretação, pedidos de auxílio e compreensão das etapas. Uma breve explicação do percurso pelo participante e uma escala de confiança de 1 a 5 complementarão a observação; essa escala é proposta pelo grupo, não um instrumento validado pela tese. Os resultados serão descritivos, com indicação do número e perfil dos participantes e das limitações da amostra. Confiança elevada não será considerada sucesso quando a interpretação estiver incorreta. A participação deverá ser voluntária e os registros minimizados e apresentados sem identificação pessoal.
+
+\textbf{Retorno e iteração.} Após cada sessão de avaliação, o grupo deverá registrar a versão do protótipo e o cenário utilizado, a tarefa proposta, o comportamento observado, a dificuldade relatada e a interpretação dos responsáveis pela análise. Cada alteração deverá indicar a evidência que a motivou e a tarefa a repetir. Erros que levem à escolha de sentido, embarque ou conexão inadequados terão prioridade sobre ajustes estéticos. Caso a dificuldade esteja na compreensão do problema ou na qualidade dos dados, o processo deverá retornar à escuta e à revisão dos requisitos, em vez de se limitar a modificar a interface.
 
 A avaliação com Osmar e passageiros ainda não foi realizada. O retorno deverá ser documentado, convertido em requisitos e confrontado com os critérios de Haylett. Não se avaliará precisão de previsão real usando horários simulados. A validação operacional das paradas, dos sentidos e dos itinerários será uma atividade distinta, dependente de cadastro autorizado e conferência pelos responsáveis pelo serviço.
 
@@ -562,6 +637,8 @@ Em paralelo, será necessário obter e confrontar o cadastro operacional, revisa
 O relatório registra uma implementação funcional em ambiente de demonstração. Não comprova redução de espera, precisão de chegada, cobertura integral de Mauá ou melhoria estatisticamente demonstrada da experiência do passageiro. A tese fornece fundamentos para formular requisitos e avaliar clareza; a validade desses requisitos no contexto local dependerá dos resultados da próxima etapa.
 
 \begin{thebibliography}{99}
+\bibitem{ideo-designthinking} IDEO. \textit{What is design thinking?} Disponível em: \url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.
+\bibitem{designcouncil} DESIGN COUNCIL. \textit{Framework for Innovation}. Disponível em: \url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.
 \bibitem{haylett2018} HAYLETT, Amanda Jane. \textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018.
 \bibitem{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
 \bibitem{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \textit{Transport Reviews}, v. 39, n. 3, p. 327--356, 2019. DOI: 10.1080/01441647.2018.1472147.
@@ -604,6 +681,7 @@ Este glossário reúne os principais termos técnicos e siglas utilizados no rel
 \item[Catálogo] Conjunto de registros de linhas, variantes, paradas e documentos importados. A presença no catálogo não garante que uma linha possua dados suficientes para o planejamento.
 \item[Chave estrangeira (FK, Foreign Key)] Campo que referencia um registro de outra tabela, estabelecendo um vínculo no banco de dados.
 \item[Chave primária (PK, Primary Key)] Campo ou combinação de campos que identifica de forma única cada registro de uma tabela.
+\item[Design Thinking] Abordagem de projeto orientada às necessidades das pessoas, à exploração de alternativas e ao aprendizado com protótipos e avaliações. No PaP, organiza a relação entre escuta, definição do problema, decisões de solução e validação ainda pendente.
 \item[Frontend] Parte da aplicação com a qual o passageiro interage no navegador, incluindo mapa, listas, filtros e detalhes da viagem.
 \item[Geolocalização aproximada] Estimativa das coordenadas de uma parada com base em endereço, malha viária e sequência do itinerário. Não equivale a localização validada em campo.
 \item[Grafo] Representação por vértices e arestas. No projeto, permite modelar conexões viárias e estados de viagem; os pesos representam distância ou tempo, conforme a etapa do processamento.
