@@ -14,6 +14,9 @@ MAPA DE ÔNIBUS DE MAUÁ — PROTÓTIPO
 5. As linhas que passam por ele são desenhadas, e os pontos posteriores possíveis ficam verdes.
 6. Clique em um segundo ponto verde. Só permanecem as linhas que atendem aos dois pontos, nessa ordem.
 7. É possível continuar escolhendo pontos, refinando progressivamente as linhas.
+8. Com o mapa em foco, pressione `Esc` para limpar toda a seleção ou `Backspace`/`Delete` para remover somente o último ponto selecionado. Esses atalhos não interferem na digitação do endereço.
+
+No mobile, a legenda fica disponível pelo botão circular `i`. O modal pode ser fechado pelo `X`, clicando fora dele, pressionando `Esc` ou usando o botão voltar do navegador.
 
 DADOS
 - OpenStreetMap para mapa base e relações de transporte público.
@@ -53,6 +56,16 @@ Os scripts são carregados em ordem no `index.html`. Como usam o escopo global d
 BACKEND
 - `backend/server.py`: servidor HTTP estático local. Ele publica somente a pasta `frontend` e não possui API própria neste momento.
 - `start_server.py`: atalho compatível para iniciar `backend/server.py` a partir da raiz.
+
+TESTES
+- `tests/unit-tests.html`: página executável dos testes unitários no navegador.
+- `tests/unit-tests.js`: fixtures e casos das regras de pontos, linhas, trajetos e destinos.
+- Para executar os testes, inicie um servidor na raiz do projeto:
+
+   python -m http.server 8002
+
+   Depois abra `http://127.0.0.1:8002/tests/unit-tests.html`.
+- O servidor da aplicação publica somente `frontend`; por isso o runner de testes usa temporariamente a raiz do projeto.
 
 FLUXO PRINCIPAL
 1. `app.js` registra os eventos dos botões, formulário e painel.

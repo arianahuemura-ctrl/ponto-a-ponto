@@ -3,7 +3,7 @@ function selectStop(key) {
   const stop = state.stops.get(key);
   if (!stop) return;
   if (!state.selectedStops.length) {
-    state.compatibleRouteIds = new Set(stop.routeIds);
+    state.compatibleRouteIds = compatibleRoutesForStop(stop);
     state.selectedStops.push(key)
   } else {
     if (!getPossibleNextStops().has(key)) return;
@@ -30,6 +30,39 @@ function resetSelection() {
     setStatus(`${[...state.stops.values()].filter(stop=>stop.nearby).length} pontos em até ${SEARCH_RADIUS/1000} km\n${state.routes.size} relações de ônibus`)
   }
 }
+
+function removeLastSelection() {
+  if (!state.selectedStops.length) return;
+  state.selectedStops.pop();
+  if (!state.selectedStops.length) {
+    resetSelection();
+    return;
+  }
+
+  const firstStop = state.stops.get(state.selectedStops[0]);
+  state.compatibleRouteIds = compatibleRoutesForStop(firstStop);
+  computeCompatibleRoutes();
+  renderSelection();
+  renderRoutes();
+  updateMarkerStyles();
+  setStatus(`${[...state.stops.values()].filter(stop=>stop.nearby).length} pontos próximos\n${state.routes.size} relações de ônibus carregadas\n${state.compatibleRouteIds.size} linhas compatíveis`)
+}
+
+function handleSelectionKeydown(event) {
+  if (!$('legend-modal').hidden) return;
+  const target = event.target;
+  const isEditable = target instanceof HTMLInputElement || target instanceof HTMLSelectElement || target instanceof HTMLTextAreaElement || target.isContentEditable;
+  if (isEditable) return;
+
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    resetSelection();
+  } else if (event.key === 'Backspace' || event.key === 'Delete') {
+    event.preventDefault();
+    removeLastSelection();
+  }
+}
+
 async function loadNearbyAt(location, label) {
   state.location = location;
   layers.location.clearLayers();
