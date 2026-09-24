@@ -1,0 +1,22 @@
+# Arquivos gerados pelo LaTeX e pelo editor
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.tmp
+*~
+/relatorio_parcial_pi2_mockup_v2.pdf
