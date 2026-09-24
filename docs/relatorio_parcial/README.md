@@ -4,7 +4,7 @@ Fontes do relatório parcial do Mauá Bus Map (MBM), com as imagens e o diagrama
 
 ## Estrutura
 
-- `relatorio_parcial_pi2_mockup_v2.tex`: documento principal, referências e apêndice técnico.
+- `relatorio_parcial_pi2.tex`: documento principal, referências e apêndice técnico.
 - `imgs/`: imagens efetivamente referenciadas pelo relatório.
 - `imgs/diagrama_banco.tex`: diagrama vetorial do esquema SQLite, desenhado com TikZ.
 
@@ -24,10 +24,10 @@ Na raiz do repositório `maua_bus_map`:
 
 ```bash
 cd docs/relatorio_parcial
-latexmk -pdf -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2_mockup_v2.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex
 ```
 
-O resultado é `relatorio_parcial_pi2_mockup_v2.pdf`. O PDF e os arquivos auxiliares são gerados localmente e ignorados pelo Git.
+O resultado é `relatorio_parcial_pi2.pdf`. O PDF e os arquivos auxiliares são gerados localmente e ignorados pelo Git.
 
 ## Desenvolvimento
 
