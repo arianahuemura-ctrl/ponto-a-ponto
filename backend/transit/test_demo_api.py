@@ -1,10 +1,11 @@
+from .test_support import DemoDatabaseTestCase
 import json
-from django.test import TestCase, Client
+from django.test import Client
 from transit.network import dataset
 from transit.models import Evaluation
 
 
-class DemoApiTests(TestCase):
+class DemoApiTests(DemoDatabaseTestCase):
     def setUp(self):
         self.origin = dataset()["stops"][0]["id"]
         self.destination = dataset()["stops"][6]["id"]

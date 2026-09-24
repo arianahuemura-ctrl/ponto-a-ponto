@@ -1,12 +1,12 @@
+from .test_support import DemoDatabaseTestCase
 from datetime import timedelta
 from django.contrib.auth import get_user_model
-from django.test import TestCase, SimpleTestCase
 from transit.models import Simulation
 from transit.network import dataset, snapshot
 from transit.geometry import point_on_segment
 
 
-class RuntimeTests(TestCase):
+class RuntimeTests(DemoDatabaseTestCase):
     def setUp(self):
         self.config = Simulation.objects.create(
             enabled=True, running=False, seconds=28800
@@ -68,7 +68,7 @@ class RuntimeTests(TestCase):
         self.assertFalse(self.config.running)
 
 
-class GeometryTests(SimpleTestCase):
+class GeometryTests(DemoDatabaseTestCase):
     def test_every_demo_leg_has_dense_street_geometry(self):
         for route in dataset()["routes"]:
             self.assertEqual(len(route["segments"]), len(route["stops"]) - 1)

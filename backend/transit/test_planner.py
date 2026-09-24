@@ -1,3 +1,4 @@
+from .test_support import DemoDatabaseTestCase
 import itertools
 from django.test import SimpleTestCase
 from transit.planner import plan, alternatives
@@ -125,7 +126,7 @@ class PlannerTests(SimpleTestCase):
             )
 
 
-class ScenarioTests(SimpleTestCase):
+class ScenarioTests(DemoDatabaseTestCase):
     def test_all_scenario_values_consistent(self):
         net = dataset()
         ids = {s["id"] for s in net["stops"]}

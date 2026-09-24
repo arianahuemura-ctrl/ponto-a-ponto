@@ -15,6 +15,9 @@ with tempfile.TemporaryDirectory(prefix="mbm-e2e-") as directory:
     call_command("migrate", verbosity=0)
     from django.contrib.auth import get_user_model
     from transit.models import Simulation
+    from transit.importing import import_demo
+    from django.conf import settings
+    import_demo(settings.BASE_DIR)
 
     # Credenciais exclusivamente do servidor efêmero de testes.
     get_user_model().objects.create_superuser(

@@ -1,0 +1,60 @@
+[
+  {
+    "id": "cittamobi",
+    "url": "https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua",
+    "kind": "catalogue"
+  },
+  {
+    "id": "suzantur",
+    "url": "https://suzanturmaua.com.br/linhas/",
+    "kind": "official"
+  },
+  {
+    "id": "planmob2017",
+    "url": "https://sistemas.maua.sp.gov.br/legislaconsulta/atosofic/Leis/5250%20-%20anexo.pdf",
+    "kind": "historical"
+  },
+  {
+    "id": "prefeitura2026",
+    "url": "https://www.maua.sp.gov.br/Noticias/Ler/173",
+    "kind": "official"
+  },
+  {
+    "id": "emtu",
+    "url": "https://www.emtu.sp.gov.br/emtu/itinerarios-e-tarifas.fss",
+    "kind": "intermunicipal"
+  },
+  {
+    "id": "emtu_maua",
+    "url": "https://www.emtu.sp.gov.br/Sistemas/linha/resultado.htm?chviatrans=151066&pag=buscarua.htm",
+    "kind": "partial_intermunicipal"
+  },
+  {
+    "id": "moovit",
+    "url": "https://moovitapp.com/index/pt-br/transporte_p%C3%BAblico-lines-Sao_Paulo-242-3779814",
+    "kind": "crosscheck"
+  },
+  {
+    "id": "bus2",
+    "url": "https://bus2.me/sp/maua/",
+    "kind": "crosscheck"
+  },
+  {
+    "id": "onibus_online",
+    "url": "https://onibus.online/sp/maua/",
+    "kind": "crosscheck"
+  },
+  {
+    "id": "bus2_panel",
+    "url": "https://painel.mobilibus.com/bus2you/home?p=1hl6p",
+    "kind": "crosscheck"
+  },
+  {
+    "id": "bus2_project",
+    "url": "https://painel.mobilibus.com/public/get-project",
+    "kind": "crosscheck",
+    "payload": {
+      "miniHash": "1hl6p"
+    }
+  }
+]

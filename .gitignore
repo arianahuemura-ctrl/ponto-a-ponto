@@ -11,3 +11,11 @@ frontend/playwright-report/
 *.sqlite3-wal
 *.sqlite3-shm
 avaliacoes.json
+
+# Respostas públicas preservadas localmente pelo importador
+fonts/raw/
+fonts/collected.json
+fonts/import-report.json
+
+fonts/geolocation_osm.json
+fonts/geolocation_runs/

@@ -13,8 +13,8 @@ def road_data():
 
 
 def segments_for(route_id, stop_ids):
-    route = road_data()["routes"].get(route_id, {})
-    segments = route.get("segments", [])
+    from .models import RouteStop
+    segments = [entry.segment for entry in RouteStop.objects.filter(route_id=route_id) if entry.segment]
     result = []
     for a, b in zip(stop_ids, stop_ids[1:]):
         segment = next((s for s in segments if s["from"] == a and s["to"] == b), None)

@@ -2,9 +2,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
-from transit import views, demo_views
+from transit import views, demo_views, catalogue
 
 urlpatterns = [
+    path("api/catalogue/", catalogue.catalogue),
+    path("api/catalogue/routes/<str:route_id>/", catalogue.route_detail),
     path("api/network/", demo_views.network),
     path("api/board/", demo_views.board),
     path("api/journey/", demo_views.journey),

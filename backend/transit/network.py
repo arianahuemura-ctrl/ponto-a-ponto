@@ -1,19 +1,63 @@
 """Rede demonstrável e horários determinísticos, independentes dos provedores externos."""
 
-import json
 import math
-from functools import lru_cache
-from pathlib import Path
-from .geometry import road_data, point_on_segment
+from .geometry import point_on_segment
 
 
-@lru_cache(maxsize=1)
 def dataset():
-    data = json.loads((Path(__file__).parent / "data/demo.json").read_text())
-    for route in data["routes"]:
-        route["segments"] = (
-            road_data()["routes"].get(route["id"], {}).get("segments", [])
+    from .models import Stop, Route, NetworkMetadata
+
+    metadata = NetworkMetadata.objects.filter(pk="default").first()
+    data = (
+        dict(metadata.data)
+        if metadata
+        else dict(
+            service_start=21600,
+            service_end=79200,
+            default_time=28800,
+            transfer_seconds=120,
         )
+    )
+    data.setdefault("attribution", "© colaboradores do OpenStreetMap · ODbL")
+    data.setdefault("license_url", "https://www.openstreetmap.org/copyright")
+    data["stops"] = [
+        {
+            **s.data,
+            "id": s.pk,
+            "name": s.name,
+            "lat": s.lat,
+            "lon": s.lon,
+            "code": s.data.get("code", s.pk),
+            "address": s.data.get("address", s.name),
+        }
+        for s in Stop.objects.filter(lat__isnull=False, lon__isnull=False).order_by(
+            "pk"
+        )
+    ]
+    # Preservar a ordem do cenário apenas quando ele tiver sido importado explicitamente.
+    data["stops"].sort(
+        key=lambda s: (not s.get("code", "").startswith("MAU-"), s.get("code", ""))
+    )
+    data["routes"] = []
+    for route in (
+        Route.objects.filter(routable=True).prefetch_related("sequence").order_by("pk")
+    ):
+        sequence = list(route.sequence.all())
+        data["routes"].append(
+            {
+                **route.data,
+                "id": route.pk,
+                "name": route.name,
+                "code": route.code,
+                "stops": [s.stop_id for s in sequence],
+                "durations": [s.duration for s in sequence[:-1]],
+                "segments": [s.segment for s in sequence[:-1]],
+                "simulated": route.simulated,
+            }
+        )
+    data["disclaimer"] = (
+        "Cadastro importado de fontes públicas. Cobertura parcial; posições estimadas por endereço são identificadas no mapa. Pontos ambíguos aguardam revisão no catálogo. Tempos e veículos de demonstração são simulados."
+    )
     return data
 
 
@@ -94,7 +138,7 @@ def snapshot(at, origin=None, allowed_trips=None):
             0 if waiting else (at - times[index]) / (times[index + 1] - times[index])
         )
         segments = routes[trip["route_id"]].get("segments", [])
-        if index >= len(segments):
+        if index >= len(segments) or not segments[index].get("points"):
             continue
         lat, lon = point_on_segment(segments[index], fraction)
         vehicles.append(
