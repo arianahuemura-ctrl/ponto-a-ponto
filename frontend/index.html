@@ -37,6 +37,25 @@
       </div>
     </section>
 
+    <button id="legend-toggle" class="legend-button" type="button" aria-label="Abrir legenda" aria-expanded="false" title="Abrir legenda">i</button>
+
+    <div id="legend-modal" class="legend-modal" hidden>
+      <div class="legend-modal-backdrop" data-close-legend></div>
+      <section class="legend-dialog" role="dialog" aria-modal="true" aria-labelledby="legend-dialog-title">
+        <div class="legend-dialog-header">
+          <h2 id="legend-dialog-title">Legenda do mapa</h2>
+          <button id="legend-close" class="icon-button" type="button" aria-label="Fechar legenda" title="Fechar legenda">×</button>
+        </div>
+        <div class="legend">
+          <div><span class="legend-symbol legend-symbol--nearby">▲</span> Triângulo — ponto próximo</div>
+          <div><span class="legend-symbol legend-symbol--available">■</span> Quadrado — destino possível</div>
+          <div><span class="legend-symbol legend-symbol--selected">★</span> Estrela — ponto selecionado</div>
+          <div><span class="legend-line legend-line--future"></span> Linha cheia — trecho futuro</div>
+          <div><span class="legend-line legend-line--past"></span> Linha tracejada — trecho já percorrido</div>
+        </div>
+      </section>
+    </div>
+
     <section id="selection-panel" class="floating-panel selection-panel" aria-label="Seleção atual" hidden>
       <div class="panel-heading panel-heading--static">
         <span>Seleção</span>

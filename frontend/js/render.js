@@ -1,23 +1,41 @@
+function findRouteStopIndex(route, stopKeyValue, fromIndex = 0) {
+  const exactIndex = route.orderedStops.indexOf(stopKeyValue, fromIndex);
+  if (exactIndex !== -1) return exactIndex;
+  const selectedStop = state.stops.get(stopKeyValue);
+  if (!selectedStop) return -1;
+  if (selectedStop.routeIds.size && !selectedStop.routeIds.has(route.id)) return -1;
+
+  let bestIndex = -1;
+  let bestDistance = 35 * 35;
+  for (let index = fromIndex; index < route.orderedStops.length; index++) {
+    const routeStop = state.stops.get(route.orderedStops[index]);
+    if (!routeStop) continue;
+    const distance = sqDist([selectedStop.lat, selectedStop.lon], [routeStop.lat, routeStop.lon]);
+    if (distance <= bestDistance) {
+      bestIndex = index;
+      bestDistance = distance;
+    }
+  }
+  return bestIndex;
+}
+
 function routeContainsSelectionInOrder(route, ids) {
   if (!ids.length) return true;
   let from = 0;
   for (const wanted of ids) {
-    let index = route.orderedStops.indexOf(wanted, from);
-    if (index === -1) {
-      const selected = state.stops.get(wanted);
-      if (selected)
-        for (let candidate = from; candidate < route.orderedStops.length; candidate++) {
-          const routeStop = state.stops.get(route.orderedStops[candidate]);
-          if (routeStop && sqDist([selected.lat, selected.lon], [routeStop.lat, routeStop.lon]) <= 35 * 35) {
-            index = candidate;
-            break
-          }
-        }
-    }
+    const index = findRouteStopIndex(route, wanted, from);
     if (index === -1) return false;
     from = index + 1
   }
   return true
+}
+
+function compatibleRoutesForStop(stop) {
+  if (stop.routeIds.size) return new Set(stop.routeIds);
+  const routeIds = new Set();
+  for (const route of state.routes.values())
+    if (findRouteStopIndex(route, stop.key) !== -1) routeIds.add(route.id);
+  return routeIds;
 }
 
 function computeCompatibleRoutes() {
@@ -33,17 +51,7 @@ function getPossibleNextStops() {
     const route = state.routes.get(routeId);
     let from = 0;
     for (const selected of state.selectedStops) {
-      let index = route.orderedStops.indexOf(selected, from);
-      if (index < 0) {
-        const selectedStop = state.stops.get(selected);
-        for (let candidate = from; candidate < route.orderedStops.length; candidate++) {
-          const routeStop = state.stops.get(route.orderedStops[candidate]);
-          if (selectedStop && routeStop && sqDist([selectedStop.lat, selectedStop.lon], [routeStop.lat, routeStop.lon]) <= 35 * 35) {
-            index = candidate;
-            break
-          }
-        }
-      }
+      const index = findRouteStopIndex(route, selected, from);
       if (index < 0) {
         from = route.orderedStops.length;
         break
@@ -51,29 +59,85 @@ function getPossibleNextStops() {
       from = index + 1
     }
     for (let index = from; index < route.orderedStops.length; index++) {
-      const stop = state.stops.get(route.orderedStops[index]);
+      const stopKeyValue = route.orderedStops[index];
+      const stop = state.stops.get(stopKeyValue);
       if (!stop) continue;
-      for (const [key, nearbyStop] of state.stops)
-        if (nearbyStop.nearby && sqDist([stop.lat, stop.lon], [nearbyStop.lat, nearbyStop.lon]) <= 35 * 35) possible.add(key)
+      for (const [key, nearbyStop] of state.stops) {
+        if (!nearbyStop.nearby) continue;
+        const isSameStop = key === stopKeyValue;
+        const isNearbyAlias = sqDist([stop.lat, stop.lon], [nearbyStop.lat, nearbyStop.lon]) <= 35 * 35;
+        if ((isSameStop || isNearbyAlias) && (!nearbyStop.routeIds.size || nearbyStop.routeIds.has(routeId))) possible.add(key);
+      }
     }
   }
   return possible
 }
 
-function buildRoutePoints(route) {
+function buildRouteSegments(route) {
   const segments = route.geometry.filter(segment => segment.length > 1);
-  if (!segments.length) return [];
-  const points = [...segments[0]];
-  for (let index = 1; index < segments.length; index++) {
+  const orientedSegments = [];
+  let lastPoint = null;
+  for (let index = 0; index < segments.length; index++) {
     let segment = [...segments[index]];
-    const last = points[points.length - 1];
-    const startDistance = sqDist(last, segment[0]);
-    const endDistance = sqDist(last, segment[segment.length - 1]);
-    if (endDistance < startDistance) segment.reverse();
-    if (sqDist(last, segment[0]) < 250 * 250) points.push(...segment.slice(1));
-    else points.push(...segment)
+    if (lastPoint) {
+      const startDistance = sqDist(lastPoint, segment[0]);
+      const endDistance = sqDist(lastPoint, segment[segment.length - 1]);
+      if (endDistance < startDistance) segment.reverse();
+    }
+    orientedSegments.push(segment);
+    lastPoint = segment[segment.length - 1]
   }
-  return points
+  return orientedSegments;
+}
+
+function buildRoutePoints(route) {
+  return buildRouteSegments(route).flat();
+}
+
+function getRouteViewportOptions() {
+  const isMobile = matchMedia('(max-width:760px)').matches;
+  if (!isMobile) {
+    return {
+      padding: [45, 45],
+      minZoom: ROUTE_MIN_ZOOM
+    };
+  }
+
+  const selectionPanel = $('selection-panel');
+  const panelHeight = selectionPanel.hidden ? 0 : selectionPanel.offsetHeight;
+  return {
+    paddingTopLeft: [20, 90],
+    paddingBottomRight: [20, Math.max(150, panelHeight + 105)],
+    minZoom: ROUTE_MIN_ZOOM + 1
+  };
+}
+
+function fitRouteBounds(boundsLayer) {
+  const options = getRouteViewportOptions();
+  const padding = options.padding || [Math.max(options.paddingTopLeft[0], options.paddingBottomRight[0]), Math.max(options.paddingTopLeft[1], options.paddingBottomRight[1])];
+  const fittingZoom = map.getBoundsZoom(boundsLayer, false, L.point(padding[0], padding[1]));
+  const targetZoom = Math.min(ROUTE_MAX_ZOOM, Math.max(options.minZoom, fittingZoom));
+
+  if (fittingZoom < options.minZoom) {
+    map.setView(boundsLayer.getCenter(), targetZoom, {
+      animate: true,
+      duration: ROUTE_ANIMATION_DURATION
+    });
+    if (matchMedia('(max-width:760px)').matches) {
+      map.once('zoomend', () => map.panBy([0, -Math.round((options.paddingBottomRight[1] - options.paddingTopLeft[1]) / 3)], {
+        animate: true,
+        duration: ROUTE_ANIMATION_DURATION
+      }));
+    }
+    return;
+  }
+
+  map.fitBounds(boundsLayer, {
+    ...options,
+    maxZoom: ROUTE_MAX_ZOOM,
+    animate: true,
+    duration: ROUTE_ANIMATION_DURATION
+  });
 }
 
 function renderRoutes() {
@@ -84,11 +148,25 @@ function renderRoutes() {
   const bounds = [];
   for (const routeId of routeIds) {
     const route = state.routes.get(routeId);
-    const points = buildRoutePoints(route);
+    const segments = buildRouteSegments(route);
+    const points = segments.flat();
     if (points.length > 1) {
-      const split = nearestGeometryIndex(points, lastStop);
-      const past = points.slice(0, split + 1);
-      const future = points.slice(split);
+      const selectedSegment = segments.reduce((best, segment, index) => {
+        const distance = Math.min(...segment.map(point => sqDist(point, [lastStop.lat, lastStop.lon])));
+        return distance < best.distance ? {index, distance} : best;
+      }, {index: 0, distance: Infinity}).index;
+      const selectedPoints = segments[selectedSegment];
+      const split = nearestGeometryIndex(selectedPoints, lastStop);
+      const past = selectedPoints.slice(0, split + 1);
+      const future = selectedPoints.slice(split);
+      for (const [index, segment] of segments.entries()) {
+        if (index < selectedSegment && segment.length > 1) L.polyline(segment, {
+          color: '#8f9aaa', weight: 5, opacity: .68, dashArray: '8 8'
+        }).addTo(layers.routes);
+        if (index > selectedSegment && segment.length > 1) L.polyline(segment, {
+          color: '#57d68d', weight: 6, opacity: .9
+        }).addTo(layers.routes);
+      }
       if (past.length > 1) L.polyline(past, {
         color: '#8f9aaa',
         weight: 5,
@@ -125,11 +203,7 @@ function renderRoutes() {
   }
   if (bounds.length) {
     const boundsLayer = L.latLngBounds(bounds);
-    map.fitBounds(boundsLayer, {
-      padding: [45, 45],
-      maxZoom: 15,
-      animate: true
-    });
+    fitRouteBounds(boundsLayer);
     setTimeout(() => map.invalidateSize(), 120)
   }
   const routeBox = $('routes');
