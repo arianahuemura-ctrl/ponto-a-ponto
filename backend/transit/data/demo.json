@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "source_date": "2026-09-23",
+  "source_timestamp": "2026-09-23T22:12:23Z",
+  "attribution": "© colaboradores do OpenStreetMap · ODbL",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "disclaimer": "Coordenadas e ruas do OpenStreetMap. Linhas, vínculos, horários e veículos simulados; itinerários não validados pela operadora.",
+  "stops": [
+    {
+      "id": "way:1410074325",
+      "name": "Terminal Municipal de Mauá",
+      "lat": -23.6675803,
+      "lon": -46.4603173,
+      "osm_url": "https://www.openstreetmap.org/way/1410074325",
+      "original_name": "Terminal Municipal de Mauá",
+      "coordinate_source": "OSM center",
+      "code": "MAU-001",
+      "address": "Terminal Municipal de Mauá · Mauá – SP"
+    },
+    {
+      "id": "node:7208906659",
+      "name": "Parada Norte (demo)",
+      "lat": -23.6616137,
+      "lon": -46.4579915,
+      "osm_url": "https://www.openstreetmap.org/node/7208906659",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-002",
+      "address": "Parada Norte · Mauá – SP"
+    },
+    {
+      "id": "node:5921758372",
+      "name": "Parada Oeste (demo)",
+      "lat": -23.6609915,
+      "lon": -46.4689267,
+      "osm_url": "https://www.openstreetmap.org/node/5921758372",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-003",
+      "address": "Parada Oeste · Mauá – SP"
+    },
+    {
+      "id": "node:13121752089",
+      "name": "Conexão Central (demo)",
+      "lat": -23.6702157,
+      "lon": -46.4708734,
+      "osm_url": "https://www.openstreetmap.org/node/13121752089",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-004",
+      "address": "Conexão Central · Mauá – SP"
+    },
+    {
+      "id": "node:7533875697",
+      "name": "Parada Sul (demo)",
+      "lat": -23.6806209,
+      "lon": -46.4564458,
+      "osm_url": "https://www.openstreetmap.org/node/7533875697",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-005",
+      "address": "Parada Sul · Mauá – SP"
+    },
+    {
+      "id": "node:9925311855",
+      "name": "Escola (demo)",
+      "lat": -23.6656073,
+      "lon": -46.4411909,
+      "osm_url": "https://www.openstreetmap.org/node/9925311855",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-006",
+      "address": "Escola · Mauá – SP"
+    },
+    {
+      "id": "node:9329691380",
+      "name": "Trabalho (demo)",
+      "lat": -23.6725454,
+      "lon": -46.4400563,
+      "osm_url": "https://www.openstreetmap.org/node/9329691380",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-007",
+      "address": "Trabalho · Mauá – SP"
+    },
+    {
+      "id": "node:12094303859",
+      "name": "Parada sem conexão (demo)",
+      "lat": -23.6752118,
+      "lon": -46.480671,
+      "osm_url": "https://www.openstreetmap.org/node/12094303859",
+      "original_name": null,
+      "coordinate_source": "OSM node",
+      "code": "MAU-008",
+      "address": "Parada sem conexão · Mauá – SP"
+    }
+  ],
+  "routes": [
+    {
+      "id": "DEMO-A",
+      "name": "Terminal → Escola",
+      "stops": [
+        "way:1410074325",
+        "node:7208906659",
+        "node:9925311855"
+      ],
+      "durations": [
+        480,
+        1080
+      ],
+      "color": "#0065ed",
+      "offset": 120,
+      "headway": 900,
+      "code": "101"
+    },
+    {
+      "id": "DEMO-B",
+      "name": "Terminal → Conexão",
+      "stops": [
+        "way:1410074325",
+        "node:5921758372",
+        "node:13121752089"
+      ],
+      "durations": [
+        240,
+        240
+      ],
+      "color": "#e8222e",
+      "offset": 240,
+      "headway": 900,
+      "code": "210"
+    },
+    {
+      "id": "DEMO-C",
+      "name": "Conexão → Escola → Trabalho",
+      "stops": [
+        "node:13121752089",
+        "node:9925311855",
+        "node:9329691380"
+      ],
+      "durations": [
+        300,
+        300
+      ],
+      "color": "#008c45",
+      "offset": 900,
+      "headway": 900,
+      "code": "307"
+    },
+    {
+      "id": "DEMO-D",
+      "name": "Terminal → Sul → Trabalho",
+      "stops": [
+        "way:1410074325",
+        "node:7533875697",
+        "node:9329691380"
+      ],
+      "durations": [
+        720,
+        1200
+      ],
+      "color": "#f29300",
+      "offset": 60,
+      "headway": 900,
+      "code": "405"
+    },
+    {
+      "id": "DEMO-E",
+      "name": "Expresso Terminal → Escola",
+      "stops": [
+        "way:1410074325",
+        "node:9925311855"
+      ],
+      "durations": [
+        720
+      ],
+      "color": "#6633b9",
+      "offset": 600,
+      "headway": 1800,
+      "code": "511"
+    },
+    {
+      "id": "DEMO-R",
+      "name": "Trabalho → Escola → Terminal",
+      "stops": [
+        "node:9329691380",
+        "node:9925311855",
+        "way:1410074325"
+      ],
+      "durations": [
+        360,
+        780
+      ],
+      "color": "#737373",
+      "offset": 180,
+      "headway": 900,
+      "code": "703"
+    }
+  ],
+  "service_start": 21600,
+  "service_end": 79200,
+  "default_time": 28800,
+  "transfer_seconds": 120
+}

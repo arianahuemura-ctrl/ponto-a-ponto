@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.sqlite3
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+avaliacoes.json
+
+# Respostas públicas preservadas localmente pelo importador
+fonts/raw/
+fonts/collected.json
+fonts/import-report.json
+
+fonts/geolocation_osm.json
+fonts/geolocation_runs/

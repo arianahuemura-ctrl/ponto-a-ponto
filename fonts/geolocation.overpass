@@ -1,0 +1,7 @@
+[out:json][timeout:180];
+(
+ way(-23.74,-46.54,-23.60,-46.39)["highway"]["highway"!~"^(footway|path|cycleway|steps|pedestrian|construction|proposed)$"];
+ nwr(-23.74,-46.54,-23.60,-46.39)["addr:street"]["addr:housenumber"];
+ way(-23.74,-46.54,-23.60,-46.39)["addr:interpolation"];
+);
+out body geom;

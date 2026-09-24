@@ -1,0 +1,12 @@
+{
+  "url": "https://overpass.kumi.systems/api/interpreter",
+  "query": "[out:json][timeout:180];\n(\n way(-23.74,-46.54,-23.60,-46.39)[\"highway\"][\"highway\"!~\"^(footway|path|cycleway|steps|pedestrian|construction|proposed)$\"];\n nwr(-23.74,-46.54,-23.60,-46.39)[\"addr:street\"][\"addr:housenumber\"];\n way(-23.74,-46.54,-23.60,-46.39)[\"addr:interpolation\"];\n);\nout body geom;",
+  "retrieved_at": "2026-09-24T03:45:22.058133+00:00",
+  "sha256": "554f8430c833cfccd9aa216a9ada521beb14956d0056c2a82a2b4c78a5b6926f",
+  "osm_timestamp": {
+    "timestamp_osm_base": "2026-07-15T15:22:01Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "license": "ODbL",
+  "elements": 26393
+}

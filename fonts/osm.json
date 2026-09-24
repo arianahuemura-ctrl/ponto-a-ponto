@@ -1,0 +1,6657 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-23T22:12:23Z",
+    "timestamp_areas_base": "2026-09-22T16:23:20Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 656356543,
+  "lat": -23.6580958,
+  "lon": -46.4893238,
+  "tags": {
+    "name": "Capuava",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 656356765,
+  "lat": -23.6682009,
+  "lon": -46.4615107,
+  "tags": {
+    "local_ref": "4",
+    "name": "Mauá",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1804994386,
+  "lat": -23.7160942,
+  "lon": -46.4836532,
+  "tags": {
+    "bus": "yes",
+    "network": "SA-TRANS",
+    "public_transport": "stop_position"
+  }
+},
+{
+  "type": "node",
+  "id": 1814129475,
+  "lat": -23.6584903,
+  "lon": -46.4906054,
+  "tags": {
+    "name": "Capuava",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2277729923,
+  "lat": -23.6682293,
+  "lon": -46.4615316,
+  "tags": {
+    "local_ref": "3",
+    "name": "Mauá",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2277751749,
+  "lat": -23.6923861,
+  "lon": -46.4485088,
+  "tags": {
+    "name": "Guapituba",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2277751750,
+  "lat": -23.6914326,
+  "lon": -46.4491771,
+  "tags": {
+    "name": "Guapituba",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2893877042,
+  "lat": -23.6541570,
+  "lon": -46.4400624,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4320530496,
+  "lat": -23.6790254,
+  "lon": -46.4396807,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "covered": "no",
+    "highway": "bus_stop",
+    "network": "Municipal de Mauá",
+    "operator": "Suzantur",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4320533333,
+  "lat": -23.6788564,
+  "lon": -46.4409125,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "network": "Municipal de Mauá",
+    "operator": "Suzantur",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 4843777950,
+  "lat": -23.6437616,
+  "lon": -46.4509337,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 4843783020,
+  "lat": -23.6440662,
+  "lon": -46.4550670,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 4843786021,
+  "lat": -23.6441449,
+  "lon": -46.4549865,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 4941307430,
+  "lat": -23.6844507,
+  "lon": -46.4532754,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5921758372,
+  "lat": -23.6609915,
+  "lon": -46.4689267,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 6104655366,
+  "lat": -23.6571574,
+  "lon": -46.4809492,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935399,
+  "lat": -23.6683074,
+  "lon": -46.4615890,
+  "tags": {
+    "local_ref": "1;2",
+    "name": "Mauá",
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935400,
+  "lat": -23.6682446,
+  "lon": -46.4608495,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "1-G"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935401,
+  "lat": -23.6682900,
+  "lon": -46.4607750,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "2-G"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935402,
+  "lat": -23.6683580,
+  "lon": -46.4606617,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "3-G"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935403,
+  "lat": -23.6684232,
+  "lon": -46.4605562,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "4-G"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935404,
+  "lat": -23.6684885,
+  "lon": -46.4604489,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "5-G"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935405,
+  "lat": -23.6680630,
+  "lon": -46.4609632,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "1-F"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935406,
+  "lat": -23.6681274,
+  "lon": -46.4608559,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "2-F"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935407,
+  "lat": -23.6681986,
+  "lon": -46.4607365,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "3-F"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935408,
+  "lat": -23.6682740,
+  "lon": -46.4606104,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "4-F"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935409,
+  "lat": -23.6683375,
+  "lon": -46.4605042,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "5-F"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935410,
+  "lat": -23.6682699,
+  "lon": -46.4610955,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "1-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935411,
+  "lat": -23.6683298,
+  "lon": -46.4610005,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "2-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935412,
+  "lat": -23.6683995,
+  "lon": -46.4608899,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "3-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935413,
+  "lat": -23.6684801,
+  "lon": -46.4607622,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "4-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935414,
+  "lat": -23.6685518,
+  "lon": -46.4606485,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "5-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935415,
+  "lat": -23.6686231,
+  "lon": -46.4605354,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "6-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935416,
+  "lat": -23.6686957,
+  "lon": -46.4604203,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "7-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935417,
+  "lat": -23.6687661,
+  "lon": -46.4603088,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "8-H"
+  }
+},
+{
+  "type": "node",
+  "id": 6341935418,
+  "lat": -23.6687644,
+  "lon": -46.4601484,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position",
+    "ref": "9-H"
+  }
+},
+{
+  "type": "node",
+  "id": 7004340039,
+  "lat": -23.6681443,
+  "lon": -46.4626149,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7078778044,
+  "lat": -23.6638954,
+  "lon": -46.4888910,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7078966142,
+  "lat": -23.6644175,
+  "lon": -46.4865784,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7208906659,
+  "lat": -23.6616137,
+  "lon": -46.4579915,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7533875692,
+  "lat": -23.6816919,
+  "lon": -46.4565906,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7533875697,
+  "lat": -23.6806209,
+  "lon": -46.4564458,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7539463714,
+  "lat": -23.6749490,
+  "lon": -46.4352244,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "103 - Bogus",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7579160396,
+  "lat": -23.6828071,
+  "lon": -46.4567355,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7593050703,
+  "lat": -23.6632551,
+  "lon": -46.4273036,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "name": "Rua Doutor João Carlos",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7593889467,
+  "lat": -23.6381060,
+  "lon": -46.4031808,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7593889469,
+  "lat": -23.6379489,
+  "lon": -46.4034653,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 7600008653,
+  "lat": -23.6827550,
+  "lon": -46.4370925,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "name": "Avenida Itapark bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7600008654,
+  "lat": -23.6833164,
+  "lon": -46.4373895,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8662512657,
+  "lat": -23.6514641,
+  "lon": -46.4416999,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8710530295,
+  "lat": -23.6472127,
+  "lon": -46.4233260,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761695,
+  "lat": -23.6509958,
+  "lon": -46.4210234,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761696,
+  "lat": -23.6534305,
+  "lon": -46.4219806,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761697,
+  "lat": -23.6535347,
+  "lon": -46.4219208,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761698,
+  "lat": -23.6511002,
+  "lon": -46.4209192,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761699,
+  "lat": -23.6548536,
+  "lon": -46.4228713,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761700,
+  "lat": -23.6550569,
+  "lon": -46.4231700,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761701,
+  "lat": -23.6571864,
+  "lon": -46.4241091,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761702,
+  "lat": -23.6574086,
+  "lon": -46.4244491,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761703,
+  "lat": -23.6587111,
+  "lon": -46.4259912,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761704,
+  "lat": -23.6584488,
+  "lon": -46.4253618,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761705,
+  "lat": -23.6607260,
+  "lon": -46.4286592,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761706,
+  "lat": -23.6607572,
+  "lon": -46.4291117,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761707,
+  "lat": -23.6618884,
+  "lon": -46.4306881,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761708,
+  "lat": -23.6620005,
+  "lon": -46.4305800,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761709,
+  "lat": -23.6636972,
+  "lon": -46.4312146,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761710,
+  "lat": -23.6643827,
+  "lon": -46.4313455,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9170761711,
+  "lat": -23.6484371,
+  "lon": -46.4193425,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "operator": "NEXT Mobilidade;Suzantur",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820601,
+  "lat": -23.6528264,
+  "lon": -46.4204177,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820602,
+  "lat": -23.6529506,
+  "lon": -46.4203622,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820603,
+  "lat": -23.6544940,
+  "lon": -46.4206044,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820604,
+  "lat": -23.6545646,
+  "lon": -46.4205226,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820605,
+  "lat": -23.6560266,
+  "lon": -46.4196872,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820606,
+  "lat": -23.6562865,
+  "lon": -46.4186845,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820607,
+  "lat": -23.6561329,
+  "lon": -46.4194767,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820608,
+  "lat": -23.6571852,
+  "lon": -46.4195258,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820609,
+  "lat": -23.6572560,
+  "lon": -46.4196498,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820610,
+  "lat": -23.6574850,
+  "lon": -46.4195441,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820611,
+  "lat": -23.6583210,
+  "lon": -46.4194445,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820612,
+  "lat": -23.6582651,
+  "lon": -46.4193469,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820613,
+  "lat": -23.6593841,
+  "lon": -46.4196660,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820614,
+  "lat": -23.6593469,
+  "lon": -46.4195725,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820615,
+  "lat": -23.6603449,
+  "lon": -46.4195319,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246820616,
+  "lat": -23.6604268,
+  "lon": -46.4194851,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847717,
+  "lat": -23.6615402,
+  "lon": -46.4189586,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847718,
+  "lat": -23.6618883,
+  "lon": -46.4185297,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847719,
+  "lat": -23.6619982,
+  "lon": -46.4164238,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847720,
+  "lat": -23.6620187,
+  "lon": -46.4162876,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847721,
+  "lat": -23.6629719,
+  "lon": -46.4148200,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847722,
+  "lat": -23.6629608,
+  "lon": -46.4149257,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847723,
+  "lat": -23.6644111,
+  "lon": -46.4148647,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847724,
+  "lat": -23.6645247,
+  "lon": -46.4148586,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847727,
+  "lat": -23.6644135,
+  "lon": -46.4183379,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847728,
+  "lat": -23.6642873,
+  "lon": -46.4181932,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847729,
+  "lat": -23.6646851,
+  "lon": -46.4195825,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847730,
+  "lat": -23.6653566,
+  "lon": -46.4200075,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847731,
+  "lat": -23.6684047,
+  "lon": -46.4228281,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847732,
+  "lat": -23.6684686,
+  "lon": -46.4228469,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9246847733,
+  "lat": -23.6686601,
+  "lon": -46.4228804,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 9329691379,
+  "lat": -23.6727600,
+  "lon": -46.4399248,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9329691380,
+  "lat": -23.6725454,
+  "lon": -46.4400563,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9356261825,
+  "lat": -23.6655652,
+  "lon": -46.4074986,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9367363191,
+  "lat": -23.6748088,
+  "lon": -46.4695694,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9367377990,
+  "lat": -23.6772259,
+  "lon": -46.4695316,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9368093318,
+  "lat": -23.6486207,
+  "lon": -46.4446353,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9922657054,
+  "lat": -23.6683083,
+  "lon": -46.4106246,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9922753578,
+  "lat": -23.6683896,
+  "lon": -46.4107164,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9925286142,
+  "lat": -23.6653195,
+  "lon": -46.4358904,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9925311855,
+  "lat": -23.6656073,
+  "lon": -46.4411909,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9927097405,
+  "lat": -23.6658570,
+  "lon": -46.4305025,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9932018944,
+  "lat": -23.6692787,
+  "lon": -46.4242618,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10292391856,
+  "lat": -23.6563514,
+  "lon": -46.4186707,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 10572763199,
+  "lat": -23.6792782,
+  "lon": -46.4330093,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10614390151,
+  "lat": -23.6926931,
+  "lon": -46.4444493,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Susantur",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10614390152,
+  "lat": -23.6927945,
+  "lon": -46.4444114,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Susantur",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10614428535,
+  "lat": -23.6913413,
+  "lon": -46.4476553,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Susantur",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10614462117,
+  "lat": -23.6914735,
+  "lon": -46.4487917,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Suzantur",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10616169616,
+  "lat": -23.6891933,
+  "lon": -46.4499196,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Suzantur",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10975174466,
+  "lat": -23.7161114,
+  "lon": -46.4836760,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11432268278,
+  "lat": -23.6243555,
+  "lon": -46.4842725,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12094303859,
+  "lat": -23.6752118,
+  "lon": -46.4806710,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12094353407,
+  "lat": -23.6668957,
+  "lon": -46.4820366,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Suzantur",
+    "public_transport": "platform",
+    "shelter": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12095383623,
+  "lat": -23.6661922,
+  "lon": -46.4798082,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "operator": "Suzantur",
+    "public_transport": "platform",
+    "shelter": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12095412283,
+  "lat": -23.6652815,
+  "lon": -46.4783791,
+  "tags": {
+    "bench": "yes",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12097259109,
+  "lat": -23.6478277,
+  "lon": -46.4190266,
+  "tags": {
+    "bench": "no",
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "operator": "NEXT Mobilidade",
+    "public_transport": "platform",
+    "shelter": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13108964548,
+  "lat": -23.6681107,
+  "lon": -46.4625982,
+  "tags": {
+    "bus": "yes",
+    "public_transport": "stop_position"
+  }
+},
+{
+  "type": "node",
+  "id": 13121752089,
+  "lat": -23.6702157,
+  "lon": -46.4708734,
+  "tags": {
+    "bus": "yes",
+    "departures_board": "no",
+    "highway": "bus_stop",
+    "lit": "yes",
+    "public_transport": "platform",
+    "shelter": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13527126990,
+  "lat": -23.6646567,
+  "lon": -46.4088983,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 13527126991,
+  "lat": -23.6652612,
+  "lon": -46.4087898,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 13527126992,
+  "lat": -23.6667637,
+  "lon": -46.4089788,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 13527126993,
+  "lat": -23.6669163,
+  "lon": -46.4083243,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 13527126994,
+  "lat": -23.6693087,
+  "lon": -46.4082166,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 466209583,
+  "center": {
+    "lat": -23.6509832,
+    "lon": -46.4407676
+  },
+  "nodes": [
+    4610692968,
+    4610692969,
+    4610692970,
+    4610692971,
+    4610692968
+  ],
+  "tags": {
+    "amenity": "bus_station",
+    "building": "yes",
+    "bus": "yes",
+    "public_transport": "station"
+  }
+},
+{
+  "type": "way",
+  "id": 466209584,
+  "center": {
+    "lat": -23.6510667,
+    "lon": -46.4406926
+  },
+  "nodes": [
+    4610692972,
+    4610692973,
+    4610692974,
+    4610692975,
+    4610692976,
+    4610692977,
+    4610692978,
+    4610692979,
+    4610692972
+  ],
+  "tags": {
+    "amenity": "bus_station",
+    "building": "yes",
+    "bus": "yes",
+    "public_transport": "station"
+  }
+},
+{
+  "type": "way",
+  "id": 469475393,
+  "center": {
+    "lat": -23.6764197,
+    "lon": -46.4155376
+  },
+  "nodes": [
+    4637870188,
+    9015236447,
+    6107304237,
+    4637870389,
+    9015236443,
+    9015236444,
+    4637870390,
+    9015236445,
+    9015236446,
+    4637870391,
+    4637870188
+  ],
+  "tags": {
+    "amenity": "bus_station",
+    "building": "transportation",
+    "bus": "yes",
+    "name": "Terminal Rodoviário Jardim Itapeva",
+    "public_transport": "station"
+  }
+},
+{
+  "type": "way",
+  "id": 507865998,
+  "center": {
+    "lat": -23.6582602,
+    "lon": -46.4896949
+  },
+  "nodes": [
+    4972901320,
+    4972904712,
+    4972904715,
+    4972901319
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 507865999,
+  "center": {
+    "lat": -23.6581816,
+    "lon": -46.4897404
+  },
+  "nodes": [
+    4972902722,
+    4972904719,
+    4972904821,
+    4972904720,
+    4972904717,
+    4972902721
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 533698739,
+  "center": {
+    "lat": -23.6919033,
+    "lon": -46.4489022
+  },
+  "nodes": [
+    5177354920,
+    5177354917,
+    5177354918,
+    5177354916,
+    10614462122,
+    5177354919
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 533698741,
+  "center": {
+    "lat": -23.6918544,
+    "lon": -46.4488142
+  },
+  "nodes": [
+    5177356823,
+    10614462123,
+    5177354910,
+    5177354913,
+    5177356821,
+    5177356822
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 574612554,
+  "center": {
+    "lat": -23.6957843,
+    "lon": -46.4460660
+  },
+  "nodes": [
+    7113867763,
+    5515153797,
+    5515153798,
+    5515153799,
+    7113867764,
+    5515153800,
+    7113867763
+  ],
+  "tags": {
+    "alt_name": "Terminal Guapituba",
+    "amenity": "bus_station",
+    "building": "transportation",
+    "bus": "yes",
+    "name": "Terminal Rodoviário José Stella",
+    "public_transport": "station"
+  }
+},
+{
+  "type": "way",
+  "id": 651227537,
+  "center": {
+    "lat": -23.6764441,
+    "lon": -46.4155851
+  },
+  "nodes": [
+    6107304233,
+    6107304234
+  ],
+  "tags": {
+    "bus": "yes",
+    "covered": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 651227538,
+  "center": {
+    "lat": -23.6763945,
+    "lon": -46.4154955
+  },
+  "nodes": [
+    6107304235,
+    6107304236
+  ],
+  "tags": {
+    "bus": "yes",
+    "covered": "yes",
+    "highway": "bus_stop",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677298642,
+  "center": {
+    "lat": -23.6683678,
+    "lon": -46.4606472
+  },
+  "nodes": [
+    6341879340,
+    6341935404,
+    6341879365,
+    6341879370,
+    6341935403,
+    6341935402,
+    6341935401,
+    6341935400,
+    6341879341
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma G",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677298644,
+  "center": {
+    "lat": -23.6685214,
+    "lon": -46.4606244
+  },
+  "nodes": [
+    6341879342,
+    6341935418,
+    6341879343,
+    6341935417,
+    6341935416,
+    6341879353,
+    6341935415,
+    6341935414,
+    6341935413,
+    6341935412,
+    6341935411,
+    6341935410,
+    6341879344
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "platform",
+    "name": "Plataforma H",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677298658,
+  "center": {
+    "lat": -23.6674447,
+    "lon": -46.4602894
+  },
+  "nodes": [
+    6341879349,
+    13107986588,
+    6341879350,
+    13108011531,
+    13108011530,
+    13108011512,
+    13515650840,
+    13515650842,
+    13515650844,
+    13515650845,
+    6341879356
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma A",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677298660,
+  "center": {
+    "lat": -23.6682155,
+    "lon": -46.4607083
+  },
+  "nodes": [
+    6341879345,
+    6341935405,
+    6341935406,
+    6341879366,
+    6341935407,
+    6341935408,
+    6341935409,
+    13108011525,
+    6341879346
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "platform",
+    "name": "Plataforma F",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677303761,
+  "center": {
+    "lat": -23.6682429,
+    "lon": -46.4613407
+  },
+  "nodes": [
+    6341933943,
+    6341935396,
+    6341933981,
+    6341933982,
+    6341935394,
+    6341933944
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "4",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 677303762,
+  "center": {
+    "lat": -23.6683137,
+    "lon": -46.4614547
+  },
+  "nodes": [
+    6341933945,
+    6341933959,
+    6341933961,
+    6341933946
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "3",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 677303763,
+  "center": {
+    "lat": -23.6683413,
+    "lon": -46.4614750
+  },
+  "nodes": [
+    6341933947,
+    6341933960,
+    6341933962,
+    6341933948
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 677303764,
+  "center": {
+    "lat": -23.6683935,
+    "lon": -46.4615177
+  },
+  "nodes": [
+    6341933949,
+    6341933979,
+    6341933978,
+    6341935397,
+    6341933950
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 677303775,
+  "center": {
+    "lat": -23.6688648,
+    "lon": -46.4609726
+  },
+  "nodes": [
+    6341933963,
+    6341933969,
+    6341933970,
+    6341935398,
+    6341933971
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "platform",
+    "public_transport": "platform",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 677303796,
+  "center": {
+    "lat": -23.6676282,
+    "lon": -46.4601264
+  },
+  "nodes": [
+    6341935430,
+    13107986579,
+    6341879358
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma E",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677303797,
+  "center": {
+    "lat": -23.6676154,
+    "lon": -46.4602182
+  },
+  "nodes": [
+    6341935429,
+    13107986578,
+    6341933955
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma D",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677303798,
+  "center": {
+    "lat": -23.6676058,
+    "lon": -46.4603094
+  },
+  "nodes": [
+    6341935428,
+    13107986577,
+    6341933954
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma C",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 677303799,
+  "center": {
+    "lat": -23.6675877,
+    "lon": -46.4603996
+  },
+  "nodes": [
+    6341935427,
+    13107986576,
+    6341933953
+  ],
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Plataforma B",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 1306180984,
+  "center": {
+    "lat": -23.6482436,
+    "lon": -46.4190567
+  },
+  "nodes": [
+    12097259105,
+    12097259106,
+    12097259107,
+    12097259108,
+    12097259105
+  ],
+  "tags": {
+    "addr:street": "Avenida Dona Benedita Franca da Veiga",
+    "amenity": "bus_station",
+    "bus": "yes",
+    "public_transport": "station"
+  }
+},
+{
+  "type": "way",
+  "id": 1410074325,
+  "center": {
+    "lat": -23.6675803,
+    "lon": -46.4603173
+  },
+  "nodes": [
+    12956636304,
+    12956636305,
+    12956636306,
+    12956636308,
+    13108011519,
+    13108011518,
+    12956636316,
+    12956636310,
+    13108011536,
+    12956636311,
+    7004037934,
+    12956636313,
+    12956636304
+  ],
+  "tags": {
+    "amenity": "bus_station",
+    "building": "transportation",
+    "bus": "yes",
+    "internet_access": "wlan",
+    "layer": "-1",
+    "name": "Terminal Municipal de Mauá",
+    "operator": "Suzantur Mauá",
+    "public_transport": "station",
+    "source": "local knoledge",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 3654006,
+  "members": [
+    {
+      "type": "relation",
+      "ref": 3959321,
+      "role": ""
+    },
+    {
+      "type": "relation",
+      "ref": 3959288,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#0432ff",
+    "fee": "yes",
+    "name": "São Paulo (Terminal Metropolitano São Mateus) / São Bernardo do Campo (Terminal Metropolitano Ferrazópolis)",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "Nextmobilidade (ABC Sistema de Transporte SPE S.A.",
+    "ref": "285",
+    "route_master": "bus",
+    "source": "EMTU",
+    "type": "route_master",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 3828567,
+  "center": {
+    "lat": -23.6552836,
+    "lon": -46.5144217
+  },
+  "members": [
+    {
+      "type": "node",
+      "ref": 4441400839,
+      "role": "stop_entry_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924364,
+      "role": "platform_entry_only"
+    },
+    {
+      "type": "node",
+      "ref": 6950120056,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5635252880,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120072,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 590203149,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120082,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770143,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950145287,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770260,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769915,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615598,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905770068,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615605,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769964,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615615,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538632,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949538636,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538640,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905769968,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1277258109,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905769981,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948025502,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905069259,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948269079,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948223215,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948223214,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905069233,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6896055282,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6952102532,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 459904130,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6924719931,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1734747368,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6917350408,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704223,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045556,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704222,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6848385286,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6848385300,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1722449030,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6917282707,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1734747381,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6919226562,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919298393,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169084000,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045617,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6925200132,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6925200136,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169092928,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2545376369,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5539130503,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6939142954,
+      "role": "stop_exit_only"
+    },
+    {
+      "type": "node",
+      "ref": 3887743504,
+      "role": "platform_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924361,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924360,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1313591001,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195176,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195178,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195166,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133880,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133878,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180146663,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949186317,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 66267679,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1217457466,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250499,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250498,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 716889982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 715901485,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345284,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345285,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949468322,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215242,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949173070,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717750206,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645736,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219643,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 952805923,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219642,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018323,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297646111,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704223218,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018657,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 938574982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346058,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404391391,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780779,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 237529186,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742630456,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 237529185,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 712388168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294265647,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1362673811,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94347265,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 718234921,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 718234924,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294265686,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116033,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706853094,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297647714,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834431,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834430,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294365543,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130703,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294365703,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324888,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324885,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324887,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 353024315,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 288270091,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913826,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913830,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 722001118,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399536,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154500,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 721646866,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399527,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 861079452,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286526565,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 196798840,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741285590,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 292024315,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 74165155,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 292024333,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 252835916,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 122481916,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#0432ff",
+    "from": "Terminal Metropolitano São Mateus",
+    "name": "São Mateus - Shopping Metrópole",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "Metra",
+    "public_transport:version": "2",
+    "ref": "284M",
+    "route": "bus",
+    "to": "Parada Paço - SBC",
+    "type": "route",
+    "via": "Terminal Metropolitano Santo André Oeste",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 3959288,
+  "center": {
+    "lat": -23.6672910,
+    "lon": -46.5143744
+  },
+  "members": [
+    {
+      "type": "node",
+      "ref": 3887873191,
+      "role": "stop_entry_only"
+    },
+    {
+      "type": "way",
+      "ref": 650091469,
+      "role": "platform_entry_only"
+    },
+    {
+      "type": "node",
+      "ref": 1368583718,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3394795541,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1368583712,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 2741029731,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1368583706,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3394798808,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950205954,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3887852664,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6951588045,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 2741036301,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6925200137,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6925200135,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 5703723118,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169086361,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919298394,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6814326140,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919226560,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6919226559,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6917282706,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6917282705,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045566,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6848385299,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6924713774,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704221,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3169258861,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169258705,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6931160085,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 4556325490,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 4066952478,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 650167214,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2364524482,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 4230845210,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948223216,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948223217,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948269077,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948269078,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538644,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770074,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538639,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770129,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538631,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949538637,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615612,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615614,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615604,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615603,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615600,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615599,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769971,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6950145286,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120080,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6950120081,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120072,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 590203150,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120055,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5635252881,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 4441400840,
+      "role": "stop_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924365,
+      "role": "platform_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 742294990,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 456279198,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742294989,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741285593,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741259225,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1231707950,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 290265670,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832301,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832326,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832330,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832360,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832366,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832385,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832393,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 303611693,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 293631320,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 122481921,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 274472375,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741285591,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 274472376,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741943770,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286526565,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 861079452,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399527,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 721646866,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154500,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399536,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 722001118,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913830,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913826,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 288270091,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116040,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 353024314,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324885,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324886,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130705,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130706,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834433,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834432,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294368781,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116039,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294369411,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1362674737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 711896751,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346061,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 851473641,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404389183,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 430837229,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 506660345,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404416957,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780777,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 506660352,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780778,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404392077,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404391391,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346058,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 938574982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018658,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297644563,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219637,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 940442279,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 734505238,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645296,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219636,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645621,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180072101,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717750206,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949173070,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215242,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949468322,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345285,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345284,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 715901485,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 716889982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250498,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250499,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1217457466,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 66267679,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949186317,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180146663,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133878,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133880,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195166,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195178,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195176,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1313591001,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924367,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924366,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#0432ff",
+    "from": "Terminal Metropolitano Ferrazópolis",
+    "name": "Ferrazópolis - São Mateus",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "Metra",
+    "public_transport:version": "2",
+    "ref": "285",
+    "route": "bus",
+    "to": "Terminal Metropolitano São Mateus",
+    "type": "route",
+    "via": "Terminal Metropolitano São Bernardo",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 3959321,
+  "center": {
+    "lat": -23.6675517,
+    "lon": -46.5144728
+  },
+  "members": [
+    {
+      "type": "node",
+      "ref": 4441400839,
+      "role": "stop_entry_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924364,
+      "role": "platform_entry_only"
+    },
+    {
+      "type": "node",
+      "ref": 6950120056,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5635252880,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120072,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 590203149,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120082,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770143,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950145287,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770260,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769915,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615598,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905770068,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615605,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769964,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615615,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538632,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949538636,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538640,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905769968,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1277258109,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905769981,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948025502,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905069259,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948269079,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948223215,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948223214,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905069233,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6896055282,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6952102532,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 459904130,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6924719931,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1734747368,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6917350408,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704223,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045556,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704222,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6848385286,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6848385300,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1722449030,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6917282707,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1734747381,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6919226562,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919298393,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169084000,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045617,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6925200132,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6925200136,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169092928,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2545376369,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5539130503,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6069480055,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6951588050,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 2741035049,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950205952,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3887849808,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949108882,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3394798807,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1368583711,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 2741028618,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950205975,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3394795284,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3887873191,
+      "role": "stop_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 650091469,
+      "role": "platform_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924361,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924360,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1313591001,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195176,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195178,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195166,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133880,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133878,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180146663,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949186317,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 66267679,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1217457466,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250499,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250498,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 716889982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 715901485,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345284,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345285,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949468322,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215242,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949173070,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717750206,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645736,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219643,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 952805923,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219642,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018323,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297646111,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704223218,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018657,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 938574982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346058,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404391391,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780779,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 237529186,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742630456,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 237529185,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 712388168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294265647,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1362673811,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94347265,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 718234921,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 718234924,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294265686,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116033,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706853094,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297647714,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834431,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834430,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294365543,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130703,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294365703,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324888,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324885,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324887,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 353024315,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 288270091,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913826,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913830,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 722001118,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399536,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154500,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 721646866,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399527,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 861079452,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286526565,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741943770,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 274472376,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 196798840,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741285590,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 292024315,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 74165155,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 292024333,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 252835916,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 122481916,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742290502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832393,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832385,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832366,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832360,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832330,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832326,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286832301,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 290265670,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1231707950,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741259227,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741259226,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 299943660,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742294991,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#0432ff",
+    "from": "Terminal Metropolitano São Mateus",
+    "name": "São Mateus - Ferrazópolis",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "Nextmobilidade (ABC Sistema de Transporte SPE S.A.",
+    "public_transport:version": "2",
+    "ref": "285",
+    "route": "bus",
+    "to": "Terminal Metropolitano Ferrazópolis",
+    "type": "route",
+    "via": "Terminal Metropolitano São Bernardo",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 8723503,
+  "center": {
+    "lat": -23.6708045,
+    "lon": -46.4144658
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 227722490,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 921404496,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 408718522,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947823044,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 408718524,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 408718525,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 408718526,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 227722484,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172306565,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 677773523,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 928681091,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 627237721,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947830162,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 627237711,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 227722482,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 390916464,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "from": "Mauá",
+    "name": "Mauá (Jardim Adelina) - São Paulo (Terminal Sacomã) via Mauá (Itapark)",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "EOASA",
+    "ref": "160",
+    "route": "bus",
+    "to": "Terminal Sacomã",
+    "type": "route",
+    "via": "Jardim Adelina"
+  }
+},
+{
+  "type": "relation",
+  "id": 10247708,
+  "center": {
+    "lat": -23.6555947,
+    "lon": -46.5141615
+  },
+  "members": [
+    {
+      "type": "node",
+      "ref": 6939142954,
+      "role": "stop_entry_only"
+    },
+    {
+      "type": "node",
+      "ref": 3887743504,
+      "role": "platform_entry_only"
+    },
+    {
+      "type": "node",
+      "ref": 6925200137,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6925200135,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 5703723118,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169086361,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919298394,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6814326140,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6919226560,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6919226559,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6917282706,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6917282705,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1389045566,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6848385299,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6924713774,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6845704221,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3169258861,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3169258705,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6931160085,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 4556325490,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 4066952478,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 650167214,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2364524482,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 4230845210,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948223216,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948223217,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6948269077,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6948269078,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538644,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770074,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538639,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 1905770129,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949538631,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949538637,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615612,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615614,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615604,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615603,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6949615600,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6949615599,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1905769971,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6950145286,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120080,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 6950120081,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120072,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 590203150,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 6950120055,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5635252881,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 4441400840,
+      "role": "stop_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 446924365,
+      "role": "platform_exit_only"
+    },
+    {
+      "type": "way",
+      "ref": 742290502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 261916160,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 303611693,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 293631320,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 122481921,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 741285591,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 286526565,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 861079452,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399527,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154502,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 721646866,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 720154500,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 187399536,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 722001118,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913830,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 730913826,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 288270091,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116040,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 353024314,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324885,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 706324886,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130705,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 282130706,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834433,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 733834432,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294368781,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 125116039,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 294369411,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1362674737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 711896751,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346061,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 851473641,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404389183,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 430837229,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 506660345,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404416957,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780777,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 506660352,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 740780778,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404392077,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404391391,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 94346058,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 938574982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27018658,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297644563,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219637,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 940442279,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 734505238,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645296,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704219636,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645621,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180072101,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717750206,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 297645737,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949173070,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 704215242,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949468322,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345285,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 862345284,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 715901485,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 716889982,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250498,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 948250499,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1217457466,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 66267679,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949186317,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 180146663,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133878,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 614133880,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195166,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195168,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195178,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 717195176,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1313591001,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924367,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446924366,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "from": "Parada Paço - SBC",
+    "name": "Shopping Metrópole - São Mateus",
+    "network": "EMTU",
+    "network:short": "EMTU",
+    "network:wikidata": "Q5374439",
+    "network:wikipedia": "pt:Empresa Metropolitana de Transportes Urbanos de São Paulo",
+    "operator": "Metra",
+    "public_transport:version": "2",
+    "ref": "284M",
+    "route": "bus",
+    "to": "Terminal Metropolitano São Mateus",
+    "type": "route",
+    "via": "Terminal Metropolitano Santo André Oeste"
+  }
+},
+{
+  "type": "relation",
+  "id": 11122645,
+  "center": {
+    "lat": -23.6683275,
+    "lon": -46.4614648
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 677303763,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 806190109,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 677303762,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 806190108,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 12385797,
+  "center": {
+    "lat": -23.6170392,
+    "lon": -46.4639718
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 912727981,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818609,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818657,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 568359695,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 387457579,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818607,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466938535,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 799408132,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 823021507,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466938539,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466938548,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727980,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172819949,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172819953,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 235281944,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466813062,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 387457320,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727977,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727976,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386875105,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386837869,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947468142,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947468143,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949755097,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386837870,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386837873,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949755096,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 742337148,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949757438,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949755098,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947468146,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386837875,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947468144,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947468145,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 937334845,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386875150,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172822195,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949759578,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727972,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172820822,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172820817,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947854848,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727969,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947854847,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727968,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937998,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937997,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937996,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780243970,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780243972,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 241249736,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1313578174,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727967,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446733588,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 994081344,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27021420,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 252694195,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947789205,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 679036678,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800588,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800587,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800582,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947804342,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947804343,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 678519022,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 678417573,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 993772390,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 147551929,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727964,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727962,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727961,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 578457421,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#006341",
+    "duration": "01:09",
+    "fee": "yes",
+    "from": "Div. de Mauá",
+    "name": "4028-10 Hosp. São Mateus",
+    "network": "SPTrans",
+    "network:wikidata": "Q7392689",
+    "network:wikipedia": "pt:São Paulo Transporte",
+    "opening_hours": "Mo-Fr 04:30-23:30;Sa 04:30-22:30;Su 04:30-22:20;PH 04:30-22:20",
+    "operator": "Movebuss Soluções em Mobilidade Urbana Ltda.",
+    "public_transport:version": "2",
+    "ref": "4028-10",
+    "route": "bus",
+    "source": "https://sptrans.com.br/itinerarios/linha/?cdp=169381; http://itinerarios.extapps.sptrans.com.br/PlanOperWeb/detalheLinha.asp?TpDiaID=0&project=OV&lincod=4028-10",
+    "to": "Hosp. São Mateus",
+    "type": "route",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 12385798,
+  "center": {
+    "lat": -23.6176420,
+    "lon": -46.4643332
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 51965387,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 678442790,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 51965372,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727957,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727956,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727955,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 578457807,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800583,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800584,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947800585,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 678519023,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 679036676,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780259087,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 679036683,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 978254907,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 252694193,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446733589,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446733590,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 446733587,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947774687,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780145275,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 895114802,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 241249694,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 27021170,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780243972,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780243971,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937996,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937997,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 972937998,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727968,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947854847,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727953,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727970,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172820822,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727972,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 949759578,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172822195,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 386875150,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 937334844,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 937334843,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 186836380,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466814004,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466814003,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466814005,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727977,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 387457320,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466813062,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 235281944,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172819953,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172819949,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727980,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 466938542,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 823021505,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947404095,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 823021504,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 833824063,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818607,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 387457579,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 568359695,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818657,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 172818609,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 912727981,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "colour": "#006341",
+    "duration": "01:08",
+    "fee": "yes",
+    "from": "Hosp. São Mateus",
+    "name": "4028-10 Div. de Mauá",
+    "network": "SPTrans",
+    "network:wikidata": "Q7392689",
+    "network:wikipedia": "pt:São Paulo Transporte",
+    "opening_hours": "Mo-Fr 04:15-00:00; Sa 04:20-23:00; Su 05:15-23:00; PH 05:15-23:00",
+    "operator": "Movebuss Soluções em Mobilidade Urbana Ltda.",
+    "public_transport:version": "2",
+    "ref": "4028-10",
+    "route": "bus",
+    "source": "https://sptrans.com.br/itinerarios/linha/?cdp=169381; http://itinerarios.extapps.sptrans.com.br/PlanOperWeb/detalheLinha.asp?TpDiaID=0&project=OV&lincod=4028-10",
+    "to": "Div. de Mauá",
+    "type": "route",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 12385799,
+  "members": [
+    {
+      "type": "relation",
+      "ref": 12385798,
+      "role": ""
+    },
+    {
+      "type": "relation",
+      "ref": 12385797,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "name": "Ônibus 4028-10 Div. de Mauá / Hosp. São Mateus",
+    "network": "SPTrans",
+    "network:wikidata": "Q7392689",
+    "network:wikipedia": "pt:São Paulo Transporte",
+    "operator": "Movebuss Soluções em Mobilidade Urbana Ltda.",
+    "ref": "4028-10",
+    "route_master": "bus",
+    "source": "https://sptrans.com.br/itinerarios/linha/?cdp=169381; http://itinerarios.extapps.sptrans.com.br/PlanOperWeb/detalheLinha.asp?TpDiaID=0&project=OV&lincod=4028-10",
+    "type": "route_master",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 15935966,
+  "center": {
+    "lat": -23.7121124,
+    "lon": -46.4947394
+  },
+  "members": [
+    {
+      "type": "node",
+      "ref": 1804994386,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174467,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371801,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174469,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371805,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174471,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2103626689,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174474,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174475,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174477,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371833,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174478,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2103626736,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174480,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371843,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174482,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174484,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174485,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174487,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10979382816,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10979382817,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10979382807,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10979382808,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 7012810030,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10979901210,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 1178698310,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 1179833751,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 169329600,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 840436175,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 405458052,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 199354881,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 199676925,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1178412225,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947817994,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1011886348,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 167405856,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 114355110,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 474918663,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1177408057,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 941588004,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 941541748,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 941541747,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 649219241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1181768933,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 67740342,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1181768927,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 115395835,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1218149606,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 474935580,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 242553754,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 166898918,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1172045470,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1389159393,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404910915,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "from": "Tartaruga da Amazônia",
+    "name": "Ônibus AL110: Tartaruga da Amazônia => Terminal Vila Luzita",
+    "network": "SA-TRANS",
+    "operator": "Suzantur",
+    "public_transport:version": "2",
+    "ref": "AL110",
+    "route": "bus",
+    "to": "Terminal Vila Luzita",
+    "type": "route"
+  }
+},
+{
+  "type": "relation",
+  "id": 15935967,
+  "center": {
+    "lat": -23.7122815,
+    "lon": -46.4946306
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1178698310,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174497,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174498,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174495,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174496,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174493,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174491,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174490,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174488,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174489,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174486,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174487,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174483,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 10975174484,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174481,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371843,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174479,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2103626736,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174476,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371833,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174472,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 2103626689,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174470,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371805,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174468,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 7842371801,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 10975174466,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 1804994386,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 1173673914,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404910039,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 404909973,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 761859978,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780981766,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 780981767,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 737453933,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 67740303,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 582074910,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1218149610,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1181762964,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 474935579,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1181762960,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 649219241,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 166184357,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 941588003,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1177408057,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1177408058,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 941520498,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 474918664,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 474918667,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 167405860,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1011886348,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1011886347,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1178412226,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 947817992,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 199676925,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 199354881,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 405458052,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 840436175,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 169329600,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 1179833751,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "from": "Terminal Vila Luzita",
+    "name": "Ônibus AL110: Terminal Vila Luzita => Tartaruga da Amazônia",
+    "network": "SA-TRANS",
+    "operator": "Suzantur",
+    "public_transport:version": "2",
+    "ref": "AL110",
+    "route": "bus",
+    "to": "Tartaruga da Amazônia",
+    "type": "route"
+  }
+},
+{
+  "type": "relation",
+  "id": 15935968,
+  "members": [
+    {
+      "type": "relation",
+      "ref": 15935967,
+      "role": ""
+    },
+    {
+      "type": "relation",
+      "ref": 15935966,
+      "role": ""
+    }
+  ],
+  "tags": {
+    "name": "Ônibus AL110: Terminal Vila Luzita => Tartaruga da Amazônia",
+    "network": "SA-TRANS",
+    "operator": "Suzantur",
+    "ref": "AL110",
+    "route_master": "bus",
+    "type": "route_master"
+  }
+}
+
+  ]
+}

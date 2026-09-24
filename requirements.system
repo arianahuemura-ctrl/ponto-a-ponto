@@ -1,0 +1,20 @@
+# Pacotes APT para instalação e desenvolvimento em Debian/Ubuntu.
+# Um pacote por linha; comentários devem ser removidos antes de passar ao APT.
+# Instalação: consulte README.md.
+#
+# Python e ambiente virtual (python3-venv fornece pip dentro do venv).
+python3
+python3-venv
+#
+# Obtenção do projeto e instalação do Node.js 24 via nvm.
+git
+curl
+ca-certificates
+xz-utils
+#
+# Node.js/npm: instalar via nvm conforme .nvmrc, pois o APT local oferece Node 22.
+# Dependências de navegador para testes opcionais:
+# cd frontend && npx playwright install --with-deps chromium
+
+# Extração do texto dos documentos PDF importados
+poppler-utils

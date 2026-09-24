@@ -1,0 +1,152 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{lmodern}
+\usepackage[margin=19mm,headheight=15pt,footskip=12mm]{geometry}
+\usepackage{graphicx,xcolor,tabularx,array,enumitem,fancyhdr,hyperref}
+\definecolor{papblue}{HTML}{124C82}
+\definecolor{papteal}{HTML}{087F8C}
+\definecolor{paplight}{HTML}{EEF5FA}
+\definecolor{papgray}{HTML}{485568}
+\hypersetup{colorlinks=true,urlcolor=papblue,linkcolor=papblue,pdftitle={Ponto a Ponto -- apresentação da proposta a Osmar},pdfauthor={Equipe do Projeto Integrador II -- UNIVESP}}
+\graphicspath{{imgs/}}
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+\setlist[itemize]{leftmargin=*,itemsep=5pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=*,itemsep=6pt,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\color{papblue}\textbf{PaP | Ponto a Ponto}}
+\fancyhead[R]{\small\color{papgray}Proposta para avaliação}
+\fancyfoot[L]{\footnotesize\color{papgray}Projeto Integrador II | UNIVESP}
+\fancyfoot[R]{\footnotesize\thepage/8}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\titulo}[2]{\vspace*{2mm}{\small\bfseries\color{papteal}#1\par}\vspace{2mm}{\LARGE\bfseries\color{papblue}#2\par}\vspace{2mm}}
+\newcommand{\bloco}[2]{\par\smallskip\noindent\colorbox{paplight}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2mm}\textbf{\color{papblue}#1}\par\smallskip #2\vspace{2mm}}}\par\smallskip}
+\newcommand{\parimagens}[4]{\par\smallskip\noindent\begin{minipage}[t]{0.485\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=139mm,keepaspectratio]{#1}\par\smallskip{\small\textbf{#2}}\end{minipage}\hfill\begin{minipage}[t]{0.485\linewidth}\vspace{0pt}\centering\includegraphics[width=\linewidth,height=139mm,keepaspectratio]{#3}\par\smallskip{\small\textbf{#4}}\end{minipage}\par\smallskip{\footnotesize\color{papgray}Fonte: mockups gerados automaticamente, fornecidos pelo grupo e incluídos no relatório parcial. Dados e locais ilustrativos.}\par}
+\begin{document}
+\titulo{APRESENTAÇÃO DA SOLUÇÃO INICIAL · VERSÃO 1 · 24/09/2026}{Ponto a Ponto}
+{\Large\color{papteal}Deslocamento facilitado entre origem e destino.\par}
+\vspace{5mm}
+{\large Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus\par}
+\vspace{5mm}
+\bloco{O que queremos discutir com você, Osmar}{Como facilitar a decisão de quem está no ponto de ônibus e precisa chegar a um destino, mesmo sem conhecer as linhas, o nome da parada ou seu endereço.}
+\textbf{A proposta}
+
+Um QR Code no ponto abre uma página no navegador com a origem já identificada. O passageiro consulta os próximos ônibus e escolhe aonde quer ir. A seleção do destino reduz as informações às alternativas úteis e permite consultar trajeto, espera e possíveis trocas.
+\begin{enumerate}
+\item \textbf{Acessar:} ler o QR Code, sem instalar aplicativo.
+\item \textbf{Escolher:} informar o destino, sem escolher previamente uma linha.
+\item \textbf{Comparar:} observar as alternativas e os veículos relevantes juntos.
+\item \textbf{Viajar:} consultar o percurso, o tempo total e eventuais baldeações.
+\end{enumerate}
+\textbf{Como ler este documento}
+
+As páginas seguintes apresentam oito telas conceituais já utilizadas no relatório parcial e explicam a experiência pretendida. Existe também um protótipo web funcional, descrito no relatório, mas \textbf{as imagens deste PDF não são capturas dessa implementação}.
+\bloco{Identidade e dados das imagens}{As telas apresentam a identidade do projeto \textbf{Ponto a Ponto (PaP)}. Linhas, endereços, posições e tempos desenhados são ilustrativos. A apresentação busca seu retorno sobre a proposta e não comprova uma operação real em Mauá.}
+\textbf{Retorno esperado:} sua percepção sobre utilidade, clareza, dificuldades práticas e melhorias prioritárias. As perguntas estão na última página.
+
+\newpage
+\titulo{01 · CHEGADA AO PONTO}{Reconhecer a origem sem pesquisar}
+O passageiro aponta a câmera do celular para o QR Code da parada. A página deve abrir com o ponto identificado e oferecer acesso às linhas e à escolha do destino.
+\parimagens{mockup1.png}{Sinalização conceitual no ponto}{mockup2.png}{Origem identificada na página}
+\bloco{O que esse acesso pretende resolver}{Dispensar o conhecimento prévio do nome da parada, endereço, código ou linha. O QR Code estabelece o contexto da consulta; a navegação ocorre pela web e depende de acesso à internet.}
+{\small A placa é uma ilustração: não representa instalação nem aprovação municipal. O código desenhado não é um QR Code funcional para teste.}
+\textbf{Para avaliar:} a sinalização e a primeira tela deixam claro o que o passageiro pode fazer?
+
+\newpage
+\titulo{02 · CONSULTA INICIAL}{Ver os ônibus e escolher aonde ir}
+A consulta inicial reúne as linhas do ponto. Para quem não sabe qual utilizar, a escolha do destino deve orientar o próximo passo e reduzir a quantidade de informações.
+\parimagens{mockup3.png}{Linhas e próximas chegadas}{mockup4.png}{Escolha do destino no mapa}
+\bloco{Da lista completa à necessidade do passageiro}{A lista inicial não deve exigir que a pessoa conheça o itinerário de cada linha. Ao informar um destino, ela passa a consultar as alternativas compatíveis com sua viagem.}
+{\small Os tempos de chegada mostrados nas telas são ilustrativos. No protótipo, as previsões demonstrativas usam dados simulados.}
+\textbf{Para avaliar:} a opção de escolher um destino está suficientemente visível para quem não conhece a rede?
+
+\newpage
+\titulo{03 · COMPARAÇÃO DAS ALTERNATIVAS}{Reunir os ônibus úteis no mesmo mapa}
+Com origem e destino definidos, o passageiro consulta uma lista reduzida e acompanha os veículos relevantes de diferentes linhas em uma mesma visualização.
+\parimagens{mockup5.png}{Alternativas filtradas pelo destino}{mockup6.png}{Veículos de diferentes linhas juntos}
+\bloco{Decidir sem abrir uma consulta para cada linha}{Cores e identificadores relacionam veículos e alternativas. A intenção é facilitar a comparação e evitar que linhas sem relação com o destino ocupem a atenção do passageiro.}
+{\small Apesar da expressão ``tempo real'' desenhada no mockup, esta apresentação utiliza posições e tempos ilustrativos; não há integração operacional de Mauá demonstrada aqui.}
+\textbf{Para avaliar:} a visão conjunta ajuda na decisão? Quais informações deveriam ter maior destaque?
+
+\newpage
+\titulo{04 · DETALHAMENTO DA VIAGEM}{Entender o percurso e o tempo de chegada}
+Depois de comparar as alternativas, o passageiro pode abrir os detalhes de uma linha, consultar a sequência de paradas e acompanhar o trajeto destacado no mapa.
+\parimagens{mockup7.png}{Horários e duração da viagem}{mockup8.png}{Trajeto e sequência de paradas}
+\bloco{Duas informações que precisam ser distintas}{\textbf{Espera no ponto:} quanto falta para embarcar. \textbf{Tempo total até o destino:} inclui espera, deslocamento e eventuais trocas. O desenho do percurso deve acompanhar as ruas, com sentido e pontos de embarque claros.}
+{\small Os valores desenhados nas telas não formam uma simulação numérica validada. As imagens ilustram viagens diretas; o exemplo da próxima página explica uma viagem com troca.}
+\textbf{Para avaliar:} fica claro onde embarcar, em qual sentido viajar e onde descer?
+
+\newpage
+\titulo{05 · EXEMPLO DE USO}{Quando a viagem exige trocar de ônibus}
+\textbf{Situação ilustrativa:} uma pessoa chega a uma parada que não conhece e deseja ir ao trabalho. Ela lê o QR Code, confirma a origem e escolhe seu destino. O planejamento encontra uma opção com duas linhas.
+\bloco{Exemplo exclusivamente simulado}{Os nomes ``Linha A'', ``Linha B'' e ``Ponto de conexão'' abaixo são genéricos. Os tempos foram escolhidos apenas para explicar o cálculo; não correspondem às linhas ou aos valores das telas anteriores.}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.30\linewidth} X r@{}}
+Etapa & Orientação ao passageiro & Tempo\\\hline
+Espera na origem & Aguardar o veículo da Linha A no sentido indicado. & 4 min\\
+Primeiro trecho & Viajar pela Linha A até o ponto de conexão. & 12 min\\
+Troca & Descer e aguardar a Linha B no mesmo local de embarque previsto neste exemplo. & 5 min\\
+Segundo trecho & Seguir pela Linha B até a parada de destino. & 9 min\\\hline
+Total estimado & Da consulta na origem até a parada de destino. & \textbf{30 min}\\
+\end{tabularx}
+\vspace{4mm}
+\textbf{O que a orientação deve mostrar}
+\begin{itemize}
+\item Linha e sentido de cada trecho, pontos de embarque e desembarque.
+\item Local da troca e tempo de espera antes do segundo ônibus.
+\item Tempo total, quantidade de trocas e percurso pelas ruas.
+\item Ausência de alternativa quando os dados ou horários não permitirem encontrar um caminho.
+\end{itemize}
+O protótipo usa planejamento por menor tempo estimado, com Dijkstra, considerando os horários do cenário e as conexões. Um ônibus que chega primeiro à origem não necessariamente produz a chegada mais rápida ao destino.
+\bloco{Ponto de atenção para uma operação real}{Este exemplo supõe troca no mesmo local e não inclui caminhada nem regras tarifárias. Em uma implantação, deslocamentos entre plataformas, acessibilidade, tempo mínimo de conexão e integração tarifária precisam ser verificados.}
+\textbf{Para avaliar:} quais cuidados e informações sobre baldeações são indispensáveis na realidade de Mauá?
+
+\newpage
+\titulo{06 · ESTÁGIO DO PROJETO}{O que existe e o que depende de validação}
+\textbf{Protótipo web descrito no relatório}
+\begin{itemize}
+\item Consulta por origem e destino, acesso por QR Code e apresentação de alternativas.
+\item Planejamento com possíveis baldeações e cenários de veículos e tempos simulados.
+\item Favoritos no navegador, como Casa, Trabalho e Escola, sem exigir cadastro para uma consulta ocasional.
+\item Administração separada para ativar ou desativar a simulação; o passageiro não precisa ligá-la na tela principal.
+\end{itemize}
+A aplicação utiliza Django, React e SQLite. O uso pelo celular ocorre no navegador; um aplicativo Android permanece como possibilidade futura.
+\textbf{Dados e limites atuais}
+\begin{itemize}
+\item OSM e catálogos públicos ajudam a montar a base de linhas, itinerários e paradas, mas a cobertura é parcial.
+\item Há localizações aproximadas e registros sem coordenadas, que precisam de conferência.
+\item Tempos e posições demonstrativos não são previsões operacionais. Desligar a simulação não disponibiliza automaticamente dados reais.
+\item O PDF permite avaliar o conceito; a usabilidade e o funcionamento devem ser observados também no protótipo, com participantes.
+\end{itemize}
+\bloco{Em que sua experiência pode ajudar}{Identificar situações que o fluxo ainda não atende, conferir o vocabulário usado e orientar o contato com os responsáveis pelo cadastro e pela operação do transporte.}
+\textbf{Informações para uma futura integração}
+
+Linhas e variantes vigentes; paradas por sentido e suas coordenadas; ordem das paradas e trajetos; horários e calendários; condições de transferência; localização dos veículos e previsões, quando disponíveis. Também será necessário conhecer as condições de uso, os responsáveis e a frequência de atualização desses dados.
+
+Um eventual piloto com placas exige autorização e definição de quem manterá os QR Codes e as informações. Essas condições ainda precisam ser discutidas.
+
+\newpage
+\titulo{07 · CONVITE À AVALIAÇÃO}{Osmar, o que deveríamos melhorar?}
+Seu retorno pode ser enviado no próprio corpo do e-mail, seguindo os números abaixo. Não é necessário elaborar um parecer formal: exemplos práticos e sugestões já ajudam a orientar a próxima versão.
+\begin{enumerate}
+\item \textbf{Utilidade.} O acesso por QR Code ajudaria quem não conhece o ponto ou as linhas? Em quais situações seria mais útil?
+\item \textbf{Clareza.} A sequência origem, destino e alternativas está compreensível? Há termos ou informações que podem confundir o passageiro?
+\item \textbf{Comparação.} Mostrar os próximos ônibus de diferentes linhas juntos ajuda a escolher? O que deveria ser priorizado na tela?
+\item \textbf{Trocas.} Quais informações são indispensáveis para orientar uma baldeação com segurança e clareza?
+\item \textbf{Realidade local.} Há situações de Mauá que o fluxo não contempla, como variantes, sentidos, plataformas ou restrições de atendimento?
+\item \textbf{Prioridade.} Qual mudança você recomendaria fazer primeiro? Há algo que deveríamos retirar ou simplificar?
+\item \textbf{Continuidade.} Com quem poderíamos conversar sobre cadastro operacional, dados disponíveis e condições para um eventual piloto autorizado?
+\end{enumerate}
+\bloco{Como utilizaremos as sugestões}{Vamos registrar o retorno como avaliação inicial da proposta, relacionar cada sugestão às mudanças previstas e atualizar o relatório do PI. O envio do documento, por si só, não será tratado como validação da solução.}
+\textbf{Registro da avaliação}
+
+Para contextualizar o retorno, pedimos que informe a data e se avaliou apenas este PDF ou também teve contato com o protótipo funcional. Antes de reproduzir comentários atribuídos a você no relatório, gostaríamos de confirmar sua concordância.
+\vspace{5mm}
+{\large\color{papblue}\textbf{Obrigado pela colaboração!}\par}
+Sua experiência contribui para aproximar o projeto das necessidades de quem utiliza e de quem organiza o transporte público.
+\vfill
+{\small\color{papgray}Documento preparado pela equipe do Projeto Integrador II da UNIVESP a partir do relatório parcial do Ponto a Ponto. Versão 1, de 24 de setembro de 2026.}
+\end{document}
