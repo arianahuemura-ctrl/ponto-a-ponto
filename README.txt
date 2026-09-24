@@ -5,7 +5,9 @@ MAPA DE ÔNIBUS DE MAUÁ — PROTÓTIPO
 
    python backend/server.py
 
-   e abra http://127.0.0.1:8000
+   O navegador será aberto automaticamente na URL disponível, normalmente `http://127.0.0.1:8000`.
+
+   Se a porta 8000 já estiver ocupada, o servidor tentará automaticamente as próximas portas até 8009.
 
 3. Informe um endereço em Mauá e clique em “Buscar”, ou clique em “Usar minha localização e buscar pontos”.
 4. Clique em um ponto azul.
