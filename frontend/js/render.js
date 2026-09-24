@@ -1,14 +1,164 @@
-function routeContainsSelectionInOrder(route,ids){if(!ids.length)return true;let from=0;for(const wanted of ids){let index=route.orderedStops.indexOf(wanted,from);if(index===-1){const selected=state.stops.get(wanted);if(selected)for(let candidate=from;candidate<route.orderedStops.length;candidate++){const routeStop=state.stops.get(route.orderedStops[candidate]);if(routeStop&&sqDist([selected.lat,selected.lon],[routeStop.lat,routeStop.lon])<=35*35){index=candidate;break}}}if(index===-1)return false;from=index+1}return true}
-function computeCompatibleRoutes(){state.compatibleRouteIds.clear();for(const route of state.routes.values())if(routeContainsSelectionInOrder(route,state.selectedStops))state.compatibleRouteIds.add(route.id)}
-function getPossibleNextStops(){const possible=new Set();if(!state.selectedStops.length)return possible;for(const routeId of state.compatibleRouteIds){const route=state.routes.get(routeId);let from=0;for(const selected of state.selectedStops){let index=route.orderedStops.indexOf(selected,from);if(index<0){const selectedStop=state.stops.get(selected);for(let candidate=from;candidate<route.orderedStops.length;candidate++){const routeStop=state.stops.get(route.orderedStops[candidate]);if(selectedStop&&routeStop&&sqDist([selectedStop.lat,selectedStop.lon],[routeStop.lat,routeStop.lon])<=35*35){index=candidate;break}}}if(index<0){from=route.orderedStops.length;break}from=index+1}for(let index=from;index<route.orderedStops.length;index++){const stop=state.stops.get(route.orderedStops[index]);if(!stop)continue;for(const [key,nearbyStop] of state.stops)if(nearbyStop.nearby&&sqDist([stop.lat,stop.lon],[nearbyStop.lat,nearbyStop.lon])<=35*35)possible.add(key)}}return possible}
-function buildRoutePoints(route){const segments=route.geometry.filter(segment=>segment.length>1);if(!segments.length)return[];const points=[...segments[0]];for(let index=1;index<segments.length;index++){let segment=[...segments[index]];const last=points[points.length-1];const startDistance=sqDist(last,segment[0]);const endDistance=sqDist(last,segment[segment.length-1]);if(endDistance<startDistance)segment.reverse();if(sqDist(last,segment[0])<250*250)points.push(...segment.slice(1));else points.push(...segment)}return points}
-function renderRoutes(){
-  layers.routes.clearLayers();if(!state.selectedStops.length)return;
-  const routeIds=[...state.compatibleRouteIds];const lastStop=state.stops.get(state.selectedStops[state.selectedStops.length-1]);const bounds=[];
-  for(const routeId of routeIds){const route=state.routes.get(routeId);const points=buildRoutePoints(route);if(points.length>1){const split=nearestGeometryIndex(points,lastStop);const past=points.slice(0,split+1);const future=points.slice(split);if(past.length>1)L.polyline(past,{color:'#8f9aaa',weight:5,opacity:.68,dashArray:'8 8'}).addTo(layers.routes);if(future.length>1)L.polyline(future,{color:'#57d68d',weight:6,opacity:.9}).addTo(layers.routes);bounds.push(...points)}else{const stopPoints=route.orderedStops.map(key=>state.stops.get(key)).filter(Boolean).map(stop=>[stop.lat,stop.lon]);if(stopPoints.length>1){const split=nearestGeometryIndex(stopPoints,lastStop);const past=stopPoints.slice(0,split+1);const future=stopPoints.slice(split);if(past.length>1)L.polyline(past,{color:'#8f9aaa',weight:4,opacity:.55,dashArray:'6 10'}).addTo(layers.routes);if(future.length>1)L.polyline(future,{color:'#57d68d',weight:5,opacity:.72,dashArray:'3 7'}).addTo(layers.routes);bounds.push(...stopPoints)}}}
-  if(bounds.length){const boundsLayer=L.latLngBounds(bounds);map.fitBounds(boundsLayer,{padding:[45,45],maxZoom:15,animate:true});setTimeout(()=>map.invalidateSize(),120)}
-  const routeBox=$('routes');if(!routeIds.length){routeBox.innerHTML='<p>Nenhuma linha do OSM passa pelos pontos escolhidos nessa ordem.</p>';return}
-  routeBox.innerHTML=routeIds.map(routeId=>{const route=state.routes.get(routeId);return `<div class="route-item"><div class="route-ref">${esc(routeLabel(route))}</div><div class="route-name">${esc(route.tags.from||'')}${route.tags.to?' → '+esc(route.tags.to):''}${route.tags.operator?' · '+esc(route.tags.operator):''}</div></div>`}).join('')
+function routeContainsSelectionInOrder(route, ids) {
+  if (!ids.length) return true;
+  let from = 0;
+  for (const wanted of ids) {
+    let index = route.orderedStops.indexOf(wanted, from);
+    if (index === -1) {
+      const selected = state.stops.get(wanted);
+      if (selected)
+        for (let candidate = from; candidate < route.orderedStops.length; candidate++) {
+          const routeStop = state.stops.get(route.orderedStops[candidate]);
+          if (routeStop && sqDist([selected.lat, selected.lon], [routeStop.lat, routeStop.lon]) <= 35 * 35) {
+            index = candidate;
+            break
+          }
+        }
+    }
+    if (index === -1) return false;
+    from = index + 1
+  }
+  return true
 }
-function renderSelection(){const selectionBox=$('selection');if(!state.selectedStops.length){selectionBox.innerHTML='<p>Nenhum ponto selecionado.</p>';return}selectionBox.innerHTML=state.selectedStops.map((key,index)=>`<div>${index+1}. <span class="selected">${esc(stopLabel(state.stops.get(key)))}</span></div>`).join('')}
-function updateMarkerStyles(){const possible=getPossibleNextStops();for(const [key,marker] of state.markers){if(state.selectedStops.includes(key))marker.setIcon(makeStopIcon('selected-stop'));else if(state.selectedStops.length&&possible.has(key))marker.setIcon(makeStopIcon('available'));else marker.setIcon(makeStopIcon());const enabled=!state.selectedStops.length||possible.has(key)||state.selectedStops.includes(key);marker.getElement()?.style.setProperty('opacity',enabled?'1':'.18')}}
+
+function computeCompatibleRoutes() {
+  state.compatibleRouteIds.clear();
+  for (const route of state.routes.values())
+    if (routeContainsSelectionInOrder(route, state.selectedStops)) state.compatibleRouteIds.add(route.id)
+}
+
+function getPossibleNextStops() {
+  const possible = new Set();
+  if (!state.selectedStops.length) return possible;
+  for (const routeId of state.compatibleRouteIds) {
+    const route = state.routes.get(routeId);
+    let from = 0;
+    for (const selected of state.selectedStops) {
+      let index = route.orderedStops.indexOf(selected, from);
+      if (index < 0) {
+        const selectedStop = state.stops.get(selected);
+        for (let candidate = from; candidate < route.orderedStops.length; candidate++) {
+          const routeStop = state.stops.get(route.orderedStops[candidate]);
+          if (selectedStop && routeStop && sqDist([selectedStop.lat, selectedStop.lon], [routeStop.lat, routeStop.lon]) <= 35 * 35) {
+            index = candidate;
+            break
+          }
+        }
+      }
+      if (index < 0) {
+        from = route.orderedStops.length;
+        break
+      }
+      from = index + 1
+    }
+    for (let index = from; index < route.orderedStops.length; index++) {
+      const stop = state.stops.get(route.orderedStops[index]);
+      if (!stop) continue;
+      for (const [key, nearbyStop] of state.stops)
+        if (nearbyStop.nearby && sqDist([stop.lat, stop.lon], [nearbyStop.lat, nearbyStop.lon]) <= 35 * 35) possible.add(key)
+    }
+  }
+  return possible
+}
+
+function buildRoutePoints(route) {
+  const segments = route.geometry.filter(segment => segment.length > 1);
+  if (!segments.length) return [];
+  const points = [...segments[0]];
+  for (let index = 1; index < segments.length; index++) {
+    let segment = [...segments[index]];
+    const last = points[points.length - 1];
+    const startDistance = sqDist(last, segment[0]);
+    const endDistance = sqDist(last, segment[segment.length - 1]);
+    if (endDistance < startDistance) segment.reverse();
+    if (sqDist(last, segment[0]) < 250 * 250) points.push(...segment.slice(1));
+    else points.push(...segment)
+  }
+  return points
+}
+
+function renderRoutes() {
+  layers.routes.clearLayers();
+  if (!state.selectedStops.length) return;
+  const routeIds = [...state.compatibleRouteIds];
+  const lastStop = state.stops.get(state.selectedStops[state.selectedStops.length - 1]);
+  const bounds = [];
+  for (const routeId of routeIds) {
+    const route = state.routes.get(routeId);
+    const points = buildRoutePoints(route);
+    if (points.length > 1) {
+      const split = nearestGeometryIndex(points, lastStop);
+      const past = points.slice(0, split + 1);
+      const future = points.slice(split);
+      if (past.length > 1) L.polyline(past, {
+        color: '#8f9aaa',
+        weight: 5,
+        opacity: .68,
+        dashArray: '8 8'
+      }).addTo(layers.routes);
+      if (future.length > 1) L.polyline(future, {
+        color: '#57d68d',
+        weight: 6,
+        opacity: .9
+      }).addTo(layers.routes);
+      bounds.push(...points)
+    } else {
+      const stopPoints = route.orderedStops.map(key => state.stops.get(key)).filter(Boolean).map(stop => [stop.lat, stop.lon]);
+      if (stopPoints.length > 1) {
+        const split = nearestGeometryIndex(stopPoints, lastStop);
+        const past = stopPoints.slice(0, split + 1);
+        const future = stopPoints.slice(split);
+        if (past.length > 1) L.polyline(past, {
+          color: '#8f9aaa',
+          weight: 4,
+          opacity: .55,
+          dashArray: '6 10'
+        }).addTo(layers.routes);
+        if (future.length > 1) L.polyline(future, {
+          color: '#57d68d',
+          weight: 5,
+          opacity: .72,
+          dashArray: '3 7'
+        }).addTo(layers.routes);
+        bounds.push(...stopPoints)
+      }
+    }
+  }
+  if (bounds.length) {
+    const boundsLayer = L.latLngBounds(bounds);
+    map.fitBounds(boundsLayer, {
+      padding: [45, 45],
+      maxZoom: 15,
+      animate: true
+    });
+    setTimeout(() => map.invalidateSize(), 120)
+  }
+  const routeBox = $('routes');
+  if (!routeIds.length) {
+    routeBox.innerHTML = '<p>Nenhuma linha do OSM passa pelos pontos escolhidos nessa ordem.</p>';
+    return
+  }
+  routeBox.innerHTML = routeIds.map(routeId => {
+    const route = state.routes.get(routeId);
+    return `<div class="route-item"><div class="route-ref">${esc(routeLabel(route))}</div><div class="route-name">${esc(route.tags.from||'')}${route.tags.to?' → '+esc(route.tags.to):''}${route.tags.operator?' · '+esc(route.tags.operator):''}</div></div>`
+  }).join('')
+}
+
+function renderSelection() {
+  const selectionBox = $('selection');
+  if (!state.selectedStops.length) {
+    selectionBox.innerHTML = '<p>Nenhum ponto selecionado.</p>';
+    return
+  }
+  selectionBox.innerHTML = state.selectedStops.map((key, index) => `<div>${index+1}. <span class="selected">${esc(stopLabel(state.stops.get(key)))}</span></div>`).join('')
+}
+
+function updateMarkerStyles() {
+  const possible = getPossibleNextStops();
+  for (const [key, marker] of state.markers) {
+    if (state.selectedStops.includes(key)) marker.setIcon(makeStopIcon('selected-stop'));
+    else if (state.selectedStops.length && possible.has(key)) marker.setIcon(makeStopIcon('available'));
+    else marker.setIcon(makeStopIcon());
+    const enabled = !state.selectedStops.length || possible.has(key) || state.selectedStops.includes(key);
+    marker.getElement()?.style.setProperty('opacity', enabled ? '1' : '.18')
+  }
+}

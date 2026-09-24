@@ -1,2 +1,2 @@
-const $=id=>document.getElementById(id);
-const setStatus=text=>$('status').textContent=text;
+const $ = id => document.getElementById(id);
+const setStatus = text => $('status').textContent = text;
