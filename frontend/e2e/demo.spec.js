@@ -186,3 +186,35 @@ test("favoritar linha persiste sem precisar escolher destino", async ({
     page.getByRole("heading", { name: "Detalhes da linha", exact: true }),
   ).toBeVisible();
 });
+
+
+test("catálogo mostra sequência importada sem inventar localização", async ({ page }) => {
+  await page.route("**/api/catalogue/?*", route => route.fulfill({ json: {
+    counts: { stops: 2, located_stops: 1, variants: 1 },
+    routes: [{ id: "cittamobi:test", code: "088", name: "ZAIRA", source: "cittamobi", stop_count: 2 }],
+    sources: [],
+  } }));
+  await page.route("**/api/catalogue/routes/**", route => route.fulfill({ json: {
+    id: "cittamobi:test", code: "088", name: "ZAIRA", source: "cittamobi", routable: false,
+    stops: [{ id: "a", name: "Parada verificada", lat: -23.6 }, { id: "b", name: "Parada sem coordenadas", lat: null }],
+  } }));
+  await page.goto("/?stop=" + origin);
+  await page.getByRole("button", { name: /Ver linhas.*deste ponto/ }).click();
+  await page.getByRole("button", { name: "Consultar cadastro de linhas" }).click();
+  await page.getByRole("textbox", { name: "Buscar linha" }).fill("088");
+  await page.getByRole("button", { name: /088 — ZAIRA/ }).click();
+  await expect(page.getByText("Parada sem coordenadas · localização pendente")).toBeVisible();
+  await expect(page.getByText(/Sem dados suficientes para planejamento/)).toBeVisible();
+});
+
+
+test("mapa identifica a localização aproximada da parada", async ({ page }) => {
+  await page.route("**/api/network/?*", async route => {
+    const response = await route.fetch();
+    const data = await response.json();
+    data.stops.find(s => s.id === origin).geolocation = { status: "estimated" };
+    await route.fulfill({ json: data });
+  });
+  await page.goto("/?stop=" + origin);
+  await expect(page.locator(".map-stop-label").filter({ hasText: "posição aproximada" })).toBeVisible();
+});

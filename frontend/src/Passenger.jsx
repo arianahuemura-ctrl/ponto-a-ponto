@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
+import Catalogue from "./Catalogue.jsx";
 import PassengerMap from "./PassengerMap.jsx";
 import { api, getLocation } from "./api.js";
 import { loadPreferences, savePreferences } from "./preferences.js";
@@ -14,6 +15,7 @@ const allowedViews = new Set([
   "detail",
   "favorites",
   "more",
+  "catalogue",
 ]);
 export default function Passenger() {
   const [network, setNetwork] = useState(null),
@@ -72,7 +74,7 @@ export default function Passenger() {
         setBoard((previous) => ({ ...previous, mode: data.mode, at: data.at }));
         const id = new URLSearchParams(location.search).get("stop");
         const found = data.stops.find((s) => s.id === id);
-        setOrigin(found?.id || data.stops[0].id);
+        setOrigin(found?.id || data.stops.find(s => s.id === data.default_origin)?.id || data.stops[0]?.id || "");
         if (id && !found)
           setNotice("Ponto não encontrado. Selecione outro ponto no mapa.");
       })
@@ -534,7 +536,8 @@ export default function Passenger() {
           </div>
         </header>
         <div className="loading-screen" role="status">
-          {notice || "Carregando seu ponto…"}
+          {notice || (network ? "Nenhum ponto com coordenadas foi importado ainda." : "Carregando seu ponto…")}
+          {network && <Catalogue />}
           {notice && (
             <button className="primary" onClick={() => location.reload()}>
               Tentar novamente
@@ -651,6 +654,7 @@ export default function Passenger() {
               <div className="section-title">
                 <div>
                   <h2>Próximos ônibus neste ponto</h2>
+                  <button className="text-button" onClick={() => go("catalogue")}>Consultar cadastro de linhas</button>
                   <p>Atualizado às {hhmm(board.at)}</p>
                 </div>
                 <button
@@ -981,6 +985,7 @@ export default function Passenger() {
                   <Icon name="clock" />
                   <div>
                     <h2>Próximos ônibus neste ponto</h2>
+                  <button className="text-button" onClick={() => go("catalogue")}>Consultar cadastro de linhas</button>
                     <p>
                       Previsões{" "}
                       {board.mode === "simulation"
@@ -1246,6 +1251,7 @@ export default function Passenger() {
             </small>
           </section>
         )}
+        {view === "catalogue" && <Catalogue />}
         {view === "more" && (
           <section className="screen-content more-screen">
             <h2>Mais</h2>
@@ -1312,6 +1318,7 @@ export default function Passenger() {
             )}
             <details>
               <summary>Sobre os dados</summary>
+              <button className="secondary full" onClick={() => go("catalogue")}>Consultar linhas e pontos importados</button>
               <p>{network.disclaimer}</p>
               <p>
                 Trajetos calculados sobre ruas do OSM, ainda sem validação

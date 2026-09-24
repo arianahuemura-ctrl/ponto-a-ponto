@@ -87,7 +87,7 @@ export default function PassengerMap({
           isOrigin || isDestination
             ? pin(isDestination ? "#e72532" : "#0065ef")
             : L.divIcon({
-                className: "small-stop",
+                className: "small-stop" + (stop.geolocation?.status === "estimated" ? " estimated-stop" : ""),
                 html: bus,
                 iconSize: [18, 18],
               }),
@@ -102,6 +102,7 @@ export default function PassengerMap({
         : isDestination
           ? "Destino selecionado\n" + stop.name.replace(" (demo)", "")
           : stop.name.replace(" (demo)", "");
+      if (stop.geolocation?.status === "estimated") label.textContent += " · posição aproximada";
       marker
         .bindTooltip(label, {
           permanent: isOrigin || isDestination,

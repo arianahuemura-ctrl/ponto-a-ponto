@@ -1235,3 +1235,5 @@ a {
   min-height: 40px;
   padding-bottom: 13px;
 }
+
+.estimated-stop { outline: 2px dashed #b46a00; border-radius: 50%; }
