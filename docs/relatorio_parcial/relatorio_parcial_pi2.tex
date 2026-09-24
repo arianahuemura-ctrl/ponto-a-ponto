@@ -6,16 +6,26 @@
 \usepackage{hyperref}
 \hypersetup{hypertexnames=false}
 \graphicspath{{imgs/}}
+% Numeração no alto à direita, inclusive nas aberturas de capítulos.
+\makepagestyle{papnumeracao}
+\makeoddhead{papnumeracao}{}{}{\ABNTEXfontereduzida\thepage}
+\makeevenhead{papnumeracao}{}{}{\ABNTEXfontereduzida\thepage}
+
 \titulo{Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus}
 \autor{André Meneghelli Vale \\ Ariana Harumi Uemura \\ Bruno Gabriel Migliari de Souza \\ Caio Wellington Procopio Ferreira \\ Ingrid Emanuelle Sousa Dias \\ Leonardo Souza Leite \\ Maurício Gonçalves Marques \\ Nathalia Almeida Amorim}
 \local{São Bernardo do Campo; Suzano; Francisco Morato; Osasco -- SP}
 \data{2026}
 \instituicao{Universidade Virtual do Estado de São Paulo -- UNIVESP}
 \tipotrabalho{Relatório Técnico-Científico Parcial}
-\preambulo{Relatório parcial apresentado à disciplina de Projeto Integrador em Computação II. Orientadora: Dra. Aline Monteiro Campos Garcia.}
+\preambulo{Relatório parcial apresentado à disciplina de Projeto Integrador em Computação II.}
+\orientador[Orientadora:]{Dra. Aline Monteiro Campos Garcia}
 \begin{document}
 \selectlanguage{brazil}\frenchspacing
 \imprimircapa
+\pretextual
+% A capa fica fora da contagem; a folha de rosto inicia a sequência.
+\pagenumbering{arabic}
+\imprimirfolhaderosto{}
 \begin{resumo}
 Este projeto desenvolve o Ponto a Ponto (PaP), aplicação web que associa um QR Code à parada para ampliar as informações disponíveis no ponto de ônibus. O acesso pelo navegador identifica a origem sem exigir conhecimento prévio do nome da parada, de seu endereço ou das linhas, nem instalação de aplicativo. A tese de Haylett sobre clareza da informação de viagem orienta o escopo: apoiar a compreensão do deslocamento por passageiros com diferentes graus de familiaridade com a rede, apresentando primeiro as alternativas e depois seus detalhes. O protótipo implementa backend Django/Python, frontend React, mapa Leaflet e persistência em SQLite. Utiliza OpenStreetMap e catálogos públicos complementares, preservando a procedência dos registros. O inventário reúne 1.616 registros de paradas e terminais; 172 possuem coordenadas, das quais 30 são estimativas por endereço e sentido do itinerário, ainda sem validação operacional. O planejamento aplica Dijkstra a viagens demonstrativas, considerando espera, deslocamento e baldeações. As seis linhas de demonstração, os horários e os veículos são simulados e administrados em uma página restrita; não representam previsões reais de Mauá. A interface permite selecionar destino, comparar alternativas e salvar favoritos no navegador. A avaliação com Osmar e passageiros permanece prevista e deverá observar conclusão das tarefas, compreensão de sentido e transferências, necessidade de ajuda e reconhecimento das limitações dos dados. A implantação em pontos reais depende de autorização e de validação do cadastro; integração operacional e aplicativo Android são evoluções futuras.
 
@@ -32,6 +42,9 @@ Este projeto desenvolve o Ponto a Ponto (PaP), aplicação web que associa um QR
 \endgroup
 \cleardoublepage
 
+\textual
+\pagestyle{papnumeracao}
+\aliaspagestyle{chapter}{papnumeracao}
 \chapter{Introdução}
 O projeto denomina-se \textbf{Ponto a Ponto (PaP)} e tem como frase de apresentação \textit{``Deslocamento facilitado entre origem e destino.''} O nome sintetiza a proposta de apoiar o passageiro na escolha do percurso, desde a identificação do ponto de embarque até o destino desejado, incluindo eventuais trocas de ônibus. A frase expressa o propósito do projeto; os benefícios para os passageiros ainda deverão ser avaliados com a comunidade.
 
@@ -638,6 +651,7 @@ Em paralelo, será necessário obter e confrontar o cadastro operacional, revisa
 
 O relatório registra uma implementação funcional em ambiente de demonstração. Não comprova redução de espera, precisão de chegada, cobertura integral de Mauá ou melhoria estatisticamente demonstrada da experiência do passageiro. A tese fornece fundamentos para formular requisitos e avaliar clareza; a validade desses requisitos no contexto local dependerá dos resultados da próxima etapa.
 
+\postextual
 \begin{thebibliography}{99}
 \bibitem{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Plano de Ação: Projeto Integrador em Computação II}. Universidade Virtual do Estado de São Paulo -- UNIVESP, 2026. Documento do grupo, arquivo \texttt{Plano\_de\_Acao\_PI2.pdf}.
 \bibitem{ideo-designthinking} IDEO. \textit{What is design thinking?} Disponível em: \url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.
