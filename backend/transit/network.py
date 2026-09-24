@@ -40,7 +40,9 @@ def dataset():
     )
     data["routes"] = []
     for route in (
-        Route.objects.filter(routable=True).prefetch_related("sequence").order_by("pk")
+        Route.objects.filter(routable=True, simulated=True)
+        .prefetch_related("sequence")
+        .order_by("pk")
     ):
         sequence = list(route.sequence.all())
         data["routes"].append(

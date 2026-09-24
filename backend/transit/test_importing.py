@@ -6,7 +6,8 @@ from pathlib import Path
 from django.test import TestCase
 from transit.importing import import_network, import_collected
 from transit.models import Stop, Route, RouteStop, SourceDocument, Simulation
-from transit.network import dataset
+from transit.network import dataset, trips, snapshot
+from .test_support import DemoDatabaseTestCase
 
 
 class ImportTests(TestCase):
@@ -97,3 +98,47 @@ class ImportTests(TestCase):
         with self.assertRaises(ValueError):
             import_network(self.payload)
         self.assertFalse(Stop.objects.exists())
+
+
+class SimulationIsolationTests(DemoDatabaseTestCase):
+    def test_external_routable_route_stays_in_catalogue_without_affecting_simulation(self):
+        network = dataset()
+        origin = network["stops"][0]["id"]
+        at = network["default_time"]
+        baseline_trips = trips()
+        baseline_snapshot = snapshot(at, origin)
+        baseline_journey = self.client.get(
+            "/api/journey/",
+            {"origin": origin, "destination": network["stops"][6]["id"]},
+        ).json()
+        for has_demo_fields in (False, True):
+            with self.subTest(has_demo_fields=has_demo_fields):
+                external = copy.deepcopy(network["routes"][0])
+                external.update(id="external:r", source="external", name="Linha externa")
+                if not has_demo_fields:
+                    external.pop("offset", None)
+                    external.pop("color", None)
+                import_network({"stops": [], "routes": [external]}, "external")
+                route = Route.objects.get(pk="external:r")
+                self.assertTrue(route.routable)
+                self.assertFalse(route.simulated)
+                self.assertEqual(trips(), baseline_trips)
+                self.assertEqual(snapshot(at, origin), baseline_snapshot)
+                self.assertNotIn(
+                    route.pk,
+                    [r["id"] for r in self.client.get("/api/network/").json()["routes"]],
+                )
+                board = self.client.get("/api/board/", {"origin": origin})
+                self.assertEqual(board.status_code, 200)
+                self.assertEqual(board.json()["lines"], baseline_snapshot["lines"])
+                self.assertEqual(
+                    self.client.get(
+                        "/api/journey/",
+                        {"origin": origin, "destination": network["stops"][6]["id"]},
+                    ).json(),
+                    baseline_journey,
+                )
+                catalogue = self.client.get("/api/catalogue/").json()
+                self.assertIn(route.pk, [r["id"] for r in catalogue["routes"]])
+                detail = self.client.get("/api/catalogue/routes/external:r/").json()
+                self.assertEqual([s["id"] for s in detail["stops"]], external["stops"])
