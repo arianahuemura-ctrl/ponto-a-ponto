@@ -1,12 +1,12 @@
 # Relatório parcial — Projeto Integrador II
 
-Fontes do relatório parcial do ponto-a-ponto, com as imagens e o diagrama do banco de dados utilizados no documento.
+Fontes do relatório parcial do Ponto a Ponto (PaP), com as imagens e o diagrama do banco de dados utilizados no documento.
 
 **Frase de apresentação:** “Deslocamento facilitado entre origem e destino.”
 
 ## Estrutura
 
-- `relatorio_parcial_pi2.tex`: documento principal, referências e apêndice técnico.
+- `relatorio_parcial_pi2.tex`: documento principal, referências, glossário e apêndice técnico.
 - `imgs/`: imagens efetivamente referenciadas pelo relatório.
 - `imgs/diagrama_banco.tex`: diagrama vetorial do esquema SQLite, desenhado com TikZ.
 
@@ -37,4 +37,4 @@ Edite os arquivos desta pasta (`docs/relatorio_parcial`) para registrar as próx
 
 As mensagens dos commits devem ser escritas em português. Os mockups e dados simulados devem permanecer identificados como ilustrativos; a origem das capturas e os limites dos dados estão documentados no relatório.
 
-Esta pasta contém os arquivos necessários para compilar o relatório. O código e os dados do ponto-a-ponto permanecem nas respectivas pastas do mesmo projeto; a tese consultada não é necessária à compilação. A documentação das importações está em [IMPORTACOES_E_GEOLOCALIZACAO.md](../IMPORTACOES_E_GEOLOCALIZACAO.md).
+Esta pasta contém os arquivos necessários para compilar o relatório. O código e os dados do Ponto a Ponto (PaP) permanecem nas respectivas pastas do mesmo projeto; a tese consultada não é necessária à compilação. A documentação das importações está em [IMPORTACOES_E_GEOLOCALIZACAO.md](../IMPORTACOES_E_GEOLOCALIZACAO.md).

@@ -6,8 +6,8 @@
 \usepackage{hyperref}
 \hypersetup{hypertexnames=false}
 \graphicspath{{imgs/}}
-\titulo{ponto-a-ponto: Deslocamento facilitado entre origem e destino.}
-\autor{André Meneghelli Vale \\ Ariana Harumi Uemura \\ Bruno Gabriel Migliari de Souza \\ Caio Wellington Procopio Ferreira \\ Ingrid Emanuelle Sousa Dias \\ Leonardo Souza Leite \\ Maurício Gonçalves Marques}
+\titulo{Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus}
+\autor{André Meneghelli Vale \\ Ariana Harumi Uemura \\ Bruno Gabriel Migliari de Souza \\ Caio Wellington Procopio Ferreira \\ Ingrid Emanuelle Sousa Dias \\ Leonardo Souza Leite \\ Maurício Gonçalves Marques \\ Nathalia Almeida Amorim}
 \local{São Bernardo do Campo; Suzano; Francisco Morato; Osasco -- SP}
 \data{2026}
 \instituicao{Universidade Virtual do Estado de São Paulo -- UNIVESP}
@@ -17,7 +17,7 @@
 \selectlanguage{brazil}\frenchspacing
 \imprimircapa
 \begin{resumo}
-Este projeto desenvolve o ponto-a-ponto, aplicação web que associa um QR Code à parada para ampliar as informações disponíveis no ponto de ônibus. O acesso pelo navegador identifica a origem sem exigir conhecimento prévio do nome da parada, de seu endereço ou das linhas, nem instalação de aplicativo. A tese de Haylett sobre clareza da informação de viagem orienta o escopo: apoiar a compreensão do deslocamento por passageiros com diferentes graus de familiaridade com a rede, apresentando primeiro as alternativas e depois seus detalhes. O protótipo implementa backend Django/Python, frontend React, mapa Leaflet e persistência em SQLite. Utiliza OpenStreetMap e catálogos públicos complementares, preservando a procedência dos registros. O inventário reúne 1.616 registros de paradas e terminais; 172 possuem coordenadas, das quais 30 são estimativas por endereço e sentido do itinerário, ainda sem validação operacional. O planejamento aplica Dijkstra a viagens demonstrativas, considerando espera, deslocamento e baldeações. As seis linhas de demonstração, os horários e os veículos são simulados e administrados em uma página restrita; não representam previsões reais de Mauá. A interface permite selecionar destino, comparar alternativas e salvar favoritos no navegador. A avaliação com Osmar e passageiros permanece prevista e deverá observar conclusão das tarefas, compreensão de sentido e transferências, necessidade de ajuda e reconhecimento das limitações dos dados. A implantação em pontos reais depende de autorização e de validação do cadastro; integração operacional e aplicativo Android são evoluções futuras.
+Este projeto desenvolve o Ponto a Ponto (PaP), aplicação web que associa um QR Code à parada para ampliar as informações disponíveis no ponto de ônibus. O acesso pelo navegador identifica a origem sem exigir conhecimento prévio do nome da parada, de seu endereço ou das linhas, nem instalação de aplicativo. A tese de Haylett sobre clareza da informação de viagem orienta o escopo: apoiar a compreensão do deslocamento por passageiros com diferentes graus de familiaridade com a rede, apresentando primeiro as alternativas e depois seus detalhes. O protótipo implementa backend Django/Python, frontend React, mapa Leaflet e persistência em SQLite. Utiliza OpenStreetMap e catálogos públicos complementares, preservando a procedência dos registros. O inventário reúne 1.616 registros de paradas e terminais; 172 possuem coordenadas, das quais 30 são estimativas por endereço e sentido do itinerário, ainda sem validação operacional. O planejamento aplica Dijkstra a viagens demonstrativas, considerando espera, deslocamento e baldeações. As seis linhas de demonstração, os horários e os veículos são simulados e administrados em uma página restrita; não representam previsões reais de Mauá. A interface permite selecionar destino, comparar alternativas e salvar favoritos no navegador. A avaliação com Osmar e passageiros permanece prevista e deverá observar conclusão das tarefas, compreensão de sentido e transferências, necessidade de ajuda e reconhecimento das limitações dos dados. A implantação em pontos reais depende de autorização e de validação do cadastro; integração operacional e aplicativo Android são evoluções futuras.
 
 \par\vfill
 \noindent\textbf{Palavras-chave}: transporte público; QR Code; informação ao passageiro; mobilidade urbana; pontos de interesse.
@@ -27,13 +27,13 @@ Este projeto desenvolve o ponto-a-ponto, aplicação web que associa um QR Code 
 \setlength{\beforechapskip}{0pt}
 \setlength{\afterchapskip}{6pt}
 \setlength{\cftbeforechapterskip}{2pt}
-\setlength{\cftbeforesubsectionskip}{-1.3pt}
+\setlength{\cftbeforesubsectionskip}{-1.8pt}
 \tableofcontents*
 \endgroup
 \cleardoublepage
 
 \chapter{Introdução}
-O projeto denomina-se \textbf{ponto-a-ponto} e tem como frase de apresentação \textit{``Deslocamento facilitado entre origem e destino.''} O nome sintetiza a proposta de apoiar o passageiro na escolha do percurso, desde a identificação do ponto de embarque até o destino desejado, incluindo eventuais trocas de ônibus. A frase expressa o propósito do projeto; os benefícios para os passageiros ainda deverão ser avaliados com a comunidade.
+O projeto denomina-se \textbf{Ponto a Ponto (PaP)} e tem como frase de apresentação \textit{``Deslocamento facilitado entre origem e destino.''} O nome sintetiza a proposta de apoiar o passageiro na escolha do percurso, desde a identificação do ponto de embarque até o destino desejado, incluindo eventuais trocas de ônibus. A frase expressa o propósito do projeto; os benefícios para os passageiros ainda deverão ser avaliados com a comunidade.
 
 A informação em tempo real pode reduzir tempos de espera, influenciar escolhas de trajetos e aumentar a satisfação dos passageiros \cite{brakewood2019}. Este PI aborda o problema a partir do próprio ponto: o QR Code funciona como uma ligação entre o ambiente físico e informações digitais úteis à decisão de viagem. Ao ler o código, o passageiro deverá acessar no navegador uma interface que já identifica a parada e apresenta as alternativas disponíveis. O acesso inicial deverá dispensar conhecimento prévio do nome ou número da linha, do nome do ponto e de seu endereço, assim como a instalação de um aplicativo. Dessa forma, a presença do passageiro no local torna-se suficiente para definir o contexto inicial da consulta, desde que ele disponha de um celular capaz de ler o código e acessar a internet.
 
@@ -83,7 +83,7 @@ GTFS é um padrão aberto para informação de transporte. GTFS Schedule descrev
 \subsection{Redes de transporte e grafos}
 O planejamento implementado utiliza Dijkstra sobre estados de viagens e paradas, com tempos não negativos em segundos. A prioridade é a chegada mais cedo ao destino no cenário e na janela de serviço considerados, e não a menor distância geográfica. O uso de estados temporais permite representar espera e compatibilidade entre conexões \cite{sedgewicksp,transitplanner}.
 
-No ponto-a-ponto, o estado identifica a viagem, a posição na sequência de paradas e a quantidade de embarques. Continuar na mesma viagem não constitui baldeação. Uma troca exige outro veículo na mesma parada e partida posterior à chegada acrescida do intervalo mínimo configurado, de 120 segundos por padrão. O limite de baldeações é configurável. Transferências a pé entre paradas distintas ainda não são representadas; para um destino indicado por coordenada, admite-se caminhada final a partir de paradas até 500 metros, com velocidade suposta de 1,3 m/s. Esses parâmetros são hipóteses do cenário, não medidas de acessibilidade ou da operação local.
+No PaP, o estado identifica a viagem, a posição na sequência de paradas e a quantidade de embarques. Continuar na mesma viagem não constitui baldeação. Uma troca exige outro veículo na mesma parada e partida posterior à chegada acrescida do intervalo mínimo configurado, de 120 segundos por padrão. O limite de baldeações é configurável. Transferências a pé entre paradas distintas ainda não são representadas; para um destino indicado por coordenada, admite-se caminhada final a partir de paradas até 500 metros, com velocidade suposta de 1,3 m/s. Esses parâmetros são hipóteses do cenário, não medidas de acessibilidade ou da operação local.
 
 O resultado separa espera, tempo a bordo, caminhada final e trocas, sem duplicar intervalos. Por exemplo, cinco minutos de espera inicial, doze no primeiro veículo, quatro entre a chegada e a próxima partida e dez no segundo veículo totalizam 31 minutos e uma baldeação; o intervalo mínimo de transferência já está contido nos quatro minutos. As alternativas são ordenadas por chegada e, em caso de empate, pelo número de trocas. A consulta considera também partidas posteriores ao ônibus mais próximo, pois elas podem produzir uma chegada anterior.
 
@@ -235,20 +235,20 @@ A Geolocation API permite solicitar a posição do dispositivo mediante autoriza
 React é uma biblioteca JavaScript para construção de interfaces por componentes reutilizáveis \cite{react}. Mapa, ponto selecionado, lista de linhas, trajeto e busca de destino podem ser componentes independentes.
 
 \subsection{Django/Python no backend}
-Django é um framework web em Python que oferece uma camada de modelos e ORM para acesso ao banco \cite{django}. No ponto-a-ponto, o backend concentra regras de negócio, persistência, importações e respostas à interface React.
+Django é um framework web em Python que oferece uma camada de modelos e ORM para acesso ao banco \cite{django}. No PaP, o backend concentra regras de negócio, persistência, importações e respostas à interface React.
 
 \subsection{Banco de dados}
 A implementação utiliza SQLite, no arquivo \texttt{db.sqlite3}, acessado pelo ORM do Django. O banco guarda paradas, linhas, sequências, documentos de origem, estimativas de localização e controles da simulação. Os dados apresentados na aplicação são montados a partir desses registros. PostgreSQL/PostGIS poderá ser considerado se a implantação exigir consultas espaciais ou concorrência mais complexas, mas não compõe a arquitetura atual \cite{postgis}.
 
 \subsection{APIs e integração de dados}
-A aplicação importa OSM/Overpass e documentos públicos de catálogos complementares, com normalização antes da gravação no SQLite. Documentos históricos e páginas de conferência não são automaticamente tratados como cadastro operacional. GTFS e APIs de localização continuam como possibilidades de integração, sem fornecimento operacional confirmado para Mauá. A API Olho Vivo é uma referência técnica de dados e endpoints, não a fonte dos veículos simulados do ponto-a-ponto \cite{sptransapi}.
+A aplicação importa OSM/Overpass e documentos públicos de catálogos complementares, com normalização antes da gravação no SQLite. Documentos históricos e páginas de conferência não são automaticamente tratados como cadastro operacional. GTFS e APIs de localização continuam como possibilidades de integração, sem fornecimento operacional confirmado para Mauá. A API Olho Vivo é uma referência técnica de dados e endpoints, não a fonte dos veículos simulados do PaP \cite{sptransapi}.
 
 \subsection{Clareza da informação e familiaridade do passageiro}
 O documento de Haylett é uma tese de doutorado em Engenharia, apresentada à University of Southampton em 2018. A autora investiga como a familiaridade com o ambiente e com a operação do transporte interfere nas necessidades de informação. Seu quadro \textit{Traveller Planning Types} articula familiaridade e etapas da viagem, e a investigação de planejadores examina a compreensão e a confiança ao planejar deslocamentos conhecidos e desconhecidos \cite{haylett2018}. O PI adapta essas contribuições ao acesso pelo ponto de ônibus; os estudos da tese, especialmente de planejamento prévio no contexto britânico, não demonstram por si só a eficácia do protótipo em Mauá.
 
 Haylett recomenda separar a visão geral das opções dos detalhes necessários para realizar a viagem, apresentar o percurso geográfico e tornar compreensíveis disponibilidade, sentido e complexidade das conexões (p.~138--144). Isso fundamenta um fluxo em que o passageiro reconhece a origem, indica o destino, compara alternativas e então consulta embarque, baldeações e desembarque. A menor duração deve ser apresentada junto às trocas: o caminho mais rápido não é necessariamente o mais simples para quem desconhece a rede \cite{haylett2018}.
 
-A tese também recomenda recuperar consultas sem perda de contexto, evitar resultados antigos após mudanças de destino e explicitar a origem das notificações (p.~144--152). Recomenda agrupar partidas de um mesmo serviço e sentido, preservando diferenças entre trajetos, e reduzir informações periféricas (p.~152--156). No ponto-a-ponto, essas orientações justificam mostrar próximas partidas sem repetir desnecessariamente opções, manter a seleção coerente entre lista e mapa e distinguir dados simulados, posições aproximadas e indisponibilidade de informação \cite{haylett2018}.
+A tese também recomenda recuperar consultas sem perda de contexto, evitar resultados antigos após mudanças de destino e explicitar a origem das notificações (p.~144--152). Recomenda agrupar partidas de um mesmo serviço e sentido, preservando diferenças entre trajetos, e reduzir informações periféricas (p.~152--156). No PaP, essas orientações justificam mostrar próximas partidas sem repetir desnecessariamente opções, manter a seleção coerente entre lista e mapa e distinguir dados simulados, posições aproximadas e indisponibilidade de informação \cite{haylett2018}.
 
 \textbf{Requisitos de escopo derivados da leitura.} A revisão estabelece como critérios de evolução e avaliação: consulta inicial sem identificação manual da linha; resumo do deslocamento antes dos detalhes; indicação textual do sentido e das trocas, além das cores do mapa; agrupamento sem misturar variantes ou sentidos; manutenção de origem e destino ao alternar visualizações; e mensagens que distingam falha de consulta, cobertura incompleta e ausência de conexão no cenário. Esses critérios não significam que todos já estejam integralmente atendidos pela interface. Sua verificação com passageiros é uma entrega da próxima etapa, junto à avaliação dos favoritos opcionais em viagens recorrentes.
 
@@ -262,7 +262,7 @@ A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prot
 Na conversa inicial relatada pelo grupo, Osmar, profissional com passagem pela EMTU, demonstrou interesse pelo acesso às informações por QR Codes nos pontos. Esse contato orientou a proposta, mas não constitui teste de usabilidade nem autorização de implantação. Data, participantes e registro detalhado da conversa ainda precisam ser consolidados. A alegação de ausência da tecnologia em Mauá permanece uma observação do grupo, sem levantamento exaustivo de todos os pontos.
 
 \subsection{Criar e prototipar}
-Foram produzidos mockups conceituais e implementado o ponto-a-ponto com Django, React, Leaflet e SQLite. O fluxo associa o QR Code à origem, apresenta alternativas e permite escolher o destino e consultar um percurso. As imagens geradas automaticamente documentam a intenção de interface, enquanto o código e os testes documentam a implementação. Favoritos locais apoiam consultas recorrentes; não se desenvolve aplicativo Android nesta etapa.
+Foram produzidos mockups conceituais e implementado o PaP com Django, React, Leaflet e SQLite. O fluxo associa o QR Code à origem, apresenta alternativas e permite escolher o destino e consultar um percurso. As imagens geradas automaticamente documentam a intenção de interface, enquanto o código e os testes documentam a implementação. Favoritos locais apoiam consultas recorrentes; não se desenvolve aplicativo Android nesta etapa.
 
 A preparação dos dados compreende coleta e preservação das fontes, normalização de identificadores e sequências, importação no banco e geolocalização aproximada dos registros sem coordenadas. Fonte, data, evidências e pendências são mantidas para revisão. Os horários e veículos do cenário de demonstração são separados do cadastro público. A administração controla ativação, relógio e velocidade da simulação; a interface do passageiro informa a natureza demonstrativa dos dados.
 
@@ -277,7 +277,7 @@ A Tabela~\ref{tab:fontes-publicas} identifica as fontes e sua participação na 
 \setlength{\parskip}{0pt}
 \renewcommand{\arraystretch}{1.15}
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.52\textwidth}}
-\caption{Fontes públicas, endereços de coleta e utilização no ponto-a-ponto}\label{tab:fontes-publicas}\\
+\caption{Fontes públicas, endereços de coleta e utilização no PaP}\label{tab:fontes-publicas}\\
 \hline
 Fonte e endereço & Dados aproveitados e limites \\
 \hline
@@ -289,7 +289,7 @@ Fonte e endereço & Dados aproveitados e limites \\
 \hline \multicolumn{2}{r}{\small Continua na próxima página}\\
 \endfoot
 \hline
-\multicolumn{2}{p{0.95\textwidth}}{\footnotesize Fonte: manifesto, arquivos coletados e scripts de importação do ponto-a-ponto (2026).}\\
+\multicolumn{2}{p{0.95\textwidth}}{\footnotesize Fonte: manifesto, arquivos coletados e scripts de importação do PaP (2026).}\\
 \endlastfoot
 Cittamobi/Suzantur Mauá\newline
 \url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}
@@ -376,7 +376,7 @@ A avaliação com Osmar e passageiros ainda não foi realizada. O retorno dever�
 
 Os resultados desta etapa incluem o protótipo web funcional, a persistência em SQLite, o catálogo importado de fontes públicas, a estimativa auditável de parte das coordenadas e os cenários de planejamento com dados simulados. O acesso por QR Code, a seleção de origem e destino, a consulta de alternativas e os favoritos no navegador estão implementados. A demonstração e a avaliação com a comunidade ainda precisam ocorrer; os mockups não substituem essa evidência.
 
-A contribuição pretendida reúne acesso contextualizado e escolha por destino. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O ponto-a-ponto busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
+A contribuição pretendida reúne acesso contextualizado e escolha por destino. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O PaP busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
 
 \subsection{Base de dados OSM utilizada no desenvolvimento}
 
@@ -408,7 +408,7 @@ Prefeitura de Mauá & 3 & 3 \\
 Total de registros & 233 & --- \\
 \hline
 \end{tabular}
-\fonte{Banco do ponto-a-ponto e registros de importação do grupo, 24 set. 2026.}
+\fonte{Banco do PaP e registros de importação do grupo, 24 set. 2026.}
 \end{table}
 
 O Cittamobi fornece identificadores, endereços e sequências; a Suzantur, catálogos e páginas de linhas. A publicação municipal registra alterações das linhas 71, 75 e 76, enquanto a consulta da EMTU cobre apenas o resultado de um logradouro. PlanMob de 2017, Moovit, Ônibus Online e Bus2 foram preservados como referências ou documentos de conferência. O PlanMob não foi convertido em operação vigente. A consulta de dados do painel Bus2 retornou erro HTTP 500 e não forneceu dados operacionais. As fontes e seus limites estão descritos no manifesto \texttt{fonts/sources.json} e no documento técnico de importações \cite{mbmimportacoes}.
@@ -555,7 +555,7 @@ A apresentação utilizará o protótipo funcional e explicitará quais informa�
 Também deverão ser levantados os responsáveis e as condições de acesso ao cadastro operacional: identificadores e coordenadas de plataformas por sentido; linhas e variantes vigentes; sequência de paradas e geometrias; horários, calendários e exceções; regras de transferência; localização e previsão, quando disponíveis; periodicidade de atualização e condições de uso. O acesso a esses dados ainda não está confirmado. Qualquer piloto físico exigirá definição de responsáveis, autorização para as placas e manutenção dos QR Codes e das informações.
 
 \subsection{Próximas etapas e limites}
-As prioridades são consolidar os registros do contato inicial, apresentar o ponto-a-ponto a Osmar, executar as tarefas de compreensão com passageiros e corrigir os problemas observados. Capturas da versão efetivamente avaliada deverão complementar os mockups, com identificação da versão e do cenário. A avaliação deve verificar especialmente se o usuário reconhece a diferença entre dados reais de catálogo, coordenadas aproximadas e tempos simulados.
+As prioridades são consolidar os registros do contato inicial, apresentar o PaP a Osmar, executar as tarefas de compreensão com passageiros e corrigir os problemas observados. Capturas da versão efetivamente avaliada deverão complementar os mockups, com identificação da versão e do cenário. A avaliação deve verificar especialmente se o usuário reconhece a diferença entre dados reais de catálogo, coordenadas aproximadas e tempos simulados.
 
 Em paralelo, será necessário obter e confrontar o cadastro operacional, revisar os 1.444 registros ainda sem coordenadas e validar as 30 estimativas, sem presumir corretude dos objetos OSM. Cobertura, duplicidades entre fontes, lado da via, acessibilidade de embarque, vigência e sentido precisam ser conferidos antes de habilitar planejamento real. O processo de atualização e de revisão das divergências deve preceder a substituição dos dados simulados.
 
@@ -563,7 +563,7 @@ O relatório registra uma implementação funcional em ambiente de demonstraçã
 
 \begin{thebibliography}{99}
 \bibitem{haylett2018} HAYLETT, Amanda Jane. \textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018.
-\bibitem{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{ponto-a-ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
+\bibitem{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
 \bibitem{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \textit{Transport Reviews}, v. 39, n. 3, p. 327--356, 2019. DOI: 10.1080/01441647.2018.1472147.
 \bibitem{gtfs} MOBILITYDATA. \textit{General Transit Feed Specification: Overview}. Disponível em: \url{https://gtfs.org/documentation/overview/}. Acesso em: 23 set. 2026.
 \bibitem{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \textit{Journal of Geographical Systems}, v. 25, p. 453--466, 2023.
@@ -589,6 +589,38 @@ O relatório registra uma implementação funcional em ambiente de demonstraçã
 \bibitem{transitplanner} UNIVERSITÄT FREIBURG. \textit{Transit Planner: Basic Concepts}. Disponível em: \url{https://ad-publications.cs.uni-freiburg.de/student-projects/transfer-patterns-robustness/concepts.html}. Acesso em: 23 set. 2026.
 \bibitem{git} CHACON, S.; STRAUB, B. \textit{Pro Git}. 2. ed. Disponível em: \url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.
 \end{thebibliography}
+
+
+\chapter*{Glossário}
+\addcontentsline{toc}{chapter}{\MakeTextUppercase{Glossário}}
+\label{sec:glossario}
+Este glossário reúne os principais termos técnicos e siglas utilizados no relatório. As definições indicam seu significado no contexto do Ponto a Ponto (PaP).
+
+\begin{description}[style=nextline,leftmargin=0pt,font=\bfseries,itemsep=0.5\baselineskip]
+\item[API (Application Programming Interface)] Interface pela qual sistemas trocam dados e solicitam operações. No PaP, permite que a interface React consulte os serviços Django.
+\item[AVL (Automatic Vehicle Location)] Localização automática de veículos. Uma integração operacional poderia fornecer posições da frota; os veículos atuais do protótipo são simulados.
+\item[Backend] Parte da aplicação executada no servidor, responsável pelas regras de negócio, acesso ao banco e respostas às consultas.
+\item[Baldeação] Troca de veículo durante uma viagem. O planejamento demonstrativo considera o intervalo mínimo necessário para a conexão e a compatibilidade dos horários.
+\item[Catálogo] Conjunto de registros de linhas, variantes, paradas e documentos importados. A presença no catálogo não garante que uma linha possua dados suficientes para o planejamento.
+\item[Chave estrangeira (FK, Foreign Key)] Campo que referencia um registro de outra tabela, estabelecendo um vínculo no banco de dados.
+\item[Chave primária (PK, Primary Key)] Campo ou combinação de campos que identifica de forma única cada registro de uma tabela.
+\item[Frontend] Parte da aplicação com a qual o passageiro interage no navegador, incluindo mapa, listas, filtros e detalhes da viagem.
+\item[Geolocalização aproximada] Estimativa das coordenadas de uma parada com base em endereço, malha viária e sequência do itinerário. Não equivale a localização validada em campo.
+\item[Grafo] Representação por vértices e arestas. No projeto, permite modelar conexões viárias e estados de viagem; os pesos representam distância ou tempo, conforme a etapa do processamento.
+\item[GTFS (General Transit Feed Specification)] Especificação de dados de transporte público. GTFS Schedule organiza informações programadas; GTFS-Realtime complementa com atualizações, posições e alertas. Não há integração operacional confirmada no PaP.
+\item[JSON (JavaScript Object Notation)] Formato textual estruturado utilizado em respostas da API, arquivos de importação e metadados persistidos pelo projeto.
+\item[Mockup] Representação visual da interface proposta. As imagens conceituais do relatório não comprovam funcionamento, precisão dos dados ou avaliação por passageiros.
+\item[ORM (Object-Relational Mapping)] Mapeamento entre objetos da aplicação e tabelas do banco. No projeto, o ORM do Django é utilizado para persistir e consultar os registros no SQLite.
+\item[OSM (OpenStreetMap)] Base geográfica colaborativa utilizada como fonte de ruas, endereços e elementos de transporte, sujeita a limitações de cobertura e atualização.
+\item[OSRM (Open Source Routing Machine)] Motor de cálculo de percursos viários utilizado para obter geometrias demonstrativas. Os trajetos gerados não constituem itinerários de ônibus homologados.
+\item[Overpass API] Serviço de consulta de objetos do OpenStreetMap por critérios como localização, tipo e atributos. Fornece os recortes preservados pelo projeto.
+\item[PaP (Ponto a Ponto)] Nome e sigla do projeto apresentado neste relatório. Sua frase de apresentação é: ``Deslocamento facilitado entre origem e destino.''
+\item[QR Code (Quick Response Code)] Código bidimensional que, neste projeto, contém um endereço web associado à parada e permite identificar a origem da consulta.
+\item[Simulação ou dados mockados] Uso de dados preparados para demonstrar e testar comportamentos. No PaP, horários, tempos e posições dos veículos demonstrativos não representam a operação real de Mauá.
+\item[SQLite] Sistema de banco de dados utilizado pela aplicação, persistido no arquivo \texttt{db.sqlite3}.
+\item[UQ (Unique)] Indicação de restrição de unicidade no diagrama: impede repetição da combinação de valores especificada dentro de uma tabela.
+\item[Variante de linha] Registro de um percurso ou configuração particular de uma linha. Sentidos e sequências distintos podem corresponder ao mesmo código comercial.
+\end{description}
 
 \begin{apendicesenv}
 \chapter{Conversão e geolocalização dos dados}
@@ -624,10 +656,10 @@ Os registros são atualizados por identificadores estáveis. Uma nova importaç�
 \clearpage
 \begin{figure}[p]
 \centering
-\caption{Diagrama do banco de dados de domínio do ponto-a-ponto}
+\caption{Diagrama do banco de dados de domínio do PaP}
 \label{fig:banco-mbm}
 \resizebox{\textwidth}{!}{\input{imgs/diagrama_banco.tex}}
-\fonte{Elaboração do grupo a partir dos modelos Django e do esquema SQLite do ponto-a-ponto, conferidos em 24 set. 2026.}
+\fonte{Elaboração do grupo a partir dos modelos Django e do esquema SQLite do PaP, conferidos em 24 set. 2026.}
 \end{figure}
 \clearpage
 
@@ -673,7 +705,7 @@ As estimativas aceitas do mesmo ID são comparadas entre variantes. Discordânci
 Os estados são \texttt{estimated}, \texttt{pending} e \texttt{conflict}. O estado \texttt{validated} exige revisão humana registrada com responsável, data e evidência; o algoritmo nunca o atribui. Na interface, a estimativa recebe contorno tracejado e indicação de posição aproximada. A execução \texttt{run-2} aceitou 272 ocorrências: quatro por número exato, 194 por interpolação e 74 por hipóteses apoiadas na sequência. A conciliação resultou em 30 IDs publicados. Das 3.463 ocorrências pendentes, 575 apresentaram rua ausente ou ambígua, 2.626 apresentaram ambiguidade de endereço/sentido e 262 não tiveram continuidade dirigida dentro dos limites da busca.
 
 \section*{A.5 Reprodução e conservação das evidências}
-Na raiz do ponto-a-ponto, com as dependências instaladas e o ambiente Python ativo, a reprodução a partir das entradas preservadas utiliza:
+Na raiz do PaP, com as dependências instaladas e o ambiente Python ativo, a reprodução a partir das entradas preservadas utiliza:
 \begin{verbatim}
 python backend/manage.py migrate
 python backend/manage.py import_sources
