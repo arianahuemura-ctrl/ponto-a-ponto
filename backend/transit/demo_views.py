@@ -49,19 +49,21 @@ def network(request):
 
 
 @require_GET
+@never_cache
 def stop(request, stop_id):
     try:
         stop_param(stop_id)
     except ValueError as exc:
         return error(str(exc), 404)
     network = dataset()
+    state = status()
     return JsonResponse(
         {
             "stop": next(s for s in network["stops"] if s["id"] == stop_id),
             "routes": [r for r in network["routes"] if stop_id in r["stops"]]
-            if status()["enabled"]
+            if state["enabled"]
             else [],
-            "mode": "simulation",
+            "mode": state["mode"],
         }
     )
 

@@ -36,6 +36,26 @@ class RuntimeTests(DemoDatabaseTestCase):
             [],
         )
 
+    def test_stop_tracks_simulation_changes(self):
+        expected_routes = {
+            r["id"] for r in dataset()["routes"] if self.origin in r["stops"]
+        }
+        self.assertTrue(expected_routes)
+        for enabled in (True, False, True):
+            self.config.enabled = enabled
+            self.config.save()
+            with self.subTest(enabled=enabled):
+                response = self.client.get(f"/api/demo/stops/{self.origin}/")
+                self.assertEqual(response.status_code, 200)
+                data = response.json()
+                self.assertEqual(data["stop"]["id"], self.origin)
+                self.assertEqual(data["mode"], "simulation" if enabled else "unavailable")
+                self.assertEqual(
+                    {r["id"] for r in data["routes"]},
+                    expected_routes if enabled else set(),
+                )
+                self.assertIn("no-store", response["Cache-Control"])
+
     def test_clock_is_global_and_speed_applied(self):
         self.config.running = True
         self.config.speed = 15
