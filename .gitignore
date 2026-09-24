@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.sqlite3
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+avaliacoes.json
