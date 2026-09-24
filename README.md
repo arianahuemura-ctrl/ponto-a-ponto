@@ -1,11 +1,26 @@
-# Meu Ponto — Mauá Bus Map (MBM)
+# Ponto a Ponto (PaP)
 
-Aplicação web do PI2 para consultar pontos de ônibus, escolher um destino e comparar viagens. Utiliza **Django/Python**, **React/Vite** e **Leaflet**, com dados geográficos do OpenStreetMap.
+**Deslocamento facilitado entre origem e destino.**
+
+Protótipo acadêmico do Projeto Integrador em Computação II da UNIVESP, voltado ao transporte público de Mauá. O QR Code identifica a parada física e inicia a consulta no navegador, sem exigir instalação de aplicativo ou conhecimento prévio do nome do ponto ou da linha. O passageiro pode consultar as linhas, escolher um destino e comparar viagens. Utiliza **Django/Python**, **React/Vite** e **Leaflet**, com dados geográficos do OpenStreetMap.
 
 O cadastro de paradas, linhas, variantes e documentos públicos é importado de `fonts/` para `db.sqlite3`. O cenário demonstrativo usa linhas, horários e veículos **simulados**, controlados pela administração e identificados separadamente das fontes reais. Os trajetos destacam as ruas do OSM; ainda não são itinerários validados pela operadora.
 
+O nome de apresentação é **Ponto a Ponto (PaP)**. A pasta `maua_bus_map`, o pacote Django `mbm` e a variável `MBM_DATABASE` ainda mantêm os identificadores técnicos anteriores.
+
+## Estado do projeto
+
+- **Protótipo web:** Django e React, com catálogo SQLite, planejamento de viagens e simulação controlada no admin.
+- **Dados operacionais:** tempos, horários e veículos da demonstração são simulados. Importar catálogos públicos não disponibiliza rastreamento real nem valida os itinerários.
+- **Design e documentação:** mockup interativo em Figma em desenvolvimento paralelo; os PDFs versionam seus fontes LaTeX e utilizam imagens conceituais compartilhadas.
+- **Comunidade externa:** entrevista e esclarecimentos de Osmar sobre bilhetagem registrados; a avaliação da solução atual e os testes com passageiros continuam pendentes.
+- **Escopo futuro:** integração com fornecedores, eventual aplicativo Android e investigação de informações agregadas de origem e destino. Uma consulta de destino indica intenção, não comprova embarque ou desembarque.
+
+O Cittamobi já oferece consulta por destino e planejamento com conexões. A contribuição investigada pelo PaP concentra-se em facilitar a identificação da parada no ambiente físico e o acesso contextualizado às informações.
+
 ## Índice
 
+- [Estado do projeto](#estado-do-projeto)
 - [Instalação](#instalação)
 - [Iniciar a aplicação](#iniciar-a-aplicação)
 - [Como usar o admin](#como-usar-o-admin)
@@ -16,6 +31,9 @@ O cadastro de paradas, linhas, variantes e documentos públicos é importado de 
 - [Dados e manutenção](#dados-e-manutenção)
 - [Configuração](#configuração)
 - [API e documentação](#api-e-documentação)
+- [Importação de fontes públicas](#importação-de-fontes-públicas)
+- [Geolocalização aproximada das paradas](#geolocalização-aproximada-das-paradas)
+- [Relatório, mockup e entrevistas](#relatório-mockup-e-entrevistas)
 
 ## Instalação
 
@@ -345,7 +363,7 @@ Capturas são geradas em `frontend/test-results/mockup-*.png`. Os tiles externos
 
 ### Banco e preferências
 
-`db.sqlite3` contém configuração, usuários administrativos e avaliações. O arquivo não é versionado; preserve uma cópia ao mover ou reinstalar o projeto. Favoritos e preferências dos passageiros ficam nos respectivos navegadores.
+`db.sqlite3` contém o catálogo de paradas e linhas, documentos de origem, execuções e estimativas de geolocalização, cenário demonstrativo, configuração da simulação, usuários administrativos e avaliações. O arquivo não é versionado; preserve uma cópia ao mover ou reinstalar o projeto. Favoritos e preferências dos passageiros ficam nos respectivos navegadores.
 
 ### Atualizar trajetos
 
@@ -476,8 +494,9 @@ pela ordem da variante e pelos sentidos permitidos da malha viária. Resultados 
 são identificados no mapa; casos ambíguos ficam para revisão. Não há consulta em lote
 ao Nominatim.
 
+Com o ambiente Python ativo (`source .venv/bin/activate` ou `workon bus`):
+
 ```bash
-workon bus
 python backend/manage.py migrate
 python backend/manage.py geolocate_stops --download
 ```
@@ -485,3 +504,42 @@ python backend/manage.py geolocate_stops --download
 Para repetir sem novo download, retire `--download`. Consulte o inventário completo
 das importações, as fórmulas, critérios, limites e instruções de auditoria em
 [Importações e geolocalização](docs/IMPORTACOES_E_GEOLOCALIZACAO.md).
+
+
+Para diagnosticar apenas uma variante, use seu identificador do catálogo:
+
+```bash
+python backend/manage.py geolocate_stops --route ID_DA_VARIANTE
+```
+
+Com `--route`, a execução registra estimativas para auditoria, mas não publica coordenadas nas paradas. As ocorrências das execuções anteriores são preservadas. Estimativas geográficas continuam sujeitas à validação em campo ou por cadastro operacional.
+
+## Relatório, mockup e entrevistas
+
+| Local | Conteúdo |
+| --- | --- |
+| [docs/relatorio_parcial/](docs/relatorio_parcial/README.md) | Relatório parcial em LaTeX, referências em autor-data, glossário e apêndice técnico |
+| [docs/mockup/](docs/mockup/README.md) | Apresentação conceitual em PDF e rascunho de e-mail para Osmar |
+| [docs/imagens/](docs/imagens/README.md) | Fonte única das telas, capturas, diagrama do banco e logo oficial da UNIVESP |
+| [docs/entrevistas/](docs/entrevistas/) | Transcrição da entrevista e registro do retorno sobre bilhetagem |
+| [docs/IMPORTACOES_E_GEOLOCALIZACAO.md](docs/IMPORTACOES_E_GEOLOCALIZACAO.md) | Fontes externas, conversão de dados, algoritmo de geolocalização e auditoria |
+
+O título do relatório é **“Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus”**. Ponto a Ponto é o nome do projeto.
+
+As pastas `docs/relatorio_parcial/imgs` e `docs/mockup/imgs` são links simbólicos relativos para `../imagens`. Preserve esses links ao copiar o repositório. Para atualizar uma tela nos dois documentos, edite o arquivo em `docs/imagens/` e recompile ambos. As imagens conceituais não são capturas do protótipo funcional nem demonstram validação com usuários.
+
+### Compilar os PDFs
+
+As dependências LaTeX são adicionais às da aplicação. Consulte a [instalação do relatório](docs/relatorio_parcial/README.md#instalação). A partir da raiz do repositório:
+
+```bash
+(cd docs/relatorio_parcial && latexmk -pdf -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex)
+(cd docs/mockup && latexmk -pdf -interaction=nonstopmode -halt-on-error mockup_ponto_a_ponto.tex)
+```
+
+Os PDFs são gerados ao lado dos respectivos arquivos `.tex`. PDFs e auxiliares de compilação são ignorados pelo Git; os fontes e as imagens são versionados. Para remover somente auxiliares, mantendo os PDFs:
+
+```bash
+(cd docs/relatorio_parcial && latexmk -c relatorio_parcial_pi2.tex)
+(cd docs/mockup && latexmk -c mockup_ponto_a_ponto.tex)
+```
