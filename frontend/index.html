@@ -1,108 +1,12 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ônibus próximos — OpenStreetMap</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body>
-  <div id="app">
-    <main id="map"></main>
-
-    <section class="floating-panel legend-panel" aria-label="Legenda do mapa">
-      <h1>Ônibus próximos</h1>
-      <div class="legend">
-          <div>
-            <svg width="16" height="16" viewBox="0 0 24 24">
-              <polygon points="12,2 22.5,21 1.5,21" fill="#4ea1ff" stroke="#000" stroke-width="2.2" stroke-linejoin="round" />
-            </svg>
-            Triângulo — ponto próximo
-          </div>
-          <div>
-            <svg width="16" height="16" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="3" fill="#57d68d" stroke="#000" stroke-width="2.2" />
-            </svg>
-            Quadrado — destino possível
-          </div>
-          <div>
-            <svg width="16" height="16" viewBox="0 0 24 24">
-              <polygon points="12,1 14.9,9.1 23.5,9.3 16.6,14.6 19.1,23 12,17.9 4.9,23 7.4,14.6 0.5,9.3 9.1,9.1" fill="#ffb454" stroke="#000" stroke-width="1.6" />
-            </svg>
-            Estrela — ponto selecionado
-          </div>
-          <div><span class="legend-line legend-line--future"></span> Linha cheia — trecho futuro</div>
-          <div><span class="legend-line legend-line--past"></span> Linha tracejada — trecho já percorrido</div>
-      </div>
-    </section>
-
-    <button id="legend-toggle" class="legend-button" type="button" aria-label="Abrir legenda" aria-expanded="false" title="Abrir legenda">i</button>
-
-    <div id="legend-modal" class="legend-modal" hidden>
-      <div class="legend-modal-backdrop" data-close-legend></div>
-      <section class="legend-dialog" role="dialog" aria-modal="true" aria-labelledby="legend-dialog-title">
-        <div class="legend-dialog-header">
-          <h2 id="legend-dialog-title">Legenda do mapa</h2>
-          <button id="legend-close" class="icon-button" type="button" aria-label="Fechar legenda" title="Fechar legenda">×</button>
-        </div>
-        <div class="legend">
-          <div><span class="legend-symbol legend-symbol--nearby">▲</span> Triângulo — ponto próximo</div>
-          <div><span class="legend-symbol legend-symbol--available">■</span> Quadrado — destino possível</div>
-          <div><span class="legend-symbol legend-symbol--selected">★</span> Estrela — ponto selecionado</div>
-          <div><span class="legend-line legend-line--future"></span> Linha cheia — trecho futuro</div>
-          <div><span class="legend-line legend-line--past"></span> Linha tracejada — trecho já percorrido</div>
-        </div>
-      </section>
-    </div>
-
-    <section id="selection-panel" class="floating-panel selection-panel" aria-label="Seleção atual" hidden>
-      <div class="panel-heading panel-heading--static">
-        <span>Seleção</span>
-        <button id="reset" class="icon-button" type="button" aria-label="Limpar seleção" title="Limpar seleção">×</button>
-      </div>
-      <div id="selection"><p>Nenhum ponto selecionado.</p></div>
-      <div class="routes-heading">Linhas compatíveis</div>
-      <div id="routes"><p>Selecione um ponto.</p></div>
-    </section>
-
-    <div class="search-controls">
-      <form id="address-form" class="floating-search" aria-label="Buscar endereço em Mauá">
-        <input id="address" type="search" placeholder="Informe um endereço em Mauá" autocomplete="street-address" aria-label="Endereço em Mauá" />
-        <button id="search-address" type="submit" aria-label="Buscar endereço" title="Buscar endereço">⌕</button>
-      </form>
-      <label class="state-select-wrap" for="state">
-        <span class="sr-only">Estado</span>
-        <select id="state" aria-label="Estado do endereço">
-          <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
-          <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
-          <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
-          <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option>
-          <option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option>
-          <option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
-          <option value="SP" selected>SP</option><option value="SE">SE</option><option value="TO">TO</option>
-        </select>
-      </label>
-      <div id="status" class="sr-only" aria-live="polite">Informe um endereço ou use sua localização.</div>
-    </div>
-    <button id="load" class="location-button" type="button">
-      <span class="location-icon" aria-hidden="true">⌖</span>
-      <span>Minha localização</span>
-    </button>
-    <div class="realtime-indicator" title="Atualização em tempo real" aria-label="Atualização em tempo real"></div>
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="js/config.js"></script>
-  <script src="js/state.js"></script>
-  <script src="js/dom.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/render.js"></script>
-  <script src="js/interactions.js"></script>
-  <script src="js/realtime.js"></script>
-  <script src="js/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBM — Ônibus próximos</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
