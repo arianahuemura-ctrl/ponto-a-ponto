@@ -6,8 +6,6 @@ Protótipo acadêmico do Projeto Integrador em Computação II da UNIVESP, volta
 
 O cadastro de paradas, linhas, variantes e documentos públicos é importado de `fonts/` para `db.sqlite3`. O cenário demonstrativo usa linhas, horários e veículos **simulados**, controlados pela administração e identificados separadamente das fontes reais. Os trajetos destacam as ruas do OSM; ainda não são itinerários validados pela operadora.
 
-O nome de apresentação é **Ponto a Ponto (PaP)**. A pasta `maua_bus_map`, o pacote Django `mbm` e a variável `MBM_DATABASE` ainda mantêm os identificadores técnicos anteriores.
-
 ## Estado do projeto
 
 - **Protótipo web:** Django e React, com catálogo SQLite, planejamento de viagens e simulação controlada no admin.
@@ -60,10 +58,10 @@ Os arquivos de dependências têm funções distintas:
 
 ### 2. Instalar os pacotes APT
 
-No terminal, entre na raiz do repositório. Na instalação atual:
+Os exemplos consideram que o repositório foi clonado na pasta `ponto-a-ponto`. No terminal, a partir do diretório que contém essa pasta, execute:
 
 ~~~bash
-cd /home/avale/Projetos/maua_bus_map
+cd ponto-a-ponto
 ~~~
 
 Instale a lista de pacotes, removendo comentários e linhas vazias:
@@ -88,8 +86,8 @@ A lista inclui Python, suporte a ambientes virtuais, Git, curl, certificados HTT
 Se já usa `nvm`, pule sua instalação. Caso contrário, execute o instalador do [projeto oficial nvm](https://github.com/nvm-sh/nvm#installing-and-updating):
 
 ~~~bash
-curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh -o /tmp/mbm-install-nvm.sh
-bash /tmp/mbm-install-nvm.sh
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh -o /tmp/pap-install-nvm.sh
+bash /tmp/pap-install-nvm.sh
 ~~~
 
 Abra um novo terminal para carregar o `nvm` e volte à raiz do projeto. Então execute:

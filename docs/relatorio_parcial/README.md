@@ -23,7 +23,7 @@ A classe `abntex2` faz parte de `texlive-publishers`. O relatório também utili
 
 ## Compilação
 
-Na raiz do repositório `maua_bus_map`:
+Na raiz do repositório `ponto-a-ponto`:
 
 ```bash
 cd docs/relatorio_parcial
