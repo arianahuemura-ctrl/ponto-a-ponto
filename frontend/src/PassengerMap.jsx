@@ -143,7 +143,7 @@ export default function PassengerMap({
       "|" +
       focusKey +
       "|" +
-      segments.map((s) => s.from + s.to + s.points.length).join(",");
+      segments.map((s) => s.from + s.to + (s.points?.length || 0)).join(",");
     if (fitKey.current !== key) {
       map.invalidateSize();
       const points = segments.flatMap((s) => s.points || []);

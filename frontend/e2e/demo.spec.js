@@ -218,3 +218,33 @@ test("mapa identifica a localização aproximada da parada", async ({ page }) =>
   await page.goto("/?stop=" + origin);
   await expect(page.locator(".map-stop-label").filter({ hasText: "posição aproximada" })).toBeVisible();
 });
+
+
+test("mapa tolera trechos sem geometria e preserva os percursos válidos", async ({ page }) => {
+  const errors = [];
+  let injected = false;
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.route(/\/api\/network\/(?:\?.*)?$/, async (route) => {
+    const response = await route.fetch();
+    const network = await response.json();
+    for (const line of network.routes) {
+      line.segments = [
+        { from: "sem", to: "geometria" },
+        { from: "geometria", to: "nula", points: null },
+        { from: "geometria", to: "vazia", points: [] },
+        ...line.segments,
+      ];
+    }
+    injected = true;
+    await route.fulfill({ response, json: network });
+  });
+  await page.goto("/?stop=" + origin);
+  await page.getByRole("button", { name: /Ver linhas.*deste ponto/ }).click();
+  await page.locator(".line-card").first().click();
+  await page.getByRole("tab", { name: "Mapa da linha", exact: true }).click();
+  await expect(page.locator(".leaflet-container")).toBeVisible();
+  await expect(page.locator(".leaflet-overlay-pane path")).not.toHaveCount(0);
+  await page.getByRole("button", { name: "Centralizar na origem" }).click();
+  expect(injected).toBe(true);
+  expect(errors).toEqual([]);
+});
