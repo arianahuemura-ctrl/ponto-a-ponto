@@ -42,7 +42,8 @@
   \texttt{run\_id}\\
   \texttt{position, status, lat, lon}\\
   \texttt{evidence} (JSON)\\
-  UQ: (\texttt{route\_id, position})
+  UQ: (\texttt{run\_id, route\_id,}
+  \texttt{position})
 };
 \draw[relation] (route.east) -- node[cardinal,above,pos=.15]{1}
   node[cardinal,above,pos=.8]{0..N} (rs.west);

@@ -322,7 +322,7 @@ Com as dependências instaladas e o frontend compilado, execute na raiz:
 ~~~bash
 source .venv/bin/activate
 python backend/manage.py check
-python backend/manage.py test
+python backend/manage.py test transit
 ~~~
 
 Para os testes JavaScript e de navegador:

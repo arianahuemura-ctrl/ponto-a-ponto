@@ -10,7 +10,6 @@ from .models import (
     RouteStop,
     SourceDocument,
     NetworkMetadata,
-    StopEstimate,
 )
 
 
@@ -43,8 +42,6 @@ def import_network(payload, source="demo", simulated=False):
             if previous_address == incoming_address and s.get("lat") is None:
                 s["lat"], s["lon"] = previous.lat, previous.lon
                 s["geolocation"] = previous.data["geolocation"]
-            elif previous_address != incoming_address:
-                StopEstimate.objects.filter(stop=previous).delete()
         Stop.objects.update_or_create(
             pk=s["id"],
             defaults=dict(
@@ -85,7 +82,6 @@ def import_network(payload, source="demo", simulated=False):
         )
         old_ids = list(route.sequence.values_list("stop_id", flat=True))
         if old_ids and old_ids != ids:
-            StopEstimate.objects.filter(route=route).delete()
             for affected in Stop.objects.filter(
                 pk__in=set(old_ids + ids), source="cittamobi"
             ):

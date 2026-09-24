@@ -192,3 +192,105 @@ class GeolocationPersistenceTests(TestCase):
         stop.refresh_from_db()
         self.assertIsNone(stop.lat)
         self.assertEqual(stop.data["geolocation"]["status"], "conflict")
+
+
+class GeolocationHistoryTests(TestCase):
+    def setUp(self):
+        import hashlib
+        import json
+        import tempfile
+        from pathlib import Path
+        from django.test import override_settings
+
+        self.folder = tempfile.TemporaryDirectory()
+        self.addCleanup(self.folder.cleanup)
+        root = Path(self.folder.name)
+        (root / 'fonts').mkdir()
+        body = json.dumps({'elements': fixture()}).encode()
+        (root / 'fonts/geolocation_osm.json').write_bytes(body)
+        (root / 'fonts/geolocation_osm.meta.json').write_text(json.dumps({
+            'sha256': hashlib.sha256(body).hexdigest(), 'url': 'https://example.test/osm'
+        }))
+        override = override_settings(BASE_DIR=root)
+        override.enable()
+        self.addCleanup(override.disable)
+        self.payload = {
+            'stops': [dict(id=f'citta:{n}', name=f'Rua Teste, {n} - Mauá',
+                           source='cittamobi', lat=None, lon=None) for n in (10, 20, 30)],
+            'routes': [dict(id='citta:route', name='Teste', source='cittamobi',
+                           stops=[f'citta:{n}' for n in (10, 20, 30)])]
+        }
+        import_network(self.payload, 'cittamobi')
+
+    def execute(self, **kwargs):
+        from io import StringIO
+        from django.core.management import call_command
+        from transit.models import GeolocationRun
+        call_command('geolocate_stops', stdout=StringIO(), **kwargs)
+        return GeolocationRun.objects.latest('pk')
+
+    def test_rerun_retains_occurrences_and_publishes_only_current_run(self):
+        from transit.models import StopEstimate
+        first = self.execute()
+        previous = list(StopEstimate.objects.filter(run=first).values())
+        second = self.execute()
+        self.assertEqual(list(StopEstimate.objects.filter(run=first).values()), previous)
+        self.assertEqual(StopEstimate.objects.filter(run=second).count(), 3)
+        stop = Stop.objects.get(pk='citta:20')
+        self.assertEqual(stop.data['geolocation']['run'], second.pk)
+        self.assertEqual(stop.data['geolocation']['route_estimates'], 1)
+
+    def test_route_diagnostic_does_not_change_any_published_stop_or_catalogue(self):
+        from django.test import RequestFactory
+        from transit.catalogue import route_detail
+        import json
+
+        self.execute()
+        Stop.objects.create(id='citta:outside', name='Fora', source='cittamobi',
+                            lat=-23.66, lon=-46.46,
+                            data={'geolocation': {'algorithm': 'osm-address-directed-old',
+                                                   'status': 'estimated'}})
+        before = list(Stop.objects.order_by('pk').values())
+        response_before = route_detail(RequestFactory().get('/'), 'citta:route').content
+        diagnostic = self.execute(route='citta:route')
+        self.assertEqual(list(Stop.objects.order_by('pk').values()), before)
+        self.assertEqual(diagnostic.summary['publication'], 'diagnostic_only')
+        self.assertEqual(diagnostic.summary['published_stops'], 0)
+        response_after = route_detail(RequestFactory().get('/'), 'citta:route').content
+        self.assertEqual(response_before, response_after)
+        self.assertIsNotNone(json.loads(response_after)['stops'][1]['route_estimate'])
+
+    def test_new_pending_run_does_not_reuse_historical_estimates(self):
+        from unittest.mock import patch
+        self.execute()
+        with patch('transit.management.commands.geolocate_stops.StreetIndex.resolve',
+                   return_value=[None, None, None]):
+            current = self.execute()
+        stop = Stop.objects.get(pk='citta:20')
+        self.assertIsNone(stop.lat)
+        self.assertEqual(stop.data['geolocation']['run'], current.pk)
+        self.assertEqual(stop.data['geolocation']['status'], 'pending')
+
+    def test_failure_retains_history_and_published_coordinates(self):
+        from unittest.mock import patch
+        from transit.models import StopEstimate, GeolocationRun
+        first = self.execute()
+        before = list(Stop.objects.order_by('pk').values())
+        old = list(StopEstimate.objects.filter(run=first).values())
+        with patch('transit.management.commands.geolocate_stops.StreetIndex.resolve',
+                   side_effect=RuntimeError('falha controlada')):
+            with self.assertRaises(RuntimeError):
+                self.execute()
+        self.assertEqual(GeolocationRun.objects.latest('pk').summary['state'], 'failed')
+        self.assertEqual(list(Stop.objects.order_by('pk').values()), before)
+        self.assertEqual(list(StopEstimate.objects.filter(run=first).values()), old)
+
+    def test_reimport_invalidates_publication_without_deleting_history(self):
+        from transit.models import StopEstimate
+        first = self.execute()
+        old = list(StopEstimate.objects.filter(run=first).values())
+        self.payload['stops'][1]['name'] = 'Rua Outra, 100'
+        self.payload['routes'][0]['stops'].reverse()
+        import_network(self.payload, 'cittamobi')
+        self.assertEqual(list(StopEstimate.objects.filter(run=first).values()), old)
+        self.assertIsNone(Stop.objects.get(pk='citta:20').lat)

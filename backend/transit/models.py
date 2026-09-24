@@ -124,6 +124,6 @@ class StopEstimate(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["route", "position"], name="unique_estimate_route_position"
+                fields=["run", "route", "position"], name="unique_estimate_run_route_position"
             )
         ]

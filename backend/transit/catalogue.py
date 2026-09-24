@@ -1,4 +1,4 @@
-from django.db.models import Count, Q
+from django.db.models import Count, Q, F
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from .models import Route, Stop, SourceDocument, StopEstimate
@@ -56,7 +56,17 @@ def route_detail(request, route_id):
     route = Route.objects.filter(pk=route_id).first()
     if route is None:
         return JsonResponse({"error": "Linha não encontrada"}, status=404)
-    estimates = {e.position: e for e in StopEstimate.objects.filter(route=route)}
+    # Somente a execução publicada para a parada; diagnósticos ficam na auditoria.
+    estimates = {
+        e.position: e
+        for e in StopEstimate.objects.filter(
+            route=route,
+            run__summary__state="complete",
+            run_id=F("stop__data__geolocation__run"),
+        ).select_related("stop", "run")
+        if not e.run.summary.get("route_filter")
+        and e.evidence.get("source_address") == e.stop.data.get("address", e.stop.name)
+    }
     return JsonResponse(
         {
             "id": route.pk,
@@ -82,7 +92,7 @@ def route_detail(request, route_id):
                             "lon": estimates[e.position].lon,
                             "evidence": estimates[e.position].evidence,
                         }
-                        if e.position in estimates
+                        if e.position in estimates and estimates[e.position].stop_id == e.stop_id
                         else None
                     ),
                 )

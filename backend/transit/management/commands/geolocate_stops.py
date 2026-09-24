@@ -5,20 +5,21 @@ from collections import Counter, defaultdict
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
-from django.db.models import Q
 
 from transit.geolocation import StreetIndex, VERSION, distance
 from transit.models import GeolocationRun, StopEstimate, Route, Stop, SourceDocument
 
 
 def publish_estimates(checksum, run):
+    # Diagnósticos e execuções malsucedidas nunca alteram o cadastro publicado.
+    if run.summary.get("route_filter") or run.summary.get("state") == "failed":
+        return 0, 0
     # Coalescer somente estimativas coerentes do mesmo ID, nunca IDs de provedores diferentes.
     by_stop = defaultdict(list)
     for estimate in (
         StopEstimate.objects.filter(
-            status="estimated", run__source_hash=checksum, run__algorithm=VERSION
+            status="estimated", run=run, run__source_hash=checksum, run__algorithm=VERSION
         )
-        .filter(Q(run=run) | Q(run__summary__state="complete"))
         .select_related("stop")
     ):
         by_stop[estimate.stop_id].append(estimate)
@@ -107,6 +108,7 @@ class Command(BaseCommand):
         except (Exception, KeyboardInterrupt) as exc:
             if self.run:
                 self.run.summary = {
+                    **self.run.summary,
                     "state": "failed",
                     "error": str(exc) or "interrupted",
                 }
@@ -143,7 +145,8 @@ class Command(BaseCommand):
         if not routes.exists():
             raise CommandError("Nenhuma variante encontrada")
         run = GeolocationRun.objects.create(
-            algorithm=VERSION, source_hash=checksum, summary={"state": "running"}
+            algorithm=VERSION, source_hash=checksum,
+            summary={"state": "running", "route_filter": options["route"]}
         )
         self.run = run
         SourceDocument.objects.update_or_create(
@@ -209,16 +212,16 @@ class Command(BaseCommand):
                     }
                 )
             with transaction.atomic():
-                StopEstimate.objects.filter(route=route).delete()
                 StopEstimate.objects.bulk_create(entries)
             self.stdout.write(
                 f"{n}/{routes.count()} {route.code} {route.name}: {sum(e.status=='estimated' for e in entries)}/{len(entries)} estimadas"
             )
-        published, conflicts = publish_estimates(checksum, run)
+        published, conflicts = (0, 0) if options["route"] else publish_estimates(checksum, run)
         run.summary = {
             "state": "complete",
             "occurrences": dict(counts),
             "reasons": dict(reasons),
+            "publication": "diagnostic_only" if options["route"] else "full_network",
             "published_stops": published,
             "conflicting_stops": conflicts,
             "addresses_consulted": len(cache),

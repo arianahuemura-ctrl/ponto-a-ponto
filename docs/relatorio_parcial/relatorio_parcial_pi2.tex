@@ -629,7 +629,7 @@ Os registros são atualizados por identificadores estáveis. Uma nova importaç�
 \end{figure}
 \clearpage
 
-A Figura~\ref{fig:banco-mbm} representa as nove tabelas de domínio pelos nomes dos modelos Django; no SQLite, seus nomes recebem o prefixo \texttt{transit\_}. As tabelas internas de autenticação, sessões, permissões e migrações do Django foram omitidas para concentrar a leitura no projeto. São indicadas as chaves primárias, estrangeiras e as duas restrições de unicidade por variante e posição.
+A Figura~\ref{fig:banco-mbm} representa as nove tabelas de domínio pelos nomes dos modelos Django; no SQLite, seus nomes recebem o prefixo \texttt{transit\_}. As tabelas internas de autenticação, sessões, permissões e migrações do Django foram omitidas para concentrar a leitura no projeto. São indicadas as chaves primárias, estrangeiras e a unicidade de variante e posição em \texttt{RouteStop} e de execução, variante e posição em \texttt{StopEstimate}.
 
 \texttt{RouteStop} implementa a associação muitos-para-muitos entre \texttt{Route} e \texttt{Stop}, acrescentando ordem, duração e geometria do segmento. Uma linha pode repetir a mesma parada em posições diferentes. \texttt{StopEstimate} associa uma ocorrência a uma linha, a uma parada e à execução que produziu sua estimativa. Embora represente a mesma combinação de variante e posição do itinerário, não possui chave estrangeira direta para \texttt{RouteStop}; essa correspondência é mantida pela aplicação.
 
@@ -687,7 +687,7 @@ O coletor pode reutilizar o cache; \texttt{import\_sources --download --refresh}
 python backend/manage.py geolocate_stops \
   --route cittamobi:169f6fbfd86b
 \end{verbatim}
-A execução parcial é diagnóstica; a conciliação da rede exige execução completa. Para reproduzir os números apresentados, é necessário conservar a versão do código e as mesmas entradas: manifesto, respostas em \texttt{fonts/raw/}, \texttt{fonts/collected.json}, \texttt{fonts/osm.json}, consulta e resposta viária, metadados e hashes. Os relatórios ficam em \nolinkurl{fonts/geolocation_runs/run-<id>.json}; as tabelas de auditoria também registram a execução. Arquivos volumosos não são todos versionados no Git, e uma nova coleta não garante os mesmos resultados.
+A execução parcial é estritamente diagnóstica: registra evidências sem alterar coordenadas publicadas ou estimativas exibidas no catálogo. A conciliação da rede exige execução completa e utiliza apenas as estimativas dessa execução. Reexecuções e reimportações preservam as evidências históricas; a unicidade das estimativas inclui execução, variante e posição. Para reproduzir os números apresentados, é necessário conservar a versão do código e as mesmas entradas: manifesto, respostas em \texttt{fonts/raw/}, \texttt{fonts/collected.json}, \texttt{fonts/osm.json}, consulta e resposta viária, metadados e hashes. Os relatórios ficam em \nolinkurl{fonts/geolocation_runs/run-<id>.json}; as tabelas de auditoria também registram a execução. Arquivos volumosos não são todos versionados no Git, e uma nova coleta não garante os mesmos resultados.
 
 A administração permite consultar execuções e estimativas e registrar revisões humanas. A inspeção do lado de embarque, vigência, acessibilidade, sentidos e itinerários autorizados permanece necessária antes de uso operacional. O cadastro importado e este método aproximativo não substituem o cadastro da operadora ou uma verificação de campo.
 \end{apendicesenv}

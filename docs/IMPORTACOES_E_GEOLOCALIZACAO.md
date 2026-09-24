@@ -172,7 +172,7 @@ azimute, o ID da via, as âncoras, o método, a margem e o motivo da decisão.
 
 ### 5. Conciliar o mesmo ponto entre variantes
 
-A tabela `StopEstimate` guarda uma estimativa por **variante + posição**, relacionada
+A tabela `StopEstimate` guarda uma estimativa por **execução + variante + posição**, relacionada
 ao ID da parada. Isso permite auditar ocorrências repetidas e sentidos conflitantes.
 Uma posição de ocorrência ainda pendente pode ter coordenadas hipotéticas registradas
 para revisão, mas elas não são publicadas no mapa como coordenadas da parada.
@@ -231,8 +231,13 @@ python backend/manage.py geolocate_stops
 python backend/manage.py geolocate_stops --route cittamobi:169f6fbfd86b
 ```
 
-O modo por variante é diagnóstico; uma execução completa é preferível para conciliar
-as ocorrências do mesmo ID em toda a rede. O recorte e os relatórios volumosos não são
+O modo por variante é estritamente diagnóstico: grava a execução e suas evidências,
+mas não altera coordenadas publicadas nem substitui estimativas no catálogo do passageiro.
+Somente uma execução completa publica posições e concilia as ocorrências do mesmo ID
+em toda a rede. A publicação usa exclusivamente as estimativas dessa execução, sem
+reaproveitar resultados históricos, diagnósticos ou execuções malsucedidas.
+Reexecuções e reimportações preservam as evidências anteriores no banco; mudanças
+de endereço ou sequência invalidam a publicação, não apagam o histórico. O recorte e os relatórios volumosos não são
 versionados no Git; preserve `fonts/geolocation_osm.json`, seu `.meta.json` e os
 relatórios para reprodução exata. Uma nova coleta pode ter dados diferentes.
 
