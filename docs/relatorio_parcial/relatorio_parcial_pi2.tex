@@ -1,7 +1,9 @@
 \documentclass[12pt,oneside,a4paper,brazil]{abntex2}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern,microtype,indentfirst,graphicx,url,enumitem,float}
+\usepackage{fontspec}
+% Compilar com LuaLaTeX; Arial deve estar instalada no sistema.
+\setmainfont{Arial}
+\setsansfont{Arial}
+\usepackage{microtype,indentfirst,graphicx,url,enumitem,float}
 \usepackage{longtable,array,amsmath,xurl,tikz}
 % Autor-data conforme os exemplos da Live da Quinzena 4.
 \usepackage[authoryear,round]{natbib}
@@ -56,6 +58,7 @@ Desenvolvido no âmbito do Projeto Integrador em Computação II da UNIVESP, est
 \end{resumo}
 % Ajuste local do espaço do título; preserva fonte e entradas do sumário.
 \begingroup
+\SingleSpacing
 \setlength{\beforechapskip}{0pt}
 \setlength{\afterchapskip}{6pt}
 \setlength{\cftbeforechapterskip}{2pt}
@@ -84,7 +87,7 @@ A informação em tempo real pode reduzir tempos de espera, influenciar escolhas
 
 O projeto está alinhado ao tema norteador de Projeto Integrador em Computação II, conforme registrado no Plano de Ação do grupo: \textit{``Desenvolvimento de um software com framework web que utilize noções de banco de dados, praticando controle de versão''} \citep[p.~1]{planoacao2026}. No PaP, esses componentes são concretizados pelo backend Django, integrado à interface React, pela persistência de paradas, linhas e registros de execução em SQLite e pelo controle de versão com Git e GitHub, utilizando branches, commits e pull requests. O acesso às informações do transporte público constitui o recorte de aplicação escolhido pelo grupo para desenvolver essas competências em um problema da comunidade.
 
-A solução implementada é uma aplicação web responsiva com backend Django/Python e frontend React, baseada em dados do OpenStreetMap e em catálogos públicos complementares. A implementação técnica não equivale à validação com a comunidade.
+A solução implementada é uma aplicação web responsiva, com backend em Django e Python e frontend em React, baseada em dados do OpenStreetMap e em catálogos públicos complementares. A implementação técnica não equivale à validação com a comunidade.
 
 \chapter{Desenvolvimento}
 \section{Objetivos}
@@ -161,7 +164,7 @@ A página da parada 70016782, na Avenida Paulista, número 200, apresenta as lin
 
 \clearpage
 \textbf{QRCodeAdesivo: hipótese de descontinuidade da evolução da interface.}
-Na verificação técnica de 23 de setembro de 2026, os cabeçalhos HTTP dos arquivos públicos da aplicação do adesivo informaram as datas de última modificação apresentadas na Tabela~\ref{tab:sptrans-modificacao}. O arquivo de código da página e o de configuração indicaram 3 de junho de 2021, enquanto os estilos e uma biblioteca apresentaram datas de 2014 e 2012, respectivamente \citep{sptransadesivojs,sptransgxcfg,sptranscss,sptransgxgral}.
+Na verificação técnica de 23 de setembro de 2026, os cabeçalhos HTTP dos arquivos públicos da aplicação do adesivo informaram as datas de última modificação apresentadas na Tabela~\ref{tab:sptrans-modificacao}. O arquivo de código da página e o de configuração indicaram 3 de junho de 2021, enquanto os estilos e uma biblioteca apresentaram datas de 2014 e 2012, respectivamente (\citeauthor{sptransadesivojs}, \citeyear{sptransadesivojs}; \citeyear{sptranscss}; \citeyear{sptransgxcfg}; \citeyear{sptransgxgral}).
 
 \begin{table}[H]
     \centering
@@ -329,7 +332,7 @@ A pesquisa documental identificou o Cittamobi como aplicativo com atendimento à
 \begin{minipage}[t]{0.48\textwidth}
 \vspace{0pt}\centering
 \includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamob_selecao_rota.jpeg}
-\par\small (b) Resultados na aba ``Linhas.
+\par\small (b) Resultados na aba ``Linhas''.
 \end{minipage}
 \caption{Cittamobi: entrada da busca e pesquisa de linhas.}
 \label{fig:cittamobi-busca-linhas}
@@ -344,7 +347,7 @@ A pesquisa documental identificou o Cittamobi como aplicativo com atendimento à
 \begin{minipage}[t]{0.48\textwidth}
 \vspace{0pt}\centering
 \includegraphics[width=\linewidth,height=0.49\textheight,keepaspectratio]{cittamobi_selecao_destino.jpeg}
-\par\small (a) Busca de local na aba ``Rotas.
+\par\small (a) Busca de local na aba ``Rotas''.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \vspace{0pt}\centering
@@ -408,7 +411,7 @@ Essa experiência fundamenta sua participação no esclarecimento dos sistemas e
 
 A escuta inicial foi realizada em conversa remota entre um integrante do grupo, responsável pela entrevista, e o interlocutor. O registro foi incorporado ao projeto como transcrição com identificação de falantes e marcações temporais. O nome do arquivo indica 20 de agosto de 2026, às 14h00min44s, e a transcrição alcança 2.861 segundos, aproximadamente 47 minutos e 41 segundos. A data é a identificação do registro fornecido pelo grupo, não uma verificação independente dos metadados da gravação \citep{entrevistaosmar2026}.
 
-\textbf{Tratamento do registro.} O entrevistador informou ter revisado os trechos sinalizados como \texttt{[REVISAR]} e considerado seu conteúdo adequado, com baixa ocorrência de erros de transcrição. Essas marcas remanescentes no arquivo são registros do processamento automático e não são tratadas neste relatório como pendências de revisão do conteúdo. A análise utiliza sínteses temáticas e intervalos em segundos para permitir a localização das passagens. A revisão pelo participante não transforma as informações operacionais relatadas em cadastro oficial nem substitui a avaliação do protótipo com passageiros.
+A análise da entrevista utiliza sínteses temáticas e intervalos em segundos para permitir a localização das passagens citadas. As informações operacionais relatadas não constituem cadastro oficial nem substituem a avaliação do protótipo com passageiros.
 
 \textbf{Principais contribuições à definição do problema.} O interlocutor informou que o monitoramento dos veículos e a consulta pelo passageiro já existiam em Mauá. A conversa deslocou, portanto, o foco da criação de rastreamento para o acesso contextualizado à informação disponível. Ele avaliou favoravelmente a ideia de iniciar a consulta pelo QR Code da parada e sugeriu organizar a proposta por escrito e apresentá-la à empresa responsável pelo rastreamento \citep[447--589 s; 739--853 s; 1135--1163 s]{entrevistaosmar2026}.
 
@@ -882,7 +885,7 @@ O resultado alcançado oferece uma base concreta para discutir com a comunidade 
 \bibitem[{Cittamobi}(s.d.)]{cittamobimaua} CITTAMOBI. \textit{Suzantur -- Mauá: horários de ônibus, linhas, itinerários e paradas}. [s.d.]. Disponível em: \url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}. Acesso em: 24 set. 2026.
 \bibitem[{Design Council}(s.d.)]{designcouncil} DESIGN COUNCIL. \textit{Framework for Innovation}. [s.d.]. Disponível em: \url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.
 \bibitem[{Django Software Foundation}(s.d.)]{django} DJANGO SOFTWARE FOUNDATION. \textit{Django documentation}. [s.d.]. Disponível em: \url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.
-\bibitem[{Equipe do Projeto Integrador II}(2026a)]{entrevistaosmar2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Conversa com Osmar sobre informações do transporte público de Mauá}. Entrevista conduzida por André Meneghelli Vale. Registro identificado com a data de 20 ago. 2026a, 14h00min44s. Transcrição com marcações temporais até 47min41s, com revisão dos trechos sinalizados informada pelo entrevistador. Documento interno, arquivo \texttt{Conversa com o Osmar - Gerente de Transportes Públicos - MAUA 2026-08-20 14-00-44.txt}, no diretório \texttt{docs/entrevistas}.
+\bibitem[{Equipe do Projeto Integrador II}(2026a)]{entrevistaosmar2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Conversa com Osmar sobre informações do transporte público de Mauá}. Entrevista conduzida por André Meneghelli Vale. Registro identificado com a data de 20 ago. 2026a, 14h00min44s. Transcrição com marcações temporais até 47min41s. Documento interno, arquivo \texttt{Conversa com o Osmar - Gerente de Transportes Públicos - MAUA 2026-08-20 14-00-44.txt}, no diretório \texttt{docs/entrevistas}.
 \bibitem[{Equipe do Projeto Integrador II}(2026b)]{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Plano de Ação: Projeto Integrador em Computação II}. Universidade Virtual do Estado de São Paulo -- UNIVESP, 2026b. Documento do grupo, arquivo \texttt{Plano\_de\_Acao\_PI2.pdf}.
 \bibitem[{Equipe do Projeto Integrador II}(2026c)]{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. Documentação técnica interna do projeto, 24 set. 2026c. Arquivo \texttt{docs/IMPORTACOES\_E\_GEOLOCALIZACAO.md}, manifesto \texttt{fonts/sources.json} e registros de importação do banco SQLite.
 \bibitem[{Google}(2026)]{androidapplinks} GOOGLE. \textit{About deep links}. Android Developers. 2026. Disponível em: \url{https://developer.android.com/training/app-links}. Acesso em: 24 set. 2026.
@@ -895,8 +898,8 @@ O resultado alcançado oferece uma base concreta para discutir com a comunidade 
 \bibitem[{OpenStreetMap Foundation}(s.d.)]{osmlicense} OPENSTREETMAP FOUNDATION. \textit{Direitos autorais e licença}. [s.d.]. Disponível em: \url{https://www.openstreetmap.org/copyright?locale=pt}. Acesso em: 23 set. 2026.
 \bibitem[{OpenStreetMap Wiki}(s.d.a)]{osmpt} OPENSTREETMAP WIKI. \textit{Key:public transport}. [s.d.a]. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Key:public_transport}. Acesso em: 23 set. 2026.
 \bibitem[{OpenStreetMap Wiki}(s.d.b)]{overpass} OPENSTREETMAP WIKI. \textit{Overpass API}. [s.d.b]. Disponível em: \url{https://wiki.openstreetmap.org/wiki/Overpass_API}. Acesso em: 23 set. 2026.
-\bibitem[{Pereira; Andrade; Vieira}(2023)]{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \textit{Journal of Geographical Systems}, v. 25, p. 453--466, 2023.
 \bibitem[{Osmar Junior}(2026)]{osmaremailod} OSMAR JUNIOR. \textit{Correspondência com o interlocutor da comunidade externa sobre bilhetagem e origem-destino em Mauá}. 2 set. 2026, 19h42. Resposta por e-mail a André Meneghelli Vale, reproduzida pelo destinatário para atualização do relatório. Título descritivo atribuído pelo grupo; data e horário conferidos no cabeçalho da captura da mensagem. Síntese documental em \texttt{docs/entrevistas/retorno\_osmar\_bilhetagem.md}.
+\bibitem[{Pereira; Andrade; Vieira}(2023)]{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \textit{Journal of Geographical Systems}, v. 25, p. 453--466, 2023.
 \bibitem[{PostGIS Project}(s.d.)]{postgis} POSTGIS PROJECT. \textit{PostGIS Manual}. [s.d.]. Disponível em: \url{https://postgis.net/docs/en/}. Acesso em: 23 set. 2026.
 \bibitem[{React}(s.d.)]{react} REACT. \textit{React documentation}. [s.d.]. Disponível em: \url{https://react.dev/}. Acesso em: 23 set. 2026.
 \bibitem[{São Paulo (Município)}(2013)]{hackatona2013} SÃO PAULO (Município). \textit{Hackatona do Ônibus reúne jovens para desenvolvimento de aplicativos para o transporte}. 2013. Disponível em: \url{https://prefeitura.sp.gov.br/w/noticia/hackatona-do-onibus-reune-jovens-para}. Acesso em: 23 set. 2026.
