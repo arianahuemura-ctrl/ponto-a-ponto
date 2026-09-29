@@ -16,8 +16,10 @@ Fontes do relatório parcial do Ponto a Ponto (PaP), com as imagens e o diagrama
 Em Debian/Ubuntu, os pacotes necessários à compilação podem ser instalados com:
 
 ```bash
-sudo aptitude install latexmk texlive-lang-portuguese texlive-publishers texlive-latex-extra texlive-pictures lmodern
+sudo aptitude install latexmk texlive-lang-portuguese texlive-publishers texlive-latex-extra texlive-pictures texlive-luatex ttf-mscorefonts-installer
 ```
+
+A compilação utiliza **LuaLaTeX** e a fonte **Arial** para texto e títulos. O pacote `ttf-mscorefonts-installer` instala Arial; conclua as etapas de licença apresentadas pelo instalador. Confira com `fc-match Arial`: o resultado deve identificar Arial, não uma substituta. Códigos e fórmulas mantêm fontes próprias. As fontes não são distribuídas no repositório.
 
 A classe `abntex2` faz parte de `texlive-publishers`. O relatório também utiliza TikZ, tabelas longas e URLs com quebra de linha.
 
@@ -27,7 +29,7 @@ Na raiz do repositório `ponto-a-ponto`:
 
 ```bash
 cd docs/relatorio_parcial
-latexmk -pdf -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex
+latexmk -lualatex -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex
 ```
 
 O resultado é `relatorio_parcial_pi2.pdf`. O PDF e os arquivos auxiliares são gerados localmente e ignorados pelo Git.

@@ -531,7 +531,7 @@ As pastas `docs/relatorio_parcial/imgs` e `docs/mockup/imgs` são links simbóli
 As dependências LaTeX são adicionais às da aplicação. Consulte a [instalação do relatório](docs/relatorio_parcial/README.md#instalação). A partir da raiz do repositório:
 
 ```bash
-(cd docs/relatorio_parcial && latexmk -pdf -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex)
+(cd docs/relatorio_parcial && latexmk -lualatex -interaction=nonstopmode -halt-on-error relatorio_parcial_pi2.tex)
 (cd docs/mockup && latexmk -pdf -interaction=nonstopmode -halt-on-error mockup_ponto_a_ponto.tex)
 ```
 
