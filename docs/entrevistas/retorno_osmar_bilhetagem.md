@@ -1,6 +1,6 @@
 # Retorno de Osmar sobre bilhetagem e origem-destino
 
-Síntese do e-mail fornecido por André Meneghelli Vale para atualização do relatório. Não é transcrição literal nem cópia do arquivo original do e-mail. Remetente identificado na assinatura: Osmar Junior. Data e assunto original não informados.
+Síntese do e-mail fornecido por André Meneghelli Vale para atualização do relatório. Não é transcrição literal nem cópia do arquivo original do e-mail. Remetente identificado na assinatura: Osmar Junior. Data e horário exibidos no cabeçalho da captura fornecida pelo grupo: **2 de setembro de 2026, às 19h42**. O fuso não aparece na captura; o assunto original não foi informado. A data foi incorporada à síntese em 29/09/2026.
 
 ## Pergunta encaminhada
 
