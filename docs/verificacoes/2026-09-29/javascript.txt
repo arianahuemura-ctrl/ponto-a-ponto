@@ -1,0 +1,74 @@
+
+> maua-bus-map@0.2.0 test
+> node --test src/*.test.js
+
+TAP version 13
+# Subtest: normaliza pontos e relações do Overpass
+ok 1 - normaliza pontos e relações do Overpass
+  ---
+  duration_ms: 2.666893
+  type: 'test'
+  ...
+# Subtest: descobre todas as linhas que passam pelo primeiro ponto
+ok 2 - descobre todas as linhas que passam pelo primeiro ponto
+  ---
+  duration_ms: 0.583512
+  type: 'test'
+  ...
+# Subtest: respeita a ordem dos pontos no trajeto
+ok 3 - respeita a ordem dos pontos no trajeto
+  ---
+  duration_ms: 0.357909
+  type: 'test'
+  ...
+# Subtest: encontra somente destinos possíveis da linha selecionada
+ok 4 - encontra somente destinos possíveis da linha selecionada
+  ---
+  duration_ms: 0.689608
+  type: 'test'
+  ...
+# Subtest: compara e refina linhas progressivamente
+ok 5 - compara e refina linhas progressivamente
+  ---
+  duration_ms: 0.32094
+  type: 'test'
+  ...
+# Subtest: não aceita ponto próximo pertencente a outra linha
+ok 6 - não aceita ponto próximo pertencente a outra linha
+  ---
+  duration_ms: 0.260464
+  type: 'test'
+  ...
+# Subtest: preserva segmentos OSM desconectados sem achatá-los em uma linha artificial
+ok 7 - preserva segmentos OSM desconectados sem achatá-los em uma linha artificial
+  ---
+  duration_ms: 0.390723
+  type: 'test'
+  ...
+# Subtest: favoritos e preferência persistem e restauram
+ok 8 - favoritos e preferência persistem e restauram
+  ---
+  duration_ms: 4.254112
+  type: 'test'
+  ...
+# Subtest: armazenamento indisponível não impede uso
+ok 9 - armazenamento indisponível não impede uso
+  ---
+  duration_ms: 0.2559
+  type: 'test'
+  ...
+# Subtest: dados locais inválidos são descartados
+ok 10 - dados locais inválidos são descartados
+  ---
+  duration_ms: 0.232926
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 239.661497
