@@ -3,8 +3,18 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 from transit import views, demo_views, catalogue
+from transit.sptrans import views as sptrans
+from transit.sptrans.addresses import suggestions
 
 urlpatterns = [
+    path("sao-paulo/", views.index),
+    path("api/sptrans/stops/", sptrans.stops),
+    path("api/sptrans/addresses/", suggestions),
+    path("api/sptrans/destination/", sptrans.destination),
+    path("api/sptrans/board/", sptrans.board),
+    path("api/sptrans/walk/", sptrans.walk),
+    path("api/sptrans/trips/<str:trip_id>/", sptrans.trip),
+    path("api/sptrans/qr/<str:stop_id>/", sptrans.qr),
     path("api/catalogue/", catalogue.catalogue),
     path("api/catalogue/routes/<str:route_id>/", catalogue.route_detail),
     path("api/network/", demo_views.network),

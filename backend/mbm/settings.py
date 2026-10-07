@@ -3,6 +3,14 @@ import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+# Local configuration stays server-side. Environment variables take precedence.
+if (BASE_DIR / '.env').exists():
+    for line in (BASE_DIR / '.env').read_text().splitlines():
+        key, sep, value = line.partition('=')
+        if sep and key.strip() in {'SPTRANS_TOKEN', 'SPTRANS_DATABASE'}:
+            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+SPTRANS_TOKEN = os.environ.get('SPTRANS_TOKEN', '')
+SPTRANS_DATABASE = os.environ.get('SPTRANS_DATABASE', str(BASE_DIR / 'sptrans.sqlite3'))
 sys.path.insert(0, str(BASE_DIR))
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-mbm-local")
