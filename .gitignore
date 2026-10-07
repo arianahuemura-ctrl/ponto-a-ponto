@@ -19,3 +19,6 @@ fonts/import-report.json
 
 fonts/geolocation_osm.json
 fonts/geolocation_runs/
+
+# Configuração local do editor
+.vscode/
