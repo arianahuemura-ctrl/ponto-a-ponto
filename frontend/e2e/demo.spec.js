@@ -21,7 +21,7 @@ test("tela inicial segue mockup e não expõe controles de simulação", async (
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/?stop=" + origin);
   await expect(
-    page.getByRole("heading", { name: "Meu Ponto", exact: true }),
+    page.getByRole("heading", { name: "Ponto a Ponto", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Ponto MAU-001" }),
@@ -216,7 +216,9 @@ test("mapa identifica a localização aproximada da parada", async ({ page }) =>
     await route.fulfill({ json: data });
   });
   await page.goto("/?stop=" + origin);
-  await expect(page.locator(".map-stop-label").filter({ hasText: "posição aproximada" })).toBeVisible();
+  const label = page.locator(".map-stop-label").filter({ hasText: "posição aproximada" });
+  await expect(label).toHaveCount(1);
+  await expect(label).toBeVisible();
 });
 
 

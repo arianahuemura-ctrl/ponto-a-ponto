@@ -37,7 +37,7 @@ export default function PassengerMap({
   stopCallback.current = onStop;
   placeCallback.current = onPlace;
   useEffect(() => {
-    const map = L.map(host.current, { zoomControl: false }).setView(
+    const map = L.map(host.current, { zoomControl: false, fadeAnimation: false }).setView(
       [-23.6676, -46.4603],
       15,
     );

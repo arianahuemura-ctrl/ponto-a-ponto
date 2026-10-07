@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
+import { useTheme } from "./useTheme.js";
 import Catalogue from "./Catalogue.jsx";
 import PassengerMap from "./PassengerMap.jsx";
 import { api, getLocation } from "./api.js";
@@ -18,6 +19,7 @@ const allowedViews = new Set([
   "catalogue",
 ]);
 export default function Passenger() {
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [network, setNetwork] = useState(null),
     [origin, setOrigin] = useState(""),
     [destination, setDestination] = useState(null),
@@ -381,7 +383,7 @@ export default function Passenger() {
     const url = location.origin + "/?stop=" + encodeURIComponent(origin);
     try {
       if (navigator.share)
-        await navigator.share({ title: "Meu Ponto · " + stop.code, url });
+        await navigator.share({ title: "Ponto a Ponto · " + stop.code, url });
       else if (navigator.clipboard) {
         await navigator.clipboard.writeText(url);
         setNotice("Link deste ponto copiado.");
@@ -531,8 +533,8 @@ export default function Passenger() {
             <Icon name="bus" />
           </span>
           <div>
-            <h1>Meu Ponto</h1>
-            <p>Transporte público ao seu alcance</p>
+            <h1>Ponto a Ponto</h1>
+            <p>Deslocamento entre origem e destino</p>
           </div>
         </header>
         <div className="loading-screen" role="status">
@@ -552,14 +554,22 @@ export default function Passenger() {
         <button
           className="brand-mark"
           onClick={() => go("home")}
-          aria-label="Meu Ponto, início"
+          aria-label="Ponto a Ponto, início"
         >
           <Icon name="bus" size={28} />
         </button>
         <div>
-          <h1>Meu Ponto</h1>
-          <p>Transporte público ao seu alcance</p>
+          <h1>Ponto a Ponto</h1>
+          <p>Deslocamento entre origem e destino</p>
         </div>
+        <button
+          className="icon-button theme-toggle"
+          aria-label={resolvedTheme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
+          title={resolvedTheme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
+          onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+        >
+          <Icon name={resolvedTheme === "dark" ? "sun" : "moon"} />
+        </button>
         <button
           className="icon-button"
           aria-label="Abrir menu"
@@ -936,14 +946,7 @@ export default function Passenger() {
                   });
                 }}
               >
-                <Icon name="heart" />
-                <small>
-                  {(preferences.routes || []).some(
-                    (r) => r.id === selectedRoute.id,
-                  )
-                    ? "Salva"
-                    : "Favoritar"}
-                </small>
+                <Icon name="star" />
               </button>
             </section>
             {destination && (
@@ -1240,7 +1243,7 @@ export default function Passenger() {
                     onChange={(e) => setFavoriteName(e.target.value)}
                   />
                 </label>
-                <button className="primary full">Salvar favorito</button>
+                <button className="primary full"><Icon name="star"/> Salvar favorito</button>
               </form>
             )}
             <button className="secondary full" onClick={pickDestination}>
@@ -1255,6 +1258,14 @@ export default function Passenger() {
         {view === "more" && (
           <section className="screen-content more-screen">
             <h2>Mais</h2>
+            <label>
+              Aparência
+              <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+                <option value="system">Automático (acompanhar dispositivo)</option>
+                <option value="light">Modo claro</option>
+                <option value="dark">Modo escuro</option>
+              </select>
+            </label>
             <label>
               Preferência de viagem
               <select

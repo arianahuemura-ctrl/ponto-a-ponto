@@ -26,3 +26,25 @@ export function getLocation() {
     );
   });
 }
+
+export async function apiProgressive(path, params, signal, onResult) {
+  const response = await fetch('/api/' + path + '/?' + new URLSearchParams(params), {signal});
+  if (!response.ok) throw new Error('Falha ao consultar o servidor.');
+  if (!response.headers.get('content-type')?.includes('application/x-ndjson')) {
+    const result=await response.json();
+    if(result.error)throw new Error(result.error);
+    onResult(result);return;
+  }
+  const reader=response.body.getReader(),decoder=new TextDecoder();
+  let buffer='';
+  const receive=line=>{if(!line.trim()||signal.aborted)return;const result=JSON.parse(line);if(result.error)throw new Error(result.error);onResult(result);};
+  try {
+    while(true){
+      const {value,done}=await reader.read();
+      buffer+=decoder.decode(value,{stream:!done});
+      const lines=buffer.split('\n');buffer=lines.pop();
+      for(const line of lines)receive(line);
+      if(done){receive(buffer);break;}
+    }
+  } finally {await reader.cancel().catch(()=>{});reader.releaseLock();}
+}

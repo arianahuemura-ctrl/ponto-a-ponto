@@ -1,0 +1,131 @@
+/* Shared passenger surfaces; route colors and the printable QR keep their identity. */
+:root {
+  --pap-surface: #fff;
+  --pap-soft: #f2f6fd;
+  --pap-border: #d4deed;
+  --pap-text: #101e38;
+  --pap-muted: #526078;
+  --pap-accent: #0058d4;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #edf3ff;
+  background: #0c1422;
+  --pap-surface: #142033;
+  --pap-soft: #1d304b;
+  --pap-border: #384b65;
+  --pap-text: #edf3ff;
+  --pap-muted: #bac9dd;
+  --pap-accent: #94c2ff;
+}
+.passenger-shell { max-width: 1600px; color: var(--pap-text); background: var(--pap-surface); }
+.passenger-shell :is(button, input, select, textarea, a) { touch-action: manipulation; }
+.passenger-header > div { min-width: 0; flex: 1; }
+.passenger-header .icon-button { margin-left: 0; flex-shrink: 0; }
+.passenger-header { padding: 12px 16px; gap: 8px; }
+.passenger-header h1 { font-size: clamp(18px, 3vw, 24px); }
+.passenger-header p { line-height: 1.4; }
+.passenger-shell :is(.icon-button, .soft-icon, .text-button, .change-point, .primary, .secondary, .detail-tabs button, .sub-header button) { min-height: 44px; }
+.passenger-shell :is(.icon-button, .soft-icon) { min-width: 44px; }
+.passenger-screen { scrollbar-gutter: stable; }
+.passenger-screen p { font-size: 14px; line-height: 1.5; }
+.passenger-screen small { font-size: 12px; }
+.passenger-screen :is(.line-text > strong, .destination-options strong, .detail-heading strong, .stop-timeline strong) { font-size: 14px; line-height: 1.4; }
+.passenger-screen :is(.arrival, .text-button, .detail-tabs button, .transfer-label) { font-size: 13px; }
+.line-text > .arrival { flex-wrap: wrap; }
+.line-text > small { margin-left: 0; }
+.line-code { width: auto; min-width: 51px; padding: 4px; }
+.point-summary { flex-wrap: wrap; padding: 12px; }
+.point-summary :is(small, .compact small) { font-size: 12px; }
+.point-summary.compact strong { font-size: 13px; }
+.point-summary span { font-size: 12px; white-space: normal; }
+.point-summary.compact span { font-size: 11px; }
+.point-summary > div { min-width: 65px; overflow-wrap: anywhere; }
+.change-point { font-size: 12px; white-space: normal; }
+.data-label { font-size: 12px; padding: 6px 16px; }
+.passenger-shell .bottom-nav { height: auto; min-height: 70px; }
+.bottom-nav button { min-height: 44px; }
+.bottom-nav button span { font-size: 12px; }
+.passenger-screen :is(input, select, textarea) { font-size: 16px; }
+.screen-catalogue input { display: block; width: 100%; margin: 8px 0 16px; padding: 12px; border: 1px solid var(--pap-border); border-radius: 7px; }
+.screen-catalogue :is(article, details) { margin: 20px 0; line-height: 1.6; overflow-wrap: anywhere; }
+.screen-catalogue article { padding: 16px; background: var(--pap-soft); border-radius: 10px; }
+.screen-catalogue .line-list button { text-align: left; justify-content: flex-start; }
+.screen-content { padding: 20px 16px; }
+.screen-content > h2 { margin-bottom: 12px; }
+.screen-content > .full { margin-top: 12px; }
+.map-search { padding: 4px 10px; }
+.map-search button { min-width: 36px; min-height: 44px; align-items: center; justify-content: center; }
+.gps-destination { top: 74px; min-height: 36px; font-size: 11px; }
+.destination-map-area .leaflet-top { top: 122px; }
+.destination-options > button { min-height: 60px; }
+.destination-options > button > span { min-width: 0; overflow-wrap: anywhere; }
+.destination-sheet .sheet-heading h2 { font-size: 17px; }
+.map-float { min-height: 40px; }
+.route-legend, .map-key { font-size: 11px; max-width: calc(100% - 60px); }
+.detail-heading > div { min-width: 0; }
+.detail-heading strong, .favorite-row span { overflow-wrap: anywhere; }
+.detail-map-area { height: clamp(260px, 45dvh, 550px); }
+.passenger-map { background: #e1e8df; }
+.leaflet-control-attribution { font-size: 10px !important; }
+.passenger-shell .leaflet-control-zoom a { width: 36px !important; height: 36px !important; line-height: 36px; }
+.center-control button { width: 36px; height: 36px; }
+@media (min-width: 768px) {
+  .passenger-header { padding: 16px 28px; }
+  .passenger-screen > .screen-content, .screen-detail > :is(.detail-heading, .detail-info, .detail-tabs, .sub-header, .stops-sheet) { max-width: 960px; margin-left: auto; margin-right: auto; width: 100%; }
+  .screen-lines > .point-summary, .screen-filtered > .point-summary { max-width: 928px; margin: 16px auto 0; }
+  .screen-home, .screen-destination { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 38%); align-items: stretch; }
+  .home-map-area, .destination-map-area { height: 100%; min-height: 340px; }
+  .home-sheet, .destination-sheet { margin: 0; border-radius: 0; padding: 24px; overflow-y: auto; border-left: 1px solid var(--pap-border); }
+  .home-actions { grid-template-columns: 1fr; margin-top: 20px; }
+  .home-actions br { display: none; }
+  .home-actions button { justify-content: center; }
+  .destination-sheet { display: flex; flex-direction: column; }
+  .destination-options { max-height: none; flex: 1; min-height: 100px; }
+  .destination-sheet > .primary { flex-shrink: 0; }
+  .screen-vehicles { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 38%); grid-template-rows: auto auto minmax(340px, 1fr); }
+  .screen-vehicles > .point-summary { grid-column: 1 / -1; }
+  .vehicles-heading { grid-column: 1 / -1; padding: 16px; }
+  .vehicles-map-area { height: 100%; min-height: 340px; margin: 0 0 16px 16px; }
+  .vehicle-list { overflow-y: auto; }
+  .screen-detail .detail-map-area { max-width: 1100px; margin: 16px auto; }
+  .bottom-nav { justify-content: center; gap: 24px; }
+  .bottom-nav button { max-width: 180px; flex-direction: row; gap: 10px; }
+  .bottom-nav button span { font-size: 14px; }
+}
+@media (max-width: 359px) {
+  .passenger-header { padding: 10px 8px; gap: 4px; }
+  .passenger-header .brand-mark { width: 32px; }
+  .passenger-header p { font-size: 10px; }
+  .home-actions { grid-template-columns: 1fr; }
+  .section-title { flex-wrap: wrap; }
+  .detail-tabs button { flex-direction: column; }
+}
+@media (max-height: 500px) {
+  .passenger-header { min-height: 60px; padding-top: 6px; padding-bottom: 6px; }
+  .passenger-header p { display: none; }
+  .screen-home, .screen-destination { overflow: auto; }
+  .home-map-area, .destination-map-area { min-height: 260px; }
+}
+/* Theme changes only surfaces and text, never the QR pixels or route colors. */
+[data-theme="dark"] .passenger-shell :is(.passenger-header, .home-sheet, .destination-sheet, .bottom-nav, .line-card, .map-float, .map-search, .map-instruction, .sub-header, input, select, textarea, .center-control, .route-legend, .map-key) { background: var(--pap-surface); color: var(--pap-text); border-color: var(--pap-border); }
+[data-theme="dark"] .passenger-shell :is(p, small, .detail-heading p, .point-summary span, .bottom-nav button) { color: var(--pap-muted); }
+[data-theme="dark"] .passenger-shell :is(.info-box, .secondary, .soft-icon, .point-summary, .chosen-destination, .duration-box, .detail-tabs, .destination-options > button.chosen, .data-label, .change-point) { background: var(--pap-soft); color: var(--pap-accent); }
+[data-theme="dark"] .passenger-shell :is(.point-summary > div, .point-summary small, .info-box p, .duration-box > div, .favorite-row > button > span) { color: var(--pap-text); }
+[data-theme="dark"] .passenger-shell :is(a, .text-button, .arrival, .detail-tabs button, .favorite-line small, .bottom-nav button.active, .transfer-label, .stop-timeline > li.first strong, .timetable > div > strong, .center-control button) { color: var(--pap-accent); }
+[data-theme="dark"] .passenger-shell .detail-tabs button[aria-selected="true"] { color: white; }
+[data-theme="dark"] .passenger-shell :is(.arrival.green, .timetable b) { color: #78ddb0; }
+[data-theme="dark"] .passenger-shell :is(.passenger-notice, .data-label.unavailable) { background: #42351e; color: #ffe0a0; }
+[data-theme="dark"] .passenger-shell .empty-message { color: var(--pap-muted) !important; }
+[data-theme="dark"] .passenger-shell .line-card:hover { background: var(--pap-soft); }
+[data-theme="dark"] .passenger-shell :is(.line-card > svg, .destination-options > button > svg) { color: var(--pap-accent); }
+[data-theme="dark"] .passenger-shell :is(.timetable > div, .favorite-row, details, .streets-detail) { border-color: var(--pap-border); }
+[data-theme="dark"] .passenger-shell .passenger-map { background: #1b292f; }
+[data-theme="dark"] .passenger-shell .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.8) saturate(.6); }
+[data-theme="dark"] .passenger-shell .leaflet-control-zoom a { background: var(--pap-surface); color: var(--pap-text) !important; border-color: var(--pap-border) !important; }
+[data-theme="dark"] .passenger-shell .leaflet-control-attribution { background: var(--pap-surface) !important; color: var(--pap-muted); }
+[data-theme="dark"] .passenger-shell .leaflet-tooltip:not(.origin-tooltip) { background: var(--pap-surface); color: var(--pap-text); border-color: var(--pap-border); }
+.passenger-shell .qr-poster { color: #101e38; color-scheme: light; }
+[data-theme="dark"] .passenger-shell .qr-poster :is(p, small) { color: #36465d; }
+:root[data-theme="dark"] .passenger-shell .detail-tabs button[aria-selected="true"] { color: #fff; }
+.passenger-shell input::placeholder { color: var(--pap-muted); opacity: 1; }

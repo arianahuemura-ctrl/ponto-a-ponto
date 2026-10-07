@@ -2,9 +2,32 @@
 
 **Deslocamento facilitado entre origem e destino.**
 
-Protótipo acadêmico do Projeto Integrador em Computação II da UNIVESP, voltado ao transporte público de Mauá. O QR Code identifica a parada física e inicia a consulta no navegador, sem exigir instalação de aplicativo ou conhecimento prévio do nome do ponto ou da linha. O passageiro pode consultar as linhas, escolher um destino e comparar viagens. Utiliza **Django/Python**, **React/Vite** e **Leaflet**, com dados geográficos do OpenStreetMap.
+Protótipo acadêmico do Projeto Integrador em Computação II da UNIVESP, iniciado com o contexto do transporte público de Mauá e com navegação integrada ao cadastro GTFS de São Paulo. O QR Code identifica a parada física e inicia a consulta no navegador, sem exigir instalação de aplicativo ou conhecimento prévio do nome do ponto ou da linha. O passageiro pode consultar as linhas, escolher um destino e comparar viagens. Utiliza **Django/Python**, **React/Vite** e **Leaflet**, com dados geográficos do OpenStreetMap.
 
 O cadastro de paradas, linhas, variantes e documentos públicos é importado de `fonts/` para `db.sqlite3`. O cenário demonstrativo usa linhas, horários e veículos **simulados**, controlados pela administração e identificados separadamente das fontes reais. Os trajetos destacam as ruas do OSM; ainda não são itinerários validados pela operadora.
+
+## São Paulo: navegação e destino da sessão
+
+A página inicial abre São Paulo. O cenário anterior de Mauá continua em `/?city=maua` e nos QR Codes antigos.
+
+1. Configure `SPTRANS_TOKEN` no `.env` da raiz. O Django lê essa chave no início; reinicie o servidor após substituí-la. A chave não é enviada ao navegador. Teste o acesso com `python backend/manage.py check_sptrans`.
+2. Ative o ambiente Python e execute `python backend/manage.py import_sptrans`. O comando indexa `fonts/sptrans_gtfs/` em `sptrans.sqlite3`, separado do banco da demonstração. Repita ao substituir o GTFS.
+3. Compile com `npm --prefix frontend run build` e inicie o servidor normalmente.
+4. Acesse `/sao-paulo/`: a primeira etapa é **Selecionar local de embarque**. Toque em uma parada para abrir a lista de próximos ônibus; nessa janela também é possível salvar o embarque nos favoritos.
+5. Toque em **Selecionar destino** para voltar ao mapa e escolher outra parada ou um favorito. A lista passa a mostrar apenas os ônibus da rota calculada, na ordem dos embarques, incluindo até duas trocas. **Alterar destino**, **Cancelar seleção** e **Cancelar viagem** permitem retomar ou encerrar o planejamento.
+6. A lupa busca o endereço da etapa atual (embarque ou destino). Após três caracteres, oferece sugestões de ruas e lugares com bairro e município quando disponíveis. Sem número, selecione a rua para enquadrar suas paradas no mapa e escolher uma delas. Com número antes ou depois do nome da rua, confirme a parada sugerida. A distância exibida até o endereço é em linha reta.
+
+O autocomplete utiliza Photon/Komoot sobre dados OpenStreetMap, com espera de 500 ms após digitar, cancelamento de consultas anteriores e cache de 10 minutos no servidor. O texto pesquisado é enviado a esse provedor externo. Quando o bairro não consta nos dados, a interface informa isso. O serviço público pode ficar indisponível; a seleção pelo mapa continua disponível.
+
+A origem e o destino corrente ficam em `sessionStorage`, restritos à sessão da aba. Favoritos ficam em `localStorage`. **Cancelar viagem** limpa a sessão, preservando os favoritos. Um QR Code define a origem e mantém o destino se aberto na mesma sessão.
+
+Enquanto a lista está aberta, as previsões são atualizadas a cada 30 segundos. Sem previsão, o aplicativo identifica os dados do GTFS como programação ou estimativa, sem apresentá-los como chegadas ao vivo. O cálculo respeita calendário, exceções, sentido e sequência das paradas. A rota escolhida considera tempos estimados do GTFS; as previsões atuais de uma parada de troca devem ser conferidas novamente ao chegar.
+
+As correspondências com o Olho Vivo exigem código completo da linha e terminal de destino compatíveis. Paradas precisam pertencer à linha e ter correspondência única a até 15 metros (ou o mesmo código nessa área). Não se presume que os identificadores do GTFS sejam os mesmos da API. Quando a correspondência é ambígua ou a API não cobre uma parada, não há previsão em tempo real. Posições com mais de 3 minutos e previsões com posição capturada há mais de 5 minutos são descartadas. Em terminais, o painel limita a consulta ao vivo a 12 linhas e interrompe novas consultas após 8 segundos. Linhas não consultadas ficam identificadas na lista.
+
+**Situação da credencial verificada em 06/10/2026:** o servidor da SPTrans respondeu, mas a autenticação com a chave local retornou `false`. O cadastro e a navegação GTFS funcionam; a exibição ao vivo depende de uma chave aceita pela SPTrans. A integração possui testes com respostas controladas, que não comprovam disponibilidade operacional.
+
+Documentação oficial: [API Olho Vivo](https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/).
 
 ## Estado do projeto
 
@@ -194,7 +217,8 @@ python start_server.py
 
 | Acesso | Endereço |
 | --- | --- |
-| Sistema do passageiro | http://127.0.0.1:8000/ |
+| São Paulo — passageiro | http://127.0.0.1:8000/sao-paulo/ |
+| Demonstração de Mauá | http://127.0.0.1:8000/?city=maua |
 | Administração | http://127.0.0.1:8000/admin/ |
 
 Mantenha o terminal aberto. Para encerrar o servidor, pressione **Ctrl+C**.
@@ -247,6 +271,8 @@ python backend/manage.py export_evaluations > avaliacoes.json
 ~~~
 
 ## Como usar o sistema
+
+As instruções desta seção descrevem a demonstração de Mauá (`/?city=maua`). Para São Paulo, siga a seção “São Paulo: navegação e destino da sessão”.
 
 ### Consultar um ponto e seus ônibus
 
@@ -331,6 +357,12 @@ npm run dev
 
 O Vite encaminha `/api` ao Django na porta 8000. O explorador OSM anterior permanece em `/explorar/`, fora da navegação principal; suas consultas dependem de Nominatim e Overpass.
 
+## Interface responsiva e aparência
+
+A interface do passageiro se adapta a celulares, tablets e computadores. Em telas maiores, a escolha do destino e a consulta de veículos apresentam o mapa ao lado do painel de informações. Estão disponíveis os fluxos de origem pelo QR Code, linhas, destino, alternativas, veículos, detalhes da viagem, paradas, favoritos e cadastro público.
+
+O botão de sol/lua no cabeçalho alterna entre os modos claro e escuro. Em **Mais → Aparência**, a opção **Automático** acompanha o tema do dispositivo. A escolha fica salva neste navegador; quando o armazenamento está bloqueado, funciona durante a sessão. Os avisos de simulação permanecem visíveis em ambos os temas.
+
 ## Testes
 
 Com as dependências instaladas e o frontend compilado, execute na raiz:
@@ -355,7 +387,7 @@ O comando `install --with-deps` prepara o Chromium e os pacotes de sistema adici
 
 Os testes de navegador compilam o React, iniciam Django na porta 18081 e usam um banco temporário com um administrador de teste. Não alteram usuários ou avaliações da instalação principal. O ambiente Python deve continuar ativo.
 
-Capturas são geradas em `frontend/test-results/mockup-*.png`. Os tiles externos são bloqueados nesses testes; as geometrias locais e os fluxos continuam sendo verificados.
+Capturas são geradas em `frontend/test-results/mockup-*.png` e `frontend/test-results/responsive-*.png`. Os testes responsivos percorrem os fluxos em larguras de 320, 390, 768, 844 e 1440 pixels, verificando navegação, ausência de transbordamento horizontal e persistência do tema. Os tiles externos são bloqueados nesses testes; as geometrias locais e os fluxos continuam sendo verificados.
 
 ## Dados e manutenção
 
@@ -541,3 +573,33 @@ Os PDFs são gerados ao lado dos respectivos arquivos `.tex`. PDFs e auxiliares 
 (cd docs/relatorio_parcial && latexmk -c relatorio_parcial_pi2.tex)
 (cd docs/mockup && latexmk -c mockup_ponto_a_ponto.tex)
 ```
+
+### Planejamento de trocas em São Paulo
+
+O planejamento usa rodadas de embarque sobre as sequências e calendários do GTFS. Retorna alternativas não dominadas em tempo estimado e número de trocas, dentro das próximas seis horas. A espera de serviços por frequência é estimada como metade do intervalo; `exact_times=1` usa a grade programada. Cada troca acrescenta margem mínima de dois minutos antes de buscar o próximo embarque. Datas excepcionais e horários após 24:00 são considerados. Esses valores são hipóteses de planejamento e não garantem conexões operacionais.
+
+As baldeações exigem o mesmo identificador de parada. Caminhadas entre pontos, plataformas distintas e integrações tarifárias não são calculadas. A interface detalha linhas, sentido, embarque, desembarque e espera por trecho. O mapa recorta a geometria GTFS entre as paradas de cada trecho e desenha o ônibus em azul contínuo. Os acessos a pé entre endereços e paradas usam o roteador de pedestres e aparecem em rosa tracejado. As cores têm contraste específico no modo escuro. Se uma geometria estiver ausente, a interface informa a limitação e não inventa uma ligação reta. As previsões ao vivo não são propagadas como garantia de conexão para os trechos seguintes.
+
+Semântica dos horários e frequências: [referência oficial GTFS Schedule](https://gtfs.org/documentation/schedule/reference/).
+
+### Sentido das paradas e caminhada em São Paulo
+
+As setas são tangentes ao traçado GTFS a até 35 metros da parada. Podem existir vários sentidos no mesmo ponto. Quando a geometria está ausente ou ambígua, o rumo até a próxima parada é mostrado como aproximado; no fim do itinerário, o indicador representa a chegada e pode usar a parada anterior. Se nem a sequência permite determinar um rumo, o sentido é informado como indisponível. A busca e o popup também identificam linha e destino. A sinalização do local continua sendo a referência para embarque.
+
+`GET /api/sptrans/walk/?origin=ID&destination=ID` consulta o perfil **a pé** do OSRM público da FOSSGIS. A consulta é separada dos horários e cobre pares com distância em linha reta de até 5 km. O mapa mostra a geometria retornada; pequenos acessos até a rede (no máximo 30 m de aproximação por extremidade) são tracejados e entram no tempo estimado a 1,3 m/s. Falhas, aproximações excessivas ou falsas travessias de comprimento zero não geram uma rota em linha reta de substituição. A interface compara a caminhada com os tempos das viagens GTFS calculadas. Esta etapa oferece caminhada direta, não conexões mistas com caminhada entre paradas.
+
+O serviço externo recebe somente as coordenadas públicas das paradas. Requer internet; utiliza cache por 24 horas, timeout de 8 segundos e limite compartilhado de uma requisição por segundo entre processos da mesma máquina (SQLite temporário). Para implantação distribuída ou maior volume, utilize roteador próprio e limitação centralizada. Atribuição e link para correções aparecem na interface, conforme a [política da FOSSGIS](https://routing.openstreetmap.de/about.html). Tempos a pé não consideram semáforos, condições atuais ou necessidades individuais de acessibilidade.
+
+### Carregamento progressivo dos pontos do mapa
+
+A consulta por limites visíveis aceita `batch_size` (1–200) e `offset`. Ordena as paradas pela proximidade ao centro informado e devolve `next_offset`, `total` e `revision`. O mapa pede 32 pontos inicialmente e lotes seguintes de 96; interrompe consultas anteriores quando a área muda. Não há redução do total de paradas visíveis.
+
+O servidor mantém em memória, por processo, o cadastro e os sentidos já calculados, conservando no máximo duas versões do GTFS. A chave considera caminho, inode, tamanho e data de modificação do banco: uma nova importação invalida os dados anteriores. Consultas de lotes já calculados não executam SQL, embora o endpoint abra a conexão de leitura. Reiniciar o servidor deixa o cache frio.
+
+O navegador reutiliza áreas completas por dois minutos (até oito áreas e 30 mil referências) e até oito mil pontos individuais para reaproveitar a parte comum entre áreas. Os lotes acrescentam marcadores sem recriar os existentes. A revisão retornada pelo servidor invalida o cache local quando detectada uma mudança do GTFS; uma área inteiramente servida pelo cache pode permanecer na revisão anterior até o prazo de dois minutos. Em instalações com vários processos, cada processo possui seu próprio cache.
+
+### Endereços e sentido do embarque
+
+A busca sem número identifica paradas pelo nome da rua no GTFS, normalizando abreviações e acentos. O mapa enquadra o conjunto e mantém a escolha manual. Nomes iguais geograficamente separados são distinguidos pelo resultado selecionado; lacunas ou nomes divergentes no cadastro podem impedir a identificação de todas as paradas.
+
+Com número, a sugestão precisa conter o número solicitado; o centro da rua não é usado como se fosse o endereço exato. Com embarque conhecido, o sistema compara até 12 paradas próximas (até 500 m do endereço e no máximo 250 m além da parada mais próxima), priorizando menos trocas e depois menor distância ao endereço. A comparação usa o sentido e a ordem das paradas no GTFS, dentro da janela de serviço. Se o embarque veio de um endereço, sua parada também é reavaliada ao escolher o destino. Atravessamentos e distâncias a pé ainda precisam ser conferidos no local; a distância desta seleção é geográfica.
