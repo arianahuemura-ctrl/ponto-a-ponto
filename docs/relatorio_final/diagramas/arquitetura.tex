@@ -1,0 +1,22 @@
+\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=3.5cm,minimum height=1cm,fill=white},arr/.style={<->,thick}]
+\draw[rounded corners,fill=blue!4] (-2.2,1.1) rectangle (2.2,-7.7);
+\node[font=\bfseries] at (0,.7) {PaP};
+\draw[rounded corners,fill=black!3] (4.1,1.1) rectangle (8.5,-7.7);
+\node[font=\bfseries,align=center] at (6.3,.55) {Fontes e serviços\\externos};
+\node (p) at (0,2) {Passageiro};
+\node[box] (ui) at (0,-.6) {Interface web\\React / Leaflet};
+\node[box] (local) at (0,-2.6) {Armazenamento do navegador\\Favoritos};
+\node[box] (api) at (0,-4.6) {Backend Django / Python\\Consultas e planejamento};
+\node[box] (db) at (0,-6.8) {SQLite e arquivos locais\\Índice GTFS e cache};
+\node[box] (tiles) at (6.3,-.6) {OpenStreetMap\\Mapa-base};
+\node[box] (ext) at (6.3,-4.6) {Olho Vivo, busca de endereços e roteamento a pé};
+\node[box] (gtfs) at (6.3,-6.8) {GTFS SPTrans\\Cadastro e programação};
+\draw[->,thick] (p)--(ui);
+\draw[arr] (ui)--(local);
+\draw[arr] (ui.west)--++(-.7,0)|-(api.west);
+\node[rotate=90,font=\footnotesize,fill=white] at (-2.55,-2.6) {JSON / NDJSON};
+\draw[arr] (api)--(db);
+\draw[->,thick] (tiles)--node[above,font=\footnotesize]{imagens}(ui);
+\draw[arr] (api)--node[above,font=\footnotesize]{consultas}(ext);
+\draw[->,thick] (gtfs)--node[above,font=\footnotesize]{importação}(db);
+\end{tikzpicture}

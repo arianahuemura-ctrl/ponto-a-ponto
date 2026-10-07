@@ -1,0 +1,17 @@
+CAPTURAS ATUAIS — 7 OUT. 2026 — versão documentada b70873a
+
+Imagens em imgs/pap-*.png (imgs é link para ../imagens). Tema escuro da aplicação; Chromium com viewport 430 × 932 CSS px, toque habilitado e densidade 2, exceto pap-09 (1,65 para cumprir o limite de 10 MB do PDF). Não são capturas de aparelho físico. Pop-ups foram capturados com margem do mapa ao redor, sem editar seus textos ou valores. Telas de favoritos têm recorte da área de conteúdo.
+
+Aplicação servida em http://127.0.0.1:18082, base ab32235; a captura 01 foi refeita com o código incorporado ao commit b70873a. As demais foram reutilizadas porque seus estados visuais não foram alterados por esse commit. registro.csv distingue a versão de captura da versão documentada. Coordenadas simuladas públicas: -23.5745, -46.7085. Cadastro local sptrans.sqlite3; respostas reais da aplicação, sem mocks. Os resultados dependem do instante, GTFS e disponibilidade dos serviços.
+
+01–02: entrada pela URL da Parada Exclusiva 1211381; próximos ônibus e geração de QR. Nenhuma leitura física ou instalação de adesivo foi realizada.
+03 e 07: favoritos ilustrativos Casa (680017147, Butantã), Trabalho (440016922, Av. Paulista) e UNIVESP (820012501, Metrô Carrão – Parada 1), preparados no armazenamento local. Casa e Trabalho são ilustrativos; UNIVESP referencia o polo Carrão, Rua Monte Serrat, 230, confirmado na relação oficial de polos: https://univesp.br/sites/58f6506869226e9479d38201/assets/623075487c1bd15f67e72bdb/Polos_e_n_mero_de_vagas.pdf . O polo também consta do Manual do Candidato 2026: https://documento.vunesp.com.br/documento/stream/NzYwMTA1Nw== . A parada está na Rua Melo Freire, referência Rua Monte Serrat, conforme GTFS.
+04–05: região do Butantã até Guaiaúna, 419; planejamento apresentou 702C-10 e 2590-10. O embarque efetivo pode diferir da âncora consultada.
+06: detalhe do último trecho e caminhada final, com origem automática na posição simulada.
+08: confirmação de cancelamento com contexto do mapa.
+09: origem automática e posição simulada.
+10: alteração do embarque depois de uma rota selecionada.
+11: captura suplementar da consulta após origem livre; não incluída no relatório.
+12: destino livre por toque prolongado próximo à Guaiaúna; coordenadas e sessão em sessao_destino_livre.json.
+
+registro.csv contém horário, dimensões e SHA-256 dos arquivos atuais. recortes.csv e imgs/capturas_originais/ descrevem as imagens anteriores fornecidas pelo usuário, e não estes arquivos substitutos.

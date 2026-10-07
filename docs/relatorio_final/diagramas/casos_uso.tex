@@ -1,0 +1,6 @@
+\begin{tikzpicture}[font=\small,uc/.style={draw,ellipse,align=center,text width=4.4cm,minimum height=.85cm}]
+\node (p) at (0,0) {Passageiro};\node (a) at (0,-6) {Administrador};
+\draw (2,1) rectangle (9,-7);\node at (5.5,.65) {PaP};
+\foreach \y/\id/\txt in {0/u1/Identificar embarque,-1.2/u2/Consultar próximos ônibus,-2.4/u3/Planejar por destino,-3.6/u4/Ver rota e trechos no mapa,-4.8/u5/Gerenciar favoritos,-6/u6/Importar e consultar cadastro}{\node[uc] (\id) at (5.5,\y-.2) {\txt};}
+\foreach \id in {u1,u2,u3,u4,u5}{\draw (p)--(\id.west);}\draw (a)--(u6.west);
+\end{tikzpicture}

@@ -1,0 +1,15 @@
+\begin{tikzpicture}[>=Stealth,font=\footnotesize]
+\foreach \x/\name in {0/Passageiro,3/Interface,6/Backend,9/Roteamento a pé}{\node[draw,align=center,text width=2.3cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-10);}
+\draw[->] (0,-1)--node[above]{Origem e destino}(3,-1);
+\draw[->] (3,-2)--node[above]{Solicitar alternativas}(6,-2);
+\node[align=center,text width=4cm,fill=white] at (7.6,-3) {Busca por rodadas no GTFS};
+\draw[->,dashed] (6,-4)--node[above]{Resultado inicial}(3,-4);
+\draw[->] (3,-4.7)--node[above]{Apresentar alternativas}(0,-4.7);
+\draw[->] (6,-5.5)--node[above]{Validar caminhada candidata}(9,-5.5);
+\draw[->,dashed] (9,-6.3)--node[above]{Distância / falha}(6,-6.3);
+\draw[->,dashed] (6,-7.2)--node[above]{Novas alternativas (NDJSON)}(3,-7.2);
+\draw[->] (0,-8)--node[above]{Selecionar uma rota}(3,-8);
+\node[align=center,text width=3cm] at (3,-9) {Abrir mapa; preservar escolha e zoom nas atualizações};
+\draw[draw] (2.6,-5) rectangle (10.4,-7.6);
+\node[anchor=south west] at (2.6,-5) {\textbf{loop} [há candidatas e limites disponíveis]};
+\end{tikzpicture}
