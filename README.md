@@ -13,7 +13,7 @@ A página inicial abre São Paulo. O cenário anterior de Mauá continua em `/?c
 1. Configure `SPTRANS_TOKEN` no `.env` da raiz. O Django lê essa chave no início; reinicie o servidor após substituí-la. A chave não é enviada ao navegador. Teste o acesso com `python backend/manage.py check_sptrans`.
 2. Ative o ambiente Python e execute `python backend/manage.py import_sptrans`. O comando indexa `fonts/sptrans_gtfs/` em `sptrans.sqlite3`, separado do banco da demonstração. Repita ao substituir o GTFS.
 3. Compile com `npm --prefix frontend run build` e inicie o servidor normalmente.
-4. Acesse `/sao-paulo/`: a primeira etapa é **Selecionar local de embarque**. Toque em uma parada para abrir a lista de próximos ônibus; nessa janela também é possível salvar o embarque nos favoritos.
+4. Acesse `/`: a primeira etapa é **Selecionar local de embarque**. Toque em uma parada para abrir a lista de próximos ônibus; nessa janela também é possível salvar o embarque nos favoritos.
 5. Toque em **Selecionar destino** para voltar ao mapa e escolher outra parada ou um favorito. A lista passa a mostrar apenas os ônibus da rota calculada, na ordem dos embarques, incluindo até duas trocas. **Alterar destino**, **Cancelar seleção** e **Cancelar viagem** permitem retomar ou encerrar o planejamento.
 6. A lupa busca o endereço da etapa atual (embarque ou destino). Após três caracteres, oferece sugestões de ruas e lugares com bairro e município quando disponíveis. Sem número, selecione a rua para enquadrar suas paradas no mapa e escolher uma delas. Com número antes ou depois do nome da rua, confirme a parada sugerida. A distância exibida até o endereço é em linha reta.
 
@@ -25,7 +25,7 @@ Enquanto a lista está aberta, as previsões são atualizadas a cada 30 segundos
 
 As correspondências com o Olho Vivo exigem código completo da linha e terminal de destino compatíveis. Paradas precisam pertencer à linha e ter correspondência única a até 15 metros (ou o mesmo código nessa área). Não se presume que os identificadores do GTFS sejam os mesmos da API. Quando a correspondência é ambígua ou a API não cobre uma parada, não há previsão em tempo real. Posições com mais de 3 minutos e previsões com posição capturada há mais de 5 minutos são descartadas. Em terminais, o painel limita a consulta ao vivo a 12 linhas e interrompe novas consultas após 8 segundos. Linhas não consultadas ficam identificadas na lista.
 
-**Situação da credencial verificada em 06/10/2026:** o servidor da SPTrans respondeu, mas a autenticação com a chave local retornou `false`. O cadastro e a navegação GTFS funcionam; a exibição ao vivo depende de uma chave aceita pela SPTrans. A integração possui testes com respostas controladas, que não comprovam disponibilidade operacional.
+A informação operacional depende de uma credencial aceita pela SPTrans e da cobertura da API para a linha e a parada. Confira sua instalação com `python backend/manage.py check_sptrans`; autenticação bem-sucedida não garante previsões para todas as paradas. Veja [como obter o token](#como-obter-o-token-da-sptrans).
 
 Documentação oficial: [API Olho Vivo](https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/).
 
@@ -51,6 +51,7 @@ O Cittamobi já oferece consulta por destino e planejamento com conexões. A con
 - [Testes](#testes)
 - [Dados e manutenção](#dados-e-manutenção)
 - [Configuração](#configuração)
+- [Como obter o token da SPTrans](#como-obter-o-token-da-sptrans)
 - [API e documentação](#api-e-documentação)
 - [Importação de fontes públicas](#importação-de-fontes-públicas)
 - [Geolocalização aproximada das paradas](#geolocalização-aproximada-das-paradas)
@@ -178,17 +179,34 @@ Nos demais comandos deste README, use `workon bus` no lugar de `source .venv/bin
 
 </details>
 
-### 5. Preparar o banco e o administrador
+### 5. Configurar o ambiente, os bancos e o administrador
+
+Crie o `.env` na raiz **somente se ele ainda não existir**, preservando suas configurações:
+
+~~~bash
+if [ ! -f .env ]; then cp .env.example .env; fi
+~~~
+
+Preencha `SPTRANS_TOKEN` conforme [as instruções abaixo](#como-obter-o-token-da-sptrans). Deixe as coordenadas simuladas vazias para usar a localização do aparelho. A credencial não é necessária para importar o GTFS e consultar a programação.
+
 
 Com o ambiente Python ativo e na raiz do projeto:
 
 ~~~bash
 python backend/manage.py migrate
-python backend/manage.py import_sources --download --demo
+python backend/manage.py import_sptrans
 python backend/manage.py createsuperuser
 ~~~
 
-A migração cria/atualiza as tabelas SQLite. A importação coleta as fontes públicas, grava o catálogo e inclui o cenário simulado (`--demo`). A coleta inicial pode levar alguns minutos. O último comando solicita nome de usuário, e-mail e senha para acesso administrativo. Se já possui um administrador, não precisa criá-lo novamente.
+A migração cria/atualiza `db.sqlite3`. `import_sptrans` lê os arquivos GTFS de `fonts/sptrans_gtfs/` e cria o índice separado `sptrans.sqlite3`; não faz download nem exige token. Se essa pasta estiver ausente, obtenha o GTFS na [área oficial da SPTrans](https://www.sptrans.com.br/desenvolvedores/) e extraia os arquivos `.txt` nela. Também é possível indicar outra pasta com `--source /caminho/gtfs`. Repita a importação ao atualizar o conjunto de dados.
+
+O último comando solicita nome de usuário, e-mail e senha para acesso administrativo. Se já possui um administrador, não precisa criá-lo novamente. Para instalar também a demonstração histórica de Mauá, execute separadamente:
+
+~~~bash
+python backend/manage.py import_sources --download --demo
+~~~
+
+Essa importação coleta fontes públicas e inclui os dados simulados de demonstração; pode levar alguns minutos.
 
 **Não existe usuário ou senha padrão.**
 
@@ -217,7 +235,7 @@ python start_server.py
 
 | Acesso | Endereço |
 | --- | --- |
-| São Paulo — passageiro | http://127.0.0.1:8000/sao-paulo/ |
+| São Paulo — passageiro | http://127.0.0.1:8000/ |
 | Demonstração de Mauá | http://127.0.0.1:8000/?city=maua |
 | Administração | http://127.0.0.1:8000/admin/ |
 
@@ -411,16 +429,55 @@ O perfil utilizado é `driving`. As ruas são reais, mas os trajetos ainda preci
 
 ## Configuração
 
-As variáveis são lidas do ambiente do processo; o projeto não carrega arquivos `.env` automaticamente.
+O Django lê automaticamente o `.env` da raiz na inicialização, **somente para as quatro variáveis abaixo**. Valores já definidos no ambiente do processo têm prioridade sobre o arquivo. Use uma atribuição `NOME=valor` por linha, sem `export` ou comentário após o valor.
 
-| Variável | Uso |
+| Variável no `.env` | Padrão e função |
 | --- | --- |
-| `DJANGO_DEBUG` | `1` para desenvolvimento; `0` para desativar DEBUG |
-| `DJANGO_SECRET_KEY` | Chave própria, obrigatória com DEBUG desativado |
-| `DJANGO_ALLOWED_HOSTS` | Hosts aceitos, separados por vírgulas |
-| `PUBLIC_BASE_URL` | URL da aplicação gravada nos QR Codes |
-| `OSM_USER_AGENT` | Identificação e contato nas consultas externas |
-| `MBM_DATABASE` | Caminho alternativo para o SQLite |
+| `SPTRANS_TOKEN` | Vazio. Credencial privada do Olho Vivo, usada apenas pelo backend. Sem ela, não há consultas operacionais ao vivo. |
+| `SPTRANS_DATABASE` | `sptrans.sqlite3` na raiz. Caminho absoluto alternativo do índice GTFS; use a mesma configuração na importação e no servidor. |
+| `SIMULATED_LATITUDE` | Vazio. Latitude de teste, entre −90 e 90, com ponto decimal. |
+| `SIMULATED_LONGITUDE` | Vazio. Longitude de teste, entre −180 e 180, com ponto decimal. |
+
+Preencha **as duas coordenadas** para substituir a localização do aparelho, por exemplo `SIMULATED_LATITUDE=-23.5505` e `SIMULATED_LONGITUDE=-46.6333`. Deixe ambas vazias para usar o GPS autorizado pelo navegador. Isso simula somente a posição do passageiro, não os ônibus ou as previsões da SPTrans. No celular, a geolocalização exige HTTPS; pelo HTTP da rede local, use as coordenadas de teste.
+
+Após editar o `.env`, reinicie o Django e recarregue a página. Não é necessário recompilar o frontend. Não publique o arquivo nem coloque o token em variáveis `VITE_*`, capturas ou URLs do navegador.
+
+As demais configurações são lidas **somente do ambiente do processo**, não desse `.env`:
+
+| Variável | Padrão e função |
+| --- | --- |
+| `DJANGO_DEBUG` | `1` para desenvolvimento; `0` desativa DEBUG. |
+| `DJANGO_SECRET_KEY` | Chave local de desenvolvimento; defina uma chave própria ao desativar DEBUG. |
+| `DJANGO_ALLOWED_HOSTS` | `localhost,127.0.0.1,[::1]`. Hosts separados por vírgulas, sem espaços, protocolo ou porta. |
+| `PUBLIC_BASE_URL` | Vazio. URL pública usada nos QR Codes; para celular, deve ser acessível pelo aparelho. |
+| `OSM_USER_AGENT` | `MauaBusMap/0.2 (local academic prototype)`. Identificação nas consultas geográficas externas. |
+| `MBM_DATABASE` | `db.sqlite3` na raiz. Banco Django, distinto do índice GTFS. |
+
+Exemplo para acesso pela mesma rede, substituindo o IP pelo endereço do computador:
+
+~~~bash
+export DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,192.168.1.10
+export PUBLIC_BASE_URL=http://192.168.1.10:8000
+python start_server.py 0.0.0.0:8000
+~~~
+
+No celular, abra `http://192.168.1.10:8000/`. O endereço `127.0.0.1` no celular aponta para o próprio aparelho.
+
+### Como obter o token da SPTrans
+
+1. Abra a [área de desenvolvedores da SPTrans](https://www.sptrans.com.br/desenvolvedores/) e cadastre-se, ou entre na conta existente.
+2. Confirme o cadastro pelo link enviado por e-mail. Se ele não chegar, confira spam e o endereço cadastrado; a confirmação é uma etapa exigida pelo portal.
+3. No perfil, acesse **Meus Aplicativos**, cadastre o aplicativo e copie a chave de acesso gerada.
+4. Coloque essa chave em `SPTRANS_TOKEN` no `.env` da raiz e reinicie o backend.
+5. Com o ambiente Python ativo, verifique a autenticação e a consulta de posições:
+
+~~~bash
+python backend/manage.py check_sptrans
+~~~
+
+Em caso de sucesso, o comando mostra `API acessível`, a referência de horário e quantidades de linhas e veículos, sem revelar o token. Uma consulta pode retornar poucos ou nenhum veículo. Se falhar, confira a chave, a confirmação da conta e a conexão; erros de rede não significam necessariamente token inválido. O backend faz a autenticação e gerencia a sessão da API.
+
+Procedimento conforme o [guia oficial do Olho Vivo](https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/). A [documentação da API](https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/) descreve a autenticação, as posições e as previsões. O token dá acesso à API; o cadastro GTFS é importado separadamente.
 
 `runserver` é destinado ao desenvolvimento. Uma publicação exige servidor WSGI, HTTPS e serviço de arquivos estáticos para React e admin.
 
