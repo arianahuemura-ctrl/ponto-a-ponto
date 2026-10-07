@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {api,apiProgressive} from './api.js';
 import Icon from './Icon.jsx';
+import {mergeProgramme} from './programme.js';
 import {boardingCoordinates} from './location.js';
 const time=value=>new Date(value).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
 export default function BoardDialog({passengerPosition,open,requestId,active,onStatus,origin,destination,onClose,onDestination,onCancel,onFavorite,isFavorite,onJourney,onChooseJourney}) {
@@ -74,7 +75,7 @@ export default function BoardDialog({passengerPosition,open,requestId,active,onS
       {line.origin&&<p>Embarque: {line.origin.name} · {line.origin.id}<br/>Desembarque: {line.destination.name} · {line.destination.id}</p>}
       {line.arrivals?.length?<><p className="sp-live">Próximas chegadas · SPTrans</p><ul>{line.arrivals.slice(0,5).map((arrival,i)=><li key={i}><strong>{arrival.time}</strong> · veículo {arrival.vehicle}{arrival.accessible?' · acessível':''}</li>)}</ul></>:<p>Estimativa baseada nos horários programados, sem atualização em tempo real.</p>}
       {line.planned_departure&&<p>Embarque estimado no planejamento: {time(line.planned_departure)} (horário programado; não é previsão em tempo real).</p>}
-      {line.programme?.map((p,i)=><p key={i}>{p.kind==='frequency'?`Intervalo programado: ${p.interval_minutes} min · ${time(p.start)}–${time(p.end)}`:`Horário programado: ${time(p.start)}`}</p>)}
+      {mergeProgramme(line.programme).map((p,i)=><p key={i}>{p.kind==='frequency'?`A cada ${p.interval_minutes} min, das ${time(p.start)} às ${time(p.end)}`:`Horário programado: ${time(p.start)}`}</p>)}
     </article>)}</div>}
   </dialog>;
 }
