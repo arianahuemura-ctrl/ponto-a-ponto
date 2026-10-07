@@ -12,7 +12,7 @@
 \draw[arr] (c)--node[lab,right]{destino definido}(e);
 \draw[arr] (e)--node[lab,right]{selecionar rota}(f);
 \draw[arr] (f.west)--++(-.8,0)|-node[pos=.25,lab,left]{horários}(e.west);
-\draw[arr] (f.west)--++(-2,0)|-node[pos=.25,lab,left]{alterar\\destino}(c.west);
+\draw[arr] (f.west)--++(-2,0)|-node[pos=.25,lab,left]{nova seleção\\de destino}(c.west);
 \node[box] (conf) at (6,-5.7) {Confirmando cancelamento};
 \draw[arr] (f.east)-|node[pos=.25,lab,below]{cancelar viagem}(conf.south);
 \draw[arr] (conf.west)--++(-.6,0)|-node[pos=.7,lab,above]{continuar viagem}(f.east);

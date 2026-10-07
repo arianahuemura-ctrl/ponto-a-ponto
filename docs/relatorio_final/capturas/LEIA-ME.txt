@@ -1,17 +1,24 @@
-CAPTURAS ATUAIS — 7 OUT. 2026 — versão documentada b70873a
+CAPTURAS — 7 OUT. 2026
+Versão capturada: 79dd7989dcdc26ab5ef8667b3d96a225a39505ce (sptrans).
+Versão atual documentada: 4992027dd0b0ee5eaf7acbac1a0e73f48ae769d8.
+A revisão 4992027 acrescenta a interação de clique fora do painel; não altera a aparência dos estados capturados. As imagens não são atribuídas a uma versão que não foi executada durante a captura.
 
-Imagens em imgs/pap-*.png (imgs é link para ../imagens). Tema escuro da aplicação; Chromium com viewport 430 × 932 CSS px, toque habilitado e densidade 2, exceto pap-09 (1,65 para cumprir o limite de 10 MB do PDF). Não são capturas de aparelho físico. Pop-ups foram capturados com margem do mapa ao redor, sem editar seus textos ou valores. Telas de favoritos têm recorte da área de conteúdo.
+Todas as telas da interface foram renovadas em Chromium: viewport 430 × 932 CSS px, densidade 2, tema escuro e toque habilitado. Aplicação local em http://127.0.0.1:8000/; GTFS e serviços externos reais, sem mocks de respostas. Posição do passageiro simulada. Favoritos preparados com dados reais do cadastro e rótulos ilustrativos Casa, Trabalho e UNIVESP.
 
-Aplicação servida em http://127.0.0.1:18082, base ab32235; a captura 01 foi refeita com o código incorporado ao commit b70873a. As demais foram reutilizadas porque seus estados visuais não foram alterados por esse commit. registro.csv distingue a versão de captura da versão documentada. Coordenadas simuladas públicas: -23.5745, -46.7085. Cadastro local sptrans.sqlite3; respostas reais da aplicação, sem mocks. Os resultados dependem do instante, GTFS e disponibilidade dos serviços.
+01: consulta de próximos ônibus na Parada Exclusiva 1211381.
+03/07: Casa (680017147), Trabalho (440016922) e UNIVESP (820012501, Metrô Carrão – Parada 1, próximo ao polo Carrão).
+04/05: Butantã a R. Guaiaúna, 419 (600012585); alternativas e viagem completa, com previsões de embarque.
+06: último trecho e caminhada final.
+08: confirmação de cancelamento, com contexto do mapa.
+09/10: posição simulada e alteração do embarque.
+11: seleção livre da origem; registro complementar, não incluído no PDF.
+12: destino livre escolhido por toque prolongado próximo à Guaiaúna.
+13: ônibus em aproximação com posição da API e percurso roxo anterior ao embarque; reenquadrado por gestos no mapa.
+14: QR Code atual, com URL na raiz do site e contexto do painel.
+02: ilustração conceitual anterior gerada por IA, mantida com indicação PENDENTE para fotografia real; não é uma captura desta sessão. Ver ilustracao-qr.txt.
 
-01–02: entrada pela URL da Parada Exclusiva 1211381; próximos ônibus e geração de QR. Nenhuma leitura física ou instalação de adesivo foi realizada.
-03 e 07: favoritos ilustrativos Casa (680017147, Butantã), Trabalho (440016922, Av. Paulista) e UNIVESP (820012501, Metrô Carrão – Parada 1), preparados no armazenamento local. Casa e Trabalho são ilustrativos; UNIVESP referencia o polo Carrão, Rua Monte Serrat, 230, confirmado na relação oficial de polos: https://univesp.br/sites/58f6506869226e9479d38201/assets/623075487c1bd15f67e72bdb/Polos_e_n_mero_de_vagas.pdf . O polo também consta do Manual do Candidato 2026: https://documento.vunesp.com.br/documento/stream/NzYwMTA1Nw== . A parada está na Rua Melo Freire, referência Rua Monte Serrat, conforme GTFS.
-04–05: região do Butantã até Guaiaúna, 419; planejamento apresentou 702C-10 e 2590-10. O embarque efetivo pode diferir da âncora consultada.
-06: detalhe do último trecho e caminhada final, com origem automática na posição simulada.
-08: confirmação de cancelamento com contexto do mapa.
-09: origem automática e posição simulada.
-10: alteração do embarque depois de uma rota selecionada.
-11: captura suplementar da consulta após origem livre; não incluída no relatório.
-12: destino livre por toque prolongado próximo à Guaiaúna; coordenadas e sessão em sessao_destino_livre.json.
+atualizacao-tempo-real.json preserva instante, commit, sessão e SHA-256 dos PNGs. registro.csv consolida a procedência atual; registro-b70873a.csv conserva o registro anterior. Horários UTC no JSON e America/Sao_Paulo no CSV.
 
-registro.csv contém horário, dimensões e SHA-256 dos arquivos atuais. recortes.csv e imgs/capturas_originais/ descrevem as imagens anteriores fornecidas pelo usuário, e não estes arquivos substitutos.
+Os PNGs permanecem integrais. Apenas os cinco mapas maiores têm exportação JPEG para o PDF, sem reduzir resolução nem subamostrar cores: qualidade 99, exceto pap-06 em 98. Configurações e hashes estão em exportacoes-pdf.csv. Os painéis com textos continuam em PNG. O PDF de envio é uma cópia do PDF compilado, sem recompressão global.
+
+recortes.csv e capturas_originais/ são registros históricos. Nenhuma leitura física de QR Code, instalação no ponto ou avaliação por passageiro foi realizada nesta etapa. As imagens são instantes de operação; não demonstram por si só a atualização periódica, verificada nos testes.
