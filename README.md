@@ -549,14 +549,16 @@ Com `--route`, a execução registra estimativas para auditoria, mas não public
 | Local | Conteúdo |
 | --- | --- |
 | [docs/relatorio_parcial/](docs/relatorio_parcial/README.md) | Relatório parcial em LaTeX, referências em autor-data, glossário e apêndice técnico |
+| [docs/relatorio_final/](docs/relatorio_final/README.md) | Relatório final em elaboração, discussão de Santos e avaliação comunitária pendente |
 | [docs/mockup/](docs/mockup/README.md) | Apresentação conceitual em PDF e rascunho de e-mail para Osmar |
+| [docs/apresentacao_avaliacao/](docs/apresentacao_avaliacao/README.md) | Apresentação genérica de oito páginas para avaliação externa e encaminhamento a profissionais |
 | [docs/imagens/](docs/imagens/README.md) | Fonte única das telas, capturas, diagrama do banco e logo oficial da UNIVESP |
 | [docs/entrevistas/](docs/entrevistas/) | Transcrição da entrevista e registro do retorno sobre bilhetagem |
 | [docs/IMPORTACOES_E_GEOLOCALIZACAO.md](docs/IMPORTACOES_E_GEOLOCALIZACAO.md) | Fontes externas, conversão de dados, algoritmo de geolocalização e auditoria |
 
 O título do relatório é **“Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus”**. Ponto a Ponto é o nome do projeto.
 
-As pastas `docs/relatorio_parcial/imgs` e `docs/mockup/imgs` são links simbólicos relativos para `../imagens`. Preserve esses links ao copiar o repositório. Para atualizar uma tela nos dois documentos, edite o arquivo em `docs/imagens/` e recompile ambos. As imagens conceituais não são capturas do protótipo funcional nem demonstram validação com usuários.
+As pastas `docs/relatorio_parcial/imgs`, `docs/relatorio_final/imgs` e `docs/mockup/imgs` são links simbólicos relativos para `../imagens`. Preserve esses links ao copiar o repositório. Para atualizar uma tela nos documentos, edite o arquivo em `docs/imagens/` e recompile os PDFs correspondentes. As imagens conceituais não são capturas do protótipo funcional nem demonstram validação com usuários.
 
 ### Compilar os PDFs
 

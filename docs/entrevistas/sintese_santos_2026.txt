@@ -1,0 +1,17 @@
+REGISTROS EXPLORATÓRIOS SOBRE SANTOS
+Síntese organizada pela Equipe do Projeto Integrador II em 5 de outubro de 2026.
+
+1. Resposta ao protocolo 7657-2026
+Fonte: texto reproduzido pelo grupo na conversa de elaboração do relatório. Informa QR Codes em todos os pontos de Santos, consulta de previsões e aplicativo Quanto Tempo Falta com linhas, itinerários e veículos. Considera desnecessária nova implantação para a finalidade apresentada e pertinente a investigação acadêmica de dados. Data e setor remetente não informados. O original não foi arquivado neste diretório. Declaração recebida, sem verificação independente da cobertura total.
+
+2. Conversa informal com passageira
+Fonte: capturas fornecidas pelo grupo. Relata uso habitual, utilidade para decidir quando sair de casa, aproximação aparente dos veículos e desaparecimentos no mapa. Não há medição, frequência ou diagnóstico. Uma pergunta composta sobre favoritos, rota e QR recebeu resposta afirmativa, insuficiente para verificar cada função. Nome e identificadores pessoais omitidos. Data não informada. Não constitui teste do PaP nem amostra representativa.
+
+3. Descrição de vídeo
+Fonte: relato do grupo de vídeo mostrando QR Code abrindo página web do ponto sem instalação. Segundo o relato, o fluxo não permite escolher destino. O arquivo audiovisual não foi disponibilizado no repositório nem analisado independentemente nesta revisão. Não se conclui ausência da função em todo o serviço.
+
+4. Consequência para o projeto
+O QR Code e o acesso web já existem. Investigar a continuidade entre origem identificada e escolha por destino, sem reivindicar novidade ou superioridade. A experiência de turistas é hipótese a avaliar.
+
+5. Avaliação do PaP
+Em 5 de outubro de 2026, o grupo informa que Osmar não respondeu aos contatos recentes e procura outro interlocutor. A entrevista inicial e o e-mail sobre bilhetagem permanecem contribuições à definição do problema. Não há avaliação documentada da versão atual do PaP com interlocutor ou passageiros.
