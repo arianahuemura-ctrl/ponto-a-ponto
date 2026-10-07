@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
-export default function SaoPauloMap({ stops, routeSelected=false, focusStops, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea }) {
+export default function SaoPauloMap({ stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea }) {
   const host=useRef(), map=useRef(), click=useRef(onStop), area=useRef(onArea);
+  const fitted=useRef(null);
   const markerLayer=useRef(),markerRecords=useRef(new Map());
   click.current=onStop;area.current=onArea;
   useEffect(()=>{
@@ -71,20 +72,17 @@ export default function SaoPauloMap({ stops, routeSelected=false, focusStops, or
     return ()=>group.remove();
   },[stops,origin,destination,detail,journey,walking,walks,routeSelected,fullJourney]);
   useEffect(()=>{
+    if(routeSelected)return;
     if(origin && destination && origin.id!==destination.id) map.current.fitBounds([[origin.lat,origin.lon],[destination.lat,destination.lon]],{padding:[40,55],maxZoom:16,animate:false});
     else if(origin) map.current.setView([origin.lat,origin.lon],16,{animate:false});
   },[origin?.id,destination?.id]);
   useEffect(()=>{if(detail?.shape?.length) map.current.fitBounds(detail.shape,{padding:[35,55],animate:false});},[detail?.line?.trip_id]);
   useEffect(()=>{
-    const points=journey?.legs.flatMap(l=>l.geometry?.length?l.geometry:l.stops.map(s=>[s.lat,s.lon]));
-    if(points?.length)map.current.fitBounds(points,{padding:[40,55],animate:false});
-  },[journey]);
-  useEffect(()=>{if(walking?.geometry?.length)map.current.fitBounds(walking.geometry,{padding:[40,55],animate:false});},[walking]);
+    if(!journey){fitted.current=null;return;}
+    if(fitted.current===focusKey)return;
+    const points=[...journey.legs.flatMap(l=>l.geometry?.length?l.geometry:(l.stops||[l.origin,l.destination]).map(s=>[s.lat,s.lon])),...walks.flatMap(w=>w.geometry||[])];
+    if(points.length){map.current.fitBounds(points,{padding:[45,85],animate:false});fitted.current=focusKey;}
+  },[journey,walks,focusKey]);
   useEffect(()=>{if(focusStops?.length)map.current.fitBounds(focusStops.map(s=>[s.lat,s.lon]),{padding:[45,65],maxZoom:17,animate:false});},[focusStops]);
-  useEffect(()=>{
-    if(!walks.length)return;
-    const points=[...(journey?.legs.flatMap(l=>l.geometry||[])||[]),...walks.flatMap(w=>w.geometry||[])];
-    if(points.length)map.current.fitBounds(points,{padding:[45,85],animate:false});
-  },[walks,journey]);
   return <div ref={host} className="passenger-map sp-map" aria-label="Mapa dos pontos de São Paulo"/>;
 }

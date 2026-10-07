@@ -207,7 +207,7 @@ class TransferPlannerTests(SimpleTestCase):
         self.edit("UPDATE stops SET stop_lat=-23.5011 WHERE stop_id='2'")
         with store.connection() as db:
             origin=store.get_stop(db,'1')
-            with patch('transit.sptrans.walking.route',return_value={'available':True,'distance_meters':201}):
+            with patch('transit.sptrans.walking.route',return_value={'available':True,'distance_meters':501}):
                 starts,incomplete=alternatives.access_points(db,origin,True)
             self.assertEqual([p['id'] for p,w in starts],['1'])
             with patch('transit.sptrans.walking.route',return_value={'available':False}):
@@ -222,10 +222,12 @@ class TransferPlannerTests(SimpleTestCase):
         self.edit("INSERT INTO stops VALUES ('5','Outra plataforma','',-23.5021,-46.6)")
         self.edit("UPDATE stop_times SET stop_id='5' WHERE trip_id='R2' AND stop_sequence=1")
         def foot(a,b,**kwargs):
-            if (a['id'],b['id'])!=('2','5'):return {'available':True,'distance_meters':250}
+            if (a['id'],b['id'])!=('2','5'):return {'available':True,'distance_meters':550}
             return {'available':True,'origin':a,'destination':b,'distance_meters':100,'duration_minutes':1.5,'geometry':[[a['lat'],a['lon']],[b['lat'],b['lon']]]}
         with store.connection() as db,patch('transit.sptrans.walking.route',side_effect=foot):
-            result=alternatives.alternatives(db,store.get_stop(db,'1'),store.get_stop(db,'4'),now=NOW)
+            a=store.get_stop(db,'1');b=store.get_stop(db,'4')
+            with patch('transit.sptrans.alternatives.access_points',side_effect=[([(a,None)],False),([(b,None)],False)]):
+                result=alternatives.alternatives(db,a,b,now=NOW)
         routes=result['journeys']
         self.assertTrue(routes)
         self.assertEqual(routes[0]['walking_minutes'],1.5)
@@ -233,7 +235,7 @@ class TransferPlannerTests(SimpleTestCase):
         self.assertEqual(routes[0]['duration_minutes'],50.5)
         self.assertEqual([r['duration_minutes'] for r in routes],sorted(r['duration_minutes'] for r in routes))
 
-    def test_same_bus_at_nearby_stops_is_one_option_with_less_walking(self):
+    def test_same_bus_at_nearby_stops_keeps_fastest_total(self):
         from transit.sptrans.alternatives import distinct_routes
         def option(identifier,minutes,meters,trip='715M-0',direction='0',code='715M-10'):
             return {'id':identifier,'duration_minutes':minutes,'walking_meters':meters,'transfers':0,
@@ -242,7 +244,7 @@ class TransferPlannerTests(SimpleTestCase):
             option('far',31,278),option('near',31.1,40),option('middle',31.1,158),
             option('other-departure',31.2,50,trip='715M-extra'),
             option('return',32,0,direction='1'),option('another-line',30,100,code='778J-10')])
-        self.assertEqual([r['id'] for r in routes],['another-line','near','return'])
+        self.assertEqual([r['id'] for r in routes],['another-line','far','return'])
 
     def test_distinct_transfer_sequences_are_preserved(self):
         from transit.sptrans.alternatives import distinct_routes
@@ -264,14 +266,14 @@ class TransferPlannerTests(SimpleTestCase):
         detour=option('detour',30,0)
         self.assertEqual(distinct_routes([early,later,detour])[0]['id'],'later')
 
-    def test_alighting_optimization_does_not_move_boarding_to_same_bus(self):
+    def test_fastest_total_can_change_boarding_without_duplicate_bus(self):
         from transit.sptrans.alternatives import distinct_routes
         leg=dict(trip_id='T',route_id='715M',code='715M',direction_id='0',headsign='Terminal')
         original=dict(id='original',duration_minutes=23,walking_meters=100,transfers=0,legs=[leg],
                       walks=[dict(accessType='destination',distance_meters=100)])
         moved=dict(id='moved',duration_minutes=22,walking_meters=20,transfers=0,legs=[leg],
                    walks=[dict(accessType='boarding',distance_meters=20)])
-        self.assertEqual(distinct_routes([moved,original])[0]['id'],'original')
+        self.assertEqual(distinct_routes([moved,original])[0]['id'],'moved')
 
     def test_progressive_yields_before_pedestrian_requests_and_can_close(self):
         from transit.sptrans import alternatives
@@ -298,3 +300,96 @@ class TransferPlannerTests(SimpleTestCase):
             self.assertEqual(response['X-Accel-Buffering'],'no')
             data=[json.loads(chunk) for chunk in response.streaming_content]
         self.assertEqual([r['complete'] for r in data],[False,True])
+
+    def test_access_accepts_500_meters_and_rejects_longer_detour(self):
+        from transit.sptrans import alternatives
+        from unittest.mock import patch
+        with store.connection() as db:
+            origin=store.get_stop(db,'1')
+            for length,expected in [(500,True),(501,False)]:
+                with patch('transit.sptrans.walking.route',return_value={'available':True,'distance_meters':length}):
+                    points,_=alternatives.access_points(db,origin,True)
+                self.assertEqual(any(s['id']=='4' for s,w in points),expected)
+
+    def test_schedule_context_reuses_service_calendar(self):
+        from unittest.mock import patch
+        with store.connection() as db,patch('transit.sptrans.store.service_active',wraps=store.service_active) as service:
+            context={}
+            first=planner.journeys(db,'1','4',now=NOW,context=context)
+            calls=service.call_count
+            second=planner.journeys(db,'1','4',now=NOW,context=context)
+            self.assertEqual(service.call_count,calls)
+            self.assertEqual(first,second)
+
+    def test_final_bus_can_alight_before_return_passage(self):
+        from transit.sptrans.alternatives import earlier_alighting
+        self.edit("INSERT INTO stop_times VALUES ('R1','07:40:00','07:40:00','4',3)")
+        with store.connection() as db:
+            trip=planner.journeys(db,'1','4',0,now=NOW)[0]
+            near=store.get_stop(db,'2');end=store.get_stop(db,'4')
+            foot={'distance_meters':40,'duration_minutes':0.6,'accessType':'destination'}
+            shortened,walk=earlier_alighting(db,trip,{'2':(near,foot),'4':(end,None)})
+        self.assertEqual(shortened['legs'][-1]['destination']['id'],'2')
+        self.assertEqual(shortened['legs'][-1]['alighting_index'],1)
+        self.assertEqual(shortened['duration_minutes'],trip['duration_minutes']-30)
+        self.assertEqual(walk,foot)
+        self.assertEqual(trip['legs'][-1]['destination']['id'],'4')
+
+    def test_arrival_bound_skips_transfers_that_cannot_improve_arrival(self):
+        from unittest.mock import patch
+        self.edit("INSERT INTO trips VALUES ('R3','daily','AFAST','Destino','0','S')")
+        self.edit("INSERT INTO stop_times VALUES ('AFAST','07:00:00','07:00:00','1',1)")
+        self.edit("INSERT INTO stop_times VALUES ('AFAST','07:02:00','07:02:00','4',2)")
+        self.edit("INSERT INTO frequencies VALUES ('AFAST','07:00:00','26:00:00',600,'0')")
+        with patch('transit.sptrans.planner.next_departure',wraps=planner.next_departure) as departures:
+            routes=self.plan()
+        self.assertEqual(routes[0]['duration_minutes'],7)
+        self.assertEqual(routes[0]['legs'][0]['trip_id'],'AFAST')
+        # R1 reaches the transfer after the destination is already reachable.
+        self.assertNotIn('R2',[call.args[0]['trip_id'] for call in departures.call_args_list])
+
+    def test_multi_source_goal_matches_exhaustive_pair_search(self):
+        from datetime import timedelta
+        starts={'1':0,'2':90};ends={'3':180,'4':0}
+        expected=[]
+        with store.connection() as db:
+            for a,access in starts.items():
+                for b,egress in ends.items():
+                    for r in planner.journeys(db,a,b,2,now=NOW+timedelta(seconds=access)):
+                        expected.append(r['duration_minutes']+(access+egress)/60)
+            actual=planner.journeys(db,'1','4',2,now=NOW,access_times=starts,end_times=ends)
+        self.assertAlmostEqual(actual[0]['duration_minutes'],min(expected),places=1)
+        self.assertTrue(all(r['transfers']<=2 for r in actual))
+
+    def test_access_budget_terminates_with_partial_flag(self):
+        from transit.sptrans import alternatives
+        from unittest.mock import patch
+        budget={'checks':64,'deadline':float('inf'),'limited':False}
+        with store.connection() as db,patch('transit.sptrans.walking.route') as foot:
+            points,incomplete=alternatives.access_points(db,store.get_stop(db,'1'),True,budget)
+        foot.assert_not_called()
+        self.assertTrue(incomplete)
+        self.assertTrue(budget['limited'])
+        self.assertEqual([p['id'] for p,w in points],['1'])
+
+    def test_revalidation_has_finite_round_limit(self):
+        from transit.sptrans import alternatives
+        from django.core.cache import cache
+        from unittest.mock import patch
+        cache.clear()
+        base=self.plan()[0]
+        calls=0
+        def search(db,a,b,*args,**kwargs):
+            nonlocal calls
+            calls+=1
+            if 'transfer_paths' not in kwargs:return [base]
+            if kwargs.get('known_transfers_only'):return []
+            walk={'origin':{'id':f'x{calls}'},'destination':{'id':f'y{calls}'},'distance_meters':20,'accessType':'transfer'}
+            return [{**base,'transfer_walks':[walk]}]
+        with store.connection() as db:
+            a=store.get_stop(db,'1');b=store.get_stop(db,'4')
+            with patch('transit.sptrans.alternatives.access_points',side_effect=[([(a,None)],False),([(b,None)],False)]),patch('transit.sptrans.planner.journeys',side_effect=search),patch('transit.sptrans.walking.route',return_value={'available':False}):
+                result=alternatives.alternatives(db,a,b,now=NOW)
+        self.assertTrue(result['search_limited'])
+        self.assertFalse(result['optimal_within_limits'])
+        self.assertLessEqual(calls,14)

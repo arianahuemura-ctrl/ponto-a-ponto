@@ -8,6 +8,7 @@ from django.utils import timezone
 from . import store
 from .geometry import leg_shape
 from .directions import distance
+from .walking import WALK_LIMIT
 
 TRANSFER_SECONDS = 120
 HORIZON_SECONDS = 6 * 3600
@@ -49,12 +50,12 @@ def _nearby(path, modified, size):
         if sid not in by_stop:continue
         y,x=math.floor(s['lat']/.002),math.floor(s['lon']/.002)
         near=[]
-        for dy in range(-2,3):
-            for dx in range(-2,3):
+        for dy in range(-3,4):
+            for dx in range(-3,4):
                 for other in cells.get((y+dy,x+dx),[]):
                     if other==sid:continue
                     d=distance((s['lat'],s['lon']),(stops[other]['lat'],stops[other]['lon']))
-                    if d<=200:near.append((other,d))
+                    if d<=WALK_LIMIT:near.append((other,d))
         edges[sid]=near
     return edges
 
@@ -78,9 +79,9 @@ def next_departure(trip, position, ready, windows):
     return best
 
 
-def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=None):
+def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=None, context=None, access_times=None, end_times=None, known_transfers_only=False):
     if not 0 <= max_transfers <= 3: raise ValueError('Limite de trocas inválido.')
-    if origin == destination: return []
+    if origin == destination and access_times is None: return []
     now = now or timezone.localtime()
     path = store.database_path()
     stat = path.stat()
@@ -90,44 +91,58 @@ def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=
     start = now.timestamp()
     horizon = start + HORIZON_SECONDS
     midnight = now.replace(hour=0,minute=0,second=0,microsecond=0)
-    active = {}
-    windows = {}
-    for identifier, trip in trips.items():
-        if not trip['times']: continue
-        entries = []
-        # GTFS times may exceed 24:00; include previous service dates.
-        latest = max([t[2] for t in trip['times']] + [f[1] for f in trip['frequencies']])
-        for delta in range(-math.ceil(latest/86400), 2):
-            day = midnight + timedelta(days=delta)
-            key = (trip['service_id'], day.date())
-            if key not in active: active[key] = store.service_active(db,*key)
-            if not active[key]: continue
-            base = day.timestamp()
-            if trip['frequencies']:
-                entries.extend((base+a,base+b,h,e) for a,b,h,e in trip['frequencies'] if h>0)
-            else:
-                departure = base + trip['times'][0][2]
-                entries.append((departure,departure,0,True))
-        windows[identifier] = entries
+    context=context if context is not None else {}
+    window_key=(str(path),stat.st_mtime_ns,stat.st_size,midnight.isoformat())
+    windows=context.get(window_key)
+    if windows is None:
+        active = {}
+        windows = {}
+        for identifier, trip in trips.items():
+            if not trip['times']: continue
+            entries = []
+            # GTFS times may exceed 24:00; include previous service dates.
+            latest = max([t[2] for t in trip['times']] + [f[1] for f in trip['frequencies']])
+            for delta in range(-math.ceil(latest/86400), 2):
+                day = midnight + timedelta(days=delta)
+                key = (trip['service_id'], day.date())
+                if key not in active: active[key] = store.service_active(db,*key)
+                if not active[key]: continue
+                base = day.timestamp()
+                if trip['frequencies']:
+                    entries.extend((base+a,base+b,h,e) for a,b,h,e in trip['frequencies'] if h>0)
+                else:
+                    departure = base + trip['times'][0][2]
+                    entries.append((departure,departure,0,True))
+            windows[identifier] = entries
+        context[window_key]=windows
     # Labels from the previous round always represent fewer boardings. Never use a
     # newly discovered transfer to board again in the same round.
-    previous = {origin: (start, ())}
-    best = {origin: start}
+    multi_goal=end_times is not None
+    access_times=access_times if access_times is not None else {origin:0}
+    end_times=end_times if end_times is not None else {destination:0}
+    previous = {sid:(start+seconds,()) for sid,seconds in access_times.items()}
+    best = {sid:label[0] for sid,label in previous.items()}
     results = []
+    # Valid only for this origin/destination search, not across alternative pairs.
+    # Nonnegative travel and walking times cannot improve an already reached bound.
+    arrival_bound = math.inf
     for boarding in range(max_transfers+1):
         if boarding and transfer_paths is not None:
             expanded=dict(previous)
             for sid,(reached,chain) in previous.items():
+                if reached+TRANSFER_SECONDS>=arrival_bound:continue
                 for other,gap in neighbours.get(sid,[]):
                     pair=(sid,other)
-                    if pair in transfer_paths and transfer_paths[pair] is None:continue
+                    if (known_transfers_only and pair not in transfer_paths) or (pair in transfer_paths and transfer_paths[pair] is None):continue
                     path=transfer_paths.get(pair)
                     seconds=(path['distance_meters'] if path else gap)/(4000/3600)
                     arrival=reached+seconds
-                    if arrival<expanded.get(other,(math.inf,))[0]:
+                    if arrival+TRANSFER_SECONDS<arrival_bound and arrival<expanded.get(other,(math.inf,))[0]:
                         expanded[other]=(arrival,chain+(('__walk__',sid,other,reached,arrival),))
             previous=expanded
         current = {}
+        previous={sid:label for sid,label in previous.items() if label[0]+(TRANSFER_SECONDS if label[1] else 0)<arrival_bound}
+        if not previous:break
         candidates = set().union(*(by_stop[s] for s in previous)) if previous else set()
         for identifier in sorted(candidates):
             trip = trips[identifier]
@@ -137,18 +152,21 @@ def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=
                     boarded, departure_at_board, prefix = onboard
                     elapsed = arrival-trip['times'][boarded][2]
                     reached = departure_at_board+elapsed
-                    if elapsed >= 0 and reached <= horizon and reached < best.get(stop_id,math.inf) and reached < current.get(stop_id,(math.inf,))[0]:
+                    if elapsed >= 0 and reached <= horizon and reached < arrival_bound and reached < best.get(stop_id,math.inf) and reached < current.get(stop_id,(math.inf,))[0]:
                         leg = (identifier,boarded,index,departure_at_board,reached)
                         current[stop_id] = (reached,prefix+(leg,))
+                        if stop_id in end_times:arrival_bound=min(arrival_bound,reached+end_times[stop_id])
                 if stop_id not in previous: continue
                 arrival_at_stop, prefix = previous[stop_id]
                 ready = arrival_at_stop+(TRANSFER_SECONDS if prefix else 0)
+                if ready>=arrival_bound:continue
                 departure_at_stop = next_departure(trip,index,ready,windows[identifier])
                 # Compare the departure's base time so downstream offsets are consistent.
-                if departure_at_stop <= horizon and (onboard is None or departure_at_stop-departure < onboard[1]-trip['times'][onboard[0]][2]):
+                if departure_at_stop <= horizon and departure_at_stop < arrival_bound and (onboard is None or departure_at_stop-departure < onboard[1]-trip['times'][onboard[0]][2]):
                     onboard = (index,departure_at_stop,prefix)
-        if destination in current:
-            reached, chain = current[destination]
+        goals=sorted(end_times.keys() & current.keys(),key=lambda sid:current[sid][0]+end_times[sid])
+        for goal in goals[:1] if multi_goal else goals:
+            reached, chain = current[goal]
             legs = []
             walks = []
             previous_arrival = start
@@ -159,8 +177,9 @@ def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=
                     previous_arrival=arrive
                     continue
                 trip = trips[identifier]
+                if not legs:previous_arrival=start+access_times.get(trip['times'][a][0],0)
                 legs.append({
-                    'geometry':leg_shape(identifier,a,b),
+                    'geometry':leg_shape(identifier,a,b),'boarding_index':a,'alighting_index':b,
                     'trip_id':identifier,'route_id':trip['route_id'],'direction_id':trip['direction_id'],'code':trip['route_short_name'],'headsign':trip['trip_headsign'],
                     'color':'#'+(trip['route_color'] or '005cec'),
                     'origin':stops[trip['times'][a][0]],'destination':stops[trip['times'][b][0]],
@@ -171,8 +190,8 @@ def journeys(db, origin, destination, max_transfers=2, now=None, transfer_paths=
                     'stops':[stops[t[0]] for t in trip['times'][a:b+1]],
                 })
                 previous_arrival = arrive
-            results.append({'transfers':len(legs)-1,'duration_minutes':round((reached-start)/60,1),
-                            'arrival':datetime.fromtimestamp(reached,now.tzinfo).isoformat(),'legs':legs,'transfer_walks':walks,'estimated':True})
+            results.append({'transfers':len(legs)-1,'duration_minutes':round((reached+end_times[goal]-start)/60,1),
+                            'arrival':datetime.fromtimestamp(reached+end_times[goal],now.tzinfo).isoformat(),'legs':legs,'transfer_walks':walks,'estimated':True})
         for stop_id,label in current.items(): best[stop_id] = min(best.get(stop_id,math.inf),label[0])
         previous = current
         if not previous: break

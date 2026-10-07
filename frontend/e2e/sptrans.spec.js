@@ -196,7 +196,7 @@ test('ônibus sólido e caminhada tracejada têm contraste nos dois temas',async
   await page.addInitScript(({stop,destination})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin:stop,destination})),{stop,destination});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[{legs:[{origin:stop,destination,stops:[stop,destination],geometry}]}]}}));
   await page.route('**/api/sptrans/walk/**',r=>r.fulfill({json:{available:true,geometry:[[destination.lat,destination.lon],[-23.5511,-46.634],[-23.5512,-46.6342]]}}));
-  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Horários de embarque'}).click();
   await expect(page.locator('.sp-route-bus')).toHaveCount(1);
   await expect(page.locator('.sp-route-walk')).toHaveCount(1);
   await page.getByRole('button',{name:'Ver mapa'}).click();
@@ -220,12 +220,12 @@ test('rota selecionada mostra só extremos e restaura pontos ao alterar destino'
   const legs=[{origin:stop,destination:transfer,stops:[stop,transfer],geometry:[[stop.lat,stop.lon],[transfer.lat,transfer.lon]]},{origin:transfer,destination,stops:[transfer,destination],geometry:[[transfer.lat,transfer.lon],[destination.lat,destination.lon]]}];
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[{legs}]}}));
   await page.goto('/sao-paulo/');await expect(page.locator('.sp-stop')).toHaveCount(3);
-  await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.getByRole('button',{name:'Horários de embarque'}).click();
   await expect(page.locator('.sp-stop')).toHaveCount(3);
   await expect(page.locator('.sp-origin')).toHaveCount(1);await expect(page.locator('.sp-destination')).toHaveCount(1);
   await expect(page.locator('.sp-route-bus')).toHaveCount(2);
   await page.getByRole('button',{name:'Ver mapa'}).click();await expect(page.locator('.sp-stop')).toHaveCount(3);
-  await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('button',{name:'Alterar destino',exact:true}).click();await expect(page.locator('.sp-stop')).toHaveCount(4);
   await expect(page.locator('.sp-route-bus')).toHaveCount(0);
   await page.getByRole('button',{name:'Cancelar seleção'}).click();
@@ -305,7 +305,7 @@ test('seleciona trecho na lista e no mapa e fechar mostra viagem completa',async
   const legs=[[stop,middle],[middle,end]].map(([origin,destination],i)=>({trip_id:'T'+i,code:'L'+i,headsign:'Fim',origin,destination,stops:[origin,destination],geometry:[[origin.lat,origin.lon],[destination.lat,destination.lon]]}));
   await page.addInitScript(({stop,end})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin:stop,destination:end})),{stop,end});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:legs,journeys:[{legs}]}}));
-  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('button',{name:'Ver trecho 2: L1 no mapa'}).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await expect(page.locator('.sp-route-bus')).toHaveCount(1);
@@ -314,7 +314,7 @@ test('seleciona trecho na lista e no mapa e fechar mostra viagem completa',async
   await expect(page.locator('.sp-route-bus')).toHaveCount(2);
   await page.getByLabel('Trecho exibido no mapa').selectOption('0');
   await expect(page.locator('.sp-route-bus')).toHaveCount(1);
-  await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('button',{name:'Ver mapa'}).click();
   await expect(page.locator('.sp-route-bus')).toHaveCount(2);
 });
@@ -343,13 +343,13 @@ test('horários reabrem pelo mapa após trecho, fechar e Escape',async({page})=>
   const legs=[{trip_id:'T',code:'1000-10',origin:stop,destination,stops:[stop,destination],geometry:[[stop.lat,stop.lon],[destination.lat,destination.lon]],arrivals:[{time:'08:10',vehicle:123}]}];
   await page.addInitScript(({stop,destination})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin:stop,destination})),{stop,destination});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:legs,journeys:[{legs}]}}));
-  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('button',{name:'Ver trecho 1: 1000-10 no mapa'}).click();
   await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toContainText('08:10');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).not.toBeVisible();
-  await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.getByRole('button',{name:'Horários de embarque'}).click();
   await expect(page.getByRole('dialog')).toContainText('08:10');
   await page.getByRole('button',{name:'Ver mapa'}).click();
   await page.locator('.sp-origin').click();
@@ -401,7 +401,7 @@ for(const width of [390,756]) test(`etapa no topo e cancelamento confirmado em $
   await page.getByRole('button',{name:'Cancelar viagem',exact:true}).click();
   await page.getByRole('button',{name:'Continuar viagem'}).click();
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).origin.id)).toBe('1');
-  await page.getByRole('button',{name:'Ver próximos ônibus'}).click();
+  await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('dialog',{name:'Próximos ônibus'}).getByRole('button',{name:'Cancelar viagem'}).click();
   await page.getByRole('button',{name:'Confirmar cancelamento'}).click();
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).origin)).toBeNull();
@@ -426,17 +426,21 @@ test('três rotas mais rápidas, expansão e escolha preservam caminhada na bald
     return r.fulfill({json:{journeys,selected_journey:chosen.id,lines:chosen.legs.map(l=>({...l,headsign:'Destino',arrivals:[],planned_departure:l.departure}))}});
   });
   await page.goto('/sao-paulo/');
-  await page.getByRole('button',{name:'Ver próximos ônibus',exact:true}).click();
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   const options=page.getByRole('region',{name:'Alternativas de viagem'});
   await expect(options.locator('.sp-route-option')).toHaveCount(3);
   await page.getByRole('button',{name:'Mostrar todas as 5 rotas calculadas'}).click();
   await expect(options.locator('.sp-route-option')).toHaveCount(5);
   await options.locator('.sp-route-option').nth(4).click();
+  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await expect(page.getByRole('combobox',{name:'Trecho exibido no mapa'})).toHaveValue('all');
+  await expect(page.locator('path.sp-route-bus')).not.toHaveCount(0);
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   await expect(page.getByRole('button',{name:'Ver trecho 1: A4 no mapa'})).toBeVisible();
   await expect(page.getByRole('region',{name:'Caminhadas da rota'})).toContainText('100 m · 1.5 min');
   await page.getByRole('button',{name:'Ver trecho 2: B4 no mapa'}).click();
   await expect(page.locator('path.sp-route-walk')).not.toHaveCount(0);
-  await page.getByRole('button',{name:'Ver próximos ônibus',exact:true}).click();
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   await expect(options.locator('.sp-route-option').nth(4)).toHaveAttribute('aria-pressed','true');
   await page.getByRole('button',{name:'Mostrar apenas as três mais rápidas'}).click();
   await expect(options.locator('.sp-route-option')).toHaveCount(3);
@@ -462,15 +466,91 @@ test('stream mostra a primeira rota antes do fim e preserva escolha com novas al
       return originalFetch(url,options);
     };
   },{stop,end});
-  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Ver próximos ônibus',exact:true}).click();
+  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   const options=page.getByRole('region',{name:'Alternativas de viagem'});
   await expect(options.locator('.sp-route-option')).toHaveCount(1);
   await expect(page.getByText(/As rotas aparecem conforme/)).toBeVisible();
   await options.locator('.sp-route-option').click();
+  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await page.locator('.leaflet-control-zoom-in').click();
+  const mapBox=await page.locator('.sp-map').boundingBox();
+  await page.mouse.move(mapBox.x+mapBox.width*.6,mapBox.y+mapBox.height*.5);
+  await page.mouse.down();await page.mouse.move(mapBox.x+mapBox.width*.45,mapBox.y+mapBox.height*.6,{steps:12});await page.mouse.up();
+  await page.waitForTimeout(400);
+  const beforeUpdate=await page.locator('.sp-origin').getAttribute('style');
   await page.evaluate(()=>window.finishRoutes());
+  await expect(page.locator('.sp-map-status')).toHaveCount(0);
+  expect(await page.locator('.sp-origin').getAttribute('style')).toBe(beforeUpdate);
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   await expect(options.locator('.sp-route-option')).toHaveCount(2);
   await expect(options.locator('.sp-route-option').first()).toContainText('Mais rápida');
   await expect(options.locator('.sp-route-option').last()).toHaveAttribute('aria-pressed','true');
   await expect(page.getByRole('button',{name:'Ver trecho 1: Primeira no mapa'})).toBeVisible();
+  await expect(page.getByText(/As rotas aparecem conforme/)).not.toBeVisible();
+});
+
+
+for(const width of [390,756,1440])test(`ações da rota na barra inferior e etapa centralizada em ${width}px`,async({page})=>{
+  await setup(page);await page.setViewportSize({width,height:900});
+  const end={...stop,id:'2',lat:-23.552};
+  await page.addInitScript(({stop,end})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin:stop,destination:end})),{stop,end});
+  await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[{legs:[{origin:stop,destination:end,code:'100',geometry:[[stop.lat,stop.lon],[end.lat,end.lon]]}]}]}}));
+  await page.goto('/sao-paulo/');
+  const header=page.locator('.sp-header'),bar=page.locator('.sp-route-legend');
+  await expect(header.getByRole('button',{name:'Cancelar viagem'})).toHaveCount(0);
+  await expect(header.getByRole('button',{name:'Ver próximos ônibus'})).toHaveCount(0);
+  await expect(bar.getByRole('button',{name:'Horários de embarque'})).toBeVisible();
+  const brand=await page.locator('.sp-header-brand').boundingBox(),tools=await page.locator('.sp-header-tools').boundingBox();
+  const stage=await header.getByRole('status').boundingBox();
+  expect(Math.abs(stage.x+stage.width/2-(brand.x+brand.width+tools.x)/2)).toBeLessThan(3);
+  const bounds=await bar.boundingBox(),cancel=await bar.getByRole('button',{name:'Cancelar viagem'}).boundingBox();
+  expect(bounds.x+bounds.width-cancel.x-cancel.width).toBeLessThan(12);
+  await bar.getByRole('button',{name:'Cancelar viagem'}).click();
+  await expect(page.getByRole('dialog',{name:'Cancelar viagem?'})).toBeVisible();
+  await page.getByRole('button',{name:'Continuar viagem'}).click();
+  await bar.getByRole('button',{name:'Horários de embarque'}).click();
+  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toBeVisible();
+});
+
+test('stream atualiza desembarque antecipado da rota escolhida sem resetar o mapa',async({page})=>{
+  await setup(page);
+  const end={...stop,id:'8',name:'Destino',lat:-23.553};
+  await page.addInitScript(({stop,end})=>{
+    sessionStorage.setItem('pap.sp.session',JSON.stringify({origin:stop,destination:end}));
+    const originalFetch=window.fetch;
+    window.fetch=(url,options)=>{
+      if(String(url).includes('/sptrans/board/')){
+        return Promise.resolve(new Response(new ReadableStream({start(controller){
+          const route=(id,minutes)=>({id,duration_minutes:minutes,transfers:0,walks:[],legs:[{trip_id:id,code:id,origin:stop,destination:end,geometry:[[stop.lat,stop.lon],[end.lat,end.lon]]}]});
+          const first=route('Primeira',30),later={...route('Melhor desembarque',20),legs:[{...first.legs[0],destination:{...end,id:'9',name:'Desembarque antecipado'},geometry:[[stop.lat,stop.lon],[end.lat,end.lon]]}]};
+          const send=(journeys,complete)=>controller.enqueue(new TextEncoder().encode(JSON.stringify({journeys,complete,selected_journey:journeys[0].id,lines:journeys[0].legs.map(l=>({...l,arrivals:[]}))})+'\n'));
+          send([first],false);
+          window.finishRoutes=()=>{send([later],true);controller.close();};
+        }}),{headers:{'Content-Type':'application/x-ndjson'}}));
+      }
+      return originalFetch(url,options);
+    };
+  },{stop,end});
+  await page.goto('/sao-paulo/');await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  const options=page.getByRole('region',{name:'Alternativas de viagem'});
+  await expect(options.locator('.sp-route-option')).toHaveCount(1);
+  await expect(page.getByText(/As rotas aparecem conforme/)).toBeVisible();
+  await options.locator('.sp-route-option').click();
+  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await page.locator('.leaflet-control-zoom-in').click();
+  const mapBox=await page.locator('.sp-map').boundingBox();
+  await page.mouse.move(mapBox.x+mapBox.width*.6,mapBox.y+mapBox.height*.5);
+  await page.mouse.down();await page.mouse.move(mapBox.x+mapBox.width*.45,mapBox.y+mapBox.height*.6,{steps:12});await page.mouse.up();
+  await page.waitForTimeout(400);
+  const beforeUpdate=await page.locator('.sp-origin').getAttribute('style');
+  await page.evaluate(()=>window.finishRoutes());
+  await expect(page.locator('.sp-map-status')).toHaveCount(0);
+  expect(await page.locator('.sp-origin').getAttribute('style')).toBe(beforeUpdate);
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  await expect(options.locator('.sp-route-option')).toHaveCount(1);
+  await expect(options.locator('.sp-route-option').first()).toContainText('Primeira');
+  await expect(options.locator('.sp-route-option').last()).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('button',{name:'Ver trecho 1: Primeira no mapa'})).toContainText('Desembarque antecipado');
+  await expect(options.locator('.sp-route-option')).toContainText('20 min');
   await expect(page.getByText(/As rotas aparecem conforme/)).not.toBeVisible();
 });

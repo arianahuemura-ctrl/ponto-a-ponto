@@ -134,3 +134,16 @@
 }
 
 .sp-route-options{display:grid;gap:8px;margin:16px 0}.sp-route-option{display:grid;gap:5px;text-align:left;padding:12px;border:1px solid var(--border,#75869b);border-radius:10px;background:transparent;color:inherit}.sp-route-option[aria-pressed="true"]{border:2px solid #48bafa;background:rgba(50,150,240,.12)}
+
+/* The middle column spans exactly the space between the brand and search tools. */
+.sp-shell .sp-header { grid-template-columns:auto minmax(0,1fr) auto; }
+.sp-header .sp-navigation-state { min-width:0; width:100%; }
+.sp-header .sp-state-heading { justify-content:center; text-align:center; }
+.sp-route-legend { padding-right:56px; min-height:44px; }
+.sp-route-legend .sp-map-cancel { position:absolute; right:6px; bottom:6px; }
+
+.sp-route-option { grid-template-columns:minmax(0,1fr) auto; column-gap:16px; }
+.sp-route-option > strong,.sp-route-option > span:not(.sp-route-arrival),.sp-route-option > small { grid-column:1; overflow-wrap:anywhere; }
+.sp-route-option .sp-route-arrival { grid-column:2; grid-row:1 / 4; align-self:center; display:grid; gap:4px; text-align:right; }
+.sp-route-arrival small { font-size:11px; }
+.sp-route-arrival strong { font-size:18px; }
