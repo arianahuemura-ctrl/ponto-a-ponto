@@ -140,6 +140,15 @@ class GTFSCase(SimpleTestCase):
         self.assertEqual(self.client.get('/api/sptrans/board/',{'origin':"' OR 1=1"}).status_code,400)
         response=self.client.get('/api/sptrans/stops/',{'q':'Destino'})
         self.assertEqual(response.json()['stops'][0]['id'],'2')
+    def test_old_url_is_removed(self):
+        response=self.client.get('/sao-paulo/?stop=1206717')
+        self.assertEqual(response.status_code,404)
+
+    @override_settings(PUBLIC_BASE_URL='https://pap.example')
+    def test_qr_uses_root_url(self):
+        response=self.client.get('/api/sptrans/qr/1/',{'format':'json'})
+        self.assertEqual(response.json()['url'],'https://pap.example/?stop=1')
+
     def test_route_and_qr(self):
         result=self.client.get('/api/sptrans/trips/T/').json()
         self.assertEqual([s['id'] for s in result['stops']],['1','2','3'])

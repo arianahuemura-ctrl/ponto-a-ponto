@@ -1,10 +1,21 @@
 import {useEffect,useRef,useState} from 'react';
 import {api,apiProgressive} from './api.js';
 import Icon from './Icon.jsx';
+import {useApproachingBus} from './useApproachingBus.js';
+import {boardingMinutes} from './boardingTime.js';
 import {mergeProgramme} from './programme.js';
 import {boardingCoordinates} from './location.js';
 const time=value=>new Date(value).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
-export default function BoardDialog({passengerPosition,open,requestId,active,onStatus,origin,destination,onClose,onDestination,onCancel,onFavorite,isFavorite,onJourney,onChooseJourney}) {
+function BoardingCountdown({trip,selected,boardingLive,active,clock}) {
+  const accessMinutes=(trip.walks||[]).filter(w=>w.accessType==='boarding').reduce((sum,w)=>sum+(Number(w.duration_minutes)||0),0);
+  const live=useApproachingBus(trip.legs[0],active&&!selected,accessMinutes);
+  const current=selected?boardingLive:live;
+  const minutes=boardingMinutes(current?.arrivals,clock,accessMinutes);
+  if(minutes===null)return <small className="sp-boarding-status">{!current?'Consultando embarque…':current.noReachableArrival||current.arrivals?.length?'Sem previsão compatível com a caminhada':'Previsão de embarque indisponível'}</small>;
+  return <span className="sp-boarding-countdown" title="Previsão de chegada ao embarque · SPTrans"><strong>Embarque em {minutes} min</strong></span>;
+}
+
+export default function BoardDialog({boardingLive,passengerPosition,open,requestId,active,onStatus,origin,destination,onClose,onDestination,onCancel,onFavorite,isFavorite,onJourney,onChooseJourney}) {
   const dialog=useRef(),chosenTrip=useRef(null),forceSearch=useRef(false);
   const latestPosition=useRef(passengerPosition),planningAnchor=useRef(null);
   useEffect(()=>{latestPosition.current=passengerPosition;},[passengerPosition]);
@@ -54,6 +65,8 @@ export default function BoardDialog({passengerPosition,open,requestId,active,onS
   },[active,origin?.id,destination?.id,origin?.addressCoordinates?.lat,origin?.addressCoordinates?.lon,origin?.manualBoarding,destination?.addressCoordinates?.lat,destination?.addressCoordinates?.lon,tick,onJourney,onStatus]);
   const current=data?.key===origin?.id+':'+(destination?.id||'')?data:null;
   const selected=current?.journeys?.find(j=>j.id===chosen)||current?.journeys?.find(j=>j.id===current.selected_journey)||current?.journeys?.[0];
+  const [clock,setClock]=useState(Date.now);
+  useEffect(()=>{if(!open)return;setClock(Date.now());const timer=setInterval(()=>setClock(Date.now()),1000);return()=>clearInterval(timer);},[open]);
   const chooseJourney=trip=>{chosenTrip.current=trip;setChosen(trip.id);onJourney(trip);setData(previous=>({...previous,selected_journey:trip.id,lines:trip.legs.map(l=>({...l,arrivals:[],planned_departure:l.departure}))}));onChooseJourney();onClose();};
   return <dialog ref={dialog} className="sp-stop-dialog sp-board-dialog" aria-labelledby="board-title" onCancel={e=>{e.preventDefault();onClose();}}>
     <header className="sp-board-top"><div className="sp-board-title"><h2 id="board-title">{destination?'Ônibus da sua rota':'Próximos ônibus'}</h2>{!origin?.useLocation&&<button type="button" className="icon-button sp-point-info-toggle" aria-label="Informações do ponto" title="Informações do ponto" aria-expanded={showInfo} aria-controls="sp-point-info" onClick={()=>setShowInfo(value=>!value)}><Icon name="info"/></button>}</div><div className="sp-board-window-actions"><button className="icon-button" onClick={onClose} aria-label="Ver mapa" title="Ver mapa"><Icon name="map"/></button><button className="icon-button" onClick={onCancel} aria-label="Cancelar viagem" title="Cancelar viagem"><Icon name="close"/></button></div></header>
@@ -63,7 +76,7 @@ export default function BoardDialog({passengerPosition,open,requestId,active,onS
     {(!destination||!origin?.useLocation)&&<div className="sp-board-actions">{!destination&&<button className="primary" onClick={onDestination}>Selecionar destino</button>}
       {!origin?.useLocation&&<button className="icon-button sp-favorite-action" onClick={onFavorite} aria-label={isFavorite?'Remover favorito':'Adicionar embarque aos favoritos'} title={isFavorite?'Remover favorito':'Adicionar aos favoritos'} data-saved={isFavorite}><Icon name="star"/></button>}
       </div>}
-    {destination&&current?.journeys?.length>0&&<section className="sp-route-options" aria-label="Alternativas de viagem"><h3>{expanded?'Rotas calculadas':'Rotas mais rápidas'}</h3>{(expanded?current.journeys:current.journeys.slice(0,3)).map((trip,index)=><button type="button" className="sp-route-option" key={trip.id||index} aria-pressed={selected===trip} onClick={()=>chooseJourney(trip)}><strong>{index+1}. {trip.duration_minutes} min · {trip.transfers||0} baldeações</strong><span>{trip.legs.map(l=>l.code).join(' → ')}</span><small>{trip.walking_meters||0} m a pé · {trip.walking_minutes||0} min de caminhada</small>{trip.arrival&&<span className="sp-route-arrival"><small>Chegada estimada</small><strong>{time(trip.arrival)}</strong></span>}</button>)}{current.journeys.length>3&&<button className="text-button" onClick={()=>setExpanded(v=>!v)}>{expanded?'Mostrar apenas as três mais rápidas':`Mostrar todas as ${current.journeys.length} rotas calculadas`}</button>}</section>}
+    {destination&&current?.journeys?.length>0&&<section className="sp-route-options" aria-label="Alternativas de viagem"><h3>{expanded?'Rotas calculadas':'Rotas mais rápidas'}</h3>{(expanded?current.journeys:current.journeys.slice(0,3)).map((trip,index)=><button type="button" className="sp-route-option" key={trip.id||index} aria-pressed={selected===trip} onClick={()=>chooseJourney(trip)}><strong>{index+1}. {trip.duration_minutes} min · {trip.transfers||0} baldeações</strong><span>{trip.legs.map(l=>l.code).join(' → ')}</span><small>{trip.walking_meters||0} m a pé · {trip.walking_minutes||0} min de caminhada</small><BoardingCountdown trip={trip} selected={selected===trip} boardingLive={boardingLive} active={open&&active} clock={clock}/>{trip.arrival&&<span className="sp-route-arrival"><small>Chegada estimada</small><strong>{time(trip.arrival)}</strong></span>}</button>)}{current.journeys.length>3&&<button className="text-button" onClick={()=>setExpanded(v=>!v)}>{expanded?'Mostrar apenas as três mais rápidas':`Mostrar todas as ${current.journeys.length} rotas calculadas`}</button>}</section>}
     {selected?.walks?.length>0&&<section aria-label="Caminhadas da rota">{selected.walks.map((w,i)=><p key={i}>A pé {w.accessType==='boarding'?'até o embarque':w.accessType==='destination'?'até o destino':`na baldeação ${w.before_leg}`}: {w.distance_meters} m · {w.duration_minutes} min{w.accessType==='transfer'?` · ${w.origin.name} → ${w.destination.name}`:''}</p>)}</section>}
     <div className="sp-board-refresh"><button className="icon-button" aria-label={busy?(destination?'Carregando rotas':'Carregando horários'):destination?'Reiniciar busca':'Atualizar horários'} title={busy?(destination?'Carregando rotas':'Carregando horários'):destination?'Reiniciar busca':'Atualizar horários'} aria-busy={busy} disabled={busy} onClick={()=>{forceSearch.current=!!destination;if(destination){chosenTrip.current=null;setChosen(null);setExpanded(false);setData(null);onJourney(null);}setTick(v=>v+1);}}><Icon name={busy?'hourglass':'refresh'} className={busy?'sp-loading-hourglass':undefined}/></button>{current?.queried_at&&<small>Consulta às {time(current.queried_at)}{!destination&&' · atualização a cada 30 s'}</small>}</div>
     {busy&&<p role="status">{destination?"Buscando alternativas… As rotas aparecem conforme são calculadas e a ordem ainda pode mudar.":"Consultando próximos ônibus…"}</p>}

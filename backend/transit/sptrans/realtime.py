@@ -32,17 +32,32 @@ def stop_mapping(origin, line):
     return exact[0] if len(exact)==1 else candidates[0] if len(candidates)==1 else None
 
 
-def add_predictions(row, origin):
+def add_predictions(row, origin, ttl=30):
     line=line_mapping(row)
     if not line:
         row['realtime_status']='Sentido sem correspondência inequívoca na API.'
         return
     row['api_line']=line['cl']
-    point=stop_mapping(origin,line)
-    if not point:
-        row['realtime_status']='Ponto sem correspondência disponível na API; consulte os intervalos GTFS.'
-        return
-    payload=client.get('Previsao',{'codigoParada':point['cp'],'codigoLinha':line['cl']})
+    # The line-stop catalogue is incomplete: Previsao accepts GTFS stop IDs
+    # that BuscarParadasPorLinha does not enumerate. Validate the returned
+    # stop identity and coordinates before accepting a direct lookup.
+    payload=None
+    if str(origin['id']).isdigit() and 'lat' in origin and 'lon' in origin:
+        direct=client.get('Previsao',{'codigoParada':int(origin['id']),'codigoLinha':line['cl']},ttl)
+        point=(direct or {}).get('p') or {}
+        try:
+            gap=math.hypot((float(point['py'])-origin['lat'])*111320,(float(point['px'])-origin['lon'])*102000)
+            if str(point.get('cp'))==str(origin['id']) and gap<=15:
+                payload=direct
+                row['api_stop']=point['cp']
+        except (KeyError,ValueError,TypeError): pass
+    if payload is None:
+        point=stop_mapping(origin,line)
+        if not point:
+            row['realtime_status']='Ponto sem correspondência disponível na API; consulte os intervalos GTFS.'
+            return
+        payload=client.get('Previsao',{'codigoParada':point['cp'],'codigoLinha':line['cl']},ttl)
+        row['api_stop']=point['cp']
     row['api_time']=payload.get('hr')
     row['realtime_status']='Sem previsão de chegada retornada pela SPTrans.'
     for actual in (payload.get('p') or {}).get('l',[]):
@@ -61,10 +76,10 @@ def add_predictions(row, origin):
         row['realtime_status']='Previsão SPTrans (sujeita a atualização).'
 
 
-def positions(row):
+def positions(row, ttl=30):
     line=line_mapping(row)
     if not line: return [],'Sentido sem correspondência inequívoca na API.'
-    payload=client.get('Posicao/Linha',{'codigoLinha':line['cl']})
+    payload=client.get('Posicao/Linha',{'codigoLinha':line['cl']},ttl)
     vehicles=[]
     for v in payload.get('vs',[]):
         from django.utils.dateparse import parse_datetime

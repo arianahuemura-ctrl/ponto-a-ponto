@@ -5,7 +5,7 @@ from io import BytesIO
 from django.http import JsonResponse, HttpResponse, StreamingHttpResponse
 from django.views.decorators.http import require_GET
 from django.utils import timezone
-from . import store, realtime, planner, directions, walking, viewport, alternatives
+from . import store, realtime, planner, directions, walking, viewport, alternatives, tracking
 from .client import APIError
 
 
@@ -100,6 +100,8 @@ def board(request,db):
 
 @endpoint
 def trip(request,db,trip_id):
+    wait_seconds=float(request.GET.get('min_wait_seconds','0'))
+    if not math.isfinite(wait_seconds) or not 0<=wait_seconds<=21600: raise ValueError()
     row=db.execute('''SELECT t.*,r.route_short_name,r.route_long_name,r.route_color FROM trips t JOIN routes r USING(route_id) WHERE trip_id=? AND r.route_type='3' ''',(trip_id,)).fetchone()
     if not row: raise ValueError()
     line={'trip_id':trip_id,'code':row['route_short_name'],'name':row['route_long_name'],'headsign':row['trip_headsign'],'arrivals':[]}
@@ -107,11 +109,19 @@ def trip(request,db,trip_id):
     shape=[[s[0],s[1]] for s in db.execute('SELECT shape_pt_lat,shape_pt_lon FROM shapes WHERE shape_id=? ORDER BY shape_pt_sequence',(row['shape_id'],))]
     vehicles=[];status='';warning=''
     try:
-        if request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']))
-        vehicles,status=realtime.positions(line)
+        if request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']),ttl=15 if request.GET.get('boarding_index') is not None else 30)
+        vehicles,status=realtime.positions(line,ttl=15 if request.GET.get('boarding_index') is not None else 30)
     except APIError as error: warning=str(error)
     except (ValueError,KeyError,TypeError): warning='Resposta inesperada da SPTrans; posições indisponíveis.'
-    return {'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning}
+    approach=None
+    if request.GET.get('boarding_index') is not None:
+        index=int(request.GET['boarding_index'])
+        if not 0<=index<len(stops) or stops[index]['id']!=request.GET.get('origin'): raise ValueError()
+        supplied=bool(line['arrivals'])
+        line['arrivals']=tracking.reachable_arrivals(line['arrivals'],timezone.now(),wait_seconds)
+        line['no_reachable_arrival']=supplied and not line['arrivals']
+        approach=tracking.approaching(trip_id,index,vehicles,line['arrivals'],require_prediction=wait_seconds>0 or supplied)
+    return {'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach}
 
 @require_GET
 def qr(request,stop_id):
@@ -123,7 +133,7 @@ def qr(request,stop_id):
         try: store.get_stop(db,stop_id)
         except ValueError: return HttpResponse(status=404)
     base=(settings.PUBLIC_BASE_URL or request.build_absolute_uri('/')).rstrip('/')
-    url=base+'/sao-paulo/?'+urlencode({'stop':stop_id})
+    url=base+'/?'+urlencode({'stop':stop_id})
     if request.GET.get('format')=='json':return JsonResponse({'url':url})
     output=BytesIO()
     qrcode.make(url,image_factory=qrcode.image.svg.SvgPathImage).save(output)

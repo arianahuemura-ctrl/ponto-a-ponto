@@ -167,3 +167,8 @@
 @media (prefers-reduced-motion:reduce) {
   .sp-loading-hourglass { animation:none; }
 }
+
+.sp-live-bus { display:grid; place-items:center; background:#7251a6; border:2px solid white; border-radius:8px; box-shadow:0 2px 6px #0008; }
+.sp-live-bus svg { width:24px; height:24px; fill:none; stroke:white; stroke-width:1.8; }
+
+.sp-boarding-countdown { color:var(--text); font-size:14px; }

@@ -21,3 +21,13 @@ test('limite de trocas é restaurado e valores inválidos usam o padrão',()=>{
   assert.equal(readSession(storage).maxTransfers,1);
   assert.equal(readSession({getItem:()=>JSON.stringify({maxTransfers:99})}).maxTransfers,2);
 });
+test('URL sem stop prevalece sobre origem e destino da sessão',()=>{
+ const storage={getItem:()=>JSON.stringify({origin:stop,destination:{...stop,id:'2'},maxTransfers:1})};
+ for(const url of ['', '?', '?stop=', '?outro=1', '?stop=99']){
+  const session=readSession(storage,url);
+  assert.equal(session.origin,null);
+  assert.equal(session.destination,null);
+ }
+ assert.equal(readSession(storage,'?stop=1').origin.id,'1');
+ assert.equal(readSession(storage,'?stop=1').destination.id,'2');
+});

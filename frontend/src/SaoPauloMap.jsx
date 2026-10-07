@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import Icon from './Icon.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
-export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea, onMapPoint }) {
+export default function SaoPauloMap({ approach, passengerFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea, onMapPoint }) {
   const host=useRef(), map=useRef(), click=useRef(onStop), area=useRef(onArea);
   const locationButton=useRef(null), mapPoint=useRef(onMapPoint);
   mapPoint.current=onMapPoint;
@@ -17,7 +17,9 @@ export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, 
       const point=instance.mouseEventToLatLng(event);
       mapPoint.current?.({lat:point.lat,lon:point.lng});
     });
-    instance.on('movestart zoomstart',longPress.cancel);
+    // Pointer movement applies the 10 px gesture tolerance; Leaflet starts
+    // moving at a smaller threshold, which must not cancel a steady hold.
+    instance.on('zoomstart',longPress.cancel);
     let timer;
     const updateArea=()=>{
       clearTimeout(timer);
@@ -29,6 +31,9 @@ export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, 
     instance.on('moveend',updateArea);
     updateArea();
     map.current=instance;
+    instance.createPane('busApproach');
+    instance.getPane('busApproach').style.zIndex='390';
+    instance.getPane('busApproach').style.pointerEvents='none';
     markerLayer.current=L.layerGroup().addTo(instance);
     const zoomControl=instance.zoomControl.getContainer();
     const alignLocationButton=()=>{
@@ -44,7 +49,7 @@ export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, 
     const observer=new ResizeObserver(()=>{instance.invalidateSize();updateArea();alignLocationButton();});
     observer.observe(host.current);observer.observe(zoomControl);
     alignLocationButton();
-    return ()=>{longPress.destroy();instance.off('movestart zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();instance.remove();};
+    return ()=>{longPress.destroy();instance.off('zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();instance.remove();};
   },[]);
   useEffect(()=>{
     if(!passengerPosition)return;
@@ -111,6 +116,19 @@ export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, 
     }
     return ()=>group.remove();
   },[stops,origin,destination,detail,journey,walking,walks,routeSelected,fullJourney]);
+  useEffect(()=>{
+    if(!approach?.vehicle)return;
+    const v=approach.vehicle;
+    const group=L.layerGroup().addTo(map.current);
+    const expire=Date.parse(v.observed_at)+180000-Date.now();
+    if(!Number.isFinite(expire)||expire<=0){group.remove();return;}
+    if(approach.geometry?.length)L.polyline(approach.geometry,{pane:'busApproach',color:'#a58acb',weight:4,opacity:.55,dashArray:'5 8',interactive:false}).addTo(group);
+    const label=document.createElement('span');
+    label.textContent=approach.label+' · '+v.code+' · veículo '+v.id+' · posição '+new Date(v.observed_at).toLocaleTimeString('pt-BR');
+    L.marker([v.lat,v.lon],{zIndexOffset:900,title:label.textContent,icon:L.divIcon({className:'sp-live-bus',iconSize:[32,32],iconAnchor:[16,16],html:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="16" rx="3"/><path d="M5 11h14M8 19v2M16 19v2"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>'})}).bindTooltip(label).addTo(group);
+    const timer=setTimeout(()=>group.remove(),expire);
+    return()=>{clearTimeout(timer);group.remove();};
+  },[approach]);
   useEffect(()=>{
     if(routeSelected)return;
     if(origin && destination && origin.id!==destination.id) map.current.fitBounds([[origin.lat,origin.lon],[destination.lat,destination.lon]],{padding:[40,55],maxZoom:16,animate:false});

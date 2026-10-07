@@ -1,6 +1,7 @@
 import appIcon from '../../icone.png';
 import {useEffect,useState,useRef,useMemo} from 'react';
 import {api} from './api.js';
+import {useApproachingBus} from './useApproachingBus.js';
 import {locationOrigin} from './location.js';
 import {usePassengerLocation} from './usePassengerLocation.js';
 import {useMapStops} from './useMapStops.js';
@@ -14,7 +15,7 @@ import FavoriteNameDialog from './FavoriteNameDialog.jsx';
 import RemoveFavoriteDialog from './RemoveFavoriteDialog.jsx';
 import CancelTripDialog from './CancelTripDialog.jsx';
 import './sao-paulo.css';
-function initialSession(){try{return readSession(sessionStorage);}catch{return {origin:null,destination:null};}}
+function initialSession(){try{return readSession(sessionStorage,location.search);}catch{return {origin:null,destination:null};}}
 function initialFavorites(){try{return readFavorites(localStorage);}catch{return [];}}
 export default function SaoPaulo(){
   const {resolvedTheme,setTheme}=useTheme();
@@ -26,8 +27,8 @@ export default function SaoPaulo(){
   const [manualOrigin,setManualOrigin]=useState(false);
   const openBoard=()=>{setDestinationSearch(false);setView('navigate');setMode('board');setBoardRequest(n=>n+1);};
   const [center,setCenter]=useState({lat:-23.5505,lon:-46.6333}),[viewport,setViewport]=useState(null);
-  const [view,setView]=useState('navigate'),[mode,setMode]=useState('origin'),[notice,setNotice]=useState('');
-  const [destinationSearch,setDestinationSearch]=useState(false),[searchRole,setSearchRole]=useState('origin'),[journey,setJourney]=useState(null);
+  const [view,setView]=useState('navigate'),[mode,setMode]=useState(()=>session.origin?(session.destination?'map':'destination'):'origin'),[notice,setNotice]=useState('');
+  const [destinationSearch,setDestinationSearch]=useState(false),[searchRole,setSearchRole]=useState(()=>session.origin?'destination':'origin'),[journey,setJourney]=useState(null);
   const [planningStatus,setPlanningStatus]=useState('');
   const routeSelected=!!session.origin&&!!session.destination&&mode!=='destination'&&mode!=='origin';
   const {stops,loading:searching,error:searchError}=useMapStops(routeSelected?null:viewport);
@@ -38,6 +39,13 @@ export default function SaoPaulo(){
   const [mapFocus,setMapFocus]=useState(0);
   const [passengerFocus,setPassengerFocus]=useState(null);
   const leg=selectedLeg===null?null:journey?.legs[selectedLeg];
+  const trackingLeg=routeSelected?(mode==='board'?journey?.legs[0]:(leg||journey?.legs[0])):null;
+  const boardingWalkMinutes=(journey?.walks||walks).filter(w=>w.accessType==='boarding').reduce((sum,w)=>sum+(Number(w.duration_minutes)||0),0);
+  const trackingIndex=journey?.legs.indexOf(trackingLeg)??0;
+  const transferMinutes=(journey?.walks||walks).filter(w=>w.accessType==='transfer'&&w.before_leg===trackingIndex).reduce((sum,w)=>sum+(Number(w.duration_minutes)||0),0);
+  const previousArrival=Date.parse(journey?.legs[trackingIndex-1]?.arrival);
+  const earliestBoarding=trackingIndex>0&&Number.isFinite(previousArrival)?new Date(previousArrival+(transferMinutes+2)*60000).toISOString():null;
+  const liveBus=useApproachingBus(trackingLeg,view==='navigate',boardingWalkMinutes,earliestBoarding);
   const shownJourney=useMemo(()=>leg?{...journey,legs:[leg]}:journey,[journey,leg]);
   const shownWalks=useMemo(()=>!leg?walks:walks.filter(path=>(path.accessType==='boarding'&&selectedLeg===0)||(path.accessType==='destination'&&selectedLeg===journey.legs.length-1)||(path.accessType==='transfer'&&(path.before_leg===selectedLeg||path.before_leg===selectedLeg+1))),[leg,walks,selectedLeg,journey]);
   const itinerary=journey?.legs.map((l,i)=>`${l.trip_id}:${l.origin.id}:${i<journey.legs.length-1?l.destination.id:"final"}`).join('|');
@@ -69,6 +77,9 @@ export default function SaoPaulo(){
   },[session]);
   useEffect(()=>{
     const id=new URLSearchParams(location.search).get('stop');if(!id)return;
+    // A URL kept by the application is not a new QR scan. Preserve a
+    // restored boarding point, including manually chosen coordinates.
+    if(id===session.origin?.id){setCenter({lat:session.origin.lat,lon:session.origin.lon});return;}
     const abort=new AbortController();qrRequest.current=abort;
     api('sptrans/stops',{id},abort.signal).then(data=>{
       if(abort.signal.aborted)return;
@@ -94,7 +105,7 @@ export default function SaoPaulo(){
     if(!passengerPosition)return;
     setManualOrigin(false);setSession(s=>({...s,origin:locationOrigin(passengerPosition)}));
     setJourney(null);setMode(destination?'board':'destination');setNotice('');
-    history.replaceState(null,'','/sao-paulo/');
+    history.replaceState(null,'','/');
   };
   const onArea=point=>{setCenter({lat:point.lat,lon:point.lon});setViewport(previous=>previous&&Object.keys(point).every(key=>previous[key]===point[key])?previous:point);};
   const selectStop=async(stop,role)=>{
@@ -105,8 +116,8 @@ export default function SaoPaulo(){
     setStreetView(null);qrRequest.current?.abort();setJourney(null);setView('navigate');
     if(role==='origin'){
       setManualOrigin(true);setSession(s=>({...s,origin:{...stop,manualBoarding:true}}));
-      history.replaceState(null,'','/sao-paulo/?stop='+encodeURIComponent(stop.id));
-    }else {setSession(s=>({...s,origin:boarding,destination:stop}));history.replaceState(null,'',boarding.useLocation?'/sao-paulo/':'/sao-paulo/?stop='+encodeURIComponent(boarding.id));}
+      history.replaceState(null,'','/?stop='+encodeURIComponent(stop.id));
+    }else {setSession(s=>({...s,origin:boarding,destination:stop}));history.replaceState(null,'',boarding.useLocation?'/':'/?stop='+encodeURIComponent(boarding.id));}
     setMode(role==='origin'&&!destination?'destination':'board');
   };
   const selectMapPoint=async point=>{
@@ -124,7 +135,7 @@ export default function SaoPaulo(){
         addressCoordinates:point,addressDistance:data.distance_meters},role);
     }catch(error){if(!abort.signal.aborted)setNotice(error.message);}
   };
-  const choose=stop=>{if(routeSelected){openBoard();return;}selectStop(stop,mode==='destination'&&origin?'destination':'origin');};
+  const choose=stop=>{if(routeSelected){openBoard();return;}selectStop(stop,!origin||mode==='origin'?'origin':'destination');};
   const cancelTrip=()=>{
     const boarding=origin||(passengerPosition?locationOrigin(passengerPosition):null);
     const focus=destination?.addressCoordinates||destination||passengerPosition||boarding;
@@ -138,7 +149,7 @@ export default function SaoPaulo(){
     setStreetView(null);setSession({origin:boarding,destination:null});setJourney(null);
     setMode(boarding?'destination':'origin');setSearchRole(boarding?'destination':'origin');
     setDestinationSearch(false);setView('navigate');setNotice('');
-    history.replaceState(null,'',boarding&&!boarding.useLocation?'/sao-paulo/?stop='+encodeURIComponent(boarding.id):'/sao-paulo/');
+    history.replaceState(null,'',boarding&&!boarding.useLocation?'/?stop='+encodeURIComponent(boarding.id):'/');
   };
   const updateFavorites=next=>{
     setFavorites(next);try{if(!save(localStorage,favoritesKey,next))setNotice('Não foi possível salvar os favoritos neste navegador.');}catch{setNotice('Armazenamento de favoritos indisponível.');}
@@ -171,7 +182,7 @@ export default function SaoPaulo(){
     {locationError&&<div role="status" className="passenger-notice">{locationError}</div>}
     {notice&&<div role="status" className="passenger-notice">{notice}<button onClick={()=>setNotice('')} aria-label="Fechar aviso">×</button></div>}
     {view==='navigate'&&<div className="sp-navigation"><section className="sp-map-panel">
-      <SaoPauloMap passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={streetView?streetView.stops:stops} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
+      <SaoPauloMap approach={liveBus?.approach} passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={streetView?streetView.stops:stops} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
       {streetView&&<div className="sp-schematic-note">{streetView.label} · {streetView.stops.length} {streetView.match_method==='nearby'?'paradas próximas (até 400 m)':'paradas cadastradas'}{streetView.match_method==='nearby'&&<small> · Podem incluir ruas vizinhas.</small>} <button onClick={()=>setStreetView(null)}>Mostrar todos os pontos</button></div>}
       {routeSelected&&planningStatus&&<div className="sp-map-status" role="status">{planningStatus}</div>}
       {origin&&<div className="sp-schematic-note sp-route-legend">{!origin.useLocation||destination?<button className="icon-button" aria-label="Horários de embarque" title="Horários de embarque" onClick={openBoard}><Icon name="list"/></button>:null}<button className="primary" onClick={changeOrigin}>Alterar embarque</button>{!origin.useLocation&&passengerPosition&&<button className="text-button" onClick={useCurrentOrigin}>Usar minha localização</button>}{journey&&<><div className="sp-route-controls"><label>Trecho <select aria-label="Trecho exibido no mapa" value={leg?selectedLeg:'all'} onChange={e=>setSelectedLeg(e.target.value==='all'?null:Number(e.target.value))}><option value="all">Viagem completa</option>{journey.legs.map((l,i)=><option key={i} value={i}>{String.fromCharCode(65+i)} → {i===journey.legs.length-1?'Destino':String.fromCharCode(66+i)} · {l.code} · {l.headsign}</option>)}</select></label><div className="sp-route-keys"><span>Ônibus</span><span className="sp-walk-key">A pé</span></div></div>{journey.legs.some(l=>!l.geometry?.length)&&<small>Traçado GTFS indisponível em um trecho.</small>}{walkWarning&&<small>{walkWarning}</small>}</>}<button className="icon-button sp-map-cancel" aria-label="Cancelar viagem" title="Cancelar viagem" onClick={()=>setCancelRequested(true)}><Icon name="close"/></button></div>}
@@ -188,20 +199,20 @@ export default function SaoPaulo(){
       <p>O mapa mostra o trajeto dos ônibus a partir da geometria fornecida no GTFS. A origem recebe a letra A, as baldeações recebem B, C e assim por diante, e o destino final é indicado por uma estrela. É possível visualizar a viagem completa ou selecionar apenas um trecho, mantendo a identificação dos pontos.</p>
       <p>As linhas contínuas azuis representam os trechos de ônibus. Os percursos a pé disponíveis aparecem em rosa tracejado. A busca de endereços utiliza Photon e OpenStreetMap, e os caminhos de pedestres são consultados no serviço de rotas a pé FOSSGIS/OSRM. Esses recursos complementam o cadastro da SPTrans.</p>
       <h3>Horários programados e informações em tempo real</h3>
-      <p>A integração com a API Olho Vivo foi desenvolvida para consultar previsões de chegada e posições de veículos. As previsões são apresentadas quando o serviço está disponível e a linha e a parada podem ser identificadas com segurança. A lista de ônibus é atualizada periodicamente enquanto está aberta.</p>
+      <p>A integração com a API Olho Vivo foi desenvolvida para consultar previsões de chegada e posições de veículos. As previsões são apresentadas quando o serviço está disponível e a linha e a parada podem ser identificadas com segurança. As posições dos veículos e as previsões de embarque são consultadas a cada 15 segundos. O mapa destaca o ônibus que se aproxima e desenha seu percurso até o embarque em roxo, abaixo da rota selecionada. Quando não há previsão compatível com a caminhada até o ponto, a interface informa essa condição.</p>
       <p>Quando não há informações em tempo real, o PaP apresenta estimativas baseadas nos horários e intervalos programados. Esses valores não indicam a posição atual do ônibus e podem variar com o trânsito e a operação. A falta de uma previsão não significa que a linha deixou de circular, e o horário de uma baldeação não garante a conexão.</p>
       <h3>Busca, favoritos e acesso por QR Code</h3>
       <p>Ao buscar uma rua sem número, o mapa exibe suas paradas identificadas no cadastro. Se o nome não for encontrado, a busca pode mostrar pontos próximos ao local selecionado, com essa condição indicada na tela. Com um endereço completo, a aplicação sugere uma parada próxima e verifica o sentido da viagem.</p>
       <p>Os pontos favoritos podem receber nomes como Casa, Trabalho ou Faculdade e ser usados na escolha do destino. Eles ficam salvos neste navegador. O QR Code de uma parada abre a aplicação com o embarque identificado, facilitando o início da consulta pelo celular.</p>
       <h3>Limites do protótipo</h3>
       <p>A busca tem limites de tempo e de verificações para encerrar o cálculo. As alternativas exibidas são as rotas verificadas até aquele momento; o encerramento não garante que a mais rápida de toda a rede tenha sido encontrada. Percursos a pé que não puderem ser verificados ficam fora das alternativas. Reiniciar a busca permite tentar novamente.</p>
-      <p>Depois da consulta, as rotas permanecem disponíveis sem atualização automática. Para consultar novamente com o horário e a posição atuais, use “Reiniciar busca”. A lista de próximos ônibus sem destino selecionado continua sendo atualizada periodicamente.</p>
+      <p>Depois da consulta, o planejamento das rotas permanece disponível sem recálculo automático; as posições e previsões continuam sendo atualizadas. Para consultar novamente com o horário e a posição atuais, use “Reiniciar busca”. A lista de próximos ônibus sem destino selecionado continua sendo atualizada periodicamente.</p>
       <p>O planejamento depende da versão do cadastro importado e da disponibilidade dos serviços consultados. Paradas, trajetos e horários podem mudar. As alternativas consideram caminhadas de até 1 km no embarque, no desembarque e nas baldeações, a 4 km/h. Os percursos a pé precisam estar disponíveis no serviço de rotas. Integrações tarifárias não são calculadas. Confira a sinalização no local e as informações da operação antes de embarcar.</p>
       <p>O PaP é um projeto acadêmico independente, não um aplicativo oficial da SPTrans. O uso dos dados públicos não representa parceria ou validação institucional.</p>
       <a href="https://www.sptrans.com.br/desenvolvedores/" target="_blank" rel="noreferrer">Dados e recursos para desenvolvedores da SPTrans</a>
     </section>}
 
-    <BoardDialog passengerPosition={passengerPosition} onChooseJourney={()=>setMapFocus(value=>value+1)} requestId={boardRequest} active={!!origin&&mode!=='destination'&&mode!=='origin'&&(!origin.useLocation||!!destination)} onStatus={setPlanningStatus} open={view==='navigate'&&mode==='board'&&!destinationSearch} origin={origin} destination={destination} onClose={()=>{setSelectedLeg(null);setMode(destination?'map':origin?.useLocation?'destination':'origin');}} onDestination={()=>{setJourney(null);setMode('destination');setView(favorites.length?'favorites':'navigate');}} onCancel={()=>setCancelRequested(true)} onFavorite={favorite} isFavorite={favorites.some(s=>s.id===origin?.id)} onJourney={setJourney}/>
+    <BoardDialog boardingLive={liveBus} passengerPosition={passengerPosition} onChooseJourney={()=>setMapFocus(value=>value+1)} requestId={boardRequest} active={!!origin&&mode!=='destination'&&mode!=='origin'&&(!origin.useLocation||!!destination)} onStatus={setPlanningStatus} open={view==='navigate'&&mode==='board'&&!destinationSearch} origin={origin} destination={destination} onClose={()=>{setSelectedLeg(null);setMode(destination?'map':origin?'destination':'origin');}} onDestination={()=>{setJourney(null);setMode('destination');setView(favorites.length?'favorites':'navigate');}} onCancel={()=>setCancelRequested(true)} onFavorite={favorite} isFavorite={favorites.some(s=>s.id===origin?.id)} onJourney={setJourney}/>
     <DestinationSearch origin={origin?.useLocation?null:origin} onStreet={data=>{setStreetView(data);setJourney(null);setView('navigate');setMode(searchRole);}} open={destinationSearch} role={searchRole} onClose={()=>setDestinationSearch(false)} onSelect={stop=>selectStop(stop,searchRole)}/>
     <CancelTripDialog open={cancelRequested} onConfirm={cancelTrip} onClose={()=>setCancelRequested(false)}/>
     <RemoveFavoriteDialog stop={removingFavorite} onConfirm={removeFavorite} onClose={()=>setRemovingFavorite(null)}/>

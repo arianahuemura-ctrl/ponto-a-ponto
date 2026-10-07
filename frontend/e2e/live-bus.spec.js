@@ -1,0 +1,62 @@
+import {test,expect} from '@playwright/test';
+for(const width of [390,1366]) test(`ônibus atualiza em 15s sem recalcular nem mover mapa em ${width}px`,async({page})=>{
+  await page.setViewportSize({width,height:844});
+  const origin={id:'1',name:'Origem',lat:-23.55,lon:-46.64},destination={id:'2',name:'Destino',lat:-23.55,lon:-46.63};
+  const journey={id:'J',duration_minutes:20,transfers:0,walking_meters:0,walking_minutes:0,arrival:new Date().toISOString(),walks:[{accessType:'boarding',duration_minutes:13.5,distance_meters:900}],legs:[{trip_id:'T',code:'1000-10',headsign:'Destino',origin,destination,boarding_index:1,geometry:[[-23.55,-46.64],[-23.55,-46.63]],departure:new Date().toISOString()}]};
+  await page.addInitScript(({origin,destination})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin,destination})),{origin,destination});
+  await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
+  await page.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
+  await page.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops:[]}}));
+  let boards=0,positions=0;
+  await page.route('**/api/sptrans/board/**',r=>{boards++;return r.fulfill({json:{lines:[],journeys:[journey],selected_journey:'J',complete:true}});});
+  await page.route('**/api/sptrans/trips/**',r=>{
+    positions++;
+    expect(Number(new URL(r.request().url()).searchParams.get('min_wait_seconds'))).toBe(810);
+    const time=new Date(Date.now()+20*60000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
+    return r.fulfill({json:{line:{arrivals:positions===1?[{time,observed_at:new Date().toISOString()}]:[]},approach:{vehicle:{id:'123',code:'1000-10',lat:-23.55,lon:-46.641+positions*.0001,observed_at:new Date().toISOString()},geometry:[[-23.55,-46.641],[-23.55,-46.64]],label:'Ônibus se aproximando'}}});
+  });
+  await page.goto('/?stop=1');
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  await expect(page.locator('.sp-live-bus')).toHaveCount(1);
+  await expect(page.locator('.sp-boarding-countdown')).toContainText('Embarque em 20 min');
+  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
+  await expect(page.locator('.leaflet-busApproach-pane path')).toHaveCount(1);
+  expect(await page.locator('.leaflet-busApproach-pane').evaluate(el=>getComputedStyle(el).zIndex)).toBe('390');
+  const before=await page.locator('.sp-live-bus').getAttribute('style'),center=await page.locator('.leaflet-map-pane').getAttribute('style');
+  const initial=positions, searches=boards;
+  await expect.poll(()=>positions,{timeout:18000}).toBeGreaterThan(initial);
+  expect(await page.locator('.sp-live-bus').getAttribute('style')).not.toBe(before);
+  expect(await page.locator('.leaflet-map-pane').getAttribute('style')).toBe(center);
+  expect(boards).toBe(searches);
+  await expect(page.locator('.sp-boarding-countdown')).toHaveCount(0);
+  await page.getByRole('button',{name:'Alterar embarque',exact:true}).click();
+  await expect(page.locator('.sp-live-bus')).toHaveCount(0);
+});
+
+test('cada alternativa mostra sua previsão e respeita sua própria caminhada',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  const origin={id:'1',name:'Origem',lat:-23.55,lon:-46.64},destination={id:'2',name:'Destino',lat:-23.55,lon:-46.63};
+  await page.addInitScript(({origin,destination})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin,destination})),{origin,destination});
+  await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
+  await page.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
+  await page.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops:[]}}));
+  const journeys=[0,1].map(i=>({id:'J'+i,duration_minutes:20+i,transfers:0,walks:[{accessType:'boarding',duration_minutes:i?13.5:0,distance_meters:i?900:0}],legs:[{trip_id:'T'+i,code:'100'+i+'-10',origin:i?{...origin,id:'3'}:origin,destination,boarding_index:1,geometry:[[-23.55,-46.64],[-23.55,-46.63]]}]}));
+  await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys,selected_journey:'J0',complete:true}}));
+  const queries=[];
+  await page.route('**/api/sptrans/trips/**',r=>{
+    const url=new URL(r.request().url()),second=url.pathname.includes('T1');
+    queries.push({origin:url.searchParams.get('origin'),wait:Number(url.searchParams.get('min_wait_seconds'))});
+    const arrival=minutes=>({time:new Date(Date.now()+minutes*60000).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}),observed_at:new Date().toISOString()});
+    return r.fulfill({json:{line:{arrivals:second?[arrival(3),arrival(20)]:[arrival(5)]}}});
+  });
+  await page.goto('/?stop=1');
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  const cards=page.locator('.sp-route-option');
+  await expect(cards.nth(0)).toContainText('Embarque em 5 min');
+  await expect(cards.nth(1)).toContainText('Embarque em 20 min');
+  expect(queries).toEqual(expect.arrayContaining([{origin:'1',wait:0},{origin:'3',wait:810}]));
+  await cards.nth(1).click();
+  await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  await expect(cards.nth(0)).toContainText('Embarque em 5 min');
+  await expect(cards.nth(1)).toContainText('Embarque em 20 min');
+});
