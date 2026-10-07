@@ -1,0 +1,9 @@
+arquivo_recebido,imagem_tex,original_preservado,tamanho_original,recorte_esquerda_topo_direita_base,tamanho_final,sha256_original
+8,pap-01-embarque.png,pap-01-embarque-original.png,"(754, 1252)","(15, 205, 738, 1054)","(720, 845)",e3674714c82908c82c744df4ea4d2513c177bd893f93a02e0bf713dc1fba5122
+7,pap-02-informacoes.png,pap-02-informacoes-original.png,"(752, 1253)","(17, 66, 738, 570)","(720, 503)",d0c8db10e175fa3ade778d78659fea995091ced44a439932536f6d759c40317b
+6,pap-03-destino.png,pap-03-destino-original.png,"(751, 1250)","(0, 90, 751, 375)","(720, 273)",cc4504814eed5c3ecdbf9bbd14499f8b48ba7d54ee4b1164ecc6f7f38aa3e5d3
+5,pap-04-alternativas.png,pap-04-alternativas-original.png,"(752, 1253)","(15, 82, 738, 1174)","(720, 1087)",80a22ce40e7a1ccec332340a9cc8573ecb100af9bbb6b11aa76e630a849dab92
+4,pap-05-viagem-completa.png,pap-05-viagem-completa-original.png,"(751, 1253)","(0, 90, 751, 1185)","(720, 1050)",787343a51dd6dcf2d5ed7572c4c75efe7280cfaa3be1c5ea9a5c3b6c66ab894c
+3,pap-06-ultimo-trecho.png,pap-06-ultimo-trecho-original.png,"(747, 1251)","(0, 90, 747, 1184)","(720, 1054)",0d476bea49be227fe8cfe18592662a7d62848c2ba81587b06368e6520ca9355a
+2,pap-07-favoritos.png,pap-07-favoritos-original.png,"(750, 1254)","(0, 90, 750, 303)","(720, 204)",dbab207b1998c7b935e4d88db59a26d258cf6d4086e278ed5431a3d423c7efc4
+substituição fornecida pelo usuário em 2026-10-07,pap-08-confirmacao.png,"pap-08-confirmacao.png (arquivo fornecido, sem novo recorte)","(641, 354)",não aplicado à substituição,"(641, 354)",62274e1223c30b91932b903977890b721c6e65d61e2ed1bd56abc879650401e3

@@ -1,0 +1,14 @@
+Validação técnica — 7 de outubro de 2026
+Branch: sptrans
+Commit da aplicação: 79dd7989dcdc26ab5ef8667b3d96a225a39505ce
+
+Backend: 154 testes aprovados. Executados os módulos transit.test* explicitamente, via Django call_command('test', ...), com banco descartável. Descoberta automática a partir do diretório pai importa backend.transit em vez de transit e não deve ser usada.
+Frontend: npm test — 26 testes aprovados.
+Navegador: PATH=/tmp/pap-ui-venv/bin:$PATH npm run test:e2e — 64 testes aprovados em 2,1 min. Inclui cenários históricos, testes São Paulo, emulação móvel e desktop, dados controlados e APIs interceptadas.
+Build: npm run build (executado pelo Playwright) — aprovado.
+git diff --check — aprovado antes do commit.
+
+As capturas de atualização-tempo-real.json usam a aplicação real e respostas reais dos serviços; não reutilizam as respostas simuladas dos testes. A posição do passageiro e os nomes Casa/Trabalho são exemplos. Nenhuma avaliação em aparelho físico ou com passageiros foi realizada nesta etapa.
+
+Revisão complementar: 4992027dd0b0ee5eaf7acbac1a0e73f48ae769d8
+Novo comportamento de clique externo: 2 testes em board-backdrop.spec.js aprovados, desktop e emulação móvel; 3 testes de route-lifecycle.spec.js também aprovados. Build aprovado. Sem alterações no backend nesta revisão. Capturas continuam sendo da revisão 79dd798.

@@ -1,0 +1,20 @@
+\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4cm,minimum height=.85cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\footnotesize,fill=white,align=center}]
+\node[circle,fill,minimum size=2.5mm,inner sep=0pt] (start) at (0,1.2) {};
+\node[box] (a) at (0,0) {Selecionando embarque};
+\node[box] (b) at (0,-2) {Consultando próximos ônibus};
+\node[box] (c) at (0,-4) {Selecionando destino};
+\node[box] (e) at (0,-6) {Consultando alternativas};
+\node[box] (f) at (0,-8) {Visualizando rota no mapa};
+\draw[arr] (start)--(a);
+\draw[arr] (start.west)--++(-3.3,0)|-node[pos=.65,lab,left]{localização\\conhecida}(c.west);
+\draw[arr] (a)--node[lab,right]{embarque definido}(b);
+\draw[arr] (b)--node[lab,right]{selecionar destino}(c);
+\draw[arr] (c)--node[lab,right]{destino definido}(e);
+\draw[arr] (e)--node[lab,right]{selecionar rota}(f);
+\draw[arr] (f.west)--++(-.8,0)|-node[pos=.25,lab,left]{horários}(e.west);
+\draw[arr] (f.west)--++(-2,0)|-node[pos=.25,lab,left]{nova seleção\\de destino}(c.west);
+\node[box] (conf) at (6,-5.7) {Confirmando cancelamento};
+\draw[arr] (f.east)-|node[pos=.25,lab,below]{cancelar viagem}(conf.south);
+\draw[arr] (conf.west)--++(-.6,0)|-node[pos=.7,lab,above]{continuar viagem}(f.east);
+\draw[arr] (conf.east)--++(.5,0)|-node[pos=.7,lab,above]{confirmar: manter embarque}(c.east);
+\end{tikzpicture}

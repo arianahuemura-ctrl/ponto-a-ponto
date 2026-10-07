@@ -1,0 +1,267 @@
+{
+  "stops": [
+    {
+      "id": "1211381",
+      "name": "Parada Exclusiva",
+      "address": "R. Camargo, 305",
+      "lat": -23.571255,
+      "lon": -46.709227,
+      "code": "1211381",
+      "directions": [
+        {
+          "bearing": 19,
+          "code": "477P-10",
+          "headsign": "Ipiranga",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "7002-10",
+          "headsign": "Hosp. Das Clínicas",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "714C-10",
+          "headsign": "Paulista",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "771P-10",
+          "headsign": "Term. Pinheiros",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "778J-41",
+          "headsign": "Metrô Barra Funda",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "809A-10",
+          "headsign": "Term. Pinheiros",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "809D-10",
+          "headsign": "Term. Pinheiros",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "809L-10",
+          "headsign": "Lapa",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N706-11",
+          "headsign": "Term. Pinheiros",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N706-11",
+          "headsign": "Term. Campo Limpo",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N801-11",
+          "headsign": "Term. Pq. D. Pedro Ii",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N801-11",
+          "headsign": "Metrô Butantã",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N835-11",
+          "headsign": "Jd. João Xxiii",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N836-11",
+          "headsign": "Pq. Continental",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 19,
+          "code": "N839-11",
+          "headsign": "Metrô Vl. Mariana",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available"
+    },
+    {
+      "id": "600012585",
+      "name": "R. Guaiaúna, 419",
+      "address": "Ref.: Rua Doutor Ismael Dias",
+      "lat": -23.530739,
+      "lon": -46.549921,
+      "code": "600012585",
+      "directions": [
+        {
+          "bearing": 307,
+          "code": "2713-10",
+          "headsign": "Chác. Bela Vista",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2726-10",
+          "headsign": "Limoeiro",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2728-10",
+          "headsign": "Jd. Do Castelo",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2755-10",
+          "headsign": "Guaianases",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3206-10",
+          "headsign": "Conj. Chaparral",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3901-10",
+          "headsign": "Jd. Danfer",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "403A-10",
+          "headsign": "Term. Penha",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "N303-11",
+          "headsign": "Term. Aricanduva",
+          "source": "shape",
+          "approximate": false,
+          "kind": "arrival"
+        }
+      ],
+      "direction_status": "available"
+    },
+    {
+      "id": "600012584",
+      "name": "R. Guaiaúna, 149",
+      "address": "Ref.: R Recife/ Tr Ascendino Lisboa",
+      "lat": -23.529715,
+      "lon": -46.551613,
+      "code": "600012584",
+      "directions": [
+        {
+          "bearing": 287,
+          "code": "2726-10",
+          "headsign": "Limoeiro",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 287,
+          "code": "2728-10",
+          "headsign": "Jd. Do Castelo",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 287,
+          "code": "2755-10",
+          "headsign": "Guaianases",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 287,
+          "code": "3901-10",
+          "headsign": "Jd. Danfer",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 287,
+          "code": "403A-10",
+          "headsign": "Term. Penha",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available"
+    }
+  ],
+  "options": [
+    "Viagem completa",
+    "A → B · 702C-10 · Metrô Belém",
+    "B → Destino · 2590-10 · União De Vl. Nova"
+  ],
+  "session": "{\"maxTransfers\":2,\"origin\":{\"id\":\"120011454\",\"name\":\"Local selecionado no mapa\",\"address\":\"Ref.: R Miragaia/ R Martins\",\"lat\":-23.574515,\"lon\":-46.708192,\"code\":\"120011454\",\"directions\":[{\"bearing\":114,\"code\":\"7545-10\",\"headsign\":\"Pça. Ramos De Azevedo\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":114,\"code\":\"7545-21\",\"headsign\":\"Pça. Ramos De Azevedo\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":114,\"code\":\"778R-10\",\"headsign\":\"Term. Princ. Isabel\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":114,\"code\":\"7903-10\",\"headsign\":\"Pça. Ramos De Azevedo\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":114,\"code\":\"8610-10\",\"headsign\":\"Term. Bandeira\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":114,\"code\":\"N842-11\",\"headsign\":\"Cohab Raposo Tavares\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"}],\"direction_status\":\"available\",\"destinationAddress\":\"Local selecionado no mapa\",\"addressCoordinates\":{\"lat\":-23.57466202747014,\"lon\":-46.70800969627133},\"addressDistance\":25,\"manualBoarding\":true},\"destination\":{\"id\":\"600012585\",\"name\":\"R. Guaiaúna, 419\",\"address\":\"Ref.: Rua Doutor Ismael Dias\",\"lat\":-23.530739,\"lon\":-46.549921,\"code\":\"600012585\",\"directions\":[{\"bearing\":307,\"code\":\"2713-10\",\"headsign\":\"Chác. Bela Vista\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"2726-10\",\"headsign\":\"Limoeiro\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"2728-10\",\"headsign\":\"Jd. Do Castelo\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"2755-10\",\"headsign\":\"Guaianases\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"3206-10\",\"headsign\":\"Conj. Chaparral\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"3901-10\",\"headsign\":\"Jd. Danfer\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"403A-10\",\"headsign\":\"Term. Penha\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"departure\"},{\"bearing\":307,\"code\":\"N303-11\",\"headsign\":\"Term. Aricanduva\",\"source\":\"shape\",\"approximate\":false,\"kind\":\"arrival\"}],\"direction_status\":\"available\",\"favoriteLabel\":\"Guaiaúna, 419\"}}"
+}

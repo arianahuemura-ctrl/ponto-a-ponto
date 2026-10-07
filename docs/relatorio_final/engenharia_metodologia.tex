@@ -1,0 +1,24 @@
+A documentação de engenharia de software foi organizada retrospectivamente nesta revisão, a partir do código existente. Os requisitos da Tabela~\ref{tab:requisitos-pap} sintetizam comportamentos e qualidades pretendidos; não se afirma que constituíam uma especificação formal aprovada antes da implementação. A Figura~\ref{fig:arquitetura-pap} apresenta as responsabilidades dos componentes. Diagramas comportamentais e a rastreabilidade detalhada estão no Apêndice~\ref{ap:engenharia}.
+\begin{table}[H]\centering\small
+\caption{Síntese dos requisitos da extensão São Paulo.}\label{tab:requisitos-pap}
+\begin{tabular}{p{1.5cm}p{11.5cm}}\hline
+ID & Comportamento ou qualidade pretendida\\\hline
+RF01 & Identificar o embarque pela localização, pelo QR Code ou pela seleção manual.\\
+RF02 & Consultar partidas e distinguir previsão de estimativa programada.\\
+RF03 & Planejar por destino com caminhada, espera e baldeações, aceitando coordenadas por toque prolongado.\\
+RF04 & Comparar alternativas e abrir a rota ou um trecho no mapa.\\
+RF05 & Salvar, renomear e remover favoritos locais, confirmando a remoção.\\
+RF06 & Cancelar mediante confirmação, preservando embarque e favoritos; permitir novo destino.\\
+RF07 & Acompanhar posição do ônibus e previsão de embarque compatível com a caminhada, com atualização a cada 15 segundos.\\
+RQ01 & Informar progresso sem perder a seleção ou redefinir o zoom.\\
+RQ02 & Reduzir esforço de interação preservando compreensão e controle.\\\hline
+\end{tabular}\fonte{Síntese do grupo baseada na implementação e nos objetivos de IHC.}
+\end{table}
+
+\begin{figure}[H]
+\centering\input{diagramas/arquitetura.tex}
+\caption{Visão de arquitetura da extensão São Paulo, inspirada no nível de contêineres do C4.}\label{fig:arquitetura-pap}
+\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\end{figure}
+
+A interface consome a API do backend e o mapa-base; os favoritos permanecem no navegador. O backend consulta o índice GTFS e serviços externos, sem transferir credenciais operacionais para a interface. As setas resumem dependências lógicas e não descrevem uma topologia de implantação em produção. A integração externa está sujeita a indisponibilidade, que deve ser comunicada sem transformar estimativas programadas em previsões ao vivo.

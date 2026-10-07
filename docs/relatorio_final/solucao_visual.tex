@@ -1,0 +1,109 @@
+A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
+
+\begin{figure}[H]
+\centering\input{diagramas/fluxo_geral.tex}
+\caption{Fluxo geral de uso do PaP: da identificação do embarque à visualização da viagem.}\label{fig:fluxo-pap}
+\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\end{figure}
+
+\clearpage
+\noindent\textbf{Telas da solução final}
+
+A solução atual corresponde à revisão \texttt{4992027} da branch \texttt{sptrans}. As telas foram produzidas na revisão \texttt{79dd798}, capturada em 7 de outubro de 2026 após a criação desse commit. A revisão \texttt{4992027} acrescenta clique fora do painel para retornar ao mapa e preserva a aparência dos estados apresentados. Todas as capturas da interface foram renovadas no tema escuro, em Chromium com emulação móvel de 430 por 932 pixels e densidade 2. A Figura~\ref{fig:print-02-informacoes} permanece uma ilustração conceitual gerada por inteligência artificial, e não uma captura nem fotografia. Foi utilizada uma posição simulada do passageiro na região do Butantã, com favoritos ilustrativos e respostas efetivamente obtidas da aplicação local, do cadastro GTFS e dos serviços externos disponíveis, sem substituição manual por respostas de teste. Os enquadramentos dos pop-ups preservam margens do mapa. Os registros de horário, revisão, sessão e integridade dos arquivos constam de \nolinkurl{capturas/atualizacao-tempo-real.json} e \nolinkurl{capturas/registro.csv}. Os cenários retomam a Rua Guaiaúna, o destino livre, o controle do embarque e o acompanhamento operacional. Emulação não equivale a teste em aparelho físico; os registros representam instantes distintos da sessão.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.80\textwidth,height=0.50\textheight,keepaspectratio]{pap-01-embarque.png}
+\caption{Consulta dos próximos ônibus com embarque identificado.}\label{fig:print-01-embarque}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+A consulta foi aberta pelo endereço local da Parada Exclusiva, código 1211381, na região do Butantã. O painel apresenta as linhas e distingue os horários programados das previsões quando disponíveis. Quando não há previsão operacional, as frequências programadas são apresentadas como ``A cada N min, das HH:mm às HH:mm'', agrupando faixas consecutivas de mesma frequência para evitar repetição. A abertura pelo endereço do ponto reproduz o contexto de entrada do QR Code, sem leitura física pela câmera.
+\clearpage
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\node[inner sep=0] (ilustracao) {\includegraphics[width=0.80\textwidth,height=0.39\textheight,keepaspectratio]{pap-02-informacoes.jpg}};
+\node[anchor=north,fill=yellow!90!white,text=black,align=center,font=\sffamily\bfseries\scriptsize,inner sep=4pt] at (ilustracao.north) {PENDENTE: substituir por fotografia real};
+\end{tikzpicture}
+\caption{Ilustração conceitual da instalação de uma placa com QR Code do PaP em um ponto de ônibus.}\label{fig:print-02-informacoes}
+\fonte{Ilustração gerada por inteligência artificial, a partir da identidade visual do PaP e da tela da parada 1211381, 7 out. 2026.}
+\end{figure}
+A ilustração apresenta uma proposta de instalação da placa do PaP no contexto da Parada Exclusiva (1211381), na Rua Camargo, 305, Butantã, com a linha 7002-10 ao fundo. A ambientação é ilustrativa e não constitui registro de instalação física nem reprodução fotográfica do local. O QR Code da tela de referência utiliza um endereço local de desenvolvimento; o código representado na ilustração não foi validado para leitura.
+\begin{figure}[H]\centering
+\includegraphics[width=0.80\textwidth,height=0.23\textheight,keepaspectratio]{pap-03-destino.png}
+\caption{Seleção do destino por favorito ou busca no mapa.}\label{fig:print-03-destino}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+Os favoritos Casa, Trabalho e UNIVESP exemplificam nomes personalizados para pontos distantes, nas regiões do Butantã, da Avenida Paulista e do Tatuapé. Casa e Trabalho são rótulos ilustrativos; UNIVESP identifica a parada Metrô Carrão -- Parada 1 (820012501), próxima ao polo Carrão, na Rua Monte Serrat, 230. O passageiro pode escolher um deles ou retornar ao mapa para selecionar uma parada ou manter o toque sobre outro local.
+\clearpage
+\begin{figure}[H]\centering
+\includegraphics[width=0.80\textwidth,height=0.76\textheight,keepaspectratio]{pap-04-alternativas.png}
+\caption{Alternativas de viagem e horários estimados de chegada.}\label{fig:print-04-alternativas}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+A consulta na região do Butantã com destino à R. Guaiaúna, 419 (600012585), apresenta duas alternativas calculadas naquele instante: 92,2 minutos com duas baldeações e 106,2 minutos com uma. A primeira inclui caminhada final de 602 m. Além da duração e da chegada estimada do planejamento, cada alternativa apresenta sua previsão operacional de embarque: 18 e 19 minutos no instante capturado. Esses valores não são horários fixos de serviço. Os detalhes dos trechos são acessados no mapa. O resultado depende do horário e das conexões verificadas; não demonstra enumeração de toda a rede.
+\clearpage
+As Figuras~\ref{fig:print-05-viagem-completa} e~\ref{fig:print-06-ultimo-trecho} relacionam o percurso completo e o último trecho selecionado. A representação distingue ônibus em linha contínua e caminhada tracejada; o seletor permite alternar a abrangência do mapa.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.64\textwidth,height=0.70\textheight,keepaspectratio]{pap-05-viagem-completa.jpg}
+\caption{Viagem completa com origem A, baldeações B/C e destino.}\label{fig:print-05-viagem-completa}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]\centering
+\includegraphics[width=0.64\textwidth,height=0.70\textheight,keepaspectratio]{pap-06-ultimo-trecho.jpg}
+\caption{Detalhe do último trecho e da caminhada final na região da Guaiaúna.}\label{fig:print-06-ultimo-trecho}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]\centering
+\includegraphics[width=0.80\textwidth,height=0.20\textheight,keepaspectratio]{pap-07-favoritos.png}
+\caption{Favoritos nomeados e ações de edição e remoção.}\label{fig:print-07-favoritos}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+A lista apresenta destinos salvos e seus controles. A persistência após recarregar e a confirmação de remoção foram verificadas pelos testes funcionais; não são demonstradas por esta imagem estática.
+\begin{figure}[H]\centering
+\includegraphics[width=0.65\textwidth,height=0.38\textheight,keepaspectratio]{pap-08-confirmacao.png}
+\caption{Confirmação antes de cancelar a viagem.}\label{fig:print-08-confirmacao}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+O diálogo permite continuar a viagem ou confirmar seu cancelamento. A confirmação mantém o embarque e os favoritos, remove o trajeto e permite escolher outro destino. A captura preserva o contexto da consulta atrás do diálogo e apresenta as consequências da ação e as duas opções disponíveis.
+
+
+\clearpage
+\noindent\textbf{Acompanhamento do ônibus}
+\begin{figure}[H]\centering
+\includegraphics[width=0.65\textwidth,height=0.69\textheight,keepaspectratio]{pap-13-onibus-tempo-real.jpg}
+\caption{Posição do ônibus e percurso anterior ao ponto de embarque.}\label{fig:print-onibus-tempo-real}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+O marcador do veículo utiliza a posição retornada pela API Olho Vivo. Seu percurso de aproximação ao embarque aparece em roxo e com menor destaque, abaixo da rota azul escolhida. A posição e as previsões são consultadas a cada 15 segundos; isso não refaz a busca de alternativas nem modifica o enquadramento escolhido pelo passageiro. A imagem é um registro estático; o intervalo de atualização e a preservação do mapa foram verificados por testes automatizados.
+\clearpage
+\noindent\textbf{Localização e controle do embarque}
+\begin{figure}[H]\centering
+\includegraphics[width=0.43\textwidth,height=0.56\textheight,keepaspectratio]{pap-09-localizacao.jpg}\hfill
+\includegraphics[width=0.43\textwidth,height=0.56\textheight,keepaspectratio]{pap-10-alterar-embarque.jpg}
+\caption{Localização simulada como origem (à esquerda) e seleção de outro embarque após consultar uma rota (à direita).}\label{fig:print-localizacao}
+\fonte{Capturas em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+O marcador roxo identifica a posição simulada do passageiro; o enquadramento inicial cobre pelo menos 250 m de raio no menor eixo. A ação Alterar embarque aproxima novamente o mapa dessa região. A seleção de outra origem conserva o destino Guaiaúna, 419, evitando repetir essa escolha. O gesto pode selecionar uma parada ou uma coordenada fora dela; o custo da caminhada de acesso participa do cálculo.
+
+\clearpage
+\begin{figure}[H]\centering
+\includegraphics[width=0.80\textwidth,height=0.64\textheight,keepaspectratio]{pap-12-destino-livre.png}
+\caption{Destino definido por toque prolongado fora de uma parada.}\label{fig:print-destino-livre}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+O painel identifica o local selecionado no mapa e inclui a caminhada até suas coordenadas. Neste cenário, a primeira alternativa tem duas baldeações e 643 m de caminhada final, enquanto a opção com uma baldeação tem duração total maior. A previsão de embarque é mostrada separadamente para cada alternativa. A comparação considera o tempo total, em vez de escolher sempre a menor caminhada. O registro mostra o resultado do gesto, não seu movimento. O teste automatizado móvel verificou seleção prolongada, ausência de seleção por toque curto, arrasto ou dois dedos e preservação do destino ao trocar a origem.
+
+As capturas documentam a interface e seus estados. Preservação de zoom, atualização progressiva, precisão dos tempos e compreensão pelos passageiros exigem evidências próprias; não são inferidas das imagens.
+\clearpage
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.74\textwidth,height=0.56\textheight,keepaspectratio]{pap-14-qr-atual.png}
+\caption{Informações da parada e QR Code com endereço na raiz da aplicação.}\label{fig:print-qr-atual}
+\fonte{Captura em emulação móvel da revisão 79dd798, 7 out. 2026.}
+\end{figure}
+A tela exibe o identificador 1211381 e o endereço local com o parâmetro \texttt{stop}. A imagem documenta a geração do QR Code na aplicação; não demonstra leitura por câmera nem instalação no ponto. Para uso público, o endereço local deve ser substituído por uma URL HTTPS acessível aos passageiros. A fotografia da instalação física permanece pendente.
+\clearpage

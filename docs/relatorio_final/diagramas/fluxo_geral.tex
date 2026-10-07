@@ -1,0 +1,21 @@
+\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4.3cm,minimum height=0.85cm,fill=black!3},arr/.style={->,thick},note/.style={align=center,font=\footnotesize,text width=3.6cm}]
+
+\node[box] (qr) at (0,0) {Ler QR Code do ponto};
+\node[box] (manual) at (7,0) {Abrir aplicação: localização\\ou embarque manual};
+\node[box] (stop) at (3.5,-1.5) {Embarque identificado};
+\draw[arr] (qr)--(stop); \draw[arr] (manual)--(stop);
+\node[box] (times) at (3.5,-2.9) {Consultar próximos ônibus};
+\draw[arr] (stop)--(times);
+\node[note] at (8,-2.9) {Previsões quando disponíveis; caso contrário, estimativas programadas};
+\node[box] (dest) at (3.5,-4.4) {Selecionar destino:\\busca, mapa ou favorito};\draw[arr] (times)--(dest);
+\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{localização\\conhecida}(dest.east);
+\node[box] (calc) at (3.5,-5.9) {Calcular e apresentar\\alternativas progressivamente};\draw[arr] (dest)--(calc);
+\node[box] (choice) at (3.5,-7.4) {Comparar e selecionar rota};\draw[arr] (calc)--(choice);
+\node[box,text width=2.7cm] (fail) at (-1,-6.6) {Sem alternativa\\ou falha:\\revisar consulta};
+\draw[arr] (calc.west)-|(fail.north);\draw[arr] (fail.west)--++(-.4,0)|-(dest.west);
+\node[box] (map) at (3.5,-8.9) {Ver viagem completa ou\\trecho no mapa};\draw[arr] (choice)--(map);
+\draw[arr] (map.east)--++(2.9,0)|-node[pos=0.25,right,font=\footnotesize]{reabrir lista}(choice.east);
+\node[box] (cancel) at (3.5,-10.4) {Cancelar viagem?\\Confirmar para encerrar};\draw[arr] (map)--(cancel);
+\draw[arr] (cancel.west)--++(-3.3,0)|-node[pos=0.15,left,font=\footnotesize]{não}(map.west);
+\node[box] (end) at (3.5,-11.9) {Selecionar novo destino\\(embarque mantido)};\draw[arr] (cancel)--node[right,xshift=4pt,font=\footnotesize]{sim}(end);
+\end{tikzpicture}

@@ -1,0 +1,57 @@
+\chapter{Documentação de engenharia de software do PaP}\label{ap:engenharia}
+Os diagramas desta revisão documentam retrospectivamente a extensão São Paulo. A notação é simplificada, baseada nas perspectivas de casos de uso, sequência e estados da UML \citep{uml251}. Os nomes dos estados são conceituais; não são uma transcrição de variáveis da implementação. A separação mantém no corpo a visão geral e reserva aqui os detalhes de comportamento.
+\section{Atores e casos de uso}
+O passageiro utiliza o fluxo de consulta sem cadastro obrigatório. O administrador representa a operação técnica do cadastro; importação por comando não implica existência de um botão na interface do passageiro.
+
+\begin{figure}[H]
+\centering\input{diagramas/casos_uso.tex}
+\caption{Atores e principais casos de uso do PaP.}\label{fig:casos-pap}
+\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\end{figure}
+
+\section{Consulta progressiva de alternativas}
+A sequência representa uma consulta bem-sucedida. O backend pode emitir um primeiro resultado sem caminhada antes de validar alternativas; sua existência não é garantida. A consulta externa pode falhar e excluir conexões ainda não verificadas. A repetição está limitada conforme o Apêndice~\ref{ap:rotas}; seleção de rota e cálculo podem coexistir.
+
+\begin{figure}[H]
+\centering\input{diagramas/sequencia.tex}
+\caption{Sequência simplificada do cálculo e seleção de uma alternativa.}\label{fig:sequencia-pap}
+\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\end{figure}
+
+\section{Estados da navegação}
+Cancelar a confirmação mantém a tela anterior; confirmar retorna à seleção de destino, preservando o embarque e enfocando o destino anterior. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
+
+\begin{figure}[H]
+\centering\input{diagramas/estados.tex}
+\caption{Estados conceituais da navegação e confirmação de cancelamento.}\label{fig:estados-pap}
+\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\end{figure}
+
+\section{Rastreabilidade e evidências}
+A Tabela~\ref{tab:rastreabilidade} relaciona requisitos, responsabilidades e verificações localizadas no código. A existência de um teste não significa que ele foi executado nesta revisão documental. Os resultados históricos de execução mantêm as datas e versões já registradas no relatório.
+\begin{longtable}{p{1.2cm}p{3cm}p{5cm}p{3cm}}
+\caption{Rastreabilidade dos requisitos e limites das evidências.}\label{tab:rastreabilidade}\\
+\hline ID & Responsabilidade & Verificação identificada / proposta & Limite\\\hline\endfirsthead
+\hline ID & Responsabilidade & Verificação identificada / proposta & Limite\\\hline\endhead
+RF01 & Entrada e seleção do ponto & Testes de embarque; completar roteiro de leitura de QR Code em dispositivo físico & Não prova implantação no ponto\\
+RF02 & Consulta de partidas & Testes backend em \nolinkurl{test_sptrans.py}; inspecionar aviso da fonte & Disponibilidade real varia\\
+RF03 & Planejador e caminhada & \nolinkurl{test_sptrans_planner.py} e \nolinkurl{test_sptrans_walking.py} & Cenários controlados, não validação de toda a rede\\
+RF04 & Mapa e lista & Testes E2E de seleção de trecho, baldeações B/C e caminhada final & Compreensão depende de avaliação\\
+RF05 & Favoritos locais & Testes E2E de nome persistido, edição e confirmação de remoção & Armazenamento depende do navegador\\
+RF06 & Diálogo de cancelamento & Teste E2E de cancelamento confirmado & Não mede erros reais de uso\\
+RF07 & Rastreamento e previsão & \nolinkurl{test_sptrans_tracking.py}, \nolinkurl{live-bus.spec.js} e \nolinkurl{boardingTime.test.js} & Não mede precisão da operação real\\
+RQ01 & Estado da interface e resposta progressiva & Testes E2E de stream, preservação da escolha e atualização sem redefinir mapa & Não mede tempo em toda condição de rede\\
+RQ02 & Fluxo de interação & Protocolo por tarefas descrito na metodologia & Avaliação com passageiros pendente\\\hline
+\end{longtable}
+Os testes E2E citados estão em \nolinkurl{frontend/e2e/sptrans.spec.js}; os testes backend estão em \nolinkurl{backend/transit/}. Capturas e inspeção de código complementam a documentação, mas não substituem execução de testes, avaliação de acessibilidade ou participação da comunidade.
+
+Na revisão ab32235, a verificação de regressão executou 49 testes de planejamento e caminhada no backend, os quatro arquivos de testes unitários do frontend e um cenário automatizado em emulação móvel. Este último verifica toque prolongado, cancelamento por arrasto e dois dedos e preservação do destino ao alterar o embarque. Na revisão b70873a, os 21 testes unitários do frontend passaram, incluindo três casos de agrupamento de frequências: faixas consecutivas, lacunas ou mudanças de frequência e passagem pela meia-noite. A compilação da aplicação também foi concluída. Esses resultados documentam verificações técnicas, sem equivaler a teste físico no celular ou avaliação de usabilidade com passageiros.
+
+\section{Verificação funcional da revisão 79dd798}
+Em 7 de outubro de 2026, foram executados 154 testes do backend, 26 testes unitários do frontend e 64 testes de navegador, todos aprovados, além da compilação de produção da aplicação. A revisão da aplicação é \texttt{79dd798}; o identificador completo e os comandos constam de \nolinkurl{capturas/validacao-atual.txt}. A suíte de navegador inclui o cenário histórico e a aplicação de São Paulo; seus cenários controlados não são capturas de operação real.
+
+As regressões cobrem GPS contínuo ou coordenada simulada, ausência de permissão, enquadramento de 250 m, seleção por parada ou toque prolongado no computador e na emulação móvel, rejeição de arrasto e gesto com dois dedos, preservação de destino ao alterar embarque e precedência da URL sobre a sessão. Cobrem ainda favoritos, confirmação de cancelamento, seleção de trechos, caminhada final, atualização progressiva sem perda da escolha, recarga manual com ampulheta e ausência de recálculo após 30 segundos. A matriz por cenário está em \nolinkurl{capturas/cenarios-funcionais.csv}.
+
+Para os dados operacionais, as verificações controlam a atualização a cada 15 segundos sem deslocar o mapa, as previsões independentes de cada alternativa, a exclusão do ônibus que chega antes da caminhada, a passagem pela meia-noite, observações antigas, falhas do serviço, sentido do trajeto e identificação da parada. Testes do planejador verificam limites e custos das caminhadas e remoção de alternativas dominadas, incluindo o caso de um transbordo adicional sem benefício. As consultas reais utilizadas nas novas capturas complementam essas regressões; não comprovam a precisão das previsões nem substituem avaliação com passageiros ou teste em celular físico.
+
+Na revisão complementar \texttt{4992027}, dois novos testes de navegador passaram, em desktop e em emulação móvel. Eles verificam os quatro setores externos do painel, o retorno ao mapa sem nova busca ou seleção acidental, a inércia de textos e espaços internos, a rejeição de arrastos e a preservação das ações dos botões. Outros três testes de ciclo da rota passaram na validação desse ajuste; a compilação da aplicação foi concluída. O arquivo \nolinkurl{frontend/e2e/board-backdrop.spec.js} registra esses cenários. As capturas da revisão 79dd798 continuam representativas visualmente e mantêm sua procedência original.

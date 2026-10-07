@@ -1,0 +1,2039 @@
+{
+  "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+  "records": [
+    {
+      "image": "pap-09-localizacao.png",
+      "captured_at": "2026-10-07T10:44:53.976Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "410b0931e753c77fd294c26101cb4c6bcb7749298d4ede7175172f35ed841178",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "passenger-location",
+          "name": "Minha localização",
+          "lat": -23.57018598367132,
+          "lon": -46.71122636509928,
+          "addressCoordinates": {
+            "lat": -23.57018598367132,
+            "lon": -46.71122636509928
+          },
+          "useLocation": true
+        },
+        "destination": null
+      }
+    },
+    {
+      "image": "pap-03-destino.png",
+      "captured_at": "2026-10-07T10:44:54.083Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "daa3cd0a4d9fd28d0213473b80faa641e806fde9b51daa39ee642a821d22dc29"
+    },
+    {
+      "image": "pap-07-favoritos.png",
+      "captured_at": "2026-10-07T10:44:54.132Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "daa3cd0a4d9fd28d0213473b80faa641e806fde9b51daa39ee642a821d22dc29"
+    },
+    {
+      "image": "pap-01-embarque.png",
+      "captured_at": "2026-10-07T10:44:57.785Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "7f061bbebcaa2a65d772605507a5fb27e24e875e92a012026d398df9bd157273",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": null
+      }
+    },
+    {
+      "image": "pap-04-alternativas.png",
+      "captured_at": "2026-10-07T10:45:24.263Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "61959891e5d4af807662b3b4fca45c2530f4746d1ac21d3c6237830dcae8b799",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-05-viagem-completa.png",
+      "captured_at": "2026-10-07T10:45:28.710Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "b937c6a44339811d7e5c4962c94da7ab685a6275926aa37c7c12c08c24ccf6e2",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-06-ultimo-trecho.png",
+      "captured_at": "2026-10-07T10:45:38.590Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "94bb24247457c14747f5a21006794381712be50199b22a6a4bead89019214f58",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-08-confirmacao.png",
+      "captured_at": "2026-10-07T10:45:39.923Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "30d42e1556fe16d39ee16ff57e02dfb5d6517067da3aef9740273788e4b3ee7b",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-10-alterar-embarque.png",
+      "captured_at": "2026-10-07T10:45:43.144Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "15b10b3cb9e29cde9707156b0161e0486ddf38de55d27fef89c7273d1b220d15",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-11-origem-livre.png",
+      "captured_at": "2026-10-07T10:45:52.598Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "69b3e4abbbb0bd435d9153ced25132a235afd112861739822dab78f1828b1905",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "120015869",
+          "name": "Av. Dr. Vital Brasil, 684",
+          "address": "Ref.: R Salvador Garcia/ R Alvarenga",
+          "lat": -23.570449,
+          "lon": -46.710646,
+          "code": "120015869",
+          "directions": [
+            {
+              "bearing": 289,
+              "code": "715M-10",
+              "headsign": "Jd. Maria Luiza",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "719R-10",
+              "headsign": "Rio Pequeno",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "775A-10",
+              "headsign": "Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "775V-10",
+              "headsign": "Itaim Bibi",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "778J-10",
+              "headsign": "Jd. Arpoador",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8021-10",
+              "headsign": "Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8027-10",
+              "headsign": "Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "809R-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "809V-10",
+              "headsign": "Metrô - Trianon - Masp",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8705-10",
+              "headsign": "Shop. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8707-10",
+              "headsign": "Rio Pequeno",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available",
+          "manualBoarding": true
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    },
+    {
+      "image": "pap-12-destino-livre.png",
+      "captured_at": "2026-10-07T10:46:09.380Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "06ae67ce4007533fdd727ee93ac89d4edd3da6e9381b118e22928a7e708d776b",
+      "session": {
+        "origin": {
+          "id": "120015869",
+          "name": "Av. Dr. Vital Brasil, 684",
+          "address": "Ref.: R Salvador Garcia/ R Alvarenga",
+          "lat": -23.570449,
+          "lon": -46.710646,
+          "code": "120015869",
+          "directions": [
+            {
+              "bearing": 289,
+              "code": "715M-10",
+              "headsign": "Jd. Maria Luiza",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "719R-10",
+              "headsign": "Rio Pequeno",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "775A-10",
+              "headsign": "Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "775V-10",
+              "headsign": "Itaim Bibi",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "778J-10",
+              "headsign": "Jd. Arpoador",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8021-10",
+              "headsign": "Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8027-10",
+              "headsign": "Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "809R-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "809V-10",
+              "headsign": "Metrô - Trianon - Masp",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8705-10",
+              "headsign": "Shop. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "8707-10",
+              "headsign": "Rio Pequeno",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 289,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available",
+          "manualBoarding": true
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "Local selecionado no mapa",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available",
+          "destinationAddress": "Local selecionado no mapa",
+          "addressCoordinates": {
+            "lat": -23.53082225886764,
+            "lon": -46.54962409873621
+          },
+          "addressDistance": 32
+        }
+      }
+    },
+    {
+      "image": "pap-14-qr-atual.png",
+      "captured_at": "2026-10-07T10:46:52.849Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "c4999167b813fcd6cbf45ff8d6e38abbfffcd63b1889c566af4c4639056803bb",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": null
+      }
+    },
+    {
+      "image": "pap-13-onibus-tempo-real.png",
+      "captured_at": "2026-10-07T10:47:03.268Z",
+      "revision": "79dd7989dcdc26ab5ef8667b3d96a225a39505ce",
+      "viewport": "430x932",
+      "density": 2,
+      "theme": "dark",
+      "sha256": "bfcc69a832966c5ede89c31196f8c4c5dc3e0725ecd56fd8a9564a058a41fbd1",
+      "session": {
+        "maxTransfers": 2,
+        "origin": {
+          "id": "1211381",
+          "name": "Parada Exclusiva",
+          "address": "R. Camargo, 305",
+          "lat": -23.571255,
+          "lon": -46.709227,
+          "code": "1211381",
+          "directions": [
+            {
+              "bearing": 19,
+              "code": "477P-10",
+              "headsign": "Ipiranga",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "7002-10",
+              "headsign": "Hosp. Das Clínicas",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "714C-10",
+              "headsign": "Paulista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "771P-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "778J-41",
+              "headsign": "Metrô Barra Funda",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809A-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809D-10",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "809L-10",
+              "headsign": "Lapa",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Pinheiros",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N706-11",
+              "headsign": "Term. Campo Limpo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Term. Pq. D. Pedro Ii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N801-11",
+              "headsign": "Metrô Butantã",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N835-11",
+              "headsign": "Jd. João Xxiii",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N836-11",
+              "headsign": "Pq. Continental",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 19,
+              "code": "N839-11",
+              "headsign": "Metrô Vl. Mariana",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            }
+          ],
+          "direction_status": "available"
+        },
+        "destination": {
+          "id": "600012585",
+          "name": "R. Guaiaúna, 419",
+          "address": "Ref.: Rua Doutor Ismael Dias",
+          "lat": -23.530739,
+          "lon": -46.549921,
+          "code": "600012585",
+          "directions": [
+            {
+              "bearing": 307,
+              "code": "2713-10",
+              "headsign": "Chác. Bela Vista",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2726-10",
+              "headsign": "Limoeiro",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2728-10",
+              "headsign": "Jd. Do Castelo",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "2755-10",
+              "headsign": "Guaianases",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3206-10",
+              "headsign": "Conj. Chaparral",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "3901-10",
+              "headsign": "Jd. Danfer",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "403A-10",
+              "headsign": "Term. Penha",
+              "source": "shape",
+              "approximate": false,
+              "kind": "departure"
+            },
+            {
+              "bearing": 307,
+              "code": "N303-11",
+              "headsign": "Term. Aricanduva",
+              "source": "shape",
+              "approximate": false,
+              "kind": "arrival"
+            }
+          ],
+          "direction_status": "available"
+        }
+      }
+    }
+  ],
+  "errors": []
+}

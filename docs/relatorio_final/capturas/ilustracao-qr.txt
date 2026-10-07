@@ -1,0 +1,6 @@
+Ilustração gerada em 7/10/2026 com image_gen integrado. Não é fotografia de instalação real.
+Referências: mockup1.png, captura pap-02-informacoes-ab32235.png e icone.png.
+Orientação inicial: placa Ponto a Ponto com ícone próprio, Parada Exclusiva 1211381, R. Camargo, 305, Butantã; ônibus 7002-10 HOSP. DAS CLÍNICAS. Sem referências a Mauá ou marcas municipais.
+Edição 1: remover texto e traço azul do vidro à esquerda, preservando reflexos naturais e restante da composição.
+Edição final (prompt): Make one localized photorealistic edit: REMOVE the street/address sign in the TOP RIGHT corner reading R. Camargo 305 Butantã, including its thin support pole and horizontal bracket. Seamlessly fill that region with natural continuation of background trees, sky and buildings. Keep the large Ponto a Ponto QR information plaque on the foreground shelter post completely unchanged; do NOT remove that plaque. Preserve all its logo, QR and text, bus with destination 7002-10 HOSP. DAS CLÍNICAS, clean unlettered shelter glass on left, lighting, framing, and lower-right Ilustração de uso · PaP caption. No other changes.
+PNG SHA256: e84ba2611b6ead776490263f2ee8363ac2a459c15369bcdebe90fcc62e3fd63b

@@ -1,0 +1,24 @@
+CAPTURAS — 7 OUT. 2026
+Versão capturada: 79dd7989dcdc26ab5ef8667b3d96a225a39505ce (sptrans).
+Versão atual documentada: 4992027dd0b0ee5eaf7acbac1a0e73f48ae769d8.
+A revisão 4992027 acrescenta a interação de clique fora do painel; não altera a aparência dos estados capturados. As imagens não são atribuídas a uma versão que não foi executada durante a captura.
+
+Todas as telas da interface foram renovadas em Chromium: viewport 430 × 932 CSS px, densidade 2, tema escuro e toque habilitado. Aplicação local em http://127.0.0.1:8000/; GTFS e serviços externos reais, sem mocks de respostas. Posição do passageiro simulada. Favoritos preparados com dados reais do cadastro e rótulos ilustrativos Casa, Trabalho e UNIVESP.
+
+01: consulta de próximos ônibus na Parada Exclusiva 1211381.
+03/07: Casa (680017147), Trabalho (440016922) e UNIVESP (820012501, Metrô Carrão – Parada 1, próximo ao polo Carrão).
+04/05: Butantã a R. Guaiaúna, 419 (600012585); alternativas e viagem completa, com previsões de embarque.
+06: último trecho e caminhada final.
+08: confirmação de cancelamento, com contexto do mapa.
+09/10: posição simulada e alteração do embarque.
+11: seleção livre da origem; registro complementar, não incluído no PDF.
+12: destino livre escolhido por toque prolongado próximo à Guaiaúna.
+13: ônibus em aproximação com posição da API e percurso roxo anterior ao embarque; reenquadrado por gestos no mapa.
+14: QR Code atual, com URL na raiz do site e contexto do painel.
+02: ilustração conceitual anterior gerada por IA, mantida com indicação PENDENTE para fotografia real; não é uma captura desta sessão. Ver ilustracao-qr.txt.
+
+atualizacao-tempo-real.json preserva instante, commit, sessão e SHA-256 dos PNGs. registro.csv consolida a procedência atual; registro-b70873a.csv conserva o registro anterior. Horários UTC no JSON e America/Sao_Paulo no CSV.
+
+Os PNGs permanecem integrais. Apenas os cinco mapas maiores têm exportação JPEG para o PDF, sem reduzir resolução nem subamostrar cores: qualidade 99, exceto pap-06 em 98. Configurações e hashes estão em exportacoes-pdf.csv. Os painéis com textos continuam em PNG. O PDF de envio é uma cópia do PDF compilado, sem recompressão global.
+
+recortes.csv e capturas_originais/ são registros históricos. Nenhuma leitura física de QR Code, instalação no ponto ou avaliação por passageiro foi realizada nesta etapa. As imagens são instantes de operação; não demonstram por si só a atualização periódica, verificada nos testes.
