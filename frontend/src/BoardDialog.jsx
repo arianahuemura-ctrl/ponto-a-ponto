@@ -16,7 +16,18 @@ function BoardingCountdown({trip,selected,boardingLive,active,clock}) {
 }
 
 export default function BoardDialog({boardingLive,passengerPosition,open,requestId,active,onStatus,origin,destination,onClose,onDestination,onCancel,onFavorite,isFavorite,onJourney,onChooseJourney}) {
-  const dialog=useRef(),chosenTrip=useRef(null),forceSearch=useRef(false);
+  const dialog=useRef(),chosenTrip=useRef(null),forceSearch=useRef(false),backdropPress=useRef(null);
+  const outsidePanel=event=>{
+    const box=event.currentTarget.getBoundingClientRect();
+    return event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom;
+  };
+  const pressBackdrop=event=>{backdropPress.current=event.isPrimary&&event.button===0&&outsidePanel(event)?{x:event.clientX,y:event.clientY}:null;};
+  const moveBackdrop=event=>{const start=backdropPress.current;if(start&&Math.hypot(event.clientX-start.x,event.clientY-start.y)>10)backdropPress.current=null;};
+  const clickBackdrop=event=>{
+    const start=backdropPress.current;backdropPress.current=null;
+    if(!start||!outsidePanel(event))return;
+    event.preventDefault();event.stopPropagation();onClose();
+  };
   const latestPosition=useRef(passengerPosition),planningAnchor=useRef(null);
   useEffect(()=>{latestPosition.current=passengerPosition;},[passengerPosition]);
   const [chosen,setChosen]=useState(null),[expanded,setExpanded]=useState(false);
@@ -68,7 +79,7 @@ export default function BoardDialog({boardingLive,passengerPosition,open,request
   const [clock,setClock]=useState(Date.now);
   useEffect(()=>{if(!open)return;setClock(Date.now());const timer=setInterval(()=>setClock(Date.now()),1000);return()=>clearInterval(timer);},[open]);
   const chooseJourney=trip=>{chosenTrip.current=trip;setChosen(trip.id);onJourney(trip);setData(previous=>({...previous,selected_journey:trip.id,lines:trip.legs.map(l=>({...l,arrivals:[],planned_departure:l.departure}))}));onChooseJourney();onClose();};
-  return <dialog ref={dialog} className="sp-stop-dialog sp-board-dialog" aria-labelledby="board-title" onCancel={e=>{e.preventDefault();onClose();}}>
+  return <dialog ref={dialog} className="sp-stop-dialog sp-board-dialog" aria-labelledby="board-title" onPointerDown={pressBackdrop} onPointerMove={moveBackdrop} onPointerCancel={()=>{backdropPress.current=null;}} onClick={clickBackdrop} onCancel={e=>{e.preventDefault();onClose();}}>
     <header className="sp-board-top"><div className="sp-board-title"><h2 id="board-title">{destination?'Ônibus da sua rota':'Próximos ônibus'}</h2>{!origin?.useLocation&&<button type="button" className="icon-button sp-point-info-toggle" aria-label="Informações do ponto" title="Informações do ponto" aria-expanded={showInfo} aria-controls="sp-point-info" onClick={()=>setShowInfo(value=>!value)}><Icon name="info"/></button>}</div><div className="sp-board-window-actions"><button className="icon-button" onClick={onClose} aria-label="Ver mapa" title="Ver mapa"><Icon name="map"/></button><button className="icon-button" onClick={onCancel} aria-label="Cancelar viagem" title="Cancelar viagem"><Icon name="close"/></button></div></header>
     {showInfo&&<section id="sp-point-info" className="sp-point-info" aria-label="QR Code e endereço do ponto"><h3>{origin?.name} · {origin?.id}</h3>{infoError?<p role="alert">{infoError}</p>:pointLink?<><img src={'/api/sptrans/qr/'+encodeURIComponent(origin.id)+'/'} alt={'QR Code do ponto '+origin.id} onError={()=>setInfoError('Não foi possível carregar o QR Code. Tente abrir as informações novamente.')}/><a href={pointLink}>{pointLink}</a></>:<p role="status">Carregando QR Code…</p>}</section>}
     <p><strong>Embarque:</strong> {selected?.legs[0]?.origin.name||origin?.name}{(selected||!origin?.useLocation)&&<> · {selected?.legs[0]?.origin.id||origin?.id}</>}</p>
