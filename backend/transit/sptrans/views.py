@@ -233,7 +233,12 @@ def stream_board(request):
     def chunks():
         try:
             with store.connection() as db:
-                origin=store.get_stop(db,request.GET['origin'])
+                if request.GET['origin']=='passenger-location':
+                    lat,lon=float(request.GET['from_lat']),float(request.GET['from_lon'])
+                    if not math.isfinite(lat) or not math.isfinite(lon) or not -90<=lat<=90 or not -180<=lon<=180:raise ValueError()
+                    origin={'id':'passenger-location','name':'Minha localização','lat':lat,'lon':lon}
+                else:
+                    origin=store.get_stop(db,request.GET['origin'])
                 destination=store.get_stop(db,request.GET['destination'])
                 limit=int(request.GET.get('max_transfers','2'))
                 if not 0<=limit<=3:raise ValueError()
@@ -245,7 +250,7 @@ def stream_board(request):
                         if not math.isfinite(lat) or not math.isfinite(lon) or not -90<=lat<=90 or not -180<=lon<=180:raise ValueError()
                         anchor.update(id='address-'+prefix,lat=lat,lon=lon)
                     anchors.append(anchor)
-                for result in alternatives.progressive(db,*anchors,max_transfers=limit):
+                for result in alternatives.progressive(db,*anchors,max_transfers=limit,refresh=request.GET.get('refresh')=='1'):
                     journeys=result['journeys']
                     selected=next((j for j in journeys if j['id']==request.GET.get('journey')),journeys[0] if journeys else None)
                     rows=[{'trip_id':leg['trip_id'],'code':leg['code'],'headsign':leg['headsign'],'origin':leg['origin'],'destination':leg['destination'],

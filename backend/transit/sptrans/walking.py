@@ -29,7 +29,7 @@ def reserve_request():
         return False
 
 MAX_DISTANCE = 5000
-WALK_LIMIT = 500
+WALK_LIMIT = 1000
 WALK_METERS_PER_MINUTE = 4000 / 60
 
 

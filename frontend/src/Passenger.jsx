@@ -1,3 +1,4 @@
+import appIcon from '../../icone.png';
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Icon from "./Icon.jsx";
 import { useTheme } from "./useTheme.js";
@@ -529,8 +530,8 @@ export default function Passenger() {
     return (
       <main className="passenger-shell">
         <header className="passenger-header">
-          <span className="brand-mark">
-            <Icon name="bus" />
+          <span className="brand-mark app-brand-mark">
+            <img src={appIcon} alt="" />
           </span>
           <div>
             <h1>Ponto a Ponto</h1>
@@ -552,11 +553,11 @@ export default function Passenger() {
     <main className="passenger-shell">
       <header className="passenger-header">
         <button
-          className="brand-mark"
+          className="brand-mark app-brand-mark"
           onClick={() => go("home")}
           aria-label="Ponto a Ponto, início"
         >
-          <Icon name="bus" size={28} />
+          <img src={appIcon} alt="" />
         </button>
         <div>
           <h1>Ponto a Ponto</h1>
@@ -632,8 +633,8 @@ export default function Passenger() {
                 </button>
               </div>
               <div className="info-box">
-                <span className="brand-mark">
-                  <Icon name="bus" size={26} />
+                <span className="brand-mark app-brand-mark">
+                  <img src={appIcon} alt="" />
                 </span>
                 <p>
                   Veja as linhas, horários e a posição dos ônibus deste ponto.

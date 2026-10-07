@@ -1,13 +1,23 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
-export default function SaoPauloMap({ stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea }) {
+import Icon from './Icon.jsx';
+import {bindMapLongPress} from './mapLongPress.js';
+export default function SaoPauloMap({ passengerFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea, onMapPoint }) {
   const host=useRef(), map=useRef(), click=useRef(onStop), area=useRef(onArea);
+  const locationButton=useRef(null), mapPoint=useRef(onMapPoint);
+  mapPoint.current=onMapPoint;
   const fitted=useRef(null);
+  const located=useRef(false);
   const markerLayer=useRef(),markerRecords=useRef(new Map());
   click.current=onStop;area.current=onArea;
   useEffect(()=>{
-    const instance=L.map(host.current).setView([center?.lat??-23.5505,center?.lon??-46.6333],15);
+    const instance=L.map(host.current,{zoomSnap:0.1,tapHold:false}).setView([center?.lat??-23.5505,center?.lon??-46.6333],15);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(instance);
+    const longPress=bindMapLongPress(host.current,event=>{
+      const point=instance.mouseEventToLatLng(event);
+      mapPoint.current?.({lat:point.lat,lon:point.lng});
+    });
+    instance.on('movestart zoomstart',longPress.cancel);
     let timer;
     const updateArea=()=>{
       clearTimeout(timer);
@@ -20,9 +30,39 @@ export default function SaoPauloMap({ stops, routeSelected=false, focusStops, fo
     updateArea();
     map.current=instance;
     markerLayer.current=L.layerGroup().addTo(instance);
-    const observer=new ResizeObserver(()=>{instance.invalidateSize();updateArea();});observer.observe(host.current);
-    return ()=>{clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();instance.remove();};
+    const zoomControl=instance.zoomControl.getContainer();
+    const alignLocationButton=()=>{
+      if(!locationButton.current)return;
+      const zoom=zoomControl.getBoundingClientRect();
+      const parent=locationButton.current.offsetParent.getBoundingClientRect();
+      Object.assign(locationButton.current.style,{
+        width:`${zoom.width}px`,minWidth:`${zoom.width}px`,maxWidth:`${zoom.width}px`,
+        height:`${zoom.width}px`,minHeight:`${zoom.width}px`,maxHeight:`${zoom.width}px`,
+        left:`${zoom.left-parent.left}px`,top:`${zoom.bottom-parent.top+10}px`,
+      });
+    };
+    const observer=new ResizeObserver(()=>{instance.invalidateSize();updateArea();alignLocationButton();});
+    observer.observe(host.current);observer.observe(zoomControl);
+    alignLocationButton();
+    return ()=>{longPress.destroy();instance.off('movestart zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();instance.remove();};
   },[]);
+  useEffect(()=>{
+    if(!passengerPosition)return;
+    const {lat,lon,accuracy,simulated}=passengerPosition;
+    const group=L.layerGroup().addTo(map.current);
+    if(accuracy>0)L.circle([lat,lon],{radius:accuracy,color:'#0066ff',weight:1,fillOpacity:.1,interactive:false}).addTo(group);
+    L.marker([lat,lon],{zIndexOffset:1000,title:simulated?'Sua localização (simulada)':'Sua localização',icon:L.divIcon({className:'sp-passenger-position'+(simulated?' is-simulated':''),iconSize:[32,32],iconAnchor:[16,16],html:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>'})})
+      .bindTooltip(simulated?'Sua localização (simulada)':'Sua localização').addTo(group);
+    if(!located.current){
+      located.current=true;
+      // A 500 m bounding square gives a 250 m radius on the shorter axis.
+      // Keep the passenger exactly centered; later GPS updates only move the marker.
+      const point=L.latLng(lat,lon);
+      const zoom=map.current.getBoundsZoom(point.toBounds(500));
+      map.current.setView(point,zoom,{animate:false});
+    }
+    return ()=>group.remove();
+  },[passengerPosition,origin,journey,focusStops]);
   useEffect(()=>{
     const group=L.layerGroup().addTo(map.current);
     const drawRoute=(geometry,foot=false)=>{
@@ -34,7 +74,7 @@ export default function SaoPauloMap({ stops, routeSelected=false, focusStops, fo
     const points=new Map((routeSelected?[]:stops).map(s=>[s.id,s]));
     for(const s of [origin,destination]) if(s) points.set(s.id,{...s,directions:points.get(s.id)?.directions||s.directions});
     for(const leg of journey?.legs||[]) {
-      for(const s of [leg.origin,leg.destination]) points.set(s.id,{...s,directions:points.get(s.id)?.directions||s.directions});
+      for(const s of [leg.origin,leg.destination]) if(s.id!==destination?.id)points.set(s.id,{...s,directions:points.get(s.id)?.directions||s.directions});
       drawRoute(leg.geometry);
     }
     for(const path of [walking,...walks].filter(Boolean)) {
@@ -42,7 +82,7 @@ export default function SaoPauloMap({ stops, routeSelected=false, focusStops, fo
     }
     for(const s of points.values()) {
       const complete=fullJourney||journey;
-      const isOrigin=s.id===(complete?.legs[0]?.origin.id||origin?.id),isDestination=s.id===(complete?.legs.at(-1)?.destination.id||destination?.id);
+      const isOrigin=s.id===(complete?.legs[0]?.origin.id||origin?.id),isDestination=s.id===(destination?.id||complete?.legs.at(-1)?.destination.id);
       const transferIndex=complete?.legs.findIndex((leg,i)=>i>0&&(leg.origin.id===s.id||complete.legs[i-1].destination.id===s.id))??-1;
       const isTransfer=!isOrigin&&!isDestination&&transferIndex>0;
       const markerText=isOrigin?'A':isDestination?'★':isTransfer?String.fromCharCode(65+transferIndex):'';
@@ -84,5 +124,18 @@ export default function SaoPauloMap({ stops, routeSelected=false, focusStops, fo
     if(points.length){map.current.fitBounds(points,{padding:[45,85],animate:false});fitted.current=focusKey;}
   },[journey,walks,focusKey]);
   useEffect(()=>{if(focusStops?.length)map.current.fitBounds(focusStops.map(s=>[s.lat,s.lon]),{padding:[45,65],maxZoom:17,animate:false});},[focusStops]);
-  return <div ref={host} className="passenger-map sp-map" aria-label="Mapa dos pontos de São Paulo"/>;
+  useEffect(()=>{
+    if(!passengerFocus||!map.current)return;
+    const point=L.latLng(passengerFocus.lat,passengerFocus.lon);
+    map.current.setView(point,map.current.getBoundsZoom(point.toBounds(500)),{animate:false});
+  },[passengerFocus]);
+  const locatePassenger=()=>{
+    if(!passengerPosition||!map.current)return;
+    const point=L.latLng(passengerPosition.lat,passengerPosition.lon);
+    map.current.setView(point,map.current.getBoundsZoom(point.toBounds(500)),{animate:false});
+  };
+  const locationLabel=passengerPosition?.simulated?'Minha localização (simulada)':passengerPosition?'Minha localização':'Aguardando localização';
+  return <><div ref={host} className="passenger-map sp-map" aria-label="Mapa dos pontos de São Paulo"/>
+    <button ref={locationButton} type="button" className="icon-button sp-locate-passenger" onClick={locatePassenger} disabled={!passengerPosition} title={locationLabel} aria-label={locationLabel}><Icon name="locate"/></button></>;
+
 }

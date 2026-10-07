@@ -45,7 +45,16 @@ def distinct_routes(journeys):
         rank=lambda route:(route['duration_minutes'],route['walking_meters'],route['id'])
         if signature not in groups or rank(journey)<rank(groups[signature]):
             groups[signature]=journey
-    return sorted(groups.values(),key=lambda r:(r['duration_minutes'],r['transfers'],r['walking_meters'],r['id']))
+    # A final additional bus is pointless when an already verified route with
+    # the same preceding services arrives sooner and requires no more walking.
+    kept=[]
+    for signature,route in groups.items():
+        dominated=any(len(prefix)<len(signature) and signature[:len(prefix)]==prefix
+                      and other['duration_minutes']<=route['duration_minutes']
+                      and other['walking_meters']<=route['walking_meters']
+                      for prefix,other in groups.items())
+        if not dominated:kept.append(route)
+    return sorted(kept,key=lambda r:(r['duration_minutes'],r['transfers'],r['walking_meters'],r['id']))
 
 
 def earlier_alighting(db, journey, ends):
@@ -76,11 +85,11 @@ def earlier_alighting(db, journey, ends):
             'duration_minutes':round(journey['duration_minutes']-saved,1)},walk
 
 
-def progressive(db, origin, destination, max_transfers=2, now=None):
+def progressive(db, origin, destination, max_transfers=2, now=None, *, refresh=False):
     now=now or timezone.localtime()
     stat=store.database_path().stat()
-    key='pap.alternatives.v8:'+hashlib.sha256(json.dumps([origin,destination,max_transfers,int(now.timestamp()//30),stat.st_mtime_ns,stat.st_size],sort_keys=True).encode()).hexdigest()
-    cached=cache.get(key)
+    key='pap.alternatives.v10:'+hashlib.sha256(json.dumps([origin,destination,max_transfers,int(now.timestamp()//30),stat.st_mtime_ns,stat.st_size],sort_keys=True).encode()).hexdigest()
+    cached=None if refresh else cache.get(key)
     if cached is not None and not cached.get("search_limited"):
         yield {**cached,"complete":True}
         return

@@ -73,3 +73,20 @@ def index(request):
             content_type="text/plain; charset=utf-8",
         )
     return FileResponse(path.open("rb"), content_type="text/html; charset=utf-8")
+
+
+@require_GET
+def location_config(request):
+    lat, lon = settings.SIMULATED_LATITUDE, settings.SIMULATED_LONGITUDE
+    position = None
+    if lat or lon:
+        try:
+            lat, lon = float(lat), float(lon)
+            if not (math.isfinite(lat) and math.isfinite(lon) and -90 <= lat <= 90 and -180 <= lon <= 180):
+                raise ValueError()
+            position = {"lat": lat, "lon": lon, "accuracy": 0, "simulated": True}
+        except (ValueError, TypeError):
+            return JsonResponse({"error": "Coordenadas simuladas inválidas: configure latitude e longitude."}, status=400)
+    response = JsonResponse({"position": position})
+    response["Cache-Control"] = "no-store"
+    return response

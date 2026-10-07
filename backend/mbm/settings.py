@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 if (BASE_DIR / '.env').exists():
     for line in (BASE_DIR / '.env').read_text().splitlines():
         key, sep, value = line.partition('=')
-        if sep and key.strip() in {'SPTRANS_TOKEN', 'SPTRANS_DATABASE'}:
+        if sep and key.strip() in {'SPTRANS_TOKEN', 'SPTRANS_DATABASE', 'SIMULATED_LATITUDE', 'SIMULATED_LONGITUDE'}:
             os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
 SPTRANS_TOKEN = os.environ.get('SPTRANS_TOKEN', '')
 SPTRANS_DATABASE = os.environ.get('SPTRANS_DATABASE', str(BASE_DIR / 'sptrans.sqlite3'))
@@ -68,3 +68,6 @@ TEMPLATES = [
         },
     }
 ]
+
+SIMULATED_LATITUDE = os.environ.get("SIMULATED_LATITUDE", "").strip()
+SIMULATED_LONGITUDE = os.environ.get("SIMULATED_LONGITUDE", "").strip()

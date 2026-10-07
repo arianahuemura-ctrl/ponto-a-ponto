@@ -1,4 +1,5 @@
 const shapes = {
+  locate: <><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></>,
   edit: <><path d="m16 3 5 5-12 12-6 1 1-6Z"/><path d="m14 5 5 5"/></>,
   trash: <><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></>,
   info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></>,
@@ -57,6 +58,7 @@ const shapes = {
       <path d="m8 10 7-4M8 14l7 4" />
     </>
   ),
+  hourglass: <><path d="M6 3h12M6 21h12M7 3v4c0 2 3 4 5 5-2 1-5 3-5 5v4M17 3v4c0 2-3 4-5 5 2 1 5 3 5 5v4"/><path d="M9 6h6m-6 12h6"/></>,
   refresh: (
     <>
       <path d="M20 7V2l-4 4M4 17v5l4-4" />

@@ -106,8 +106,10 @@
 .sp-selectable-leg { cursor:pointer; }
 .sp-selectable-leg:hover,.sp-selectable-leg:focus-visible { border-color:var(--pap-primary,#0076ed); outline:2px solid #0076ed; outline-offset:2px; }
 .sp-leg-action { display:block; color:var(--pap-muted); }
-.sp-route-legend label { display:flex; align-items:center; gap:8px; min-width:0; max-width:100%; }
-.sp-route-legend select { max-width:100%; min-width:0; padding:6px; color:var(--pap-text); background:var(--pap-surface); border:1px solid var(--pap-border); border-radius:6px; }
+.sp-route-controls { display:flex; align-items:center; gap:12px; flex:1 1 320px; min-width:0; }
+.sp-route-keys { display:flex; flex-direction:column; gap:6px; flex:none; white-space:nowrap; }
+.sp-route-legend label { flex:1; white-space:nowrap; display:flex; align-items:center; gap:8px; min-width:0; max-width:100%; }
+.sp-route-legend select { flex:1; width:0; max-width:100%; min-width:0; padding:6px; color:var(--pap-text); background:var(--pap-surface); border:1px solid var(--pap-border); border-radius:6px; }
 
 .sp-board-title { display:flex; align-items:center; gap:4px; min-width:0; }
 .sp-point-info-toggle { color:var(--pap-muted); flex-shrink:0; width:32px; height:32px; padding:6px; }
@@ -147,3 +149,21 @@
 .sp-route-option .sp-route-arrival { grid-column:2; grid-row:1 / 4; align-self:center; display:grid; gap:4px; text-align:right; }
 .sp-route-arrival small { font-size:11px; }
 .sp-route-arrival strong { font-size:18px; }
+
+.sp-locate-passenger { position:absolute; top:100px; left:10px; z-index:450; box-sizing:border-box; width:38px; min-width:38px; height:44px; padding:0; background:var(--pap-surface); color:var(--pap-text); border:1px solid var(--pap-text); box-shadow:0 1px 5px #0003; }
+.sp-locate-passenger:disabled { opacity:.55; cursor:default; }
+.sp-passenger-position { background:#0066ff; border:3px solid white; border-radius:50%; box-shadow:0 1px 6px #0008; box-sizing:border-box; }
+.sp-passenger-position.is-simulated { background:#9333ea; }
+.sp-passenger-position svg { width:100%; height:100%; fill:none; stroke:white; stroke-width:2; }
+
+/* Keep long-touch destination selection free of native image menus. */
+.sp-map { -webkit-touch-callout: none; }
+
+.sp-loading-hourglass { animation:sp-hourglass-turn 1.6s ease-in-out infinite; transform-origin:center; }
+@keyframes sp-hourglass-turn {
+  0%, 25% { transform:rotate(0deg); }
+  75%, 100% { transform:rotate(180deg); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .sp-loading-hourglass { animation:none; }
+}

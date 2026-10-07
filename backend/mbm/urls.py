@@ -7,6 +7,7 @@ from transit.sptrans import views as sptrans
 from transit.sptrans.addresses import suggestions
 
 urlpatterns = [
+    path("api/location-config/", views.location_config),
     path("sao-paulo/", views.index),
     path("api/sptrans/stops/", sptrans.stops),
     path("api/sptrans/addresses/", suggestions),

@@ -605,3 +605,15 @@ O navegador reutiliza áreas completas por dois minutos (até oito áreas e 30 m
 A busca sem número identifica paradas pelo nome da rua no GTFS, normalizando abreviações e acentos. O mapa enquadra o conjunto e mantém a escolha manual. Nomes iguais geograficamente separados são distinguidos pelo resultado selecionado; lacunas ou nomes divergentes no cadastro podem impedir a identificação de todas as paradas.
 
 Com número, a sugestão precisa conter o número solicitado; o centro da rua não é usado como se fosse o endereço exato. Com embarque conhecido, o sistema compara até 12 paradas próximas (até 500 m do endereço e no máximo 250 m além da parada mais próxima), priorizando menos trocas e depois menor distância ao endereço. A comparação usa o sentido e a ordem das paradas no GTFS, dentro da janela de serviço. Se o embarque veio de um endereço, sua parada também é reavaliada ao escolher o destino. Atravessamentos e distâncias a pé ainda precisam ser conferidos no local; a distância desta seleção é geográfica.
+
+## Localização do passageiro em São Paulo
+
+O mapa acompanha a posição autorizada pelo navegador, com círculo de precisão. Na primeira posição disponível, centraliza no passageiro e ajusta o zoom para mostrar um raio mínimo de 250 m no menor eixo do mapa (500 m entre bordas), tanto em telas verticais quanto horizontais; as atualizações seguintes preservam o enquadramento. Cada consulta de rotas usa a posição disponível do passageiro como início da caminhada até o embarque, incluindo seu custo no tempo estimado. Sem localização, utiliza o endereço de origem ou a parada selecionada. Atualizações do GPS movem o marcador sem reiniciar a busca; atualizar horários ou iniciar uma consulta usa a posição mais recente.
+
+Para simular um local, preencha no `.env` da raiz `SIMULATED_LATITUDE=-23.5505` e `SIMULATED_LONGITUDE=-46.6333`. Reinicie o Django e recarregue a página. As duas coordenadas substituem o GPS e a posição é identificada como simulada; deixe ambas vazias para usar o aparelho. Valores incompletos ou fora dos limites são rejeitados. Somente essa configuração pública é exposta, nunca o token SPTrans.
+
+No celular, GPS requer HTTPS e permissão do navegador; HTTP pelo IP da rede permite testar coordenadas simuladas, mas não habilita o GPS. O acompanhamento termina ao sair da tela/aplicação e não armazena histórico de posições.
+
+Com localização conhecida e sem embarque já identificado, basta selecionar o destino. O planejador busca embarques próximos à posição. A ação “Alterar embarque” permite escolher outro ponto pelo mapa, endereço ou favoritos, preservando o destino; nessa escolha explícita o GPS não substitui a origem. “Usar minha localização” restaura a origem automática. Entrada por QR Code conserva o contexto da parada.
+
+O planejador admite até 1 km por caminhada de acesso, saída ou baldeação (15 minutos a 4 km/h), comparando o tempo total com espera e ônibus. O enquadramento inicial do mapa permanece em 250 m. Percursos a pé continuam sujeitos à verificação e aos limites de execução da busca.
