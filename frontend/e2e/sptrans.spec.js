@@ -338,7 +338,7 @@ test('baldeações B e C mantêm identificação na viagem e nos trechos',async(
   await expect(page.locator('.sp-stop')).toHaveCount(4);
 });
 
-test('horários reabrem pelo mapa após trecho, fechar e Escape',async({page})=>{
+test('viagem direta oculta seletor e permite reabrir horários após fechar e Escape',async({page})=>{
   await setup(page);
   const destination={...stop,id:'2',lat:-23.551};
   const legs=[{trip_id:'T',code:'1000-10',origin:stop,destination,stops:[stop,destination],geometry:[[stop.lat,stop.lon],[destination.lat,destination.lon]],arrivals:[{time:'08:10',vehicle:123}]}];
@@ -346,7 +346,8 @@ test('horários reabrem pelo mapa após trecho, fechar e Escape',async({page})=>
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:legs,journeys:[{legs}]}}));
   await page.goto('/?stop=1');await page.getByRole('button',{name:'Horários de embarque'}).click();
   await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
-  await page.getByLabel('Trecho exibido no mapa').selectOption('0');
+  await expect(page.getByLabel('Trecho exibido no mapa')).toHaveCount(0);
+  await expect(page.locator('path.sp-route-bus')).not.toHaveCount(0);
   await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toContainText('1000-10');
   await page.keyboard.press('Escape');
