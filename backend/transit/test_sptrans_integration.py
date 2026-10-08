@@ -166,3 +166,50 @@ class MaterializedAppTests(SimpleTestCase):
             result=self.run_app(max_transfers=2)[-1]
         self.assertEqual(result['planner'],'raptor')
         self.assertEqual(fallback.call_args.args[3],2)
+
+    def test_invalid_artifact_exposes_fallback_reason(self):
+        self.build()
+        with store.connection() as db, \
+             patch.object(materialized,'_validate',side_effect=ValueError('Conexões materializadas desatualizadas')), \
+             patch.object(alternatives,'_raptor_progressive',return_value=iter([{'journeys':[],'complete':True}])):
+            result=list(alternatives._bus_progressive(db,store.get_stop(db,'A'),store.get_stop(db,'D'),now=fixtures.NOW))[-1]
+        self.assertEqual(result['planner'],'raptor')
+        self.assertEqual(result['planner_fallback'],'Conexões materializadas desatualizadas')
+
+    def test_direct_index_is_used_without_materialized_pair(self):
+        self.build()
+        with patch.object(direct,'database_path',return_value=self.dp), \
+             patch.object(adapter,'_prepare_materialized',return_value=None), \
+             patch.object(walking,'route',side_effect=self.foot), \
+             patch.object(alternatives,'_raptor_progressive',side_effect=AssertionError('RAPTOR não deve ser consultado')):
+            with store.connection() as db:
+                origin=store.get_stop(db,'A')
+                destination=store.get_stop(db,'B')
+                context=adapter.prepare(db,origin,destination)
+                self.assertTrue(context['paths'])
+                result=list(alternatives._bus_progressive(db,origin,destination,now=fixtures.NOW))[-1]
+            self.assertEqual(result['planner'],'connections')
+            self.assertTrue(result['journeys'])
+            self.assertTrue(all(len(j['legs'])==1 for j in result['journeys']))
+
+    def test_preprocessed_final_walk_without_materialized_pair(self):
+        with sqlite3.connect(self.index) as db:
+            db.execute("UPDATE walk_edge SET status='verified',distance_meters=75,seconds=60 WHERE origin='B' AND destination='E'")
+        self.build()
+        with patch.object(direct,'database_path',return_value=self.dp), \
+             patch.object(city_connections,'database_path',return_value=self.cp), \
+             patch.object(adapter,'_prepare_materialized',return_value=None):
+            with store.connection() as db:
+                context=adapter.prepare(db,store.get_stop(db,'A'),store.get_stop(db,'E'))
+        self.assertTrue(context['paths'])
+        self.assertTrue(any(p['trechos'][-1]['modo']=='caminhada' for p in context['paths']))
+        self.assertTrue(all(sum(l['modo']=='onibus' for l in p['trechos'])==1 for p in context['paths']))
+
+    def test_two_bus_fallback_without_consolidated_pair(self):
+        self.build()
+        with patch.object(direct,'database_path',return_value=self.dp), \
+             patch.object(city_connections,'database_path',return_value=self.cp), \
+             patch.object(adapter,'_prepare_materialized',return_value=None):
+            with store.connection() as db:
+                context=adapter.prepare(db,store.get_stop(db,'A'),store.get_stop(db,'D'))
+        self.assertTrue(any(sum(l['modo']=='onibus' for l in p['trechos'])==2 for p in context['paths']))

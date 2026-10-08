@@ -23,7 +23,7 @@ def direct_walk(origin, destination, now):
     if not path.get('available') or not path.get('geometry') or not math.isfinite(meters) or not 0 <= meters <= walking.MAX_DISTANCE:
         return None
     seconds = meters / walking.WALK_METERS_PER_SECOND
-    minutes = round(seconds / 60, 1)
+    minutes = seconds / 60
     return {'id': 'walk-' + hashlib.sha256(json.dumps([origin, destination], sort_keys=True).encode()).hexdigest()[:20],
             'mode': 'walk', 'legs': [], 'transfers': 0, 'walks': [{**path, 'origin': origin,
             'destination': destination, 'accessType': 'destination', 'duration_minutes': minutes}],
@@ -33,8 +33,9 @@ def direct_walk(origin, destination, now):
 
 
 class Completion:
-    def __init__(self, db, destination, allowed_stops=None):
+    def __init__(self, db, destination, allowed_stops=None, origin=None):
         self.db, self.destination = db, destination
+        self.origin = origin
         self.allowed_stops = allowed_stops
         self.walks = Walks(max_distance=config.FINAL_WALK_LIMIT_METERS)
         self.cache = {}
@@ -47,9 +48,47 @@ class Completion:
         if key not in self.cache:
             started = time.monotonic()
             self.walks.deadline = started + self.remaining_seconds
-            self.cache[key] = self._finish_before_transfer(self._improve(journey))
+            self.cache[key] = self._finish_before_transfer(self._improve(self._start_after_transfer(journey)))
             self.remaining_seconds = max(0, self.remaining_seconds - (time.monotonic() - started))
         return self.cache[key]
+
+    def _start_after_transfer(self, journey):
+        if self.origin is None or len(journey['legs']) < 2:
+            return journey
+        end = datetime.fromisoformat(journey['arrival'])
+        start = end - timedelta(seconds=journey.get('duration_seconds', journey['duration_minutes'] * 60))
+        best = journey
+        for index, leg in enumerate(journey['legs'][1:], 1):
+            try:
+                foot = self.walks.route(self.origin, leg['origin'], 'boarding')
+            except ValueError:
+                continue
+            seconds = foot['seconds'] if foot else 0
+            if seconds > walking.WALK_LIMIT / walking.WALK_METERS_PER_SECOND:
+                continue
+            if start + timedelta(seconds=seconds) > datetime.fromisoformat(leg['departure']):
+                continue
+            retained = []
+            for path in journey.get('walks', []):
+                if path.get('accessType') == 'destination':
+                    retained.append(path)
+                elif path.get('accessType') == 'transfer' and path.get('before_leg', 0) > index:
+                    retained.append({**path, 'before_leg': path['before_leg'] - index})
+            paths = ([foot] if foot else []) + retained
+            meters = sum(p['distance_meters'] for p in paths)
+            if meters > best['walking_meters']:
+                continue
+            best = {**journey, 'id': journey['id'] + ':start-' + str(index),
+                    'legs': journey['legs'][index:], 'transfers': len(journey['legs']) - index - 1,
+                    'walks': paths, 'walking_meters': meters,
+                    'walking_seconds': meters / walking.WALK_METERS_PER_SECOND,
+                    'walking_minutes': meters / walking.WALK_METERS_PER_MINUTE,
+                    'access_seconds': seconds}
+            if 'boardings' in best: best['boardings'] = len(best['legs'])
+            if 'ride_seconds' in best:
+                best['ride_seconds'] = sum((datetime.fromisoformat(l['arrival'])-datetime.fromisoformat(l['departure'])).total_seconds() for l in best['legs'])
+            best.pop('distance_meters', None)
+        return normalize_walks(best)
 
     def _finish_before_transfer(self, journey):
         if len(journey['legs'])<2:return journey
@@ -118,7 +157,7 @@ class Completion:
                 continue
             point = store.get_stop(self.db, row['stop_id'])
             gap = directions.distance((point['lat'], point['lon']), (self.destination['lat'], self.destination['lon']))
-            if gap <= walking.WALK_LIMIT:
+            if gap <= self.walks.max_distance:
                 candidates.append((gap, index, point))
         for _, index, point in sorted(candidates):
             try:
@@ -191,5 +230,7 @@ def normalize_walks(journey):
             path['seconds'] = path['distance_meters'] / walking.WALK_METERS_PER_SECOND
             path['duration_minutes'] = path['seconds'] / 60
         paths.append(path)
+    seconds = sum(p.get('seconds', 0) for p in paths)
     return {**journey, 'walks': paths,
+            'walking_seconds': seconds, 'walking_minutes': seconds / 60,
             'transfer_walks': [p for p in paths if p.get('accessType') == 'transfer']}

@@ -15,15 +15,17 @@ def geographic_anchor(anchor):
     return anchor['id'].startswith('address-') or anchor['id']=='passenger-location' or anchor.get('useLocation',False)
 
 def access_points(db, anchor, outgoing, budget=None, optimistic=False, endpoint_selection=False):
-    if endpoint_selection and not geographic_anchor(anchor):
-        return [(anchor, None)], False
     choices=[]; incomplete=False
     lat_margin=WALK_LIMIT/110000
     lon_margin=WALK_LIMIT/(110000*max(.01,math.cos(math.radians(anchor['lat']))))
     rows=db.execute("SELECT s.* FROM stops s WHERE stop_lat BETWEEN ? AND ? AND stop_lon BETWEEN ? AND ? AND EXISTS (SELECT 1 FROM stop_times st JOIN trips t USING(trip_id) JOIN routes r USING(route_id) WHERE st.stop_id=s.stop_id AND r.route_type='3')",
                     (anchor['lat']-lat_margin,anchor['lat']+lat_margin,anchor['lon']-lon_margin,anchor['lon']+lon_margin))
     ordered=sorted(rows,key=lambda r:(directions.distance((anchor['lat'],anchor['lon']),(r['stop_lat'],r['stop_lon'])),r['stop_id']))
-    if endpoint_selection:ordered=ordered[:3]
+    if endpoint_selection:
+        # Preserve o ponto escolhido, mas permita caminhar até outro sentido.
+        if not geographic_anchor(anchor):
+            ordered.sort(key=lambda r:r['stop_id'] != anchor['id'])
+        ordered=ordered[:3]
     for row in ordered:
         point=store.stop(row)
         gap=directions.distance((anchor['lat'],anchor['lon']),(point['lat'],point['lon']))
@@ -96,7 +98,7 @@ def earlier_alighting(db, journey, ends):
 def _raptor_progressive(db, origin, destination, max_transfers=2, now=None, *, refresh=False):
     now=now or timezone.localtime()
     stat=store.database_path().stat()
-    key='pap.alternatives.v16:'+hashlib.sha256(json.dumps([origin,destination,max_transfers,int(now.timestamp()//30),stat.st_mtime_ns,stat.st_size],sort_keys=True).encode()).hexdigest()
+    key='pap.alternatives.v18:'+hashlib.sha256(json.dumps([origin,destination,max_transfers,int(now.timestamp()//30),stat.st_mtime_ns,stat.st_size],sort_keys=True).encode()).hexdigest()
     cached=None if refresh else cache.get(key)
     if cached is not None and not cached.get("search_limited"):
         yield {**cached,"complete":True}
@@ -183,10 +185,12 @@ def _raptor_progressive(db, origin, destination, max_transfers=2, now=None, *, r
 def _bus_progressive(db, origin, destination, max_transfers=2, now=None, *, refresh=False, allow_raptor=True):
     now=now or timezone.localtime()
     selected=getattr(settings,'SPTRANS_PLANNER','raptor')
+    fallback_reason = None
     if selected=='connections' and max_transfers<=2:
         from . import connection_adapter
         context=connection_adapter.prepare(db,origin,destination)
-        if context:
+        fallback_reason = (context or {}).get('unavailable_reason')
+        if context and not fallback_reason:
             found=False
             for result in connection_adapter.progressive(db,origin,destination,min(max_transfers,1),now,context):
                 found=bool(result['journeys'])
@@ -201,15 +205,15 @@ def _bus_progressive(db, origin, destination, max_transfers=2, now=None, *, refr
         return
     for result in _raptor_progressive(db,origin,destination,max_transfers,now,refresh=refresh):
         yield {**result,'planner':'raptor','planner_fallback':
-            'Conexões de até dois ônibus indisponíveis ou sem rotas válidas; usando o planejador por rodadas, inclusive para três ônibus.' if selected=='connections' else None}
+            (fallback_reason or 'Conexões de até dois ônibus indisponíveis ou sem rotas válidas; usando o planejador por rodadas, inclusive para três ônibus.') if selected=='connections' else None}
 
 
 def progressive(db, origin, destination, max_transfers=2, now=None, *, refresh=False):
     from .journey_completion import Completion, direct_walk, has_short_bus_leg, normalize_walks
     now = now or timezone.localtime()
     foot = direct_walk(origin, destination, now)
-    ends,_=access_points(db,destination,False,optimistic=True,endpoint_selection=True) if geographic_anchor(destination) else ([(destination,None)],False)
-    completion = Completion(db, destination, allowed_stops={p['id'] for p,_ in ends})
+    # A revisão do desembarque examina a própria viagem, além dos pontos usados na busca inicial.
+    completion = Completion(db, destination, origin=origin)
     for result in _bus_progressive(db, origin, destination, max_transfers, now, refresh=refresh,
                                    allow_raptor=foot is None or foot['walking_meters'] >= 1000):
         journeys = [normalize_walks(completion.improve(normalize_walks(journey))) for journey in result['journeys']]

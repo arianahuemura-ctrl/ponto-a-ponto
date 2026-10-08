@@ -14,7 +14,7 @@ from . import direct, graph, materialized_connections as materialized
 from . import connection_planner, store, walking
 
 
-def prepare(db, origin, destination):
+def _prepare_materialized(db, origin, destination):
     from .alternatives import access_points
     try:
         with closing(graph.readonly(materialized.database_path())) as prepared:
@@ -32,13 +32,80 @@ def prepare(db, origin, destination):
                 EXISTS (SELECT 1 FROM materialization_status m WHERE m.origin=c.origin
                  AND m.destination=c.destination AND m.state='ready' AND m.boardings=c.boardings)
                 ORDER BY c.distance_meters,c.origin,c.destination,c.boardings,c.rank''').fetchall()
-            if not rows:
-                return None
+            ready_pairs = {tuple(r) for r in prepared.execute("SELECT m.origin,m.destination FROM materialization_status m JOIN starts s ON s.id=m.origin JOIN ends e ON e.id=m.destination WHERE m.boardings=2 AND m.state='ready'")}
             with direct.connection(meta['signature']['source'][0]) as source:
                 paths = [materialized._expand(row, source) for row in rows]
-            return {'paths': paths, 'city_complete': meta.get('city_complete', False)}
+            return {'paths': paths, 'city_complete': meta.get('city_complete', False), 'ready_two_bus_pairs': ready_pairs}
+    except (ValueError, sqlite3.Error, OSError) as error:
+        return {'paths': [], 'unavailable_reason': str(error)}
+
+
+def prepare(db, origin, destination):
+    """Use também o índice municipal direto, independente da cobertura por pares."""
+    from .alternatives import access_points
+    context = _prepare_materialized(db, origin, destination)
+    paths = list((context or {}).get('paths', []))
+    try:
+        with direct.connection() as source:
+            starts, _ = access_points(db, origin, True, optimistic=True, endpoint_selection=True)
+            ends, _ = access_points(db, destination, False, optimistic=True, endpoint_selection=True)
+            for start, _ in starts:
+                for end, _ in ends:
+                    for edge in source.execute('SELECT * FROM direct_services WHERE origin=? AND destination=?',
+                                               (start['id'], end['id'])):
+                        paths.append({'trechos': [{'modo': 'onibus', 'origem': edge['origin'],
+                            'destino': edge['destination'], 'padrao_id': edge['pattern_id'],
+                            'embarque_indice': edge['boarding_index'], 'desembarque_indice': edge['alighting_index']}],
+                            'distancia_onibus_m': edge['distance_meters'] or 0})
     except (ValueError, sqlite3.Error, OSError):
-        return None
+        pass  # O consolidado pode continuar disponível mesmo sem o índice direto.
+    # O índice fatorado já contém ônibus + caminhada final para a cidade.
+    # Consulte essa categoria sem exigir a materialização do par e sem compor baldeações.
+    try:
+        from . import city_connections
+        source_path = city_connections.database_path()
+        materialized._source_meta(source_path)
+        with direct.connection(source_path) as source:
+            deadline = time.monotonic() + 5
+            source.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
+            starts, _ = access_points(db, origin, True, optimistic=True, endpoint_selection=True)
+            ends, _ = access_points(db, destination, False, optimistic=True, endpoint_selection=True)
+            expanded = []
+            for start, _ in starts:
+                for end, _ in ends:
+                    rows = source.execute('SELECT * FROM conexoes_1 WHERE origin=? AND destination=? AND final_walk IS NOT NULL',
+                                          (start['id'], end['id'])).fetchall()
+                    expanded.extend(materialized._expand(row, source) for row in rows)
+            paths.extend(expanded)
+    except (ValueError, sqlite3.Error, OSError):
+        pass
+    # Complete apenas pares cuja categoria de dois ônibus não está pronta.
+    # Um resultado vazio já materializado é definitivo; não refaça essa busca.
+    try:
+        from . import city_connections
+        source_path = city_connections.database_path()
+        materialized._source_meta(source_path)
+        with direct.connection(source_path) as source:
+            deadline = time.monotonic() + 5
+            source.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
+            starts, _ = access_points(db, origin, True, optimistic=True, endpoint_selection=True)
+            ends, _ = access_points(db, destination, False, optimistic=True, endpoint_selection=True)
+            ready = (context or {}).get('ready_two_bus_pairs', set())
+            for start, _ in starts:
+                for end, _ in ends:
+                    pair = (start['id'], end['id'])
+                    if pair in ready:
+                        continue
+                    rows = source.execute('''SELECT * FROM conexoes_2 WHERE origin=? AND destination=?
+                        ORDER BY distance_meters,edge1,edge2,edge3,final_walk LIMIT ?''',
+                        (*pair, city_connections.QUOTAS[2])).fetchall()
+                    expanded = [materialized._expand(row, source) for row in rows]
+                    paths.extend(expanded)
+    except (ValueError, sqlite3.Error, OSError):
+        pass  # Preserve as categorias prontas; o RAPTOR continua disponível.
+    if paths:
+        return {'paths': paths, 'city_complete': (context or {}).get('city_complete', False)}
+    return context
 
 
 class Walks:
@@ -142,7 +209,7 @@ def progressive(db, origin, destination, max_transfers, now, context):
                 a = graph.distance((origin['lat'], origin['lon']), (start['lat'], start['lon'])) / walking.WALK_METERS_PER_SECOND
                 b = graph.distance((end['lat'], end['lon']), (destination['lat'], destination['lon'])) / walking.WALK_METERS_PER_SECOND
                 candidates[signature] = (engine.preliminary(candidate, a, b), candidate, start, end, middle)
-            ranked = sorted(candidates.values(), key=lambda item: (item[0], item[1]['id']))
+            ranked = sorted(candidates.values(), key=lambda item: (item[1]['boardings'], item[0], item[1]['id']))
             base['candidate_count'] = len(ranked)
             for _, candidate, start, end, middle in ranked:
                 if walks.limited:

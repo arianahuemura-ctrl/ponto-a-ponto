@@ -217,13 +217,17 @@ class TransferPlannerTests(SimpleTestCase):
         self.assertEqual(best['transfer_walks'][-1]['destination']['id'],'4')
         self.assertAlmostEqual(best['duration_minutes'],19)
 
-    def test_geographic_endpoints_use_three_nearest_and_explicit_stops_stay_fixed(self):
+    def test_all_endpoints_allow_nearby_boarding_and_alighting(self):
         from transit.sptrans import alternatives
         with store.connection() as db:
             point=store.get_stop(db,'1')
             for outgoing in (True,False):
                 fixed,_=alternatives.access_points(db,point,outgoing,optimistic=True,endpoint_selection=True)
-                self.assertEqual([(p['id'],w) for p,w in fixed],[('1',None)])
+                self.assertEqual([p['id'] for p,w in fixed],['1','2','3'])
+                self.assertIsNone(fixed[0][1])
+                for p,w in fixed[1:]:
+                    self.assertEqual(w['accessType'],'boarding' if outgoing else 'destination')
+                    self.assertEqual(w['origin']['id'] if outgoing else w['destination']['id'],'1')
                 anchor={**point,'id':'address-test','lat':point['lat']+.0001}
                 choices,_=alternatives.access_points(db,anchor,outgoing,optimistic=True,endpoint_selection=True)
                 self.assertEqual([p['id'] for p,w in choices],['1','2','3'])
@@ -259,7 +263,7 @@ class TransferPlannerTests(SimpleTestCase):
                 result=alternatives.alternatives(db,a,b,now=NOW)
         routes=result['journeys']
         self.assertTrue(routes)
-        self.assertEqual(routes[0]['walking_minutes'],1.3)
+        self.assertAlmostEqual(routes[0]['walking_minutes'],100/75)
         self.assertEqual(routes[0]['walks'][0]['accessType'],'transfer')
         self.assertEqual(routes[0]['duration_minutes'],50.3)
         self.assertEqual([r['duration_minutes'] for r in routes],sorted(r['duration_minutes'] for r in routes))

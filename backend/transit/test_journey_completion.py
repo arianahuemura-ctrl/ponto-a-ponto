@@ -77,8 +77,8 @@ class CompletionTests(SimpleTestCase):
             self.assertEqual(reviewer._finish_before_transfer(journey),journey)
 
     def test_short_bus_uses_shape_distance(self):
-        self.assertTrue(completion.has_short_bus_leg({'legs':[{'geometry':[[0,0],[0,.004]]}]}))
-        self.assertFalse(completion.has_short_bus_leg({'legs':[{'geometry':[[0,0],[0,.006]]}]}))
+        self.assertTrue(completion.has_short_bus_leg({'legs':[{'geometry':[[0,0],[0,.002]]}]}))
+        self.assertFalse(completion.has_short_bus_leg({'legs':[{'geometry':[[0,0],[0,.004]]}]}))
         self.assertFalse(completion.has_short_bus_leg({'legs':[{'geometry':[]}]}))
 
     def test_final_walk_accepts_up_to_1500_meters(self):
@@ -140,3 +140,33 @@ class CompletionTests(SimpleTestCase):
                     self.assertEqual(prepare.called,selected=='connections')
                     self.assertTrue(result['complete'])
                     self.assertEqual(result['journeys'],[foot] if foot else [])
+
+    def test_walking_total_preserves_same_precision_as_details(self):
+        result=completion.normalize_walks({'legs':[], 'walking_minutes':12.1,
+            'walks':[{'accessType':'destination','distance_meters':911}]})
+        self.assertEqual(result['walking_minutes'],result['walks'][0]['duration_minutes'])
+        self.assertEqual(round(result['walking_seconds']),729)
+
+    def test_progressive_does_not_restrict_earlier_alighting_to_destination(self):
+        from transit.sptrans import alternatives
+        with patch.object(completion,'direct_walk',return_value=None), \
+             patch.object(completion,'Completion') as reviewer, \
+             patch.object(alternatives,'_bus_progressive',return_value=iter([{'journeys':[], 'complete':True}])):
+            list(alternatives.progressive(None,self.a,self.b,now=self.now))
+        reviewer.assert_called_once_with(None,self.b,origin=self.a)
+
+    def test_walk_directly_to_second_boarding_removes_backtracking_bus(self):
+        legs=[{'origin':self.a,'destination':self.b,'departure':'2026-10-08T05:01:00+00:00','arrival':'2026-10-08T05:05:00+00:00'},
+              {'origin':self.b,'destination':self.a,'departure':'2026-10-08T05:15:00+00:00','arrival':'2026-10-08T05:25:00+00:00'}]
+        journey={'id':'backtrack','legs':legs,'arrival':legs[-1]['arrival'],'duration_minutes':25,
+                 'transfers':1,'walking_meters':700,'walks':[{'accessType':'transfer','before_leg':1,'distance_meters':700}]}
+        reviewer=completion.Completion(None,self.a,origin=self.a)
+        foot={'origin':self.a,'destination':self.b,'accessType':'boarding','distance_meters':300,'seconds':240}
+        with patch.object(reviewer.walks,'route',return_value=foot):
+            result=reviewer._start_after_transfer(journey)
+        self.assertEqual(result['legs'],legs[1:])
+        self.assertEqual(result['transfers'],0)
+        self.assertEqual(result['walks'][0]['duration_minutes'],4)
+        self.assertEqual(result['arrival'],journey['arrival'])
+        with patch.object(reviewer.walks,'route',return_value={**foot,'seconds':1200}):
+            self.assertEqual(reviewer._start_after_transfer(journey)['legs'],legs)
