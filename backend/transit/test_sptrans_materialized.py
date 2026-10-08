@@ -148,3 +148,19 @@ class MaterializedConnectionsTests(SimpleTestCase):
                 self.assertIsNotNone(result)
                 self.assertTrue(result['paths'])
                 self.assertEqual({sum(leg['modo']=='onibus' for leg in p['trechos']) for p in result['paths']}, {ready})
+
+    def test_origin_batch_matches_every_destination_and_reuses_rank(self):
+        shared={}
+        with direct.connection(self.cp) as db:
+            stops=[r[0] for r in db.execute('SELECT id FROM graph_stop')]
+        for origin in stops:
+            shared.clear()
+            for destination in stops:
+                if origin==destination:continue
+                expected=city_connections.structural_query(origin,destination,path=self.cp,categories=(1,2))
+                actual=city_connections.structural_query(origin,destination,path=self.cp,categories=(1,2),offline=True,shared=shared)
+                self.assertEqual(actual['trajetos'],expected['trajetos'],(origin,destination))
+            self.assertEqual(len(shared),2)
+        with direct.connection(self.cp) as db:
+            cached=city_connections.rank_origin(db,origin,1,16,shared)
+            self.assertIs(cached,city_connections.rank_origin(db,origin,1,16,shared))

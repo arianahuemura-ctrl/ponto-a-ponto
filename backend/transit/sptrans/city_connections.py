@@ -278,6 +278,44 @@ def _rank_three(db, origin, destination, limit, deadline):
     return best
 
 
+def rank_origin(db, origin, boardings, limit, shared):
+    """Expanda uma origem uma vez; preserve TOP por destino sem podar intermediários.
+
+    Os JOINs das views cruzam ocorrências de chegada e partida nos pontos
+    de transferência, incluindo as ligações pedestres verificadas.
+    O SQLite pode usar disco para ordenar; só os resultados finais ficam em RAM.
+    """
+    key = ('origin_rank', origin, boardings, limit)
+    if key not in shared:
+        ranked = {}
+        # Copie a expansão de ônibus desta origem uma única vez. A extensão
+        # pedestre reutiliza essa tabela em vez de repetir a junção de ônibus.
+        table = f'origin_bus_{boardings}'
+        db.execute(f'DROP TABLE IF EXISTS temp.{table}')
+        db.execute(f'CREATE TEMP TABLE {table} AS SELECT * FROM bus_end_{boardings} WHERE origin=?', (origin,))
+        db.execute(f'CREATE INDEX temp.{table}_last ON {table}(edge{boardings})')
+        definition = db.execute("SELECT sql FROM sqlite_master WHERE name=?", (f'conexoes_{boardings}',)).fetchone()[0]
+        query = definition.split(' AS ', 1)[1].replace(f'bus_end_{boardings}', f'temp.{table}')
+        # Comece pelos desembarques já expandidos, não pela rede pedestre inteira.
+        begin = query.index('FROM walking_link')
+        end = query.index('AND w.destination<>j.origin', begin)
+        query = query[:begin] + (f'FROM temp.{table} j CROSS JOIN ride_edge e '
+            f'CROSS JOIN walking_link w INDEXED BY walking_out '
+            f'WHERE e.id=j.edge{boardings} AND w.origin=e.destination ') + query[end:]
+        rows = db.execute(f"""SELECT * FROM (
+            SELECT c.*, ROW_NUMBER() OVER (
+                PARTITION BY destination
+                ORDER BY distance_meters,edge1,edge2,edge3,final_walk
+            ) AS destination_rank
+            FROM ({query}) c WHERE origin=?
+        ) WHERE destination_rank<=? ORDER BY destination,destination_rank""", (origin, limit))
+        for row in rows:
+            ranked.setdefault(row['destination'], []).append(dict(row))
+        # Não publique resultados parciais caso a consulta seja interrompida.
+        shared[key] = ranked
+    return shared[key]
+
+
 def structural_query(origin, destination, path=None, seconds=30, quotas=None, categories=(1,2,3), offline=False, shared=None, experimental=False):
     if seconds <= 0:
         raise ValueError('O prazo deve ser positivo.')
@@ -322,6 +360,24 @@ def structural_query(origin, destination, path=None, seconds=30, quotas=None, ca
                         rows = rank_three(db,origin,destination,limit,start+seconds,shared=None if experimental else shared,allows=allows)
                     else:
                         rows = _rank_three(db,origin,destination,limit,start+seconds)
+                elif offline and shared is not None and not experimental:
+                    failure_key = ('origin_rank_timeout', origin, n, limit)
+                    ranked = None
+                    if not shared.get(failure_key):
+                        try:
+                            ranked = rank_origin(db, origin, n, limit, shared)
+                        except sqlite3.OperationalError as error:
+                            if 'interrupted' not in str(error): raise
+                            shared[failure_key] = True
+                    if ranked is None:
+                        # Uma origem muito grande não deve repetir a expansão em cada destino.
+                        deadline = time.perf_counter() + seconds
+                        db.set_progress_handler(lambda: int(time.perf_counter() > deadline), PROGRESS_STEPS)
+                        rows = db.execute(f'''SELECT * FROM conexoes_{n} WHERE origin=? AND destination=?
+                            ORDER BY distance_meters,edge1,edge2,edge3,final_walk LIMIT ?''',
+                            (origin,destination,limit)).fetchall()
+                    else:
+                        rows = ranked.get(destination, [])
                 else:
                     restriction=(' AND '+ ' AND '.join(f'pap_converges(edge{i})' for i in range(1,n+1))) if experimental else ''
                     rows = db.execute(f'''SELECT * FROM conexoes_{n} WHERE origin=? AND destination=?{restriction}

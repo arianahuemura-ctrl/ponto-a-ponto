@@ -1,0 +1,47 @@
+{
+  "stages": [
+    {
+      "stage": "validate_components",
+      "seconds": 0.0007829649839550257
+    },
+    {
+      "stage": "read_existing_coverage",
+      "seconds": 0.000806939962785691
+    },
+    {
+      "stage": "materialize",
+      "seconds": 415.5697947139852
+    },
+    {
+      "stage": "validate_new_artifact",
+      "seconds": 0.0007027359679341316
+    },
+    {
+      "stage": "activate",
+      "seconds": 3.4968950785696507e-05
+    }
+  ],
+  "pairs": 866,
+  "result": {
+    "selection_policy": "reference",
+    "database": "/home/avale/Projetos/maua_bus_map/sptrans.rebuilt.sqlite3",
+    "built_categories": 1732,
+    "skipped_categories": 0,
+    "timed_out_categories": 0,
+    "ready_pairs": 866,
+    "stored_paths": 7410,
+    "seconds": 415.558409158024,
+    "bytes": 1368064
+  },
+  "backup": "/home/avale/Projetos/maua_bus_map/sptrans.materialized.sqlite3.obsolete-1791465896803887648",
+  "total_seconds": 415.5729160940391,
+  "active_database": "/home/avale/Projetos/maua_bus_map/sptrans.materialized.sqlite3",
+  "verification": {
+    "pair": [
+      "260016674",
+      "440015046"
+    ],
+    "paths": 8,
+    "seconds": 0.007936471025459468
+  }
+}
