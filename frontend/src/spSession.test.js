@@ -29,5 +29,12 @@ test('URL sem stop prevalece sobre origem e destino da sessão',()=>{
   assert.equal(session.destination,null);
  }
  assert.equal(readSession(storage,'?stop=1').origin.id,'1');
- assert.equal(readSession(storage,'?stop=1').destination.id,'2');
+ assert.equal(readSession(storage,'?stop=1').destination,null);
+});
+
+
+test('favoritos guardam apenas pontos únicos, sem contexto de viagem',()=>{
+ const point={...stop,favoriteLabel:'Casa',manualBoarding:true,addressCoordinates:{lat:1,lon:2},destinationAddress:'Rua antiga',trip_id:'T'};
+ const storage={getItem:()=>JSON.stringify([point,point])};
+ assert.deepEqual(readFavorites(storage),[{...stop,favoriteLabel:'Casa'}]);
 });

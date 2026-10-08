@@ -1,4 +1,4 @@
-"""Local GTFS tangents with explicit approximate stop-sequence fallback."""
+"""Tangentes GTFS locais com aproximação explícita pela sequência de paradas quando necessário."""
 import math
 
 
@@ -29,7 +29,7 @@ def tangent(shape, point):
     if not candidates: return None
     candidates.sort()
     heading = candidates[0][1]
-    # At loops/crossings, do not pick one of two opposite directions arbitrarily.
+    # Em voltas/cruzamentos, não escolha arbitrariamente um de dois sentidos opostos.
     if any(abs((angle-heading+180)%360-180)>75 for gap,angle in candidates if gap<=candidates[0][0]+5): return None
     return round(heading)
 

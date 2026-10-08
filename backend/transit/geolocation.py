@@ -237,7 +237,7 @@ class StreetIndex:
                 if a["number"] == number
             ]
             if not targets:
-                # Bracketing only; no extrapolation beyond known numbers.
+                # Apenas interpolação entre números conhecidos; sem extrapolação.
                 lower = sorted(
                     (a for a in anchors if a["number"] < number),
                     key=lambda a: -a["number"],
@@ -280,7 +280,7 @@ class StreetIndex:
         if physical:
             physical = sorted(physical, key=lambda c: c["gap"])[:4]
         else:
-            # Street-only hypotheses. Never publish solely on this evidence.
+            # Hipóteses baseadas somente na rua. Nunca publique apenas com essa evidência.
             total = sum(s["length"] for s in segments)
             for fraction in (0.1, 0.3, 0.5, 0.7, 0.9):
                 target = total * fraction
@@ -329,7 +329,7 @@ class StreetIndex:
             return 0.0
         if distance(self.nodes[start], self.nodes[end]) > MAX_PATH:
             return math.inf
-        # A* with Euclidean lower bound; directed topology enforces one-way roads.
+        # A* com limite inferior euclidiano; a topologia dirigida respeita as vias de mão única.
         queue = [(0.0, 0.0, start)]
         best = {start: 0.0}
         while queue:
@@ -368,7 +368,7 @@ class StreetIndex:
         return tail + self.path_distance(end, start) + head
 
     def resolve(self, lists):
-        """Viterbi-like DP; unresolved streets split the sequence, never get skipped."""
+        """Programação dinâmica semelhante ao Viterbi; ruas não resolvidas dividem a sequência, nunca são ignoradas."""
         results = [None] * len(lists)
         start = 0
         while start < len(lists):
@@ -440,7 +440,7 @@ class StreetIndex:
                     for near in group[i + 1 : i + 3]
                     for c in near
                 )
-                # Missing direction or weak street-only evidence remains reviewable, unpublished.
+                # Sentido ausente ou evidência fraca baseada na rua permanece para revisão, sem publicação.
                 publish = margin >= 0.5 and (anchored or neighbors and margin >= 1.0)
                 segment = candidate["segment"]
                 ax, ay = xy(segment["a"])

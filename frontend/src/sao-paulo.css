@@ -26,7 +26,7 @@
 .sp-area-button { padding:12px; background:var(--pap-surface); color:var(--pap-text); border:1px solid var(--pap-border); border-radius:8px; box-shadow:0 1px 5px #0003; }
 .sp-stop { --sp-stop-fill:#1372db; --sp-heading-size:60px; border-radius:50%; background:var(--sp-stop-fill); border:2px solid white; box-shadow:0 1px 4px #0006; }
 .sp-origin,.sp-destination { color:white; text-align:center; line-height:24px; font-weight:bold; }
-.sp-destination { --sp-stop-fill:#b92340; }
+.sp-destination { --sp-stop-fill:#f1f5f9; display:grid; place-items:center; border-color:#475569; }
 .sp-bus { background:#128050; border:2px solid white; border-radius:5px; color:white; text-align:center; }
 .sp-favorites, .sp-more { width:100%; max-width:900px; align-self:center; }
 @media(max-width:767px) {
@@ -46,7 +46,7 @@
 .sp-schematic-note { position:absolute; bottom:24px; left:12px; right:12px; z-index:450; padding:10px; border-radius:8px; background:var(--pap-surface); color:var(--pap-text); font-size:12px; }
 .sp-transfer-stop { --sp-stop-fill:#a34c00; color:white; font-weight:bold; line-height:24px; text-align:center; }
 
-/* The concave base follows the outer circle exactly; the tip extends 7px beyond it. */
+/* A base côncava segue exatamente a circunferência externa; a ponta se estende mais 7 px. */
 .sp-heading { position:absolute; left:50%; top:50%; width:var(--sp-heading-size); height:var(--sp-heading-size); margin-top:calc(var(--sp-heading-size) / -2); margin-left:calc(var(--sp-heading-size) / -2); pointer-events:none; transform-origin:center; }
 .sp-heading svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
 .sp-heading path { fill:var(--sp-stop-fill); stroke:none; }
@@ -137,7 +137,7 @@
 
 .sp-route-options{display:grid;gap:8px;margin:16px 0}.sp-route-option{display:grid;gap:5px;text-align:left;padding:12px;border:1px solid var(--border,#75869b);border-radius:10px;background:transparent;color:inherit}.sp-route-option[aria-pressed="true"]{border:2px solid #48bafa;background:rgba(50,150,240,.12)}
 
-/* The middle column spans exactly the space between the brand and search tools. */
+/* A coluna central ocupa exatamente o espaço entre a marca e as ferramentas de busca. */
 .sp-shell .sp-header { grid-template-columns:auto minmax(0,1fr) auto; }
 .sp-header .sp-navigation-state { min-width:0; width:100%; }
 .sp-header .sp-state-heading { justify-content:center; text-align:center; }
@@ -156,7 +156,7 @@
 .sp-passenger-position.is-simulated { background:#9333ea; }
 .sp-passenger-position svg { width:100%; height:100%; fill:none; stroke:white; stroke-width:2; }
 
-/* Keep long-touch destination selection free of native image menus. */
+/* Evite menus nativos de imagens durante a seleção de destino por toque prolongado. */
 .sp-map { -webkit-touch-callout: none; }
 
 .sp-loading-hourglass { animation:sp-hourglass-turn 1.6s ease-in-out infinite; transform-origin:center; }
@@ -172,3 +172,139 @@
 .sp-live-bus svg { width:24px; height:24px; fill:none; stroke:white; stroke-width:1.8; }
 
 .sp-boarding-countdown { color:var(--text); font-size:14px; }
+
+.sp-next-arrivals ul{list-style:none;padding:0;margin:.6rem 0}
+.sp-next-arrivals li{display:flex;flex-direction:column;gap:.3rem;margin:.8rem 0}
+.sp-next-arrivals .sp-next-countdown{font-size:1.2rem;color:var(--text)}
+.sp-next-arrivals li:first-child .sp-next-countdown{font-size:1.45rem}
+
+.sp-watch-bus{display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;background:transparent;border:0;padding:.3rem 0;text-align:left;cursor:pointer;color:var(--pap-accent)}
+.sp-watch-panel{position:absolute;top:var(--sp-map-control-center,47px);transform:translateY(-50%);left:calc(var(--sp-map-control-left,10px) + var(--sp-map-control-size,38px) + 10px);right:10px;z-index:450;background:var(--pap-surface);padding:12px;border:1px solid var(--pap-border);border-radius:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.sp-selectable-line{position:relative}
+.sp-selectable-line.selecting{padding-top:48px}
+.sp-line-checkbox{position:absolute;top:14px;left:14px;width:22px;height:22px;accent-color:var(--pap-accent)}
+.sp-multi-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sp-selectable-line.selecting .sp-watch-bus{pointer-events:none}
+.sp-watch-panel{max-height:35%;overflow:auto}
+
+.sp-board-order{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}
+.sp-board-order select{max-width:100%;min-height:40px;padding:8px;background:var(--pap-surface,#1c2839);color:inherit;border:1px solid currentColor;border-radius:6px}
+
+.sp-board-actions .sp-favorite-action{display:inline-flex;align-items:center;gap:8px}
+.sp-favorite-action svg{width:24px;height:24px;flex-shrink:0}
+
+.sp-stop-transparency { position:absolute; top:12px; right:12px; z-index:450; padding:10px 12px; border:1px solid var(--pap-text); border-radius:8px; background:var(--pap-surface); color:var(--pap-text); cursor:pointer; }
+.sp-stop-transparency[aria-pressed="true"] { border-style:dotted; border-color:var(--pap-text); box-shadow:0 1px 5px #0003; }
+.sp-transparent-stops .sp-stop:not(.sp-origin):not(.sp-destination):not(.sp-transfer-stop) { opacity:.25 !important; }
+
+.sp-point-control{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:5px 8px;border:1px dashed var(--pap-text);border-radius:8px;background:var(--pap-surface);color:var(--pap-text);text-align:left;cursor:pointer;flex-shrink:0}
+.sp-point-control small{display:block;font-size:10px;line-height:1.3}
+.sp-point-symbol{position:relative;display:flex;padding-right:5px}
+.sp-point-symbol>span{position:absolute;right:-3px;bottom:-6px;font-size:12px;font-weight:bold;background:var(--pap-surface);border-radius:50%}
+.sp-point-control[data-state="set"]{border-style:solid}
+.sp-point-control[data-selecting="true"]{border-color:#38bdf8}
+.sp-point-control:focus-visible{outline:3px solid #38bdf8;outline-offset:3px}
+.sp-point-control:disabled{opacity:.5;cursor:default}
+
+.sp-map .sp-stop { transition:opacity 300ms ease-in-out; }
+.sp-stop-transparency { transition:background-color 300ms ease-in-out, border-color 300ms ease-in-out; }
+@media (prefers-reduced-motion:reduce) {
+  .sp-map .sp-stop, .sp-stop-transparency { transition:none; }
+}
+.leaflet-zoom-anim .sp-stop { transition:transform 250ms cubic-bezier(0,0,.25,1), opacity 300ms ease-in-out; }
+@media (prefers-reduced-motion:reduce) {
+  .leaflet-zoom-anim .sp-stop { transition:transform 250ms cubic-bezier(0,0,.25,1); }
+}
+
+.sp-stop-transparency { top:var(--sp-light-top,154px); left:var(--sp-map-control-left,10px); right:auto; width:var(--sp-map-control-size,38px); min-width:var(--sp-map-control-size,38px); height:var(--sp-map-control-size,38px); padding:0; box-sizing:border-box; border-radius:8px; box-shadow:0 1px 5px #0003; }
+
+/* O foco nos controles do mapa não deve rolar o cabeçalho para fora da tela. */
+.sp-shell { overflow:clip; }
+.sp-shell .sp-header { position:relative; z-index:500; flex-shrink:0; background:var(--pap-surface); }
+.sp-navigation { overflow:clip; }
+.sp-map-panel { overflow:clip; }
+.sp-map { min-height:0; }
+
+/* Mesma caixa e alinhamento dos controles de localização e zoom. */
+.sp-shell .sp-stop-transparency {
+  width:var(--sp-map-control-size,38px);
+  min-width:var(--sp-map-control-size,38px);
+  max-width:var(--sp-map-control-size,38px);
+  height:var(--sp-map-control-size,38px);
+  min-height:var(--sp-map-control-size,38px);
+  max-height:var(--sp-map-control-size,38px);
+  display:grid; place-items:center; margin:0; padding:0;
+}
+.sp-shell .sp-stop-transparency svg { width:22px; height:22px; display:block; transform:none; }
+
+.sp-map-point-controls { position:absolute; z-index:450; left:var(--sp-map-control-left,10px); top:calc(var(--sp-light-top,154px) + var(--sp-map-control-size,38px) + 10px); display:flex; flex-direction:column; gap:10px; }
+.sp-shell .sp-point-control { position:relative; display:grid; place-items:center; box-sizing:border-box; width:var(--sp-map-control-size,38px); min-width:var(--sp-map-control-size,38px); max-width:var(--sp-map-control-size,38px); height:var(--sp-map-control-size,38px); min-height:var(--sp-map-control-size,38px); max-height:var(--sp-map-control-size,38px); padding:0; margin:0; border-radius:8px; box-shadow:0 1px 5px #0003; }
+.sp-point-control .sp-point-symbol { padding:0; }
+.sp-point-control .sp-point-symbol>span { right:-6px; bottom:-6px; font-size:10px; line-height:12px; }
+.sp-point-description { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+
+.sp-map-point-controls[data-has-light="false"] { top:var(--sp-light-top,154px); }
+
+.sp-next-arrivals .sp-watch-bus { display:inline-flex; width:fit-content; max-width:100%; align-self:flex-start; flex:0 0 auto; }
+
+.sp-point-control[data-state="empty"] { border-style:dotted; }
+
+/* Estado visual uniforme dos controles: foco não altera a opacidade. */
+.sp-shell .sp-point-control,
+.sp-shell .sp-stop-transparency {
+  opacity:1;
+  transition:opacity 300ms ease-in-out, border-color 300ms ease-in-out;
+}
+.sp-shell .sp-point-control[data-state="empty"],
+.sp-shell .sp-stop-transparency[aria-pressed="true"] {
+  opacity:.55;
+  border-width:2px;
+  border-style:dotted;
+}
+@media (prefers-reduced-motion:reduce) {
+  .sp-shell .sp-point-control,
+  .sp-shell .sp-stop-transparency { transition:none; }
+}
+
+.sp-raptor-mark { display:inline-flex; vertical-align:middle; margin-left:8px; opacity:.7; }
+.sp-raptor-mark svg { width:16px; height:16px; }
+
+.sp-origin .sp-boarding-icon { width:28px; height:28px; display:block; object-fit:contain; }
+
+.sp-destination .sp-destination-icon { width:22px; height:22px; display:block; object-fit:contain; }
+
+.sp-point-control-image { display:block; width:24px; height:24px; object-fit:contain; }
+[data-theme="dark"] .sp-point-control[data-kind="destination"] .sp-point-control-image { filter:invert(1); }
+
+.sp-origin { display:grid; place-items:center; }
+
+.sp-point-dark-image { display:none; width:24px; height:24px; object-fit:contain; }
+[data-theme="dark"] .sp-point-control[data-kind="origin"] .sp-point-control-image { display:none; }
+[data-theme="dark"] .sp-point-control[data-kind="origin"] .sp-point-dark-image { display:block; }
+
+/* Contraste do destino sobre o mapa claro, mantendo a bandeira dentro do círculo. */
+[data-theme="light"] .sp-destination { --sp-stop-fill:#1e293b; border-color:#f1f5f9; }
+[data-theme="light"] .sp-destination .sp-destination-icon { filter:invert(1); }
+
+/* A janela e sua barra fixa compartilham o fundo suave do tema ativo. */
+.sp-board-dialog,
+.sp-board-dialog .sp-board-actions {
+  background:var(--pap-soft);
+  color:var(--pap-text);
+}
+
+/* Título e controles permanecem acessíveis durante a rolagem da lista. */
+.sp-board-dialog .sp-board-top {
+  position:sticky;
+  top:-22px;
+  z-index:3;
+  margin:-22px -22px 0;
+  padding:22px;
+  background:var(--pap-soft);
+  border-bottom:1px solid var(--pap-border);
+}
+.sp-board-dialog .sp-board-actions { position:static; }
+
+.sp-measure-tooltip { white-space:normal; max-width:240px; }
+.sp-measure-tooltip button { border:0; background:transparent; color:inherit; cursor:pointer; font-size:18px; padding:2px 8px; }

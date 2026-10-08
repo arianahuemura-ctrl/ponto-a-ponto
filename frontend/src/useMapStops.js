@@ -13,7 +13,7 @@ export function useMapStops(viewport) {
     const hit=cache.current.get(key);
     setError('');
     if(hit&&now-hit.time<TTL){setStops(hit.stops);setLoading(false);return()=>abort.abort();}
-    // Show reusable markers immediately while completing the new visible area.
+    // Exiba marcadores reutilizáveis imediatamente enquanto completa a nova área visível.
     const reused=[...known.current.values()].filter(s=>now-s.time<TTL&&inside(s.stop,viewport)).map(s=>s.stop);
     setStops(reused);setLoading(true);
     const timer=setTimeout(async()=>{
@@ -27,7 +27,7 @@ export function useMapStops(viewport) {
           if(data.revision&&revision.current!==data.revision){cache.current.clear();known.current.clear();revision.current=data.revision;}
           for(const stop of data.stops){gathered.set(stop.id,stop);known.current.delete(stop.id);known.current.set(stop.id,{stop,time:Date.now()});}
           while(known.current.size>8000)known.current.delete(known.current.keys().next().value);
-          // Preserve cached markers on the edges until fresh batches reach them.
+          // Preserve marcadores em cache nas bordas até os novos lotes alcançá-los.
           const visible=new Map([...known.current.values()].filter(s=>Date.now()-s.time<TTL&&inside(s.stop,viewport)).map(s=>[s.stop.id,s.stop]));
           for(const [id,stop] of gathered)visible.set(id,stop);
           setStops([...visible.values()]);

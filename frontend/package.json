@@ -11,7 +11,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test src/*.test.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:coverage": "node scripts/coverage.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -21,6 +22,33 @@
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "vite": "^8.3.0"
+    "nyc": "^18.0.0",
+    "vite": "^8.3.0",
+    "vite-plugin-istanbul": "^9.0.1"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "src/**/*.js",
+      "src/**/*.jsx"
+    ],
+    "exclude": [
+      "src/**/*.test.js"
+    ],
+    "extension": [
+      ".js",
+      ".jsx"
+    ],
+    "reporter": [
+      "text",
+      "html",
+      "json-summary"
+    ],
+    "report-dir": "coverage",
+    "check-coverage": true,
+    "lines": 71,
+    "branches": 71,
+    "functions": 71,
+    "statements": 71
   }
 }

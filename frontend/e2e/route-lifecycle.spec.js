@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './coverage.js';
 const origin={id:'1',name:'Embarque',lat:-23.55,lon:-46.64},destination={id:'2',name:'Guaiaúna',lat:-23.52,lon:-46.53};
 async function setup(page,gps=false){
  await page.addInitScript(({origin,destination})=>sessionStorage.setItem('pap.sp.session',JSON.stringify({origin,destination})),{origin,destination});

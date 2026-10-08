@@ -19,7 +19,7 @@ def line_mapping(row):
         terminal=line['tp'] if line['sl']==1 else line['ts']
         if code==row['code'] and normalized(terminal)==normalized(row['headsign']):
             matches.append(line)
-    # Do not infer Olho Vivo direction from GTFS direction_id: conventions can differ.
+    # Não deduza o sentido Olho Vivo a partir de direction_id GTFS: as convenções podem diferir.
     return matches[0] if len(matches)==1 else None
 
 
@@ -38,9 +38,9 @@ def add_predictions(row, origin, ttl=30):
         row['realtime_status']='Sentido sem correspondência inequívoca na API.'
         return
     row['api_line']=line['cl']
-    # The line-stop catalogue is incomplete: Previsao accepts GTFS stop IDs
-    # that BuscarParadasPorLinha does not enumerate. Validate the returned
-    # stop identity and coordinates before accepting a direct lookup.
+    # O catálogo linha/parada é incompleto: Previsao aceita IDs GTFS de paradas
+    # que BuscarParadasPorLinha não enumera. Valide a identidade e as coordenadas
+    # da parada retornada antes de aceitar a consulta direta.
     payload=None
     if str(origin['id']).isdigit() and 'lat' in origin and 'lon' in origin:
         direct=client.get('Previsao',{'codigoParada':int(origin['id']),'codigoLinha':line['cl']},ttl)

@@ -1,0 +1,454 @@
+{
+  "date": "2026-10-07",
+  "branch": "feat/busca-bidirecional",
+  "base_commit": "9c1191b",
+  "implementation": "uncommitted working tree",
+  "database": "sptrans.routing.sqlite3",
+  "database_bytes": 624701440,
+  "quotas": {
+    "one_bus": 16,
+    "two_buses": 8,
+    "three_buses": 4
+  },
+  "counts": {
+    "connection_segments": 96454,
+    "connection_pairs": 9,
+    "connections": 39,
+    "historical_profiles": 0,
+    "connection_operational_mappings": 11
+  },
+  "walking_coverage": {
+    "pending": 1687888,
+    "verified": 4
+  },
+  "integrity_check": "ok",
+  "backend_tests_passed": 203,
+  "frontend_tests_passed": 26,
+  "frontend_build": "passed",
+  "live_check": {
+    "candidate_count": 14,
+    "journeys": 5,
+    "api_lookups": 15,
+    "warnings": [],
+    "timing_sources": [
+      "olho_vivo",
+      "programme"
+    ]
+  },
+  "materialized_pairs": [
+    {
+      "origin": "1206717",
+      "destination": "820005700",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 1.4937977539375424e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.0661733080050908
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.20628110400866717
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "260016920",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 1.8368009477853775e-05
+        },
+        "2": {
+          "count": 8,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06546108599286526
+        },
+        "3": {
+          "count": 4,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.23191108999890275
+        }
+      },
+      "candidate_count": 12,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "440015007",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 2,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 2.5493005523458123e-05
+        },
+        "2": {
+          "count": 8,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06334590399637818
+        },
+        "3": {
+          "count": 4,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.23751797899603844
+        }
+      },
+      "candidate_count": 14,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012584",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 2.200898597948253e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06537463201675564
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.224283079005545
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012585",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 6.261400994844735e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06433563298196532
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.2205389160080813
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "6714560",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 1,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 5.348300328478217e-05
+        },
+        "2": {
+          "count": 8,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06551089198910631
+        },
+        "3": {
+          "count": 4,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.2320995979825966
+        }
+      },
+      "candidate_count": 13,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211364",
+      "destination": "80014596",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 1.658900873735547e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06305637100012973
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.22116338601335883
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211381",
+      "destination": "600012584",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 1.5878002159297466e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06456155399791896
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.21038193302229047
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    },
+    {
+      "origin": "1211381",
+      "destination": "600012585",
+      "complete": true,
+      "categories": {
+        "1": {
+          "count": 0,
+          "quota": 16,
+          "complete": true,
+          "build_seconds": 9.307402069680393e-05
+        },
+        "2": {
+          "count": 0,
+          "quota": 8,
+          "complete": true,
+          "build_seconds": 0.06522838800447062
+        },
+        "3": {
+          "count": 0,
+          "quota": 4,
+          "complete": true,
+          "build_seconds": 0.20878091698978096
+        }
+      },
+      "candidate_count": 0,
+      "revision": 4,
+      "selection": "distance_bus_plus_walk"
+    }
+  ],
+  "offline_checks": [
+    {
+      "origin": "1206717",
+      "destination": "820005700",
+      "seconds": [
+        0.0007169829914346337,
+        0.000558572995942086,
+        0.0004993760085199028
+      ],
+      "median_seconds": 0.000558572995942086,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "260016920",
+      "seconds": [
+        0.002842415007762611,
+        0.0026620079879648983,
+        0.002599720988655463
+      ],
+      "median_seconds": 0.0026620079879648983,
+      "candidates": 12,
+      "journeys": 5,
+      "counts": {
+        "evaluated": 7,
+        "pruned": 0,
+        "infeasible_or_pruned": 5
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "440015007",
+      "seconds": [
+        0.003259489021729678,
+        0.0031993129814509302,
+        0.003316147020086646
+      ],
+      "median_seconds": 0.003259489021729678,
+      "candidates": 14,
+      "journeys": 5,
+      "counts": {
+        "evaluated": 7,
+        "pruned": 0,
+        "infeasible_or_pruned": 7
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012584",
+      "seconds": [
+        0.0006147800013422966,
+        0.000555207981960848,
+        0.0005432140023913234
+      ],
+      "median_seconds": 0.000555207981960848,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012585",
+      "seconds": [
+        0.0005269389948807657,
+        0.0005510199989657849,
+        0.0005276250012684613
+      ],
+      "median_seconds": 0.0005276250012684613,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "6714560",
+      "seconds": [
+        0.0021583340130746365,
+        0.0022447600204031914,
+        0.002255439991131425
+      ],
+      "median_seconds": 0.0022447600204031914,
+      "candidates": 13,
+      "journeys": 5,
+      "counts": {
+        "evaluated": 7,
+        "pruned": 0,
+        "infeasible_or_pruned": 6
+      }
+    },
+    {
+      "origin": "1211364",
+      "destination": "80014596",
+      "seconds": [
+        0.0005992979859001935,
+        0.0005512330099008977,
+        0.0005486040026880801
+      ],
+      "median_seconds": 0.0005512330099008977,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    },
+    {
+      "origin": "1211381",
+      "destination": "600012584",
+      "seconds": [
+        0.000551700999494642,
+        0.000559243984753266,
+        0.0005202299798838794
+      ],
+      "median_seconds": 0.000551700999494642,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    },
+    {
+      "origin": "1211381",
+      "destination": "600012585",
+      "seconds": [
+        0.0005348190024960786,
+        0.000525618001120165,
+        0.0005134610109962523
+      ],
+      "median_seconds": 0.000525618001120165,
+      "candidates": 0,
+      "journeys": 0,
+      "counts": {
+        "evaluated": 0,
+        "pruned": 0,
+        "infeasible_or_pruned": 0
+      }
+    }
+  ],
+  "benchmark_scope": "3 local offline runs per pair; no fair previous-planner comparison, no p95/p99 claim.",
+  "limitations": [
+    "Only verified walks enter the graph.",
+    "No observed historical profiles imported.",
+    "All-pairs variants are relational views; nine pairs are materialized.",
+    "Distance selection is heuristic, not globally optimal."
+  ]
+}

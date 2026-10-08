@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './coverage.js';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos não escolhem',async({page,context})=>{
   await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
@@ -43,7 +43,7 @@ test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos n�
   expect(boards[0].get('to_lat')).not.toBe('-23.551');
   await expect(page.getByRole('dialog')).toContainText('Local selecionado no mapa');
   const previousDestination=Object.fromEntries(['destination','to_lat','to_lon'].map(key=>[key,boards[0].get(key)]));
-  // Changing boarding from an already selected route must preserve its destination.
+  // Alterar embarque em uma rota já selecionada deve preservar o destino.
   await page.waitForTimeout(1250);
   await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
   await page.getByRole('button',{name:'Alterar embarque',exact:true}).click();

@@ -1,0 +1,1408 @@
+{
+  "walking_build": {
+    "version": 1,
+    "source_gtfs": [
+      "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+      73437184,
+      1791318021740218230
+    ],
+    "built_at": "2026-10-08T02:47:50.299476+00:00",
+    "network_id": "osrm-6.0.0-foot:8ed7c42b9ffbc56b8dcb47345fbaa2f7beb835de3dfab20713b4a430098e97ff",
+    "router": "http://127.0.0.1:5099",
+    "profile": "foot",
+    "max_meters": 1000,
+    "speed_kmh": 4.5,
+    "max_snap_meters": 20,
+    "geometry_materialized": false,
+    "candidate_pairs": 1687892,
+    "counts": {
+      "over_limit": 661940,
+      "unreachable": 31220,
+      "unsnappable": 42124,
+      "verified": 952608
+    },
+    "stops": 22061,
+    "source_graph": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+    "seconds": 31.62522149202414,
+    "bytes": 467996672,
+    "database": "/home/avale/Projetos/maua_bus_map/sptrans.walks.sqlite3"
+  },
+  "connections_build": {
+    "version": 2,
+    "built_at": "2026-10-08T03:06:19.748179+00:00",
+    "representation": "factorized",
+    "source_gtfs": [
+      "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+      73437184,
+      1791318021740218230
+    ],
+    "walk_revision": 4,
+    "walking_speed_kmh": 4.5,
+    "max_walk_meters": 1000,
+    "quotas": {
+      "1": 16,
+      "2": 8,
+      "3": 4
+    },
+    "walk_source": [
+      "/home/avale/Projetos/maua_bus_map/sptrans.walks.sqlite3",
+      467996672,
+      1791427695787605925
+    ],
+    "walking_coverage": {
+      "version": 1,
+      "source_gtfs": [
+        "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+        73437184,
+        1791318021740218230
+      ],
+      "built_at": "2026-10-08T02:47:50.299476+00:00",
+      "network_id": "osrm-6.0.0-foot:8ed7c42b9ffbc56b8dcb47345fbaa2f7beb835de3dfab20713b4a430098e97ff",
+      "router": "http://127.0.0.1:5099",
+      "profile": "foot",
+      "max_meters": 1000,
+      "speed_kmh": 4.5,
+      "max_snap_meters": 20,
+      "geometry_materialized": false,
+      "candidate_pairs": 1687892,
+      "counts": {
+        "over_limit": 661940,
+        "unreachable": 31220,
+        "unsnappable": 42124,
+        "verified": 952608
+      },
+      "stops": 22061,
+      "source_graph": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+      "seconds": 30.00365276201046
+    },
+    "bus_walk_exits": 4267783,
+    "ride_edges": 2588077,
+    "patterns": 2239,
+    "same_stop_transfers": 815823,
+    "transfers": 22769860,
+    "verified_walks": 952608,
+    "unknown_ride_distances": 42,
+    "structural_only": true,
+    "all_od_paths_materialized": false,
+    "source": "/home/avale/Projetos/maua_bus_map/sptrans.direct.sqlite3",
+    "graph_source": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+    "seconds": 111.81348745300784,
+    "bytes": 3048796160,
+    "database": "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3"
+  },
+  "route_validation": {
+    "sample": [
+      {
+        "origin": "7612199",
+        "destination": "760006067",
+        "matrix_m": 512.659228949,
+        "route_m": 512.659228949,
+        "difference_m": 0.0,
+        "geometry_vertices": 14
+      },
+      {
+        "origin": "20014703",
+        "destination": "211157",
+        "matrix_m": 345.870989332,
+        "route_m": 345.870989332,
+        "difference_m": 0.0,
+        "geometry_vertices": 10
+      },
+      {
+        "origin": "630015116",
+        "destination": "6311395",
+        "matrix_m": 297.191550512,
+        "route_m": 297.191550512,
+        "difference_m": 0.0,
+        "geometry_vertices": 9
+      },
+      {
+        "origin": "650004814",
+        "destination": "6509510",
+        "matrix_m": 946.063854624,
+        "route_m": 946.0638546240001,
+        "difference_m": 1.1368683772161603e-13,
+        "geometry_vertices": 26
+      },
+      {
+        "origin": "780006299",
+        "destination": "780006303",
+        "matrix_m": 210.90480767100001,
+        "route_m": 210.90480767100001,
+        "difference_m": 0.0,
+        "geometry_vertices": 16
+      },
+      {
+        "origin": "510001683",
+        "destination": "510001667",
+        "matrix_m": 98.59261320499999,
+        "route_m": 98.59261320499999,
+        "difference_m": 0.0,
+        "geometry_vertices": 6
+      },
+      {
+        "origin": "3515144",
+        "destination": "3515402",
+        "matrix_m": 273.81537609300005,
+        "route_m": 273.815376093,
+        "difference_m": 5.684341886080802e-14,
+        "geometry_vertices": 9
+      },
+      {
+        "origin": "9505518",
+        "destination": "950006563",
+        "matrix_m": 993.7917561400001,
+        "route_m": 993.79175614,
+        "difference_m": 1.1368683772161603e-13,
+        "geometry_vertices": 28
+      },
+      {
+        "origin": "490016952",
+        "destination": "490017001",
+        "matrix_m": 644.396621955,
+        "route_m": 644.396621955,
+        "difference_m": 0.0,
+        "geometry_vertices": 41
+      },
+      {
+        "origin": "3515251",
+        "destination": "3515421",
+        "matrix_m": 641.037555224,
+        "route_m": 641.037555224,
+        "difference_m": 0.0,
+        "geometry_vertices": 21
+      },
+      {
+        "origin": "3515326",
+        "destination": "350002374",
+        "matrix_m": 573.798452678,
+        "route_m": 573.798452678,
+        "difference_m": 0.0,
+        "geometry_vertices": 23
+      },
+      {
+        "origin": "360004615",
+        "destination": "360004967",
+        "matrix_m": 816.491329099,
+        "route_m": 816.491329099,
+        "difference_m": 0.0,
+        "geometry_vertices": 40
+      },
+      {
+        "origin": "409070",
+        "destination": "409058",
+        "matrix_m": 894.3440909039999,
+        "route_m": 894.3440909039999,
+        "difference_m": 0.0,
+        "geometry_vertices": 27
+      },
+      {
+        "origin": "6415396",
+        "destination": "640000127",
+        "matrix_m": 790.6406066935001,
+        "route_m": 790.6406066935,
+        "difference_m": 1.1368683772161603e-13,
+        "geometry_vertices": 21
+      },
+      {
+        "origin": "800016546",
+        "destination": "8010210",
+        "matrix_m": 820.8915924935001,
+        "route_m": 820.8915924935001,
+        "difference_m": 0.0,
+        "geometry_vertices": 55
+      },
+      {
+        "origin": "5409615",
+        "destination": "109740",
+        "matrix_m": 996.0234249030001,
+        "route_m": 996.0234249030001,
+        "difference_m": 0.0,
+        "geometry_vertices": 34
+      },
+      {
+        "origin": "6009602",
+        "destination": "6009776",
+        "matrix_m": 400.242122762,
+        "route_m": 400.242122762,
+        "difference_m": 0.0,
+        "geometry_vertices": 20
+      },
+      {
+        "origin": "3608984",
+        "destination": "3609175",
+        "matrix_m": 435.963627267,
+        "route_m": 435.963627267,
+        "difference_m": 0.0,
+        "geometry_vertices": 16
+      },
+      {
+        "origin": "760002826",
+        "destination": "7612196",
+        "matrix_m": 688.575246174,
+        "route_m": 688.575246174,
+        "difference_m": 0.0,
+        "geometry_vertices": 20
+      },
+      {
+        "origin": "190011829",
+        "destination": "450011822",
+        "matrix_m": 852.328791888,
+        "route_m": 852.328791888,
+        "difference_m": 0.0,
+        "geometry_vertices": 25
+      }
+    ],
+    "maximum_difference_m": 1.1368683772161603e-13
+  },
+  "tests_passed": 235,
+  "integrity": "ok",
+  "invalid_walking_links": 0,
+  "foreign_key_issues": [],
+  "forward_reverse_samples": [
+    {
+      "edge_id": 1225527,
+      "walk_id": 398734,
+      "origin": "780006751",
+      "destination": "1410086",
+      "search_from": "780006751",
+      "search_to": "1410086",
+      "pattern_id": 991,
+      "boarding_index": 0,
+      "alighting_index": 61,
+      "bus_meters": 20634.338145522324,
+      "walk_meters": 500.899811959,
+      "walk_seconds": 400.71984956719996,
+      "distance_meters": 21135.237957481324
+    },
+    {
+      "edge_id": 190235,
+      "walk_id": 874285,
+      "origin": "8313537",
+      "destination": "710002052",
+      "search_from": "8313537",
+      "search_to": "710002052",
+      "pattern_id": 172,
+      "boarding_index": 15,
+      "alighting_index": 28,
+      "bus_meters": 3745.151254970274,
+      "walk_meters": 821.3887257210001,
+      "walk_seconds": 657.1109805768001,
+      "distance_meters": 4566.539980691274
+    },
+    {
+      "edge_id": 1839567,
+      "walk_id": 949662,
+      "origin": "1206916",
+      "destination": "6607151",
+      "search_from": "1206916",
+      "search_to": "6607151",
+      "pattern_id": 1643,
+      "boarding_index": 20,
+      "alighting_index": 33,
+      "bus_meters": 6043.055745776619,
+      "walk_meters": 906.838021587,
+      "walk_seconds": 725.4704172695999,
+      "distance_meters": 6949.893767363619
+    },
+    {
+      "edge_id": 1007067,
+      "walk_id": 283446,
+      "origin": "240012635",
+      "destination": "8209720",
+      "search_from": "240012635",
+      "search_to": "8209720",
+      "pattern_id": 819,
+      "boarding_index": 36,
+      "alighting_index": 51,
+      "bus_meters": 7551.373076467744,
+      "walk_meters": 934.6994436084001,
+      "walk_seconds": 747.75955488672,
+      "distance_meters": 8486.072520076144
+    },
+    {
+      "edge_id": 642942,
+      "walk_id": 520985,
+      "origin": "250005960",
+      "destination": "3114984",
+      "search_from": "250005960",
+      "search_to": "3114984",
+      "pattern_id": 533,
+      "boarding_index": 2,
+      "alighting_index": 31,
+      "bus_meters": 7764.093228925562,
+      "walk_meters": 941.6234475140001,
+      "walk_seconds": 753.2987580112001,
+      "distance_meters": 8705.716676439562
+    },
+    {
+      "edge_id": 1173594,
+      "walk_id": 916589,
+      "origin": "370013685",
+      "destination": "9206521",
+      "search_from": "370013685",
+      "search_to": "9206521",
+      "pattern_id": 947,
+      "boarding_index": 35,
+      "alighting_index": 70,
+      "bus_meters": 10924.669269733871,
+      "walk_meters": 662.5330711087001,
+      "walk_seconds": 530.0264568869601,
+      "distance_meters": 11587.202340842572
+    },
+    {
+      "edge_id": 363751,
+      "walk_id": 733610,
+      "origin": "600005669",
+      "destination": "650005384",
+      "search_from": "600005669",
+      "search_to": "650005384",
+      "pattern_id": 318,
+      "boarding_index": 29,
+      "alighting_index": 36,
+      "bus_meters": 2387.4720486798506,
+      "walk_meters": 933.6438865910001,
+      "walk_seconds": 746.9151092728,
+      "distance_meters": 3321.1159352708505
+    },
+    {
+      "edge_id": 900987,
+      "walk_id": 261136,
+      "origin": "7503818",
+      "destination": "7703847",
+      "search_from": "7503818",
+      "search_to": "7703847",
+      "pattern_id": 751,
+      "boarding_index": 24,
+      "alighting_index": 25,
+      "bus_meters": 338.30763527564795,
+      "walk_meters": 558.78830723,
+      "walk_seconds": 447.030645784,
+      "distance_meters": 897.0959425056479
+    },
+    {
+      "edge_id": 1301719,
+      "walk_id": 576615,
+      "origin": "3702715",
+      "destination": "370007968",
+      "search_from": "3702715",
+      "search_to": "370007968",
+      "pattern_id": 1026,
+      "boarding_index": 32,
+      "alighting_index": 39,
+      "bus_meters": 2219.3840413817616,
+      "walk_meters": 556.7283427769,
+      "walk_seconds": 445.38267422152,
+      "distance_meters": 2776.1123841586614
+    },
+    {
+      "edge_id": 916809,
+      "walk_id": 265741,
+      "origin": "750012664",
+      "destination": "7703847",
+      "search_from": "750012664",
+      "search_to": "7703847",
+      "pattern_id": 760,
+      "boarding_index": 22,
+      "alighting_index": 51,
+      "bus_meters": 8791.535497419129,
+      "walk_meters": 481.993813498,
+      "walk_seconds": 385.5950507984,
+      "distance_meters": 9273.529310917129
+    },
+    {
+      "edge_id": 1718214,
+      "walk_id": 676742,
+      "origin": "520008895",
+      "destination": "5601419",
+      "search_from": "520008895",
+      "search_to": "5601419",
+      "pattern_id": 1490,
+      "boarding_index": 8,
+      "alighting_index": 20,
+      "bus_meters": 5863.9080350824515,
+      "walk_meters": 896.3116239200001,
+      "walk_seconds": 717.0492991360001,
+      "distance_meters": 6760.219659002451
+    },
+    {
+      "edge_id": 510753,
+      "walk_id": 730645,
+      "origin": "600005414",
+      "destination": "6508672",
+      "search_from": "600005414",
+      "search_to": "6508672",
+      "pattern_id": 427,
+      "boarding_index": 5,
+      "alighting_index": 23,
+      "bus_meters": 5850.708738067932,
+      "walk_meters": 918.3829541900001,
+      "walk_seconds": 734.706363352,
+      "distance_meters": 6769.091692257933
+    },
+    {
+      "edge_id": 2377102,
+      "walk_id": 113204,
+      "origin": "350012097",
+      "destination": "350002468",
+      "search_from": "350012097",
+      "search_to": "350002468",
+      "pattern_id": 2108,
+      "boarding_index": 48,
+      "alighting_index": 84,
+      "bus_meters": 9789.861650997243,
+      "walk_meters": 966.4695628190001,
+      "walk_seconds": 773.1756502552,
+      "distance_meters": 10756.331213816244
+    },
+    {
+      "edge_id": 1959564,
+      "walk_id": 737448,
+      "origin": "6607664",
+      "destination": "6607186",
+      "search_from": "6607664",
+      "search_to": "6607186",
+      "pattern_id": 1758,
+      "boarding_index": 10,
+      "alighting_index": 27,
+      "bus_meters": 4911.43640227855,
+      "walk_meters": 265.18447606189994,
+      "walk_seconds": 212.14758084951995,
+      "distance_meters": 5176.62087834045
+    },
+    {
+      "edge_id": 116539,
+      "walk_id": 908634,
+      "origin": "80014530",
+      "destination": "9112416",
+      "search_from": "80014530",
+      "search_to": "9112416",
+      "pattern_id": 101,
+      "boarding_index": 4,
+      "alighting_index": 13,
+      "bus_meters": 3037.9549125801645,
+      "walk_meters": 860.9715223784001,
+      "walk_seconds": 688.77721790272,
+      "distance_meters": 3898.9264349585646
+    },
+    {
+      "edge_id": 1673007,
+      "walk_id": 426430,
+      "origin": "190011834",
+      "destination": "1903430",
+      "search_from": "190011834",
+      "search_to": "1903430",
+      "pattern_id": 1435,
+      "boarding_index": 3,
+      "alighting_index": 10,
+      "bus_meters": 1961.0797798397866,
+      "walk_meters": 867.183239062,
+      "walk_seconds": 693.7465912496,
+      "distance_meters": 2828.2630189017864
+    },
+    {
+      "edge_id": 1529228,
+      "walk_id": 515117,
+      "origin": "230009794",
+      "destination": "300009417",
+      "search_from": "230009794",
+      "search_to": "300009417",
+      "pattern_id": 1273,
+      "boarding_index": 17,
+      "alighting_index": 39,
+      "bus_meters": 9256.596881640198,
+      "walk_meters": 955.074063476,
+      "walk_seconds": 764.0592507808,
+      "distance_meters": 10211.670945116199
+    },
+    {
+      "edge_id": 941858,
+      "walk_id": 930247,
+      "origin": "3214690",
+      "destination": "9309497",
+      "search_from": "3214690",
+      "search_to": "9309497",
+      "pattern_id": 772,
+      "boarding_index": 9,
+      "alighting_index": 44,
+      "bus_meters": 14724.784456045716,
+      "walk_meters": 920.684570959,
+      "walk_seconds": 736.5476567672,
+      "distance_meters": 15645.469027004716
+    },
+    {
+      "edge_id": 995282,
+      "walk_id": 673903,
+      "origin": "740006382",
+      "destination": "540014130",
+      "search_from": "740006382",
+      "search_to": "540014130",
+      "pattern_id": 810,
+      "boarding_index": 21,
+      "alighting_index": 57,
+      "bus_meters": 10632.711088070817,
+      "walk_meters": 584.54737479,
+      "walk_seconds": 467.637899832,
+      "distance_meters": 11217.258462860817
+    },
+    {
+      "edge_id": 1202233,
+      "walk_id": 51274,
+      "origin": "5914634",
+      "destination": "2202990",
+      "search_from": "5914634",
+      "search_to": "2202990",
+      "pattern_id": 975,
+      "boarding_index": 5,
+      "alighting_index": 32,
+      "bus_meters": 7977.581546167789,
+      "walk_meters": 415.41986206490003,
+      "walk_seconds": 332.33588965192,
+      "distance_meters": 8393.001408232689
+    }
+  ],
+  "example": {
+    "origem": "1211364",
+    "destino": "120010332",
+    "trajetos": [
+      {
+        "embarques": 1,
+        "baldeacoes": 0,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1804513,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "1211364",
+            "destino": "120010328",
+            "distancia_m": 21305.805634642522,
+            "embarque_indice": 11,
+            "desembarque_indice": 47
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 22112.581398215523,
+        "distancia_onibus_m": 21305.805634642522,
+        "distancia_caminhada_m": 806.775763573,
+        "caminhada_s": 645.4206108584
+      },
+      {
+        "embarques": 1,
+        "baldeacoes": 0,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1804514,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "1211364",
+            "destino": "120010329",
+            "distancia_m": 21890.950882639576,
+            "embarque_indice": 11,
+            "desembarque_indice": 48
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010329",
+            "destino": "120010332",
+            "distancia_m": 568.927016912,
+            "tempo_s": 455.1416135296,
+            "percurso_id": 383366
+          }
+        ],
+        "distancia_m": 22459.877899551575,
+        "distancia_onibus_m": 21890.950882639576,
+        "distancia_caminhada_m": 568.927016912,
+        "caminhada_s": 455.1416135296
+      },
+      {
+        "embarques": 1,
+        "baldeacoes": 0,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1804515,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "1211364",
+            "destino": "120010354",
+            "distancia_m": 22784.326044835543,
+            "embarque_indice": 11,
+            "desembarque_indice": 49
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010354",
+            "destino": "120010332",
+            "distancia_m": 326.793971733,
+            "tempo_s": 261.43517738639997,
+            "percurso_id": 383843
+          }
+        ],
+        "distancia_m": 23111.120016568544,
+        "distancia_onibus_m": 22784.326044835543,
+        "distancia_caminhada_m": 326.793971733,
+        "caminhada_s": 261.43517738639997
+      },
+      {
+        "embarques": 1,
+        "baldeacoes": 0,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1804516,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "1211364",
+            "destino": "120010355",
+            "distancia_m": 23286.08030853718,
+            "embarque_indice": 11,
+            "desembarque_indice": 50
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010355",
+            "destino": "120010332",
+            "distancia_m": 793.74635612,
+            "tempo_s": 634.9970848959999,
+            "percurso_id": 383869
+          }
+        ],
+        "distancia_m": 24079.82666465718,
+        "distancia_onibus_m": 23286.08030853718,
+        "distancia_caminhada_m": 793.74635612,
+        "caminhada_s": 634.9970848959999
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1897849,
+            "padrao_id": 1690,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "1",
+            "letreiro": "Metrô Butantã",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669449,
+            "embarque_indice": 19,
+            "desembarque_indice": 20
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1897490,
+            "padrao_id": 1689,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211391",
+            "destino": "120010328",
+            "distancia_m": 1557.4324566794376,
+            "embarque_indice": 0,
+            "desembarque_indice": 4
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2687.9071551193824,
+        "distancia_onibus_m": 1881.1313915463825,
+        "distancia_caminhada_m": 806.775763573,
+        "caminhada_s": 645.4206108584
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1897849,
+            "padrao_id": 1690,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "1",
+            "letreiro": "Metrô Butantã",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669449,
+            "embarque_indice": 19,
+            "desembarque_indice": 20
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1969136,
+            "padrao_id": 1771,
+            "linha": "8084-10",
+            "route_id": "8084-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211391",
+            "destino": "120010328",
+            "distancia_m": 1557.4324566794376,
+            "embarque_indice": 0,
+            "desembarque_indice": 4
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2687.9071551193824,
+        "distancia_onibus_m": 1881.1313915463825,
+        "distancia_caminhada_m": 806.775763573,
+        "caminhada_s": 645.4206108584
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1969321,
+            "padrao_id": 1771,
+            "linha": "8084-10",
+            "route_id": "8084-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669458,
+            "embarque_indice": 18,
+            "desembarque_indice": 19
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1897490,
+            "padrao_id": 1689,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211391",
+            "destino": "120010328",
+            "distancia_m": 1557.4324566794376,
+            "embarque_indice": 0,
+            "desembarque_indice": 4
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2687.9071551193833,
+        "distancia_onibus_m": 1881.1313915463834,
+        "distancia_caminhada_m": 806.775763573,
+        "caminhada_s": 645.4206108584
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1780713,
+            "padrao_id": 1595,
+            "linha": "715M-10",
+            "route_id": "715M-10",
+            "sentido": "0",
+            "letreiro": "Lgo. Da Pólvora",
+            "origem": "1211364",
+            "destino": "120015846",
+            "distancia_m": 340.5049689991938,
+            "embarque_indice": 26,
+            "desembarque_indice": 27
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120015846",
+            "destino": "120015861",
+            "distancia_m": 915.764804735,
+            "tempo_s": 732.611843788,
+            "percurso_id": 385561
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 177543,
+            "padrao_id": 156,
+            "linha": "177H-10",
+            "route_id": "177H-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 66,
+            "desembarque_indice": 67
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2751.3902162568565,
+        "distancia_onibus_m": 1028.8496479488567,
+        "distancia_caminhada_m": 1722.5405683079998,
+        "caminhada_s": 1378.0324546463999
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1780713,
+            "padrao_id": 1595,
+            "linha": "715M-10",
+            "route_id": "715M-10",
+            "sentido": "0",
+            "letreiro": "Lgo. Da Pólvora",
+            "origem": "1211364",
+            "destino": "120015846",
+            "distancia_m": 340.5049689991938,
+            "embarque_indice": 26,
+            "desembarque_indice": 27
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120015846",
+            "destino": "120015861",
+            "distancia_m": 915.764804735,
+            "tempo_s": 732.611843788,
+            "percurso_id": 385561
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1805388,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 46,
+            "desembarque_indice": 47
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2751.3902162568565,
+        "distancia_onibus_m": 1028.8496479488567,
+        "distancia_caminhada_m": 1722.5405683079998,
+        "caminhada_s": 1378.0324546463999
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 2094824,
+            "padrao_id": 1876,
+            "linha": "8705-10",
+            "route_id": "8705-10",
+            "sentido": "0",
+            "letreiro": "Anhangabaú",
+            "origem": "1211364",
+            "destino": "120015846",
+            "distancia_m": 340.5049689991938,
+            "embarque_indice": 22,
+            "desembarque_indice": 23
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120015846",
+            "destino": "120015861",
+            "distancia_m": 915.764804735,
+            "tempo_s": 732.611843788,
+            "percurso_id": 385561
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 177543,
+            "padrao_id": 156,
+            "linha": "177H-10",
+            "route_id": "177H-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 66,
+            "desembarque_indice": 67
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2751.3902162568565,
+        "distancia_onibus_m": 1028.8496479488567,
+        "distancia_caminhada_m": 1722.5405683079998,
+        "caminhada_s": 1378.0324546463999
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 2094824,
+            "padrao_id": 1876,
+            "linha": "8705-10",
+            "route_id": "8705-10",
+            "sentido": "0",
+            "letreiro": "Anhangabaú",
+            "origem": "1211364",
+            "destino": "120015846",
+            "distancia_m": 340.5049689991938,
+            "embarque_indice": 22,
+            "desembarque_indice": 23
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120015846",
+            "destino": "120015861",
+            "distancia_m": 915.764804735,
+            "tempo_s": 732.611843788,
+            "percurso_id": 385561
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1805388,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 46,
+            "desembarque_indice": 47
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2751.3902162568565,
+        "distancia_onibus_m": 1028.8496479488567,
+        "distancia_caminhada_m": 1722.5405683079998,
+        "caminhada_s": 1378.0324546463999
+      },
+      {
+        "embarques": 2,
+        "baldeacoes": 1,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1992230,
+            "padrao_id": 1794,
+            "linha": "809V-10",
+            "route_id": "809V-10",
+            "sentido": "0",
+            "letreiro": "Metrô - Trianon - Masp",
+            "origem": "1211364",
+            "destino": "120015846",
+            "distancia_m": 340.50496899919426,
+            "embarque_indice": 10,
+            "desembarque_indice": 11
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120015846",
+            "destino": "120015861",
+            "distancia_m": 915.764804735,
+            "tempo_s": 732.611843788,
+            "percurso_id": 385561
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 177543,
+            "padrao_id": 156,
+            "linha": "177H-10",
+            "route_id": "177H-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 66,
+            "desembarque_indice": 67
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2751.390216256857,
+        "distancia_onibus_m": 1028.8496479488572,
+        "distancia_caminhada_m": 1722.5405683079998,
+        "caminhada_s": 1378.0324546463999
+      },
+      {
+        "embarques": 3,
+        "baldeacoes": 2,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1897849,
+            "padrao_id": 1690,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "1",
+            "letreiro": "Metrô Butantã",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669449,
+            "embarque_indice": 19,
+            "desembarque_indice": 20
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 2573623,
+            "padrao_id": 2235,
+            "linha": "N839-11",
+            "route_id": "N839-11",
+            "sentido": "0",
+            "letreiro": "Metrô Vl. Mariana",
+            "origem": "1211391",
+            "destino": "1211381",
+            "distancia_m": 57.073536533746115,
+            "embarque_indice": 0,
+            "desembarque_indice": 1
+          },
+          {
+            "modo": "caminhada",
+            "origem": "1211381",
+            "destino": "120015861",
+            "distancia_m": 669.3325987669999,
+            "tempo_s": 535.4660790135999,
+            "percurso_id": 23899
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 177543,
+            "padrao_id": 156,
+            "linha": "177H-10",
+            "route_id": "177H-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 66,
+            "desembarque_indice": 67
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2545.2255126903538,
+        "distancia_onibus_m": 1069.117150350354,
+        "distancia_caminhada_m": 1476.10836234,
+        "caminhada_s": 1180.8866898719998
+      },
+      {
+        "embarques": 3,
+        "baldeacoes": 2,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1897849,
+            "padrao_id": 1690,
+            "linha": "8012-10",
+            "route_id": "8012-10",
+            "sentido": "1",
+            "letreiro": "Metrô Butantã",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669449,
+            "embarque_indice": 19,
+            "desembarque_indice": 20
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 2573623,
+            "padrao_id": 2235,
+            "linha": "N839-11",
+            "route_id": "N839-11",
+            "sentido": "0",
+            "letreiro": "Metrô Vl. Mariana",
+            "origem": "1211391",
+            "destino": "1211381",
+            "distancia_m": 57.073536533746115,
+            "embarque_indice": 0,
+            "desembarque_indice": 1
+          },
+          {
+            "modo": "caminhada",
+            "origem": "1211381",
+            "destino": "120015861",
+            "distancia_m": 669.3325987669999,
+            "tempo_s": 535.4660790135999,
+            "percurso_id": 23899
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1805388,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 46,
+            "desembarque_indice": 47
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2545.2255126903538,
+        "distancia_onibus_m": 1069.117150350354,
+        "distancia_caminhada_m": 1476.10836234,
+        "caminhada_s": 1180.8866898719998
+      },
+      {
+        "embarques": 3,
+        "baldeacoes": 2,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1969321,
+            "padrao_id": 1771,
+            "linha": "8084-10",
+            "route_id": "8084-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669458,
+            "embarque_indice": 18,
+            "desembarque_indice": 19
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 2573623,
+            "padrao_id": 2235,
+            "linha": "N839-11",
+            "route_id": "N839-11",
+            "sentido": "0",
+            "letreiro": "Metrô Vl. Mariana",
+            "origem": "1211391",
+            "destino": "1211381",
+            "distancia_m": 57.073536533746115,
+            "embarque_indice": 0,
+            "desembarque_indice": 1
+          },
+          {
+            "modo": "caminhada",
+            "origem": "1211381",
+            "destino": "120015861",
+            "distancia_m": 669.3325987669999,
+            "tempo_s": 535.4660790135999,
+            "percurso_id": 23899
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 177543,
+            "padrao_id": 156,
+            "linha": "177H-10",
+            "route_id": "177H-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 66,
+            "desembarque_indice": 67
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2545.2255126903547,
+        "distancia_onibus_m": 1069.117150350355,
+        "distancia_caminhada_m": 1476.10836234,
+        "caminhada_s": 1180.8866898719998
+      },
+      {
+        "embarques": 3,
+        "baldeacoes": 2,
+        "trechos": [
+          {
+            "modo": "onibus",
+            "aresta_id": 1969321,
+            "padrao_id": 1771,
+            "linha": "8084-10",
+            "route_id": "8084-10",
+            "sentido": "0",
+            "letreiro": "Cid. Universitária",
+            "origem": "1211364",
+            "destino": "1211391",
+            "distancia_m": 323.6989348669458,
+            "embarque_indice": 18,
+            "desembarque_indice": 19
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 2573623,
+            "padrao_id": 2235,
+            "linha": "N839-11",
+            "route_id": "N839-11",
+            "sentido": "0",
+            "letreiro": "Metrô Vl. Mariana",
+            "origem": "1211391",
+            "destino": "1211381",
+            "distancia_m": 57.073536533746115,
+            "embarque_indice": 0,
+            "desembarque_indice": 1
+          },
+          {
+            "modo": "caminhada",
+            "origem": "1211381",
+            "destino": "120015861",
+            "distancia_m": 669.3325987669999,
+            "tempo_s": 535.4660790135999,
+            "percurso_id": 23899
+          },
+          {
+            "modo": "onibus",
+            "aresta_id": 1805388,
+            "padrao_id": 1615,
+            "linha": "7411-10",
+            "route_id": "7411-10",
+            "sentido": "0",
+            "letreiro": "Pça. Da Sé",
+            "origem": "120015861",
+            "destino": "120010328",
+            "distancia_m": 688.3446789496629,
+            "embarque_indice": 46,
+            "desembarque_indice": 47
+          },
+          {
+            "modo": "caminhada",
+            "origem": "120010328",
+            "destino": "120010332",
+            "distancia_m": 806.775763573,
+            "tempo_s": 645.4206108584,
+            "percurso_id": 383343
+          }
+        ],
+        "distancia_m": 2545.2255126903547,
+        "distancia_onibus_m": 1069.117150350355,
+        "distancia_caminhada_m": 1476.10836234,
+        "caminhada_s": 1180.8866898719998
+      }
+    ],
+    "categories": {
+      "1": {
+        "complete": true,
+        "count": 4,
+        "seconds": 0.002015328995184973
+      },
+      "2": {
+        "complete": true,
+        "count": 8,
+        "seconds": 1.0305918219964951
+      },
+      "3": {
+        "complete": true,
+        "count": 4,
+        "seconds": 2.524736583000049
+      }
+    },
+    "structural_only": true,
+    "temporal_feasibility_checked": false,
+    "complete": true,
+    "coverage": {
+      "verified_walks": 952608,
+      "unknown_ride_distances": 42
+    }
+  },
+  "notes": [
+    "Somente artefatos: frontend e avaliador anterior não integrados automaticamente.",
+    "Caminhada de até 1 km por trecho, depois do ônibus.",
+    "Representação compartilhada: composições completas expandidas por par.",
+    "Geometria não duplicada na matriz; distâncias calculadas na rede foot local."
+  ]
+}

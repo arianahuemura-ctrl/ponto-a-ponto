@@ -1,0 +1,23 @@
+import {test,expect} from './coverage.js';
+for(const width of [390,1200])test(`caminhada direta sem embarque em ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:850});
+ const a={id:'1',name:'Origem',lat:-23.56,lon:-46.68},b={id:'2',name:'Destino',lat:-23.561,lon:-46.681};
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ let tracking=0;page.on('request',r=>{if(r.url().includes('/api/sptrans/trips/'))tracking++;});
+ await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
+ await page.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
+ await page.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops:new URL(r.request().url()).searchParams.has('id')?[a]:[a,b]}}));
+ const trip={id:'walk-1',mode:'walk',legs:[],walks:[{origin:a,destination:b,accessType:'destination',distance_meters:750,duration_minutes:10,geometry:[[a.lat,a.lon],[b.lat,b.lon]]}],walking_meters:750,walking_minutes:10,duration_minutes:10,transfers:0,arrival:'2026-10-08T09:10:00Z'};
+ await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{complete:true,lines:[],journeys:new URL(r.request().url()).searchParams.has('destination')?[trip]:[]}}));
+ await page.goto('/?stop=1');
+ await page.getByRole('button',{name:'Selecionar destino',exact:true}).click();
+ await page.locator('.sp-stop[title^="Destino · 2"]').click();
+ const dialog=page.getByRole('dialog');
+ await expect(dialog).toContainText('Somente a pé');
+ await expect(dialog).not.toContainText('Até o ponto:');
+ await expect(dialog).not.toContainText('Nenhuma rota encontrada');
+ await page.getByRole('button',{name:/1\. 10 min/}).click();
+ await expect(page.locator('.sp-route-walk')).toHaveCount(1);
+ await expect(page.locator('.sp-route-bus')).toHaveCount(0);
+ expect(tracking).toBe(0);expect(errors).toEqual([]);
+});

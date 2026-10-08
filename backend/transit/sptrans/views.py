@@ -60,7 +60,7 @@ def board(request,db):
             if prefix+'_lat' in request.GET:
                 lat,lon=float(request.GET[prefix+'_lat']),float(request.GET[prefix+'_lon'])
                 if not math.isfinite(lat) or not math.isfinite(lon) or not -90<=lat<=90 or not -180<=lon<=180:raise ValueError()
-                anchor.update(id='address-'+prefix,lat=lat,lon=lon)
+                anchor.update(id='address-'+prefix,lat=lat,lon=lon,catalog_stop_id=point['id'])
             anchors.append(anchor)
         planned=alternatives.alternatives(db,*anchors,max_transfers=max_transfers)
         connections=planned['journeys'];walking_incomplete=planned['walking_incomplete']
@@ -79,7 +79,7 @@ def board(request,db):
                'wait_minutes':leg['wait_minutes']} for index,leg in enumerate(selected['legs'])] if selected else []
     warning=''
     started=time.monotonic()
-    # Bound external work on large terminals.
+    # Limite consultas externas em terminais grandes.
     for index,row in enumerate(rows):
         if warning or index>=12 or time.monotonic()-started>8:
             row['realtime_status']=warning or 'Previsão não consultada nesta atualização.'
@@ -109,19 +109,36 @@ def trip(request,db,trip_id):
     shape=[[s[0],s[1]] for s in db.execute('SELECT shape_pt_lat,shape_pt_lon FROM shapes WHERE shape_id=? ORDER BY shape_pt_sequence',(row['shape_id'],))]
     vehicles=[];status='';warning=''
     try:
-        if request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']),ttl=15 if request.GET.get('boarding_index') is not None else 30)
-        vehicles,status=realtime.positions(line,ttl=15 if request.GET.get('boarding_index') is not None else 30)
+        if request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']),ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
+        vehicles,status=realtime.positions(line,ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
     except APIError as error: warning=str(error)
     except (ValueError,KeyError,TypeError): warning='Resposta inesperada da SPTrans; posições indisponíveis.'
-    approach=None
-    if request.GET.get('boarding_index') is not None:
+    approach=None;passed_approaches=[];approaches=[]
+    vehicle_id=request.GET.get('vehicle')
+    if vehicle_id or request.GET.get('next')=='1':
+        if not request.GET.get('origin'):raise ValueError()
+        indices=[i for i,s in enumerate(stops) if s['id']==request.GET['origin']]
+        if len(indices)==1:
+            matching=[v for v in vehicles if str(v['id'])==vehicle_id] if vehicle_id else vehicles
+            arrivals=tracking.reachable_arrivals(line['arrivals'],timezone.now())
+            approach=tracking.approaching(trip_id,indices[0],matching,arrivals,require_prediction=not bool(vehicle_id))
+            if request.GET.get('all')=='1' and not vehicle_id:
+                for vehicle in {str(v['id']):v for v in vehicles}.values():
+                    candidate=tracking.approaching(trip_id,indices[0],[vehicle],arrivals,require_prediction=True)
+                    if candidate:approaches.append(candidate)
+            passed_approaches=tracking.passed(trip_id,indices[0],vehicles)
+            if approach is None and vehicle_id and any(str(a['vehicle']['id'])==vehicle_id for a in passed_approaches):
+                approach=tracking.approaching(trip_id,indices[0],vehicles,arrivals,require_prediction=True)
+        # A troca pelo próximo só ocorre quando o selecionado foi identificado após o ponto.
+    elif request.GET.get('boarding_index') is not None:
         index=int(request.GET['boarding_index'])
         if not 0<=index<len(stops) or stops[index]['id']!=request.GET.get('origin'): raise ValueError()
         supplied=bool(line['arrivals'])
         line['arrivals']=tracking.reachable_arrivals(line['arrivals'],timezone.now(),wait_seconds)
         line['no_reachable_arrival']=supplied and not line['arrivals']
         approach=tracking.approaching(trip_id,index,vehicles,line['arrivals'],require_prediction=wait_seconds>0 or supplied)
-    return {'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach}
+        passed_approaches=tracking.passed(trip_id,index,vehicles)
+    return {'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach,'passed_approaches':passed_approaches,'approaches':approaches}
 
 @require_GET
 def qr(request,stop_id):
@@ -167,7 +184,7 @@ def destination(request, db):
     if request.GET.get('street'):
         key=street_key(request.GET['street'])
         matching=[point for _,point in candidates if street_key(point['name'])==key]
-        # Separate geographically disconnected namesakes using the selected suggestion.
+        # Separe locais homônimos geograficamente desconectados usando a sugestão selecionada.
         selected=[]
         if matching and directions.distance((lat,lon),(matching[0]['lat'],matching[0]['lon']))<=2000:
             selected=[matching.pop(0)]
@@ -179,7 +196,7 @@ def destination(request, db):
                         selected.append(point);matching.remove(point);changed=True
         method='street_name'
         if not selected:
-            # Reuse actual bus stops already in the application, never invented stops.
+            # Reutilize as paradas reais já cadastradas na aplicação, nunca paradas inventadas.
             selected=[point for gap,point in candidates if gap<=400]
             method='nearby'
         directions.enrich(db,selected)
@@ -194,12 +211,12 @@ def destination(request, db):
     transfer_limit=2
     if origin or target:
         store.get_stop(db,origin or target)
-        # Nearby alternatives cover opposite sidewalks without choosing distant terminals.
+        # Alternativas próximas cobrem calçadas opostas sem escolher terminais distantes.
         nearby=[entry for entry in candidates if entry[0]<=min(500,meters+250)][:12]
         viable=[]
         now=timezone.localtime()
         if target:
-            # Compare both sidewalks together: fixing either endpoint can hide a direct bus.
+            # Compare as duas calçadas juntas: fixar uma extremidade pode ocultar um ônibus direto.
             target_stop=store.get_stop(db,target)
             boarding_candidates=[entry for entry in candidates if entry[0]<=500][:24]
             alighting_candidates=sorted(
@@ -220,7 +237,7 @@ def destination(request, db):
                     routes=planner.journeys(db,start_id,end_id,0,now=now)
                     if routes:
                         gap,point=starts[start_id];end_gap,end_point=ends[end_id]
-                        direct.append((routes[0]['duration_minutes']+(gap+end_gap)/78,gap+end_gap,point,end_point))
+                        direct.append((routes[0]['duration_minutes']+(gap+end_gap)/walking.WALK_METERS_PER_MINUTE,gap+end_gap,point,end_point))
             if direct:
                 _,_,point,end_point=min(direct,key=lambda item:item[:2])
                 directions.enrich(db,[point,end_point])
@@ -231,7 +248,7 @@ def destination(request, db):
                 route=min(routes,key=lambda r:(r['transfers'],r['duration_minutes']))
                 viable.append((route['transfers'],distance,route['duration_minutes'],point))
         if viable:
-            transfer_limit,meters,_,closest=min(viable,key=lambda item:(item[0],item[2]+item[1]/78,item[1]));checked=True
+            transfer_limit,meters,_,closest=min(viable,key=lambda item:(item[0],item[2]+item[1]/walking.WALK_METERS_PER_MINUTE,item[1]));checked=True
         else:
             return {'stop':None,'message':'Nenhuma rota encontrada para as paradas próximas deste endereço. Escolha outra parada no mapa.'}
     directions.enrich(db,[closest])
@@ -239,7 +256,7 @@ def destination(request, db):
 
 
 def stream_board(request):
-    # Open the connection inside the iterator: the request decorator closes its own.
+    # Abra a conexão dentro do iterador: o decorador da requisição fecha a própria conexão.
     def chunks():
         try:
             with store.connection() as db:
@@ -258,7 +275,7 @@ def stream_board(request):
                     if prefix+'_lat' in request.GET:
                         lat,lon=float(request.GET[prefix+'_lat']),float(request.GET[prefix+'_lon'])
                         if not math.isfinite(lat) or not math.isfinite(lon) or not -90<=lat<=90 or not -180<=lon<=180:raise ValueError()
-                        anchor.update(id='address-'+prefix,lat=lat,lon=lon)
+                        anchor.update(id='address-'+prefix,lat=lat,lon=lon,catalog_stop_id=point['id'])
                     anchors.append(anchor)
                 for result in alternatives.progressive(db,*anchors,max_transfers=limit,refresh=request.GET.get('refresh')=='1'):
                     journeys=result['journeys']
@@ -267,7 +284,7 @@ def stream_board(request):
                            'arrivals':[],'programme':[],'planned_departure':leg['departure']} for leg in selected['legs']] if selected else []
                     payload={**result,'origin':origin,'destination':destination,'lines':rows,'queried_at':timezone.now().isoformat(),'selected_journey':selected['id'] if selected else None}
                     yield json.dumps(payload)+'\n'
-                    if result['complete'] and rows:
+                    if result['complete'] and rows and result.get('planner')!='connections':
                         started=time.monotonic();warning=''
                         for row in rows[:12]:
                             if time.monotonic()-started>8:break

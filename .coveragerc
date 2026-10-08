@@ -1,0 +1,18 @@
+[run]
+branch = True
+source = backend
+omit =
+    */test*.py
+    */migrations/*
+    */e2e_server.py
+
+[report]
+show_missing = True
+precision = 2
+fail_under = 71
+
+[html]
+directory = coverage/backend
+
+[json]
+output = coverage/backend.json

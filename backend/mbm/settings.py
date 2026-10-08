@@ -3,12 +3,10 @@ import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-# Local configuration stays server-side. Environment variables take precedence.
-if (BASE_DIR / '.env').exists():
-    for line in (BASE_DIR / '.env').read_text().splitlines():
-        key, sep, value = line.partition('=')
-        if sep and key.strip() in {'SPTRANS_TOKEN', 'SPTRANS_DATABASE', 'SIMULATED_LATITUDE', 'SIMULATED_LONGITUDE'}:
-            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+from .environment import load_environment
+load_environment(BASE_DIR)
+SPTRANS_PLANNER = os.environ.get('SPTRANS_PLANNER', 'connections')
+SPTRANS_CONNECTION_API_BUDGET = float(os.environ.get('SPTRANS_CONNECTION_API_BUDGET', '20'))
 SPTRANS_TOKEN = os.environ.get('SPTRANS_TOKEN', '')
 SPTRANS_DATABASE = os.environ.get('SPTRANS_DATABASE', str(BASE_DIR / 'sptrans.sqlite3'))
 sys.path.insert(0, str(BASE_DIR))
@@ -19,6 +17,8 @@ if not DEBUG and SECRET_KEY == "dev-only-mbm-local":
 ALLOWED_HOSTS = os.environ.get(
     "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]"
 ).split(",")
+# Permite identificar a origem nas consultas ao mapa sem enviar caminho ou parâmetros.
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 ROOT_URLCONF = "mbm.urls"
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -68,6 +68,3 @@ TEMPLATES = [
         },
     }
 ]
-
-SIMULATED_LATITUDE = os.environ.get("SIMULATED_LATITUDE", "").strip()
-SIMULATED_LONGITUDE = os.environ.get("SIMULATED_LONGITUDE", "").strip()

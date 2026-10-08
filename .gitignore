@@ -22,3 +22,20 @@ fonts/geolocation_runs/
 
 # Configuração local do editor
 .vscode/
+
+# Rede pedestre local, regenerável a partir de OSM
+.cache/pap-foot/
+
+# Relatórios e contadores de cobertura
+.coverage
+.coverage.*
+coverage/
+frontend/.nyc_output/
+
+# Backups de materializações incompatíveis
+*.sqlite3.obsolete-*
+
+# Ferramentas nativas e relatórios de geração
+.cache/osrm-*/
+.cache/setup/
+artifacts-backup-*/

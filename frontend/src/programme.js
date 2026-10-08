@@ -1,4 +1,4 @@
-// Adjacent minute-based GTFS windows may end at :45 and resume at :46.
+// Faixas GTFS adjacentes em minutos podem terminar em :45 e recomeçar em :46.
 export function mergeProgramme(windows=[]) {
   return windows.reduce((result, window)=>{
     const previous=result.at(-1);

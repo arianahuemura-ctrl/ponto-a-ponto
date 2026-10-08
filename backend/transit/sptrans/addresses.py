@@ -1,4 +1,4 @@
-"""Photon address suggestions: search-as-you-type with a bounded result set."""
+"""Sugestões de endereços Photon durante a digitação, com quantidade limitada de resultados."""
 import hashlib
 import json
 import math
@@ -14,7 +14,7 @@ from django.views.decorators.http import require_GET
 
 
 def split_number(query):
-    """Accept '123 Rua X', 'Rua X 123' and 'Rua X, 123, bairro'."""
+    """Aceita '123 Rua X', 'Rua X 123' e 'Rua X, 123, bairro'."""
     leading=re.match(r'^\s*(\d+[A-Za-z]?)\s*,?\s+(.+)$',query)
     if leading:return leading[2],leading[1]
     trailing=re.match(r'^(.*?)[,\s]+(?:n[º°o.]?\s*)?(\d+[A-Za-z]?)(?=\s*(?:,|$))(.*)$',query,re.I)

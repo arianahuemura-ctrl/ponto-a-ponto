@@ -1,4 +1,8 @@
 const shapes = {
+  eagle: <path d="M12 8c-2 0-3-2-5-3L1 3l2 5 5 4-4-1 3 4 3 1-1 5 3-2 3 2-1-5 3-1 3-4-4 1 5-4 2-5-6 2-3 3V6l-2-1-2 2Z" fill="currentColor" stroke="none"/>,
+  finish: <><path d="M5 21V3h15v12H5"/><path d="M5 3h5v4H5zm10 0h5v4h-5zm-5 4h5v4h-5zm-5 4h5v4H5zm10 0h5v4h-5z" fill="currentColor" stroke="none"/></>,
+  bulb: <><path d="M9 18h6m-6 3h6M9 15c0-2-3-3-3-6a6 6 0 0 1 12 0c0 3-3 4-3 6v1H9Z"/><path d="M12 1v1M2 9h1m18 0h1M4 3l1 1m14 0 1-1"/></>,
+  bulbOff: <><path d="m3 3 18 18M9 18h6m-6 3h6M7 5a6 6 0 0 0-1 4c0 3 3 4 3 6v1h6M11 3a6 6 0 0 1 7 6c0 2-1 3-2 4"/></>,
   locate: <><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></>,
   edit: <><path d="m16 3 5 5-12 12-6 1 1-6Z"/><path d="m14 5 5 5"/></>,
   trash: <><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></>,

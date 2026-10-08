@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './coverage.js';
 const stop={id:'1',name:'Origem A',lat:-23.55,lon:-46.6333,directions:[{bearing:90,code:'1000-10',headsign:'Destino',kind:'departure'},{bearing:270,code:'1000-10',headsign:'Destino',kind:'arrival'}]};
 async function openOrigin(page,first=false){
   await (first?page.locator('.sp-stop').first():page.locator('.sp-stop')).click();
@@ -47,7 +47,7 @@ for(const width of [390,1440]) {
     await page.setViewportSize({width,height:900});await setup(page);await page.goto('/');
     await openOrigin(page);
     await expect(page.getByRole('dialog')).toBeVisible();
-    await page.getByRole('button',{name:'Adicionar embarque aos favoritos'}).click();
+    await page.getByRole('button',{name:'Adicionar ponto aos favoritos'}).click();
     await page.getByRole('textbox',{name:'Nome do favorito',exact:true}).fill('');
     await page.getByRole('textbox',{name:'Nome do favorito',exact:true}).fill('Origem A');
     await page.getByRole('button',{name:'Salvar favorito',exact:true}).click();
@@ -260,7 +260,7 @@ test('fechar lista antes da resposta não cancela rota nem reexibe paradas',asyn
 
 test('nome do favorito persiste e pode ser alterado sem mudar a parada',async({page})=>{
   await setup(page);await page.goto('/');await openOrigin(page);
-  await page.getByRole('button',{name:'Adicionar embarque aos favoritos'}).click();
+  await page.getByRole('button',{name:'Adicionar ponto aos favoritos'}).click();
   await page.getByRole('textbox',{name:'Nome do favorito',exact:true}).fill('Casa');
   await page.getByRole('button',{name:'Salvar favorito',exact:true}).click();
   await page.getByRole('button',{name:'Ver mapa'}).click();
@@ -390,10 +390,10 @@ test('estrela salva confirma remoção e cancelar preserva o favorito',async({pa
   expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pap.sp.favorites')).length)).toBe(1);
   await page.getByRole('button',{name:'Remover favorito',exact:true}).click();
   await confirmation.getByRole('button',{name:'Remover favorito',exact:true}).click();
-  await expect(page.getByRole('button',{name:'Adicionar embarque aos favoritos'})).toBeVisible();
+  await expect(page.getByRole('button',{name:'Adicionar ponto aos favoritos'})).toBeVisible();
   expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pap.sp.favorites')))).toEqual([]);
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).origin.id)).toBe('1');
-  await page.reload();await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();await expect(page.getByRole('button',{name:'Adicionar embarque aos favoritos'})).toBeVisible();
+  await page.reload();await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();await expect(page.getByRole('button',{name:'Adicionar ponto aos favoritos'})).toBeVisible();
 });
 
 for(const width of [390,756]) test(`etapa no topo e cancelamento confirmado em ${width}px`,async({page})=>{

@@ -9,16 +9,25 @@ export function readSession(storage, search=null) {
     const session = { maxTransfers: Number.isInteger(value?.maxTransfers) && value.maxTransfers>=0 && value.maxTransfers<=3 ? value.maxTransfers : 2, origin: validStop(value?.origin) ? value.origin : null, destination: validStop(value?.destination) ? value.destination : null };
     if(search!==null){
       const stopId=new URLSearchParams(search).get('stop');
-      // The URL is authoritative: a bare URL starts a new journey, and
-      // a different QR stop must not inherit endpoints from a previous trip.
+      // A URL tem precedência: uma URL sem parâmetros inicia nova viagem, e
+      // um QR de outra parada não deve herdar extremidades da viagem anterior.
       if(!stopId||session.origin?.id!==stopId)return {...session,origin:null,destination:null};
+      return {...session,destination:null};
     }
     return session;
   } catch { return { origin:null, destination:null }; }
 }
+export function favoriteStop(stop) {
+  if(!validStop(stop)||stop.useLocation)return null;
+  const {id,name,lat,lon,favoriteLabel}=stop;
+  return {id,name,lat,lon,...(typeof favoriteLabel==='string'&&favoriteLabel.trim()?{favoriteLabel:favoriteLabel.trim().slice(0,80)}:{})};
+}
 export function readFavorites(storage) {
-  try { const value=JSON.parse(storage.getItem(favoritesKey)); return Array.isArray(value) ? value.filter(validStop).slice(0,50).map(stop=>{const {favoriteLabel,...point}=stop;return typeof favoriteLabel==='string'&&favoriteLabel.trim()?{...point,favoriteLabel:favoriteLabel.trim().slice(0,80)}:point;}) : []; }
-  catch { return []; }
+  try {
+    const value=JSON.parse(storage.getItem(favoritesKey));
+    if(!Array.isArray(value))return [];
+    return [...new Map(value.map(favoriteStop).filter(Boolean).map(s=>[s.id,s])).values()].slice(0,50);
+  } catch { return []; }
 }
 export function save(storage,key,value) {
   try { storage.setItem(key,JSON.stringify(value)); return true; } catch { return false; }

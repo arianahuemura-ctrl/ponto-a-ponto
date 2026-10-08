@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-07",
+  "branch": "feat/busca-bidirecional",
+  "base_commit": "9c1191b",
+  "walking_speed_kmh": 4.5,
+  "database_bytes": 619393024,
+  "counts": {
+    "graph_stop": 22061,
+    "pattern": 2239,
+    "timetable": 2239,
+    "ride_edge": 2588077,
+    "walk_edge": 1687892
+  },
+  "walking_coverage": {
+    "pending": 1687888,
+    "verified": 4
+  },
+  "skipped_trip_ids": [
+    "626A-10-1"
+  ],
+  "bus_edges_with_unknown_distance": 42,
+  "backend_tests_passed": 173,
+  "frontend_build": "passed",
+  "sqlite_integrity": "ok",
+  "benchmark_scope": "Consultas locais ao índice, 3 execuções por cenário; cache de topologia aquecido. Sem Olho Vivo, busca de endereços ou validação de novas caminhadas. Sem comparação equivalente com o planejador atual; não comprova ganho no tempo total da aplicação.",
+  "measurements": [
+    {
+      "origin": "1211364",
+      "destination": "6714560",
+      "transfers": 0,
+      "seconds": [
+        0.05928236499312334,
+        0.0007526780245825648,
+        0.000523004011483863
+      ],
+      "median_seconds": 0.0007526780245825648,
+      "candidates": {
+        "candidates": 1,
+        "complete": true
+      },
+      "results": [
+        {
+          "duration_seconds": 2098.0,
+          "transfers": 0
+        }
+      ]
+    },
+    {
+      "origin": "1211364",
+      "destination": "6714560",
+      "transfers": 1,
+      "seconds": [
+        0.06657996500143781,
+        0.0019334379758220166,
+        0.0017194279935210943
+      ],
+      "median_seconds": 0.0019334379758220166,
+      "candidates": {
+        "candidates": 53,
+        "complete": true
+      },
+      "results": [
+        {
+          "duration_seconds": 2380.0,
+          "transfers": 1
+        }
+      ]
+    },
+    {
+      "origin": "1211364",
+      "destination": "6714560",
+      "transfers": 2,
+      "seconds": [
+        0.32562159397639334,
+        0.10580646598828025,
+        0.10633517199312337
+      ],
+      "median_seconds": 0.10633517199312337,
+      "candidates": {
+        "candidates": 7386,
+        "complete": true
+      },
+      "results": [
+        {
+          "duration_seconds": 2720.0,
+          "transfers": 2
+        }
+      ]
+    },
+    {
+      "origin": "1211364",
+      "destination": "260016920",
+      "transfers": 0,
+      "seconds": [
+        0.003459209983702749,
+        0.00047053201706148684,
+        0.0003656399785540998
+      ],
+      "median_seconds": 0.00047053201706148684,
+      "candidates": {
+        "candidates": 0,
+        "complete": true
+      },
+      "results": []
+    },
+    {
+      "origin": "1211364",
+      "destination": "260016920",
+      "transfers": 1,
+      "seconds": [
+        0.07008437300100923,
+        0.0018634020234458148,
+        0.0016793690156191587
+      ],
+      "median_seconds": 0.0018634020234458148,
+      "candidates": {
+        "candidates": 27,
+        "complete": true
+      },
+      "results": [
+        {
+          "duration_seconds": 2362.0,
+          "transfers": 1
+        }
+      ]
+    },
+    {
+      "origin": "1211364",
+      "destination": "260016920",
+      "transfers": 2,
+      "seconds": [
+        0.27329581600497477,
+        0.038730853993911296,
+        0.03998604501248337
+      ],
+      "median_seconds": 0.03998604501248337,
+      "candidates": {
+        "candidates": 3426,
+        "complete": true
+      },
+      "results": [
+        {
+          "duration_seconds": 2708.0,
+          "transfers": 2
+        }
+      ]
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012584",
+      "transfers": 0,
+      "seconds": [
+        0.0033567599894013256,
+        0.0004588610026985407,
+        0.0003608429979067296
+      ],
+      "median_seconds": 0.0004588610026985407,
+      "candidates": {
+        "candidates": 0,
+        "complete": true
+      },
+      "results": []
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012584",
+      "transfers": 1,
+      "seconds": [
+        0.06595060499967076,
+        0.0005277299787849188,
+        0.0003890399821102619
+      ],
+      "median_seconds": 0.0005277299787849188,
+      "candidates": {
+        "candidates": 0,
+        "complete": true
+      },
+      "results": []
+    },
+    {
+      "origin": "1211364",
+      "destination": "600012584",
+      "transfers": 2,
+      "seconds": [
+        0.22372247697785497,
+        0.0005288080137688667,
+        0.0003315880021546036
+      ],
+      "median_seconds": 0.0005288080137688667,
+      "candidates": {
+        "candidates": 0,
+        "complete": true
+      },
+      "results": []
+    }
+  ]
+}

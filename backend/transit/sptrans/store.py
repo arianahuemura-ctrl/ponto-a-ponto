@@ -77,7 +77,7 @@ def get_stop(db, identifier):
 
 
 def search(db, query='', lat=-23.5505, lon=-46.6333):
-    # Only stops served by buses. Spatial order makes nearby search useful without loading 22k markers.
+    # Somente paradas atendidas por ônibus. A ordenação espacial evita carregar 22 mil marcadores.
     rows = db.execute('''SELECT s.* FROM stops s WHERE (s.stop_name LIKE ? OR s.stop_id=?)
         AND EXISTS (SELECT 1 FROM stop_times st JOIN trips t USING(trip_id) JOIN routes r USING(route_id)
         WHERE st.stop_id=s.stop_id AND r.route_type='3')
@@ -104,7 +104,7 @@ def programme(db, trip, now):
     offset = seconds(trip['departure_time'])-seconds(first[0])
     frequencies=db.execute('SELECT * FROM frequencies WHERE trip_id=?', (trip['trip_id'],)).fetchall()
     result=[]
-    # Include previous service day for departures after midnight, and tomorrow for the next window.
+    # Inclua o dia anterior para partidas após a meia-noite e o seguinte para a próxima faixa.
     for delta in [-1,0,1]:
         day=now.date()+timedelta(days=delta)
         if not service_active(db,trip['service_id'],day): continue
@@ -134,7 +134,7 @@ def alternatives(db, origin, destination, now=None):
     result=[]
     seen=set()
     for row in rows:
-        # Different services remain represented through their active schedule windows.
+        # Serviços distintos permanecem representados por suas faixas de horários ativas.
         windows=programme(db,row,now)
         key=(row['route_id'],row['direction_id'],row['trip_headsign'])
         if key in seen: continue
