@@ -235,7 +235,6 @@ export default function SaoPaulo(){
       <h3>Controles do mapa</h3>
       <p>Use + e − para aproximar ou afastar o mapa e o botão de localização para centralizar sua posição. Ao escolher embarque ou destino, a lâmpada permite atenuar os pontos e reduzir a poluição visual. Apagada, ela fica pontilhada e transparente; toque novamente para destacar os pontos.</p>
       <p>Alterar ou desmarcar os locais mantém o enquadramento do mapa. O botão com a lista, na parte inferior, abre os próximos ônibus ou as alternativas da viagem. O botão de mapa dentro dessa janela permite voltar ao acompanhamento.</p>
-      <p>No computador, clique com o botão direito em dois locais para medir a distância em linha reta. Um terceiro clique inicia outra medição. Use Esc ou × para limpar. Essa medida não representa um percurso pelas ruas.</p>
       <h3>Próximos ônibus</h3>
       <p>Ordene a lista por próximos ônibus, nome do destino ou número da linha. Quando disponível, “Embarque em” informa o tempo até a chegada prevista, acompanhado do horário, veículo e indicação de acessibilidade. Sem previsão operacional, são exibidos os horários ou frequências programados.</p>
       <p>Toque em “Ver ônibus no mapa” para acompanhar um veículo específico. Toque em outra área do cartão da linha para acompanhar os próximos veículos disponíveis dessa linha. Para selecionar várias linhas, mantenha um cartão pressionado sem arrastar; depois marque as demais com toques simples e volte ao mapa.</p>

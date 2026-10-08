@@ -1,3 +1,5 @@
+import {humanDuration} from './duration.js';
+import {developmentTools} from './environment.js';
 import {useJourneyForecast,operationalArrival} from './useJourneyForecast.js';
 import PointControl from './PointControl.jsx';
 import {useCallback,useEffect,useRef,useState} from 'react';
@@ -20,22 +22,22 @@ function BoardingCountdown({trip,selected,boardingLive,active,clock,onArrival}) 
   const remaining=Date.parse(trip.arrival)-Date.parse(trip.legs[0]?.departure);
   const updatedArrival=next&&trip.legs.length===1&&Number.isFinite(remaining)&&remaining>=0?next.expected+remaining:transferArrival;
   const orderingArrival=updatedArrival!==null?updatedArrival:next?Infinity:Date.parse(trip.arrival);
-  useEffect(()=>{onArrival(trip,orderingArrival);},[trip,orderingArrival,onArrival]);
+  useEffect(()=>{onArrival(trip,orderingArrival,updatedArrival!==null);},[trip,orderingArrival,updatedArrival,onArrival]);
   return <>
-    <small>Caminhada até o embarque: {accessMinutes.toLocaleString('pt-BR',{maximumFractionDigits:1})} min</small>
-    {minutes===null?<small className="sp-boarding-status">{!current?'Consultando embarque…':current.noReachableArrival||current.arrivals?.length?'Sem previsão compatível com a caminhada':'Previsão de embarque indisponível'}</small>:<span className="sp-boarding-countdown" title="Previsão de chegada ao embarque · SPTrans"><strong>Embarque em {minutes} min</strong></span>}
+    <small>Caminhada até o embarque: {humanDuration(accessMinutes)}</small>
+    {minutes===null?<small className="sp-boarding-status">{!current?'Consultando embarque…':current.noReachableArrival||current.arrivals?.length?'Sem previsão compatível com a caminhada':'Previsão de embarque indisponível'}</small>:<span className="sp-boarding-countdown" title="Previsão de chegada ao embarque · SPTrans"><strong>Embarque em {humanDuration(minutes)}</strong></span>}
     {next&&<small>Embarque previsto às {time(next.expected)} · SPTrans</small>}
-    <span className="sp-route-arrival"><small>{updatedArrival!==null?'Chegada ao destino · estimativa atualizada':'Chegada ao destino · planejamento'}</small>
-      {updatedArrival!==null?<><strong>{time(updatedArrival)}</strong><small>{Math.max(0,Math.ceil((updatedArrival-clock)/60000))} min a partir de agora</small><small>Tempos dentro dos ônibus baseados no planejamento</small></>:<><strong>{time(trip.arrival)}</strong>{next&&<small>Aguardando previsões compatíveis para todos os trechos. Horário acima corresponde ao planejamento.</small>}</>}
+    <span className="sp-route-arrival" title={updatedArrival!==null?'Estimativa com previsões de embarque; tempos dentro dos ônibus baseados no planejamento':undefined}><small>{updatedArrival!==null?'Chegada ao destino · estimativa atualizada':'Chegada ao destino · planejamento'}</small>
+      {updatedArrival!==null?<><strong>{time(updatedArrival)}</strong><small>{humanDuration(Math.max(0,Math.ceil((updatedArrival-clock)/60000)))} a partir de agora</small></>:<><strong>{time(trip.arrival)}</strong>{next&&<small>Aguardando previsões compatíveis para todos os trechos. Horário acima corresponde ao planejamento.</small>}</>}
     </span>
   </>;
 }
 
 export default function BoardDialog({onWatchLines,onWatchBus,boardingLive,passengerPosition,open,requestId,active,onStatus,origin,destination,onClose,onDestination,onCancel,onFavorite,isFavorite,onJourney,onChooseJourney}) {
   const [arrivalTimes,setArrivalTimes]=useState({});
-  const reportArrival=useCallback((trip,value)=>setArrivalTimes(previous=>{
-    if(previous[trip.id]?.trip===trip&&Object.is(previous[trip.id]?.value,value))return previous;
-    return {...previous,[trip.id]:{trip,value}};
+  const reportArrival=useCallback((trip,value,updated)=>setArrivalTimes(previous=>{
+    if(previous[trip.id]?.trip===trip&&Object.is(previous[trip.id]?.value,value)&&previous[trip.id]?.updated===updated)return previous;
+    return {...previous,[trip.id]:{trip,value,updated}};
   }),[]);
   useEffect(()=>setArrivalTimes({}),[origin?.id,destination?.id]);
   const [lineOrder,setLineOrder]=useState('arrival');
@@ -87,7 +89,7 @@ export default function BoardDialog({onWatchLines,onWatchBus,boardingLive,passen
       const sameBoardings=route=>JSON.stringify(route.legs.map((leg,index)=>[leg.trip_id,leg.origin.id,index<route.legs.length-1?leg.destination.id:null]));
       let previous=chosenTrip.current;
       const service=leg=>JSON.stringify([leg.route_id||leg.code,leg.direction_id??leg.trip_id,leg.headsign]);
-      const dominated=previous&&result.journeys?.some(other=>other.legs.length<previous.legs.length&&other.legs.every((leg,i)=>service(leg)===service(previous.legs[i]))&&other.duration_minutes<=previous.duration_minutes&&other.walking_meters<=previous.walking_meters);
+      const dominated=previous&&result.journeys?.some(other=>other.legs.length<previous.legs.length&&Array.from({length:previous.legs.length-other.legs.length+1},(_,offset)=>offset).some(offset=>other.legs.every((leg,i)=>service(leg)===service(previous.legs[i+offset])))&&other.duration_minutes<=previous.duration_minutes&&other.walking_meters<=previous.walking_meters);
       if(dominated){previous=null;chosenTrip.current=null;setChosen(null);}
 
       const improved=previous&&result.journeys?.find(j=>sameBoardings(j)===sameBoardings(previous)&&j.duration_minutes<=previous.duration_minutes);
@@ -127,8 +129,8 @@ export default function BoardDialog({onWatchLines,onWatchBus,boardingLive,passen
     <div className="sp-board-actions"><PointControl kind="destination" point={destination} onClick={onDestination}/>
       {(destination||!origin?.useLocation)&&<button className="text-button sp-favorite-action" onClick={onFavorite} aria-label={isFavorite?'Remover favorito':'Adicionar ponto aos favoritos'} title={isFavorite?'Remover favorito':'Adicionar ponto aos favoritos'} aria-pressed={isFavorite} data-saved={isFavorite}><Icon name="star"/><span>{isFavorite?'Ponto favorito':'Salvar ponto'}</span></button>}
     </div>
-    {destination&&current?.journeys?.length>0&&<section className="sp-route-options" aria-label="Alternativas de viagem"><h3>Alternativas de viagem</h3><label className="sp-board-order">Ordenar rotas por <select aria-label="Ordenar rotas por" value={routeOrder} onChange={e=>setRouteOrder(e.target.value)}><option value="fastest">Mais rápido</option><option value="transfers">Menos baldeações</option><option value="walking">Menos caminhada</option></select></label>{orderedJourneys.map((trip,index)=><button type="button" className="sp-route-option" key={trip.id||index} aria-pressed={selected===trip} onClick={()=>chooseJourney(trip)}><strong>{index+1}. {trip.duration_minutes} min no planejamento · {trip.mode==='walk'?'Somente a pé':`${trip.transfers||0} baldeações`}{trip.mode!=='walk'&&trip.planner==='raptor'&&<span className="sp-raptor-mark" role="img" aria-label="Rota calculada pelo RAPTOR" title="Rota calculada pelo RAPTOR"><Icon name="eagle"/></span>}</strong><span>{trip.legs.map(l=>l.code).join(' → ')}</span><small>{trip.walking_meters||0} m a pé · {trip.walking_minutes||0} min de caminhada total</small>{trip.mode!=='walk'&&<BoardingCountdown trip={trip} selected={selected===trip} boardingLive={boardingLive} active={open&&active} clock={clock} onArrival={reportArrival}/>}{trip.mode==='walk'&&trip.arrival&&<span className="sp-route-arrival"><small>Chegada ao destino · planejamento</small><strong>{time(clock+trip.duration_minutes*60000)}</strong></span>}</button>)}{false&&current.journeys.length>3&&<button className="text-button" onClick={()=>setExpanded(v=>!v)}>{expanded?'Mostrar apenas as três mais rápidas':`Mostrar todas as ${current.journeys.length} rotas calculadas`}</button>}</section>}
-    {selected?.walks?.length>0&&<section aria-label="Caminhadas da rota">{selected.walks.map((w,i)=><p key={i}>A pé {w.accessType==='boarding'?'até o embarque':w.accessType==='destination'?'até o destino':`na baldeação ${w.before_leg}`}: {w.distance_meters} m · {w.duration_minutes} min{w.accessType==='transfer'?` · ${w.origin.name} → ${w.destination.name}`:''}</p>)}</section>}
+    {destination&&current?.journeys?.length>0&&<section className="sp-route-options" aria-label="Alternativas de viagem"><h3>Alternativas de viagem</h3><label className="sp-board-order">Ordenar rotas por <select aria-label="Ordenar rotas por" value={routeOrder} onChange={e=>setRouteOrder(e.target.value)}><option value="fastest">Mais rápido</option><option value="transfers">Menos baldeações</option><option value="walking">Menos caminhada</option></select></label>{orderedJourneys.map((trip,index)=><button type="button" className="sp-route-option" key={trip.id||index} aria-pressed={selected===trip} onClick={()=>chooseJourney(trip)}><strong>{index+1}. {!(arrivalTimes[trip.id]?.trip===trip&&arrivalTimes[trip.id]?.updated)&&<>{humanDuration(trip.duration_minutes)} no planejamento · </>}{trip.mode==='walk'?'Somente a pé':`${trip.transfers||0} baldeações`}{developmentTools&&trip.mode!=='walk'&&trip.planner==='raptor'&&<span className="sp-raptor-mark" role="img" aria-label="Rota calculada pelo RAPTOR" title="Rota calculada pelo RAPTOR"><Icon name="eagle"/></span>}</strong><span>{trip.legs.map(l=>l.code).join(' → ')}</span><small>{trip.walking_meters||0} m a pé · {humanDuration(trip.walking_minutes||0)} de caminhada total</small>{trip.mode!=='walk'&&<BoardingCountdown trip={trip} selected={selected===trip} boardingLive={boardingLive} active={open&&active} clock={clock} onArrival={reportArrival}/>}{trip.mode==='walk'&&trip.arrival&&<span className="sp-route-arrival"><small>Chegada ao destino · planejamento</small><strong>{time(clock+trip.duration_minutes*60000)}</strong></span>}</button>)}{false&&current.journeys.length>3&&<button className="text-button" onClick={()=>setExpanded(v=>!v)}>{expanded?'Mostrar apenas as três mais rápidas':`Mostrar todas as ${current.journeys.length} rotas calculadas`}</button>}</section>}
+    {selected?.walks?.length>0&&<section aria-label="Caminhadas da rota">{selected.walks.map((w,i)=><p key={i}>A pé {w.accessType==='boarding'?'até o embarque':w.accessType==='destination'?'até o destino':`na baldeação ${w.before_leg}`}: {w.distance_meters} m · {humanDuration(w.duration_minutes)}{w.accessType==='transfer'?` · ${w.origin.name} → ${w.destination.name}`:''}</p>)}</section>}
     <div className="sp-board-refresh"><button className="icon-button" aria-label={busy?(destination?'Carregando rotas':'Carregando horários'):destination?'Reiniciar busca':'Atualizar horários'} title={busy?(destination?'Carregando rotas':'Carregando horários'):destination?'Reiniciar busca':'Atualizar horários'} aria-busy={busy} disabled={busy} onClick={()=>{forceSearch.current=!!destination;if(destination){chosenTrip.current=null;setChosen(null);setExpanded(false);setData(null);onJourney(null);}setTick(v=>v+1);}}><Icon name={busy?'hourglass':'refresh'} className={busy?'sp-loading-hourglass':undefined}/></button>{current?.queried_at&&<small>Consulta às {time(current.queried_at)}{!destination&&' · atualização a cada 30 s'}</small>}</div>
     {busy&&<p role="status">{destination?"Buscando alternativas… As rotas aparecem conforme são calculadas e a ordem ainda pode mudar.":"Consultando próximos ônibus…"}</p>}
     {error&&<p role="alert">{error}</p>}
@@ -142,7 +144,7 @@ export default function BoardDialog({onWatchLines,onWatchBus,boardingLive,passen
       {line.live.length?<div className="sp-next-arrivals"><small>Previsão de chegada · SPTrans</small><ul>{line.live.slice(0,5).map((arrival,i)=><li key={arrival.vehicle+':'+i}><strong className="sp-next-countdown">{humanBoarding(arrival.seconds)}</strong><button type="button" className="sp-watch-bus" onClick={()=>onWatchBus({...line,origin,vehicle:String(arrival.vehicle)})} aria-label={`Ver veículo ${arrival.vehicle} da linha ${line.code} no mapa`}><span>Ver ônibus no mapa →</span></button><span>No veículo {arrival.vehicle}{arrival.accessible?' — acessível':''}</span><small>Chegada prevista às {arrival.time}</small></li>)}</ul></div>:<p>Previsão de chegada indisponível. Consulte os horários ou frequências programados abaixo.</p>}
 
       {line.planned_departure&&<p>Embarque estimado no planejamento: {time(line.planned_departure)} (horário programado; não é previsão em tempo real).</p>}
-      {!line.live.length&&mergeProgramme(line.programme).map((p,i)=><p key={i}>{p.kind==='frequency'?`A cada ${p.interval_minutes} min, das ${time(p.start)} às ${time(p.end)}`:`Horário programado: ${time(p.start)}`}</p>)}
+      {!line.live.length&&mergeProgramme(line.programme).map((p,i)=><p key={i}>{p.kind==='frequency'?`A cada ${humanDuration(p.interval_minutes)}, das ${time(p.start)} às ${time(p.end)}`:`Horário programado: ${time(p.start)}`}</p>)}
     </SelectableBusLine>)}</div>}
   </dialog>;
 }

@@ -1,3 +1,4 @@
+import {humanDuration} from './duration.js';
 import {useEffect,useState} from 'react';
 import {api} from './api.js';
 export default function DestinationJourney({origin,destination,onJourney,onStatus,onClear}) {
@@ -23,7 +24,7 @@ export default function DestinationJourney({origin,destination,onJourney,onStatu
       {!result&&!error&&<p role="status">Calculando rota…</p>}
       {error&&<p role="alert">{error} <button className="text-button" onClick={()=>setRetry(n=>n+1)}>Tentar novamente</button></p>}
       {result&&!journey&&<p>Nenhuma viagem encontrada até esta parada nas próximas 6 horas, com até 2 trocas.</p>}
-      {journey&&<><p><strong>Cerca de {Math.ceil(journey.duration_minutes)} min</strong> · {journey.transfers?`${journey.transfers} troca(s)`:'Sem trocas'}</p>
+      {journey&&<><p><strong>Cerca de {humanDuration(journey.duration_minutes)}</strong> · {journey.transfers?`${journey.transfers} troca(s)`:'Sem trocas'}</p>
         <details><summary>Como chegar</summary><ol>{journey.legs.map((leg,i)=><li key={i}><strong>{leg.code} · {leg.headsign}</strong><p>{leg.origin.name} → {leg.destination.name}</p></li>)}</ol>
         <p>Estimativa GTFS com espera média. Não é previsão ao vivo. Traçado esquemático entre paradas; até 2 trocas no mesmo ponto.</p></details></>}
     </>}

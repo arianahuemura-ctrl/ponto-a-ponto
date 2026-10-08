@@ -1386,3 +1386,7 @@ Uma categoria concluída pode estar vazia por decisão da política, não por au
 física de conexão. A retomada preserva categorias concluídas e tenta novamente os
 timeouts. A conclusão municipal significa cobertura do escopo dessa política.
 O novo arquivo não substitui automaticamente o banco usado pela aplicação.
+
+### Ambiente da aplicação
+
+Defina `PAP_ENVIRONMENT=production` (padrão) ou `PAP_ENVIRONMENT=development` no `.env` da raiz. Em produção, a marca do RAPTOR e a medição de distâncias pelo botão direito ficam desativadas. Essas ferramentas estão disponíveis apenas em desenvolvimento. Após alterar, execute `npm --prefix frontend run build`; se estiver usando o Vite, reinicie o servidor de desenvolvimento. A variável não altera o `DEBUG` do Django.

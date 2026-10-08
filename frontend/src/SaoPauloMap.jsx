@@ -1,3 +1,4 @@
+import {developmentTools} from './environment.js';
 import destinationPointIcon from './assets/destination-point.png';
 import boardingPointIcon from './assets/boarding-point.png';
 import { useEffect, useRef, useMemo, useState } from 'react';
@@ -66,8 +67,10 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
         .setContent(label).addTo(measurement);
     };
     const clearOnEscape=event=>{if(event.key==='Escape')clearMeasurement();};
-    host.current.addEventListener('contextmenu',measure);
-    document.addEventListener('keydown',clearOnEscape);
+    if(developmentTools){
+      host.current.addEventListener('contextmenu',measure);
+      document.addEventListener('keydown',clearOnEscape);
+    }
 
     let timer;
     const updateArea=()=>{
