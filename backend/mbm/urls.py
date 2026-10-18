@@ -4,9 +4,11 @@ from django.urls import path
 from django.contrib import admin
 from transit import views, demo_views, catalogue
 from transit.sptrans import views as sptrans
+from transit.sptrans.compact import catalogue as stop_catalogue
 from transit.sptrans.addresses import suggestions
 
 urlpatterns = [
+    path("api/sptrans/stop-catalogue/", stop_catalogue),
     path("api/location-config/", views.location_config),
     path("api/sptrans/stops/", sptrans.stops),
     path("api/sptrans/addresses/", suggestions),

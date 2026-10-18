@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {api} from './api.js';
-export default function DestinationSearch({open,onClose,onSelect,onStreet,origin,role='destination'}) {
+import {parseCoordinates} from './coordinates.js';
+export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoordinates,origin,role='destination'}) {
   const dialog=useRef(),input=useRef(),selectionRequest=useRef();
   const [query,setQuery]=useState(''),[suggestions,setSuggestions]=useState([]),[busy,setBusy]=useState(false),[error,setError]=useState(''),[result,setResult]=useState(null),[active,setActive]=useState(-1),[retry,setRetry]=useState(0),[choosing,setChoosing]=useState(false),[finished,setFinished]=useState(false);
   useEffect(()=>{
@@ -11,6 +12,12 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,origin
   useEffect(()=>{
     setSuggestions([]);setActive(-1);setFinished(false);setBusy(false);
     if(!open||query.trim().length<3||result)return;
+    const coordinates=parseCoordinates(query);
+    if(coordinates){
+      setError(coordinates.error||'');
+      if(!coordinates.error)setSuggestions([{...coordinates,id:'coordinates',kind:'coordinates',name:'Ver localização no mapa',district:'Raio de 250 m',label:query.trim()}]);
+      return;
+    }
     const abort=new AbortController();setBusy(true);setError('');
     const timer=setTimeout(()=>api('sptrans/addresses',{q:query.trim()},abort.signal).then(data=>{
       if(!abort.signal.aborted){setSuggestions(data.suggestions);setFinished(true);}
@@ -18,6 +25,7 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,origin
     return()=>{clearTimeout(timer);abort.abort();};
   },[open,query,retry,result]);
   const choose=async place=>{
+    if(place.kind==='coordinates'){selectionRequest.current?.abort();onCoordinates({lat:place.lat,lon:place.lon});setQuery('');setSuggestions([]);onClose();return;}
     selectionRequest.current?.abort();const abort=new AbortController();selectionRequest.current=abort;setChoosing(true);setError('');
     try{
       const data=await api('sptrans/destination',{lat:place.lat,lon:place.lon,...(place.kind==='street'?{street:place.street}:role==='destination'&&origin?{origin:origin.id}:{})},abort.signal);
@@ -29,8 +37,8 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,origin
   return <dialog ref={dialog} className="sp-stop-dialog sp-destination-search" aria-labelledby="destination-title" onCancel={onClose}>
     <button className="text-button" onClick={onClose} aria-label="Fechar busca de endereço">Fechar ×</button>
     <h2 id="destination-title">{role==='origin'?'Onde você vai embarcar?':'Para onde você vai?'}</h2>
-    <form onSubmit={e=>{e.preventDefault();if(active>=0&&suggestions[active])choose(suggestions[active]);else setRetry(n=>n+1);}}>
-      <label className="sp-search-label">Endereço de {name}<input ref={input} value={query} maxLength={300} autoComplete="off" role="combobox" aria-autocomplete="list" aria-expanded={suggestions.length>0&&!result} aria-controls="address-options" aria-activedescendant={active>=0?`address-option-${active}`:undefined} placeholder="Digite a rua, número ou lugar" onChange={e=>{selectionRequest.current?.abort();setChoosing(false);setResult(null);setQuery(e.target.value);setError('');}} onKeyDown={e=>{
+    <form onSubmit={e=>{e.preventDefault();if(active>=0&&suggestions[active])choose(suggestions[active]);else if(suggestions[0]?.kind==='coordinates')choose(suggestions[0]);else setRetry(n=>n+1);}}>
+      <label className="sp-search-label">Endereço ou coordenadas de {name}<input ref={input} value={query} maxLength={300} autoComplete="off" role="combobox" aria-autocomplete="list" aria-expanded={suggestions.length>0&&!result} aria-controls="address-options" aria-activedescendant={active>=0?`address-option-${active}`:undefined} placeholder="Rua, lugar ou latitude, longitude" onChange={e=>{selectionRequest.current?.abort();setChoosing(false);setResult(null);setQuery(e.target.value);setError('');}} onKeyDown={e=>{
         if(e.key==='ArrowDown'&&suggestions.length){e.preventDefault();setActive(a=>(a+1)%suggestions.length);}
         if(e.key==='ArrowUp'&&suggestions.length){e.preventDefault();setActive(a=>a<=0?suggestions.length-1:a-1);}
       }}/></label>
@@ -47,6 +55,7 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,origin
       {result.direction_checked&&<p>Sentido verificado a partir do embarque, priorizando menos trocas entre paradas próximas.</p>}
       <button className="primary full" onClick={()=>{onSelect({...result.stop,destinationAddress:result.place.label,addressDistance:result.distance_meters,addressCoordinates:{lat:result.place.lat,lon:result.place.lon},addressMaxTransfers:result.max_transfers});onClose();}}>Usar como {name}</button>
       <button className="text-button" onClick={()=>setResult(null)}>Escolher outro endereço</button></section>}
+    <small>Coordenadas: −23.559010, −46.731544. A busca centraliza o mapa com raio de 250 m, sem alterar embarque ou destino.</small>
     <small>Sugestões: Photon / OpenStreetMap. Sem número, escolha a rua para ver suas paradas. Com número, selecione o endereço completo.</small>
   </dialog>;
 }

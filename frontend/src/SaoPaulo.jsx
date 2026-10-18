@@ -1,3 +1,4 @@
+import FavoritesDialog from './FavoritesDialog.jsx';
 import PointControl from './PointControl.jsx';
 import appIcon from '../../icone.png';
 import {useEffect,useState,useRef,useMemo} from 'react';
@@ -17,12 +18,14 @@ import FavoriteNameDialog from './FavoriteNameDialog.jsx';
 import RemoveFavoriteDialog from './RemoveFavoriteDialog.jsx';
 import CancelTripDialog from './CancelTripDialog.jsx';
 import './sao-paulo.css';
+const ignorePreviewJourney=()=>{};
 function initialSession(){try{return readSession(sessionStorage,location.search);}catch{return {origin:null,destination:null};}}
 function initialFavorites(){try{return readFavorites(localStorage);}catch{return [];}}
 export default function SaoPaulo(){
   const {resolvedTheme,setTheme}=useTheme();
   const {position:passengerPosition,error:locationError}=usePassengerLocation();
   const [session,setSession]=useState(initialSession),[favorites,setFavorites]=useState(initialFavorites);
+  const [previewStop,setPreviewStop]=useState(null);
   const [editingFavorite,setEditingFavorite]=useState(null),[removingFavorite,setRemovingFavorite]=useState(null);
   const [boardRequest,setBoardRequest]=useState(0);
   const [cancelRequested,setCancelRequested]=useState(false);
@@ -48,6 +51,7 @@ export default function SaoPaulo(){
   const [selectedLeg,setSelectedLeg]=useState(null);
   const [mapFocus,setMapFocus]=useState(0);
   const [passengerFocus,setPassengerFocus]=useState(null);
+  const [coordinateFocus,setCoordinateFocus]=useState(null);
   const leg=selectedLeg===null?null:journey?.legs[selectedLeg];
   const trackingLeg=routeSelected?(mode==='board'?journey?.legs[0]:(leg||journey?.legs[0])):(mode==='watch'?watchedBus:null);
   const boardingWalkMinutes=(journey?.walks||walks).filter(w=>w.accessType==='boarding').reduce((sum,w)=>sum+(Number(w.duration_minutes)||0),0);
@@ -151,6 +155,28 @@ export default function SaoPaulo(){
     }else {setSession(s=>({...s,origin:boarding,destination:stop}));history.replaceState(null,'',withLocationParams(boarding.useLocation?'/':'/?stop='+encodeURIComponent(boarding.id),location.search));}
     setDestinationSearch(false);setMode('board');setBoardRequest(value=>value+1);
   };
+  const selectFavorite=(stop,role)=>{
+    selectionRequest.current?.abort();qrRequest.current?.abort();
+    setSelectedLeg(null);setWatchedBus(null);setWatchedLines([]);setWalks([]);setPlanningStatus('');
+    if(role==='destination'&&!origin&&!passengerPosition){
+      setSession(previous=>({...previous,destination:stop}));setManualOrigin(true);
+      setJourney(null);setMode('origin');setSearchRole('origin');setView('navigate');setNotice('Selecione o local de embarque.');return;
+    }
+    selectStop(stop,role);
+  };
+  const useCurrentLocation=async role=>{
+    if(!passengerPosition)return;
+    if(role==='origin'){setView('navigate');useCurrentOrigin();return;}
+    selectionRequest.current?.abort();
+    const abort=new AbortController();selectionRequest.current=abort;
+    try{
+      const point={lat:passengerPosition.lat,lon:passengerPosition.lon};
+      const result=await api('sptrans/destination',point,abort.signal);
+      if(abort.signal.aborted)return;
+      if(!result.stop){setNotice(result.message||'Não há paradas próximas da sua localização.');return;}
+      selectFavorite({...result.stop,name:'Minha localização',useLocation:true,addressCoordinates:point,destinationAddress:'Minha localização'},'destination');
+    }catch(error){if(!abort.signal.aborted)setNotice(error.message);}
+  };
   const selectMapPoint=async point=>{
     const role=mode==='origin'||!origin?'origin':'destination';
     selectionRequest.current?.abort();
@@ -212,17 +238,18 @@ export default function SaoPaulo(){
     </header>
     {locationError&&<div role="status" className="passenger-notice">{locationError}</div>}
     {notice&&<div role="status" className="passenger-notice">{notice}<button onClick={()=>setNotice('')} aria-label="Fechar aviso">×</button></div>}
-    {view==='navigate'&&<div className="sp-navigation"><section className="sp-map-panel">
-      <SaoPauloMap selectingPoint={selectingPoint} preserveViewport={preserveViewport} confirmDestination={mode==='watch'} approaches={[...lineApproaches,...(liveBus?.passedApproaches||[])]} approachFocusKey={mode==='watch'?(watchedLines.length?watchedLines.map(l=>l.trip_id).join(':'):watchedBus?.trip_id+':'+watchedBus?.vehicle):null} approach={liveBus?.approach} passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={selectingPoint?(streetView?streetView.stops:stops):[]} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
+    {view!=='more'&&<div className="sp-navigation"><section className="sp-map-panel">
+      <SaoPauloMap coordinateFocus={coordinateFocus} selectingPoint={selectingPoint} preserveViewport={preserveViewport} confirmDestination={mode==='watch'} approaches={[...lineApproaches,...(liveBus?.passedApproaches||[])]} approachFocusKey={mode==='watch'?(watchedLines.length?watchedLines.map(l=>l.trip_id).join(':'):watchedBus?.trip_id+':'+watchedBus?.vehicle):null} approach={liveBus?.approach} passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={selectingPoint?(streetView?streetView.stops:stops):[]} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
       {mode!=='board'&&<div className="sp-map-point-controls" data-has-light={selectingPoint} aria-label="Escolher embarque e destino"><PointControl kind="origin" point={origin} selecting={mode==='origin'} onClick={()=>togglePoint('origin')}/><PointControl kind="destination" point={destination} selecting={mode==='destination'} onClick={()=>togglePoint('destination')}/></div>}
       {selectingPoint&&streetView&&<div className="sp-schematic-note">{streetView.label} · {streetView.stops.length} {streetView.match_method==='nearby'?'paradas próximas (até 400 m)':'paradas cadastradas'}{streetView.match_method==='nearby'&&<small> · Podem incluir ruas vizinhas.</small>} <button onClick={()=>setStreetView(null)}>Mostrar todos os pontos</button></div>}
       {mode==='watch'&&watchedLines.length>0&&<div className="sp-watch-panel" role="status"><strong>{watchedLines.length} linhas acompanhadas</strong><span>Atualização a cada 5 s</span>{(lineTracking||watchedLines).map(l=><span key={l.trip_id}>{l.code}: {!lineTracking?'consultando…':l.approach?'veículo '+l.approach.vehicle.id:'posição/previsão indisponível'}</span>)}</div>}
       {mode==='watch'&&watchedBus&&<div className="sp-watch-panel" role="status"><strong>{watchedBus.code} · veículo {watchedBus.vehicle}</strong><span>{!liveBus?'Consultando posição…':liveBus.approach?'Percurso até '+origin.name+' · próximo veículo '+liveBus.approach.vehicle.id+' · atualização a cada 5 s':liveBus.passedApproaches?.length?'Ônibus após o embarque · até 500 m · atualização a cada 5 s':'Posição ou percurso até este ponto indisponível no momento.'}</span></div>}
       {routeSelected&&planningStatus&&<div className="sp-map-status" role="status">{planningStatus}</div>}
-      <div className="sp-schematic-note sp-route-legend">{origin&&(!origin.useLocation||destination)?<button className="icon-button" aria-label="Horários de embarque" title="Horários de embarque" onClick={openBoard}><Icon name="list"/></button>:null}{origin&&!origin.useLocation&&passengerPosition&&<button className="text-button" onClick={useCurrentOrigin}>Usar minha localização</button>}{journey&&<><div className="sp-route-controls">{journey.legs.length>1&&<label>Trecho <select aria-label="Trecho exibido no mapa" value={leg?selectedLeg:'all'} onChange={e=>setSelectedLeg(e.target.value==='all'?null:Number(e.target.value))}><option value="all">Viagem completa</option>{journey.legs.map((l,i)=><option key={i} value={i}>{String.fromCharCode(65+i)} → {i===journey.legs.length-1?'Destino':String.fromCharCode(66+i)} · {l.code} · {l.headsign}</option>)}</select></label>}<div className="sp-route-keys"><span>Ônibus</span><span className="sp-walk-key">A pé</span></div></div>{journey.legs.some(l=>!l.geometry?.length)&&<small>Traçado GTFS indisponível em um trecho.</small>}{walkWarning&&<small>{walkWarning}</small>}</>}<button className="icon-button sp-map-cancel" aria-label="Cancelar viagem" title="Cancelar viagem" onClick={()=>setCancelRequested(true)}><Icon name="close"/></button></div>
+      {((origin&&!origin.useLocation)||destination)&&<div className="sp-schematic-note sp-route-legend">{origin&&(!origin.useLocation||destination)?<button className="icon-button" aria-label="Horários de embarque" title="Horários de embarque" onClick={openBoard}><Icon name="list"/></button>:null}{journey&&<><div className="sp-route-controls">{journey.legs.length>1&&<label>Trecho <select aria-label="Trecho exibido no mapa" value={leg?selectedLeg:'all'} onChange={e=>setSelectedLeg(e.target.value==='all'?null:Number(e.target.value))}><option value="all">Viagem completa</option>{journey.legs.map((l,i)=><option key={i} value={i}>{String.fromCharCode(65+i)} → {i===journey.legs.length-1?'Destino':String.fromCharCode(66+i)} · {l.code} · {l.headsign}</option>)}</select></label>}<div className="sp-route-keys"><span>Ônibus</span><span className="sp-walk-key">A pé</span></div></div>{journey.legs.some(l=>!l.geometry?.length)&&<small>Traçado GTFS indisponível em um trecho.</small>}{walkWarning&&<small>{walkWarning}</small>}</>}<button className="icon-button sp-map-cancel" aria-label="Cancelar viagem" title="Cancelar viagem" onClick={()=>setCancelRequested(true)}><Icon name="close"/></button></div>}
       {selectingPoint&&(searching||searchError)&&<div className="sp-map-status" role={searchError?'alert':'status'}>{searchError||'Atualizando pontos…'}</div>}
     </section></div>}
-    {view==='favorites'&&<section className="passenger-screen screen-content sp-favorites"><h2>Pontos favoritos</h2>{mode==='destination'&&<div className="sp-board-actions"><button className="primary" onClick={()=>setView('navigate')}>Buscar no mapa</button><button className="text-button" onClick={()=>{selectionRequest.current?.abort();setNotice('');setMode('board');setView('navigate');}}>Cancelar seleção</button></div>}<p>{!origin||mode==='origin'?'Escolha o local de embarque.':'Escolha o destino.'}</p>{!favorites.length&&<p>Adicione pontos aos favoritos usando a estrela.</p>}{favorites.map(s=><div className="favorite-row" key={s.id}><button onClick={()=>selectStop(s,!origin||mode==='origin'?'origin':'destination')}><Icon name="star"/><span>{s.favoriteLabel||s.name}<small>{s.favoriteLabel?` · ${s.name}`:''} · {s.id}</small></span></button><button className="icon-button" title="Renomear favorito" aria-label={'Renomear favorito '+(s.favoriteLabel||s.name)} onClick={()=>setEditingFavorite(s)}><Icon name="edit"/></button><button className="icon-button" title="Remover favorito" aria-label={'Remover favorito '+(s.favoriteLabel||s.name)} onClick={()=>setRemovingFavorite(s)}><Icon name="trash"/></button></div>)}</section>}
+    <FavoritesDialog open={view==='favorites'&&!previewStop} favorites={favorites} onClose={()=>setView('navigate')} onSelect={selectFavorite} onPreview={setPreviewStop} onEdit={setEditingFavorite} onRemove={setRemovingFavorite} onLocation={useCurrentLocation} hasLocation={!!passengerPosition}/>
+    <BoardDialog open={!!previewStop} active={!!previewStop} origin={previewStop} destination={null} onClose={()=>setPreviewStop(null)} onCancel={()=>setPreviewStop(null)} onFavorite={()=>setEditingFavorite(previewStop)} isFavorite={true} onDestination={()=>{const stop=previewStop;setPreviewStop(null);selectFavorite(stop,'destination');}} onJourney={ignorePreviewJourney} onStatus={ignorePreviewJourney} onWatchBus={bus=>{setSession(s=>({...s,origin:previewStop,destination:null}));setPreviewStop(null);setView('navigate');setWatchedBus(bus);setMode('watch');}} onWatchLines={lines=>{setSession(s=>({...s,origin:previewStop,destination:null}));setPreviewStop(null);setView('navigate');setWatchedLines(lines);setMode('watch');}}/>
     {view==='more'&&<section className="passenger-screen screen-content more-screen sp-more">
       <h2>Saiba mais</h2>
       <p>O Ponto a Ponto (PaP) é um protótipo acadêmico do Projeto Integrador da UNIVESP. A aplicação ajuda a planejar viagens de ônibus em São Paulo a partir do ponto de embarque e do destino, sem exigir que o passageiro conheça previamente os números das linhas.</p>
@@ -256,7 +283,7 @@ export default function SaoPaulo(){
     </section>}
 
     <BoardDialog onWatchLines={lines=>{setWatchedBus(null);setWatchedLines(lines);setMode(lines.length?'watch':origin?'destination':'origin');setView('navigate');}} onWatchBus={bus=>{setWatchedLines([]);setWatchedBus(bus);setMode('watch');setView('navigate');setDestinationSearch(false);}} boardingLive={liveBus} passengerPosition={passengerPosition} onChooseJourney={()=>setMapFocus(value=>value+1)} requestId={boardRequest} active={!!origin&&mode!=='destination'&&mode!=='origin'&&(!origin.useLocation||!!destination)} onStatus={setPlanningStatus} open={view==='navigate'&&mode==='board'&&!destinationSearch} origin={origin} destination={destination} onClose={()=>{setSelectedLeg(null);setMode(destination?'map':origin?'destination':'origin');}} onDestination={()=>togglePoint('destination')} onCancel={()=>setCancelRequested(true)} onFavorite={favorite} isFavorite={favorites.some(s=>s.id===favoritePoint?.id)} onJourney={setJourney}/>
-    <DestinationSearch origin={origin?.useLocation?null:origin} onStreet={data=>{setPreserveViewport(false);setStreetView(data);setJourney(null);setView('navigate');setMode(searchRole);}} open={destinationSearch} role={searchRole} onClose={()=>setDestinationSearch(false)} onSelect={stop=>selectStop(stop,searchRole)}/>
+    <DestinationSearch onCoordinates={point=>{setPreserveViewport(true);setStreetView(null);setView('navigate');setMode(previous=>previous==='board'?'map':previous);setCoordinateFocus({...point});}} origin={origin?.useLocation?null:origin} onStreet={data=>{setPreserveViewport(false);setStreetView(data);setJourney(null);setView('navigate');setMode(searchRole);}} open={destinationSearch} role={searchRole} onClose={()=>setDestinationSearch(false)} onSelect={stop=>selectStop(stop,searchRole)}/>
     <CancelTripDialog boardingOnly={!destination} open={cancelRequested} onConfirm={cancelTrip} onClose={()=>setCancelRequested(false)}/>
     <RemoveFavoriteDialog stop={removingFavorite} onConfirm={removeFavorite} onClose={()=>setRemovingFavorite(null)}/>
     <FavoriteNameDialog stop={editingFavorite} onSave={saveFavorite} onClose={()=>setEditingFavorite(null)}/>

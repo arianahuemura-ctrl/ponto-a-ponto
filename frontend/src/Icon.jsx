@@ -1,4 +1,5 @@
 const shapes = {
+  eye: <><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></>,
   eagle: <path d="M12 8c-2 0-3-2-5-3L1 3l2 5 5 4-4-1 3 4 3 1-1 5 3-2 3 2-1-5 3-1 3-4-4 1 5-4 2-5-6 2-3 3V6l-2-1-2 2Z" fill="currentColor" stroke="none"/>,
   finish: <><path d="M5 21V3h15v12H5"/><path d="M5 3h5v4H5zm10 0h5v4h-5zm-5 4h5v4h-5zm-5 4h5v4H5zm10 0h5v4h-5z" fill="currentColor" stroke="none"/></>,
   bulb: <><path d="M9 18h6m-6 3h6M9 15c0-2-3-3-3-6a6 6 0 0 1 12 0c0 3-3 4-3 6v1H9Z"/><path d="M12 1v1M2 9h1m18 0h1M4 3l1 1m14 0 1-1"/></>,

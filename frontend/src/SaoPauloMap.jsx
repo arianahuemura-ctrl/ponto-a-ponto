@@ -4,9 +4,27 @@ import boardingPointIcon from './assets/boarding-point.png';
 import { useEffect, useRef, useMemo, useState } from 'react';
 import L from 'leaflet';
 import Icon from './Icon.jsx';
+import {StopCanvas} from './StopCanvas.js';
+import StopTransparencyControl from './StopTransparencyControl.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
-export default function SaoPauloMap({ selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=[], center, onStop, onArea, onMapPoint }) {
+const EMPTY_LIST=Object.freeze([]);
+export default function SaoPauloMap({ selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
+  const [dimmerActive,setDimmerActive]=useState(false);
   const [transparentStops,setTransparentStops]=useState(false);
+  const [stopTransparency,setStopTransparency]=useState(()=>{
+    try { const stored=localStorage.getItem('pap-stop-transparency'); const value=Number(stored); return stored!==null&&Number.isFinite(value)&&value>=0&&value<=100?value:75; } catch { return 75; }
+  });
+  const changeTransparency=value=>{
+    setStopTransparency(value);setTransparentStops(true);
+    try { localStorage.setItem('pap-stop-transparency',String(value)); } catch { /* Storage may be unavailable. */ }
+  };
+  const commitTransparency=value=>{
+    if(value===0){
+      // Fully opaque means lamp on; retain the default 25% opacity for lamp off.
+      changeTransparency(75);
+      setTransparentStops(false);
+    }else changeTransparency(value);
+  };
   const host=useRef(), map=useRef(), click=useRef(onStop), area=useRef(onArea);
   const locationButton=useRef(null), mapPoint=useRef(onMapPoint);
   const confirmPoint=useRef(confirmDestination), destinationPopup=useRef(null);
@@ -18,6 +36,7 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
   useEffect(()=>{
     host.current.parentElement.style.setProperty('--sp-location-gap',passengerPosition?'calc(var(--sp-map-control-size,38px) + 10px)':'0px');
   },[!!passengerPosition]);
+  const stopCanvas=useRef();
   const markerLayer=useRef(),markerRecords=useRef(new Map());
   click.current=onStop;area.current=onArea;
   useEffect(()=>{
@@ -87,6 +106,7 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
     instance.getPane('busApproach').style.zIndex='390';
     instance.getPane('busApproach').style.pointerEvents='none';
     markerLayer.current=L.layerGroup().addTo(instance);
+    stopCanvas.current=new StopCanvas(instance,s=>click.current(s));
     const zoomControl=instance.zoomControl.getContainer();
     const alignLocationButton=()=>{
       if(!locationButton.current)return;
@@ -106,8 +126,9 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
     const observer=new ResizeObserver(()=>{instance.invalidateSize();updateArea();alignLocationButton();});
     observer.observe(host.current);observer.observe(zoomControl);
     alignLocationButton();
-    return ()=>{host.current?.removeEventListener('contextmenu',measure);document.removeEventListener('keydown',clearOnEscape);measurement.clearLayers();longPress.destroy();instance.off('zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();instance.remove();};
+    return ()=>{host.current?.removeEventListener('contextmenu',measure);document.removeEventListener('keydown',clearOnEscape);measurement.clearLayers();longPress.destroy();instance.off('zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();stopCanvas.current.destroy();instance.remove();};
   },[]);
+  useEffect(()=>{stopCanvas.current?.setOpacity(selectingPoint&&transparentStops?1-stopTransparency/100:1);},[selectingPoint,transparentStops,stopTransparency]);
   useEffect(()=>{
     if(!passengerPosition)return;
     const {lat,lon,accuracy,simulated}=passengerPosition;
@@ -126,6 +147,7 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
     return ()=>group.remove();
   },[passengerPosition,origin,journey,focusStops]);
   useEffect(()=>{
+    if(dimmerActive)return;
     const group=L.layerGroup().addTo(map.current);
     const drawRoute=(geometry,foot=false)=>{
       if(!geometry?.length)return;
@@ -142,11 +164,13 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
     for(const path of [walking,...walks].filter(Boolean)) {
       if(path.geometry?.length)drawRoute(path.geometry,true);
     }
+    const ordinary=[];
     for(const s of points.values()) {
       const complete=fullJourney||journey;
       const isOrigin=s.id===(complete?.legs[0]?.origin.id||origin?.id),isDestination=s.id===(destination?.id||complete?.legs.at(-1)?.destination.id);
       const transferIndex=complete?.legs.findIndex((leg,i)=>i>0&&(leg.origin.id===s.id||complete.legs[i-1].destination.id===s.id))??-1;
       const isTransfer=!isOrigin&&!isDestination&&transferIndex>0;
+      if(!isOrigin&&!isDestination&&!isTransfer){ordinary.push(s);continue;}
       const markerText=isOrigin?'A':isDestination?'★':isTransfer?String.fromCharCode(65+transferIndex):'';
       const directions=s.directions||[];
       const departures=directions.filter(d=>d.kind!=='arrival');
@@ -165,14 +189,16 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
         markerRecords.current.set(s.id,{marker,signature});
       }
     }
-    for(const [id,record] of markerRecords.current)if(!points.has(id)){markerLayer.current.removeLayer(record.marker);markerRecords.current.delete(id);}
+    stopCanvas.current.setStops(ordinary);
+    const ordinaryIds=new Set(ordinary.map(s=>s.id));
+    for(const [id,record] of markerRecords.current)if(!points.has(id)||ordinaryIds.has(id)){markerLayer.current.removeLayer(record.marker);markerRecords.current.delete(id);}
     if(detail?.shape?.length) L.polyline(detail.shape,{color:'#4c9aff',weight:5}).addTo(group);
     for(const v of detail?.vehicles||[]) {
       const label=document.createElement('span');label.textContent=`Ônibus ${v.id} · ${v.code} · posição recebida ${new Date(v.observed_at).toLocaleTimeString('pt-BR')}`;
       L.marker([v.lat,v.lon],{title:label.textContent,icon:L.divIcon({className:'sp-bus',html:'●',iconSize:[22,22]})}).bindTooltip(label).addTo(group);
     }
     return ()=>group.remove();
-  },[stops,origin,destination,detail,journey,walking,walks,routeSelected,fullJourney]);
+  },[stops,origin,destination,detail,journey,walking,walks,routeSelected,fullJourney,dimmerActive]);
   const activeApproaches=useMemo(()=>[...(approach?[approach]:[]),...approaches].filter(a=>a?.vehicle),[approach,approaches]);
   const fittedApproach=useRef(null);
   useEffect(()=>{
@@ -217,14 +243,19 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
     const point=L.latLng(passengerFocus.lat,passengerFocus.lon);
     map.current.setView(point,map.current.getBoundsZoom(point.toBounds(500)),{animate:false});
   },[passengerFocus]);
+  useEffect(()=>{
+    if(!coordinateFocus||!map.current)return;
+    const point=L.latLng(coordinateFocus.lat,coordinateFocus.lon);
+    map.current.setView(point,map.current.getBoundsZoom(point.toBounds(500)),{animate:false});
+  },[coordinateFocus]);
   const locatePassenger=()=>{
     if(!passengerPosition||!map.current)return;
     const point=L.latLng(passengerPosition.lat,passengerPosition.lon);
     map.current.setView(point,map.current.getBoundsZoom(point.toBounds(500)),{animate:false});
   };
   const locationLabel=passengerPosition?.simulated?'Minha localização (simulada)':passengerPosition?'Minha localização':'Aguardando localização';
-  return <><div ref={host} className={`passenger-map sp-map${selectingPoint&&transparentStops?' sp-transparent-stops':''}`} aria-label="Mapa dos pontos de São Paulo"/>
-    {selectingPoint&&<button type="button" className="icon-button sp-stop-transparency" aria-label="Pontos transparentes" title={transparentStops?'Destacar pontos':'Deixar pontos transparentes'} aria-pressed={transparentStops} onClick={()=>setTransparentStops(value=>!value)}><Icon name={transparentStops?'bulbOff':'bulb'}/></button>}
+  return <><div ref={host} style={{'--sp-stop-opacity':1-stopTransparency/100}} className={`passenger-map sp-map${selectingPoint&&transparentStops?' sp-transparent-stops':''}`} aria-label="Mapa dos pontos de São Paulo"/>
+    {selectingPoint&&<StopTransparencyControl active={transparentStops} onToggle={()=>setTransparentStops(value=>!value)} value={stopTransparency} onChange={changeTransparency} onCommit={commitTransparency} onActiveChange={setDimmerActive}/>}
     <button ref={locationButton} type="button" className="icon-button sp-locate-passenger" style={{display:passengerPosition?undefined:'none'}} onClick={locatePassenger} disabled={!passengerPosition} title={locationLabel} aria-label={locationLabel}><Icon name="locate"/></button></>;
 
 }
