@@ -1,0 +1,5 @@
+{% extends "admin/base_site.html" %}
+{% block content %}<p>Registros de pesquisa restritos à administração. {{ total }} sessões.</p>
+<p><a href=".">Atualizar lista</a></p><div style="overflow:auto"><table><thead><tr><th>Sessão</th><th>Início</th><th>Último recebimento</th><th>Intervalo de recebimento</th><th>Registros</th><th>Dados armazenados</th><th>Replay</th></tr></thead><tbody>
+{% for s in sessions %}<tr><td><a href="{% url 'usability-detail' s.id %}">{{ s.id }}</a></td><td>{{ s.start|date:"d/m/Y H:i:s" }}</td><td>{{ s.end|date:"H:i:s" }}</td><td>{{ s.duration }} s</td><td>{{ s.count }}</td><td>{{ s.size|filesizeformat }}</td><td>{% if s.visual %}Detectado{% else %}Não detectado{% endif %}</td></tr>{% empty %}<tr><td colspan="7">Nenhuma sessão registrada.</td></tr>{% endfor %}</tbody></table></div>
+<p>{% if page > 1 %}<a href="?page={{ previous }}">Anterior</a> · {% endif %}Página {{ page }}{% if has_next %} · <a href="?page={{ next }}">Próxima</a>{% endif %}</p>{% endblock %}

@@ -94,3 +94,6 @@ class StopEstimateAdmin(admin.ModelAdmin):
     list_filter = ("status", "run")
     search_fields = ("stop__name", "route__code")
     readonly_fields = ("route", "stop", "position", "run", "status", "lat", "lon", "evidence")
+
+# Entrada para os registros de pesquisa, protegidos pelo mesmo login administrativo.
+admin.site.index_template = 'transit/admin_index.html'

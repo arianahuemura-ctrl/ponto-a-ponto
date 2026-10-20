@@ -1,9 +1,11 @@
+import {observedFetch,trace} from './usability.js';
 export async function api(path, params, signal) {
-  const response = await fetch(
+  const response = await observedFetch(
     "/api/" + path + "/?" + new URLSearchParams(params),
     { signal },
   );
   const data = await response.json();
+  trace('api_result',{path,params,status:response.status,data});
   if (!response.ok)
     throw new Error(data.error || "Falha ao consultar o servidor.");
   return data;
@@ -28,16 +30,16 @@ export function getLocation() {
 }
 
 export async function apiProgressive(path, params, signal, onResult) {
-  const response = await fetch('/api/' + path + '/?' + new URLSearchParams(params), {signal});
+  const response = await observedFetch('/api/' + path + '/?' + new URLSearchParams(params), {signal});
   if (!response.ok) throw new Error('Falha ao consultar o servidor.');
   if (!response.headers.get('content-type')?.includes('application/x-ndjson')) {
     const result=await response.json();
     if(result.error)throw new Error(result.error);
-    onResult(result);return;
+    trace('api_result',{path,params,status:response.status,data:result});onResult(result);return;
   }
   const reader=response.body.getReader(),decoder=new TextDecoder();
   let buffer='';
-  const receive=line=>{if(!line.trim()||signal.aborted)return;const result=JSON.parse(line);if(result.error)throw new Error(result.error);onResult(result);};
+  const receive=line=>{if(!line.trim()||signal.aborted)return;const result=JSON.parse(line);if(result.error)throw new Error(result.error);trace('api_result',{path,params,status:response.status,data:result});onResult(result);};
   try {
     while(true){
       const {value,done}=await reader.read();

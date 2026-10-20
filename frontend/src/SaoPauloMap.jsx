@@ -1,3 +1,4 @@
+import {trace} from './usability.js';
 import {developmentTools} from './environment.js';
 import destinationPointIcon from './assets/destination-point.png';
 import boardingPointIcon from './assets/boarding-point.png';
@@ -8,9 +9,10 @@ import {StopCanvas} from './StopCanvas.js';
 import StopTransparencyControl from './StopTransparencyControl.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
 const EMPTY_LIST=Object.freeze([]);
-export default function SaoPauloMap({ selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
+export default function SaoPauloMap({ highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
   const [dimmerActive,setDimmerActive]=useState(false);
   const [transparentStops,setTransparentStops]=useState(false);
+  useEffect(()=>{setTransparentStops(false);},[highlightStopsRequest]);
   const [stopTransparency,setStopTransparency]=useState(()=>{
     try { const stored=localStorage.getItem('pap-stop-transparency'); const value=Number(stored); return stored!==null&&Number.isFinite(value)&&value>=0&&value<=100?value:75; } catch { return 75; }
   });
@@ -41,6 +43,7 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
   click.current=onStop;area.current=onArea;
   useEffect(()=>{
     const instance=L.map(host.current,{zoomSnap:0.1,tapHold:false}).setView([center?.lat??-23.5505,center?.lon??-46.6333],15);
+    instance.attributionControl.setPrefix(false).setPosition('topright');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(instance);
     const longPress=bindMapLongPress(host.current,event=>{
       const point=instance.mouseEventToLatLng(event);
@@ -100,6 +103,8 @@ export default function SaoPauloMap({ selectingPoint=false, preserveViewport=fal
       },150);
     };
     instance.on('moveend',updateArea);
+    instance.on('moveend zoomend',()=>trace('map_view',{center:instance.getCenter(),zoom:instance.getZoom(),bounds:instance.getBounds()}));
+    instance.on('click',e=>trace('map_click',{latlng:e.latlng}));
     updateArea();
     map.current=instance;
     instance.createPane('busApproach');

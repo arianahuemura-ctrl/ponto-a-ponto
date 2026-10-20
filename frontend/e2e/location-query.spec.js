@@ -24,7 +24,7 @@ test('URL com coordenada incompleta informa erro sem inventar uma posição',asy
   await page.goto('/?latitude=-23.57');
   await expect(page.locator('.passenger-notice')).toContainText('Coordenadas simuladas inválidas');
   await expect(page.locator('.sp-passenger-position')).toHaveCount(0);
-  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar local de embarque');
+  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
 });
 
 test('sem parâmetros usa GPS; remover parâmetros retoma a localização do aparelho',async({page,context})=>{

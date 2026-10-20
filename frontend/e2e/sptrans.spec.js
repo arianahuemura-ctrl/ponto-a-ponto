@@ -154,7 +154,7 @@ for(const width of [390,1440]) test(`embarque, lista filtrada e cancelamento em 
     return r.fulfill({json:{lines:[{trip_id:'T',code:'1000-10',headsign:'Centro',arrivals:[{time:'08:10',vehicle:123}],...(filtered?{origin:stop,destination:other}:{})},...(!filtered?[{trip_id:'X',code:'2000-10',headsign:'Outra linha',arrivals:[]}]:[])],journeys:filtered?[{legs:[leg]}]:[]}});
   });
   const state=page.getByRole('region',{name:'Estado da navegação'});
-  await page.goto('/');await expect(state).toContainText('Selecionar local de embarque');
+  await page.goto('/');await expect(state).toContainText('Selecionar embarque');
   await page.getByRole('button',{name:'Ativar modo escuro'}).click();await openOrigin(page,true);
   const dialog=page.getByRole('dialog');
   await expect(dialog).toContainText('Próximos ônibus');await expect(dialog).toContainText('2000-10');
@@ -184,7 +184,7 @@ test('rua sem número enquadra suas paradas e aguarda escolha no mapa',async({pa
   await page.getByRole('combobox').fill('Rua Augusta');await page.getByRole('option').click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await expect(page.locator('.sp-stop')).toHaveCount(2);
-  await expect(page.getByRole('region',{name:'Estado da navegação'})).toContainText('Selecionar local de embarque');
+  await expect(page.getByRole('region',{name:'Estado da navegação'})).toContainText('Selecionar embarque');
   const map=await page.locator('.sp-map').boundingBox();
   for(const marker of await page.locator('.sp-stop').all()){
     const box=await marker.boundingBox();expect(box.x).toBeGreaterThan(map.x);expect(box.x).toBeLessThan(map.x+map.width);expect(box.y).toBeGreaterThan(map.y);expect(box.y).toBeLessThan(map.y+map.height);

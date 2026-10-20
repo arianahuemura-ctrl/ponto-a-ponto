@@ -111,7 +111,7 @@ test('sem geolocalização nem embarque, primeiro clique longo define origem e s
   await page.route('**/api/sptrans/destination/**',r=>{selections++;return r.fulfill({json:{stop:{id:String(selections),name:'Local '+selections,lat:-23.551,lon:-46.631}}});});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[]}}));
   await page.goto('/');
-  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar local de embarque');
+  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
   const hold=async()=>{const box=await page.locator('.sp-map').boundingBox();await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();};
   await hold();
   await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar destino');
@@ -135,7 +135,7 @@ for(const gps of [true,false]) test(`URL vazia ignora viagem antiga da sessão (
   let boardRequests=0;
   await page.route('**/api/sptrans/board/**',r=>{boardRequests++;return r.fulfill({json:{lines:[],journeys:[]}});});
   await page.goto('/');
-  await expect(page.locator('.sp-navigation-state')).toContainText(gps?'Selecionar destino':'Selecionar local de embarque');
+  await expect(page.locator('.sp-navigation-state')).toContainText(gps?'Selecionar destino':'Selecionar embarque');
   const session=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')));
   expect(session.origin?.id??null).toBe(gps?'passenger-location':null);
   expect(session.destination).toBeNull();

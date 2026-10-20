@@ -1,3 +1,5 @@
+import FullscreenButton from './FullscreenButton.jsx';
+import {record,trace} from './usability.js';
 import FavoritesDialog from './FavoritesDialog.jsx';
 import PointControl from './PointControl.jsx';
 import appIcon from '../../icone.png';
@@ -28,6 +30,7 @@ export default function SaoPaulo(){
   const [previewStop,setPreviewStop]=useState(null);
   const [editingFavorite,setEditingFavorite]=useState(null),[removingFavorite,setRemovingFavorite]=useState(null);
   const [boardRequest,setBoardRequest]=useState(0);
+  const [highlightStopsRequest,setHighlightStopsRequest]=useState(0);
   const [cancelRequested,setCancelRequested]=useState(false);
   const [manualOrigin,setManualOrigin]=useState(false);
   const [preserveViewport,setPreserveViewport]=useState(false);
@@ -36,6 +39,7 @@ export default function SaoPaulo(){
   const [view,setView]=useState('navigate'),[mode,setMode]=useState(()=>new URLSearchParams(location.search).get('stop')?'board':session.origin?(session.destination?'map':'destination'):'origin'),[notice,setNotice]=useState('');
   const [destinationSearch,setDestinationSearch]=useState(false),[searchRole,setSearchRole]=useState(()=>session.origin?'destination':'origin'),[journey,setJourney]=useState(null);
   const [planningStatus,setPlanningStatus]=useState('');
+  useEffect(()=>{record('state',{mode,view,origin:!!session.origin,destination:!!session.destination,gps:!!passengerPosition});},[mode,view,!!session.origin,!!session.destination,!!passengerPosition]);
   const [watchedBus,setWatchedBus]=useState(null);
   const [watchedLines,setWatchedLines]=useState([]);
   useEffect(()=>setWatchedLines([]),[session.origin?.id,session.destination?.id]);
@@ -52,6 +56,7 @@ export default function SaoPaulo(){
   const [mapFocus,setMapFocus]=useState(0);
   const [passengerFocus,setPassengerFocus]=useState(null);
   const [coordinateFocus,setCoordinateFocus]=useState(null);
+  useEffect(()=>trace('app_state',{mode,view,session,passengerPosition,favorites,journey,selectedLeg,destinationSearch,searchRole,notice}),[mode,view,session,passengerPosition,favorites,journey,selectedLeg,destinationSearch,searchRole,notice]);
   const leg=selectedLeg===null?null:journey?.legs[selectedLeg];
   const trackingLeg=routeSelected?(mode==='board'?journey?.legs[0]:(leg||journey?.legs[0])):(mode==='watch'?watchedBus:null);
   const boardingWalkMinutes=(journey?.walks||walks).filter(w=>w.accessType==='boarding').reduce((sum,w)=>sum+(Number(w.duration_minutes)||0),0);
@@ -116,6 +121,7 @@ export default function SaoPaulo(){
   };
   const requireBoarding=()=>{
     window.alert('Selecione o local de embarque antes de escolher o destino. Sua localização não está disponível.');
+    setHighlightStopsRequest(value=>value+1);
     changeOrigin();
   };
   const togglePoint=role=>{
@@ -153,7 +159,12 @@ export default function SaoPaulo(){
       setManualOrigin(true);setSession(s=>({...s,origin:{...stop,manualBoarding:true}}));
       history.replaceState(null,'',withLocationParams('/?stop='+encodeURIComponent(stop.id),location.search));
     }else {setSession(s=>({...s,origin:boarding,destination:stop}));history.replaceState(null,'',withLocationParams(boarding.useLocation?'/':'/?stop='+encodeURIComponent(boarding.id),location.search));}
-    setDestinationSearch(false);setMode('board');setBoardRequest(value=>value+1);
+    setDestinationSearch(false);setSelectedLeg(null);
+    if(role==='origin'){
+      setMode('destination');setSearchRole('destination');
+    }else{
+      setMode('board');setBoardRequest(value=>value+1);
+    }
   };
   const selectFavorite=(stop,role)=>{
     selectionRequest.current?.abort();qrRequest.current?.abort();
@@ -227,19 +238,19 @@ export default function SaoPaulo(){
     setEditingFavorite(null);
   };
   const openSearch=()=>{setSearchRole(origin&&mode!=='origin'?'destination':'origin');setDestinationSearch(true);};
-  const stage=mode==='watch'?'Acompanhar ônibus':routeSelected?'Rota selecionada':mode==='destination'?'Selecionar destino':mode==='board'?(destination?'Ônibus da rota':'Próximos ônibus'):'Selecionar local de embarque';
+  const stage=mode==='watch'?'Acompanhar ônibus':routeSelected?'Rota selecionada':mode==='destination'?'Selecionar destino':mode==='board'?(destination?'Ônibus da rota':'Próximos ônibus'):'Selecionar embarque';
   return <main className="passenger-shell sp-shell">
     <header className="passenger-header sp-header">
-      <div className="sp-header-brand"><span className="brand-mark app-brand-mark"><img src={appIcon} alt=""/></span><div><h1>Ponto a Ponto</h1></div></div>
+      <button type="button" className="sp-header-brand sp-about-button" aria-label={view==='more'?'Fechar Saiba mais pelo logo':'Saiba mais sobre o Ponto a Ponto'} aria-expanded={view==='more'} title={view==='more'?'Voltar ao mapa':'Saiba mais'} onClick={()=>setView(current=>current==='more'?'navigate':'more')}><span className="brand-mark app-brand-mark"><img src={appIcon} alt=""/></span></button>
       {view==='navigate'&&<section className="sp-navigation-state" aria-label="Estado da navegação"><div className="sp-state-heading"><strong role="status">{stage}</strong>
       </div></section>}
-      <div className="sp-header-tools"><button className="icon-button" aria-label="Buscar endereço" onClick={openSearch}><Icon name="search"/></button>
+      <div className="sp-header-tools"><FullscreenButton onError={setNotice}/><button className="icon-button" aria-label="Buscar endereço" onClick={openSearch}><Icon name="search"/></button>
         <button className="icon-button" aria-label={resolvedTheme==='dark'?'Ativar modo claro':'Ativar modo escuro'} onClick={()=>setTheme(resolvedTheme==='dark'?'light':'dark')}><Icon name={resolvedTheme==='dark'?'sun':'moon'}/></button></div>
     </header>
     {locationError&&<div role="status" className="passenger-notice">{locationError}</div>}
     {notice&&<div role="status" className="passenger-notice">{notice}<button onClick={()=>setNotice('')} aria-label="Fechar aviso">×</button></div>}
     {view!=='more'&&<div className="sp-navigation"><section className="sp-map-panel">
-      <SaoPauloMap coordinateFocus={coordinateFocus} selectingPoint={selectingPoint} preserveViewport={preserveViewport} confirmDestination={mode==='watch'} approaches={[...lineApproaches,...(liveBus?.passedApproaches||[])]} approachFocusKey={mode==='watch'?(watchedLines.length?watchedLines.map(l=>l.trip_id).join(':'):watchedBus?.trip_id+':'+watchedBus?.vehicle):null} approach={liveBus?.approach} passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={selectingPoint?(streetView?streetView.stops:stops):[]} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
+      <SaoPauloMap highlightStopsRequest={highlightStopsRequest} coordinateFocus={coordinateFocus} selectingPoint={selectingPoint} preserveViewport={preserveViewport} confirmDestination={mode==='watch'} approaches={[...lineApproaches,...(liveBus?.passedApproaches||[])]} approachFocusKey={mode==='watch'?(watchedLines.length?watchedLines.map(l=>l.trip_id).join(':'):watchedBus?.trip_id+':'+watchedBus?.vehicle):null} approach={liveBus?.approach} passengerFocus={passengerFocus} passengerPosition={passengerPosition} focusKey={`${origin?.id}:${destination?.id}:${mapFocus}:${selectedLeg}`} routeSelected={routeSelected} stops={selectingPoint?(streetView?streetView.stops:stops):[]} focusStops={streetView?.stops} origin={leg?.origin||journey?.legs[0]?.origin||(origin?.useLocation?null:origin)} destination={destination?.addressCoordinates?{...destination,...destination.addressCoordinates}:destination} journey={shownJourney} fullJourney={journey} walks={shownWalks} center={center} onStop={choose} onArea={onArea} onMapPoint={selectMapPoint}/>
       {mode!=='board'&&<div className="sp-map-point-controls" data-has-light={selectingPoint} aria-label="Escolher embarque e destino"><PointControl kind="origin" point={origin} selecting={mode==='origin'} onClick={()=>togglePoint('origin')}/><PointControl kind="destination" point={destination} selecting={mode==='destination'} onClick={()=>togglePoint('destination')}/></div>}
       {selectingPoint&&streetView&&<div className="sp-schematic-note">{streetView.label} · {streetView.stops.length} {streetView.match_method==='nearby'?'paradas próximas (até 400 m)':'paradas cadastradas'}{streetView.match_method==='nearby'&&<small> · Podem incluir ruas vizinhas.</small>} <button onClick={()=>setStreetView(null)}>Mostrar todos os pontos</button></div>}
       {mode==='watch'&&watchedLines.length>0&&<div className="sp-watch-panel" role="status"><strong>{watchedLines.length} linhas acompanhadas</strong><span>Atualização a cada 5 s</span>{(lineTracking||watchedLines).map(l=><span key={l.trip_id}>{l.code}: {!lineTracking?'consultando…':l.approach?'veículo '+l.approach.vehicle.id:'posição/previsão indisponível'}</span>)}</div>}
@@ -251,7 +262,7 @@ export default function SaoPaulo(){
     <FavoritesDialog open={view==='favorites'&&!previewStop} favorites={favorites} onClose={()=>setView('navigate')} onSelect={selectFavorite} onPreview={setPreviewStop} onEdit={setEditingFavorite} onRemove={setRemovingFavorite} onLocation={useCurrentLocation} hasLocation={!!passengerPosition}/>
     <BoardDialog open={!!previewStop} active={!!previewStop} origin={previewStop} destination={null} onClose={()=>setPreviewStop(null)} onCancel={()=>setPreviewStop(null)} onFavorite={()=>setEditingFavorite(previewStop)} isFavorite={true} onDestination={()=>{const stop=previewStop;setPreviewStop(null);selectFavorite(stop,'destination');}} onJourney={ignorePreviewJourney} onStatus={ignorePreviewJourney} onWatchBus={bus=>{setSession(s=>({...s,origin:previewStop,destination:null}));setPreviewStop(null);setView('navigate');setWatchedBus(bus);setMode('watch');}} onWatchLines={lines=>{setSession(s=>({...s,origin:previewStop,destination:null}));setPreviewStop(null);setView('navigate');setWatchedLines(lines);setMode('watch');}}/>
     {view==='more'&&<section className="passenger-screen screen-content more-screen sp-more">
-      <h2>Saiba mais</h2>
+      <div className="sp-more-heading"><h2>Saiba mais</h2><button type="button" className="icon-button" aria-label="Fechar Saiba mais" title="Voltar ao mapa" onClick={()=>setView('navigate')}><Icon name="close"/></button></div>
       <p>O Ponto a Ponto (PaP) é um protótipo acadêmico do Projeto Integrador da UNIVESP. A aplicação ajuda a planejar viagens de ônibus em São Paulo a partir do ponto de embarque e do destino, sem exigir que o passageiro conheça previamente os números das linhas.</p>
       <h3>Escolha a origem e o destino</h3>
       <p>Ao abrir o QR Code de uma parada, o PaP identifica o embarque e abre a lista de próximos ônibus. Você pode acompanhar uma linha ou escolher um destino para planejar a viagem.</p>
@@ -287,6 +298,6 @@ export default function SaoPaulo(){
     <CancelTripDialog boardingOnly={!destination} open={cancelRequested} onConfirm={cancelTrip} onClose={()=>setCancelRequested(false)}/>
     <RemoveFavoriteDialog stop={removingFavorite} onConfirm={removeFavorite} onClose={()=>setRemovingFavorite(null)}/>
     <FavoriteNameDialog stop={editingFavorite} onSave={saveFavorite} onClose={()=>setEditingFavorite(null)}/>
-    <nav className="bottom-nav" aria-label="Navegação principal">{[['navigate','map','Navegação'],['favorites','star','Favoritos'],['more','info','Saiba mais']].map(([id,icon,label])=><button key={id} className={view===id?'active':''} aria-current={view===id?'page':undefined} onClick={()=>setView(id)}><Icon name={icon}/><span>{label}</span></button>)}</nav>
+    <nav className="bottom-nav" aria-label="Navegação principal">{[['navigate','map','Navegação'],['favorites','star','Favoritos'],['feedback','feedback','Feedback']].map(([id,icon,label])=><button key={id} className={view===id?'active':''} aria-current={view===id?'page':undefined} onClick={()=>id==='feedback'?window.dispatchEvent(new Event('pap-open-feedback')):setView(id)}><Icon name={icon}/><span>{label}</span></button>)}</nav>
   </main>;
 }

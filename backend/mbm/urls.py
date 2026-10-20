@@ -2,12 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
-from transit import views, demo_views, catalogue
+from transit import views, demo_views, catalogue, usability, usability_admin
 from transit.sptrans import views as sptrans
 from transit.sptrans.compact import catalogue as stop_catalogue
 from transit.sptrans.addresses import suggestions
 
 urlpatterns = [
+    path("api/usability/", usability.events),
     path("api/sptrans/stop-catalogue/", stop_catalogue),
     path("api/location-config/", views.location_config),
     path("api/sptrans/stops/", sptrans.stops),
@@ -23,6 +24,10 @@ urlpatterns = [
     path("api/board/", demo_views.board),
     path("api/journey/", demo_views.journey),
     path("explorar/", views.index),
+    path("admin/usability/", usability_admin.sessions, name="usability-sessions"),
+    path("admin/usability/assets/<str:name>", usability_admin.asset, name="usability-asset"),
+    path("admin/usability/<uuid:session>/", usability_admin.detail, name="usability-detail"),
+    path("admin/usability/<uuid:session>/player/", usability_admin.player, name="usability-player"),
     path("admin/", admin.site.urls),
     path("api/demo/network/", demo_views.network),
     path("api/demo/stops/<str:stop_id>/", demo_views.stop),

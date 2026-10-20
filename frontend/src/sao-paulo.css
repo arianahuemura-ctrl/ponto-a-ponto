@@ -106,7 +106,7 @@
 .sp-selectable-leg { cursor:pointer; }
 .sp-selectable-leg:hover,.sp-selectable-leg:focus-visible { border-color:var(--pap-primary,#0076ed); outline:2px solid #0076ed; outline-offset:2px; }
 .sp-leg-action { display:block; color:var(--pap-muted); }
-.sp-route-controls { display:flex; align-items:center; gap:12px; flex:1 1 320px; min-width:0; }
+.sp-route-controls { display:flex; align-items:center; gap:12px; flex:1 1 0; min-width:0; }
 .sp-route-keys { display:flex; flex-direction:column; gap:6px; flex:none; white-space:nowrap; }
 .sp-route-legend label { flex:1; white-space:nowrap; display:flex; align-items:center; gap:8px; min-width:0; max-width:100%; }
 .sp-route-legend select { flex:1; width:0; max-width:100%; min-width:0; padding:6px; color:var(--pap-text); background:var(--pap-surface); border:1px solid var(--pap-border); border-radius:6px; }
@@ -149,6 +149,21 @@
 .sp-route-option .sp-route-arrival { grid-column:2; grid-row:1 / 4; align-self:center; display:grid; gap:4px; text-align:right; }
 .sp-route-arrival small { font-size:11px; }
 .sp-route-arrival strong { font-size:18px; }
+
+/* No celular, preserve a largura dos detalhes antes de mostrar a chegada. */
+@media (max-width: 700px) {
+  .sp-route-option { grid-template-columns:minmax(0,1fr); }
+  .sp-route-option .sp-route-arrival {
+    grid-column:1;
+    grid-row:auto;
+    min-width:0;
+    text-align:left;
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px solid var(--border,#75869b);
+  }
+}
+
 
 .sp-locate-passenger { position:absolute; top:100px; left:10px; z-index:450; box-sizing:border-box; width:38px; min-width:38px; height:44px; padding:0; background:var(--pap-surface); color:var(--pap-text); border:1px solid var(--pap-text); box-shadow:0 1px 5px #0003; }
 .sp-locate-passenger:disabled { opacity:.55; cursor:default; }
@@ -324,7 +339,8 @@
 .sp-favorite-point-icon[data-kind="origin"] img { width:37.333px; height:37.333px; }
 .sp-favorite-point-icon[data-kind="destination"] img { width:28.444px; height:28.444px; }
 
-.sp-stop-transparency { touch-action:none; user-select:none; }
+/* Override the generic mobile button touch-action before the gesture begins. */
+.sp-shell .sp-stop-transparency { touch-action:none; user-select:none; }
 .sp-transparency-panel { position:absolute; top:var(--sp-light-top,154px); left:calc(var(--sp-map-control-left,10px) + var(--sp-map-control-size,38px) + 10px); z-index:460; width:min(280px,calc(100% - 78px)); box-sizing:border-box; padding:14px; display:grid; gap:12px; border:1px solid var(--pap-text); border-radius:10px; background:var(--pap-surface); color:var(--pap-text); box-shadow:0 3px 14px #0004; }
 .sp-transparency-panel input { width:100%; min-height:32px; margin:0; }
 .sp-transparency-panel button { justify-self:end; min-height:36px; }
@@ -336,3 +352,30 @@
 .sp-dimmer-bar.is-open{opacity:1;pointer-events:auto;}
 .sp-dimmer-thumb{position:absolute;left:0;right:0;height:3px;background:white;box-shadow:0 0 3px #000;transform:translateY(-50%);pointer-events:none;}
 @media(prefers-reduced-motion:reduce){.sp-dimmer-bar,:is(.leaflet-control-zoom,.sp-locate-passenger,.sp-stop-transparency,.sp-map-point-controls){transition:none;}}
+
+/* Pontos pendentes: pulso suave apenas no ícone, sem alterar o alvo de toque. */
+@keyframes sp-pending-point {
+  0%, 100% { opacity:1; }
+  50% { opacity:.35; }
+}
+.sp-shell .sp-point-control[data-state="empty"]:not(:disabled) { opacity:1; }
+.sp-shell .sp-point-control[data-state="empty"]:not(:disabled) .sp-point-symbol {
+  animation:sp-pending-point 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion:reduce) {
+  .sp-shell .sp-point-control[data-state="empty"] .sp-point-symbol { animation:none; }
+}
+
+/* Crédito legível no canto superior direito do mapa. */
+.sp-shell .leaflet-top .leaflet-control-attribution{margin:4px 4px 0 0;background:var(--pap-surface);color:var(--pap-text);border-radius:3px;padding:2px 5px;}
+.sp-shell .leaflet-control-attribution a{color:var(--pap-accent);}
+
+.sp-shell .sp-about-button { padding:0; border:0; background:transparent; cursor:pointer; min-width:44px; min-height:44px; justify-content:center; }
+.sp-about-button:focus-visible { outline:3px solid var(--pap-accent,#38bdf8); outline-offset:2px; }
+.sp-route-legend { bottom:0; }
+
+.sp-more-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.sp-more-heading h2 { margin:0; }
+.sp-more-heading button { flex-shrink:0; }
+
+.sp-shell .sp-about-button .brand-mark { width:40px; height:40px; }

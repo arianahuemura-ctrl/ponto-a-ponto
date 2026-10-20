@@ -1,3 +1,4 @@
+import {record} from './usability.js';
 import {useEffect, useRef, useState} from 'react';
 import Icon from './Icon.jsx';
 
@@ -12,18 +13,19 @@ export default function StopTransparencyControl({active, onToggle, value, onChan
     const rects=controls.map(e=>e.getBoundingClientRect()).filter(r=>r.height);
     const origin=map.getBoundingClientRect(), lamp=button.current.getBoundingClientRect();
     setBounds({top:Math.min(...rects.map(r=>r.top))-origin.top,left:lamp.left-origin.left,width:lamp.width,height:Math.max(...rects.map(r=>r.bottom))-Math.min(...rects.map(r=>r.top))});
+    record('dimmer',{phase:'open',value});
     held.current=true;opened.current=true;setOpen(true);
   };
   const select=y=>{const r=bar.current.getBoundingClientRect();const next=Math.round(Math.max(0,Math.min(100,(y-r.top)/r.height*100)));onChange(next);return next;};
   const finish=y=>{
     cancel();
     if(!opened.current)return;
-    try { onCommit(select(y)); } finally { close(); }
+    try { const next=select(y);record('dimmer',{phase:'commit',value:next});onCommit(next); } finally { close(); }
   };
   useEffect(()=>{
     if(!open)return;
     const release=e=>finish(e.clientY);
-    const interrupt=()=>close();
+    const interrupt=()=>{record('dimmer',{phase:'cancel',value});close();};
     const hidden=()=>{if(document.hidden)close();};
     // Capture release even when the pointer is over the map or capture is lost.
     window.addEventListener('pointerup',release,true);

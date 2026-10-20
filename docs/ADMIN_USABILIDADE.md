@@ -1,0 +1,5 @@
+# Administração de usabilidade
+
+Acesso em /admin/usability/ (lista paginada de sessões) e /admin/usability/<UUID>/ (detalhes, dispositivo, eventos e replay). Requer usuário Django ativo com is_staff. Use o login existente /admin/login/. Nenhuma credencial padrão é criada. As rotas ficam indisponíveis na instância pública, inclusive com autenticação, pelo bloqueio de /admin/. Sem mudanças no banco da aplicação.
+
+Todas as leituras de telemetria são locais, SQLite em modo read-only, com respostas no-store. O player e seus assets são servidos por HTTP autenticado na mesma origem. Metadados v1 incluem userAgent, idioma(s), plataforma informada, dimensões de tela/viewport, pixel ratio, touch points e fuso; não inferem modelo físico exato, identidade ou localização por IP. Sessões anteriores mostram apenas campos disponíveis. Player não é vídeo MP4: é reconstrução rrweb, com canvas limitado a 5 fps e dependência de algumas imagens externas. Lacunas e fragmentos ausentes são exibidos; não se garante integridade além dos registros recebidos.
