@@ -370,6 +370,8 @@ Abra **Mais → Registrar avaliação**, preencha o campo e envie. As observaç�
 
 ## Acessar pelo celular e QR Code
 
+Para acesso temporário pela internet com Gunicorn isolado em 8001 e Cloudflare Tunnel, consulte [Acesso público temporário](docs/ACESSO_PUBLICO_TEMPORARIO.md).
+
 Em **Mais → QR Code deste ponto**, visualize ou imprima a sinalização. O QR Code identifica a origem pela URL, sem exigir aplicativo, GPS ou conhecimento prévio do nome da linha:
 
 http://127.0.0.1:8000/?stop=way%3A1410074325
