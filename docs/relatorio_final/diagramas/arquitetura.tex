@@ -1,22 +1,29 @@
-\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=3.5cm,minimum height=1cm,fill=white},arr/.style={<->,thick}]
-\draw[rounded corners,fill=blue!4] (-2.2,1.1) rectangle (2.2,-7.7);
-\node[font=\bfseries] at (0,.7) {PaP};
-\draw[rounded corners,fill=black!3] (4.1,1.1) rectangle (8.5,-7.7);
-\node[font=\bfseries,align=center] at (6.3,.55) {Fontes e serviços\\externos};
-\node (p) at (0,2) {Passageiro};
-\node[box] (ui) at (0,-.6) {Interface web\\React / Leaflet};
-\node[box] (local) at (0,-2.6) {Armazenamento do navegador\\Favoritos};
-\node[box] (api) at (0,-4.6) {Backend Django / Python\\Consultas e planejamento};
-\node[box] (db) at (0,-6.8) {SQLite e arquivos locais\\Índice GTFS e cache};
-\node[box] (tiles) at (6.3,-.6) {OpenStreetMap\\Mapa-base};
-\node[box] (ext) at (6.3,-4.6) {Olho Vivo, busca de endereços e roteamento a pé};
-\node[box] (gtfs) at (6.3,-6.8) {GTFS SPTrans\\Cadastro e programação};
-\draw[->,thick] (p)--(ui);
-\draw[arr] (ui)--(local);
-\draw[arr] (ui.west)--++(-.7,0)|-(api.west);
-\node[rotate=90,font=\footnotesize,fill=white] at (-2.55,-2.6) {JSON / NDJSON};
-\draw[arr] (api)--(db);
-\draw[->,thick] (tiles)--node[above,font=\footnotesize]{imagens}(ui);
-\draw[arr] (api)--node[above,font=\footnotesize]{consultas}(ext);
-\draw[->,thick] (gtfs)--node[above,font=\footnotesize]{importação}(db);
+\begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
+box/.style={draw,rounded corners,align=center,text width=5cm,minimum height=.85cm,fill=white},arr/.style={->,thick}]
+\draw[rounded corners,fill=blue!4] (-2.9,.7) rectangle (2.9,-7.3);
+\draw[rounded corners,fill=green!4] (3.7,.7) rectangle (9.5,-10.2);
+\node[font=\bfseries] at (0,.3) {PREPARAÇÃO OFFLINE};
+\node[font=\bfseries] at (6.6,.3) {CONSULTA ONLINE};
+\node[box] (fonte) at (0,-.7) {GTFS SPTrans e OSM/OSRM};
+\node[box] (grafo) at (0,-2.2) {Conexões dirigidas\\e caminhadas verificadas};
+\node[box] (comp) at (0,-3.7) {Componentes reutilizáveis\\Índices diretos e reversos};
+\node[box] (bi) at (0,-5.2) {Composição bidirecional\\Um, dois ou três ônibus};
+\node[box] (mat) at (0,-6.7) {Candidatos materializados};
+\node[box] (entrada) at (6.6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
+\node[box] (rec) at (6.6,-2.2) {Recuperar candidatos compatíveis};
+
+\node[box,fill=orange!10] (ctx) at (6.6,-3.6) {Contexto utilizável?};
+\node[box] (av) at (6.6,-5.1) {Validar caminhadas; avaliar tempos\\Refinar com dados operacionais};
+\node[box,fill=orange!10] (cond) at (6.6,-6.7) {Há alternativa válida ao final?};
+\node[box,fill=orange!6] (fallback) at (0,-9) {Fallback por rodadas\\somente quando permitido};
+\node[box] (res) at (6.6,-9) {Alternativas progressivas\\Identificação do produtor};
+\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/ctx,av/cond}{\draw[arr] (\a)--(\b);}
+\draw[arr] (mat.east)--(3.3,-6.7)--(3.3,-2.2)--(rec.west);
+\draw[arr] (ctx)--node[right]{sim}(av);
+\draw[arr] (ctx.east)--(10,-3.6)--(10,-8.3)--(-2.7,-8.3)--(-2.7,-9)--(fallback.west);
+\node[fill=white,font=\scriptsize,rotate=90] at (10,-5.2) {não: fallback antecipado};
+\draw[arr] (cond.south)--(6.6,-7.9)--node[above,font=\scriptsize]{não: fallback posterior}(0,-7.9)--(fallback.north);
+\draw[arr] (cond.east)--(9.2,-6.7)--node[right]{sim}(9.2,-9)--(res.east);
+\draw[arr] (fallback)--(res);
+\node[align=center,text width=12cm,font=\scriptsize] at (3.5,-11.5) {O fallback pertence à consulta online; os dois desvios convergem para o mesmo mecanismo.\\Não há execução paralela nem fallback apenas para completar uma lista válida.\\Caminhada direta validada inferior a 1 km dispensa o fallback por rodadas.\\O caminho principal publica resultados durante a avaliação, antes de concluir.};
 \end{tikzpicture}

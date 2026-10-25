@@ -1,0 +1,9 @@
+Revisão de 23/10/2026: caso da linha 6L10-41 e capturas afetadas.
+Branch relatorio; sem commit. Alterações preexistentes preservadas.
+Sete capturas reais recapturadas; seis incorporadas ao PDF e consulta da linha preservada como evidência complementar. Nenhuma tela anterior foi sintetizada.
+Fontes alteradas nesta rodada: relatorio_final_pi2_v2.tex e novo caso_rotas_sobrepostas.tex. Roteiro, registros e hashes nesta pasta.
+Compilação: latexmk -norc -cd -lualatex -interaction=nonstopmode -halt-on-error docs/relatorio_final/relatorio_final_pi2_v2.tex
+110 páginas. Caso nas páginas impressas 64–66 (68–70 do PDF); detalhe na Figura 25, página 65. Visão geral na Figura 21, página 53; consentimento na página 45; configurações e feedback na página 67.
+Sem overfull, referências ou citações indefinidas. Permanecem 16 avisos underfull em tabelas preexistentes. git diff --check aprovado.
+PDF de trabalho com 20.025.296 bytes, acima do limite de envio de 10 MB informado no projeto; não foi substituído o arquivo de envio antigo.
+Diagramas, benchmarks, comunidade de Mauá e avaliação Nath's Brother preservados. Capturas históricas de outros fluxos mantidas com suas datas explícitas.

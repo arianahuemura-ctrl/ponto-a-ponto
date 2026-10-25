@@ -1,0 +1,97 @@
+--- antes/relatorio_final_pi2_v2.tex
++++ depois/relatorio_final_pi2_v2.tex
+@@ -665,22 +665,22 @@
+ \clearpage
+ \noindent\textbf{Telas da solução final}
+ 
+-As figuras a seguir começam pelo aviso de pesquisa, obrigatório antes de abrir a navegação. Em seguida, distinguem o acesso comum, com ou sem localização, e o acesso pelo link de uma parada. A sequência documentada pelo link segue para favoritos, alternativas, mapa e confirmação de cancelamento. As telas adicionais são identificadas como cenários independentes; não representam uma única sessão contínua.
+-
+-As capturas foram realizadas em 22 e 23 de outubro de 2026, conforme as fontes de cada figura, usando a aplicação local em desenvolvimento. O registro de 22 de outubro identifica o commit \texttt{aee66eb} e as alterações locais existentes na data. Foi utilizado Chromium com emulação móvel de 430 por 932 pixels e densidade 2, no tema escuro. As consultas de transporte utilizaram serviços reais. A localização no Butantã e os favoritos dos exemplos de 22 de outubro foram preparados para a documentação; a conferência de 23 de outubro usou contextos novos, sem localização autorizada. A telemetria foi interceptada somente no navegador de captura, sem substituir respostas de transporte. A procedência consta de \nolinkurl{capturas/2026-10-22/registro.json} e \nolinkurl{capturas/2026-10-23/procedencia.json}. As imagens documentam a interface, não avaliação por participantes externos.
+-
+-\begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio,trim=30bp 200bp 30bp 250bp,clip]{capturas/2026-10-23/aceite-viewport.png}
+-\caption{Primeiro acesso: aviso de pesquisa e concordância antes da navegação (margens vazias recortadas).}\label{fig:print-02-informacoes}
++As figuras a seguir começam pela apresentação da pesquisa, cuja participação é opcional. A navegação pode ser iniciada por ``Continuar sem contribuir, sem gravação de pesquisa. Em seguida, distinguem o acesso comum, com ou sem localização, e o acesso pelo link de uma parada. A sequência documentada pelo link segue para favoritos, alternativas, mapa e confirmação de cancelamento. As telas adicionais são identificadas como cenários independentes; não representam uma única sessão contínua.
++
++As capturas foram realizadas em 22 e 23 de outubro de 2026, conforme as fontes de cada figura, usando a aplicação local em desenvolvimento. O registro de 22 de outubro identifica o commit \texttt{aee66eb} e as alterações locais existentes na data. Foi utilizado Chromium com emulação móvel de 430 por 932 pixels e densidade 2, no tema escuro. As consultas de transporte utilizaram serviços reais. A localização no Butantã e os favoritos dos exemplos de 22 de outubro foram preparados para a documentação; a conferência de 23 de outubro usou contextos novos, sem localização autorizada. A telemetria foi interceptada somente no navegador de captura, sem substituir respostas de transporte. A procedência consta de \nolinkurl{capturas/2026-10-22/registro.json} e \nolinkurl{capturas/2026-10-23/procedencia.json}. As imagens documentam a interface, não avaliação por participantes externos. As telas de entrada e acompanhamento foram recapturadas em 23 de outubro após a reformulação do consentimento e da representação dos percursos. Nessa rodada, foi escolhida a navegação sem contribuir; nenhuma resposta de transporte foi substituída. As capturas móveis usam 430 por 932 pixels; as da linha 6L10-41 usam 1366 por 1000 pixels, ambas com densidade 2. O roteiro, os horários e os hashes estão em \nolinkurl{capturas/2026-10-23-rotas/}. As demais telas mantêm suas datas e cenários históricos explicitados.
++
++\begin{figure}[H]\centering
++\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio]{capturas/2026-10-23-rotas/pesquisa-inicial.png}
++\caption{Primeiro acesso: participação voluntária na pesquisa e acesso ao transporte sem contribuir.}\label{fig:print-02-informacoes}
+ \fonte{Captura da aplicação em emulação móvel, 23 out. 2026.}
+ \end{figure}
+-O aviso informa a cobertura da SPTrans em São Paulo e a coleta de dados de navegação, exigindo concordância antes de abrir o mapa ou a consulta da parada. Na implementação examinada, reaparece ao recarregar a aplicação: o aceite não é persistido entre carregamentos. A captura foi refeita em navegador limpo. Os limites da coleta são discutidos adiante neste capítulo.
+-\clearpage
+-
+-\begin{figure}[H]\centering
+-\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-23/sem-localizacao.png}\hfill
++O aviso informa a cobertura da SPTrans em São Paulo e apresenta duas escolhas com destaque equivalente. Na captura, foi utilizado um navegador sem decisão anterior; em seguida, escolheu-se continuar sem contribuir. A decisão é persistida localmente com versão do aviso e data, separada dos identificadores de gravação, e pode ser revista nas configurações. Os limites da coleta são discutidos adiante neste capítulo.
++\clearpage
++
++\begin{figure}[H]\centering
++\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-23-rotas/sem-localizacao.png}\hfill
+ \includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-22/pap-09-localizacao.png}
+-\caption{Acesso comum após o aceite: sem localização autorizada (à esquerda) e com localização simulada como origem (à direita).}\label{fig:print-entrada-comum}
++\caption{Acesso comum após a escolha sobre pesquisa: sem localização autorizada (à esquerda) e com localização simulada como origem (à direita).}\label{fig:print-entrada-comum}
+ \fonte{Capturas da aplicação em emulação móvel, 23 e 22 out. 2026, respectivamente.}
+ \end{figure}
+ Estas telas representam cenários alternativos, não etapas sucessivas. Sem localização disponível e sem parada identificada, a interface solicita o embarque; a captura à esquerda registra a permissão de localização negada no navegador de teste. Com localização disponível, a origem pode ser definida automaticamente e o cabeçalho passa a solicitar o destino. À direita, a posição no Butantã foi simulada para a documentação. Selecionar manualmente um ponto como embarque mantém o mapa aberto para escolher o destino; a entrada pelo link do ponto segue o caminho apresentado a seguir.
+@@ -694,10 +694,10 @@
+ \includegraphics[width=\linewidth,trim=75bp 224bp 70bp 820bp,clip]{capturas/2026-10-22/pap-01-embarque.png}
+ \small Detalhe ampliado da mesma captura.
+ \end{minipage}
+-\caption{Entrada pelo link da parada, após o aceite: próximos ônibus e detalhe das previsões.}\label{fig:print-01-embarque}
++\caption{Entrada pelo link da parada: próximos ônibus e detalhe das previsões (registro de 22 out. 2026).}\label{fig:print-01-embarque}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-Neste cenário, após aceitar o aviso, a consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. Esse acesso reproduz o destino de um QR Code, sem leitura pela câmera. Diferentemente da escolha de embarque no mapa, o painel de próximos ônibus abre automaticamente. O painel distingue previsões operacionais e informações programadas. Os horários são os retornados na captura e não constituem promessa de chegada.
++Neste registro de 22 de outubro, anterior à reformulação do consentimento, após aceitar o aviso, a consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. Esse acesso reproduz o destino de um QR Code, sem leitura pela câmera. Diferentemente da escolha de embarque no mapa, o painel de próximos ônibus abre automaticamente. O painel distingue previsões operacionais e informações programadas. Os horários são os retornados na captura e não constituem promessa de chegada.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+@@ -747,11 +747,11 @@
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-13-onibus-tempo-real.png}
+-\caption{Acompanhamento de veículo consultado na API Olho Vivo.}\label{fig:print-onibus-tempo-real}
+-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+-\end{figure}
+-Em outra consulta, independente da sequência da viagem anterior, a tela foi aberta pela ação de visualizar um veículo na consulta dos próximos ônibus. O marcador utiliza a posição disponível no serviço externo no momento da captura. Uma imagem estática não comprova atualização periódica nem precisão operacional.
++\includegraphics[width=\textwidth,height=0.65\textheight,keepaspectratio]{capturas/2026-10-23-rotas/linha-6L10-completa.png}
++\caption{Acompanhamento da linha 6L10-41: traçado completo, setas de sentido e distinção dos trechos.}\label{fig:print-onibus-tempo-real}
++\fonte{Captura real da aplicação em navegador de computador, 23 out. 2026.}
++\end{figure}
++Em consulta independente da sequência anterior, foi selecionada a linha 6L10-41, sentido Messiânica, a partir da parada R. Matilde de Lutis Barbosa (5614798). A visualização não exige posição de ônibus disponível: nesta captura, o estado operacional informa sua ausência. O início do traçado aparece com ``I''; a bandeira indica seu final com ressalva sobre o cadastro da última parada. As setas mostram o sentido e o pequeno afastamento visual permite distinguir passagens opostas pela mesma via. O caso que motivou essa alteração é descrito na avaliação interna de uso.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+@@ -852,13 +852,23 @@
+ 
+ Durante o desenvolvimento, os responsáveis pela implementação utilizaram o PaP em situações de navegação no computador e no celular, identificando dificuldades de interação e apresentação das informações. Essas observações orientaram ajustes na interface e nos fluxos de navegação. Os registros constituem avaliação interna, realizada pelos desenvolvedores também na condição de usuários da aplicação, e não substituem testes com passageiros externos ao grupo.
+ 
++\input{caso_rotas_sobrepostas.tex}
++
+ \noindent\textbf{Telemetria de usabilidade e seus limites}
+ 
+-Na versão examinada em 22 de outubro de 2026, a coleta de navegação já está implementada para investigar dificuldades de interação e falhas. Os registros são agrupados por sessão em banco separado do cadastro de transporte. Incluem a reprodução visual da interface e do mapa, movimentos e toques, rolagem e ações, textos de busca, origem e destino, localização quando autorizada no navegador, estado dos favoritos e das rotas, parâmetros e respostas das consultas, erros e metadados do dispositivo. A reprodução visual permite reconstituir a interface; os eventos e resultados de consultas ajudam a localizar falhas; os metadados permitem relacioná-las ao navegador e às dimensões de tela. Comentários enviados pelo botão de feedback ficam associados à sessão. Um identificador de sessão não torna anônimos os locais e textos registrados.
+-
+-O aviso da Figura~\ref{fig:print-02-informacoes} exige a ação ``Concordo e continuar''. Sem concordância, a orientação é fechar a página; não há, nessa versão, um modo de utilizar o serviço sem participar da coleta. Uma falha ao iniciar o registro também impede abrir a navegação. Fechar o site encerra a interação, mas não exclui os eventos já enviados. Esse desenho do consentimento é uma limitação a avaliar separadamente da facilidade de consultar o transporte, sobretudo pelo volume de texto e pela ausência de acesso sem coleta.
+-
+-O prazo de 30 dias informado na interface corresponde ao critério de remoção dos eventos antigos durante o recebimento de novas gravações, não a uma tarefa periódica independente. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Os blocos comprimidos compartilhados são eliminados quando a sessão deixa de possuir eventos; arquivos exportados não são abrangidos automaticamente pela limpeza por idade. Assim, a implementação não assegura a eliminação de todas as cópias em até 30 dias. O acesso pela aplicação exige autenticação administrativa, e a configuração de acesso público bloqueia a administração. A exclusão manual de uma sessão, com confirmação, remove seus eventos, blocos associados e arquivos de exportação em cache; cópias previamente baixadas precisam de tratamento próprio. Não há exclusão oferecida diretamente ao participante na interface atual.
++Na versão atualizada em 23 de outubro de 2026, a coleta de navegação depende da participação voluntária e está implementada para investigar dificuldades de interação e falhas. Os registros são agrupados por sessão em banco separado do cadastro de transporte. Incluem a reprodução visual da interface e do mapa, movimentos e toques, rolagem e ações, textos de busca, origem e destino, localização quando autorizada no navegador, estado dos favoritos e das rotas, parâmetros e respostas das consultas, erros e metadados do dispositivo. A reprodução visual permite reconstituir a interface; os eventos e resultados de consultas ajudam a localizar falhas; os metadados permitem relacioná-las ao navegador e às dimensões de tela. Comentários enviados voluntariamente pelo botão de feedback são armazenados separadamente e podem ser vinculados à sessão quando a pesquisa está ativa; o envio também é permitido sem gravação de navegação. Um identificador de sessão não torna anônimos os locais e textos registrados.
++
++O aviso da Figura~\ref{fig:print-02-informacoes} permite ``Contribuir com a pesquisa'' ou ``Continuar sem contribuir''. A recusa mantém as funções de transporte disponíveis, sem iniciar sessão de telemetria ou reprodução visual. Falhas de gravação não devem bloquear a consulta. A escolha, sua versão e data são persistidas no navegador, sem prazo arbitrário de expiração; alterações relevantes no aviso exigem nova decisão. Ausência ou falha do armazenamento não equivale a consentimento. Em Configurações, o participante pode consultar ou alterar sua decisão, interromper a captura e solicitar exclusão. A interrupção descarta eventos não enviados e impede novos envios, mas não exclui automaticamente dados já recebidos. Consultas operacionais de transporte e logs do servidor são distintos da participação na pesquisa.
++
++\begin{figure}[H]\centering
++\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-10-23-rotas/pesquisa-configuracoes.png}\hfill
++\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-10-23-rotas/feedback.png}
++\caption{Decisão de não participar nas configurações e formulário de feedback voluntário.}\label{fig:pesquisa-voluntaria}
++\fonte{Capturas reais da aplicação em viewport móvel, 23 out. 2026.}
++\end{figure}
++As configurações possuem conteúdo rolável: a captura mostra a parte inicial, não a integralidade das informações. O formulário de feedback foi aberto sem enviar mensagem. Essas telas documentam a separação entre consulta ao transporte, pesquisa e manifestação voluntária.
++
++O prazo de 30 dias informado na interface corresponde ao critério de remoção dos eventos antigos durante o recebimento de novas gravações, não a uma tarefa periódica independente. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Os blocos comprimidos compartilhados são eliminados quando a sessão deixa de possuir eventos; arquivos exportados não são abrangidos automaticamente pela limpeza por idade. Assim, a implementação não assegura a eliminação de todas as cópias em até 30 dias. O acesso pela aplicação exige autenticação administrativa, e a configuração de acesso público bloqueia a administração. A exclusão manual de uma sessão, com confirmação, remove seus eventos, blocos associados e arquivos de exportação em cache; cópias previamente baixadas precisam de tratamento próprio. A interface permite solicitar exclusão, sujeita à análise da equipe; o protocolo de recebimento não significa eliminação imediata. Relatos voluntários e solicitações não possuem limpeza automática por prazo nesta versão.
+ 
+ O protótipo registra eventos de navegação para diagnóstico de usabilidade, incluindo origem e destino, mas não consolida esses registros em indicadores agregados de demanda. Essa finalidade analítica permanece uma possibilidade futura; pesquisas populacionais estão fora da entrega atual. Sua utilidade deverá ser discutida com o interlocutor e responsáveis pelo planejamento, definindo quais decisões os indicadores poderiam apoiar e como confrontá-los com levantamentos operacionais. Uma eventual confirmação voluntária de embarque ou desembarque seria um dado adicional autodeclarado, sujeito a validação própria.
+ 

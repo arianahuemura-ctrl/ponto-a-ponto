@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-22",
+  "base_commit": "aee66eb",
+  "uncommitted_changes": true,
+  "viewport": [
+    430,
+    932
+  ],
+  "device_scale": 2,
+  "simulated_location": [
+    -23.5745,
+    -46.7085
+  ],
+  "transport_api": "real local application responses",
+  "telemetry": "intercepted in capture browser only",
+  "files": {
+    "pap-01-embarque.png": "5e20200300e08ab2383e95018d51621b7e7c70c3e98b336316bf18e1c6d5b442",
+    "pap-06-ultimo-trecho.png": "4fcce3b6344375bb305a8b36128a3746e89bc2608e01d3d0b0b491d3a2ce1c9d",
+    "pap-03-destino.png": "2f9f4b94676710ebe9de15461bdf2b548f2c097220521537a4671aa2d7c13c82",
+    "pap-07-favoritos.png": "2f9f4b94676710ebe9de15461bdf2b548f2c097220521537a4671aa2d7c13c82",
+    "pap-13-onibus-tempo-real.png": "545ed0253a5ba18df7f79e31eae7a8f2e20d5991420012007bf29782a889e39a",
+    "pap-09-localizacao.png": "63202607629f886b08c77ea4e12d74e52f97dcc0e4c85f12bdeafc9e30b462b7",
+    "pap-00-aceite.png": "44c214f57b8c3cefb74121156ea2c1528de1779b75cc525d3fd9c67444b02c59",
+    "pap-14-qr-atual.png": "f56dc774b359529f4d8ebb75afa05fcb7a632a4f649b90a578d01b4880158212",
+    "pap-05-viagem-completa.png": "6e4ff1ab5ddfe82a52fa97bfdd3ae3fde46a1d8cea6a05cbcffe2e2f716a4670",
+    "pap-08-confirmacao.png": "235047a1f168e2d4ed86ed8b7c0dc684e0b55b0bdbdc72920f7db000458ffbf2",
+    "pap-10-alterar-embarque.png": "0a0808cb9fbec243c4c0175f69c2aa0081ac31b0e28f05327cebf996d6d9250d",
+    "pap-12-destino-livre.png": "e84dea788a558d0352106d37cb314d8ae4d2ad61809ab04ac27fbb3e739fe469",
+    "pap-04-alternativas.png": "3442e840156f1c8bc46c5d3db4a4e4303859c2cb4e6c4322c31f1bfa3db51ccb"
+  }
+}

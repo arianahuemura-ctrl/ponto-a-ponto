@@ -1,0 +1,65 @@
+REVISÃO CRÍTICA — TRATAMENTO DAS OBSERVAÇÕES
+Data: 22/10/2026. Worktree acadêmico; branch relatorio. Sem commit.
+Base: texto de revisão fornecido pelo usuário; comparação com o estado local anterior a esta tarefa.
+A revisão editorial recebida não é avaliação institucional da UNIVESP nem parecer da Nath’s Brother. Suas notas estimadas não foram incorporadas ao relatório.
+
+CORREÇÕES REALIZADAS
+1. Cancelamento: a implementação atual de SaoPaulo.jsx/cancelTrip remove origem, destino e trajeto, mantém favoritos e enquadramento e volta à seleção de embarque. Corrigidos RF06, descrição funcional e Apêndice A. A Figura 12 e a captura da confirmação já representavam esse comportamento. Fechar a lista para ver o mapa é operação distinta e não cancela a viagem. O diálogo também desmarca um embarque isolado; não há cancelamento separado que preserve a origem. Diagramas de estados reorganizados.
+2. Telemetria: distinguida a coleta existente para diagnóstico de usabilidade da proposta futura de indicadores agregados de demanda. Documentados eventos, buscas, origem/destino, localização autorizada, estado da aplicação, respostas de API, metadados e feedback por sessão. Explicitadas finalidades, ausência de modo de uso sem coleta, falha de inicialização que bloqueia a navegação, exclusão e limites da retenção. Nenhum mecanismo de captura foi alterado.
+3. Figuras 13 e 16: tela completa e detalhe ampliado, derivados do mesmo PNG por trim/clip no LaTeX. Figura 14: removidas somente margens vazias para ampliar o aviso sem retirar seu conteúdo. Os 13 PNGs originais e seus hashes foram preservados.
+4. Figura 16: capture.cjs demonstra a mesma sequência de captura, e BoardDialog.jsx exibe a origem do primeiro trecho selecionado. Explicada a diferença entre a Parada Exclusiva (1211381) inicial e o embarque da alternativa na Av. Dr. Vital Brasil, 569 (1211364), com acesso a pé de 72 m/58 s mostrado na imagem. Nenhum identificador foi alterado.
+5. Figura 11: simplificados os blocos e explicitada a condição de fallback, preservando a separação offline/online e o retorno progressivo.
+6. Figura 25: associação shape_id com cotovelos e rótulos mais legíveis. Preservada a distinção entre associações lógicas e chaves estrangeiras declaradas.
+7. Figura 26: 400 m = 5min20s; 200 m = 2min40s, ambos a 4,5 km/h. Totais de 13min20s e 22min40s; economia ilustrativa de 9min20s. Não são medições do planejador.
+8. Figuras 27–29: atores e fronteira do sistema mais claros, condição de fallback explicitada, transições e rótulos de cancelamento reposicionados. Uma rota válida, mesmo limitada, não aciona fallback para completar a lista.
+9. Benchmark: acrescentado critério de comparabilidade semântica para evitar confundir diferenças de representação com perda de qualidade. Configurações A/B/C, parâmetros e marcadores TODO preservados. Tolerâncias ainda devem ser fixadas antes da coleta; nenhum resultado foi inserido. O custo de pré-processamento já estava previsto no protocolo.
+10. Avaliação externa: mantida como realizada em 21/10/2026, conforme confirmação expressa do usuário nas conversas anteriores. Explicitado o vínculo familiar. Não foram criadas observações, recomendações ou assinaturas. Conclusão distingue resultado técnico, avaliação documental e avaliação com passageiros/Mauá ainda pendente. Entrevista com Osmar preservada.
+
+EVIDÊNCIAS DO COMPORTAMENTO (INSPEÇÃO SOMENTE DE LEITURA)
+No worktree de desenvolvimento: frontend/src/SaoPaulo.jsx (cancelTrip e app_state); CancelTripDialog.jsx; BoardDialog.jsx (cabeçalho do primeiro trecho); UsabilityConsent.jsx; usability.js; visualRecording.js; api.js; backend/transit/usability.py; usability_admin.py; replay_video.py; scripts/telemetry_storage.py; backend/mbm/public_urls.py e public_boundary.py.
+Nenhum arquivo da aplicação, banco de dados, segredo, serviço ou configuração de execução foi modificado. Esta revisão não executou novo pentest nem testes operacionais.
+
+IMAGENS MANTIDAS E LIMITES
+Figuras 15 e 19 usam a mesma captura de favoritos em contextos explicativos diferentes; duplicidade conhecida, mantida para preservar a sequência e numeração.
+Figuras 17 e 18: tema escuro e contraste do mapa original preservados; não foram aplicados filtros que produzissem uma aparência diferente da interface real.
+Figura 20: texto e código agora concordam com a confirmação apresentada.
+Figura 21: mantida como evidência estática da integração visual; não prova movimento ou periodicidade de atualização.
+Figura 23: estado intermediário de processamento mantido e identificado; não demonstra conclusão ou qualidade final da consulta.
+Figura 24: URL local preservada como captura de desenvolvimento, com limite de acesso externo explicado.
+Os detalhes das Figuras 13 e 16 ampliam o conteúdo dentro da mesma figura, sem recriar dados ou substituir capturas reais. Original: 860 x 1864 pixels, sem metadados de DPI. Recortes (x0,y0,x1,y1, em pixels a partir do canto superior esquerdo): próximos ônibus (75,820,790,1640); alternativas (75,850,790,1360); aviso (30,250,830,1664). O LaTeX converte esses limites para trim em bp no tamanho natural do PNG. Registro original: capturas/2026-10-22/registro.json.
+
+RECOMENDAÇÕES PARA APROVAÇÃO — NÃO IMPLEMENTADAS NA APLICAÇÃO
+- Avaliar acesso ao serviço sem gravação da pesquisa e controle de encerramento da participação.
+- Rever a extensão e a apresentação do aviso, mantendo informação acessível sobre categorias, finalidades e limites reais.
+- Definir limpeza periódica de eventos, blocos e exportações; o mecanismo atual de 30 dias depende de gravações posteriores. Blocos de sessões ainda ativas e arquivos exportados exigem tratamento adicional.
+- Definir procedimento de solicitação de exclusão e tratamento de cópias baixadas; excluir uma sessão não revoga por si só um token ainda válido para novos eventos.
+Estas propostas respondem às divergências observadas. Não constituem avaliação jurídica ou declaração de conformidade.
+
+PENDÊNCIAS ACADÊMICAS
+- Nome e função formal do avaliador, identificação institucional, versão dos materiais examinados, devolutiva direta e parecer revisado/assinado. O PDF recebido permanece minuta preparatória. Consultar a facilitadora sobre os requisitos formais da participação, explicitando o vínculo familiar.
+- Receber e registrar eventual observação concreta do avaliador, sem produzi-la em seu nome.
+- Executar e registrar avaliação exploratória com passageiros se viável, identificando participantes, tarefas e limites; não confundir contagem de sessões/replays com feedback externo ou estudo de usabilidade concluído.
+- Concluir/verificar materialização e executar comparação A/B/C antes de preencher resultados definitivos.
+- Confirmar vídeo acadêmico e participação de todos antes de preencher seu link.
+- Preencher total de folhas somente no fechamento, conforme critério institucional; 106 é a contagem física atual do PDF, não preenchimento automático da ficha.
+- Revisão normativa integral segundo as edições aplicáveis da NBR 6023 e NBR 10520 permanece pendente: seus textos completos não foram verificados nesta tarefa.
+
+AUDITORIA BIBLIOGRÁFICA
+46 entradas; 46 chaves citadas; nenhuma entrada sem citação; nenhuma citação sem referência; nenhuma chave ou DOI duplicado. Auditoria sobre o documento principal e seus inputs, sem confundir fontes auxiliares não incluídas com o relatório compilado. As entradas e identificadores existentes foram preservados.
+Conferência externa parcial (22/10/2026):
+- Bast: título/autores e ano conferidos no depósito https://arxiv.org/abs/1504.05140 ; acesso via DOI não disponível na ferramenta.
+- Batz: título/autores e DOI da publicação original conferidos em https://publikationen.bibliothek.kit.edu/1000139527 ; DOI direto retornou bloqueio 403.
+- Baum: página da publicação https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2019.14 acessível.
+- Brakewood/Watkins: título/autoras conferidos no preprint https://candacebrakewood.com/wp-content/uploads/2019/05/brakewood-and-watkins-preprint-paper.pdf ; DOI direto indisponível, metadados finais não conferidos integralmente.
+- Delling/Pajor/Werneck: título/autores/ALENEX 2012 conferidos em https://www.microsoft.com/en-us/research/publication/round-based-public-transit-routing/ ; DOI direto expirou por tempo de resposta.
+- Dibbelt: título/autores/DOI conferidos em https://publikationen.bibliothek.kit.edu/1000088435 .
+- Dijkstra: título/autor/ano/páginas/DOI conferidos em https://link.springer.com/article/10.1007/BF01386390 .
+- Hart: DOI encaminhou a https://ieeexplore.ieee.org/document/4082128/ ; bloqueio de verificação do navegador impediu conferir os metadados, pendente.
+- Pereira/Andrade/Vieira: título/autores/volume/páginas conferidos em https://link.springer.com/article/10.1007/s10109-022-00400-x . Publicação online em 2022 e volume de 2023 são compatíveis com a entrada atual.
+- Prommaharaj: título/autores conferidos no PDF do laboratório https://senseable.mit.edu/papers/pdf/20200320_Prommaharaj-etal_VisualizingTransit_Helyon.pdf ; DOI direto bloqueado, metadados finais não conferidos integralmente.
+Falhas de acesso não foram interpretadas como DOI inexistente. Não se declara auditoria externa exaustiva de todas as 46 fontes.
+
+VALIDAÇÃO
+Relatório recompilado: 106 páginas. Zero Overfull. Sem referências ou citações indefinidas. Permanecem 16 Underfull (espaçamento de caixas/tabelas) e avisos de depreciação de babel/memoir já existentes.
+Conferência visual das capturas ampliadas e dos diagramas de arquitetura, GTFS, poda, casos de uso, sequência e estados. Fonte e legenda da Figura 14 cabem na mesma página. Hashes dos 13 PNGs originais verificados. Referências bibliográficas e TODO-BENCHMARK preservados. git diff --check aprovado.
+O arquivo alteracoes.diff isola esta tarefa das alterações acadêmicas que já existiam no início.

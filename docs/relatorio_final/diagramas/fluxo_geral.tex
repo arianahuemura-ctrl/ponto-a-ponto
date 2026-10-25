@@ -1,21 +1,35 @@
-\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4.3cm,minimum height=0.85cm,fill=black!3},arr/.style={->,thick},note/.style={align=center,font=\footnotesize,text width=3.6cm}]
-
-\node[box] (qr) at (0,0) {Ler QR Code do ponto};
-\node[box] (manual) at (7,0) {Abrir aplicação: localização\\ou embarque manual};
-\node[box] (stop) at (3.5,-1.5) {Embarque identificado};
-\draw[arr] (qr)--(stop); \draw[arr] (manual)--(stop);
-\node[box] (times) at (3.5,-2.9) {Consultar próximos ônibus};
-\draw[arr] (stop)--(times);
-\node[note] at (8,-2.9) {Previsões quando disponíveis; caso contrário, estimativas programadas};
-\node[box] (dest) at (3.5,-4.4) {Selecionar destino:\\busca, mapa ou favorito};\draw[arr] (times)--(dest);
-\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{localização\\conhecida}(dest.east);
-\node[box] (calc) at (3.5,-5.9) {Calcular e apresentar\\alternativas progressivamente};\draw[arr] (dest)--(calc);
-\node[box] (choice) at (3.5,-7.4) {Comparar e selecionar rota};\draw[arr] (calc)--(choice);
-\node[box,text width=2.7cm] (fail) at (-1,-6.6) {Sem alternativa\\ou falha:\\revisar consulta};
-\draw[arr] (calc.west)-|(fail.north);\draw[arr] (fail.west)--++(-.4,0)|-(dest.west);
-\node[box] (map) at (3.5,-8.9) {Ver viagem completa ou\\trecho no mapa};\draw[arr] (choice)--(map);
-\draw[arr] (map.east)--++(2.9,0)|-node[pos=0.25,right,font=\footnotesize]{reabrir lista}(choice.east);
-\node[box] (cancel) at (3.5,-10.4) {Cancelar viagem?\\Confirmar para encerrar};\draw[arr] (map)--(cancel);
-\draw[arr] (cancel.west)--++(-3.3,0)|-node[pos=0.15,left,font=\footnotesize]{não}(map.west);
-\node[box] (end) at (3.5,-11.9) {Selecionar novo destino\\(embarque mantido)};\draw[arr] (cancel)--node[right,xshift=4pt,font=\footnotesize]{sim}(end);
+\begin{tikzpicture}[>=Stealth,font=\fontsize{8}{10}\selectfont,
+box/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=.8cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\scriptsize,fill=white,align=center}]
+\node[box] (qr) at (0,0) {QR Code ou link do ponto};
+\node[box] (manual) at (4.3,0) {Selecionar embarque no mapa\\(ponto ou toque prolongado)};
+\node[box] (gps) at (8.6,0) {Geolocalização disponível\\sem embarque manual ou QR};
+\node[box,fill=blue!5] (times) at (0,-1.4) {Abrir próximos ônibus\\do ponto identificado};
+\node[box] (stay) at (4.3,-1.4) {Definir embarque;\\permanecer no mapa};
+\node[box] (auto) at (8.6,-1.4) {Usar localização como origem};
+\foreach \a/\b in {qr/times,manual/stay,gps/auto}{\draw[arr] (\a)--(\b);}
+\node[box,text width=5cm] (check) at (4.3,-3.2) {Ao escolher destino no mapa:\\origem disponível?};
+\draw[arr] (times.south)--(0,-2.4)--node[lab,above]{se desejar planejar}(4.3,-2.4)--(check.north);
+\draw[thick] (stay)--(4.3,-2.4);
+\draw[thick] (auto.south)--(8.6,-2.4)--(4.3,-2.4);
+\node[box,text width=2.9cm] (missing) at (-.6,-3.2) {Não: alertar e solicitar embarque};
+\draw[arr] (check)--(missing);
+\draw[arr] (missing.west)--(-2.5,-3.2)--(-2.5,.7)--(4.3,.7)--(manual.north);
+\node[box,text width=5cm] (dest) at (4.3,-4.6) {Sim: definir destino\\ponto, toque prolongado, busca ou favorito};
+\draw[arr] (check)--(dest);
+\node[box,text width=5cm] (calc) at (4.3,-6) {Abrir lista de rotas;\\calcular alternativas progressivamente};
+\draw[arr] (dest)--(calc);
+\node[box,text width=2.5cm] (fail) at (-.6,-6) {Sem alternativa ou falha:\\revisar consulta};
+\draw[arr] (calc)--(fail);
+\draw[arr] (fail.north)--(-.6,-4.6)--(dest.west);
+\node[box,text width=5cm] (choice) at (4.3,-7.4) {Comparar e selecionar rota};
+\node[box,text width=5cm] (map) at (4.3,-8.8) {Ver viagem ou trecho no mapa};
+\draw[arr] (calc)--(choice);
+\draw[arr] (choice)--node[lab,right]{fechar painel / ver mapa}(map);
+\draw[arr] (map.east)--(8,-8.8)--node[lab,right]{reabrir lista}(8,-7.4)--(choice.east);
+\node[box,text width=5cm] (cancel) at (4.3,-10.3) {Solicitar cancelamento\\e confirmar?};
+\draw[arr] (map)--(cancel);
+\draw[arr] (cancel.west)--(.7,-10.3)--node[lab,left]{não: continuar\\sem cancelar}(.7,-8.8)--(map.west);
+\node[box,text width=5cm] (end) at (4.3,-11.8) {Sim: desmarcar embarque e destino;\\preservar favoritos e enquadramento};
+\draw[arr] (cancel)--(end);
+\node[align=center,font=\scriptsize,text width=12cm] at (4.3,-13.3) {Ícones de embarque e destino piscam enquanto seus dados estão pendentes.\\Favorito de destino sem origem: guardar destino pendente e solicitar embarque.\\Fechar o painel não cancela a viagem; desistir mantém a visualização anterior.\\Próximos ônibus: previsão disponível ou programação.};
 \end{tikzpicture}

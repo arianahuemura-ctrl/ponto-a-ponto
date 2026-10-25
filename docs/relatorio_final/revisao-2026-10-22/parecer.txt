@@ -1,0 +1,50 @@
+REVISÃO CORRETIVA — 22/10/2026
+Escopo: fontes acadêmicos na branch relatorio. Código da aplicação consultado somente para leitura. Nenhum commit/merge/rebase ou troca de branch.
+
+CORREÇÕES DOCUMENTAIS
+1. Figura 12: mantido cancelamento com locais desmarcados, confirmado por SaoPaulo.jsx, cancelTrip (linhas 207–218): origin=null, destination=null, mode=origin, favoritos intactos, enquadramento preservado. Corrigido texto contraditório no apêndice e também Figura 29, que ainda mandava manter embarque.
+2. QR/link: efeito do parâmetro stop abre mode=board; selectStop(origin) abre mode=destination, enquanto selectStop(destination) abre mode=board. Fluxo geral, texto e diagrama de estados agora distinguem objetivos. Clique longo chama selectStop conforme o papel selecionado. Com origem/destino já definidos, clicar no ponto pode reabrir o painel; a descrição refere-se ao modo de seleção.
+3. Figura 16: pap-04-alternativas.png mostra Av. Dr. Vital Brasil, 569, 1211364, destino 600012585. Figura 13 mostra Parada Exclusiva, 1211381. A descrição agora distingue entrada inicial e embarque apresentado; nenhum identificador de imagem foi editado. Não se infere a causa interna da troca apenas da captura.
+4. Figura 28: atualizado caminho materializado, caminhadas, avaliação temporal, refinamento operacional disponível e NDJSON. Fallback condicional, sem execução simultânea para unir resultados. Evidências: alternatives.py/_bus_progressive, connection_adapter.py e materialized_adapter.py. Configuração ou profundidade incompatível também podem direcionar à alternativa por rodadas; o diagrama resume o caminho principal e o fallback.
+5. Referências: reordenadas alfabeticamente sem editar conteúdo/chaves. BATZ e BAUM após BAST; DELLING e DESIGN COUNCIL antes de DIBBELT. Verificação automática das chaves e textos anexada na validação.
+
+AUDITORIA TÉCNICA DE TELEMETRIA — NÃO É AVALIAÇÃO JURÍDICA
+Fontes lidas no worktree de desenvolvimento: frontend/src/UsabilityConsent.jsx, usability.js, visualRecording.js, api.js, SaoPaulo.jsx; backend/transit/usability.py, usability_admin.py, replay_video.py; scripts/telemetry_storage.py; backend/mbm/public_urls.py.
+
+Categorias e finalidade declarada/inferida do mecanismo:
+- DOM, imagens/canvas (5 fps), movimentos/toques e rolagem: reconstrução visual e diagnóstico da interação.
+- Textos digitados, buscas, origem/destino, coordenadas e favoritos no estado: reconstruir contexto e falhas de consulta. Permitem inferir locais pessoais; identificador de sessão não anonimiza.
+- Parâmetros e respostas integrais de API (api_result), rotas, estado da aplicação: reprodução do resultado observado e diagnóstico. O aviso menciona rotas e buscas, mas não explicita respostas integrais e favoritos em detalhe.
+- Endpoint, status HTTP, latência, erros: diagnóstico técnico.
+- Navegador, plataforma, idiomas, dimensões, densidade, toque e fuso: diagnóstico de compatibilidade e apresentação.
+- Mensagem/categoria de feedback: vincular relato à sessão. O aviso geral não detalha a categoria de texto livre.
+- Consentimento research-v5, instante, sequência e sessão: rastreabilidade do aceite e ordem dos eventos.
+Finalidades por categoria acima são interpretações técnicas; não comprovam necessidade/proporcionalidade de todos os campos.
+
+Aceite: clique explícito em Concordo e continuar inicia startRecording, registra evento de consentimento e exige flush com sucesso antes de montar a aplicação. A captura visual começa após status=on. Se a inicialização falha, aparece mensagem e o aplicativo não abre. O usuário que não concorda é orientado a fechar a página. Não há botão de recusa, modo sem pesquisa ou retirada dentro da interface. Fechar a aba interrompe futuras interações, mas pode disparar envio final da fila e não apaga registros enviados. A permissão de geolocalização é do navegador; negar GPS não equivale a recusar telemetria e coordenadas de busca/URL também podem estar registradas.
+
+Retenção: o código remove eventos recebidos há mais de 30 dias durante a próxima ingestão POST válida; sem nova gravação, os dados podem permanecer além do prazo. Blocos comprimidos são removidos quando a sessão não tem mais eventos; blocos antigos de sessão ainda ativa podem durar mais. Arquivos JSON/WebM exportados/cache não participam dessa limpeza automática. Portanto, a frase do aviso não garante expurgo de todas as cópias em 30 dias.
+
+Acesso: administração requer usuário Django ativo is_staff; o URLconf público exclui admin/. Arquivos ficam em armazenamento local privado. Isso não é criptografia nem garante que cópias baixadas permaneçam no servidor. O aviso não explica exportações e cópias locais. Não foi realizado novo pentest nesta revisão.
+
+Exclusão: administrador pode apagar a sessão mediante POST, confirmação e CSRF; remove eventos, blocos sem eventos e pasta de exportações da sessão. Não há solicitação de exclusão pelo passageiro nem revogação do token ativo; uma aba ativa pode reenviar eventos e recriar a sessão. Downloads já realizados não são apagados remotamente. A descrição não promete eliminação física imediata de páginas SQLite/backups.
+
+Divergências no relatório: a Figura 14 documenta coleta já implementada, enquanto o texto sobre uso futuro de dados de demanda fala em definir uma estrutura mínima antes de coletar. Deve-se distinguir explicitamente telemetria existente de usabilidade e eventual pesquisa futura de demanda; a coleta atual é mais ampla que origem/destino e faixa temporal. Não há base para chamar a participação de opcional dentro do serviço: atualmente recusa impede utilização. Nada foi alterado no mecanismo.
+
+RECOMENDAÇÕES SEPARADAS, DEPENDENTES DE APROVAÇÃO
+A. Permitir uso sem pesquisa e oferecer recusa/retirada explícitas, definindo o efeito sobre dados anteriores.
+B. Revisar campos necessários; avaliar mascaramento de textos, coordenadas precisas, favoritos e respostas integrais.
+C. Definir política de retenção abrangendo eventos, blocos, cache, exportações e backups; implementar limpeza periódica independente de novas sessões.
+D. Definir canal/procedimento para exclusão, revogação de sessão ativa e tratamento de cópias exportadas.
+E. Harmonizar aviso e relatório, explicitando coleta existente, exportação e limitações, após aprovação das decisões. Confirmar responsáveis e condições de pesquisa com a orientação acadêmica; esta auditoria não determina conformidade legal.
+
+QUALIDADE DAS FIGURAS — ORIGINAIS PRESERVADOS
+13, 16, 21 e 23: PNG 860x1864, viewport 430x932 com DPR=2, inseridos a cerca de 278 dpi (pdfimages). Exibição aproximada 7,9x17 cm. Sem reamostragem ou substituição sintética nesta revisão; hashes comparados com registro.json.
+13: títulos e previsões contrastam bem; a continuação da lista é cortada pelo viewport/rolagem, não uma captura integral de todas as linhas. Texto secundário pequeno na impressão; legenda representa corretamente consulta de próximos ônibus.
+16: legibilidade principal suficiente; detalhes pequenos, cabeçalho confirma 1211364. Corrigida descrição. Não confundir horários exibidos com benchmark.
+21: controles e marcadores legíveis; fundo escuro torna nomes de vias menos contrastantes. É acompanhamento de veículo real recebido pela API, não prova de precisão ou atualização contínua. Legenda compatível.
+23: mostra consulta em andamento, incluindo Consultando embarque e Buscando alternativas. Legenda/texto já identificam retorno progressivo, não resultado concluído. Texto secundário pequeno; não apagar indicadores de carregamento nem substituir respostas.
+Recomendação para aprovação: acrescentar ampliações/recortes identificados dos cartões, mantendo originais e hashes; não é necessário inventar imagens ou ampliar artificialmente resolução. Contraste avaliado visualmente, sem alegar medição WCAG.
+
+PRESERVAÇÃO ACADÊMICA
+Protocolo e marcadores de benchmark mantidos; nenhuma medição antiga foi promovida a resultado definitivo. Materialização e comparação continuam pendentes. Avaliação externa, atribuições a Osmar e comunidade de Mauá não foram reescritas. São Paulo permanece cenário técnico distinto. Total de folhas não preenchido e vídeo publicado não incluído.

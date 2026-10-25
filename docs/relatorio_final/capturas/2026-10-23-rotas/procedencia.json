@@ -1,0 +1,16 @@
+{
+  "app_commit": "aee66eb6761e868c0547c7454e7b259faae3a9fc",
+  "app_branch": "feat/busca-bidirecional",
+  "local_changes": true,
+  "sources_sha256": {
+    "frontend/src/SaoPaulo.jsx": "d4d1e98fd8020e6226171be3b7c7623fab997bc9417238b2098d8f3a3270e382",
+    "frontend/src/SaoPauloMap.jsx": "0067d4580a1b98be62993d2710a44184610aaae1d15ab7c1786e14c8c7b63130",
+    "frontend/src/routeDirection.js": "293d4851e018852e5fa00fd2f645d0dbc02ac03795c36ebc2c7b4cab2d44c8eb",
+    "frontend/src/UsabilityConsent.jsx": "148410f34aee62d329f4adf11cfb1c77442491756dc863f793c76b381c6056eb",
+    "frontend/src/researchChoice.js": "da65318d7af5cb2ab9f902ce4609884d3d3e65203bf8b5fbd8c14cd8a7bbb651",
+    "backend/transit/sptrans/tracking.py": "054faf89b63a05bcc66e61d89c58a570f361d1b92135a93090f1623acbf171d5"
+  },
+  "capture": "Chromium, densidade 2, tema escuro; 430x932 (entrada) e 1366x1000 (linha); localização não autorizada. Dados reais, sem substituição de respostas de transporte. Escolha Continuar sem contribuir; nenhum feedback enviado. Endpoint de pesquisa protegido contra chamadas inesperadas.",
+  "route": "6L10-41-1, embarque 5614798 (R. Matilde de Lutis Barbosa), captura sem posição operacional disponível.",
+  "limitation": "Capturas não comprovam usabilidade externa nem precisão operacional; detalhe obtido pelo botão de zoom real. Sem recriação de tela anterior."
+}

@@ -1,0 +1,410 @@
+--- a/docs/relatorio_final/diagramas/arquitetura.tex
++++ b/docs/relatorio_final/diagramas/arquitetura.tex
+@@ -1,32 +1,25 @@
+ \begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
+-box/.style={draw,rounded corners,align=center,text width=5.4cm,minimum height=.95cm,fill=white},
+-arr/.style={->,thick}]
+-\draw[rounded corners,fill=blue!4] (-3.05,.7) rectangle (3.05,-10.6);
+-\draw[rounded corners,fill=green!4] (3.55,.7) rectangle (9.65,-6.5);
+-\draw[rounded corners,fill=orange!6] (3.55,-6.8) rectangle (9.65,-10.6);
+-\node[font=\fontsize{10}{12}\selectfont\bfseries] at (0,.35) {PRÉ-PROCESSAMENTO OFFLINE};
+-\node[font=\fontsize{10}{12}\selectfont\bfseries] at (6.6,.35) {CONSULTA ONLINE};
+-\node[box] (fonte) at (0,-.65) {GTFS SPTrans + OSM/OSRM\\Cadastro, programação e malha pedestre};
+-\node[box] (grafo) at (0,-2.3) {Grafo e conexões diretas dirigidas\\Caminhadas verificadas};
+-\node[box] (comp) at (0,-4) {Componentes reutilizáveis\\Índices diretos e reversos};
+-\node[box] (bi) at (0,-5.7) {Composição bidirecional\\Um, dois ou três ônibus};
+-\node[box] (mat) at (0,-7.5) {Materialização seletiva de candidatos\\Distâncias, referências e estado por par};
+-\node[align=center,text width=5.2cm] at (0,-9.3) {Artefatos vinculados às fontes e parâmetros.\\A preparação não se repete em cada consulta.};
+-\node[box] (entrada) at (6.6,-.65) {React/Leaflet $\leftrightarrow$ Django\\Origem, destino e instante};
+-\node[box] (rec) at (6.6,-2.3) {Recuperação dos candidatos preparados\\Verificação de compatibilidade e cobertura};
+-\node[box] (av) at (6.6,-4) {Validação pedestre e avaliação temporal\\GTFS + refinamento Olho Vivo};
+-\node[box] (res) at (6.6,-5.7) {Reordenação e alternativas progressivas\\Identificação do planejador produtor};
+-\node[font=\fontsize{10}{12}\selectfont\bfseries] at (6.6,-7.15) {FALLBACK POR RODADAS};
+-\node[align=center,text width=5.3cm] at (6.6,-8) {Sem preparação utilizável ou resultado final válido no caminho principal};
+-\node[box] (fallback) at (6.6,-9.5) {Busca por rodadas sobre GTFS\\Caminhadas e retorno progressivo};
+-\draw[arr] (fonte)--(grafo);
+-\draw[arr] (grafo)--(comp);
+-\draw[arr] (comp)--(bi);
+-\draw[arr] (bi)--(mat);
+-\draw[arr] (entrada)--(rec);
+-\draw[arr] (rec)--(av);
+-\draw[arr] (av)--(res);
+-\draw[arr] (mat.east)--(3.3,-7.5)--(3.3,-2.3)--(rec.west);
+-\draw[arr,dashed] (res.east)--(9.85,-5.7)--(9.85,-9.5)--(fallback.east);
+-\draw[arr] (fallback.west)--(3.4,-9.5)--(3.4,-5.7)--(res.west);
++box/.style={draw,rounded corners,align=center,text width=5cm,minimum height=.85cm,fill=white},arr/.style={->,thick}]
++\draw[rounded corners,fill=blue!4] (-2.9,.7) rectangle (2.9,-10.7);
++\draw[rounded corners,fill=green!4] (3.7,.7) rectangle (9.5,-10.7);
++\node[font=\bfseries] at (0,.3) {PREPARAÇÃO OFFLINE};
++\node[font=\bfseries] at (6.6,.3) {CONSULTA ONLINE};
++\node[box] (fonte) at (0,-.7) {GTFS SPTrans e OSM/OSRM};
++\node[box] (grafo) at (0,-2.2) {Conexões dirigidas\\e caminhadas verificadas};
++\node[box] (comp) at (0,-3.7) {Componentes reutilizáveis\\Índices diretos e reversos};
++\node[box] (bi) at (0,-5.2) {Composição bidirecional\\Um, dois ou três ônibus};
++\node[box] (mat) at (0,-6.7) {Candidatos materializados};
++\node[align=center,text width=5cm] at (0,-8.5) {Artefatos vinculados às fontes e parâmetros.\\Preparação separada de cada consulta.};
++\node[box] (entrada) at (6.6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
++\node[box] (rec) at (6.6,-2.2) {Recuperar candidatos compatíveis};
++\node[box] (av) at (6.6,-3.7) {Validar caminhadas e horários\\Refinar se houver dados operacionais};
++\node[box,fill=orange!10] (cond) at (6.6,-5.4) {Sem contexto utilizável ou\\sem alternativa válida ao final?};
++\node[box,fill=orange!6] (fallback) at (6.6,-7.3) {Fallback por rodadas\\quando habilitado};
++\node[box] (res) at (6.6,-9.7) {Alternativas progressivas\\Identificação do produtor};
++\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/av,av/cond}{\draw[arr] (\a)--(\b);}
++\draw[arr] (mat.east)--(3.3,-6.7)--(3.3,-2.2)--(rec.west);
++\draw[arr] (cond)--node[right]{sim}(fallback);
++\draw[arr] (fallback)--(res);
++\draw[arr] (cond.east)--(9.9,-5.4)--node[right]{não}(9.9,-9.7)--(res.east);
++\node[align=center,text width=12cm,font=\scriptsize] at (3.5,-11.3) {O caminho principal pode publicar alternativas antes de terminar.\\Uma alternativa válida não aciona o fallback apenas para completar a lista.};
+ \end{tikzpicture}
+--- a/docs/relatorio_final/diagramas/casos_uso.tex
++++ b/docs/relatorio_final/diagramas/casos_uso.tex
+@@ -1,6 +1,17 @@
+ \begin{tikzpicture}[font=\small,uc/.style={draw,ellipse,align=center,text width=4.4cm,minimum height=.85cm}]
+-\node (p) at (0,0) {Passageiro};\node (a) at (0,-6) {Administrador};
+-\draw (2,1) rectangle (9,-7);\node at (5.5,.65) {PaP};
+-\foreach \y/\id/\txt in {0/u1/Identificar embarque,-1.2/u2/Consultar próximos ônibus,-2.4/u3/Planejar por destino,-3.6/u4/Ver rota e trechos no mapa,-4.8/u5/Gerenciar favoritos,-6/u6/Importar e consultar cadastro}{\node[uc] (\id) at (5.5,\y-.2) {\txt};}
+-\foreach \id in {u1,u2,u3,u4,u5}{\draw (p)--(\id.west);}\draw (a)--(u6.west);
+-\end{tikzpicture}+\draw (2,1.3) rectangle (9,-8.5);\node[font=\bfseries] at (5.5,.95) {PaP};
++\foreach \y/\name in {0/Passageiro,-7.5/Administrador}{
++\draw (0,\y+.45) circle (.16);
++\draw (0,\y+.29)--(0,\y-.25);
++\draw (-.35,\y+.1)--(.35,\y+.1);
++\draw (0,\y-.25)--(-.3,\y-.65);
++\draw (0,\y-.25)--(.3,\y-.65);
++\node[anchor=east] at (-.5,\y) {\name};}
++\node[uc] (u1) at (5.5,0) {Identificar embarque};
++\node[uc] (u2) at (5.5,-1.5) {Consultar próximos\\ônibus};
++\node[uc] (u3) at (5.5,-3) {Planejar por destino};
++\node[uc] (u4) at (5.5,-4.5) {Ver rota e trechos\\no mapa};
++\node[uc] (u5) at (5.5,-6) {Gerenciar favoritos};
++\node[uc] (u6) at (5.5,-7.5) {Importar e consultar\\cadastro};
++\foreach \id in {u1,u2,u3,u4,u5}{\draw (.4,0)--(\id.west);}\draw (.4,-7.5)--(u6.west);
++\end{tikzpicture}
+--- a/docs/relatorio_final/diagramas/estados.tex
++++ b/docs/relatorio_final/diagramas/estados.tex
+@@ -1,21 +1,21 @@
+-\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4cm,minimum height=.85cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\footnotesize,fill=white,align=center}]
+-\node[circle,fill,minimum size=2.5mm,inner sep=0pt] (start) at (0,1.2) {};
++\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=3.7cm,minimum height=.85cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\scriptsize,fill=white,align=center,inner sep=2pt}]
++\node[circle,fill,minimum size=2.5mm,inner sep=0pt] (start) at (0,1.3) {};
+ \node[box] (a) at (0,0) {Selecionando embarque};
+ \node[box] (b) at (0,-2) {Consultando próximos ônibus};
+ \node[box] (c) at (0,-4) {Selecionando destino};
+ \node[box] (e) at (0,-6) {Consultando alternativas};
+ \node[box] (f) at (0,-8) {Visualizando rota no mapa};
++\node[box] (conf) at (6.5,-8) {Confirmando cancelamento};
+ \draw[arr] (start)--(a);
+-\draw[arr] (start.west)--++(-3.3,0)|-node[pos=.65,lab,left]{localização\\conhecida}(c.west);
++\draw[arr] (start.west)--(-3.4,1.3)--node[lab,rotate=90,above]{localização conhecida}(-3.4,-4)--(c.west);
+ \draw[arr] (a)--node[lab,right]{QR Code ou link}(b);
+-\draw[arr] (a.east)--++(1,0)|-node[pos=.7,lab,right]{embarque no mapa}(c.east);
++\draw[arr] (a.east)--(3,0)--node[lab,right]{embarque\\no mapa}(3,-4)--(c.east);
+ \draw[arr] (b)--node[lab,right]{selecionar destino}(c);
+ \draw[arr] (c)--node[lab,right]{destino definido}(e);
+ \draw[arr] (e)--node[lab,right]{selecionar rota}(f);
+-\draw[arr] (f.west)--++(-.8,0)|-node[pos=.25,lab,left]{horários}(e.west);
+-\draw[arr] (f.west)--++(-2,0)|-node[pos=.25,lab,left]{nova seleção\\de destino}(c.west);
+-\node[box] (conf) at (6,-5.7) {Confirmando cancelamento};
+-\draw[arr] (f.east)-|node[pos=.25,lab,below]{cancelar viagem}(conf.south);
+-\draw[arr] (conf.west)--++(-.6,0)|-node[pos=.7,lab,above]{continuar viagem}(f.east);
+-\draw[arr] (conf.east)--++(.5,0)|-node[pos=.7,lab,above]{confirmar: desmarcar locais}(a.east);
++\draw[arr] (f.west)--(-2.6,-8)--node[lab,left]{horários}(-2.6,-6)--(e.west);
++\draw[arr] (f.south)--(0,-9.1)--node[lab,below]{cancelar viagem}(6.5,-9.1)--(conf.south);
++\draw[arr] (conf.west)--node[lab,above]{continuar viagem}(f.east);
++\draw[arr] (conf.east)--(9,-8)--node[lab,rotate=90,above]{confirmar: desmarcar embarque e destino}(9,.85)--(0,.85)--(a.north);
++\node[align=center,text width=11.7cm,font=\scriptsize] at (2.5,-10.6) {A confirmação também pode ser aberta na lista. Continuar mantém a visualização anterior;\\confirmar preserva os favoritos e o enquadramento do mapa.};
+ \end{tikzpicture}
+--- a/docs/relatorio_final/diagramas/grafo.tex
++++ b/docs/relatorio_final/diagramas/grafo.tex
+@@ -2,9 +2,9 @@
+ \node[stop] (a) at (0,0) {A};\node[stop] (b) at (4,0) {B};\node[stop] (c) at (8,0) {C};\node[stop] (d) at (4,-3) {D};
+ \draw[->,very thick,blue!70!black] (a)--node[above]{ônibus: 8 min}(b);
+ \draw[->,thick] (b)--node[above]{ônibus: 12 min}(c);
+-\draw[->,dashed,very thick,blue!70!black] (b)--node[left,align=right]{a pé: 400 m\\6 min}(d);
+-\draw[->,dashed,gray] (c)--node[below right,align=left,text=black]{a pé: 200 m\\3 min}(d);
+-\node[draw,fill=blue!5,align=center] at (1,-4.4) {A $\to$ B $\to$ D = 14 min\\Melhor chegada conhecida};
+-\node[draw,align=center] at (7.4,-4.4) {A $\to$ B $\to$ C $\to$ D = 23 min\\Alternativa descartada};
+-\node[draw,fill=black!5,align=center] at (4,-5.8) {C é alcançado em 20 min $\geq$ 14 min.\\Podar sua expansão: custos seguintes não negativos.};
++\draw[->,dashed,very thick,blue!70!black] (b)--node[left,align=right]{a pé: 400 m\\5 min 20 s}(d);
++\draw[->,dashed,gray] (c)--node[below right,align=left,text=black]{a pé: 200 m\\2 min 40 s}(d);
++\node[draw,fill=blue!5,align=center,text width=5.2cm] at (1,-4.6) {A $\to$ B $\to$ D = 13 min 20 s\\Melhor chegada conhecida};
++\node[draw,align=center,text width=5.2cm] at (7.4,-4.6) {A $\to$ B $\to$ C $\to$ D\\= 22 min 40 s; descartada};
++\node[draw,fill=black!5,align=center] at (4,-6) {C é alcançado em 20 min $\geq$ 13 min 20 s.\\Podar sua expansão: custos seguintes não negativos.};
+ \end{tikzpicture}
+--- a/docs/relatorio_final/diagramas/sequencia.tex
++++ b/docs/relatorio_final/diagramas/sequencia.tex
+@@ -2,7 +2,7 @@
+ \foreach \x/\name in {0/Interface,4.5/Backend,9.3/Artefatos e serviços}{\node[draw,align=center,text width=2.6cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-14);}
+ \draw[->] (0,-1)--node[msg,above]{1. Solicitar alternativas: origem e destino}(4.5,-1);
+ \draw[->] (4.5,-2)--node[msg,above]{2. Recuperar candidatos materializados}(9.3,-2);
+-\draw[->,dashed] (9.3,-2.8)--node[msg,above]{Candidatos / contexto indisponível}(4.5,-2.8);
++\draw[->,dashed] (9.3,-2.8)--node[msg,above]{Candidatos / ausência ou incompatibilidade}(4.5,-2.8);
+ \draw (2.1,-3.3) rectangle (10.9,-10.5);
+ \node[msg,anchor=west] at (2.2,-3.3) {\textbf{opt} [contexto materializado utilizável]};
+ \draw[->] (4.5,-4.2)--node[msg,above]{3. Validar caminhadas candidatas}(9.3,-4.2);
+@@ -14,8 +14,8 @@
+ \draw[->,dashed] (4.5,-10)--node[msg,above]{6. Alternativas progressivas (NDJSON)}(0,-10);
+ \node[msg,text width=3cm] at (9.1,-9.7) {Repetir dentro\\dos limites};
+ \draw (2.1,-10.8) rectangle (10.9,-13);
+-\node[msg,text width=8.2cm,anchor=north] at (6.5,-10.8) {\textbf{opt} [sem contexto ou rotas válidas; fallback habilitado]};
++\node[msg,text width=8.2cm,anchor=north] at (6.5,-10.8) {\textbf{opt} [contexto inutilizável ou nenhuma rota válida ao final; habilitado]};
+ \node[seqbox] at (4.5,-12) {Planejador por rodadas};
+ \draw[->,dashed] (4.5,-12.7)--node[msg,above]{Alternativas do fallback (NDJSON)}(0,-12.7);
+-\node[msg,text width=10cm] at (4.8,-14.4) {A interface permite selecionar uma rota durante o retorno progressivo.\\Os mecanismos principal e alternativo não são executados simultaneamente.};
++\node[msg,text width=10cm] at (4.8,-14.4) {A interface permite selecionar uma rota durante o retorno progressivo.\\Resultados válidos, mesmo limitados, não acionam fallback para completar a lista.\\Os mecanismos principal e alternativo não são executados simultaneamente.};
+ \end{tikzpicture}
+--- a/docs/relatorio_final/engenharia_apendice.tex
++++ b/docs/relatorio_final/engenharia_apendice.tex
+@@ -10,7 +10,7 @@
+ \end{figure}
+ 
+ \section{Consulta progressiva de alternativas}
+-A sequência representa o caminho materializado da arquitetura híbrida: recuperação de candidatos, validação das caminhadas, avaliação temporal e refinamento operacional quando disponível. As alternativas válidas são retornadas progressivamente. Se não houver contexto materializado utilizável ou o caminho principal terminar sem rotas válidas, o despachante poderá acionar o planejador por rodadas como fallback, conforme a configuração. Os dois planejadores não são executados simultaneamente para unir resultados em produção. A indisponibilidade isolada de previsão operacional não aciona esse fallback. Os limites são descritos no Apêndice~\ref{ap:rotas}.
++A sequência representa recuperação de candidatos, validação de caminhadas, avaliação temporal e refinamento operacional quando disponível, com retorno progressivo. O fallback, se habilitado, é acionado por contexto inutilizável (ausência de candidatos ou incompatibilidade dos artefatos) ou ausência de rotas válidas ao final, inclusive após rejeições temporais. Uma alternativa válida, mesmo com limitações, encerra pelo caminho principal: não se executa o fallback para completar a lista. A indisponibilidade isolada de previsão operacional não o aciona. Os limites estão no Apêndice~\ref{ap:rotas}.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/sequencia.tex}
+--- a/docs/relatorio_final/planejador_hibrido.tex
++++ b/docs/relatorio_final/planejador_hibrido.tex
+@@ -43,3 +43,6 @@
+ \textbf{Métricas e critérios de análise.} Para cada configuração e condição de cache, registrar latências p50, p95 e p99, média, desvio-padrão e tamanho da amostra; quantidade de candidatos examinados e alternativas temporalmente válidas; melhor duração, baldeações, caminhada e espera, incluindo sua decomposição por etapa. Registrar consumo de memória, tamanho final de cada banco e do conjunto e tempo total de preparação, discriminando suas etapas. No fluxo integrado, medir frequência e motivos de fallback, tempo consumido antes de seu acionamento e produtor de cada resposta.
+ 
+ A qualidade será comparada por cobertura, compatibilidade temporal e diferença entre as melhores durações encontradas, sem assumir que um dos planejadores limitados fornece o ótimo global. Deverá ser examinada a perda causada pelas cotas de 16, oito e quatro candidatos, mediante amostras com cotas ampliadas ou referência independente, quando viável. Resultados sem rota serão contabilizados e terão suas causas distinguidas de timeout e falha externa. A conclusão sobre o compromisso entre preparação, armazenamento, latência e alternativas somente será redigida após essas medições.
++
++
++\textbf{Comparabilidade das alternativas.} Para não confundir igualdade de representação com utilidade equivalente, o protocolo distinguirá: itinerários com a mesma sequência dirigida de linhas, paradas e ocorrências de embarque; o mesmo deslocamento com variações nos acessos a pé; itinerários distintos com chegada temporalmente equivalente; alternativa mais rápida encontrada por apenas um mecanismo; alternativa inviável; e ausência de resultado. A tolerância temporal e o critério para agrupar variações de caminhada deverão ser definidos antes da coleta, com preservação dos valores exatos de chegada, distância, espera e baldeações. Uma alternativa inviável não será classificada como equivalente por apresentar duração semelhante. Essa classificação complementa as métricas de cobertura e latência, sem alterar as três configurações comparadas ou antecipar resultados.
+--- a/docs/relatorio_final/relatorio_final_pi2_v2.tex
++++ b/docs/relatorio_final/relatorio_final_pi2_v2.tex
+@@ -466,7 +466,7 @@
+ RF03 & Planejar por destino com caminhada, espera e baldeações, aceitando coordenadas por toque prolongado.\\
+ RF04 & Comparar alternativas e abrir a rota ou um trecho no mapa.\\
+ RF05 & Salvar, renomear e remover favoritos locais, confirmando a remoção.\\
+-RF06 & Cancelar mediante confirmação, preservando embarque e favoritos; permitir novo destino.\\
++RF06 & Cancelar mediante confirmação, desmarcando embarque e destino e preservando os favoritos; retornar à seleção de embarque.\\
+ RF07 & Acompanhar posição do ônibus e previsão de embarque compatível com a caminhada, com atualização a cada 15 segundos.\\
+ RQ01 & Informar progresso sem perder a seleção ou redefinir o zoom.\\
+ RQ02 & Reduzir esforço de interação preservando compreensão e controle.\\\hline
+@@ -686,19 +686,25 @@
+ As capturas desta seção foram atualizadas em 22 de outubro de 2026 usando a aplicação em desenvolvimento, baseada no commit \texttt{aee66eb} e nas alterações locais existentes na data. Foi utilizado Chromium com emulação móvel de 430 por 932 pixels e densidade 2, no tema escuro. As consultas de transporte utilizaram a aplicação local e seus serviços reais; a localização foi simulada no Butantã e os favoritos foram preparados para a documentação. A ingestão de telemetria foi interceptada somente no navegador de captura para não inserir testes artificiais entre as sessões de pesquisa. Essa configuração não substituiu respostas das consultas de transporte. A procedência e os hashes constam de \nolinkurl{capturas/2026-10-22/registro.json}. As telas documentam estados da interface, não avaliação por participantes externos.
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-01-embarque.png}
+-\caption{Consulta dos próximos ônibus com embarque identificado.}\label{fig:print-01-embarque}
++\begin{minipage}[c]{0.36\textwidth}\centering
++\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-01-embarque.png}
++\end{minipage}\hfill
++\begin{minipage}[c]{0.60\textwidth}\centering
++\includegraphics[width=\linewidth,trim=75bp 224bp 70bp 820bp,clip]{capturas/2026-10-22/pap-01-embarque.png}
++\small Detalhe ampliado da mesma captura.
++\end{minipage}
++\caption{Consulta dos próximos ônibus: tela completa e detalhe das previsões.}\label{fig:print-01-embarque}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+ A consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. O painel distingue previsões operacionais e informações programadas. Os horários são os retornados na captura e não constituem promessa de chegada.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-00-aceite.png}
+-\caption{Aviso inicial sobre cobertura geográfica e coleta de dados de navegação.}\label{fig:print-02-informacoes}
++\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio,trim=30bp 200bp 30bp 250bp,clip]{capturas/2026-10-22/pap-00-aceite.png}
++\caption{Aviso inicial sobre cobertura geográfica e coleta de dados de navegação (recorte das margens vazias).}\label{fig:print-02-informacoes}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-O aceite informa que os dados de transporte são fornecidos pela SPTrans e que o PaP funciona atualmente apenas na cidade de São Paulo. A tela também explica os registros de pesquisa e solicita a concordância antes de iniciar a navegação. Esta captura substitui a antiga ilustração conceitual de instalação de uma placa; não houve registro de instalação física.
++O aceite informa que os dados de transporte são fornecidos pela SPTrans e que o PaP funciona atualmente apenas na cidade de São Paulo. A tela também explica os registros de pesquisa e solicita a concordância antes de iniciar a navegação; o funcionamento e os limites dessa coleta são discutidos adiante neste capítulo. Esta captura substitui a antiga ilustração conceitual de instalação de uma placa; não houve registro de instalação física.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+@@ -710,11 +716,17 @@
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-04-alternativas.png}
+-\caption{Alternativas de viagem e horários estimados de chegada.}\label{fig:print-04-alternativas}
++\begin{minipage}[c]{0.36\textwidth}\centering
++\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-04-alternativas.png}
++\end{minipage}\hfill
++\begin{minipage}[c]{0.60\textwidth}\centering
++\includegraphics[width=\linewidth,trim=75bp 504bp 70bp 850bp,clip]{capturas/2026-10-22/pap-04-alternativas.png}
++\small Detalhe ampliado da mesma captura.
++\end{minipage}
++\caption{Alternativas de viagem: tela completa e detalhe da alternativa selecionada.}\label{fig:print-04-alternativas}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-O acesso inicial utilizou a Parada Exclusiva (1211381), como mostra a Figura~\ref{fig:print-01-embarque}. Na alternativa exibida nesta captura, o painel identifica o embarque na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). Trata-se de identificadores distintos; a descrição acompanha os locais efetivamente apresentados no painel. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
++As capturas integram a mesma sequência registrada no roteiro de captura: acesso à Parada Exclusiva (1211381), retorno ao mapa e seleção de Guaiaúna como destino favorito. O painel de alternativas mostra o embarque do primeiro trecho da rota selecionada, na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). A caminhada de acesso exibida é de 72 m, estimada em 58 s; portanto, o embarque da alternativa difere do ponto usado para iniciar a consulta. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+@@ -786,7 +798,7 @@
+ Na interface dessa extensão, a localização conhecida identifica automaticamente a origem e permite selecionar apenas o destino; o QR Code mantém a entrada por parada. O mapa inicia centrado no passageiro, com raio mínimo de 250 m no menor eixo, e permite recentrar pela ação de localização. Coordenadas simuladas configuráveis do passageiro substituem seu GPS para reprodução de cenários; quando ausentes, utiliza-se a localização autorizada pelo navegador. Além disso, os favoritos permitem reutilizar destinos e a seleção de uma alternativa abre seu percurso no mapa. O cálculo fornece resultados progressivos e preserva a seleção e o enquadramento do mapa durante atualizações. Essas escolhas procuram reduzir operações repetidas e tornar o estado da consulta perceptível, em consonância com os critérios de IHC discutidos. Sua implementação é um resultado técnico; a redução efetiva do esforço do passageiro permanece por medir.
+ 
+ 
+-O toque prolongado por aproximadamente 0,65 segundo permite selecionar coordenadas fora das paradas, respeitando a tarefa ativa: origem ao alterar o embarque ou destino ao escolher a chegada. Arrasto e gestos com dois dedos cancelam a seleção. O planejamento inclui as caminhadas entre essas coordenadas e as paradas utilizadas. Alterar o embarque conserva o destino e reenquadra o mapa na localização do passageiro ou, na sua ausência, no embarque anterior. Confirmar o cancelamento remove o trajeto, mantém o embarque e retorna à seleção de destino com foco no destino anterior.
++O toque prolongado por aproximadamente 0,65 segundo permite selecionar coordenadas fora das paradas, respeitando a tarefa ativa: origem ao alterar o embarque ou destino ao escolher a chegada. Arrasto e gestos com dois dedos cancelam a seleção. O planejamento inclui as caminhadas entre essas coordenadas e as paradas utilizadas. Alterar o embarque conserva o destino e reenquadra o mapa na localização do passageiro ou, na sua ausência, no embarque anterior. Confirmar o cancelamento remove o trajeto e desmarca embarque e destino, retornando à seleção de embarque e preservando os favoritos e o enquadramento do mapa. Fechar o painel para ver o mapa apenas muda a visualização; não cancela a viagem.
+ 
+ A tela de rotas utiliza uma ampulheta animada durante o cálculo e disponibiliza o recálculo manual ao concluir. Reiniciar a busca ignora o cache de resultados e executa novamente o planejamento. A consulta de rotas não é reiniciada automaticamente a cada 30 segundos nem a cada atualização do GPS; a atualização periódica permanece na consulta de próximos ônibus. No mapa, o seletor Trecho alterna a viagem completa e suas etapas, com legenda de ônibus e caminhada em coluna. A consulta de próximos ônibus apresenta a frequência como intervalo entre veículos e a faixa em que ele vigora, unindo faixas consecutivas de mesma frequência. Essa apresentação evita confundir frequência com contagem regressiva para a chegada. A identidade visual utiliza ícone próprio, mantendo a identificação das fontes de dados na documentação e nas informações da aplicação.
+ 
+@@ -835,7 +847,7 @@
+ 
+ Um aplicativo Android permanece fora do escopo atual. Sua conveniência será avaliada após a validação do fluxo web, considerando necessidades que não sejam atendidas pelo navegador. A futura aplicação poderá reutilizar a API Django, mas tecnologia, distribuição e eventual sincronização ainda não foram definidas.
+ 
+-A entrevista registrou interesse pelo acesso por QR Code e a sugestão de formalizar a proposta para discussão com o fornecedor. Em resposta a esse encaminhamento, foi preparado um PDF com a sequência dos mockups, explicações do fluxo e perguntas para avaliação. O interlocutor já respondeu por e-mail à pergunta sobre dados de embarque e desembarque. O grupo busca outro interlocutor, diante da ausência de resposta aos contatos recentes, e ainda não realizou a avaliação documentada da solução atual; a resposta técnica sobre bilhetagem não é tratada como teste ou aprovação dos mockups. A análise dessa segunda interação será registrada separadamente da entrevista de definição do problema  (entrevista com Osmar Junior, 1135--1163 s; 2293--2425 s).
++A entrevista registrou interesse pelo acesso por QR Code e a sugestão de formalizar a proposta para discussão com o fornecedor. Em resposta a esse encaminhamento, foi preparado um PDF com a sequência dos mockups, explicações do fluxo e perguntas para avaliação. O interlocutor já respondeu por e-mail à pergunta sobre dados de embarque e desembarque. O grupo busca outro interlocutor, diante da ausência de resposta aos contatos recentes, e ainda não realizou avaliação de uso documentada junto à comunidade de Mauá; a resposta técnica sobre bilhetagem não é tratada como teste ou aprovação dos mockups. A análise dessa segunda interação será registrada separadamente da entrevista de definição do problema  (entrevista com Osmar Junior, 1135--1163 s; 2293--2425 s).
+ 
+ O protótipo web funcional é o principal material para apresentação e avaliação da solução atual. O PDF de mockups e o Figma documentam a etapa de prototipação e a evolução da interface. A apresentação deverá identificar a revisão da aplicação examinada, o cenário e as informações disponíveis nessa versão. A discussão priorizará a contribuição do QR Code para identificar a parada em comparação com o Cittamobi, a compreensão do fluxo, a viabilidade percebida e os limites da eventual integração. O retorno profissional do interlocutor será separado dos resultados de tarefas realizadas por passageiros.
+ 
+@@ -851,7 +863,15 @@
+ 
+ Antes de coletar dados para essa finalidade, deverão ser definidos objetivo, informação ao usuário, participação voluntária, retenção e acesso aos registros. Uma estrutura mínima a avaliar incluiria identificadores da origem e do destino, faixa de tempo e identificação de consultas de teste ou demonstração, separadas das demais consultas de uso, sem exigir nome, cartão de transporte ou rastreamento contínuo. Destinos salvos como Casa e Trabalho não deverão ser publicados individualmente; mesmo sem nomes, pares precisos de locais podem permitir associações pessoais. A divulgação deverá priorizar agrupamentos por região e período, com tratamento de grupos pouco frequentes e regras de qualidade para repetições e consultas de teste.
+ 
+-O protótipo usa origem e destino para calcular trajetos, mas não armazena essas consultas para análise nem gera indicadores de demanda. Esse uso é uma possibilidade futura; pesquisas populacionais estão fora da entrega atual. Sua utilidade deverá ser discutida com o interlocutor e responsáveis pelo planejamento, definindo quais decisões os indicadores poderiam apoiar e como confrontá-los com levantamentos operacionais. Uma eventual confirmação voluntária de embarque ou desembarque seria um dado adicional autodeclarado, sujeito a validação própria.
++\noindent\textbf{Telemetria de usabilidade e seus limites}
++
++Na versão examinada em 22 de outubro de 2026, a coleta de navegação já está implementada para investigar dificuldades de interação e falhas. Os registros são agrupados por sessão em banco separado do cadastro de transporte. Incluem a reprodução visual da interface e do mapa, movimentos e toques, rolagem e ações, textos de busca, origem e destino, localização quando autorizada no navegador, estado dos favoritos e das rotas, parâmetros e respostas das consultas, erros e metadados do dispositivo. A reprodução visual permite reconstituir a interface; os eventos e resultados de consultas ajudam a localizar falhas; os metadados permitem relacioná-las ao navegador e às dimensões de tela. Comentários enviados pelo botão de feedback ficam associados à sessão. Um identificador de sessão não torna anônimos os locais e textos registrados.
++
++O aviso da Figura~\ref{fig:print-02-informacoes} exige a ação ``Concordo e continuar''. Sem concordância, a orientação é fechar a página; não há, nessa versão, um modo de utilizar o serviço sem participar da coleta. Uma falha ao iniciar o registro também impede abrir a navegação. Fechar o site encerra a interação, mas não exclui os eventos já enviados. Esse desenho do consentimento é uma limitação a avaliar separadamente da facilidade de consultar o transporte, sobretudo pelo volume de texto e pela ausência de acesso sem coleta.
++
++O prazo de 30 dias informado na interface corresponde ao critério de remoção dos eventos antigos durante o recebimento de novas gravações, não a uma tarefa periódica independente. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Os blocos comprimidos compartilhados são eliminados quando a sessão deixa de possuir eventos; arquivos exportados não são abrangidos automaticamente pela limpeza por idade. Assim, a implementação não assegura a eliminação de todas as cópias em até 30 dias. O acesso pela aplicação exige autenticação administrativa, e a configuração de acesso público bloqueia a administração. A exclusão manual de uma sessão, com confirmação, remove seus eventos, blocos associados e arquivos de exportação em cache; cópias previamente baixadas precisam de tratamento próprio. Não há exclusão oferecida diretamente ao participante na interface atual.
++
++O protótipo registra eventos de navegação para diagnóstico de usabilidade, incluindo origem e destino, mas não consolida esses registros em indicadores agregados de demanda. Essa finalidade analítica permanece uma possibilidade futura; pesquisas populacionais estão fora da entrega atual. Sua utilidade deverá ser discutida com o interlocutor e responsáveis pelo planejamento, definindo quais decisões os indicadores poderiam apoiar e como confrontá-los com levantamentos operacionais. Uma eventual confirmação voluntária de embarque ou desembarque seria um dado adicional autodeclarado, sujeito a validação própria.
+ 
+ A prioridade é estabelecer contato com outro interlocutor da comunidade externa e realizar a apresentação e a avaliação da solução atual, documentando sua relação com o transporte local e os critérios de escolha. A ausência de resposta aos contatos recentes com o interlocutor inicial constitui uma limitação de continuidade, sem invalidar suas contribuições à definição do problema. O grupo poderá revisar a experiência de uso e aprimorar diretamente a aplicação funcional conforme as observações recebidas. O Figma permanece como registro histórico da prototipação. A avaliação de compreensão com passageiros ainda será realizada, com planejamento e registro próprios. As capturas da aplicação avaliada deverão identificar revisão e cenário; as alterações decorrentes do feedback serão documentadas. A avaliação deve verificar especialmente se o usuário reconhece a natureza das informações apresentadas, distinguindo dados cadastrais, coordenadas aproximadas, horários programados, previsões operacionais e, quando aplicável ao cenário histórico de Mauá, informações simuladas.
+ 
+@@ -859,7 +879,7 @@
+ 
+ \noindent\textbf{Avaliação técnica externa --- Nath's Brother}
+ 
+-Em 21 de outubro de 2026, o projeto Ponto a Ponto (PaP) recebeu uma avaliação técnica externa realizada por um profissional vinculado à empresa de consultoria em tecnologia identificada provisoriamente como Nath's Brother. O contato foi intermediado pela integrante Nathália Almeida Amorim, e a avaliação ocorreu mediante análise do relatório técnico do projeto. O avaliador confirmou o conteúdo técnico apresentado na documentação, contribuindo para a etapa de avaliação externa da solução desenvolvida.
++Em 21 de outubro de 2026, o projeto Ponto a Ponto (PaP) recebeu uma avaliação técnica externa realizada por um profissional vinculado à empresa de consultoria em tecnologia identificada provisoriamente como Nath's Brother. O contato foi intermediado pela integrante Nathália Almeida Amorim, irmã do avaliador, e a avaliação ocorreu mediante análise do relatório técnico do projeto. O avaliador confirmou o conteúdo técnico apresentado na documentação, contribuindo para a etapa de avaliação externa da solução desenvolvida.
+ 
+ A análise documental contemplou a arquitetura da aplicação, desenvolvida com Django/Python, React e SQLite, suas funcionalidades e a integração com os dados GTFS e a API Olho Vivo da SPTrans. Também foram examinadas as características do planejador híbrido, que utiliza conexões pré-processadas, composição bidirecional e materialização seletiva de candidatos, preservando o planejador por rodadas como mecanismo alternativo. A documentação apresentada incluiu os resultados dos testes automatizados e as limitações técnicas identificadas durante o desenvolvimento.
+ 
+@@ -892,7 +912,7 @@
+ 
+ A interlocução inicial contribuiu para definir o problema e esclarecer limitações da bilhetagem. A comparação com Cittamobi, SPTrans e os registros de Santos mostrou que parte importante da proposta já existe em outros serviços. Esse reconhecimento orientou o recorte para a continuidade entre identificação da origem e escolha do deslocamento por destino, evitando atribuir novidade ao QR Code ou ao acesso web. O possível aproveitamento agregado das consultas para estudar necessidades informacionais permanece uma investigação futura; intenções de viagem não equivalem a embarques e desembarques observados.
+ 
+-O objetivo de avaliar a solução com a comunidade externa ainda não foi concluído. Até 5 de outubro de 2026, o grupo informa ausência de resposta aos contatos recentes com o interlocutor inicial e busca outra pessoa que possa contribuir com essa etapa. Portanto, a pergunta de pesquisa não pode ser respondida em termos de benefício demonstrado aos usuários. O protocolo proposto oferece um caminho para registrar tarefas, compreensão, dificuldades e mudanças decorrentes do retorno, preservando a distinção entre avaliação profissional e experiência dos passageiros.
++Os resultados de avaliação têm alcances distintos. A implementação funcional e as verificações automatizadas documentam o resultado técnico. A avaliação profissional realizada em 21 de outubro de 2026 acrescenta uma apreciação documental externa, cuja formalização permanece pendente. A avaliação de usabilidade com passageiros e a verificação da adequação da solução à comunidade de Mauá ainda não foram concluídas. Portanto, a pergunta de pesquisa não pode ser respondida em termos de benefício demonstrado aos usuários. O protocolo proposto orienta o registro de tarefas, compreensão, dificuldades e mudanças decorrentes desse retorno.
+ 
+ A continuidade exige concluir essa avaliação, documentar as alterações motivadas por seus resultados e confrontar os dados com o cadastro operacional. Implantação física e integração operacional com fornecedores em Mauá dependem de condições ainda não asseguradas. Em São Paulo, previsões e posições operacionais já podem ser consultadas pela API Olho Vivo; essa integração não assegura cobertura integral nem precisão operacional validada. Não foram demonstradas redução de espera, cobertura integral de Mauá ou melhoria da experiência de uso. O trabalho entrega um protótipo funcional e um protocolo para investigar sua utilidade com a comunidade.
+ 
+@@ -1013,15 +1033,15 @@
+ \node[b] (routes) at (0,0) {routes\\route\_id};
+ \node[b] (trips) at (5,0) {trips\\trip\_id, route\_id\\service\_id, shape\_id};
+ \node[b] (times) at (5,-2.5) {stop\_times\\trip\_id, stop\_id\\stop\_sequence};
+-\node[b] (stops) at (0,-2.5) {stops\\stop\_id, coordenadas};
++\node[b] (stops) at (0,-2.5) {stops\\stop\_id\\coordenadas};
+ \node[b] (freq) at (10,0) {frequencies\\trip\_id};
+ \node[b] (shape) at (10,-2.5) {shapes\\shape\_id\\shape\_pt\_sequence};
+-\node[b] (cal) at (5,2.2) {calendar / calendar\_dates\\service\_id};
++\node[b] (cal) at (5,2.2) {calendar\\calendar\_dates\\service\_id};
+ \draw[->] (routes)--node[above,font=\footnotesize]{1:N}(trips);
+ \draw[->] (trips)--node[right,font=\footnotesize]{1 : N}(times);
+ \draw[->] (stops)--node[above,font=\footnotesize]{1:N}(times);
+ \draw[->] (trips)--node[above,font=\footnotesize]{1 : 0..N}(freq);
+-\draw[->] (trips)--node[sloped,above,font=\footnotesize]{shape\_id}(shape);
++\draw[->] (trips.south east)|-(10,-1.25) node[pos=.65,above,font=\footnotesize]{shape\_id}--(shape.north);
+ \draw[->] (cal)--node[right,font=\footnotesize]{1:N}(trips);
+ \end{tikzpicture}
+ \caption{Associações lógicas do índice GTFS da extensão SPTrans.}\label{fig:banco-mbm}
+@@ -1038,7 +1058,7 @@
+ 
+ Cada alternativa consulta seu próprio ponto de embarque e apresenta ``Embarque em'' quando há previsão recente e compatível com a caminhada de acesso. Por exemplo, uma caminhada de 13,5 minutos exclui uma chegada prevista em 3 minutos, antes de qualquer arredondamento para exibição. Sem previsão elegível, a interface informa a ausência ou a incompatibilidade, sem inventar um tempo. Os horários e a duração total das alternativas continuam sendo resultados do planejamento programado; a atualização operacional não recalcula automaticamente a viagem nem garante as baldeações.
+ 
+-O acesso da aplicação passou para a raiz do site: \texttt{/?stop=1206717} identifica um embarque, e \texttt{/} inicia uma nova seleção. O caminho anterior foi removido. A URL prevalece sobre a sessão: sem \texttt{stop}, embarque e destino antigos são descartados, preservando favoritos. Com posição conhecida, solicita-se apenas o destino; sem ela, solicita-se o embarque. Um clique fora do painel de rotas retorna ao mapa, preservando a rota, como o botão Ver mapa. Áreas internas sem ação permanecem inertes; arrastos não são interpretados como clique no fundo. Um toque prolongado no mapa respeita a etapa atual. Alterar embarque conserva o destino; cancelar a viagem conserva o embarque e focaliza o último destino para nova seleção.
++O acesso da aplicação passou para a raiz do site: \texttt{/?stop=1206717} identifica um embarque, e \texttt{/} inicia uma nova seleção. O caminho anterior foi removido. A URL prevalece sobre a sessão: sem \texttt{stop}, embarque e destino antigos são descartados, preservando favoritos. Com posição conhecida, solicita-se apenas o destino; sem ela, solicita-se o embarque. Um clique fora do painel de rotas retorna ao mapa, preservando a rota, como o botão Ver mapa. Áreas internas sem ação permanecem inertes; arrastos não são interpretados como clique no fundo. Um toque prolongado no mapa respeita a etapa atual. Alterar embarque conserva o destino; cancelar a viagem desmarca ambos os locais e preserva os favoritos e o enquadramento do mapa. Quando apenas o embarque está definido, a mesma confirmação permite desmarcá-lo; não há uma segunda ação de cancelamento que preserve o embarque.
+ 
+ 
+ \section{Busca de paradas, geometrias e caminhadas}
+@@ -1089,7 +1109,7 @@
+ \begin{figure}[H]
+ \centering\input{diagramas/grafo.tex}
+ \caption{Exemplo didático de desembarque antecipado e poda temporal.}\label{fig:grafo-poda}
+-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
++\fonte{Elaboração do grupo; exemplo atualizado para caminhada a 4,5 km/h em 22 out. 2026.}
+ \end{figure}
+ 
+ No exemplo da Figura~\ref{fig:grafo-poda}, D é o destino final e todos os custos são ilustrativos. A espera inicial é igual nas duas alternativas e foi omitida. As conexões a pé pressupõem percursos verificados; o exemplo não representa coordenadas ou uma linha real.
+@@ -1097,7 +1117,7 @@
+ \section{Alcance dos resultados e reprodução}
+ O indicador interno de melhor resultado dentro dos limites deve ser interpretado no domínio do modelo: cadastro importado, horário de consulta, profundidade permitida, custos estimados e conexões a pé verificadas. Não equivale a uma garantia sobre trânsito, acessibilidade física ou operação real. Interrupções de serviço ou esgotamento do orçamento de validação restringem ainda mais essa interpretação.
+ 
+-Uma comparação reproduzível deve conservar versão do código, arquivo GTFS, instante e fuso da consulta, origem, destino, limites e respostas do serviço de caminhada. O exemplo didático de duas alternativas ilustra o critério: se permanecer no ônibus exige mais 12 minutos e descer em uma parada anterior permite caminhar 400 m, essa caminhada corresponde a aproximadamente 5,3 minutos a 4,5 km/h. A segunda opção chega aproximadamente 6,7 minutos antes, desde que os demais custos sejam iguais e a caminhada seja verificada. Esses números são ilustrativos, não uma medição operacional; os valores da figura anterior pertencem ao exemplo histórico de 7 de outubro.
++Uma comparação reproduzível deve conservar versão do código, arquivo GTFS, instante e fuso da consulta, origem, destino, limites e respostas do serviço de caminhada. O exemplo didático de duas alternativas ilustra o critério: se permanecer no ônibus exige mais 12 minutos e descer em uma parada anterior permite caminhar 400 m, essa caminhada corresponde a 5 minutos e 20 segundos a 4,5 km/h. Na Figura~\ref{fig:grafo-poda}, desembarcar em B resulta em 13 minutos e 20 segundos; seguir até C e caminhar mais 200 m resulta em 22 minutos e 40 segundos. A diferença é de 9 minutos e 20 segundos, considerando todos os custos representados. Esses números são ilustrativos, não uma medição operacional.
+ 
+ % Conteúdo independente para a revisão estilística v2: engenharia_apendice
+ \chapter{Documentação de engenharia de software do PaP}\label{ap:engenharia}
+@@ -1108,11 +1128,11 @@
+ \begin{figure}[H]
+ \centering\input{diagramas/casos_uso.tex}
+ \caption{Atores e principais casos de uso do PaP.}\label{fig:casos-pap}
+-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
++\fonte{Elaboração do grupo; diagrama revisado em 22 out. 2026.}
+ \end{figure}
+ 
+ \section{Consulta progressiva de alternativas}
+-A sequência representa o caminho materializado da arquitetura híbrida: recuperação de candidatos, validação das caminhadas, avaliação temporal e refinamento operacional quando disponível. As alternativas válidas são retornadas progressivamente. Se não houver contexto materializado utilizável ou o caminho principal terminar sem rotas válidas, o despachante poderá acionar o planejador por rodadas como fallback, conforme a configuração. Os dois planejadores não são executados simultaneamente para unir resultados em produção. A indisponibilidade isolada de previsão operacional não aciona esse fallback. Os limites são descritos no Apêndice~\ref{ap:rotas}.
++A sequência representa recuperação de candidatos, validação de caminhadas, avaliação temporal e refinamento operacional quando disponível, com retorno progressivo. O fallback, se habilitado, é acionado por contexto inutilizável (ausência de candidatos ou incompatibilidade dos artefatos) ou ausência de rotas válidas ao final, inclusive após rejeições temporais. Uma alternativa válida, mesmo com limitações, encerra pelo caminho principal: não se executa o fallback para completar a lista. A indisponibilidade isolada de previsão operacional não o aciona. Os limites estão no Apêndice~\ref{ap:rotas}.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/sequencia.tex}
+@@ -1126,7 +1146,7 @@
+ \begin{figure}[H]
+ \centering\input{diagramas/estados.tex}
+ \caption{Estados conceituais da navegação e confirmação de cancelamento.}\label{fig:estados-pap}
+-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
++\fonte{Elaboração do grupo; diagrama revisado em 22 out. 2026.}
+ \end{figure}
+ 
+ \section{Rastreabilidade e evidências}
+--- a/docs/relatorio_final/solucao_visual.tex
++++ b/docs/relatorio_final/solucao_visual.tex
+@@ -12,16 +12,22 @@
+ As capturas desta seção foram atualizadas em 22 de outubro de 2026 usando a aplicação em desenvolvimento, baseada no commit \texttt{aee66eb} e nas alterações locais existentes na data. Foi utilizado Chromium com emulação móvel de 430 por 932 pixels e densidade 2, no tema escuro. As consultas de transporte utilizaram a aplicação local e seus serviços reais; a localização foi simulada no Butantã e os favoritos foram preparados para a documentação. A ingestão de telemetria foi interceptada somente no navegador de captura para não inserir testes artificiais entre as sessões de pesquisa. Essa configuração não substituiu respostas das consultas de transporte. A procedência e os hashes constam de \nolinkurl{capturas/2026-10-22/registro.json}. As telas documentam estados da interface, não avaliação por participantes externos.
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-01-embarque.png}
+-\caption{Consulta dos próximos ônibus com embarque identificado.}\label{fig:print-01-embarque}
++\begin{minipage}[c]{0.36\textwidth}\centering
++\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-01-embarque.png}
++\end{minipage}\hfill
++\begin{minipage}[c]{0.60\textwidth}\centering
++\includegraphics[width=\linewidth,trim=75bp 224bp 70bp 820bp,clip]{capturas/2026-10-22/pap-01-embarque.png}
++\small Detalhe ampliado da mesma captura.
++\end{minipage}
++\caption{Consulta dos próximos ônibus: tela completa e detalhe das previsões.}\label{fig:print-01-embarque}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+ A consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. O painel distingue previsões operacionais e informações programadas. Os horários são os retornados na captura e não constituem promessa de chegada.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-00-aceite.png}
+-\caption{Aviso inicial sobre cobertura geográfica e coleta de dados de navegação.}\label{fig:print-02-informacoes}
++\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio,trim=30bp 200bp 30bp 250bp,clip]{capturas/2026-10-22/pap-00-aceite.png}
++\caption{Aviso inicial sobre cobertura geográfica e coleta de dados de navegação (recorte das margens vazias).}\label{fig:print-02-informacoes}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+ O aceite informa que os dados de transporte são fornecidos pela SPTrans e que o PaP funciona atualmente apenas na cidade de São Paulo. A tela também explica os registros de pesquisa e solicita a concordância antes de iniciar a navegação. Esta captura substitui a antiga ilustração conceitual de instalação de uma placa; não houve registro de instalação física.
+@@ -36,11 +42,17 @@
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-04-alternativas.png}
+-\caption{Alternativas de viagem e horários estimados de chegada.}\label{fig:print-04-alternativas}
++\begin{minipage}[c]{0.36\textwidth}\centering
++\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-04-alternativas.png}
++\end{minipage}\hfill
++\begin{minipage}[c]{0.60\textwidth}\centering
++\includegraphics[width=\linewidth,trim=75bp 504bp 70bp 850bp,clip]{capturas/2026-10-22/pap-04-alternativas.png}
++\small Detalhe ampliado da mesma captura.
++\end{minipage}
++\caption{Alternativas de viagem: tela completa e detalhe da alternativa selecionada.}\label{fig:print-04-alternativas}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-O acesso inicial utilizou a Parada Exclusiva (1211381), como mostra a Figura~\ref{fig:print-01-embarque}. Na alternativa exibida nesta captura, o painel identifica o embarque na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). Trata-se de identificadores distintos; a descrição acompanha os locais efetivamente apresentados no painel. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
++As capturas integram a mesma sequência registrada no roteiro de captura: acesso à Parada Exclusiva (1211381), retorno ao mapa e seleção de Guaiaúna como destino favorito. O painel de alternativas mostra o embarque do primeiro trecho da rota selecionada, na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). A caminhada de acesso exibida é de 72 m, estimada em 58 s; portanto, o embarque da alternativa difere do ponto usado para iniciar a consulta. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
+ \clearpage
+ 
+ \begin{figure}[H]\centering

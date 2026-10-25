@@ -1,0 +1,24 @@
+\section{Situação dos benchmarks em 23 de outubro de 2026}
+A revisão dos artefatos disponíveis não localizou uma nova execução do benchmark definitivo. Os resultados encontrados nos diretórios de evidências datam de 7 e 8 de outubro e não foram promovidos a resultados finais. Foi realizado um inventário somente de leitura dos seis bancos utilizados pela aplicação, com registro de tamanho e SHA-256. O script e os dados brutos estão em \nolinkurl{benchmarks/2026-10-23/}. Trata-se de diagnóstico de preparação, não de comparação experimental dos planejadores.
+
+\begin{table}[H]\centering
+\caption{Armazenamento observado em 23 de outubro, antes da conclusão da materialização.}\label{tab:inventario-benchmark}
+\begin{tabular}{lr}\hline
+Arquivo & Tamanho (MiB)\\\hline
+\nolinkurl{sptrans.sqlite3} & 70,04\\
+\nolinkurl{sptrans.routing.sqlite3} & 595,36\\
+\nolinkurl{sptrans.direct.sqlite3} & 402,20\\
+\nolinkurl{sptrans.walks.sqlite3} & 446,32\\
+\nolinkurl{sptrans.connections.sqlite3} & 2907,56\\
+\nolinkurl{sptrans.materialized.sqlite3} & 112,23\\
+\hline
+Total & 4533,70\\\hline
+\end{tabular}
+\fonte{Inventário local somente de leitura; 1 MiB = 1.048.576 bytes.}
+\end{table}
+
+Os valores representam o tamanho lógico dos arquivos principais naquele instante, sem incluir eventuais arquivos auxiliares, caches ou exportações; não representam armazenamento final da materialização municipal. As assinaturas permaneceram estáveis quanto ao tamanho e à data de modificação durante a leitura de cada arquivo, sem constituir um snapshot transacional conjunto.
+
+O banco materializado informa \texttt{city\_complete=false}. Seu catálogo contém 77.957 pares na categoria de um ônibus e 77.956 na categoria de dois ônibus, todos marcados como \texttt{ready}; 77.956 pares possuem ambas as categorias. Há 644.702 candidatos armazenados. O esquema desse artefato admite apenas essas duas categorias, não a categoria de três ônibus prevista no protocolo. O estado \texttt{ready} indica processamento da categoria, inclusive quando ela não produz caminho: as contagens não equivalem a cobertura de viagens viáveis. Os validadores existentes aceitaram as assinaturas dos componentes e do materializado, o que não comprova conclusão municipal nem equivalência das três configurações experimentais.
+
+Permanecem sem medição definitiva o tempo total de preparação, a latência até a primeira alternativa e até o término, a cobertura temporal, a qualidade dos itinerários e a frequência e o custo de fallback. Não foram calculados percentis com base nos registros históricos nem somados tempos parciais como se representassem o tempo total de preparação. A comparação A/B/C deverá ocorrer após conclusão e verificação da materialização, com amostra, repetições, tolerâncias e condições de cache definidas previamente, conforme o protocolo preservado. Nenhuma materialização ou consulta comparativa foi iniciada nesta revisão.

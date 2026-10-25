@@ -1,6 +1,17 @@
 \begin{tikzpicture}[font=\small,uc/.style={draw,ellipse,align=center,text width=4.4cm,minimum height=.85cm}]
-\node (p) at (0,0) {Passageiro};\node (a) at (0,-6) {Administrador};
-\draw (2,1) rectangle (9,-7);\node at (5.5,.65) {PaP};
-\foreach \y/\id/\txt in {0/u1/Identificar embarque,-1.2/u2/Consultar próximos ônibus,-2.4/u3/Planejar por destino,-3.6/u4/Ver rota e trechos no mapa,-4.8/u5/Gerenciar favoritos,-6/u6/Importar e consultar cadastro}{\node[uc] (\id) at (5.5,\y-.2) {\txt};}
-\foreach \id in {u1,u2,u3,u4,u5}{\draw (p)--(\id.west);}\draw (a)--(u6.west);
+\draw (2,1.3) rectangle (9,-8.5);\node[font=\bfseries] at (5.5,.95) {PaP};
+\foreach \y/\name in {0/Passageiro,-7.5/Administrador}{
+\draw (0,\y+.45) circle (.16);
+\draw (0,\y+.29)--(0,\y-.25);
+\draw (-.35,\y+.1)--(.35,\y+.1);
+\draw (0,\y-.25)--(-.3,\y-.65);
+\draw (0,\y-.25)--(.3,\y-.65);
+\node[anchor=east] at (-.5,\y) {\name};}
+\node[uc] (u1) at (5.5,0) {Identificar embarque};
+\node[uc] (u2) at (5.5,-1.5) {Consultar próximos\\ônibus};
+\node[uc] (u3) at (5.5,-3) {Planejar por destino};
+\node[uc] (u4) at (5.5,-4.5) {Ver rota e trechos\\no mapa};
+\node[uc] (u5) at (5.5,-6) {Gerenciar favoritos};
+\node[uc] (u6) at (5.5,-7.5) {Importar e consultar\\cadastro};
+\foreach \id in {u1,u2,u3,u4,u5}{\draw (.4,0)--(\id.west);}\draw (.4,-7.5)--(u6.west);
 \end{tikzpicture}

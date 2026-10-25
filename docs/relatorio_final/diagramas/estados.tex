@@ -1,20 +1,27 @@
-\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4cm,minimum height=.85cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\footnotesize,fill=white,align=center}]
-\node[circle,fill,minimum size=2.5mm,inner sep=0pt] (start) at (0,1.2) {};
+\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=3.7cm,minimum height=.85cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\scriptsize,fill=white,align=center,inner sep=2pt}]
+\node[circle,fill,minimum size=2.5mm,inner sep=0pt] (start) at (0,1.3) {};
 \node[box] (a) at (0,0) {Selecionando embarque};
-\node[box] (b) at (0,-2) {Consultando próximos ônibus};
-\node[box] (c) at (0,-4) {Selecionando destino};
-\node[box] (e) at (0,-6) {Consultando alternativas};
-\node[box] (f) at (0,-8) {Visualizando rota no mapa};
+\node[box] (b) at (6,0) {Consultando próximos ônibus};
+\node[box] (c) at (0,-2.6) {Selecionando destino};
+\node[box] (e) at (0,-4.4) {Consultando alternativas};
+\node[box] (f) at (0,-6.2) {Visualizando rota no mapa};
+\node[box] (conf) at (6,-6.2) {Confirmando cancelamento};
 \draw[arr] (start)--(a);
-\draw[arr] (start.west)--++(-3.3,0)|-node[pos=.65,lab,left]{localização\\conhecida}(c.west);
-\draw[arr] (a)--node[lab,right]{embarque definido}(b);
-\draw[arr] (b)--node[lab,right]{selecionar destino}(c);
+\draw[arr] (start.west)--(-3,1.3)--(-3,-2.6)--(c.west);
+\node[lab,text width=1.9cm] at (-3,-1.2) {localização\\conhecida};
+\draw[arr] (a)--node[lab,above]{QR Code\\ou link}(b);
+\draw[arr] (a)--node[lab,right,pos=.3]{embarque\\no mapa}(c);
+\draw[arr] (b.south)--(6,-1.7)--node[lab,above]{selecionar destino}(0,-1.7)--(c.north);
 \draw[arr] (c)--node[lab,right]{destino definido}(e);
-\draw[arr] (e)--node[lab,right]{selecionar rota}(f);
-\draw[arr] (f.west)--++(-.8,0)|-node[pos=.25,lab,left]{horários}(e.west);
-\draw[arr] (f.west)--++(-2,0)|-node[pos=.25,lab,left]{nova seleção\\de destino}(c.west);
-\node[box] (conf) at (6,-5.7) {Confirmando cancelamento};
-\draw[arr] (f.east)-|node[pos=.25,lab,below]{cancelar viagem}(conf.south);
-\draw[arr] (conf.west)--++(-.6,0)|-node[pos=.7,lab,above]{continuar viagem}(f.east);
-\draw[arr] (conf.east)--++(.5,0)|-node[pos=.7,lab,above]{confirmar: manter embarque}(c.east);
+\draw[arr] ([xshift=7pt]e.south)--node[lab,right]{selecionar rota}([xshift=7pt]f.north);
+\draw[arr] ([xshift=-7pt]f.north)--node[lab,left]{reabrir lista}([xshift=-7pt]e.south);
+\draw[arr] ([yshift=6pt]f.east)--node[lab,above]{cancelar}([yshift=6pt]conf.west);
+\draw[arr] ([yshift=-6pt]conf.west)--node[lab,below]{continuar}([yshift=-6pt]f.east);
+\draw[arr] (conf.east)--(8.3,-6.2)--(8.3,2)--(1,2)--([xshift=1cm]a.north);
+\node[lab,text width=2.3cm] at (7.8,-3.3) {confirmar:\\desmarcar embarque\\e destino};
+\draw[arr] (c.west)--(-4.4,-2.6)--(-4.4,0)--(a.west);
+\node[lab,text width=1.1cm] at (-4.4,-.9) {sem\\origem};
+\draw[arr] (f.south)--(0,-7.3)--(-5.2,-7.3)--(-5.2,.7)--(-1,.7)--([xshift=-1cm]a.north);
+\node[lab,text width=2.3cm] at (-5.2,-4.7) {alterar\\embarque:\\preservar destino};
+\node[align=center,text width=13cm,font=\scriptsize] at (1.2,-8.5) {A confirmação também pode ser aberta na lista. Continuar mantém a visualização anterior;\\confirmar preserva os favoritos e o enquadramento do mapa.};
 \end{tikzpicture}

@@ -1,0 +1,9 @@
+{
+  "frontend/src/UsabilityConsent.jsx": "6eb080b3e4afd92b9025a8c56fbdcc2bf1c8318cbf0d358cec489d4b7405cd62",
+  "frontend/src/usability.js": "37eb4a8aecd7aa57d069f119abb7d5924f777e18b37981fb18dc3e9167f2b5fc",
+  "frontend/src/visualRecording.js": "0ba28079cb9607a0411ed108432d2a4b0a6377932b5afacd9d34a4dc2d7039cc",
+  "backend/transit/usability.py": "f0d01c6c38f2f6c8c8771a77d5e9a25c5ae9c1f8e241be3ac3fbfc1a842e8e58",
+  "scripts/telemetry_storage.py": "63039f3ef9a4b03c3a0b8d412e2bc5972b55de5d70fa96d47e2f15bc89828a20",
+  "backend/transit/usability_admin.py": "d2e99a6ec71754b3e759ee793c898507bf3384728678bcf02ead70e71fbda6bb",
+  "backend/transit/replay_video.py": "e929d8cfbd2005b6fa20bde2f83aeb99033a13d5d92b25476d6e0852cb239085"
+}

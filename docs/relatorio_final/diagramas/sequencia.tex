@@ -1,15 +1,26 @@
-\begin{tikzpicture}[>=Stealth,font=\footnotesize]
-\foreach \x/\name in {0/Passageiro,3/Interface,6/Backend,9/Roteamento a pé}{\node[draw,align=center,text width=2.3cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-10);}
-\draw[->] (0,-1)--node[above]{Origem e destino}(3,-1);
-\draw[->] (3,-2)--node[above]{Solicitar alternativas}(6,-2);
-\node[align=center,text width=4cm,fill=white] at (7.6,-3) {Busca por rodadas no GTFS};
-\draw[->,dashed] (6,-4)--node[above]{Resultado inicial}(3,-4);
-\draw[->] (3,-4.7)--node[above]{Apresentar alternativas}(0,-4.7);
-\draw[->] (6,-5.5)--node[above]{Validar caminhada candidata}(9,-5.5);
-\draw[->,dashed] (9,-6.3)--node[above]{Distância / falha}(6,-6.3);
-\draw[->,dashed] (6,-7.2)--node[above]{Novas alternativas (NDJSON)}(3,-7.2);
-\draw[->] (0,-8)--node[above]{Selecionar uma rota}(3,-8);
-\node[align=center,text width=3cm] at (3,-9) {Abrir mapa; preservar escolha e zoom nas atualizações};
-\draw[draw] (2.6,-5) rectangle (10.4,-7.6);
-\node[anchor=south west] at (2.6,-5) {\textbf{loop} [há candidatas e limites disponíveis]};
+\begin{tikzpicture}[>=Stealth,font=\scriptsize,msg/.style={fill=white,align=center,font=\scriptsize},seqbox/.style={draw,fill=white,align=center,text width=3.2cm,font=\scriptsize}]
+\foreach \x/\name in {0/Interface React,3/Backend Django,6/Bancos materializados,9/Serviço pedestre,12/API Olho Vivo}{\node[draw,align=center,text width=2cm] at (\x,0) {\name};\draw[dashed] (\x,-.5)--(\x,-14);}
+\draw[->] (0,-1)--node[msg,above]{Solicitar alternativas}(3,-1);
+\draw[->] (3,-1.8)--node[msg,above]{Recuperar candidatos}(6,-1.8);
+\draw[->,dashed] (6,-2.5)--node[msg,above]{Contexto / indisponibilidade}(3,-2.5);
+\draw (-1.1,-3) rectangle (13.1,-9.4);
+\node[msg,anchor=west] at (-1,-3) {\textbf{alt} [contexto utilizável]};
+\draw[->] (3,-3.9)--node[msg,above]{Validar caminhadas dos candidatos}(9,-3.9);
+\draw[->,dashed] (9,-4.6)--node[msg,above]{Percursos verificados / falha}(3,-4.6);
+\node[seqbox] at (3,-5.3) {Avaliar tempos dos candidatos válidos};
+\draw[->] (3,-6.2)--node[msg,above]{Refinamento operacional, quando disponível}(12,-6.2);
+\draw[->,dashed] (12,-6.9)--node[msg,above]{Previsões compatíveis; senão, manter programação}(3,-6.9);
+\draw[->,dashed] (3,-7.7)--node[msg,above]{NDJSON progressivo}(0,-7.7);
+\node[msg,text width=6cm] at (8,-7.5) {Repetir avaliação e publicação dentro dos limites.\\Registrar se restaram alternativas válidas.};
+\draw[dashed] (-1.1,-8.2)--(13.1,-8.2);
+\node[msg,anchor=west] at (-1,-8.2) {[contexto indisponível ou incompatível]};
+\node[seqbox] at (3,-8.9) {Marcar fallback antecipado};
+\draw (-1.1,-9.8) rectangle (13.1,-13.2);
+\node[msg,anchor=west] at (-1,-9.8) {\textbf{alt} [fallback antecipado OU término sem alternativas válidas; rodadas permitidas]};
+\node[seqbox] at (3,-10.6) {Executar planejador por rodadas};
+\draw[->,dashed] (3,-11.4)--node[msg,above]{NDJSON do fallback}(0,-11.4);
+\draw[dashed] (-1.1,-11.9)--(13.1,-11.9);
+\node[msg,anchor=west] at (-1,-11.9) {[há alternativas válidas OU rodadas dispensadas]};
+\node[msg,text width=9cm] at (6,-12.6) {Concluir sem executar o planejador por rodadas.};
+\node[msg,text width=13cm] at (6,-14.2) {Os caminhos são condicionais, sem execução simultânea dos planejadores.\\Uma lista válida não provoca fallback para completar resultados. Caminhada direta validada\\inferior a 1 km dispensa rodadas. A avaliação temporal incorpora o refinamento operacional.};
 \end{tikzpicture}

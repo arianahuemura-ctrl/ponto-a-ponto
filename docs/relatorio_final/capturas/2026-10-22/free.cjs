@@ -1,0 +1,12 @@
+const {chromium}=require('/home/avale/Projetos/maua_bus_map/frontend/node_modules/playwright');const fs=require('fs');
+(async()=>{const browser=await chromium.launch({headless:true});const c=await browser.newContext({viewport:{width:430,height:932},deviceScaleFactor:2,isMobile:true,hasTouch:true,colorScheme:'dark',geolocation:{latitude:-23.5745,longitude:-46.7085},permissions:['geolocation']});const p=await c.newPage();p.setDefaultTimeout(45000);
+await p.route('**/api/usability/',r=>r.fulfill({json:{session:'capture-documentation',token:'capture',csrf:'capture',accepted:1}}));
+const fav=[];for(const [id,label] of [['680017147','Casa'],['440016922','Trabalho'],['820012501','UNIVESP'],['600012585','Guaiaúna']]){const res=await c.request.get('http://127.0.0.1:8000/api/sptrans/stops/?id='+id);const d=await res.json();if(d.stops?.[0])fav.push({...d.stops[0],favoriteLabel:label});}
+await c.addInitScript(f=>{localStorage.setItem('pap.sp.favorites',JSON.stringify(f));localStorage.setItem('pap.theme','dark');},fav);
+const out='/tmp/pap-capturas-20261022/';const manifest=[];
+async function shot(name){await p.waitForTimeout(1200);await p.mouse.move(0,0);await p.screenshot({path:out+name+'.png',fullPage:false});manifest.push({file:name+'.png',at:new Date().toISOString(),url:p.url()});fs.writeFileSync(out+'manifest-free.json',JSON.stringify(manifest,null,2));console.log(name);}
+try{
+ await p.goto('http://127.0.0.1:8000/?stop=1211381');await p.getByRole('button',{name:'Concordo e continuar'}).click();await p.getByRole('button',{name:'Ver mapa',exact:true}).click();await p.getByRole('button',{name:'Buscar endereço',exact:true}).click();await p.getByRole('combobox').fill('-23.531995, -46.551611');await p.waitForTimeout(2500);console.log('SEARCH',await p.locator('body').innerText());await p.getByRole('option').first().click();await p.waitForTimeout(2000);const box=await p.locator('.sp-map').boundingBox();await p.mouse.move(box.x+box.width*.52,box.y+box.height*.48);await p.mouse.down();await p.waitForTimeout(900);await p.mouse.up();await p.locator('.sp-route-option').first().waitFor({timeout:180000});await shot('pap-12-destino-livre');
+}
+catch(e){console.log('ERROR',e.message);await p.screenshot({path:out+'error.png'});console.log((await p.locator('body').innerText()).slice(-3500));}
+finally{await browser.close();}})();

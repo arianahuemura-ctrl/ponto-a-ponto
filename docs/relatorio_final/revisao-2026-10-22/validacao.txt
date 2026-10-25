@@ -1,0 +1,42 @@
+Referências: mesmas chaves e textos; apenas ordem alterada.
+Marcadores de benchmark/pendências e inclusão do planejador_hibrido: inalterados. Arquivo planejador_hibrido.tex não editado nesta revisão.
+Capturas: todos os hashes originais preservados.
+Overfull: 0
+Underfull: 16
+Referências/citações indefinidas: False
+Avisos restantes: depreciações babel/memoir e espaçamento frouxo (Underfull), principalmente tabelas.
+Compilação LuaLaTeX/latexmk concluída; git diff --check passou.
+Title:           
+Subject:         
+Keywords:        
+Author:          
+Creator:         LaTeX with hyperref
+Producer:        LuaTeX-1.22.0
+CreationDate:    Thu Oct 22 20:00:04 2026 -03
+ModDate:         Thu Oct 22 20:00:04 2026 -03
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           106
+Encrypted:       no
+Page size:       595.276 x 841.89 pts (A4)
+Page rot:        0
+File size:       14511195 bytes
+Optimized:       no
+PDF version:     1.7
+
+ M docs/relatorio_final/diagramas/arquitetura.tex
+ M docs/relatorio_final/diagramas/estados.tex
+ M docs/relatorio_final/diagramas/fluxo_geral.tex
+ M docs/relatorio_final/diagramas/sequencia.tex
+ M docs/relatorio_final/engenharia_apendice.tex
+ M docs/relatorio_final/relatorio_final_pi2_v2.tex
+ M docs/relatorio_final/solucao_visual.tex
+?? AGENTS.md
+?? docs/relatorio_final/capturas/2026-10-22/
+?? docs/relatorio_final/planejador_hibrido.tex
+?? docs/relatorio_final/revisao-2026-10-22/

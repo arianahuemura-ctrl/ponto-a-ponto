@@ -2,9 +2,9 @@
 \node[stop] (a) at (0,0) {A};\node[stop] (b) at (4,0) {B};\node[stop] (c) at (8,0) {C};\node[stop] (d) at (4,-3) {D};
 \draw[->,very thick,blue!70!black] (a)--node[above]{ônibus: 8 min}(b);
 \draw[->,thick] (b)--node[above]{ônibus: 12 min}(c);
-\draw[->,dashed,very thick,blue!70!black] (b)--node[left,align=right]{a pé: 400 m\\6 min}(d);
-\draw[->,dashed,gray] (c)--node[below right,align=left,text=black]{a pé: 200 m\\3 min}(d);
-\node[draw,fill=blue!5,align=center] at (1,-4.4) {A $\to$ B $\to$ D = 14 min\\Melhor chegada conhecida};
-\node[draw,align=center] at (7.4,-4.4) {A $\to$ B $\to$ C $\to$ D = 23 min\\Alternativa descartada};
-\node[draw,fill=black!5,align=center] at (4,-5.8) {C é alcançado em 20 min $\geq$ 14 min.\\Podar sua expansão: custos seguintes não negativos.};
+\draw[->,dashed,very thick,blue!70!black] (b)--node[left,align=right]{a pé: 400 m\\5 min 20 s}(d);
+\draw[->,dashed,gray] (c)--node[below right,align=left,text=black]{a pé: 200 m\\2 min 40 s}(d);
+\node[draw,fill=blue!5,align=center,text width=5.2cm] at (1,-4.6) {A $\to$ B $\to$ D = 13 min 20 s\\Melhor chegada conhecida};
+\node[draw,align=center,text width=5.2cm] at (7.4,-4.6) {A $\to$ B $\to$ C $\to$ D\\= 22 min 40 s; descartada};
+\node[draw,fill=black!5,align=center] at (4,-6) {C é alcançado em 20 min $\geq$ 13 min 20 s.\\Podar sua expansão: custos seguintes não negativos.};
 \end{tikzpicture}

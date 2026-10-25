@@ -1,0 +1,35 @@
+REVISÃO DE CONSISTÊNCIA — 23/10/2026
+Escopo: Figuras 11, 12, 28 e 29 e fechamento das aspas do alerta.
+Fontes alteradas: diagramas/arquitetura.tex, fluxo_geral.tex, sequencia.tex,
+estados.tex e relatorio_final_pi2_v2.tex. Figuras 25, 26 e 27 preservadas.
+
+Verificação estática, somente leitura, do código atual no worktree de desenvolvimento:
+frontend/src/SaoPaulo.jsx:
+- useEffect de passengerPosition define origem quando não há origem, seleção manual ou parâmetro stop.
+- requireBoarding mostra alerta e chama changeOrigin; selectStop impede destino sem origem/GPS.
+- selectFavorite é exceção: guarda destino pendente e solicita embarque, sem o mesmo alerta.
+- changeOrigin e selectStop preservam destination; escolher novo embarque no mapa mantém seleção de destino.
+- openBoard reabre lista; fechar BoardDialog retorna ao mapa quando há destino.
+- cancelTrip limpa origin/destination e trajeto, preserva favoritos/enquadramento.
+backend/transit/sptrans/alternatives.py, _bus_progressive:
+- Caminho connections prepara contexto antes da avaliação. Ausência/incompatibilidade desvia antecipadamente.
+- Sem resultados válidos ao término, pode executar rodadas. Lista válida encerra pelo principal.
+- Rodadas dependem de allow_raptor; progressive dispensa quando caminhada direta validada é inferior a 1000 m.
+- Seleção explícita de raptor e limites fora do ramo connections também usam rodadas; os diagramas focalizam o cenário híbrido.
+backend/transit/sptrans/materialized_adapter.py:
+- prepare recupera caminhos e índices diretos/fatorados, incluindo categorias de dois ônibus já preparadas.
+- progressive valida caminhadas e chama engine.evaluate; acumula resultados e os publica incrementalmente.
+backend/transit/sptrans/connection_planner.py: avaliação incorpora previsão operacional quando disponível.
+backend/transit/sptrans/views.py, stream_board: StreamingHttpResponse application/x-ndjson;
+cada resultado do gerador é serializado em uma linha, incluindo indicação de conclusão.
+
+Divergências/nuances identificadas antes das correções:
+- Fluxo genérico sem origem não descrevia a exceção dos favoritos: registrada em nota da Figura 12.
+- Condição de dispensa das rodadas para caminhada curta não era explicitada: registrada nas Figuras 11 e 28.
+- Alerta tinha aspas de fechamento ausentes: corrigidas sem alterar a string confirmada no código.
+- Diagrama de sequência agrupa a avaliação por candidato de forma conceitual; não implica etapa operacional obrigatória separada.
+
+Validação: LuaLaTeX/latexmk concluído, PDF com 106 páginas, sem Overfull ou referências indefinidas.
+Figuras conferidas visualmente: páginas PDF 34, 47, 102 e 103 (impressas 30, 43, 98 e 99).
+Não houve testes funcionais em execução, alteração do código, medições novas, commit ou merge.
+O diff desta pasta usa o estado anterior desta rodada, preservando a separação das mudanças preexistentes.
