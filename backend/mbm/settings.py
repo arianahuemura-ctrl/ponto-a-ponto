@@ -68,3 +68,10 @@ TEMPLATES = [
         },
     }
 ]
+
+# Optional project contact; the in-app request form works without external email.
+PAP_RESEARCH_CONTACT = os.environ.get("PAP_RESEARCH_CONTACT", "25202874@aluno.univesp.br")
+
+# Capacidade de pesquisa configurável; limites de ingestão por minuto permanecem.
+PAP_TELEMETRY_MAX_EVENTS = int(os.environ.get("PAP_TELEMETRY_MAX_EVENTS", "250000"))
+PAP_TELEMETRY_MAX_BYTES = int(os.environ.get("PAP_TELEMETRY_MAX_BYTES", str(1024 * 1024 * 1024)))

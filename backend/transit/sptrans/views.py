@@ -138,7 +138,8 @@ def trip(request,db,trip_id):
         line['no_reachable_arrival']=supplied and not line['arrivals']
         approach=tracking.approaching(trip_id,index,vehicles,line['arrivals'],require_prediction=wait_seconds>0 or supplied)
         passed_approaches=tracking.passed(trip_id,index,vehicles)
-    return {'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach,'passed_approaches':passed_approaches,'approaches':approaches}
+    itinerary=tracking.itinerary(trip_id,stops,request.GET['origin'],int(request.GET['boarding_index']) if request.GET.get('boarding_index') is not None else None) if request.GET.get('origin') else None
+    return {'itinerary':itinerary,'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach,'passed_approaches':passed_approaches,'approaches':approaches}
 
 @require_GET
 def qr(request,stop_id):

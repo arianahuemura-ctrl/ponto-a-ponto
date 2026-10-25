@@ -12,7 +12,7 @@ for(const long of [false,true])test(`origem permanece no mapa e destino abre rot
  let requests=0,boards=[];
  await page.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:stops[requests++],distance_meters:10}}));
  await page.route('**/api/sptrans/board/**',r=>{boards.push(new URL(r.request().url()).searchParams);return r.fulfill({json:{lines:[],journeys:[]}});});
- await page.goto('/');await page.getByRole('button',{name:'Concordo e continuar'}).click();
+ await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir'}).click();
  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
  const select=async(index)=>{
   if(!long){
@@ -37,6 +37,6 @@ for(const long of [false,true])test(`origem permanece no mapa e destino abre rot
  expect(boards[0].get('origin')).toBe('1');expect(boards[0].get('destination')).toBe('2');
 });
 test('link direto abre próximos ônibus',async({page})=>{
- await page.goto('/?stop=1');await page.getByRole('button',{name:'Concordo e continuar'}).click();
+ await page.goto('/?stop=1');await page.getByRole('button',{name:'Continuar sem contribuir'}).click();
  await expect(page.getByRole('dialog',{name:'Próximos ônibus'})).toBeVisible();
 });

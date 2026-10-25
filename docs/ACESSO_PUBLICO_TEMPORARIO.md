@@ -15,7 +15,7 @@ npm --prefix frontend run build
 
 O script utiliza `~/.virtualenvs/bus/bin/python`; `PAP_PUBLIC_PYTHON` permite escolher outro virtualenv. Dependências normais do projeto devem estar instaladas. WhiteNoise serve somente `frontend/dist/assets` em `/assets/`, inclusive com `DEBUG=False`; não é necessário executar `collectstatic`. A página inicial continua sendo servida pela view Django existente. Um rebuild também atualiza os arquivos usados pelo desenvolvimento; não é executado automaticamente pelos scripts. Após rebuild, reinicie apenas a instância pública para reindexar os assets do WhiteNoise.
 
-Sem `PAP_PUBLIC_HOST`, a instância aceita somente hosts locais. Teste:
+Sem `PAP_PUBLIC_HOST`, o script procura um contêiner Cloudflare ativo apontando para `127.0.0.1:8001` ou `localhost:8001` e identifica o domínio nos logs da execução atual. Sem túnel detectado, preserva o domínio de uma instância ativa; em uma primeira inicialização, aceita somente hosts locais. Teste:
 
 ```bash
 curl http://127.0.0.1:8001/api/health/
@@ -48,7 +48,7 @@ PAP_PUBLIC_HOST='SEU-DOMINIO.trycloudflare.com' ./scripts/start_public.sh
 
 Substitua o exemplo pela URL real sem `https://`, porta ou caminho. Não use `*` nem `.trycloudflare.com`. O processo `cloudflared` pode permanecer aberto durante esse reinício. Nenhum acesso é liberado automaticamente para outros domínios. O QR Code passa a gerar URLs HTTPS do domínio configurado.
 
-Teste a página, busca, alternativas, acompanhamento e GPS em um celular por dados móveis. HTTPS permite solicitar geolocalização, mas a permissão ainda depende do navegador. O domínio muda ao criar outro Quick Tunnel: pare/reinicie o Gunicorn com o novo `PAP_PUBLIC_HOST`.
+Teste a página, busca, alternativas, acompanhamento e GPS em um celular por dados móveis. HTTPS permite solicitar geolocalização, mas a permissão ainda depende do navegador. O domínio muda ao criar outro Quick Tunnel: execute novamente `./scripts/start_public.sh`. O script detecta o novo domínio e reinicia somente o Gunicorn público, se necessário.
 
 Para interromper o acesso, use **Ctrl+C no terminal do cloudflared**. Para encerrar também a instância pública:
 
@@ -118,3 +118,17 @@ Referências oficiais:
 - Estado final: 8000 preservada; 8001 ativa e aceitando apenas hosts locais. Nenhum túnel iniciado, pois cloudflared não foi encontrado. Entrega incremental pelo Cloudflare e acesso real por celular na internet continuam dependendo do teste com o domínio real.
 
 Registro opcional de eventos por sessão: [Logs de usabilidade](LOGS_USABILIDADE.md). A escrita ocorre apenas na base separada descrita nesse documento.
+
+## Atualização automática do domínio
+
+Com o túnel Docker já iniciado, execute apenas:
+
+```bash
+./scripts/start_public.sh
+```
+
+O script reutiliza o túnel existente; não cria nem encerra contêineres. Consulta apenas contêineres ativos da imagem `cloudflare/cloudflared` direcionados explicitamente à porta 8001. Usa os logs desde a inicialização atual. Se houver mais de um domínio candidato, exige escolha explícita; se a URL ainda não estiver nos logs, pede nova tentativa. `PAP_PUBLIC_HOST` explícito tem prioridade. Para cloudflared fora do Docker, continue informando essa variável.
+
+A troca mantém o bloqueio entre operações e verifica a identidade do processo antes da parada. A porta 8000 não é modificada. Não acompanha mudanças continuamente: depois de recriar o túnel, execute o start novamente.
+
+Testes sem Docker/rede reais: `python scripts/test_public_instance.py`.

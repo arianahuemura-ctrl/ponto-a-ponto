@@ -379,3 +379,10 @@
 .sp-more-heading button { flex-shrink:0; }
 
 .sp-shell .sp-about-button .brand-mark { width:40px; height:40px; }
+
+.sp-itinerary-legend{flex:1;padding-right:44px;display:flex;flex-wrap:wrap;gap:8px 14px;max-width:calc(100% - 24px);padding:10px;background:var(--pap-surface);color:var(--pap-text);border-radius:8px;font-size:12px;pointer-events:none}.sp-itinerary-legend span::before{content:"";display:inline-block;width:28px;border-top:4px dashed #a58acb;margin-right:6px;vertical-align:middle}.sp-itinerary-legend span:nth-child(2)::before{border-top-style:solid;border-color:#0076ed}[data-theme="dark"] .sp-itinerary-legend span:nth-child(2)::before{border-color:#42c8ff}.sp-itinerary-legend small{flex-basis:100%}
+
+.sp-line-start{display:grid;place-items:center;box-sizing:border-box;border:2px solid #fff;border-radius:50%;background:#604095;color:#fff;font-size:17px;font-weight:700;box-shadow:0 1px 5px #0008}
+
+.sp-direction-arrow{pointer-events:none!important;background:none;border:0}.sp-direction-arrow span{display:block;font-size:18px;line-height:18px;color:#0076ed;text-shadow:0 1px 2px #fff,0 -1px 2px #fff}.sp-direction-before span{color:#7954aa}[data-theme="dark"] .sp-direction-arrow span{color:#42c8ff;text-shadow:0 1px 2px #172235,0 -1px 2px #172235}[data-theme="dark"] .sp-direction-before span{color:#c2a1e6}
+[data-theme="dark"] .sp-itinerary-legend span:first-child::before{border-color:#a58acb}

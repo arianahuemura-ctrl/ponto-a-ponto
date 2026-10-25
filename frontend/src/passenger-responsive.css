@@ -129,3 +129,20 @@
 [data-theme="dark"] .passenger-shell .qr-poster :is(p, small) { color: #36465d; }
 :root[data-theme="dark"] .passenger-shell .detail-tabs button[aria-selected="true"] { color: #fff; }
 .passenger-shell input::placeholder { color: var(--pap-muted); opacity: 1; }
+
+/* Menus nativos precisam de fundo opaco: não herdar texto claro sobre popup branco. */
+:is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select {
+  color-scheme: light;
+}
+:root[data-theme="dark"] :is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select {
+  color-scheme: dark;
+}
+:is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select :is(option, optgroup) {
+  background-color: var(--pap-surface);
+  color: var(--pap-text);
+}
+.research-welcome select { color-scheme: dark; }
+.research-welcome select :is(option, optgroup) {
+  background-color: #193754;
+  color: #fff;
+}

@@ -1,5 +1,29 @@
 {% extends "admin/base_site.html" %}
-{% block content %}<p>Registros de pesquisa restritos à administração. {{ total }} sessões.</p>
-<p><a href=".">Atualizar lista</a></p><div style="overflow:auto"><table><thead><tr><th>Sessão</th><th>Início</th><th>Último recebimento</th><th>Intervalo de recebimento</th><th>Registros</th><th>Dados armazenados</th><th>Replay</th></tr></thead><tbody>
-{% for s in sessions %}<tr><td><a href="{% url 'usability-detail' s.id %}">{{ s.id }}</a></td><td>{{ s.start|date:"d/m/Y H:i:s" }}</td><td>{{ s.end|date:"H:i:s" }}</td><td>{{ s.duration }} s</td><td>{{ s.count }}</td><td>{{ s.size|filesizeformat }}</td><td>{% if s.visual %}Detectado{% else %}Não detectado{% endif %}</td></tr>{% empty %}<tr><td colspan="7">Nenhuma sessão registrada.</td></tr>{% endfor %}</tbody></table></div>
-<p>{% if page > 1 %}<a href="?page={{ previous }}">Anterior</a> · {% endif %}Página {{ page }}{% if has_next %} · <a href="?page={{ next }}">Próxima</a>{% endif %}</p>{% endblock %}
+{% block content %}
+<p><a href="{% url 'research-inbox' %}">Feedback voluntário e solicitações de pesquisa</a></p><p>Registros de pesquisa restritos à administração. {{ total }} sessões.</p>
+<p><a href=".">Atualizar lista</a></p><div style="overflow:auto"><table><thead><tr><th>Sessão</th><th>Início</th><th>Último recebimento</th><th>Intervalo de recebimento</th><th>Registros</th><th>Dados armazenados</th><th>Replay</th><th>Ações</th></tr></thead><tbody>
+{% for s in sessions %}<tr><td><a href="{% url 'usability-detail' s.id %}">{{ s.id }}</a></td><td>{{ s.start|date:"d/m/Y H:i:s" }}</td><td>{{ s.end|date:"H:i:s" }}</td><td>{{ s.duration }} s</td><td>{{ s.count }}</td><td>{{ s.size|filesizeformat }}</td><td>{% if s.visual %}Detectado{% else %}Não detectado{% endif %}</td><td style="white-space:nowrap" class="export-actions"><a href="{% url 'usability-delete' s.id %}" title="Apagar sessão (solicita confirmação)" aria-label="Apagar sessão">🗑</a> <button type="button" data-export="json" data-url="{% url 'usability-export-json' s.id %}" title="Exportar JSON" aria-label="Exportar JSON">📄</button> {% if s.visual %}<button type="button" data-export="webm" data-url="{% url 'usability-export-video' s.id %}" title="Exportar vídeo WebM" aria-label="Exportar vídeo WebM">🎬</button>{% else %}<span title="Sessão sem replay visual" aria-label="Vídeo indisponível">—</span>{% endif %}</td></tr>{% empty %}<tr><td colspan="8">Nenhuma sessão registrada.</td></tr>{% endfor %}</tbody></table></div>
+<p>{% if page > 1 %}<a href="?page={{ previous }}">Anterior</a> · {% endif %}Página {{ page }}{% if has_next %} · <a href="?page={{ next }}">Próxima</a>{% endif %}</p><form hidden>{% csrf_token %}</form><p id="export-status" role="status"></p>
+<style>.export-actions button,.export-actions a{display:inline-block;background:transparent;border:0;padding:6px;font-size:19px;cursor:pointer;text-decoration:none}.export-actions button:disabled{cursor:wait;opacity:.6}.export-actions button[aria-busy=true]{animation:export-pulse .8s infinite alternate}@keyframes export-pulse{to{opacity:.3}}</style>
+<script>
+const status=document.getElementById('export-status');
+for(const button of document.querySelectorAll('[data-export]'))button.addEventListener('click',async()=>{
+ if(button.disabled)return;const original=button.textContent,title=button.title;
+ button.disabled=true;button.setAttribute('aria-busy','true');button.textContent='⏳';button.title='Gerando arquivo…';status.textContent='Preparando '+button.dataset.export.toUpperCase()+'…';
+ try{
+  let url=button.dataset.url;
+  if(button.dataset.export==='webm'){
+   const response=await fetch(url,{method:'POST',headers:{'X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value}});
+   const result=await response.json();if(!response.ok)throw Error(result.error||'Falha ao iniciar exportação.');
+   const job=url+'?job='+encodeURIComponent(result.job);
+   for(;;){const response=await fetch(job);if(!response.ok)throw Error('Exportação indisponível.');const state=await response.json();if(state.state==='ready')break;if(state.state==='error')throw Error('Falha ao gerar vídeo.');await new Promise(resolve=>setTimeout(resolve,1500));}
+   url=job+'&download=1';
+  }
+  const response=await fetch(url);if(!response.ok)throw Error('Não foi possível baixar o arquivo.');
+  const blob=await response.blob(),href=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=href;link.download=(response.headers.get('Content-Disposition')||'').match(/filename="([^"]+)"/)?.[1]||'navegacao.'+button.dataset.export;
+  link.click();setTimeout(()=>URL.revokeObjectURL(href),60000);status.textContent='Arquivo pronto. Download iniciado.';
+ }catch(error){status.textContent=error.message;}
+ finally{button.disabled=false;button.removeAttribute('aria-busy');button.textContent=original;button.title=title;}
+});
+</script>{% endblock %}

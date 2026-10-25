@@ -1,0 +1,44 @@
+Branch: feat/busca-bidirecional
+HEAD: aee66eb6761e868c0547c7454e7b259faae3a9fc
+
+ M README.md
+ M backend/e2e_server.py
+ M backend/mbm/settings.py
+ M backend/mbm/urls.py
+ M backend/transit/templates/transit/usability_sessions.html
+ M backend/transit/test_usability_admin.py
+ M backend/transit/usability.py
+ M backend/transit/usability_admin.py
+ M docs/ACESSO_PUBLICO_TEMPORARIO.md
+ M docs/ADMIN_USABILIDADE.md
+ M frontend/e2e/selection-flow.spec.js
+ M frontend/src/Feedback.jsx
+ M frontend/src/SaoPaulo.jsx
+ M frontend/src/UsabilityConsent.jsx
+ M frontend/src/usability.js
+ M frontend/src/visualRecording.js
+ M scripts/export_replay.py
+ M scripts/public_instance.py
+ M scripts/usability_logs.py
+?? backend/transit/replay_video.py
+?? backend/transit/research.py
+?? backend/transit/templates/transit/research_inbox.html
+?? backend/transit/templates/transit/usability_delete.html
+?? backend/transit/templates/transit/usability_video.html
+?? backend/transit/test_research.py
+?? docs/ATUALIZACAO_RELATORIO_CONSENTIMENTO.md
+?? docs/CONSENTIMENTO_PESQUISA.md
+?? docs/evidencias/
+?? frontend/e2e/research-consent.spec.js
+?? frontend/src/research.css
+?? frontend/src/researchApi.js
+?? frontend/src/researchChoice.js
+?? frontend/src/usability.test.js
+?? scripts/render_replay_video.cjs
+?? scripts/telemetry_storage.py
+?? scripts/test_public_instance.py
+?? scripts/test_render_replay_video.py
+?? scripts/test_telemetry_storage.py
+
+git diff --check: aprovado
+Sem commit, merge ou rebase. Inclui alterações anteriores à tarefa.

@@ -10,12 +10,13 @@ export function useApproachingBus(leg,enabled=true,walkingMinutes=0,earliestBoar
     setResult(null);
     if(!enabled||!trip||(index==null&&!vehicle))return;
     const abort=new AbortController();
-    let busy=false;
+    let busy=false,itinerary=null;
     const keepPosition=retainLive(),keepForecast=retainLive();
     const publish=data=>{
+      itinerary=data.itinerary||itinerary;
       const positions=keepPosition({approach:data.approach||null,passedApproaches:data.passed_approaches||[]},!!data.approach||!!data.passed_approaches?.length);
       const forecast=keepForecast({arrivals:data.line?.arrivals||[],noReachableArrival:!!data.line?.no_reachable_arrival,error:!!data.warning},!!data.line?.arrivals?.length&&!data.warning);
-      if(!abort.signal.aborted)setResult({key,...positions,...forecast});
+      if(!abort.signal.aborted)setResult({key,itinerary,...positions,...forecast});
     };
     const update=async()=>{
       if(busy||document.hidden)return;

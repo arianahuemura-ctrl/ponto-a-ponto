@@ -9,7 +9,7 @@ export function useApproachingLines(lines,enabled) {
     setState(null);
     if(!enabled||!lines.length)return;
     const abort=new AbortController();let busy=false;
-    const keep=lines.map(()=>retainLive());
+    const keep=lines.map(()=>retainLive()),itineraries=[];
     const update=async()=>{
       if(busy||document.hidden)return;
       busy=true;
@@ -18,8 +18,8 @@ export function useApproachingLines(lines,enabled) {
         // Limite a concorrência e não sobreponha rodadas de atualização.
         for(let i=0;i<lines.length&&!abort.signal.aborted;i+=4){
           results.push(...await Promise.all(lines.slice(i,i+4).map(async (line,offset)=>{
-            try {const data=await api('sptrans/trips/'+encodeURIComponent(line.trip_id),{origin:line.origin.id,next:1,all:1},abort.signal);return keep[i+offset]({...line,approach:data.approach,approaches:data.approaches,passedApproaches:data.passed_approaches||[]},!!data.approach||!!data.approaches?.length||!!data.passed_approaches?.length);}
-            catch{return keep[i+offset]({...line,approach:null,approaches:[],passedApproaches:[]},false);}
+            try {const data=await api('sptrans/trips/'+encodeURIComponent(line.trip_id),{origin:line.origin.id,next:1,all:1},abort.signal);itineraries[i+offset]=data.itinerary||itineraries[i+offset];return {...keep[i+offset]({...line,approach:data.approach,approaches:data.approaches,passedApproaches:data.passed_approaches||[]},!!data.approach||!!data.approaches?.length||!!data.passed_approaches?.length),itinerary:itineraries[i+offset]};}
+            catch{return {...keep[i+offset]({...line,approach:null,approaches:[],passedApproaches:[]},false),itinerary:itineraries[i+offset]};}
           })));
         }
         if(!abort.signal.aborted)setState({key,results});

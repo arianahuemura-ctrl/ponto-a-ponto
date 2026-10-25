@@ -17,6 +17,8 @@ with tempfile.TemporaryDirectory(prefix="mbm-e2e-") as directory:
     from transit.models import Simulation
     from transit.importing import import_demo
     from django.conf import settings
+    settings.PAP_USABILITY_DB = Path(directory) / "telemetry.sqlite3"
+    settings.PAP_RESEARCH_DB = Path(directory) / "research.sqlite3"
     import_demo(settings.BASE_DIR)
 
     # Credenciais exclusivamente do servidor efêmero de testes.

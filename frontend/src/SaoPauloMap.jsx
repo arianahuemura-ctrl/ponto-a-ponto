@@ -1,3 +1,4 @@
+import {directedPath} from './routeDirection.js';
 import {trace} from './usability.js';
 import {developmentTools} from './environment.js';
 import destinationPointIcon from './assets/destination-point.png';
@@ -9,7 +10,7 @@ import {StopCanvas} from './StopCanvas.js';
 import StopTransparencyControl from './StopTransparencyControl.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
 const EMPTY_LIST=Object.freeze([]);
-export default function SaoPauloMap({ highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
+export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
   const [dimmerActive,setDimmerActive]=useState(false);
   const [transparentStops,setTransparentStops]=useState(false);
   useEffect(()=>{setTransparentStops(false);},[highlightStopsRequest]);
@@ -204,16 +205,49 @@ export default function SaoPauloMap({ highlightStopsRequest=0, selectingPoint=fa
     }
     return ()=>group.remove();
   },[stops,origin,destination,detail,journey,walking,walks,routeSelected,fullJourney,dimmerActive]);
+  useEffect(()=>{
+    const group=L.layerGroup().addTo(map.current);
+    const strokes=L.layerGroup().addTo(group);
+    const redraw=()=>{
+      strokes.clearLayers();
+      for(const route of itineraries){
+        const draw=(points,past)=>{
+          if(!points||points.length<2)return;
+          const {path,arrows}=directedPath(points.map(p=>map.current.latLngToLayerPoint(p)));
+          const color=past?'#a58acb':'#0076ed';
+          L.polyline(path.map(p=>map.current.layerPointToLatLng(L.point(p.x,p.y))),{color,weight:past?4:5,opacity:.95,dashArray:past?'5 8':undefined,className:past?'sp-line-before':'sp-route-bus sp-line-after',interactive:false}).addTo(strokes);
+          for(const arrow of arrows){
+            const at=map.current.layerPointToLatLng(L.point(arrow.x,arrow.y));
+            L.marker(at,{interactive:false,keyboard:false,icon:L.divIcon({className:`sp-direction-arrow ${past?'sp-direction-before':'sp-direction-after'}`,html:`<span style="transform:rotate(${arrow.angle}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]})}).addTo(strokes);
+          }
+        };
+        if(route.split_available){draw(route.before,true);draw(route.after,false);}else draw(route.geometry,true);
+      }
+    };
+    redraw();map.current.on('zoomend',redraw);
+    for(const route of itineraries){
+      if(route.geometry?.length){
+        const label=document.createElement('span');label.textContent=`Início do traçado da linha ${route.code||''}`;
+        L.marker(route.geometry[0],{title:label.textContent,zIndexOffset:100,icon:L.divIcon({className:'sp-line-start',html:'<span aria-hidden="true">I</span>',iconSize:[30,30],iconAnchor:[15,15]})}).bindTooltip(label).addTo(group);
+      }
+      if((route.endpoint||route.terminal)&&route.geometry?.length){
+        const end=route.endpoint||route.terminal,label=document.createElement('span');label.textContent=end.kind==='shape'?`Fim do traçado GTFS da linha ${route.code||''} · última parada cadastrada divergente`:`Último ponto da linha ${route.code||''} · ${end.name} · ${end.id}`;
+        L.marker([end.lat,end.lon],{title:label.textContent,icon:L.divIcon({className:'sp-stop sp-destination sp-line-terminal',html:`<img class="sp-destination-icon" src="${destinationPointIcon}" alt=""/>`,iconSize:[36,36]})}).bindTooltip(label).addTo(group);
+      }
+    }
+    return()=>{map.current.off('zoomend',redraw);group.remove();};
+  },[itineraries]);
   const activeApproaches=useMemo(()=>[...(approach?[approach]:[]),...approaches].filter(a=>a?.vehicle),[approach,approaches]);
   const fittedApproach=useRef(null);
   useEffect(()=>{
     if(preserveViewport)return;
     if(!approachFocusKey){fittedApproach.current=null;return;}
-    if(!activeApproaches.length||fittedApproach.current===approachFocusKey)return;
-    const points=[...activeApproaches.flatMap(a=>[[a.vehicle.lat,a.vehicle.lon],...(a.geometry||[])]),...(origin?[[origin.lat,origin.lon]]:[])];
+    const fitKey=approachFocusKey+':'+itineraries.map(i=>i.trip_id).join(',');
+    if((!activeApproaches.length&&!itineraries.some(i=>i.geometry?.length))||fittedApproach.current===fitKey)return;
+    const points=[...itineraries.flatMap(i=>i.geometry||[]),...activeApproaches.flatMap(a=>[[a.vehicle.lat,a.vehicle.lon],...(a.geometry||[])]),...(origin?[[origin.lat,origin.lon]]:[])];
     map.current.fitBounds(points,{padding:[60,100],maxZoom:16});
-    fittedApproach.current=approachFocusKey;
-  },[approachFocusKey,activeApproaches,origin]);
+    fittedApproach.current=fitKey;
+  },[approachFocusKey,activeApproaches,origin,itineraries]);
   useEffect(()=>{
     const group=L.layerGroup().addTo(map.current),timers=[];
     for(const approach of activeApproaches){

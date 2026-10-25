@@ -3,6 +3,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import secrets
 import signal
@@ -31,6 +32,53 @@ def alive(record):
     return identity(record['pid']) == record['started']
 
 
+def docker_output(*args):
+    return subprocess.run(['docker', *args], capture_output=True, text=True,
+                          timeout=10, check=True)
+
+
+def discover_host():
+    """Only running Cloudflare containers explicitly forwarding to this instance."""
+    try:
+        ids=docker_output('ps','--filter','status=running','--format','{{.ID}}').stdout.split()
+        hosts=set()
+        for cid in ids:
+            raw=docker_output('inspect','--format',
+                '{{json .Config.Image}}|{{json .Args}}|{{.State.StartedAt}}',cid).stdout.strip()
+            image,args,started=raw.split('|',2)
+            if not json.loads(image).startswith('cloudflare/cloudflared'):continue
+            args=json.loads(args)
+            targets={'http://127.0.0.1:8001','http://localhost:8001'}
+            if not any((arg=='--url' and i+1<len(args) and args[i+1].rstrip('/') in targets)
+                       or (arg.startswith('--url=') and arg[6:].rstrip('/') in targets)
+                       for i,arg in enumerate(args)):continue
+            log=docker_output('logs','--since',started,'--tail','1000',cid)
+            found=re.findall(r'https://([a-z0-9]+(?:-[a-z0-9]+)*\.trycloudflare\.com)\b',log.stdout+'\n'+log.stderr)
+            if not found:raise SystemExit('Túnel encontrado, mas a URL ainda não apareceu. Aguarde e execute start_public.sh novamente.')
+            hosts.add(found[-1])
+        if len(hosts)>1:raise SystemExit('Há vários túneis para 8001. Defina PAP_PUBLIC_HOST explicitamente; nada foi interrompido.')
+        return next(iter(hosts),None)
+    except (OSError,subprocess.SubprocessError,ValueError):
+        print('Não foi possível consultar túneis Docker; usando PAP_PUBLIC_HOST ou a configuração pública existente.')
+        return None
+
+
+def running_host(record):
+    # Read only the host; never print or persist the process environment.
+    if not record or not alive(record):return None
+    for item in Path(f"/proc/{record['pid']}/environ").read_bytes().split(b'\0'):
+        if item.startswith(b'PAP_PUBLIC_HOST='):return item.split(b'=',1)[1].decode()
+    return ''
+
+
+def desired_host(record):
+    explicit=os.environ.get('PAP_PUBLIC_HOST','').strip().lower()
+    host=explicit or discover_host() or running_host(record) or ''
+    if host and (len(host)>253 or not re.fullmatch(r'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+',host)):
+        raise SystemExit('PAP_PUBLIC_HOST inválido: informe somente o domínio, sem https:// ou caminho. Nada foi interrompido.')
+    return host
+
+
 def main():
     os.umask(0o077)
     STATE.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -52,9 +100,18 @@ def main():
                     return
                 time.sleep(.1)
             raise SystemExit('Encerramento ainda em andamento; execute stop_public.sh novamente.')
+        host=desired_host(record)
         if record and alive(record):
-            print('Instância pública já está ativa em 127.0.0.1:8001. Para mudar o domínio, pare e reinicie.')
-            return
+            if running_host(record)==host:
+                print('Instância pública já ativa; domínio permitido:',host or 'somente localhost')
+                return
+            print('Atualizando domínio público para:',host)
+            os.kill(record['pid'],signal.SIGTERM)
+            for _ in range(350):
+                if not alive(record):break
+                time.sleep(.1)
+            else:raise SystemExit('Encerramento ainda em andamento; tente novamente. Túnel preservado.')
+            pidfile.unlink(missing_ok=True)
         with socket.socket() as sock:
             try:
                 sock.bind(('127.0.0.1', 8001))
@@ -63,6 +120,7 @@ def main():
         if not (ROOT / 'frontend/dist/index.html').is_file():
             raise SystemExit('Compile o React antes: npm --prefix frontend run build')
         env = os.environ.copy()
+        env['PAP_PUBLIC_HOST'] = host
         env['DJANGO_SETTINGS_MODULE'] = 'mbm.public_settings'
         env['DJANGO_DEBUG'] = '0'
         env['PAP_PUBLIC_SECRET_KEY'] = env.get('PAP_PUBLIC_SECRET_KEY') or secrets.token_urlsafe(64)

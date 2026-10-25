@@ -2,6 +2,10 @@
 """Exportação local e comparação de camadas da mesma sessão."""
 import argparse,collections,gzip,html,json,os,sqlite3,shutil
 from pathlib import Path
+try:
+    from scripts.telemetry_storage import read_rows, block_size
+except ModuleNotFoundError:
+    from telemetry_storage import read_rows, block_size
 
 def reconstruct(rows):
     events=[];chunks={};missing=[]
@@ -36,7 +40,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--session',required=True);parser.add_argument('--output',required=True);args=parser.parse_args()
     os.umask(0o077);out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     dbpath=Path.home()/'.local/state/pap/usability/events.sqlite3'
-    with sqlite3.connect(dbpath.as_uri()+'?mode=ro',uri=True) as db:rows=db.execute('SELECT seq,received,type,data FROM events WHERE session=? ORDER BY seq',(args.session,)).fetchall()
+    with sqlite3.connect(dbpath.as_uri()+'?mode=ro',uri=True) as db:
+        stored=db.execute('SELECT COALESCE(SUM(LENGTH(CAST(data AS BLOB))),0) FROM events WHERE session=?',(args.session,)).fetchone()[0]+block_size(db,args.session)
+        rows=read_rows(db,args.session)
     if not rows:raise SystemExit('Sessão não encontrada')
     events,incomplete=reconstruct(rows)
     basic=[e for e in events if e['kind'] in {'session_start','state','action','api','error','dimmer'}]
@@ -49,7 +55,7 @@ def main():
         (out/f'{name}.json').write_bytes(content);(out/f'{name}.json.gz').write_bytes(compressed)
         sizes[name]={'eventos':len(data),'bytes':len(content),'gzip_bytes':len(compressed)}
     sequences={r[0] for r in rows};gaps=sorted(set(range(rows[0][0],rows[-1][0]+1))-sequences)
-    report=dict(session=args.session,sizes=sizes,missing_sequences=gaps,incomplete_chunks=incomplete,stored_data_bytes=sum(len(r[3].encode()) for r in rows),duration_received_seconds=rows[-1][1]-rows[0][1])
+    report=dict(session=args.session,sizes=sizes,missing_sequences=gaps,incomplete_chunks=incomplete,stored_data_bytes=stored,duration_received_seconds=rows[-1][1]-rows[0][1])
     report['player_asset_bytes']=sum((Path(__file__).resolve().parents[1]/'frontend/node_modules/rrweb-player/dist'/name).stat().st_size for name in ['rrweb-player.umd.cjs','style.css'])
     (out/'comparacao.json').write_text(json.dumps(report,indent=2))
     table=''.join(f'<tr><td>{html.escape(k)}</td><td>{v["eventos"]}</td><td>{v["bytes"]:,}</td><td>{v["gzip_bytes"]:,}</td></tr>' for k,v in sizes.items())

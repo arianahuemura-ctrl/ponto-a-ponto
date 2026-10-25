@@ -1,0 +1,32 @@
+CONSENTIMENTO VOLUNTÁRIO — 23/10/2026
+
+Resultado: 22 testes Django, 47 testes JavaScript e 18 testes Playwright aprovados (87 no total).
+Build React executado pelo Playwright: aprovado. Aviso remanescente: chunk principal acima de 500 kB.
+git diff --check: aprovado. Branch de desenvolvimento: feat/busca-bidirecional.
+232 arquivos previamente registrados do worktree acadêmico conferidos por SHA-256, sem alterações.
+Nenhum commit, merge ou rebase. Nenhuma limpeza, migração ou compactação de dados reais. Nenhum serviço permanente instalado. Servidores e túnel existentes não reiniciados.
+
+MATRIZ DOS REQUISITOS
+1. Aceitação: research-consent, aceitação explícita; evento consent com versão e visual_config.
+2. Recusa: navegação, busca, feedback; zero requisições a /api/usability/.
+3. Persistência: accepted/declined, chave com estado, versão e data.
+4. Revogação: navegador e usability.test.js; captura interrompida, fila descartada, POST pendente abortado.
+5. Recarregamento: mantém escolha, recusa não reinicia captura.
+6. Nova aba: lê escolha da mesma origem; interrupção sincronizada.
+7. Versão: aviso antigo exige nova escolha sem iniciar gravação.
+8. Armazenamento bloqueado: erro não significa aceite; escolha só em memória, nova pergunta após recarga.
+9. Falha inicial: HTTP 503 não impede próximos ônibus.
+10. Rede: falhas no início e durante gravação preservam a aplicação. 429/503 testados também no módulo de envio.
+11. Ausência de telemetria: contadores de requisições e eventos zerados após recusa; não cria ID de sessão; listeners ausentes sem aceite.
+12. Transporte: QR abre ônibus; origem por clique/toque longo permanece no mapa; destino abre alternativas; selecionar rota, visualizar mapa, abrir/fechar favoritos e cancelar funcionam sem telemetria.
+13. Feedback voluntário: API real em SQLite temporário, sem token e sem criar banco de telemetria; CSRF, idempotência, limites, validação e acesso administrativo verificados.
+14. Sem reinício após revogar: recarga, outra aba e resposta tardia; não surgem novos envios.
+
+ARQUIVOS E EVIDÊNCIAS
+manifest.json lista arquivos modificados/criados e hashes das evidências.
+alteracoes-consentimento.diff contém apenas esta tarefa, preservando as modificações anteriores da branch. Para os dois arquivos administrativos sem snapshot inicial, a base foi reconstruída removendo apenas as inserções desta rodada.
+backend.txt, javascript.txt e navegador.txt contêm a execução final aprovada.
+As três imagens são capturas do frontend real em Chromium automatizado. O mapa foi simulado e seus tiles bloqueados no teste; não representam sessão de passageiro externo. A captura móvel utiliza 390 x 844 pixels. Sem overflow horizontal no teste de recusa.
+
+LIMITES
+Não foi executada a suíte integral de E2E legados, nem chamada a SPTrans real. Não há medição em celular físico ou prova de ausência de logs operacionais do servidor. O indicador de gravação não substitui uma avaliação de impacto de CPU/rede. A retenção e a exclusão retroativa continuam exigindo tratamento administrativo descrito na documentação. O gesto existente de toque longo suprime cliques durante 1,2 segundo; o roteiro automatizado respeita essa janela, sem alterar o comportamento da aplicação.

@@ -12,6 +12,8 @@ from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_http_methods
 
+from scripts.telemetry_storage import setup, encode, collect
+
 SALT = 'pap-usability-v1'
 SCHEMA = {
     'feedback': {'payload': str},
@@ -85,6 +87,7 @@ def connection():
     db=sqlite3.connect(path,timeout=3)
     db.execute('CREATE TABLE IF NOT EXISTS events (session TEXT,seq INTEGER,received REAL,type TEXT,data TEXT,PRIMARY KEY(session,seq))')
     db.execute('CREATE INDEX IF NOT EXISTS events_received ON events(received)')
+    setup(db)
     return db
 
 
@@ -95,7 +98,8 @@ def events(request):
         try: session=signing.loads(token,salt=SALT,max_age=43200)
         except signing.BadSignature:
             session=str(uuid.uuid4());token=signing.dumps(session,salt=SALT)
-        response=JsonResponse({'session':session,'token':token,'csrf':get_token(request)})
+        from .research import PROOF_SALT
+        response=JsonResponse({'session':session,'token':token,'csrf':get_token(request),'deletion_proof':signing.dumps(session,salt=PROOF_SALT)})
         response['Cache-Control']='no-store'
         return response
     if len(request.body)>262144:return JsonResponse({'error':'Lote muito grande.'},status=413)
@@ -112,16 +116,19 @@ def events(request):
         with db:
             db.execute('BEGIN IMMEDIATE')
             db.execute('DELETE FROM events WHERE received < ?',(now-30*86400,))
+            collect(db)
             count=db.execute('SELECT COUNT(*) FROM events WHERE session=? AND received>?',(session,now-60)).fetchone()[0]
             if count+len(rows)>3000:return JsonResponse({'error':'Limite de eventos.'},status=429)
-            total,size=db.execute('SELECT COUNT(*),COALESCE(SUM(LENGTH(CAST(data AS BLOB))),0) FROM events').fetchone()
-            recent,volume=db.execute('SELECT COUNT(*),COALESCE(SUM(LENGTH(CAST(data AS BLOB))),0) FROM events WHERE received>?',(now-60,)).fetchone()
+            total,size=db.execute('SELECT COUNT(*),COALESCE(SUM(telemetry_raw_size(data)),0) FROM events').fetchone()
+            recent,volume=db.execute('SELECT COUNT(*),COALESCE(SUM(telemetry_raw_size(data)),0) FROM events WHERE received>?',(now-60,)).fetchone()
             incoming=sum(len(row[2].encode()) for row in rows)
             if recent+len(rows)>getattr(settings,'PAP_TELEMETRY_EVENTS_PER_MINUTE',12000) or volume+incoming>getattr(settings,'PAP_TELEMETRY_BYTES_PER_MINUTE',32*1024*1024):
                 return JsonResponse({'error':'Limite global temporário.'},status=429,headers={'Retry-After':'60'})
             if total+len(rows)>getattr(settings,'PAP_TELEMETRY_MAX_EVENTS',50000) or size+incoming>getattr(settings,'PAP_TELEMETRY_MAX_BYTES',256*1024*1024):
                 return JsonResponse({'error':'Armazenamento de pesquisa cheio.'},status=503,headers={'Retry-After':'300'})
-            db.executemany('INSERT OR IGNORE INTO events VALUES (?,?,?,?,?)',[(session,seq,now,kind,data) for seq,kind,data in rows])
+            for seq,kind,data in rows:
+                if db.execute('SELECT 1 FROM events WHERE session=? AND seq=?',(session,seq)).fetchone():continue
+                db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(session,seq,now,kind,encode(db,session,data)))
 
         return JsonResponse({'accepted':len(rows),'session':session})
     finally:db.close()

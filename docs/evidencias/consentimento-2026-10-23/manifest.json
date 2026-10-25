@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-23",
+  "branch": "feat/busca-bidirecional",
+  "head": "aee66eb6761e868c0547c7454e7b259faae3a9fc",
+  "academic_files_unchanged": 232,
+  "tests": {
+    "backend": 22,
+    "javascript": 47,
+    "browser": 18
+  },
+  "modified_this_task": [
+    "README.md",
+    "backend/e2e_server.py",
+    "backend/mbm/settings.py",
+    "backend/mbm/urls.py",
+    "backend/transit/usability.py",
+    "backend/transit/usability_admin.py",
+    "backend/transit/test_usability_admin.py",
+    "backend/transit/templates/transit/usability_sessions.html",
+    "docs/ADMIN_USABILIDADE.md",
+    "frontend/e2e/selection-flow.spec.js",
+    "frontend/src/Feedback.jsx",
+    "frontend/src/SaoPaulo.jsx",
+    "frontend/src/UsabilityConsent.jsx",
+    "frontend/src/usability.js",
+    "frontend/src/visualRecording.js"
+  ],
+  "created_this_task": [
+    "backend/transit/research.py",
+    "backend/transit/test_research.py",
+    "backend/transit/templates/transit/research_inbox.html",
+    "docs/CONSENTIMENTO_PESQUISA.md",
+    "docs/ATUALIZACAO_RELATORIO_CONSENTIMENTO.md",
+    "frontend/e2e/research-consent.spec.js",
+    "frontend/src/researchChoice.js",
+    "frontend/src/researchApi.js",
+    "frontend/src/research.css",
+    "frontend/src/usability.test.js"
+  ],
+  "artifacts": {
+    "research-settings.png": "90180fea3d5e2722050b88fd32e65ef590c4fdc2027c8a6656b36fab9e029403",
+    "backend.txt": "765f7a19a025b09900be83487045681f4c28d6560ea1b6a0a9c6d6dd098c2bde",
+    "research-refusal-mobile.png": "05a4fe31975a9aad73adcfbb3a36d5adaeb4220d9be69a2ad9f2a08bbb215a3f",
+    "navegador.txt": "a5967baf86d2accdd8e91364e7f5f1d19633ee47a4b7b54a1125b2f296b1d9cf",
+    "verificacao.txt": "be91f675b3117e8fd2aa3b7780451c69cd0c522ee33db9fd6458302b7825541f",
+    "research-welcome-mobile.png": "3fb4cd9239824f6df06d6d41edb9b387e9f75901fafc59c8e0cfa7bc10d82e7d",
+    "git-final.txt": "d1405640c06a60cc256c2ecb13df9608170405f5f7c11a1804ff233c4d7973e3",
+    "javascript.txt": "a9e99baafc0c27bbaa69c723a54761c6f9506a90e54ab486c8b5b757c55f9707",
+    "alteracoes-consentimento.diff": "82f7e861804d93ba2ee37acea5d116065d74aa7f4766d98455e15f325b46b19b"
+  }
+}

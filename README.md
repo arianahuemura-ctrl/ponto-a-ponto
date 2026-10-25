@@ -24,7 +24,7 @@ O cadastro de paradas, linhas, variantes e documentos públicos é importado de 
 
 ## São Paulo: navegação e destino da sessão
 
-A página inicial abre São Paulo. O cenário anterior de Mauá continua em `/?city=maua` e nos QR Codes antigos.
+A página inicial abre a navegação de passageiros em São Paulo.
 
 1. Configure `SPTRANS_TOKEN` no `.env` da raiz. O Django lê essa chave no início; reinicie o servidor após substituí-la. A chave não é enviada ao navegador. Teste o acesso com `python backend/manage.py check_sptrans`.
 2. Ative o ambiente Python e execute `python backend/manage.py import_sptrans`. O comando indexa `fonts/sptrans_gtfs/` em `sptrans.sqlite3`, separado do banco da demonstração. Repita ao substituir o GTFS.
@@ -268,7 +268,6 @@ python start_server.py
 | Acesso | Endereço |
 | --- | --- |
 | São Paulo — passageiro | http://127.0.0.1:8000/ |
-| Demonstração de Mauá | http://127.0.0.1:8000/?city=maua |
 | Administração | http://127.0.0.1:8000/admin/ |
 
 Mantenha o terminal aberto. Para encerrar o servidor, pressione **Ctrl+C**.
@@ -1392,3 +1391,7 @@ O novo arquivo não substitui automaticamente o banco usado pela aplicação.
 ### Ambiente da aplicação
 
 Defina `PAP_ENVIRONMENT=production` (padrão) ou `PAP_ENVIRONMENT=development` no `.env` da raiz. Em produção, a marca do RAPTOR e a medição de distâncias pelo botão direito ficam desativadas. Essas ferramentas estão disponíveis apenas em desenvolvimento. Após alterar, execute `npm --prefix frontend run build`; se estiver usando o Vite, reinicie o servidor de desenvolvimento. A variável não altera o `DEBUG` do Django.
+
+## Participação voluntária na pesquisa
+
+O passageiro pode contribuir com a pesquisa ou usar o transporte sem gravação. A decisão pode ser alterada em **Configurações → Participação na pesquisa**. Feedback continua disponível sem participar. Consulte [comportamento, retenção e testes](docs/CONSENTIMENTO_PESQUISA.md).

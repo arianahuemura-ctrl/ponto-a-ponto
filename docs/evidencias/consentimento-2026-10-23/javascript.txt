@@ -1,0 +1,296 @@
+
+> maua-bus-map@0.2.0 test
+> node --test src/*.test.js
+
+TAP version 13
+# Subtest: countdown uses live arrival, not scheduled departure, and decreases
+ok 1 - countdown uses live arrival, not scheduled departure, and decreases
+  ---
+  duration_ms: 1.021392
+  type: 'test'
+  ...
+# Subtest: expired, stale and malformed predictions are omitted
+ok 2 - expired, stale and malformed predictions are omitted
+  ---
+  duration_ms: 0.199367
+  type: 'test'
+  ...
+# Subtest: midnight is anchored to observation and does not resurrect old arrivals
+ok 3 - midnight is anchored to observation and does not resurrect old arrivals
+  ---
+  duration_ms: 0.080574
+  type: 'test'
+  ...
+# Subtest: 13.5 minute access walk excludes the bus in 3 minutes and rounding does not make it reachable
+ok 4 - 13.5 minute access walk excludes the bus in 3 minutes and rounding does not make it reachable
+  ---
+  duration_ms: 0.091016
+  type: 'test'
+  ...
+# Subtest: next buses sort by live arrival; stale/missing estimates follow without mutating input
+ok 5 - next buses sort by live arrival; stale/missing estimates follow without mutating input
+  ---
+  duration_ms: 5.991143
+  type: 'test'
+  ...
+# Subtest: board sorts destinations alphabetically and schedules by active or upcoming dated service
+ok 6 - board sorts destinations alphabetically and schedules by active or upcoming dated service
+  ---
+  duration_ms: 0.422812
+  type: 'test'
+  ...
+# Subtest: coordenadas copiadas e separadores usuais
+ok 7 - coordenadas copiadas e separadores usuais
+  ---
+  duration_ms: 1.807476
+  type: 'test'
+  ...
+# Subtest: não interpreta endereços como coordenadas
+ok 8 - não interpreta endereços como coordenadas
+  ---
+  duration_ms: 0.120367
+  type: 'test'
+  ...
+# Subtest: rejeita coordenadas fora dos limites
+ok 9 - rejeita coordenadas fora dos limites
+  ---
+  duration_ms: 0.158293
+  type: 'test'
+  ...
+# Subtest: normaliza pontos e relações do Overpass
+ok 10 - normaliza pontos e relações do Overpass
+  ---
+  duration_ms: 1.172203
+  type: 'test'
+  ...
+# Subtest: descobre todas as linhas que passam pelo primeiro ponto
+ok 11 - descobre todas as linhas que passam pelo primeiro ponto
+  ---
+  duration_ms: 0.224087
+  type: 'test'
+  ...
+# Subtest: respeita a ordem dos pontos no trajeto
+ok 12 - respeita a ordem dos pontos no trajeto
+  ---
+  duration_ms: 0.155023
+  type: 'test'
+  ...
+# Subtest: encontra somente destinos possíveis da linha selecionada
+ok 13 - encontra somente destinos possíveis da linha selecionada
+  ---
+  duration_ms: 0.306903
+  type: 'test'
+  ...
+# Subtest: compara e refina linhas progressivamente
+ok 14 - compara e refina linhas progressivamente
+  ---
+  duration_ms: 0.123357
+  type: 'test'
+  ...
+# Subtest: não aceita ponto próximo pertencente a outra linha
+ok 15 - não aceita ponto próximo pertencente a outra linha
+  ---
+  duration_ms: 0.098261
+  type: 'test'
+  ...
+# Subtest: preserva segmentos OSM desconectados sem achatá-los em uma linha artificial
+ok 16 - preserva segmentos OSM desconectados sem achatá-los em uma linha artificial
+  ---
+  duration_ms: 0.162767
+  type: 'test'
+  ...
+# Subtest: preserva duas falhas, descarta na terceira e reinicia após sucesso
+ok 17 - preserva duas falhas, descarta na terceira e reinicia após sucesso
+  ---
+  duration_ms: 1.15293
+  type: 'test'
+  ...
+# Subtest: contagens são independentes e não inventam dados antes do primeiro sucesso
+ok 18 - contagens são independentes e não inventam dados antes do primeiro sucesso
+  ---
+  duration_ms: 0.107132
+  type: 'test'
+  ...
+# Subtest: simulated coordinates bypass GPS even on HTTP
+ok 19 - simulated coordinates bypass GPS even on HTTP
+  ---
+  duration_ms: 1.160187
+  type: 'test'
+  ...
+# Subtest: GPS streams updates, reports denial and clears watcher
+ok 20 - GPS streams updates, reports denial and clears watcher
+  ---
+  duration_ms: 0.317083
+  type: 'test'
+  ...
+# Subtest: HTTP cannot start GPS
+ok 21 - HTTP cannot start GPS
+  ---
+  duration_ms: 0.107677
+  type: 'test'
+  ...
+# Subtest: embarque explícito preserva suas coordenadas apesar do GPS
+ok 22 - embarque explícito preserva suas coordenadas apesar do GPS
+  ---
+  duration_ms: 1.086836
+  type: 'test'
+  ...
+# Subtest: automatic origin needs no stop and manual boarding overrides live GPS
+ok 23 - automatic origin needs no stop and manual boarding overrides live GPS
+  ---
+  duration_ms: 0.229609
+  type: 'test'
+  ...
+# Subtest: URL test coordinates are forwarded without silently filling missing values
+ok 24 - URL test coordinates are forwarded without silently filling missing values
+  ---
+  duration_ms: 0.511581
+  type: 'test'
+  ...
+# Subtest: navigation preserves test location but removes the old stop
+ok 25 - navigation preserves test location but removes the old stop
+  ---
+  duration_ms: 0.432852
+  type: 'test'
+  ...
+# Subtest: copied Maps coordinates survive navigation and URL encoding
+ok 26 - copied Maps coordinates survive navigation and URL encoding
+  ---
+  duration_ms: 0.262918
+  type: 'test'
+  ...
+# Subtest: favoritos e preferência persistem e restauram
+ok 27 - favoritos e preferência persistem e restauram
+  ---
+  duration_ms: 1.708766
+  type: 'test'
+  ...
+# Subtest: armazenamento indisponível não impede uso
+ok 28 - armazenamento indisponível não impede uso
+  ---
+  duration_ms: 0.103819
+  type: 'test'
+  ...
+# Subtest: dados locais inválidos são descartados
+ok 29 - dados locais inválidos são descartados
+  ---
+  duration_ms: 0.097913
+  type: 'test'
+  ...
+# Subtest: merges adjacent equal frequencies without changing source windows
+ok 30 - merges adjacent equal frequencies without changing source windows
+  ---
+  duration_ms: 1.980797
+  type: 'test'
+  ...
+# Subtest: preserves frequency changes, service gaps and scheduled departures
+ok 31 - preserves frequency changes, service gaps and scheduled departures
+  ---
+  duration_ms: 0.193931
+  type: 'test'
+  ...
+# Subtest: uses full timestamps across midnight
+ok 32 - uses full timestamps across midnight
+  ---
+  duration_ms: 0.122867
+  type: 'test'
+  ...
+# Subtest: sessão e favoritos ficam em espaços separados e toleram corrupção
+ok 33 - sessão e favoritos ficam em espaços separados e toleram corrupção
+  ---
+  duration_ms: 1.786623
+  type: 'test'
+  ...
+# Subtest: armazenamento bloqueado não interrompe navegação
+ok 34 - armazenamento bloqueado não interrompe navegação
+  ---
+  duration_ms: 0.109197
+  type: 'test'
+  ...
+# Subtest: limite de trocas é restaurado e valores inválidos usam o padrão
+ok 35 - limite de trocas é restaurado e valores inválidos usam o padrão
+  ---
+  duration_ms: 0.098694
+  type: 'test'
+  ...
+# Subtest: URL sem stop prevalece sobre origem e destino da sessão
+ok 36 - URL sem stop prevalece sobre origem e destino da sessão
+  ---
+  duration_ms: 0.381289
+  type: 'test'
+  ...
+# Subtest: favoritos guardam apenas pontos únicos, sem contexto de viagem
+ok 37 - favoritos guardam apenas pontos únicos, sem contexto de viagem
+  ---
+  duration_ms: 0.153799
+  type: 'test'
+  ...
+# Subtest: decodes signed coordinate deltas and preserves IDs and names
+ok 38 - decodes signed coordinate deltas and preserves IDs and names
+  ---
+  duration_ms: 1.770069
+  type: 'test'
+  ...
+# Subtest: rejects incompatible versions and invalid coordinates
+ok 39 - rejects incompatible versions and invalid coordinates
+  ---
+  duration_ms: 0.284765
+  type: 'test'
+  ...
+# Subtest: sem consentimento não há listeners, fila transmitida ou sessão
+ok 40 - sem consentimento não há listeners, fila transmitida ou sessão
+  ---
+  duration_ms: 1.541001
+  type: 'test'
+  ...
+# Subtest: revogação aborta POST em andamento, remove listeners e descarta fila
+ok 41 - revogação aborta POST em andamento, remove listeners e descarta fila
+  ---
+  duration_ms: 30.854948
+  type: 'test'
+  ...
+# Subtest: resposta tardia da inicialização não reativa pesquisa após revogação
+ok 42 - resposta tardia da inicialização não reativa pesquisa após revogação
+  ---
+  duration_ms: 0.383703
+  type: 'test'
+  ...
+# Subtest: falha 429 encerra captura sem bloquear fetch do transporte
+ok 43 - falha 429 encerra captura sem bloquear fetch do transporte
+  ---
+  duration_ms: 1.358732
+  type: 'test'
+  ...
+# Subtest: falha 503 encerra captura sem bloquear fetch do transporte
+ok 44 - falha 503 encerra captura sem bloquear fetch do transporte
+  ---
+  duration_ms: 0.465446
+  type: 'test'
+  ...
+# Subtest: usa caminhada pré-calculada no acesso e na transferência para escolher veículos alcançáveis
+ok 45 - usa caminhada pré-calculada no acesso e na transferência para escolher veículos alcançáveis
+  ---
+  duration_ms: 1.053954
+  type: 'test'
+  ...
+# Subtest: não publica chegada operacional quando nenhuma previsão permite concluir a caminhada
+ok 46 - não publica chegada operacional quando nenhuma previsão permite concluir a caminhada
+  ---
+  duration_ms: 0.166666
+  type: 'test'
+  ...
+# Subtest: aguarda os trechos ainda sem previsão
+ok 47 - aguarda os trechos ainda sem previsão
+  ---
+  duration_ms: 0.097122
+  type: 'test'
+  ...
+1..47
+# tests 47
+# suites 0
+# pass 47
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.992234

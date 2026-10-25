@@ -1,0 +1,6 @@
+{% extends "admin/base_site.html" %}
+{% block content %}<h1>{{ title }}</h1>
+<p>Até 200 mensagens mais recentes. Solicitações de exclusão exigem análise e tratamento de eventos, blocos, exportações e cópias baixadas. Marcar como analisada não apaga dados.</p>
+<table><thead><tr><th>Protocolo</th><th>Tipo</th><th>Mensagem</th><th>Sessões vinculadas</th><th>Acompanhamento</th></tr></thead><tbody>
+{% for row in rows %}<tr><td>{{ row.id }}</td><td>{{ row.kind }}</td><td style="white-space:pre-wrap">{{ row.message }}</td><td>{% if row.session %}<a href="{% url 'usability-detail' row.session %}">{{ row.session }}</a>{% endif %}{% for session in row.sessions %}<p><a href="{% url 'usability-detail' session %}">{{ session }}</a></p>{% endfor %}</td><td>{% if row.resolved %}Analisada{% endif %}<form method="post">{% csrf_token %}<input type="hidden" name="id" value="{{ row.id }}"><label><input type="checkbox" required name="confirm" value="yes"> Confirmo esta ação</label><button>Marcar como analisada</button><button name="action" value="delete">Excluir esta mensagem</button></form></td></tr>{% empty %}<tr><td colspan="5">Nenhuma mensagem.</td></tr>{% endfor %}
+</tbody></table>{% endblock %}

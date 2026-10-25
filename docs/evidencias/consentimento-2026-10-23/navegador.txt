@@ -1,0 +1,473 @@
+
+> maua-bus-map@0.2.0 test:e2e
+> playwright test e2e/research-consent.spec.js e2e/selection-flow.spec.js --reporter=line
+
+[WebServer] (node:16840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:16871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] [plugin builtin:vite-reporter] 
+[WebServer] (!) Some chunks are larger than 500 kB after minification. Consider:
+[WebServer] - Using dynamic import() to code-split the application
+[WebServer] - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+[WebServer] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /api/health/ HTTP/1.1" 200 83
+
+
+Running 18 tests using 1 worker
+
+(node:16991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/18] e2e/research-consent.spec.js:24:1 › recusa: navegação, busca, tema e feedback sem sessão ou replay
+[WebServer] [23/Oct/2026 15:36:59] "GET /?stop=1 HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:36:59] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:00] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:00] "POST /api/research/feedback/ HTTP/1.1" 201 68
+
+[2/18] e2e/research-consent.spec.js:37:1 › aceitação explícita registra versão e inicia rrweb
+[WebServer] [23/Oct/2026 15:37:01] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[3/18] e2e/research-consent.spec.js:45:44 › persistência, recarga e nova aba: accepted
+[WebServer] [23/Oct/2026 15:37:01] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:01] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:02] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:02] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:02] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[4/18] e2e/research-consent.spec.js:45:44 › persistência, recarga e nova aba: declined
+[WebServer] [23/Oct/2026 15:37:03] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:03] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:04] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:04] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:04] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[5/18] e2e/research-consent.spec.js:53:1 › revogação limpa fila, interrompe envios e não reinicia ao recarregar
+[WebServer] [23/Oct/2026 15:37:05] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:05] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:06] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:06] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[6/18] e2e/research-consent.spec.js:58:1 › mudança de versão solicita nova escolha sem capturar
+[WebServer] [23/Oct/2026 15:37:07] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[7/18] e2e/research-consent.spec.js:61:34 › armazenamento indisponível não presume consentimento (false)
+[WebServer] [23/Oct/2026 15:37:07] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:07] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:08] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[8/18] e2e/research-consent.spec.js:61:34 › armazenamento indisponível não presume consentimento (true)
+[WebServer] [23/Oct/2026 15:37:08] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:08] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:09] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[9/18] e2e/research-consent.spec.js:66:40 › falha get permite consulta
+[WebServer] [23/Oct/2026 15:37:09] "GET /?stop=1 HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:09] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[10/18] e2e/research-consent.spec.js:66:40 › falha network permite consulta
+[WebServer] [23/Oct/2026 15:37:10] "GET /?stop=1 HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:10] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[11/18] e2e/research-consent.spec.js:69:1 › falha de rede depois do início interrompe pesquisa e preserva mapa
+[WebServer] [23/Oct/2026 15:37:11] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:11] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[12/18] e2e/research-consent.spec.js:72:1 › recusa pode ser alterada nas configurações e revogada em outra aba
+[WebServer] [23/Oct/2026 15:37:12] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:12] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:13] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:13] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:13] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[13/18] e2e/research-consent.spec.js:76:1 › exclusão pode ser solicitada sem criar sessão
+[WebServer] [23/Oct/2026 15:37:14] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:14] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:15] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:15] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[WebServer] [23/Oct/2026 15:37:15] "POST /api/research/requests/ HTTP/1.1" 201 51
+
+[14/18] e2e/research-consent.spec.js:79:1 › revogação durante inicialização não permite captura tardia
+[WebServer] [23/Oct/2026 15:37:15] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:15] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:15] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[WebServer] [23/Oct/2026 15:37:16] "GET /api/research/info/ HTTP/1.1" 200 116
+
+[15/18] e2e/research-consent.spec.js:84:1 › roteiro de transporte sem pesquisa: rota, mapa, favoritos e cancelamento
+[WebServer] [23/Oct/2026 15:37:17] "GET /?stop=1 HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:17] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+(node:17921) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[16/18] e2e/selection-flow.spec.js:11:32 › origem permanece no mapa e destino abre rotas (clique longo=false)
+[WebServer] [23/Oct/2026 15:37:21] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:21] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[17/18] e2e/selection-flow.spec.js:11:32 › origem permanece no mapa e destino abre rotas (clique longo=true)
+[WebServer] [23/Oct/2026 15:37:23] "GET / HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:23] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+[18/18] e2e/selection-flow.spec.js:39:1 › link direto abre próximos ônibus
+[WebServer] [23/Oct/2026 15:37:26] "GET /?stop=1 HTTP/1.1" 200 570
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/index-Cme8PA3l.css HTTP/1.1" 200 42731
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/index-2y1x3ZAm.js HTTP/1.1" 200 610905
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/SaoPaulo-CgDR2C8N.css HTTP/1.1" 200 22328
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/SaoPaulo-fAGCiQJJ.js HTTP/1.1" 200 91516
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/destination-point-DFmu3fCe.png HTTP/1.1" 200 4409
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/boarding-point-dark-BRCSME1Q.svg HTTP/1.1" 200 4472
+
+[WebServer] [23/Oct/2026 15:37:26] "GET /assets/icone-QUlUNPUd.png HTTP/1.1" 200 864631
+
+  18 passed (29.7s)

@@ -101,3 +101,29 @@ def passed(trip_id,boarding_index,vehicles):
     shape,positions=trip_geometry(str(path),stat.st_mtime_ns,stat.st_size,trip_id)
     if not 0<=boarding_index<len(positions):return []
     return select_passed(shape,positions[boarding_index],vehicles)
+
+
+def itinerary(trip_id, stops, origin, boarding_index=None):
+    """Traçado estático; não depende de previsão nem de posição de veículo."""
+    path=store.database_path();stat=path.stat()
+    shape,positions=trip_geometry(str(path),stat.st_mtime_ns,stat.st_size,trip_id)
+    matches=[i for i,stop in enumerate(stops) if stop['id']==origin]
+    index=boarding_index if boarding_index is not None else matches[0] if len(matches)==1 else None
+    if index is not None and (not 0<=index<len(stops) or stops[index]['id']!=origin):raise ValueError()
+    result={'geometry':shape,'before':[],'after':[],'terminal':stops[-1] if stops else None,'boarding_index':index,'split_available':False}
+    terminal=result['terminal']
+    remaining=0
+    last=positions[-1] if positions and len(positions)==len(stops) else None
+    if shape and last is not None:
+        pos,point=last
+        tail=[point]+shape[math.floor(pos)+1:]
+        remaining=sum(distance(a,b) for a,b in zip(tail,tail[1:]))
+    mismatch=bool(shape and (not terminal or last is None or
+        distance((terminal['lat'],terminal['lon']),shape[-1])>150 or remaining>150))
+    result['terminal_mismatch']=mismatch
+    result['endpoint']=({'kind':'shape','lat':shape[-1][0],'lon':shape[-1][1]} if mismatch
+        else dict(terminal,kind='stop') if terminal else None)
+    if index is None or index>=len(positions) or positions[index] is None:return result
+    pos,point=positions[index]
+    result.update(before=shape[:math.ceil(pos)]+[point],after=[point]+shape[math.floor(pos)+1:],split_available=True)
+    return result

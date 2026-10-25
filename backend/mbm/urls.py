@@ -2,12 +2,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
-from transit import views, demo_views, catalogue, usability, usability_admin
+from transit import research, views, demo_views, catalogue, usability, usability_admin
 from transit.sptrans import views as sptrans
 from transit.sptrans.compact import catalogue as stop_catalogue
 from transit.sptrans.addresses import suggestions
 
 urlpatterns = [
+    path("api/research/info/", research.info),
+    path("api/research/feedback/", research.feedback),
+    path("api/research/requests/", research.requests),
+    path("admin/research/", research.inbox, name="research-inbox"),
     path("api/usability/", usability.events),
     path("api/sptrans/stop-catalogue/", stop_catalogue),
     path("api/location-config/", views.location_config),
@@ -26,6 +30,9 @@ urlpatterns = [
     path("explorar/", views.index),
     path("admin/usability/", usability_admin.sessions, name="usability-sessions"),
     path("admin/usability/assets/<str:name>", usability_admin.asset, name="usability-asset"),
+    path("admin/usability/<uuid:session>/delete/", usability_admin.delete_session, name="usability-delete"),
+    path("admin/usability/<uuid:session>/export.json", usability_admin.export_json, name="usability-export-json"),
+    path("admin/usability/<uuid:session>/video/", usability_admin.export_video, name="usability-export-video"),
     path("admin/usability/<uuid:session>/", usability_admin.detail, name="usability-detail"),
     path("admin/usability/<uuid:session>/player/", usability_admin.player, name="usability-player"),
     path("admin/", admin.site.urls),
