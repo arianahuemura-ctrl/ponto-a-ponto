@@ -1,0 +1,261 @@
+{
+  "originais": {
+    "barbosa2021": "\\bibitem[{Barbosa et al.}(2021)]{barbosa2021} BARBOSA, S. D. J.; SILVA, B. S.; SILVEIRA, M. S.; GASPARINI, I.; DARIN, T.; BARBOSA, G. D. J. \\textit{Interação Humano-Computador e Experiência do Usuário}. Rio de Janeiro: Autopublicação, 2021. Disponível em: \\url{https://leanpub.com/ihc-ux}. Acesso em: 7 out. 2026.",
+    "bast2015": "\\bibitem[{Bast et al.}(2015)]{bast2015} BAST, Hannah et al. \\textit{Route planning in transportation networks}. 2015. Preprint. arXiv:1504.05140. DOI: \\url{https://doi.org/10.48550/arXiv.1504.05140}. Disponível em: \\url{https://arxiv.org/abs/1504.05140}. Acesso em: 7 out. 2026.",
+    "batz2013": "\\bibitem[{Batz et al.}(2013)]{batz2013} BATZ, Gernot Veit; GEISBERGER, Robert; SANDERS, Peter; VETTER, Christian. Minimum time-dependent travel times with contraction hierarchies. \\textit{Journal of Experimental Algorithmics}, [s. l.], v. 18, n. 1, art. 1.4, 2013. DOI: \\url{https://doi.org/10.1145/2444016.2444020}. Disponível em: \\url{https://publikationen.bibliothek.kit.edu/1000139527}. Acesso em: 8 out. 2026.",
+    "baum2019": "\\bibitem[{Baum et al.}(2019)]{baum2019} BAUM, Moritz; BUCHHOLD, Valentin; SAUER, Jonas; WAGNER, Dorothea; ZÜNDORF, Tobias. UnLimited TRAnsfers for Multi-Modal Route Planning: An Efficient Solution. In: ANNUAL EUROPEAN SYMPOSIUM ON ALGORITHMS (ESA), 27., 2019. \\textit{Proceedings [...]}. Dagstuhl: Schloss Dagstuhl -- Leibniz-Zentrum für Informatik, 2019. (Leibniz International Proceedings in Informatics, v. 144). p. 14:1--14:16. DOI: \\url{https://doi.org/10.4230/LIPIcs.ESA.2019.14}. Disponível em: \\url{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2019.14}. Acesso em: 8 out. 2026.",
+    "brakewood2019": "\\bibitem[{Brakewood; Watkins}(2019)]{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \\textit{Transport Reviews}, [s. l.], v. 39, n. 3, p. 327--356, 2019. DOI: \\url{https://doi.org/10.1080/01441647.2018.1472147}. Disponível em: \\url{https://candacebrakewood.com/wp-content/uploads/2019/05/brakewood-and-watkins-preprint-paper.pdf}. Acesso em: 5 out. 2026.",
+    "c4container": "\\bibitem[{C4 model}({[20\\mbox{-}\\mbox{-}]})]{c4container} C4 MODEL. \\textit{Container diagram}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://c4model.com/diagrams/container}. Acesso em: 7 out. 2026.",
+    "card1980": "\\bibitem[{Card, Moran e Newell}(1980)]{card1980} CARD, Stuart K.; MORAN, Thomas P.; NEWELL, Allen. The keystroke-level model for user performance time with interactive systems. \\textit{Communications of the ACM}, v. 23, n. 7, p. 396--410, 1980. DOI: \\url{https://doi.org/10.1145/358886.358895}.",
+    "git": "\\bibitem[{Chacon; Straub}(2014)]{git} CHACON, Scott; STRAUB, Ben. \\textit{Pro Git}. 2. ed. Berkeley, CA: Apress, 2014. Disponível em: \\url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.",
+    "cittamobiajuda": "\\bibitem[{Cittamobi}(2022)]{cittamobiajuda} CITTAMOBI. \\textit{Como o Cittamobi funciona?} Central de Ajuda. 2022. Disponível em: \\url{https://cittamobi.zendesk.com/hc/pt-br/articles/9379145018519-Como-o-Cittamobi-funciona}. Acesso em: 24 set. 2026.",
+    "cittamobimaua": "\\bibitem[{Cittamobi}({[20\\mbox{-}\\mbox{-}]})]{cittamobimaua} CITTAMOBI. \\textit{Suzantur -- Mauá: horários de ônibus, linhas, itinerários e paradas}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}. Acesso em: 24 set. 2026.",
+    "delling2012": "\\bibitem[{Delling; Pajor; Werneck}(2012)]{delling2012} DELLING, Daniel; PAJOR, Thomas; WERNECK, Renato F. Round-based public transit routing. In: MEETING ON ALGORITHM ENGINEERING AND EXPERIMENTS (ALENEX), 14., 2012, Kyoto. \\textit{Proceedings [...]}. Philadelphia: SIAM, 2012. p. 130--140. DOI: \\url{https://doi.org/10.1137/1.9781611972924.13}. Disponível em: \\url{https://www.microsoft.com/en-us/research/publication/round-based-public-transit-routing/}. Acesso em: 7 out. 2026.",
+    "designcouncil": "\\bibitem[{Design Council}({[20\\mbox{-}\\mbox{-}]})]{designcouncil} DESIGN COUNCIL. \\textit{Framework for Innovation}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.",
+    "dibbelt2018": "\\bibitem[{Dibbelt et al.}(2018)]{dibbelt2018} DIBBELT, Julian; PAJOR, Thomas; STRASSER, Ben; WAGNER, Dorothea. Connection scan algorithm. \\textit{Journal of Experimental Algorithmics}, [s. l.], v. 23, art. 1.7, 2018. DOI: \\url{https://doi.org/10.1145/3274661}. Disponível em: \\url{https://publikationen.bibliothek.kit.edu/1000088435}. Acesso em: 8 out. 2026.",
+    "dijkstra1959": "\\bibitem[{Dijkstra}(1959)]{dijkstra1959} DIJKSTRA, E. W. A note on two problems in connexion with graphs. \\textit{Numerische Mathematik}, [s. l.], v. 1, p. 269--271, 1959. DOI: \\url{https://doi.org/10.1007/BF01386390}. Disponível em: \\url{https://link.springer.com/article/10.1007/BF01386390}. Acesso em: 7 out. 2026.",
+    "django": "\\bibitem[{Django Software Foundation}({[20\\mbox{-}\\mbox{-}]})]{django} DJANGO SOFTWARE FOUNDATION. \\textit{Django documentation}. Versão 6.0. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.",
+    "planoacao2026": "\\bibitem[{Equipe do Projeto Integrador II}(2026a)]{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \\textit{Plano de ação: Projeto Integrador em Computação II}. [S. l.]: Universidade Virtual do Estado de São Paulo, 2026a. Documento acadêmico não publicado.",
+    "mbmimportacoes": "\\bibitem[{Equipe do Projeto Integrador II}(2026b)]{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \\textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. [S. l.]: Equipe do Projeto Integrador II, 2026b. Documento técnico não publicado, atualizado em 24 set. 2026.",
+    "androidapplinks": "\\bibitem[{Google}(2026)]{androidapplinks} GOOGLE. \\textit{About deep links}. Android Developers. 2026. Disponível em: \\url{https://developer.android.com/training/app-links}. Acesso em: 24 set. 2026.",
+    "hart1968": "\\bibitem[{Hart; Nilsson; Raphael}(1968)]{hart1968} HART, P. E.; NILSSON, N. J.; RAPHAEL, B. A Formal Basis for the Heuristic Determination of Minimum Cost Paths. \\textit{IEEE Transactions on Systems Science and Cybernetics}, [s. l.], v. 4, n. 2, p. 100--107, 1968. DOI: \\url{https://doi.org/10.1109/TSSC.1968.300136}. Disponível em: \\url{https://ieeexplore.ieee.org/document/4082128/}. Acesso em: 7 out. 2026.",
+    "haylett2018": "\\bibitem[{Haylett}(2018)]{haylett2018} HAYLETT, Amanda Jane. \\textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018. Disponível em: \\url{https://eprints.soton.ac.uk/455573/}. Acesso em: 7 out. 2026.",
+    "ideo-designthinking": "\\bibitem[{IDEO}({[20\\mbox{-}\\mbox{-}]})]{ideo-designthinking} IDEO. \\textit{What is design thinking?} [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.",
+    "iso924111": "\\bibitem[{International Organization for Standardization}(2018)]{iso924111} INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. \\textit{ISO 9241-11:2018: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts}. Geneva: ISO, 2018. Disponível em: \\url{https://www.iso.org/standard/63500.html}. Acesso em: 7 out. 2026.",
+    "laubheimer2019": "\\bibitem[{Laubheimer}(2019)]{laubheimer2019} LAUBHEIMER, Page. \\textit{The 3-Click Rule for Navigation Is False}. Nielsen Norman Group, 11 ago. 2019. Disponível em: \\url{https://www.nngroup.com/articles/3-click-rule/}. Acesso em: 26 out. 2026.",
+    "geolocation": "\\bibitem[{MDN Web Docs}({[20\\mbox{-}\\mbox{-}]}a)]{geolocation} MDN WEB DOCS. \\textit{Geolocation API}. [20\\mbox{-}\\mbox{-}]a. Disponível em: \\url{https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API}. Acesso em: 23 set. 2026.",
+    "responsive": "\\bibitem[{MDN Web Docs}({[20\\mbox{-}\\mbox{-}]}b)]{responsive} MDN WEB DOCS. \\textit{Responsive web design}. [20\\mbox{-}\\mbox{-}]b. Disponível em: \\url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design}. Acesso em: 23 set. 2026.",
+    "gtfs": "\\bibitem[{MobilityData}({[20\\mbox{-}\\mbox{-}]})]{gtfs} MOBILITYDATA. \\textit{General Transit Feed Specification: Overview}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://gtfs.org/documentation/overview/}. Acesso em: 23 set. 2026.",
+    "nielsen2000": "\\bibitem[{Nielsen}(2000)]{nielsen2000} NIELSEN, Jakob. \\textit{Why You Only Need to Test with 5 Users}. Nielsen Norman Group, 18 mar. 2000. Disponível em: \\url{https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/}. Acesso em: 26 out. 2026.",
+    "sauro2012seq": "\\bibitem[{Sauro}(2012)]{sauro2012seq} SAURO, Jeff. \\textit{10 Things To Know About The Single Ease Question (SEQ)}. MeasuringU, 2012. Disponível em: \\url{https://measuringu.com/seq10/}. Acesso em: 26 out. 2026.",
+    "nielsen1994": "\\bibitem[{Nielsen}(1994)]{nielsen1994} NIELSEN, J. \\textit{10 Usability Heuristics for User Interface Design}. Nielsen Norman Group, 1994. Revisado em 30 jan. 2024. Disponível em: \\url{https://www.nngroup.com/articles/ten-usability-heuristics/}. Acesso em: 7 out. 2026.",
+    "norman2013": "\\bibitem[{Norman}(2013)]{norman2013} NORMAN, D. A. \\textit{The Design of Everyday Things}. Revised and expanded edition. New York: Basic Books, 2013. Disponível em: \\url{https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/}. Acesso em: 7 out. 2026.",
+    "uml251": "\\bibitem[{Object Management Group}(2017)]{uml251} OBJECT MANAGEMENT GROUP. \\textit{Unified Modeling Language: version 2.5.1}. 2017. Disponível em: \\url{https://www.omg.org/spec/UML/2.5.1/About-UML}. Acesso em: 7 out. 2026.",
+    "osmlicense": "\\bibitem[{OpenStreetMap Foundation}({[20\\mbox{-}\\mbox{-}]})]{osmlicense} OPENSTREETMAP FOUNDATION. \\textit{Direitos autorais e licença}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://www.openstreetmap.org/copyright?locale=pt}. Acesso em: 23 set. 2026.",
+    "osmpt": "\\bibitem[{OpenStreetMap Wiki}({[20\\mbox{-}\\mbox{-}]}a)]{osmpt} OPENSTREETMAP WIKI. \\textit{Key:public\\_transport}. [20\\mbox{-}\\mbox{-}]a. Disponível em: \\url{https://wiki.openstreetmap.org/wiki/Key:public_transport}. Acesso em: 23 set. 2026.",
+    "overpass": "\\bibitem[{OpenStreetMap Wiki}({[20\\mbox{-}\\mbox{-}]}b)]{overpass} OPENSTREETMAP WIKI. \\textit{Overpass API}. [20\\mbox{-}\\mbox{-}]b. Disponível em: \\url{https://wiki.openstreetmap.org/wiki/Overpass_API}. Acesso em: 23 set. 2026.",
+    "pereira2023": "\\bibitem[{Pereira; Andrade; Vieira}(2023)]{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \\textit{Journal of Geographical Systems}, [s. l.], v. 25, n. 3, p. 453--466, 2023. DOI: \\url{https://doi.org/10.1007/s10109-022-00400-x}. Disponível em: \\url{https://www.urbandemographics.org/publication/2022_jgs_time_geography_gtfs2gps/}. Acesso em: 5 out. 2026.",
+    "postgis": "\\bibitem[{PostGIS Project}({[20\\mbox{-}\\mbox{-}]})]{postgis} POSTGIS PROJECT. \\textit{PostGIS Manual}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://postgis.net/docs/en/}. Acesso em: 23 set. 2026.",
+    "prommaharaj2020": "\\bibitem[{Prommaharaj et al.}(2020)]{prommaharaj2020} PROMMAHARAJ, P.; PHITHAKKITNUKOON, S.; DEMISSIE, M. G.; KATTAN, L.; RATTI, C. Visualizing public transit system operation with GTFS data: a case study of Calgary, Canada. \\textit{Heliyon}, [s. l.], v. 6, n. 4, e03729, 2020. DOI: \\url{https://doi.org/10.1016/j.heliyon.2020.e03729}. Disponível em: \\url{https://senseable.mit.edu/papers/pdf/20200320_Prommaharaj-etal_VisualizingTransit_Helyon.pdf}. Acesso em: 5 out. 2026.",
+    "react": "\\bibitem[{React}({[20\\mbox{-}\\mbox{-}]})]{react} REACT. \\textit{React documentation}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://react.dev/}. Acesso em: 23 set. 2026.",
+    "hackatona2013": "\\bibitem[{São Paulo (Município)}(2013)]{hackatona2013} SÃO PAULO (Município). \\textit{Hackatona do Ônibus reúne jovens para desenvolvimento de aplicativos para o transporte}. 2013. Disponível em: \\url{https://prefeitura.sp.gov.br/w/noticia/hackatona-do-onibus-reune-jovens-para}. Acesso em: 23 set. 2026.",
+    "qrsptrans2014": "\\bibitem[{São Paulo (Município)}(2014)]{qrsptrans2014} SÃO PAULO (Município). \\textit{Nova tecnologia, QR Code já fornece informações por celular aos usuários de ônibus}. 24 jun. 2014. Disponível em: \\url{https://prefeitura.sp.gov.br/web/mobilidade/w/noticias/173515}. Acesso em: 23 set. 2026.",
+    "sptransapi": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}a)]{sptransapi} SÃO PAULO TRANSPORTE S.A. \\textit{API do Olho Vivo: guia de referência}. [20\\mbox{-}\\mbox{-}]a. Disponível em: \\url{https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/}. Acesso em: 23 set. 2026.",
+    "sptransadesivojs": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}b)]{sptransadesivojs} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: adesivo.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]b. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.js?2021631733832}. Acesso em: 23 set. 2026.",
+    "sptranscss": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}c)]{sptranscss} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: GeneXusXEv2.css}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]c. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/Resources/Portuguese/GeneXusXEv2.css?14585136}. Acesso em: 23 set. 2026.",
+    "sptransgxcfg": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}d)]{sptransgxcfg} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: gxcfg.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]d. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxcfg.js?54798}. Acesso em: 23 set. 2026.",
+    "sptransgxgral": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}e)]{sptransgxgral} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: gxgral.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]e. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxgral.js?54798}. Acesso em: 23 set. 2026.",
+    "sptransparada70016782": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}f)]{sptransparada70016782} SÃO PAULO TRANSPORTE S.A. \\textit{Informações desta parada: Av. Paulista, n. 200, código 70016782}. [20\\mbox{-}\\mbox{-}]f. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.aspx?70016782}. Acesso em: 23 set. 2026.",
+    "sedgewicksp": "\\bibitem[{Sedgewick; Wayne}({[20\\mbox{-}\\mbox{-}]})]{sedgewicksp} SEDGEWICK, R.; WAYNE, K. \\textit{Algorithms, 4th edition: 4.4 Shortest Paths}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://algs4.cs.princeton.edu/44sp/}. Acesso em: 23 set. 2026.",
+    "matriz2026": "\\bibitem[{Universidade Virtual do Estado de São Paulo}(2026)]{matriz2026} UNIVERSIDADE VIRTUAL DO ESTADO DE SÃO PAULO. \\textit{Matriz Curricular do Aluno: Bacharelado em Tecnologia da Informação}. Matriz BT.INFORMACAO.1. [S. l.]: UNIVESP, 7 out. 2026. 2 p. Documento institucional não publicado.",
+    "transitplanner": "\\bibitem[{Universität Freiburg}({[20\\mbox{-}\\mbox{-}]})]{transitplanner} UNIVERSITÄT FREIBURG. \\textit{Transit Planner: Basic Concepts}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://ad-publications.cs.uni-freiburg.de/student-projects/transfer-patterns-robustness/concepts.html}. Acesso em: 23 set. 2026.",
+    "southampton": "\\bibitem[{University of Southampton}(2012)]{southampton} UNIVERSITY OF SOUTHAMPTON. \\textit{Study of QR Codes in Southampton Bus Stops}. 2012. Disponível em: \\url{https://blog.soton.ac.uk/data/2012/03/27/studey-of-qr-codes-in-southampton-bus-stops/}. Acesso em: 23 set. 2026."
+  },
+  "corrigidas": {
+    "barbosa2021": "\\bibitem[{Barbosa \\textit{et al.}}(2021)]{barbosa2021} BARBOSA, S. D. J.; SILVA, B. S.; SILVEIRA, M. S.; GASPARINI, I.; DARIN, T.; BARBOSA, G. D. J. \\textit{Interação Humano-Computador e Experiência do Usuário}. Rio de Janeiro: Autopublicação, 2021. Disponível em: \\url{https://leanpub.com/ihc-ux}. Acesso em: 7 out. 2026.",
+    "bast2015": "\\bibitem[{Bast \\textit{et al.}}(2015)]{bast2015} BAST, Hannah \\textit{et al.} \\textit{Route planning in transportation networks}. 2015. Preprint. arXiv:1504.05140. DOI: \\url{https://doi.org/10.48550/arXiv.1504.05140}. Disponível em: \\url{https://arxiv.org/abs/1504.05140}. Acesso em: 7 out. 2026.",
+    "batz2013": "\\bibitem[{Batz \\textit{et al.}}(2013)]{batz2013} BATZ, Gernot Veit; GEISBERGER, Robert; SANDERS, Peter; VETTER, Christian. Minimum time-dependent travel times with contraction hierarchies. \\textit{Journal of Experimental Algorithmics}, [\\textit{s. l.}], v. 18, n. 1, art. 1.4, abr. 2013. DOI: \\url{https://doi.org/10.1145/2444016.2444020}. Disponível em: \\url{https://publikationen.bibliothek.kit.edu/1000139527}. Acesso em: 8 out. 2026.",
+    "baum2019": "\\bibitem[{Baum \\textit{et al.}}(2019)]{baum2019} BAUM, Moritz; BUCHHOLD, Valentin; SAUER, Jonas; WAGNER, Dorothea; ZÜNDORF, Tobias. UnLimited TRAnsfers for Multi-Modal Route Planning: An Efficient Solution. \\textit{In}: ANNUAL EUROPEAN SYMPOSIUM ON ALGORITHMS (ESA), 27., 2019, Munich/Garching. \\textit{Proceedings [...]}. Dagstuhl: Schloss Dagstuhl -- Leibniz-Zentrum für Informatik, 2019. (Leibniz International Proceedings in Informatics, v. 144). p. 14:1--14:16. DOI: \\url{https://doi.org/10.4230/LIPIcs.ESA.2019.14}. Disponível em: \\url{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2019.14}. Acesso em: 8 out. 2026.",
+    "brakewood2019": "\\bibitem[{Brakewood; Watkins}(2019)]{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \\textit{Transport Reviews}, [\\textit{s. l.}], v. 39, n. 3, p. 327--356, maio 2019. DOI: \\url{https://doi.org/10.1080/01441647.2018.1472147}. Disponível em: \\url{https://candacebrakewood.com/wp-content/uploads/2019/05/brakewood-and-watkins-preprint-paper.pdf}. Acesso em: 5 out. 2026.",
+    "c4container": "\\bibitem[{C4 model}({[20\\mbox{-}\\mbox{-}]})]{c4container} C4 MODEL. \\textit{Container diagram}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://c4model.com/diagrams/container}. Acesso em: 7 out. 2026.",
+    "card1980": "\\bibitem[{Card, Moran e Newell}(1980)]{card1980} CARD, Stuart K.; MORAN, Thomas P.; NEWELL, Allen. The keystroke-level model for user performance time with interactive systems. \\textit{Communications of the ACM}, [New York], v. 23, n. 7, p. 396--410, jul. 1980. DOI: \\url{https://doi.org/10.1145/358886.358895}. Disponível em: \\url{https://iihm.imag.fr/blanch/ens/2010-2011/M1/EIHM/cours/1980-Card-KLM.pdf}. Acesso em: 26 out. 2026.",
+    "git": "\\bibitem[{Chacon; Straub}(2014)]{git} CHACON, Scott; STRAUB, Ben. \\textit{Pro Git}. 2. ed. Berkeley, CA: Apress, 2014. Disponível em: \\url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.",
+    "cittamobiajuda": "\\bibitem[{Cittamobi}(2022)]{cittamobiajuda} CITTAMOBI. \\textit{Como o Cittamobi funciona?} Central de Ajuda. 2022. Disponível em: \\url{https://cittamobi.zendesk.com/hc/pt-br/articles/9379145018519-Como-o-Cittamobi-funciona}. Acesso em: 24 set. 2026.",
+    "cittamobimaua": "\\bibitem[{Cittamobi}({[20\\mbox{-}\\mbox{-}]})]{cittamobimaua} CITTAMOBI. \\textit{Suzantur -- Mauá: horários de ônibus, linhas, itinerários e paradas}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}. Acesso em: 24 set. 2026.",
+    "delling2012": "\\bibitem[{Delling; Pajor; Werneck}(2012)]{delling2012} DELLING, Daniel; PAJOR, Thomas; WERNECK, Renato F. Round-based public transit routing. \\textit{In}: MEETING ON ALGORITHM ENGINEERING AND EXPERIMENTS (ALENEX), 14., 2012, Kyoto. \\textit{Proceedings [...]}. Philadelphia: SIAM, 2012. p. 130--140. DOI: \\url{https://doi.org/10.1137/1.9781611972924.13}. Disponível em: \\url{https://www.microsoft.com/en-us/research/publication/round-based-public-transit-routing/}. Acesso em: 7 out. 2026.",
+    "designcouncil": "\\bibitem[{Design Council}({[20\\mbox{-}\\mbox{-}]})]{designcouncil} DESIGN COUNCIL. \\textit{Framework for Innovation}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.",
+    "dibbelt2018": "\\bibitem[{Dibbelt \\textit{et al.}}(2018)]{dibbelt2018} DIBBELT, Julian; PAJOR, Thomas; STRASSER, Ben; WAGNER, Dorothea. Connection scan algorithm. \\textit{Journal of Experimental Algorithmics}, [\\textit{s. l.}], v. 23, art. 1.7, out. 2018. DOI: \\url{https://doi.org/10.1145/3274661}. Disponível em: \\url{https://publikationen.bibliothek.kit.edu/1000088435}. Acesso em: 8 out. 2026.",
+    "dijkstra1959": "\\bibitem[{Dijkstra}(1959)]{dijkstra1959} DIJKSTRA, E. W. A note on two problems in connexion with graphs. \\textit{Numerische Mathematik}, [\\textit{s. l.}], v. 1, p. 269--271, dez. 1959. DOI: \\url{https://doi.org/10.1007/BF01386390}. Disponível em: \\url{https://link.springer.com/article/10.1007/BF01386390}. Acesso em: 7 out. 2026.",
+    "django": "\\bibitem[{Django Software Foundation}({[20\\mbox{-}\\mbox{-}]})]{django} DJANGO SOFTWARE FOUNDATION. \\textit{Django documentation}. Versão 6.0. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.",
+    "planoacao2026": "\\bibitem[{Equipe do Projeto Integrador II}(2026a)]{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \\textit{Plano de ação: Projeto Integrador em Computação II}. [\\textit{S. l.}]: Universidade Virtual do Estado de São Paulo, 2026a. Documento acadêmico não publicado.",
+    "mbmimportacoes": "\\bibitem[{Equipe do Projeto Integrador II}(2026b)]{mbmimportacoes} EQUIPE DO PROJETO INTEGRADOR II. \\textit{Ponto a Ponto: importações externas e localização aproximada das paradas}. [\\textit{S. l.}]: Equipe do Projeto Integrador II, 2026b. Documento técnico não publicado, atualizado em 24 set. 2026.",
+    "androidapplinks": "\\bibitem[{Google}(2026)]{androidapplinks} GOOGLE. \\textit{About deep links}. Android Developers. 2026. Disponível em: \\url{https://developer.android.com/training/app-links}. Acesso em: 24 set. 2026.",
+    "hart1968": "\\bibitem[{Hart; Nilsson; Raphael}(1968)]{hart1968} HART, P. E.; NILSSON, N. J.; RAPHAEL, B. A Formal Basis for the Heuristic Determination of Minimum Cost Paths. \\textit{IEEE Transactions on Systems Science and Cybernetics}, [\\textit{s. l.}], v. 4, n. 2, p. 100--107, 1968. DOI: \\url{https://doi.org/10.1109/TSSC.1968.300136}. Disponível em: \\url{https://ieeexplore.ieee.org/document/4082128/}. Acesso em: 7 out. 2026.",
+    "haylett2018": "\\bibitem[{Haylett}(2018)]{haylett2018} HAYLETT, Amanda Jane. \\textit{Improving the clarity of travel information for familiar and unfamiliar travellers in public transport travel information systems}. 2018. Tese (Doctor of Engineering) -- Faculty of Engineering and the Environment, University of Southampton, Southampton, 2018. Disponível em: \\url{https://eprints.soton.ac.uk/455573/}. Acesso em: 7 out. 2026.",
+    "ideo-designthinking": "\\bibitem[{IDEO}({[20\\mbox{-}\\mbox{-}]})]{ideo-designthinking} IDEO. \\textit{What is design thinking?} [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://designthinking.ideo.com/introduction}. Acesso em: 24 set. 2026.",
+    "iso924111": "\\bibitem[{International Organization for Standardization}(2018)]{iso924111} INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. \\textit{ISO 9241-11:2018: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts}. Geneva: ISO, 2018. Disponível em: \\url{https://www.iso.org/standard/63500.html}. Acesso em: 7 out. 2026.",
+    "laubheimer2019": "\\bibitem[{Laubheimer}(2019)]{laubheimer2019} LAUBHEIMER, Page. \\textit{The 3-Click Rule for Navigation Is False}. Nielsen Norman Group, 11 ago. 2019. Disponível em: \\url{https://www.nngroup.com/articles/3-click-rule/}. Acesso em: 26 out. 2026.",
+    "geolocation": "\\bibitem[{MDN Web Docs}(2026a)]{geolocation} MDN WEB DOCS. \\textit{Geolocation API}. Atualizado em 11 set. 2026a. Disponível em: \\url{https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API}. Acesso em: 23 set. 2026.",
+    "responsive": "\\bibitem[{MDN Web Docs}(2026b)]{responsive} MDN WEB DOCS. \\textit{Responsive web design}. Atualizado em 4 set. 2026b. Disponível em: \\url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design}. Acesso em: 23 set. 2026.",
+    "gtfs": "\\bibitem[{MobilityData}({[20\\mbox{-}\\mbox{-}]})]{gtfs} MOBILITYDATA. \\textit{General Transit Feed Specification: Overview}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://gtfs.org/documentation/overview/}. Acesso em: 23 set. 2026.",
+    "nielsen2000": "\\bibitem[{Nielsen}(2000)]{nielsen2000} NIELSEN, Jakob. \\textit{Why You Only Need to Test with 5 Users}. Nielsen Norman Group, 18 mar. 2000. Disponível em: \\url{https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/}. Acesso em: 26 out. 2026.",
+    "sauro2012seq": "\\bibitem[{Sauro}(2012)]{sauro2012seq} SAURO, Jeff. \\textit{10 Things To Know About The Single Ease Question (SEQ)}. MeasuringU, 30 out. 2012. Disponível em: \\url{https://measuringu.com/seq10/}. Acesso em: 26 out. 2026.",
+    "nielsen1994": "\\bibitem[{Nielsen}(1994)]{nielsen1994} NIELSEN, Jakob. \\textit{10 Usability Heuristics for User Interface Design}. Nielsen Norman Group, 24 abr. 1994. Revisado em 30 jan. 2024. Disponível em: \\url{https://www.nngroup.com/articles/ten-usability-heuristics/}. Acesso em: 7 out. 2026.",
+    "norman2013": "\\bibitem[{Norman}(2013)]{norman2013} NORMAN, D. A. \\textit{The Design of Everyday Things}. Revised and expanded edition. New York: Basic Books, 2013. Disponível em: \\url{https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/}. Acesso em: 7 out. 2026.",
+    "uml251": "\\bibitem[{Object Management Group}(2017)]{uml251} OBJECT MANAGEMENT GROUP. \\textit{Unified Modeling Language: version 2.5.1}. dez. 2017. Disponível em: \\url{https://www.omg.org/spec/UML/2.5.1/About-UML}. Acesso em: 7 out. 2026.",
+    "osmlicense": "\\bibitem[{OpenStreetMap Foundation}({[20\\mbox{-}\\mbox{-}]})]{osmlicense} OPENSTREETMAP FOUNDATION. \\textit{Direitos autorais e licença}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://www.openstreetmap.org/copyright?locale=pt}. Acesso em: 23 set. 2026.",
+    "osmpt": "\\bibitem[{OpenStreetMap Wiki}(2026)]{osmpt} OPENSTREETMAP WIKI. \\textit{Key:public\\_transport}. Atualizado em 16 mar. 2026. Disponível em: \\url{https://wiki.openstreetmap.org/wiki/Key:public_transport}. Acesso em: 23 set. 2026.",
+    "overpass": "\\bibitem[{OpenStreetMap Wiki}({[20\\mbox{-}\\mbox{-}]})]{overpass} OPENSTREETMAP WIKI. \\textit{Overpass API}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://wiki.openstreetmap.org/wiki/Overpass_API}. Acesso em: 23 set. 2026.",
+    "pereira2023": "\\bibitem[{Pereira; Andrade; Vieira}(2023)]{pereira2023} PEREIRA, R. H. M.; ANDRADE, P. R.; VIEIRA, J. P. B. Exploring the time geography of public transport networks with the gtfs2gps package. \\textit{Journal of Geographical Systems}, [\\textit{s. l.}], v. 25, n. 3, p. 453--466, jul. 2023. DOI: \\url{https://doi.org/10.1007/s10109-022-00400-x}. Disponível em: \\url{https://www.urbandemographics.org/publication/2022_jgs_time_geography_gtfs2gps/}. Acesso em: 5 out. 2026.",
+    "postgis": "\\bibitem[{PostGIS Project}({[20\\mbox{-}\\mbox{-}]})]{postgis} POSTGIS PROJECT. \\textit{PostGIS Manual}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://postgis.net/docs/en/}. Acesso em: 23 set. 2026.",
+    "prommaharaj2020": "\\bibitem[{Prommaharaj \\textit{et al.}}(2020)]{prommaharaj2020} PROMMAHARAJ, P.; PHITHAKKITNUKOON, S.; DEMISSIE, M. G.; KATTAN, L.; RATTI, C. Visualizing public transit system operation with GTFS data: a case study of Calgary, Canada. \\textit{Heliyon}, [\\textit{s. l.}], v. 6, n. 4, e03729, abr. 2020. DOI: \\url{https://doi.org/10.1016/j.heliyon.2020.e03729}. Disponível em: \\url{https://senseable.mit.edu/papers/pdf/20200320_Prommaharaj-etal_VisualizingTransit_Helyon.pdf}. Acesso em: 5 out. 2026.",
+    "react": "\\bibitem[{React}({[20\\mbox{-}\\mbox{-}]})]{react} REACT. \\textit{React documentation}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://react.dev/}. Acesso em: 23 set. 2026.",
+    "hackatona2013": "\\bibitem[{São Paulo (Município)}(2013)]{hackatona2013} SÃO PAULO (Município). \\textit{Hackatona do Ônibus reúne jovens para desenvolvimento de aplicativos para o transporte}. 26 out. 2013. Disponível em: \\url{https://prefeitura.sp.gov.br/w/noticia/hackatona-do-onibus-reune-jovens-para}. Acesso em: 23 set. 2026.",
+    "qrsptrans2014": "\\bibitem[{São Paulo (Município)}(2014)]{qrsptrans2014} SÃO PAULO (Município). \\textit{Nova tecnologia, QR Code já fornece informações por celular aos usuários de ônibus}. 24 jun. 2014. Disponível em: \\url{https://prefeitura.sp.gov.br/web/mobilidade/w/noticias/173515}. Acesso em: 23 set. 2026.",
+    "sptransapi": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}a)]{sptransapi} SÃO PAULO TRANSPORTE S.A. \\textit{API do Olho Vivo: guia de referência}. [20\\mbox{-}\\mbox{-}]a. Disponível em: \\url{https://www.sptrans.com.br/desenvolvedores/api-do-olho-vivo-guia-de-referencia/documentacao-api/}. Acesso em: 23 set. 2026.",
+    "sptransadesivojs": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}b)]{sptransadesivojs} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: adesivo.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]b. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.js?2021631733832}. Acesso em: 23 set. 2026.",
+    "sptranscss": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}c)]{sptranscss} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: GeneXusXEv2.css}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]c. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/Resources/Portuguese/GeneXusXEv2.css?14585136}. Acesso em: 23 set. 2026.",
+    "sptransgxcfg": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}d)]{sptransgxcfg} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: gxcfg.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]d. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxcfg.js?54798}. Acesso em: 23 set. 2026.",
+    "sptransgxgral": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}e)]{sptransgxgral} SÃO PAULO TRANSPORTE S.A. \\textit{Aplicação QRCodeAdesivo: gxgral.js}. Recurso público; cabeçalho HTTP Last-Modified consultado. [20\\mbox{-}\\mbox{-}]e. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/gxgral.js?54798}. Acesso em: 23 set. 2026.",
+    "sptransparada70016782": "\\bibitem[{São Paulo Transporte S.A.}({[20\\mbox{-}\\mbox{-}]}f)]{sptransparada70016782} SÃO PAULO TRANSPORTE S.A. \\textit{Informações desta parada: Av. Paulista, n. 200, código 70016782}. [20\\mbox{-}\\mbox{-}]f. Disponível em: \\url{http://qrcodeadesivo.extapps.sptrans.com.br/QRCodeAdesivo/adesivo.aspx?70016782}. Acesso em: 23 set. 2026.",
+    "sedgewicksp": "\\bibitem[{Sedgewick; Wayne}({[20\\mbox{-}\\mbox{-}]})]{sedgewicksp} SEDGEWICK, R.; WAYNE, K. \\textit{Algorithms, 4th edition: 4.4 Shortest Paths}. [20\\mbox{-}\\mbox{-}]. Disponível em: \\url{https://algs4.cs.princeton.edu/44sp/}. Acesso em: 23 set. 2026.",
+    "matriz2026": "\\bibitem[{Universidade Virtual do Estado de São Paulo}(2026)]{matriz2026} UNIVERSIDADE VIRTUAL DO ESTADO DE SÃO PAULO. \\textit{Matriz Curricular do Aluno: Bacharelado em Tecnologia da Informação}. Matriz BT.INFORMACAO.1. [\\textit{S. l.}]: UNIVESP, 7 out. 2026. 2 p. Documento institucional não publicado.",
+    "transitplanner": "\\bibitem[{Sawin; Stahl; Sternisko}(2011--2012)]{transitplanner} SAWIN, Eugen; STAHL, Philip; STERNISKO, Jonas. \\textit{Transit Planner: Basic Concepts}. Freiburg: Universität Freiburg, c2011--2012. Disponível em: \\url{https://ad-publications.cs.uni-freiburg.de/student-projects/transfer-patterns-robustness/concepts.html}. Acesso em: 23 set. 2026.",
+    "southampton": "\\bibitem[{Gutteridge}(2012)]{southampton} GUTTERIDGE, Christopher. \\textit{Study of QR Codes in Southampton Bus Stops}. Southampton Open Data Blog, 27 mar. 2012. Disponível em: \\url{https://blog.soton.ac.uk/data/2012/03/27/studey-of-qr-codes-in-southampton-bus-stops/}. Acesso em: 23 set. 2026.",
+    "iso25062": "\\bibitem[{International Organization for Standardization}(2025)]{iso25062} INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. \\textit{ISO 25062:2025}: Systems and software engineering --- Systems and software Quality Requirements and Evaluation (SQuaRE) --- Common Industry Format (CIF) for reporting usability evaluations. Geneva: ISO, jan. 2025. Disponível em: \\url{https://www.iso.org/standard/84255.html}. Acesso em: 26 out. 2026.",
+    "tullis2013": "\\bibitem[{Tullis; Albert}(2013)]{tullis2013} TULLIS, Tom; ALBERT, Bill. \\textit{Measuring the user experience}: collecting, analyzing, and presenting usability metrics. 2nd ed. Waltham, MA: Morgan Kaufmann, 2013. DOI: \\url{https://doi.org/10.1016/C2011-0-00016-9}. Disponível em: \\url{https://www.sciencedirect.com/book/monograph/9780124157811/measuring-the-user-experience}. Acesso em: 26 out. 2026."
+  },
+  "ordem": [
+    "barbosa2021",
+    "bast2015",
+    "batz2013",
+    "baum2019",
+    "brakewood2019",
+    "c4container",
+    "card1980",
+    "git",
+    "cittamobiajuda",
+    "cittamobimaua",
+    "delling2012",
+    "designcouncil",
+    "dibbelt2018",
+    "dijkstra1959",
+    "django",
+    "planoacao2026",
+    "mbmimportacoes",
+    "androidapplinks",
+    "southampton",
+    "hart1968",
+    "haylett2018",
+    "ideo-designthinking",
+    "iso25062",
+    "iso924111",
+    "laubheimer2019",
+    "geolocation",
+    "responsive",
+    "gtfs",
+    "nielsen1994",
+    "nielsen2000",
+    "norman2013",
+    "uml251",
+    "osmlicense",
+    "osmpt",
+    "overpass",
+    "pereira2023",
+    "postgis",
+    "prommaharaj2020",
+    "react",
+    "hackatona2013",
+    "qrsptrans2014",
+    "sptransapi",
+    "sptransadesivojs",
+    "sptranscss",
+    "sptransgxcfg",
+    "sptransgxgral",
+    "sptransparada70016782",
+    "sauro2012seq",
+    "transitplanner",
+    "sedgewicksp",
+    "tullis2013",
+    "matriz2026"
+  ],
+  "notas": {
+    "nielsen1994": [
+      "Normalização do mesmo autor (6023, 8.1.1; melhoria recomendada).",
+      "Data completa expressa na fonte original; revisão de 2024 preservada."
+    ],
+    "sauro2012seq": [
+      "Data completa expressa no artigo."
+    ],
+    "card1980": [
+      "Local identificado externamente; 6023, 7.7.5 e 8.4.3.",
+      "Mês do fascículo confirmado no artigo e no registro editorial.",
+      "URL da cópia consultada e acesso acrescentados (6023, 6.6); DOI preservado."
+    ],
+    "batz2013": [
+      "Data do fascículo ou publicação eletrônica confirmada no registro editorial/repositório dos autores; 6023, 7.7.5.",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "brakewood2019": [
+      "Data do fascículo ou publicação eletrônica confirmada no registro editorial/repositório dos autores; 6023, 7.7.5.",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "dibbelt2018": [
+      "Data do fascículo ou publicação eletrônica confirmada no registro editorial/repositório dos autores; 6023, 7.7.5.",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "pereira2023": [
+      "Data do fascículo ou publicação eletrônica confirmada no registro editorial/repositório dos autores; 6023, 7.7.5.",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "prommaharaj2020": [
+      "Data do fascículo ou publicação eletrônica confirmada no registro editorial/repositório dos autores; 6023, 7.7.5.",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "baum2019": [
+      "Local do evento confirmado nos anais (6023, 7.8.4.2).",
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "southampton": [
+      "Autoria pessoal explícita: Christopher Gutteridge; corrigida a chamada (10520, 6.1.1).",
+      "Autoria identificada no próprio documento (6023, 8.1.1).",
+      "Data e veículo expressos na fonte."
+    ],
+    "geolocation": [
+      "Chamada sincronizada com o ano de atualização documentado.",
+      "Data de atualização explícita da MDN, distinta do acesso preservado; 6023, 8.6."
+    ],
+    "responsive": [
+      "Chamada sincronizada com o ano de atualização documentado.",
+      "Data de atualização explícita da MDN, distinta do acesso preservado; 6023, 8.6."
+    ],
+    "osmpt": [
+      "Chamada atualizada; sufixo desnecessário removido.",
+      "Última edição expressa no documento, anterior ao acesso original."
+    ],
+    "overpass": [
+      "Sufixo removido: obras da mesma autoria agora têm datas distintas.",
+      "Atualização atual de 24/10/2026 é posterior ao acesso de 23/09; não foi retroativamente atribuída ao documento consultado."
+    ],
+    "transitplanner": [
+      "Autoria da equipe e intervalo de copyright expressos na página inicial do mesmo projeto; não confundidos com a data de acesso (6023, 8.1.1 e 8.6.1.1)."
+    ],
+    "iso25062": [
+      "Adição conceitual solicitada, citada em E.4; não é correção obrigatória."
+    ],
+    "tullis2013": [
+      "Adição conceitual solicitada, citada em E.4; não é correção obrigatória."
+    ],
+    "barbosa2021": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "bast2015": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "delling2012": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "dijkstra1959": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025.",
+      "Data mais precisa confirmada na página oficial, sem alterar a data de acesso."
+    ],
+    "planoacao2026": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "mbmimportacoes": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "hart1968": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "matriz2026": [
+      "Uniformização tipográfica de expressões latinas conforme exemplos da NBR 6023:2025."
+    ],
+    "hackatona2013": [
+      "Data mais precisa confirmada na página oficial, sem alterar a data de acesso."
+    ],
+    "uml251": [
+      "Data mais precisa confirmada na página oficial, sem alterar a data de acesso."
+    ]
+  }
+}

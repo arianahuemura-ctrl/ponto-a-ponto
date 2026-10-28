@@ -1,0 +1,79 @@
+[
+  {
+    "file": "pesquisa-inicial.png",
+    "date": "2026-10-25T07:18:53.865Z",
+    "url": "http://127.0.0.1:8001/",
+    "viewport": {
+      "width": 430,
+      "height": 932
+    },
+    "sha256": "4c03ee2a340b1376626a3ff1630663b4bfdca1d29b2f2a035e7573c6d1bfd1f6",
+    "text": "Ponto a Ponto — Ajude a melhorar o transporte público\n\nO PaP é um projeto acadêmico da UNIVESP que facilita a consulta de ônibus e o planejamento de viagens.\n\nDurante o desenvolvimento, estamos realizando uma pesquisa para identificar dificuldades de navegação e melhorar a experiência dos passageiros.\n\nSe você optar por contribuir, poderemos registrar suas interações com a aplicação, incluindo movimentos no mapa, buscas, locais consultados e informações técnicas do dispositivo.\n\nSua participação é voluntária. Você poderá utilizar todas as funcionalidades do PaP mesmo sem participar da pesquisa.\n\nOs dados de transporte são fornecidos pela SPTrans. Atualmente, o PaP funciona na cidade de São Paulo.\n\nContribuir com a pesquisa\nContinuar sem contribuir\nInformações completas sobre a pesquisa"
+  },
+  {
+    "file": "sem-localizacao.png",
+    "date": "2026-10-25T07:19:06.171Z",
+    "url": "http://127.0.0.1:8001/",
+    "viewport": {
+      "width": 430,
+      "height": 932
+    },
+    "sha256": "d92862e2264453ff77a8a5e58160cc6e2a542cfa62e651fae5189f887d55319c",
+    "text": "Selecionar embarque\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n+\n−\n© OpenStreetMap\n…\nEmbarque\nSelecionando\n+\nDestino\nNão definido\nNavegação\nFavoritos\nFeedback"
+  },
+  {
+    "file": "pesquisa-configuracoes.png",
+    "date": "2026-10-25T07:19:14.344Z",
+    "url": "http://127.0.0.1:8001/",
+    "viewport": {
+      "width": 430,
+      "height": 932
+    },
+    "sha256": "4d350e0409761b7d21b99a697a422fc0fe778c9a59576273624f68584d10ed16",
+    "text": "Selecionar embarque\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n+\n−\n© OpenStreetMap\n…\nEmbarque\nSelecionando\n+\nDestino\nNão definido\nNavegação\nFavoritos\nFeedback\nConfigurações → Participação na pesquisa\n×\n\nDecisão atual: não participar. Registrada em 25/10/2026, 04:18:53.\n\n● Gravar\n\nInterromper não exclui automaticamente os dados já enviados.\n\nDados e finalidade\n\nCom sua autorização, registramos reprodução visual da interface e do mapa, movimentos, toques, buscas digitadas, locais de origem e destino, rotas e respostas das consultas, falhas, favoritos e informações técnicas do dispositivo. A localização depende também da permissão do navegador. O objetivo é identificar dificuldades de uso e falhas. Os dados são agrupados por sessão, sem cadastro, mas podem revelar locais e hábitos pessoais: não são anônimos.\n\nAcesso, retenção e exclusão\n\nOs registros ficam no servidor do projeto, com acesso administrativo restrito. Eventos com mais de 30 dias são removidos quando uma nova gravação é recebida. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Blocos de gravação de sessões ainda existentes, exportações e cópias baixadas podem permanecer e exigem tratamento pelos responsáveis. Não garantimos exclusão de todas as cópias em 30 dias.\n\nInterromper a participação encerra a captura e descarta eventos ainda não enviados; não apaga automaticamente dados já recebidos. Uma transmissão já recebida pelo servidor não pode ser desfeita pela revogação. Você pode solicitar a exclusão abaixo. A solicitação será analisada pela equipe e não representa exclusão imediata.\n\nSem participar, o PaP não inicia gravação de pesquisa. Consultas necessárias ao transporte e logs operacionais do servidor continuam funcionando. Feedback enviado voluntariamente é armazenado separadamente, mesmo sem gravação. Relatos e solicitações são tratados pela equipe, sem limpeza automática por prazo nesta versão.\n\nSua decisão é salva neste navegador, separada dos identificadores da gravação. Não há vencimento por prazo nesta versão. Mudanças relevantes na coleta, finalidade, acesso ou retenção exigirão uma nova escolha. Você pode alterar sua participação a qualquer momento nestas configurações.\n\nContato com a equipe\n\n25202874@aluno.univesp.br\n\nUse este formulário para entrar em contato ou solicitar exclusão. Não informe senhas. Se desejar resposta fora da aplicação, inclua um contato no texto.\n\nAssunto\nContato sobre a pesquisa\nSolicitar exclusão dos registros já enviados\nMensagem\nEnviar solicitação"
+  },
+  {
+    "file": "feedback.png",
+    "date": "2026-10-25T07:19:22.568Z",
+    "url": "http://127.0.0.1:8001/",
+    "viewport": {
+      "width": 430,
+      "height": 932
+    },
+    "sha256": "d41402cb22d5428524a09e435af37497362a1e97869b633a28135c3de1c22e5b",
+    "text": "Selecionar embarque\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n+\n−\n© OpenStreetMap\n…\nEmbarque\nSelecionando\n+\nDestino\nNão definido\nNavegação\nFavoritos\nFeedback\nComo foi usar o PaP?\n×\n\nEncontrou um problema ou tem uma sugestão? O envio é voluntário e não inicia gravação de navegação. Se a pesquisa estiver ativa, o relato será vinculado à sessão.\n\nTipo\nRelatar problema\nSugerir melhoria\nO que funcionou bem\nSeu feedback\n0/2000 · Evite senhas ou dados pessoais.\nVoltar\nEnviar feedback"
+  },
+  {
+    "file": "linha-6L10-consulta.png",
+    "date": "2026-10-25T07:19:31.741Z",
+    "url": "http://127.0.0.1:8001/?stop=5614798",
+    "viewport": {
+      "width": 1366,
+      "height": 1000
+    },
+    "sha256": "5fd87901358e0fdcdadedbbec67a9d7416d746967b8399da6455286d31f6d577",
+    "text": "Próximos ônibus\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n+\n−\n© OpenStreetMap\nPróximos ônibus\n\nEmbarque: R. Matilde De Lutis Barbosa · 5614798\n\n+\nDestino\nNão definido\nSalvar ponto\nConsulta às 04:19 · atualização a cada 30 s\nOrdenar por\nPróximos ônibus\nNome do destino (A–Z)\nNúmero da linha\nSelecionar linhas para acompanhar\n6L10-41 · Messiânica\nVer trajeto da linha →\n\nPrevisão de chegada indisponível. Consulte os horários ou frequências programados abaixo.\n\nA cada 30 min, das 05:28 às 06:27\n\nA cada 20 min, das 06:28 às 07:27\n\nA cada 30 min, das 07:28 às 08:27\n\nNavegação\nFavoritos\nFeedback"
+  },
+  {
+    "file": "linha-6L10-completa.png",
+    "date": "2026-10-25T07:19:45.479Z",
+    "url": "http://127.0.0.1:8001/?stop=5614798",
+    "viewport": {
+      "width": 1366,
+      "height": 1000
+    },
+    "sha256": "43448c1907bd231c6f3cc7ae6007e903fbe07a2fc07e9ffd7dbb18c3d821cf94",
+    "text": "Acompanhar ônibus\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\nI\n+\n−\n© OpenStreetMap\n✓\nEmbarque\nDefinido\n+\nDestino\nNão definido\n1 linhas acompanhadas\nAtualização a cada 5 s\n6L10-41: trajeto disponível · sem posição de ônibus disponível\nAntes do embarque\nApós o embarque\nSetas: sentido · separação visual de ida e volta\nI: início do traçado da linha\nBandeira: fim do traçado GTFS. Última parada cadastrada divergente; desembarque final não confirmado.\nNavegação\nFavoritos\nFeedback"
+  },
+  {
+    "file": "linha-6L10-detalhe.png",
+    "date": "2026-10-25T07:19:55.861Z",
+    "url": "http://127.0.0.1:8001/?stop=5614798",
+    "viewport": {
+      "width": 1366,
+      "height": 1000
+    },
+    "sha256": "bdc283032b8807cc47f1e8666223eee194e2b4a804fd1f619beb2238d7887543",
+    "text": "Acompanhar ônibus\nPermissão de localização negada. Você pode continuar escolhendo os pontos no mapa.\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\n➤\nI\n+\n−\n© OpenStreetMap\n✓\nEmbarque\nDefinido\n+\nDestino\nNão definido\n1 linhas acompanhadas\nAtualização a cada 5 s\n6L10-41: trajeto disponível · sem posição de ônibus disponível\nAntes do embarque\nApós o embarque\nSetas: sentido · separação visual de ida e volta\nI: início do traçado da linha\nBandeira: fim do traçado GTFS. Última parada cadastrada divergente; desembarque final não confirmado.\nNavegação\nFavoritos\nFeedback"
+  }
+]

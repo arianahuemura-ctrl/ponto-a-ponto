@@ -1,0 +1,219 @@
+REVISÃO TÉCNICA E ACADÊMICA — MATERIALIZAÇÃO DO PAP
+28 de outubro de 2026 — horário de Brasília
+
+AMBIENTE E VERSÕES
+
+Worktree editado: /home/avale/Projetos/maua_bus_map-relatorio
+Branch confirmada antes e depois: relatorio.
+HEAD acadêmico preservado: c18556cb4a3f3bc733d9eab040f0d7f0755595b3.
+Havia alterações e arquivos não rastreados antes desta revisão; foram preservados.
+Não houve commit, merge, rebase, reset ou troca de branch.
+
+PDF de entrada confirmado por conteúdo, independentemente do nome de download:
+  relatorio_final_pi2_v2.pdf, 132 páginas
+  MD5: 2fdcb455617d4429293930e4ee3b3458
+Coincide com a referência Relatorio_final_PaP(7).pdf informada pelo usuário.
+A versão anterior também foi localizada no acervo materializacao-disco-2026-10-28/
+antes/ e teve confirmado o MD5 47b891de58f357f7d3202534ab96a0ba.
+
+Código de desenvolvimento apenas lido:
+  /home/avale/Projetos/maua_bus_map
+  branch feat/busca-bidirecional, HEAD 85417bccfb3b72ff287c5e2105840654e5b95ca1,
+  com alterações locais preexistentes. Hashes dos módulos em evidencias.json.
+Nenhum algoritmo, serviço ou banco foi modificado; não houve materialização,
+benchmark, planejamento de viagem ou chamada a serviços externos.
+
+ALTERAÇÕES EFETIVAS NO FONTE
+
+Arquivo: docs/relatorio_final/planejador_hibrido.tex
+  Linha 14: separa as cotas efetivas 16/8 e o esquema de duas categorias da
+  previsão de três ônibus (cota 4) no protocolo futuro.
+  Linhas 16–18: caracteriza a interrupção preventiva, documenta a amostra,
+  reproduz a extrapolação e explicita as limitações da estimativa de disco.
+  Linhas 20–22: diferencia registro intermediário, banco preservado, backup,
+  categorias processadas, candidatos recuperáveis e cobertura/viabilidade.
+  Linhas 29–33: corrige as condições do adaptador online, da consulta estrita
+  e da complementação pelos índices; elimina a exigência indevida de três
+  categorias e a afirmação de ausência absoluta de composição online.
+  Linhas 43–45: esclarece fallback, exceção da caminhada direta, ausência de
+  complementação automática com três ônibus e alcance do indicador do produtor.
+
+Arquivo: docs/relatorio_final/relatorio_final_pi2_v2.tex
+  Linhas 611–614: proteção local contra linha viúva (widowpenalty=10000),
+  sem alterar o texto do parágrafo, Times New Roman, margens ou espaçamento.
+  Linha 1132: identifica data, revisão e evidências da nova inspeção técnica
+  na abertura do Apêndice B; preserva a notícia da interrupção em 28/10.
+
+O diff exclusivo desta revisão está em alteracoes.patch. Ele foi calculado
+contra o estado encontrado, não contra HEAD, para não atribuir ao trabalho
+atual as modificações anteriores do usuário.
+
+RESULTADO DA ANÁLISE DO CÓDIGO
+
+1. Categorias presentes e concluídas
+   materialized_connections.py:16 e 90–104: VERSION=2; os CHECKs do esquema
+   restringem boardings a 1 ou 2. Os campos edge3/walk2 não comprovam a
+   existência de registros de três ônibus. O laço de materialize (linha 126)
+   processa somente 1 e 2, com cotas 16/8.
+   O banco preservado possui 77.988 estados ready de um ônibus e 77.987 de
+   dois. Não há timeout nem terceira categoria nesse banco. ready significa
+   que a categoria terminou, podendo ter zero candidatos.
+
+2. Caminho utilizado pela aplicação
+   alternatives.py:185 → connection_adapter.py:6/33 →
+   materialized_adapter.py:17/43/160.
+   _prepare_materialized valida assinaturas e usa EXISTS para exigir ready
+   da categoria do candidato, não de todas as categorias do par. A seleção
+   dos acessos usa até três paradas por extremidade (alternatives.py:17–31).
+   city_complete=false não impede essa recuperação parcial.
+
+3. Consulta estrita distinta
+   materialized_connections.query (linha 193) exige exatamente as chaves
+   {1,2} nas cotas e ambas as categorias ready. Levanta MaterializationPending
+   se uma faltar. Não admite consulta de uma categoria isolada nem exige três.
+   Essa função não é o caminho de preparação usado pelo passageiro.
+
+4. Complementação dos candidatos
+   materialized_adapter.prepare consulta o índice direto, conexoes_1 com
+   caminhada final e, se dois ônibus não estiverem ready, conexoes_2 com
+   LIMIT 8 e prazo estrutural de cinco segundos. O bloco de um ônibus com
+   caminhada final tem seu próprio prazo de cinco segundos. A categoria
+   de dois ônibus pronta e vazia não é recomposta.
+   Esses acessos podem produzir contexto mesmo sem consolidado utilizável.
+   O indicador materialized=true é compartilhado e não comprova procedência
+   exclusiva do consolidado municipal.
+
+5. Aproveitamento e validação temporal
+   Assinaturas do materializado, do grafo e do índice direto foram aceitas
+   pelos validadores de leitura existentes (validadores.json).
+   A disponibilidade estrutural ainda depende de paradas de acesso/saída,
+   referências compatíveis ao grafo, caminhadas verificadas, limites de
+   validação e horários/calendários compatíveis. O avaliador propaga acesso,
+   esperas, embarques, transferências e saída; o caminho final armazenado é
+   substituído pelo acesso ao destino real, sem soma duplicada.
+   connection_planner.Evaluator é reutilizado pelo adaptador. A função
+   progressive independente desse módulo (linha 181) consulta o catálogo
+   legado connection_pairs/connections: não deve ser confundida com o
+   despachante atual. catalog.py:132 valida revisão/versão desse catálogo.
+   planner.py:83 contém a busca temporal por rodadas, não a exigência de
+   categorias prontas do consolidado.
+
+6. Fallback e três ônibus
+   Com seletor connections e max_transfers<=2, a avaliação inicial recebe
+   min(max_transfers,1): no máximo dois ônibus. Sem contexto utilizável ou
+   sem alternativas ao fim dessa avaliação, tenta rodadas, se permitido.
+   Se há alternativas, retorna sem complementar a lista com três ônibus.
+   Três ônibus podem ser alcançados pelo planejador por rodadas respeitando
+   o limite solicitado. A falta da terceira categoria não bloqueia os
+   candidatos de um ou dois ônibus.
+   Uma caminhada direta validada menor que 1.000 m desabilita a tentativa
+   por rodadas no despachante atual. Filtros posteriores de apresentação
+   podem remover alternativas sem reiniciar o fallback.
+   A configuração carregada da aplicação nesta inspeção foi connections;
+   não se auditou eventual override no ambiente de servidores já iniciados.
+
+EVIDÊNCIAS, AMOSTRAGEM E ESTIMATIVA
+
+Foram lidos, sem alteração, os arquivos de:
+/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/
+
+Os 32 identificadores registrados correspondem às posições 0, 710, 1.420,
+..., 22.010 da lista de 22.011 identificadores de embarque ordenados como
+strings. O nome amostra_estratificada no JSON não comprova estratificação
+geográfica. A seleção é compatível com espaçamento sistemático, inferido dos
+dados; o script original de seleção não está nesse diretório.
+
+A leitura do banco de componentes reproduziu exatamente os 32 totais,
+aplicando as duas expansões dirigidas e as ligações pedestres de city_pairs,
+sem produzir candidatos, avaliar viagens ou medir desempenho.
+Soma: 234.177; média: 7.318,03125; mínimo: 1.891; máximo: 19.681;
+mediana: 6.553,5; desvio-padrão amostral calculado nesta conferência: 4.417,25.
+As estatísticas derivadas não são novos resultados de benchmark.
+
+Projeção não arredondada:
+  (234.177 / 32) × 22.011 = 161.077.185,84375 pares.
+Arredondamento registrado: 161.077.186.
+Alcançabilidade é um superconjunto estrutural; pode incluir pares com
+categorias vazias e não mede cobertura temporal.
+
+Armazenamento:
+  (117.702.656 bytes / 77.968 pares) × 161.077.185,84375 / 2^30
+  = 226,46653353279922 GiB.
+Reproduz o JSON (diferença numérica desprezível de ponto flutuante).
+O tamanho e as contagens intermediários constam do JSON; não existe uma
+cópia física identificada daquele instante exato. O banco atual avançou.
+O quociente inclui a estrutura do arquivo parcial, não um custo marginal
+medido por par. Quantidade de candidatos, índices e ocupação podem variar.
+Não há intervalo de confiança ou representatividade municipal comprovada.
+
+Espaço livre registrado no JSON: 54,14790344238281 GiB. A referência a
+51 GiB no acompanhamento não tem medição bruta preservada no diretório
+examinado; não foi apresentada como novo valor confirmado.
+
+estado.json registra cancelada_pelo_usuario. Não foi encontrada evidência
+de ENOSPC/database-or-disk-is-full. O wrapper tinha reserva preventiva de
+10 GiB. estado-antes-retomada.json documenta uma reinicialização anterior,
+com causa do encerramento não determinada; isso não prova falta de disco.
+
+Contagens separadas por momento:
+  Inventário histórico de 23/10 (Tabela 8): 77.956 pares com ambas prontas;
+  644.702 candidatos. Tabela e texto histórico mantidos integralmente.
+  Registro intermediário de 28/10: 77.968 pares; 644.798 candidatos.
+  Banco preservado, último registro em 28/10 às 07:50:34: 77.987 pares com
+  ambas prontas; 644.942 candidatos (28.292 de um ônibus, 616.650 de dois).
+  Pares com algum candidato em categoria ready: 77.956. Esse total não é
+  uma contagem de pares usados por passageiros ou de rotas válidas.
+
+Backup materializado-antes.sqlite3: existência e integridade confirmadas;
+77.956 pares com ambas prontas, 644.702 candidatos e 117.686.272 bytes.
+Preserva o estado anterior à tentativa, não o estado final. Banco atual e
+backup retornaram quick_check=ok e conservaram seus hashes durante a revisão.
+
+PENDÊNCIAS E CONSISTÊNCIA ENTRE B.1–B.4
+
+B.1 documenta esquema e contagens, B.2 descreve utilização e fallback,
+B.3 permanece protocolo futuro, e B.4 preserva o inventário de 23/10.
+O conteúdo de B.3 e de B.4 foi preservado, incluindo a Tabela 8.
+A categoria de três ônibus prevista no protocolo não está no consolidado
+atual; uma comparação futura precisará verificar/equalizar o escopo,
+conforme já exige o protocolo. Não foi tratada como avaliação concluída.
+
+Continuam sem comprovação: total municipal exato, espaço final necessário,
+ocupação temporária máxima, série histórica de espaço livre, cobertura
+temporal, quantidade de pares efetivamente usados online, rotas válidas em
+cada horário e comparação de desempenho. Nenhum resultado foi inventado
+para preencher essas lacunas.
+
+VALIDAÇÃO E ENTREGA
+
+Compilação: latexmk -lualatex -interaction=nonstopmode -halt-on-error.
+PDF compilado em 28/10/2026 às 12:13:48, horário de Brasília.
+132 → 133 páginas; o acréscimo está na explicação técnica de B.1.
+Sumário e contagem automática atualizados; referências cruzadas resolvidas.
+Fontes incorporadas; sem referências/citações indefinidas ou overfull.
+Páginas alteradas conferidas em texto e visualmente; a página impressa 33
+agora recebe duas linhas do parágrafo anterior, sem linha final isolada.
+Permanecem avisos de obsolescência babel/memoir e um Underfull hbox na
+célula calendar/calendar_dates de tabela preexistente e preservada.
+O gerador auxiliar não produz a cópia de envio inferior a 10 MB: o PDF
+principal foi compilado normalmente e conserva aproximadamente 20,23 MB.
+
+git diff --check: aprovado.
+Comparação por hash preservou 412 outros fontes/imagens/documentos; o diff
+preexistente fora dos dois fontes editados permanece idêntico. Estudo de
+cliques, IHC, avaliação externa, assinaturas, imagens, diagramas, tabelas,
+introdução, objetivos e fundamentação não foram alterados.
+
+MD5 final: 99a9dd131d390ace229c5ebb7773d518
+MD5 de entrada: 2fdcb455617d4429293930e4ee3b3458
+
+PDF compilado:
+/home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/relatorio_final_pi2_v2.pdf
+Cópia de entrega sincronizada:
+/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/relatorio/Relatorio_final_PaP.pdf
+
+Estado final: branch relatorio, HEAD inalterado, alterações locais mantidas
+sem commit. Esta revisão altera dois fontes e adiciona esta pasta de
+auditoria; os demais itens sujos já existiam antes do trabalho.
+Detalhes verificáveis: validacao.json, evidencias.json, validadores.json,
+alteracoes.patch, compilacao.log, pdfinfo.txt, fontes.txt e git-depois.txt.

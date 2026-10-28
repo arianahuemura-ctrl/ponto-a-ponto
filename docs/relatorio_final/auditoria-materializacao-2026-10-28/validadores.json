@@ -1,0 +1,8 @@
+{
+  "banco_resolvido": "/home/avale/Projetos/maua_bus_map/sptrans.materialized.sqlite3",
+  "seletor_configuracao_carregada": "connections",
+  "ressalva": "Configuração carregada neste processo de auditoria; não inspeciona overrides de processos servidores.",
+  "assinatura_materializado": "aceita",
+  "grafo": "aceito",
+  "direto": "aceito"
+}

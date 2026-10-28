@@ -1,0 +1,602 @@
+{
+  "10.48550/arXiv.1504.05140": {
+    "error": "HTTP Error 404: Not Found"
+  },
+  "10.1145/2444016.2444020": {
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "10.4230/LIPIcs.ESA.2019.14": {
+    "error": "HTTP Error 404: Not Found"
+  },
+  "10.1080/01441647.2018.1472147": {
+    "title": [
+      "A literature review of the passenger benefits of real-time transit information"
+    ],
+    "author": [
+      {
+        "given": "Candace",
+        "family": "Brakewood",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Civil and Environmental Engineering, University of Tennessee, Knoxville, TN, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Kari",
+        "family": "Watkins",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "School of Civil and Environmental Engineering, Georgia Institute of Technology, Atlanta, GA, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "Transport Reviews"
+    ],
+    "publisher": "Informa UK Limited",
+    "published": {
+      "date-parts": [
+        [
+          2018,
+          5,
+          14
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2019,
+          5,
+          4
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2018,
+          5,
+          14
+        ]
+      ]
+    },
+    "volume": "39",
+    "issue": "3",
+    "page": "327-356",
+    "article-number": null
+  },
+  "10.1145/358886.358895": {
+    "title": [
+      "The keystroke-level model for user performance time with interactive systems"
+    ],
+    "author": [
+      {
+        "given": "Stuart K.",
+        "family": "Card",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Xerox Palo Alto Research Center, Palo Alto, CA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Thomas P.",
+        "family": "Moran",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Xerox Palo Alto Research Center, Palo Alto, CA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Allen",
+        "family": "Newell",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Carnagie-Mellon Univ., Pittsburgh, PA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "Communications of the ACM"
+    ],
+    "publisher": "Association for Computing Machinery (ACM)",
+    "published": {
+      "date-parts": [
+        [
+          1980,
+          7
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          1980,
+          7
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          1980,
+          7
+        ]
+      ]
+    },
+    "volume": "23",
+    "issue": "7",
+    "page": "396-410",
+    "article-number": null
+  },
+  "10.1137/1.9781611972924.13": {
+    "title": [
+      "Round-Based Public Transit Routing"
+    ],
+    "author": [
+      {
+        "given": "Daniel",
+        "family": "Delling",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Thomas",
+        "family": "Pajor",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Renato F.",
+        "family": "Werneck",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "2012 Proceedings of the Fourteenth Workshop on Algorithm Engineering and Experiments (ALENEX)"
+    ],
+    "publisher": "Society for Industrial and Applied Mathematics",
+    "published": {
+      "date-parts": [
+        [
+          2012,
+          1,
+          16
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2012,
+          1,
+          16
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2013,
+          12,
+          18
+        ]
+      ]
+    },
+    "volume": null,
+    "issue": null,
+    "page": "130-140",
+    "article-number": null
+  },
+  "10.1145/3274661": {
+    "title": [
+      "Connection Scan Algorithm"
+    ],
+    "author": [
+      {
+        "given": "Julian",
+        "family": "Dibbelt",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Karlsruhe Institute of Technology"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Thomas",
+        "family": "Pajor",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Karlsruhe Institute of Technology"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Ben",
+        "family": "Strasser",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Karlsruhe Institute of Technology"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Dorothea",
+        "family": "Wagner",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Karlsruhe Institute of Technology"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "ACM Journal of Experimental Algorithmics"
+    ],
+    "publisher": "Association for Computing Machinery (ACM)",
+    "published": {
+      "date-parts": [
+        [
+          2018,
+          10,
+          10
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2018,
+          11,
+          15
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2018,
+          10,
+          10
+        ]
+      ]
+    },
+    "volume": "23",
+    "issue": null,
+    "page": "1-56",
+    "article-number": null
+  },
+  "10.1007/BF01386390": {
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "10.1109/TSSC.1968.300136": {
+    "title": [
+      "A Formal Basis for the Heuristic Determination of Minimum Cost Paths"
+    ],
+    "author": [
+      {
+        "given": "Peter",
+        "family": "Hart",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Nils",
+        "family": "Nilsson",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Bertram",
+        "family": "Raphael",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "IEEE Transactions on Systems Science and Cybernetics"
+    ],
+    "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+    "published": {
+      "date-parts": [
+        [
+          1968
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          1968
+        ]
+      ]
+    },
+    "published-online": null,
+    "volume": "4",
+    "issue": "2",
+    "page": "100-107",
+    "article-number": null
+  },
+  "10.1007/s10109-022-00400-x": {
+    "title": [
+      "Exploring the time geography of public transport networks with the gtfs2gps package"
+    ],
+    "author": [
+      {
+        "ORCID": "https://orcid.org/0000-0003-2125-7465",
+        "authenticated-orcid": false,
+        "given": "Rafael H. M.",
+        "family": "Pereira",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0001-8675-4046",
+        "authenticated-orcid": false,
+        "given": "Pedro R.",
+        "family": "Andrade",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0003-4536-5006",
+        "authenticated-orcid": false,
+        "given": "João Pedro Bazzo",
+        "family": "Vieira",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "Journal of Geographical Systems"
+    ],
+    "publisher": "Springer Science and Business Media LLC",
+    "published": {
+      "date-parts": [
+        [
+          2022,
+          12,
+          17
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2023,
+          7
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2022,
+          12,
+          17
+        ]
+      ]
+    },
+    "volume": "25",
+    "issue": "3",
+    "page": "453-466",
+    "article-number": null
+  },
+  "10.1016/j.heliyon.2020.e03729": {
+    "title": [
+      "Visualizing public transit system operation with GTFS data: A case study of Calgary, Canada"
+    ],
+    "author": [
+      {
+        "given": "Postsavee",
+        "family": "Prommaharaj",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-5716-9363",
+        "authenticated-orcid": false,
+        "given": "Santi",
+        "family": "Phithakkitnukoon",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Merkebe Getachew",
+        "family": "Demissie",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Lina",
+        "family": "Kattan",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Carlo",
+        "family": "Ratti",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "container-title": [
+      "Heliyon"
+    ],
+    "publisher": "Elsevier BV",
+    "published": {
+      "date-parts": [
+        [
+          2020,
+          4
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2020,
+          4
+        ]
+      ]
+    },
+    "published-online": null,
+    "volume": "6",
+    "issue": "4",
+    "page": "e03729",
+    "article-number": "e03729"
+  }
+}
