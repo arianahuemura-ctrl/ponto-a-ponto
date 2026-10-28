@@ -1,17 +1,34 @@
-\begin{tikzpicture}[font=\small,uc/.style={draw,ellipse,align=center,text width=4.4cm,minimum height=.85cm}]
-\draw (2,1.3) rectangle (9,-8.5);\node[font=\bfseries] at (5.5,.95) {PaP};
-\foreach \y/\name in {0/Passageiro,-7.5/Administrador}{
-\draw (0,\y+.45) circle (.16);
-\draw (0,\y+.29)--(0,\y-.25);
-\draw (-.35,\y+.1)--(.35,\y+.1);
-\draw (0,\y-.25)--(-.3,\y-.65);
-\draw (0,\y-.25)--(.3,\y-.65);
-\node[anchor=east] at (-.5,\y) {\name};}
-\node[uc] (u1) at (5.5,0) {Identificar embarque};
-\node[uc] (u2) at (5.5,-1.5) {Consultar próximos\\ônibus};
-\node[uc] (u3) at (5.5,-3) {Planejar por destino};
-\node[uc] (u4) at (5.5,-4.5) {Ver rota e trechos\\no mapa};
-\node[uc] (u5) at (5.5,-6) {Gerenciar favoritos};
-\node[uc] (u6) at (5.5,-7.5) {Importar e consultar\\cadastro};
-\foreach \id in {u1,u2,u3,u4,u5}{\draw (.4,0)--(\id.west);}\draw (.4,-7.5)--(u6.west);
+\begin{tikzpicture}[font=\fontsize{8}{10}\selectfont,
+uc/.style={draw,ellipse,align=center,text width=3.5cm,minimum height=.8cm},
+actor/.pic={\draw (0,.45) circle (.15);\draw (0,.3)--(0,-.25);\draw (-.3,.08)--(.3,.08);\draw (0,-.25)--(-.3,-.6);\draw (0,-.25)--(.3,-.6);}]
+\draw (1,-9.6) rectangle (6.3,1);
+\draw (8.9,-9.6) rectangle (14.2,1);
+\node[font=\bfseries] at (3.65,.65) {PaP: passageiro};
+\node[font=\bfseries] at (11.55,.65) {PaP: administração};
+\pic at (0,-3.5) {actor};\node[rotate=90] at (-.65,-3.5) {Passageiro};
+\pic at (7.9,-3.5) {actor};\node[rotate=90] at (7.25,-3.5) {Administrador};
+\node[uc] (u00) at (3.65,-0.35) {Identificar embarque e\\consultar próximos ônibus};
+\draw (0.35,-3.5)--(u00.west);
+\node[uc] (u01) at (3.65,-1.9500000000000002) {Planejar por destino e\\ver rota e trechos};
+\draw (0.35,-3.5)--(u01.west);
+\node[uc] (u02) at (3.65,-3.5500000000000003) {Gerenciar favoritos};
+\draw (0.35,-3.5)--(u02.west);
+\node[uc] (u03) at (3.65,-5.15) {Escolher ou interromper\\participação na pesquisa};
+\draw (0.35,-3.5)--(u03.west);
+\node[uc] (u04) at (3.65,-6.75) {Enviar feedback\\voluntário};
+\draw (0.35,-3.5)--(u04.west);
+\node[uc] (u05) at (3.65,-8.35) {Solicitar exclusão\\dos dados de pesquisa};
+\draw (0.35,-3.5)--(u05.west);
+\node[uc] (u10) at (11.55,-0.35) {Importar e consultar\\cadastro de transporte};
+\draw (8.25,-3.5)--(u10.west);
+\node[uc] (u11) at (11.55,-1.9500000000000002) {Consultar sessões,\\eventos e replay};
+\draw (8.25,-3.5)--(u11.west);
+\node[uc] (u12) at (11.55,-3.5500000000000003) {Exportar registros JSON\\e vídeo WebM};
+\draw (8.25,-3.5)--(u12.west);
+\node[uc] (u13) at (11.55,-5.15) {Excluir sessão\\e suas exportações};
+\draw (8.25,-3.5)--(u13.west);
+\node[uc] (u14) at (11.55,-6.75) {Consultar feedback e\\solicitações de pesquisa};
+\draw (8.25,-3.5)--(u14.west);
+\node[uc] (u15) at (11.55,-8.35) {Marcar mensagens como\\analisadas ou excluí-las};
+\draw (8.25,-3.5)--(u15.west);
 \end{tikzpicture}

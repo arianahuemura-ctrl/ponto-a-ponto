@@ -1,29 +1,30 @@
 \begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
-box/.style={draw,rounded corners,align=center,text width=5cm,minimum height=.85cm,fill=white},arr/.style={->,thick}]
-\draw[rounded corners,fill=blue!4] (-2.9,.7) rectangle (2.9,-7.3);
-\draw[rounded corners,fill=green!4] (3.7,.7) rectangle (9.5,-10.2);
-\node[font=\bfseries] at (0,.3) {PREPARAÇÃO OFFLINE};
-\node[font=\bfseries] at (6.6,.3) {CONSULTA ONLINE};
+box/.style={draw,rounded corners,align=center,text width=4.4cm,minimum height=.85cm,fill=white},
+arr/.style={->,thick,rounded corners=3pt},
+label/.style={font=\scriptsize,fill=green!4,inner sep=3pt}]
+\draw[rounded corners,fill=blue!4] (-2.6,.8) rectangle (2.6,-7.3);
+\draw[rounded corners,fill=green!4] (3.4,.8) rectangle (13.4,-11);
+\node[font=\bfseries] at (0,.35) {PREPARAÇÃO OFFLINE};
+\node[font=\bfseries] at (8.4,.35) {CONSULTA ONLINE};
 \node[box] (fonte) at (0,-.7) {GTFS SPTrans e OSM/OSRM};
 \node[box] (grafo) at (0,-2.2) {Conexões dirigidas\\e caminhadas verificadas};
 \node[box] (comp) at (0,-3.7) {Componentes reutilizáveis\\Índices diretos e reversos};
 \node[box] (bi) at (0,-5.2) {Composição bidirecional\\Um, dois ou três ônibus};
-\node[box] (mat) at (0,-6.7) {Candidatos materializados};
-\node[box] (entrada) at (6.6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
-\node[box] (rec) at (6.6,-2.2) {Recuperar candidatos compatíveis};
-
-\node[box,fill=orange!10] (ctx) at (6.6,-3.6) {Contexto utilizável?};
-\node[box] (av) at (6.6,-5.1) {Validar caminhadas; avaliar tempos\\Refinar com dados operacionais};
-\node[box,fill=orange!10] (cond) at (6.6,-6.7) {Há alternativa válida ao final?};
-\node[box,fill=orange!6] (fallback) at (0,-9) {Fallback por rodadas\\somente quando permitido};
-\node[box] (res) at (6.6,-9) {Alternativas progressivas\\Identificação do produtor};
-\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/ctx,av/cond}{\draw[arr] (\a)--(\b);}
-\draw[arr] (mat.east)--(3.3,-6.7)--(3.3,-2.2)--(rec.west);
-\draw[arr] (ctx)--node[right]{sim}(av);
-\draw[arr] (ctx.east)--(10,-3.6)--(10,-8.3)--(-2.7,-8.3)--(-2.7,-9)--(fallback.west);
-\node[fill=white,font=\scriptsize,rotate=90] at (10,-5.2) {não: fallback antecipado};
-\draw[arr] (cond.south)--(6.6,-7.9)--node[above,font=\scriptsize]{não: fallback posterior}(0,-7.9)--(fallback.north);
-\draw[arr] (cond.east)--(9.2,-6.7)--node[right]{sim}(9.2,-9)--(res.east);
-\draw[arr] (fallback)--(res);
-\node[align=center,text width=12cm,font=\scriptsize] at (3.5,-11.5) {O fallback pertence à consulta online; os dois desvios convergem para o mesmo mecanismo.\\Não há execução paralela nem fallback apenas para completar uma lista válida.\\Caminhada direta validada inferior a 1 km dispensa o fallback por rodadas.\\O caminho principal publica resultados durante a avaliação, antes de concluir.};
+\node[box] (mat) at (0,-6.7) {Candidatos materializados\\Um ou dois ônibus};
+\node[box] (entrada) at (6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
+\node[box] (rec) at (6,-2.2) {Recuperar candidatos compatíveis\\Consolidado e índices auxiliares};
+\node[box,fill=orange!10] (ctx) at (6,-3.7) {Contexto utilizável?};
+\node[box] (av) at (6,-5.2) {Validar caminhadas; avaliar tempos\\Refinar com dados operacionais};
+\node[box,fill=orange!10] (cond) at (6,-6.9) {Há alternativa válida ao final?};
+\node[box,text width=3.2cm,fill=orange!6] (fallback) at (11.4,-8.9) {Fallback por rodadas\\somente quando permitido};
+\node[box] (res) at (6,-10) {Alternativas progressivas\\Identificação do produtor};
+\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/ctx,av/cond}{\draw[arr] (\a.south)--(\b.north);}
+\draw[arr] (mat.east)--(3,-6.7)--(3,-2.2)--(rec.west);
+\draw[arr] (ctx.south)--node[right,label]{sim}(av.north);
+\draw[arr] (ctx.east)--node[above,label]{não: antecipado}(11.4,-3.7)--(fallback.north);
+\draw[arr] (cond.east)--(9.3,-6.9)--node[label,align=center,pos=.3]{não:\\posterior}(9.3,-8.9)--(fallback.west);
+\draw[arr] (cond.south)--node[right,label]{sim}(res.north);
+\draw[arr] (fallback.south)--(11.4,-10)--(res.east);
+\node[align=left,text width=4.4cm,font=\scriptsize] at (0,-8.8) {\textbf{Recuperação online:} inclui índice direto e componentes auxiliares, com composição limitada a até dois ônibus.};
+\node[align=center,text width=15cm,font=\scriptsize] at (5.4,-12.2) {Os dois desvios convergem para o mesmo fallback, pertencente à consulta online.\\Não há execução paralela nem fallback apenas para completar uma lista válida.\\Caminhada direta validada inferior a 1 km dispensa o fallback por rodadas.\\O caminho principal publica resultados durante a avaliação, antes de concluir.};
 \end{tikzpicture}
