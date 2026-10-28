@@ -72,7 +72,7 @@ export default function UsabilityConsent({children}){
   const running=choice?.state==='accepted'&&phase!=='unavailable';
   const recordingSymbol=phase==='active'?'●':phase==='starting'?'◷':phase==='unavailable'?'⚠':'■';
   const recordingLabel=phase==='active'?'Gravação ativa.':phase==='starting'?'Iniciando gravação…':phase==='unavailable'?'Gravação indisponível. Tente novamente.':'Gravação parada.';
-  const indicator=<span className={`research-recording-state research-recording-state--${phase}`}><span aria-hidden="true">{recordingSymbol}</span> {recordingLabel}</span>;
+  const indicator=phase==='off'?null:<span className={`research-recording-state research-recording-state--${phase}`}><span aria-hidden="true">{recordingSymbol}</span> {recordingLabel}</span>;
   const buttons=<div className="research-choices"><button onClick={()=>choose('accepted')}>Contribuir com a pesquisa</button><button onClick={()=>choose('declined')}>Continuar sem contribuir</button></div>;
   const warning=storageWarning&&<p role="status">Não foi possível salvar sua escolha neste aparelho. Ela vale nesta página; ao recarregar, perguntaremos novamente.</p>;
   return <>
@@ -90,7 +90,7 @@ export default function UsabilityConsent({children}){
     <dialog onPointerDown={pressBackdrop} onPointerMove={moveBackdrop} onPointerCancel={()=>{backdropPress.current=null;}} onClick={clickBackdrop} className="research-dialog" data-private ref={dialog} aria-labelledby="research-settings-title" onClose={()=>{setSettingsOpen(false);trigger.current?.focus();}}>
       <header><h2 id="research-settings-title">Configurações → Participação na pesquisa</h2><button type="button" className="pap-dialog-close" onClick={()=>dialog.current.close()} aria-label="Fechar configurações" title="Fechar configurações">×</button></header>
       <p>Decisão atual: {choice?.state==='accepted'?'participar':'não participar'}.{choice?.decidedAt&&` Registrada em ${new Date(choice.decidedAt).toLocaleString('pt-BR')}.`}</p>
-      <p role="status">{indicator}</p>
+      {indicator&&<p role="status">{indicator}</p>}
       {warning}<div className="research-choices"><button type="button" onClick={()=>choose(running?'declined':'accepted')}><span aria-hidden="true">{running?'■':'●'}</span> {running?'Interromper gravação':'Gravar'}</button></div>
       <p>Interromper não exclui automaticamente os dados já enviados.</p>
       {settingsOpen&&<ResearchDetails/>}

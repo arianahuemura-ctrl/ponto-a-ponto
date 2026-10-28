@@ -24,6 +24,7 @@ async function revoke(page){await settings(page);await page.getByRole('button',{
 test('recusa: navegação, busca, tema e feedback sem sessão ou replay',async({page,context})=>{
   const {requests,events}=await setup(context);await page.setViewportSize({width:390,height:844});await page.goto('/?stop=1');await page.screenshot({path:'test-results/research-welcome-mobile.png'});await decide(page);
   await expect(page.getByRole('dialog',{name:'Próximos ônibus'})).toBeVisible();
+  await expect(page.locator('.research-status')).toBeHidden();
   await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
   await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();await expect(page.getByRole('combobox')).toBeVisible();await page.keyboard.press('Escape');
   await page.getByRole('button',{name:'Feedback',exact:true}).click();await page.getByLabel('Seu feedback', {exact:true}).fill('Relato voluntário artificial');
@@ -74,7 +75,7 @@ test('recusa pode ser alterada nas configurações e revogada em outra aba',asyn
  const other=await context.newPage();await other.goto('/');await expect(other.locator('.research-status')).toContainText('Gravação ativa');await revoke(page);await expect(other.locator('.research-status')).not.toContainText('Gravação ativa');const count=requests.length;await other.reload();await expect(other.locator('.sp-shell')).toBeVisible();await page.waitForTimeout(300);expect(requests).toHaveLength(count);await other.close();
 });
 test('exclusão pode ser solicitada sem criar sessão',async({page,context})=>{
- const {requests}=await setup(context);await page.goto('/');await decide(page);await settings(page);await page.screenshot({path:'test-results/research-settings.png'});await page.getByRole('combobox',{name:'Assunto',exact:true}).selectOption('deletion');await page.getByLabel('Mensagem',{exact:true}).fill('Solicitação artificial de exclusão de registros anteriores');await page.getByRole('button',{name:'Enviar solicitação'}).click();await expect(page.getByText('Solicitação recebida.',{exact:false})).toBeVisible();expect(requests).toHaveLength(0);
+ const {requests}=await setup(context);await page.goto('/');await decide(page);await settings(page);await expect(page.getByText('Gravação parada.',{exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Gravar',exact:true})).toBeVisible();await page.screenshot({path:'test-results/research-settings.png'});await page.getByRole('combobox',{name:'Assunto',exact:true}).selectOption('deletion');await page.getByLabel('Mensagem',{exact:true}).fill('Solicitação artificial de exclusão de registros anteriores');await page.getByRole('button',{name:'Enviar solicitação'}).click();await expect(page.getByText('Solicitação recebida.',{exact:false})).toBeVisible();expect(requests).toHaveLength(0);
 });
 test('revogação durante inicialização não permite captura tardia',async({page,context})=>{
  const {requests}=await setup(context);let release;const wait=new Promise(r=>release=r);await context.route('**/api/usability/',async r=>{await wait;try{await r.fulfill({json:{session:'test',token:'test',csrf:'test'}});}catch{}});await page.goto('/');await decide(page,true);await revoke(page);release();await page.waitForTimeout(500);expect(requests.filter(r=>r.method()==='POST')).toHaveLength(0);await expect(page.locator('.research-status')).not.toContainText('Gravação ativa');
@@ -91,14 +92,13 @@ test('roteiro de transporte sem pesquisa: rota, mapa, favoritos e cancelamento',
  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
  const box=await page.locator('.sp-map').boundingBox();
  await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();
- // O gesto existente suprime cliques por 1,2 s após disparar o toque longo.
- await page.waitForTimeout(1250);
+ await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
  await expect(page.locator('.sp-route-option')).toHaveCount(1);
  await page.locator('.sp-route-option').click();
  await expect(page.locator('dialog[open]')).toHaveCount(0);
  await expect(page.locator('.sp-route-bus')).toHaveCount(1);
  await page.getByRole('button',{name:'Favoritos',exact:true}).click();
- await expect(page.getByRole('dialog',{name:'Pontos favoritos'})).toBeVisible();
+ await expect(page.getByRole('dialog',{name:'Favoritos'})).toBeVisible();
  await page.getByRole('button',{name:'Fechar favoritos',exact:true}).click();
  await page.getByRole('button',{name:'Cancelar viagem',exact:true}).click();
  await page.getByRole('button',{name:'Confirmar cancelamento',exact:true}).click();

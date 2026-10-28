@@ -18,9 +18,19 @@ export function readSession(storage, search=null) {
   } catch { return { origin:null, destination:null }; }
 }
 export function favoriteStop(stop) {
-  if(!validStop(stop)||stop.useLocation)return null;
-  const {id,name,lat,lon,favoriteLabel}=stop;
-  return {id,name,lat,lon,...(typeof favoriteLabel==='string'&&favoriteLabel.trim()?{favoriteLabel:favoriteLabel.trim().slice(0,80)}:{})};
+  if(!stop || typeof stop.name!=='string')return null;
+  const label=typeof stop.favoriteLabel==='string'&&stop.favoriteLabel.trim()?{favoriteLabel:stop.favoriteLabel.trim().slice(0,80)}:{};
+  // Uma localização favorita é fixa: nunca acompanha futuras atualizações do GPS.
+  if(stop.kind==='location'||stop.addressCoordinates||stop.useLocation){
+    const point=stop.addressCoordinates||stop;
+    if(!Number.isFinite(point.lat)||!Number.isFinite(point.lon)||Math.abs(point.lat)>90||Math.abs(point.lon)>180)return null;
+    const {lat,lon}=point;
+    const name=typeof stop.destinationAddress==='string'&&stop.destinationAddress.trim()?stop.destinationAddress:stop.name;
+    return {kind:'location',id:`location:${lat},${lon}`,name,lat,lon,...label};
+  }
+  if(!validStop(stop))return null;
+  const {id,name,lat,lon}=stop;
+  return {id,name,lat,lon,...label};
 }
 export function readFavorites(storage) {
   try {
@@ -31,4 +41,13 @@ export function readFavorites(storage) {
 }
 export function save(storage,key,value) {
   try { storage.setItem(key,JSON.stringify(value)); return true; } catch { return false; }
+}
+
+// Os atalhos referenciam favoritos existentes; não duplicam os pontos salvos.
+export const quickDestinationsKey = 'pap.sp.quickDestinations';
+export function readQuickDestinations(storage, favorites) {
+  try {
+    const value=JSON.parse(storage.getItem(quickDestinationsKey));
+    return Object.fromEntries(['home','work'].filter(role=>favorites.some(stop=>stop.id===value?.[role])).map(role=>[role,value[role]]));
+  } catch { return {}; }
 }

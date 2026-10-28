@@ -1,13 +1,14 @@
 import {useEffect,useRef,useState} from 'react';
 import {api} from './api.js';
 import {parseCoordinates} from './coordinates.js';
-export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoordinates,origin,role='destination'}) {
-  const dialog=useRef(),input=useRef(),selectionRequest=useRef();
+export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoordinates,origin,role='destination',favoriteRole=null,onSaveFavoritePlace,onExistingFavorite}) {
+  const dialog=useRef(),input=useRef(),confirmation=useRef(),selectionRequest=useRef();
   const [query,setQuery]=useState(''),[suggestions,setSuggestions]=useState([]),[busy,setBusy]=useState(false),[error,setError]=useState(''),[result,setResult]=useState(null),[active,setActive]=useState(-1),[retry,setRetry]=useState(0),[choosing,setChoosing]=useState(false),[finished,setFinished]=useState(false);
   useEffect(()=>{
     if(open){dialog.current.showModal();input.current?.focus();}
     else{dialog.current.close();selectionRequest.current?.abort();setChoosing(false);}
   },[open]);
+  useEffect(()=>{if(open&&result)confirmation.current?.focus();},[open,result]);
   useEffect(()=>()=>selectionRequest.current?.abort(),[]);
   useEffect(()=>{
     setSuggestions([]);setActive(-1);setFinished(false);setBusy(false);
@@ -24,7 +25,12 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoor
     }).catch(e=>{if(!abort.signal.aborted)setError(e.message);}).finally(()=>{if(!abort.signal.aborted)setBusy(false);}),500);
     return()=>{clearTimeout(timer);abort.abort();};
   },[open,query,retry,result]);
+  useEffect(()=>{setQuery('');setSuggestions([]);setResult(null);setActive(-1);setError('');},[favoriteRole]);
+  const favoriteName=favoriteRole==='home'?'Casa':'Trabalho';
   const choose=async place=>{
+    // Release the software keyboard as soon as a suggestion is chosen.
+    input.current?.blur();
+    if(favoriteRole){selectionRequest.current?.abort();setResult({place});return;}
     if(place.kind==='coordinates'){selectionRequest.current?.abort();onCoordinates({lat:place.lat,lon:place.lon});setQuery('');setSuggestions([]);onClose();return;}
     selectionRequest.current?.abort();const abort=new AbortController();selectionRequest.current=abort;setChoosing(true);setError('');
     try{
@@ -36,7 +42,8 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoor
   const name=role==='origin'?'embarque':'destino';
   return <dialog ref={dialog} className="sp-stop-dialog sp-destination-search" aria-labelledby="destination-title" onCancel={onClose}>
     <button className="text-button" onClick={onClose} aria-label="Fechar busca de endereço">Fechar ×</button>
-    <h2 id="destination-title">{role==='origin'?'Onde você vai embarcar?':'Para onde você vai?'}</h2>
+    <h2 id="destination-title">{favoriteRole?`Endereço de ${favoriteName}`:role==='origin'?'Onde você vai embarcar?':'Para onde você vai?'}</h2>
+    {favoriteRole&&<button className="text-button" onClick={onExistingFavorite}>Usar favorito existente</button>}
     <form onSubmit={e=>{e.preventDefault();if(active>=0&&suggestions[active])choose(suggestions[active]);else if(suggestions[0]?.kind==='coordinates')choose(suggestions[0]);else setRetry(n=>n+1);}}>
       <label className="sp-search-label">Endereço ou coordenadas de {name}<input ref={input} value={query} maxLength={300} autoComplete="off" role="combobox" aria-autocomplete="list" aria-expanded={suggestions.length>0&&!result} aria-controls="address-options" aria-activedescendant={active>=0?`address-option-${active}`:undefined} placeholder="Rua, lugar ou latitude, longitude" onChange={e=>{selectionRequest.current?.abort();setChoosing(false);setResult(null);setQuery(e.target.value);setError('');}} onKeyDown={e=>{
         if(e.key==='ArrowDown'&&suggestions.length){e.preventDefault();setActive(a=>(a+1)%suggestions.length);}
@@ -50,12 +57,13 @@ export default function DestinationSearch({open,onClose,onSelect,onStreet,onCoor
       <strong>{place.name}</strong><span>{place.district||'Bairro não informado'}{place.city?` · ${place.city}`:''}{place.postcode?` · ${place.postcode}`:''}</span>
     </li>)}</ul>}
     {finished&&!busy&&!suggestions.length&&!result&&!error&&<p>Nenhum endereço encontrado. Acrescente o bairro ou o número.</p>}
-    {result&&<section><h3>Confirme o {name}</h3><p>{result.place.label}</p><p><strong>Parada sugerida:</strong> {result.stop.name} · {result.stop.id}</p><p>{result.distance_meters} m em linha reta; a caminhada pode ser maior.</p>
+    {result&&favoriteRole&&<section><h3>Salvar como {favoriteName}</h3><p>{result.place.label}</p><button ref={confirmation} className="primary full" onClick={()=>{onSaveFavoritePlace({kind:'location',name:result.place.label,lat:result.place.lat,lon:result.place.lon});onClose();}}>Salvar {favoriteName}</button><button className="text-button" onClick={()=>{setResult(null);input.current?.focus();}}>Escolher outro endereço</button></section>}
+    {result?.stop&&!favoriteRole&&<section><h3>Confirme o {name}</h3><p>{result.place.label}</p><p><strong>Parada sugerida:</strong> {result.stop.name} · {result.stop.id}</p><p>{result.distance_meters} m em linha reta; a caminhada pode ser maior.</p>
       {role==='origin'&&<p>O sentido do embarque será conferido quando você escolher o destino.</p>}
       {result.direction_checked&&<p>Sentido verificado a partir do embarque, priorizando menos trocas entre paradas próximas.</p>}
-      <button className="primary full" onClick={()=>{onSelect({...result.stop,destinationAddress:result.place.label,addressDistance:result.distance_meters,addressCoordinates:{lat:result.place.lat,lon:result.place.lon},addressMaxTransfers:result.max_transfers});onClose();}}>Usar como {name}</button>
-      <button className="text-button" onClick={()=>setResult(null)}>Escolher outro endereço</button></section>}
-    <small>Coordenadas: −23.559010, −46.731544. A busca centraliza o mapa com raio de 250 m, sem alterar embarque ou destino.</small>
+      <button ref={confirmation} className="primary full" onClick={()=>{onSelect({...result.stop,destinationAddress:result.place.label,addressDistance:result.distance_meters,addressCoordinates:{lat:result.place.lat,lon:result.place.lon},addressMaxTransfers:result.max_transfers});onClose();}}>Usar como {name}</button>
+      <button className="text-button" onClick={()=>{setResult(null);input.current?.focus();}}>Escolher outro endereço</button></section>}
+    <small>{favoriteRole?'Você também pode informar latitude e longitude para salvar o local.':'Coordenadas: −23.559010, −46.731544. A busca centraliza o mapa com raio de 250 m, sem alterar embarque ou destino.'}</small>
     <small>Sugestões: Photon / OpenStreetMap. Sem número, escolha a rua para ver suas paradas. Com número, selecione o endereço completo.</small>
   </dialog>;
 }

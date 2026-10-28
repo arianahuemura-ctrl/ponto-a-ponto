@@ -1,4 +1,5 @@
 const shapes = {
+  work: <><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V3h8v4M3 12l9 4 9-4M12 12v5"/></>,
   feedback: <path d="M21 11a8 8 0 0 1-8 8H7l-5 3V11a9 9 0 0 1 19 0ZM7 10h10M7 14h6"/>,
   eye: <><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></>,
   eagle: <path d="M12 8c-2 0-3-2-5-3L1 3l2 5 5 4-4-1 3 4 3 1-1 5 3-2 3 2-1-5 3-1 3-4-4 1 5-4 2-5-6 2-3 3V6l-2-1-2 2Z" fill="currentColor" stroke="none"/>,

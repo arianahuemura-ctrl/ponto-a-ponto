@@ -1078,7 +1078,7 @@ export default function Passenger() {
                         : "da linha " + selectedRoute.code}
                     </h2>
                     <p>
-                      {detailStops.length} paradas no total (origem → destino)
+                      {detailStops.length} {detailStops.length===1?'parada':'paradas'} no total (origem → destino)
                     </p>
                   </div>
                 </div>

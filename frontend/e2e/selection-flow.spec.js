@@ -24,8 +24,9 @@ for(const long of [false,true])test(`origem permanece no mapa e destino abre rot
    await page.mouse.click(box.x+box.width/2+point.x-center.x,box.y+box.height/2+point.y-center.y);return;
   }
   const box=await page.locator('.sp-map').boundingBox();
-  await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);
+  await page.mouse.move(box.x+box.width*(index?.4:.7),box.y+box.height*.4);
   await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();
+  await page.getByRole('button',{name:index?'Usar como destino':'Usar como embarque',exact:true}).click();
  };
  await select(0);
  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar destino');

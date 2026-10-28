@@ -17,6 +17,7 @@ for(const touch of [false,true])test(`seleção múltipla sem arrastar: ${touch?
   return r.fulfill({json:{approach:id==='B'&&calls[id]>1?null:{vehicle:{id:id+calls[id],code:id,lat:-23.561,lon:id==='A'?-46.685:-46.675,observed_at:now},geometry:[[-23.561,id==='A'?-46.685:-46.675],[-23.56,-46.68]]}}});
  });
  await page.goto('/?stop=1');
+ await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
  const first=page.locator('.sp-selectable-line').first();await expect(first).toBeVisible();
  const pointer={pointerId:1,isPrimary:true,pointerType:touch?'touch':'mouse',button:0,clientX:100,clientY:400};
  await first.dispatchEvent('pointerdown',pointer);
@@ -45,6 +46,6 @@ for(const touch of [false,true])test(`seleção múltipla sem arrastar: ${touch?
  await expect(page.getByRole('checkbox',{name:'Acompanhar linha B · Centro'})).toBeChecked();
  await page.getByRole('checkbox',{name:'Acompanhar linha B · Centro'}).uncheck();
  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
- await expect(page.locator('.sp-watch-panel')).toContainText('1 linhas acompanhadas');
+ await expect(page.locator('.sp-watch-panel')).toContainText('1 linha acompanhada');
  await expect.poll(()=>calls.A).toBe(3);expect(calls.B).toBe(2);
 });

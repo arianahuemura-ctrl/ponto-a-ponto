@@ -386,3 +386,14 @@
 
 .sp-direction-arrow{pointer-events:none!important;background:none;border:0}.sp-direction-arrow span{display:block;font-size:18px;line-height:18px;color:#0076ed;text-shadow:0 1px 2px #fff,0 -1px 2px #fff}.sp-direction-before span{color:#7954aa}[data-theme="dark"] .sp-direction-arrow span{color:#42c8ff;text-shadow:0 1px 2px #172235,0 -1px 2px #172235}[data-theme="dark"] .sp-direction-before span{color:#c2a1e6}
 [data-theme="dark"] .sp-itinerary-legend span:first-child::before{border-color:#a58acb}
+
+/* Atalhos fora do mapa: não cobrem controles, balões ou avisos. */
+.sp-quick-destinations { display:flex; gap:10px; padding:8px 12px; flex-shrink:0; background:var(--pap-surface); border-bottom:1px solid var(--pap-border); }
+.sp-quick-destination { display:flex; flex:1; min-width:0; align-items:center; gap:4px; }
+.sp-shell .sp-quick-go { display:flex; flex:1; justify-content:center; align-items:center; gap:8px; min-height:44px; padding:8px 10px; border:1px solid var(--pap-border); border-radius:10px; background:var(--pap-soft); color:var(--pap-text); font:inherit; font-size:14px; }
+.sp-quick-go svg { flex-shrink:0; }
+.sp-quick-go small { font-size:11px; }
+.sp-favorites-dialog .sp-quick-destinations { padding:8px 0 16px; margin-bottom:12px; }
+@media(max-width:360px) { .sp-quick-go { flex-wrap:wrap; } .sp-quick-go small { width:100%; } }
+
+.sp-location-popup{display:flex;align-items:center;gap:12px}.sp-location-star{min-width:44px;min-height:44px}

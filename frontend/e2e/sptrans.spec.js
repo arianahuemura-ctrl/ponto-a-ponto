@@ -68,11 +68,13 @@ test('falha ao atualizar informa o erro e mantém os pontos anteriores',async({p
 
 for(const width of [390,1440]) test(`autocomplete distingue bairros em ${width}px`,async({page})=>{
   await page.setViewportSize({width,height:900});await setup(page);
+  await page.context().grantPermissions(['geolocation']);
+  await page.context().setGeolocation({latitude:-23.55,longitude:-46.6333});
   const destination={id:'2',name:'Parada do destino',lat:-23.551,lon:-46.634};
   let searches=0;
   await page.route('**/api/sptrans/addresses/**',r=>{searches++;return r.fulfill({json:{suggestions:['Centro','Bela Vista'].map((district,i)=>({id:String(i),name:'Rua de teste',district,city:'São Paulo',label:'Rua de teste, '+district,lat:-23.551,lon:-46.634}))}});});
   await page.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:destination,distance_meters:12}}));
-  await page.goto('/');await openOrigin(page);
+  await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();await expect(page.getByRole('status').filter({hasText:'Selecionar destino'})).toBeVisible();
   await page.getByRole('button',{name:'Selecionar destino',exact:true}).click();
   await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();
   const input=page.getByRole('combobox');
@@ -83,14 +85,25 @@ for(const width of [390,1440]) test(`autocomplete distingue bairros em ${width}p
   await input.press('ArrowUp');await input.press('Enter');
   await expect(page.getByRole('dialog')).toContainText('Rua de teste, Bela Vista');
   await expect(page.getByRole('dialog')).toContainText('Parada do destino');
-  await page.getByRole('button',{name:'Usar como destino'}).click();
+  const confirm=page.getByRole('button',{name:'Usar como destino'});
+  await expect(input).not.toBeFocused();
+  await expect(confirm).toBeFocused();
+  await expect(confirm).toBeInViewport();
+  await page.getByRole('button',{name:'Escolher outro endereço'}).click();
+  await expect(input).toBeFocused();
+  await expect(page.getByRole('option')).toHaveCount(2);
+  await page.getByRole('option').last().click();
+  await expect(input).not.toBeFocused();
+  await expect(confirm).toBeFocused();
+  await expect(confirm).toBeInViewport();
+  await confirm.press('Enter');
   await expect(page.getByRole('dialog')).toContainText('Ônibus da sua rota');
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).destination.id)).toBe('2');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('busca trata ausência de sugestões e falha do provedor',async({page})=>{
   await setup(page);await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({json:{suggestions:[]}}));
-  await page.goto('/');await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();
+  await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();
   await page.getByRole('combobox').fill('Não existe');await expect(page.getByRole('dialog')).toContainText('Nenhum endereço encontrado');
   await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({status:502,json:{error:'Não foi possível buscar endereços agora.'}}));
   await page.getByRole('combobox').fill('Outra rua');await expect(page.getByRole('dialog').getByRole('alert')).toContainText('Não foi possível');
@@ -288,7 +301,7 @@ test('selecionar destino oferece favoritos e preserva a referência para calcula
   await page.route('**/api/sptrans/walk/**',r=>r.fulfill({json:{available:false,message:'Sem percurso'}}));
   await page.goto('/');await openOrigin(page);
   await page.getByRole('button',{name:'Selecionar destino',exact:true}).click();
-  await expect(page.getByRole('heading',{name:'Pontos favoritos'})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'Favoritos'})).toBeVisible();
   await page.getByRole('button',{name:'Buscar no mapa'}).click();
   await expect(page.locator('.sp-map')).toBeVisible();
   await page.getByRole('button',{name:'Favoritos',exact:true}).click();

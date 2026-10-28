@@ -10,7 +10,7 @@ import {StopCanvas} from './StopCanvas.js';
 import StopTransparencyControl from './StopTransparencyControl.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
 const EMPTY_LIST=Object.freeze([]);
-export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint }) {
+export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint, mapPointRole='destination', onFavoritePoint, isFavoritePoint }) {
   const [dimmerActive,setDimmerActive]=useState(false);
   const [transparentStops,setTransparentStops]=useState(false);
   useEffect(()=>{setTransparentStops(false);},[highlightStopsRequest]);
@@ -33,6 +33,8 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
   const confirmPoint=useRef(confirmDestination), destinationPopup=useRef(null);
   confirmPoint.current=confirmDestination;
   mapPoint.current=onMapPoint;
+  const favoritePoint=useRef(),favoriteCheck=useRef(),pointRole=useRef();
+  favoritePoint.current=onFavoritePoint;favoriteCheck.current=isFavoritePoint;pointRole.current=mapPointRole;
   useEffect(()=>{destinationPopup.current?.remove();},[confirmDestination]);
   const fitted=useRef(null);
   const located=useRef(false);
@@ -49,15 +51,24 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
     const longPress=bindMapLongPress(host.current,event=>{
       const point=instance.mouseEventToLatLng(event);
       destinationPopup.current?.remove();
-      if(confirmPoint.current){
-        const button=document.createElement('button');
-        button.type='button';button.className='primary';button.textContent='Adicionar como destino';
-        button.addEventListener('click',()=>{
-          destinationPopup.current?.remove();
-          mapPoint.current?.({lat:point.lat,lon:point.lng});
-        });
-        destinationPopup.current=L.popup().setLatLng(point).setContent(button).openOn(instance);
-      }else mapPoint.current?.({lat:point.lat,lon:point.lng});
+      const coordinates={lat:point.lat,lon:point.lng};
+      const controls=document.createElement('div');controls.className='sp-location-popup';
+      const button=document.createElement('button');
+      button.type='button';button.className='primary';
+      button.textContent=confirmPoint.current?'Adicionar como destino':pointRole.current==='origin'?'Usar como embarque':'Usar como destino';
+      button.addEventListener('click',()=>{destinationPopup.current?.remove();mapPoint.current?.(coordinates);});
+      controls.append(button);
+      if(favoritePoint.current){
+        const saved=favoriteCheck.current?.(coordinates);
+        const star=document.createElement('button');star.type='button';star.className='icon-button sp-favorite-action sp-location-star';
+        star.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/></svg>';
+        star.setAttribute('data-saved',String(!!saved));star.setAttribute('aria-pressed',String(!!saved));
+        star.setAttribute('aria-label',saved?'Remover favorito deste local':'Adicionar local aos favoritos');
+        star.title=saved?'Remover favorito':'Salvar local';
+        star.addEventListener('click',()=>{destinationPopup.current?.remove();favoritePoint.current?.(coordinates);});
+        controls.append(star);
+      }
+      destinationPopup.current=L.popup().setLatLng(point).setContent(controls).openOn(instance);
     });
     // O movimento do ponteiro aplica a tolerância de 10 px; o Leaflet começa
     // a mover antes disso, o que não deve cancelar uma pressão estável.
@@ -186,7 +197,7 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
       // A base côncava é um arco da própria circunferência externa do marcador.
       const tipPath=`M0 ${-radius-7} L${baseX} ${-radius/2} A${radius} ${radius} 0 0 0 ${-baseX} ${-radius/2} Z`;
       const directionInfo=(s.directions||[]).map(d=>`${d.code} · ${d.headsign}${d.kind==='arrival'?' (chegada / fim de linha)':''}${d.approximate?' (sentido aproximado)':''}`).join('; ');
-      const label=document.createElement('span');label.textContent=(isOrigin?'Origem · ':isDestination?'Destino · ':isTransfer?`Baldeação ${markerText} · `:'')+s.name+' · '+s.id+' · '+(directionInfo||'Sentido indisponível no cadastro');
+      const label=document.createElement('span');label.textContent=(isOrigin?'Origem · ':isDestination?'Destino · ':isTransfer?`Baldeação ${markerText} · `:'')+s.name+(s.mapStop?' · Localização':' · '+s.id+' · '+(directionInfo||'Sentido indisponível no cadastro'));
       const signature=JSON.stringify([s,isOrigin,isDestination,isTransfer,markerText]);
       const previous=markerRecords.current.get(s.id);
       if(!previous||previous.signature!==signature) {
