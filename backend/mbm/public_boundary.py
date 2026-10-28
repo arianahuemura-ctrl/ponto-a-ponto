@@ -14,16 +14,21 @@ def public_payload(value):
     return value
 
 
-def public_chunks(chunks):
+def public_chunks(chunks, event_stream=False):
+    def encode(line):
+        if event_stream:
+            line = line.removeprefix(b"data: ")
+        data = json.dumps(public_payload(json.loads(line))).encode()
+        return b"data: " + data + b"\n\n" if event_stream else data + b"\n"
     pending = b""
     for chunk in chunks:
         pending += chunk
         while b"\n" in pending:
             line, pending = pending.split(b"\n", 1)
             if line.strip():
-                yield json.dumps(public_payload(json.loads(line))).encode() + b"\n"
+                yield encode(line)
     if pending.strip():
-        yield json.dumps(public_payload(json.loads(pending))).encode() + b"\n"
+        yield encode(pending)
 
 
 class PublicBoundary:
@@ -36,7 +41,10 @@ class PublicBoundary:
             return HttpResponsePermanentRedirect("https://" + settings.PUBLIC_HOST + request.get_full_path())
         if request.path.rstrip("/") == "/admin" or request.path.startswith("/admin/") or request.path.rstrip("/") in {"/api/demo/evaluation", "/explorar"}:
             return HttpResponse(status=404)
-        if request.method not in {"GET", "HEAD"} and not (request.method == "POST" and request.path == "/api/usability/"):
+        # Escritas públicas limitadas aos canais voluntários; cada endpoint mantém
+        # validação, limites e proteção CSRF próprios.
+        public_posts = {"/api/usability/", "/api/research/feedback/", "/api/research/requests/"}
+        if request.method not in {"GET", "HEAD"} and not (request.method == "POST" and request.path in public_posts):
             return HttpResponse(status=405, headers={"Allow": "GET, HEAD"})
         response = self.get_response(request)
         response['X-Frame-Options']='DENY'
@@ -44,8 +52,9 @@ class PublicBoundary:
         response['Content-Security-Policy-Report-Only']="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org; connect-src 'self'; font-src 'self' data:; frame-ancestors 'none'"
         if response.status_code >= 500 and request.path.startswith("/api/"):
             return JsonResponse({"error": "Serviço temporariamente indisponível."}, status=response.status_code)
-        if response.streaming and response.get("Content-Type", "").startswith("application/x-ndjson"):
-            response.streaming_content = public_chunks(response.streaming_content)
+        if response.streaming and response.get("Content-Type", "").startswith(("application/x-ndjson", "text/event-stream")):
+            response.streaming_content = public_chunks(response.streaming_content,
+                event_stream=response["Content-Type"].startswith("text/event-stream"))
         elif not response.streaming and response.get("Content-Type", "").startswith("application/json") and not response.get("Content-Encoding"):
             response.content = json.dumps(public_payload(json.loads(response.content)))
             if response.has_header("Content-Length"):

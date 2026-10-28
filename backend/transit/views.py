@@ -2,6 +2,7 @@ import math
 from django.conf import settings
 from django.http import FileResponse, HttpResponse, JsonResponse
 from django.views.decorators.http import require_GET
+from django.views.decorators.cache import never_cache
 from . import services
 
 STATES = set(
@@ -64,6 +65,7 @@ def nearby(request):
 
 
 @require_GET
+@never_cache
 def index(request):
     path = settings.BASE_DIR / "frontend/dist/index.html"
     if not path.exists():

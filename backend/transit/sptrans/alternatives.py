@@ -212,6 +212,11 @@ def progressive(db, origin, destination, max_transfers=2, now=None, *, refresh=F
     from .journey_completion import Completion, direct_walk, has_short_bus_leg, normalize_walks
     now = now or timezone.localtime()
     foot = direct_walk(origin, destination, now)
+    if foot:
+        # Publique o percurso já validado antes da preparação dos índices de ônibus.
+        # Ainda não é uma conclusão: alternativas mais rápidas podem aparecer depois.
+        yield {'journeys': [foot], 'walking_incomplete': False, 'complete': False,
+               'planner': 'walk', 'planner_fallback': None}
     # A revisão do desembarque examina a própria viagem, além dos pontos usados na busca inicial.
     completion = Completion(db, destination, origin=origin)
     for result in _bus_progressive(db, origin, destination, max_transfers, now, refresh=refresh,

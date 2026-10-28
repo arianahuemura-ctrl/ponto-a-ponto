@@ -323,6 +323,44 @@ class TransferPlannerTests(SimpleTestCase):
             iterator.close()
             access.assert_not_called()
 
+    def test_verified_walk_streams_before_bus_preparation_and_can_close(self):
+        import json
+        from unittest.mock import patch
+        path={'available':True,'distance_meters':299,
+              'geometry':[[-23.501,-46.6],[-23.504,-46.6]]}
+        with patch('transit.sptrans.walking.route',return_value=path), \
+             patch('transit.sptrans.alternatives._bus_progressive') as buses:
+            response=self.client.get('/api/sptrans/board/',
+                                     {'origin':'1','destination':'4','stream':'1'})
+            stream=iter(response.streaming_content)
+            first=json.loads(next(stream))
+            self.assertFalse(first['complete'])
+            self.assertEqual(first['journeys'][0]['mode'],'walk')
+            self.assertEqual(first['journeys'][0]['walking_meters'],299)
+            self.assertEqual(first['lines'],[])
+            self.assertEqual(first['selected_journey'],first['journeys'][0]['id'])
+            buses.assert_not_called()
+            response.close()
+            buses.assert_not_called()
+
+    def test_early_walk_preserves_later_faster_bus_and_final_status(self):
+        from transit.sptrans import alternatives
+        from unittest.mock import patch
+        path={'available':True,'distance_meters':299,
+              'geometry':[[-23.501,-46.6],[-23.504,-46.6]]}
+        bus={'id':'faster-bus','legs':[{'code':'R1','trip_id':'R1','headsign':'Destino'}],
+             'walks':[],'walking_meters':0,'duration_minutes':2,'transfers':0}
+        with store.connection() as db, patch('transit.sptrans.walking.route',return_value=path), \
+             patch.object(alternatives,'_bus_progressive',return_value=iter([
+                 {'journeys':[],'complete':False,'planner':'connections'},
+                 {'journeys':[bus],'complete':True,'planner':'connections'}])) as buses, \
+             patch('transit.sptrans.journey_completion.Completion.improve',side_effect=lambda j:j):
+            chunks=list(alternatives.progressive(db,store.get_stop(db,'1'),store.get_stop(db,'4'),now=NOW))
+        self.assertEqual([c['complete'] for c in chunks],[False,False,True])
+        self.assertTrue(all(any(j['mode']=='walk' for j in c['journeys'] if 'mode' in j) for c in chunks))
+        self.assertEqual(chunks[-1]['journeys'][0]['id'],'faster-bus')
+        self.assertFalse(buses.call_args.kwargs['allow_raptor'])
+
     def test_explicit_refresh_bypasses_cached_result(self):
         from transit.sptrans import alternatives
         from unittest.mock import patch

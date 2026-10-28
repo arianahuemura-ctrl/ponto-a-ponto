@@ -30,16 +30,17 @@ export function getLocation() {
 }
 
 export async function apiProgressive(path, params, signal, onResult) {
-  const response = await observedFetch('/api/' + path + '/?' + new URLSearchParams(params), {signal});
+  const response = await observedFetch('/api/' + path + '/?' + new URLSearchParams(params), {signal,headers:{Accept:'text/event-stream, application/x-ndjson, application/json'}});
   if (!response.ok) throw new Error('Falha ao consultar o servidor.');
-  if (!response.headers.get('content-type')?.includes('application/x-ndjson')) {
+  const eventStream=response.headers.get('content-type')?.includes('text/event-stream');
+  if (!eventStream&&!response.headers.get('content-type')?.includes('application/x-ndjson')) {
     const result=await response.json();
     if(result.error)throw new Error(result.error);
     trace('api_result',{path,params,status:response.status,data:result});onResult(result);return;
   }
   const reader=response.body.getReader(),decoder=new TextDecoder();
   let buffer='';
-  const receive=line=>{if(!line.trim()||signal.aborted)return;const result=JSON.parse(line);if(result.error)throw new Error(result.error);trace('api_result',{path,params,status:response.status,data:result});onResult(result);};
+  const receive=line=>{if(eventStream){if(!line.startsWith('data:'))return;line=line.slice(5);}if(!line.trim()||signal.aborted)return;const result=JSON.parse(line);if(result.error)throw new Error(result.error);trace('api_result',{path,params,status:response.status,data:result});onResult(result);};
   try {
     while(true){
       const {value,done}=await reader.read();

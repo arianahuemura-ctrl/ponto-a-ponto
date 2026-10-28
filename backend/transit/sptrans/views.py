@@ -297,7 +297,12 @@ def stream_board(request):
 
         except (ValueError,KeyError,TypeError):
             yield json.dumps({'error':'Não foi possível concluir o cálculo das rotas.','complete':True})+'\n'
-    response=StreamingHttpResponse(chunks(),content_type='application/x-ndjson')
-    response['Cache-Control']='no-cache'
+    # SSE evita a retenção das alternativas pelo Cloudflare Tunnel. Clientes
+    # antigos continuam recebendo NDJSON; os objetos JSON conservam o contrato.
+    event_stream = 'text/event-stream' in request.headers.get('Accept', '')
+    content = (('data: ' + chunk + '\n') for chunk in chunks()) if event_stream else chunks()
+    response=StreamingHttpResponse(content,content_type='text/event-stream' if event_stream else 'application/x-ndjson')
+    response['Cache-Control']='no-cache, no-transform'
+    response['Vary']='Accept'
     response['X-Accel-Buffering']='no'
     return response

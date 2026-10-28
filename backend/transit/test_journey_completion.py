@@ -122,7 +122,10 @@ class CompletionTests(SimpleTestCase):
                      {'journeys':[candidate],'planner':'raptor','complete':False},
                      {'journeys':[candidate],'planner':'raptor','complete':True}])):
                 results=list(alternatives.progressive(None,self.a,self.b,now=self.now))
-            for result in results:
+            if direct:
+                self.assertEqual(results[0]['journeys'],[direct])
+                self.assertFalse(results[0]['complete'])
+            for result in results[1:] if direct else results:
                 self.assertEqual(any(j['id']=='backtrack' for j in result['journeys']),keep)
                 self.assertEqual(any(j['id']=='foot' for j in result['journeys']),bool(direct))
 
