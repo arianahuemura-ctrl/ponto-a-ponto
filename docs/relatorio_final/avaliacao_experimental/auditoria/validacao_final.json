@@ -1,0 +1,20 @@
+{
+  "branch": "relatorio",
+  "head": "c18556cb4a3f3bc733d9eab040f0d7f0755595b3",
+  "git_diff_check": "ok",
+  "diff_preexistente_inalterado": true,
+  "app_fontes_preservadas": 16,
+  "pdf_md5": "cc9f063ec8ae7b225bdf0463d764cd19",
+  "pdf_paginas": 133,
+  "pdf_recompilado": false,
+  "testes_unitarios": 23,
+  "teste_com_app_real": false,
+  "bancos_pesquisa_abertos": false,
+  "experimentos_executados": false,
+  "planilha_abas": 21,
+  "ficha_resultados_preenchidos": false,
+  "commit_realizado": false,
+  "git_status_final": " M docs/relatorio_final/.latexmkrc\n M docs/relatorio_final/avaliacoes_externas/alameda_solutions/Registro_feedback_Thiago_Alameda_Solutions.docx\n M docs/relatorio_final/avaliacoes_externas/alameda_solutions/Registro_feedback_Thiago_Alameda_Solutions.pdf\n M docs/relatorio_final/avaliacoes_externas/alameda_solutions/gerar_feedback_completo.py\n M docs/relatorio_final/caso_rotas_sobrepostas.tex\n M docs/relatorio_final/diagramas/arquitetura.tex\n M docs/relatorio_final/diagramas/casos_uso.tex\n M docs/relatorio_final/diagramas/estados.tex\n M docs/relatorio_final/diagramas/fluxo_geral.tex\n M docs/relatorio_final/diagramas/sequencia.tex\n M docs/relatorio_final/gerar_pdf_envio.py\n M docs/relatorio_final/planejador_hibrido.tex\n M docs/relatorio_final/relatorio_final_pi2_v2.tex\n?? docs/relatorio_final/acabamento-final-2026-10-25/\n?? docs/relatorio_final/auditoria-bibliografia-2026-10-26/\n?? docs/relatorio_final/auditoria-materializacao-2026-10-28/\n?? docs/relatorio_final/avaliacao_experimental/\n?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/comunicacao_thiago.tex\n?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/documento_confirmado_2026-10-26/\n?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/documento_recebido_2026-10-26/\n?? docs/relatorio_final/capturas/2026-10-25-sem-aviso/\n?? docs/relatorio_final/capturas/2026-10-25/\n?? docs/relatorio_final/estudo_cliques.tex\n?? docs/relatorio_final/estudo_cliques_evidencias/\n?? docs/relatorio_final/estudo_ihc_ampliado/\n?? docs/relatorio_final/revisao-consolidacao-2026-10-25/\n?? docs/relatorio_final/revisao-corretiva-final-2026-10-25/\n?? docs/relatorio_final/revisao-corretiva-v8-2026-10-28/\n?? docs/relatorio_final/validacao-final-2026-10-25/\n",
+  "unico_arquivo_preexistente_modificado": "docs/relatorio_final/estudo_ihc_ampliado/ficha_coleta_vazia.csv",
+  "relacao_arquivos": "inventario_entrega.json; inclui a ficha canônica"
+}

@@ -1,0 +1,42 @@
+# Protocolo operacional MAN versus QR — EXP-1
+## Hipóteses, unidade e desenho
+H1: o acesso QR reduz ações e duração do acesso à consulta. H2: a compreensão da linha, sentido, embarque e baldeação não é prejudicada. Hipóteses, sem resultados; esta amostra não permite demonstrar não inferioridade estatística.
+Unidade: participante externo com duas tentativas pareadas do mesmo cenário. Meta exploratória: oito adultos externos ao desenvolvimento, quatro em cada ordem. Idade exata, nome, gênero, endereço, profissão e histórico de deslocamentos não são necessários. Não recrutar menores neste protocolo operacional sem revisão e autorização próprias.
+Vagas V01–V08 em `ordem_planejada.csv` não representam participantes existentes. Atribuir P01 etc. somente no acolhimento consentido, sem publicar uma chave de nomes. Alternar MAN→QR / QR→MAN por ingresso; registrar perdas e ordem efetiva, sem reassinar conforme desempenho. Procurar diferença máxima de um nas ordens; se houver desistência, mostrar o desequilíbrio e decidir nova convocação antes de coletar, sem apagar a tentativa.
+
+A tarefa principal usa T6 (identificação contextualizada, com controle manual) seguida de T2 (planejar por destino). Registrar `tarefa=T2` e `escopo=T6_acesso_T2_planejamento`. T1=próximos ônibus; T3=favorito; T4=correção; T5=baldeação. Complementares acontecem somente após o par, em bloco separado, nunca somadas ao efeito MAN/QR.
+
+## Cenário e gabarito
+Candidato público inicial SP-QR01: origem parada 800016609, Praça da Sé, 21; destino MASP, Av. Paulista, 1578. Validar a parada/sentido, acesso ao museu, coordenadas públicas, janela de serviço e todas as alternativas antes do piloto. Isso é uma proposta de cenário, não uma rota temporal já conferida.
+Use São Paulo, o mesmo destino/parada, celular, navegador, permissões, partida fixa, limites de caminhada e transferências em ambas as condições. O cenário principal usa respostas congeladas identificadas como controladas. Não adaptar um só lado a dados ao vivo. Restabelecer mapa, favoritos, histórico, rota, armazenamento de sessão e cache da mesma forma. Preservar a decisão de pesquisa; não limpar consentimento inadvertidamente. Impedir origem GPS pré-preenchida em MAN; preparar permissões fora da tarefa, com configuração igual nos dois lados. Se a versão não permitir tal estado sem alteração funcional, não iniciar: qualificar ambiente de teste apropriado.
+O QR deve conter a URL do mesmo ambiente + `?stop=800016609`; registrar conteúdo decodificado, abertura no celular e identificação efetiva da parada, sem pressupor sucesso apenas porque a imagem existe. Rede local acessível ou túnel temporário são suficientes; loopback do computador não serve ao celular.
+O gabarito registra cada sequência admissível com linhas/sentidos, embarques/desembarques, caminhos, partidas e chegadas, validade do serviço, restrições e evidência. Não exigir uma linha específica, primeira sugestão ou menor tempo se a tarefa não o disser. Alternativa não listada é marcada `em_adjudicacao`, examinada pelos mesmos critérios por revisor sem ver a condição e incorporada por adendo datado; aplicar a decisão a todas as tentativas equivalentes. Nunca editar respostas brutas.
+Critério de sucesso T2: origem e destino corretos + alternativa contínua, temporalmente viável e dentro das restrições + detalhes abertos. Compreensão e SEQ são desfechos separados; não exigir acerto verbal para apagar um sucesso operacional.
+
+## Roteiro do moderador
+1. Acolha: “Estamos avaliando o PaP, não você. Você pode parar a qualquer momento. Usaremos apenas locais públicos fictícios para a tarefa.” Leia o termo operacional em `privacidade.md`, registre consentimento manual e, separadamente, gravação/telemetria. Recusar registro automático não impede participação por observação manual.
+2. Registre familiaridade separada: transporte local e aplicativos (nunca/raramente/mensal/semanal/diária), conhecimento do trajeto (não/parcial/sim), uso anterior do PaP (não/sim). Não solicitar rotas pessoais.
+3. Prática neutra de 2 minutos: abrir/fechar uma informação em um contexto público diferente, sem selecionar origem/destino nem usar o QR avaliado. Mesma instrução e duração; não demonstrar solução. Registre desvio.
+4. Explique o objetivo comum: “Você está na parada indicada e quer chegar ao destino apresentado. Encontre uma alternativa que cumpra as condições da ficha e abra seus detalhes. Avise quando considerar que terminou.”
+5. MAN: “Use o acesso ao PaP fornecido e identifique a parada manualmente.” QR: “Use o QR Code da placa para acessar o PaP e identificar a parada.” Não dizer que um método é melhor ou mais rápido.
+6. Leia a tarefa antes do cronômetro. Parta da mesma tela inicial neutra do dispositivo, sem câmera/app abertos. Ao sinal “pode começar”, marque t0. Na contagem entram abrir navegador/atalho ou câmera, enquadrar, confirmar o link e as ações subsequentes. Não conte leitura das instruções.
+7. Observe sem ensinar ou pensar em voz alta simultâneo ao cronômetro. Limite operacional pré-fixado: 5 minutos por tentativa. Se pedir ajuda, registre e pergunte “O que você está tentando fazer?”. Ajuda neutra não indica controle; ajuda direcionada é registrada como assistência. Risco/desconforto/retirada ou falha técnica persistente encerra imediatamente. Limite de tempo é censura, não duração de sucesso; não imputar 300 s a uma conclusão ausente.
+8. Após tf, interrupção ou limite: faça as perguntas de compreensão e SEQ. Não corrigir respostas nem ensinar a solução antes da segunda condição. Retrospectiva específica depois das duas, fora do tempo de execução.
+9. Pausa fixa de 2 minutos, restauração documentada e segunda condição. Registre aprendizagem declarada; compare por ordem/período e mostre valores individuais. Contrabalanceamento não elimina memorização.
+10. Complementares opcionais T1/T3/T4/T5, com instruções/gabaritos próprios. T4 usa destino público errado preparado pelo moderador; distinguí-lo de erro espontâneo. T5 exige uma baldeação validada. Não misturar esses blocos à comparação principal.
+
+## Marcos e observação
+Todos os marcos em segundos desde o mesmo cronômetro monotônico local; t0=0. UTC/offset da execução é metadado, não relógio para subtrair lotes.
+- to: participante confirma origem correta; td: confirma destino correto.
+- ta: primeira alternativa visível admissível; tc: término sinalizado do cálculo, se confiável.
+- ts: seleção explícita pelo participante; tf: detalhes estáveis abertos, confirme com observação. Uma seleção automática de primeira rota não é ts.
+- ts pode anteceder tc no processamento progressivo. td/to podem ser revistos; registre histórico de cada marco e a referência usada. tc pode ficar vazio; nunca substituí-lo por resposta HTTP.
+Toque, longo, rolagem contínua e arrasto contínuo = uma ação cada. Episódios de digitação são separados. Não contar click/pointerdown/pointerup três vezes. Contar anúncios/interrupções nas ações observadas e também discriminar seu subconjunto, sem somá-lo de novo.
+Concluir sem ajuda direcionada, concluir assistido, falhar, atingir limite, interromper tecnicamente e retirar participação são categorias distintas. Relato de exploração não é erro. `erros` exige incompatibilidade com a tarefa e evidência. Registre recuperação e ajuda oferecida/pedida separadamente.
+
+## Compreensão e SEQ
+Sem mostrar respostas: “Qual linha você usaria?”, “Em que sentido?”, “Onde embarcaria?”, “Onde faria a baldeação, se houver?”. Gabarito: correto=identifica informação suficiente sem erro; parcial=informação incompleta mas compatível; incorreto=contradição/ausência de compreensão; não aplicável=baldeação em viagem direta. Guardar classificação por item; notas curtas sem informações pessoais. Não somar itens NA como acertos. Não transformar uma hipótese do avaliador em resposta do participante.
+SEQ após cada tentativa: “No geral, quão difícil ou fácil foi realizar esta tarefa?” Escala 1=muito difícil, 2, 3, 4, 5, 6, 7=muito fácil. Adaptação de trabalho em português, sem alegar validação psicométrica. É permitido não responder; vazio não é 0.
+
+## Formulários
+Ficha canônica: `../estudo_ihc_ampliado/ficha_coleta_vazia.csv`. Uma linha por tentativa. Planilha acompanha versões vazias dos modelos. `marcos.csv` conserva cada marca/correção; `problemas.csv` separa evento, reconstrução, hipótese e confirmação; `gabarito.csv` aceita múltiplos itinerários; `cenarios_ihc.csv` documenta equivalência. Arquivos são modelos vazios, exceto vagas planejadas explicitamente marcadas.

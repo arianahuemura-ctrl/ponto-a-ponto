@@ -1,0 +1,14 @@
+indicador,sinal,natureza,ambiguidade,uso,fonte_codigo
+entrada,session_start; trace consent/device,Início da captura,Não comprova abertura do app nem t0; consentimento pode ser tardio,Não disponível diretamente,usability.js:startRecording
+origem_definida,state.origin; app_state.session.origin,Estado observado; conteúdo apenas em trace,bool não identifica parada; validar versão e usar alias restrito,"Estado, não intenção","SaoPaulo.jsx:48,66"
+destino_definido,state.destination; app_state.session.destination,Estado observado,Alterações de ID não disparam necessariamente state booleano; usar app_state,"Estado, não intenção","SaoPaulo.jsx:48,66"
+inicio_planejamento,mudança de contexto + api_result posterior,Reconstrução,Não existe trace de envio/início; observedFetch ms termina nos headers; falta request_id,Não medir latência ponta a ponta por esse substituto,BoardDialog.jsx:78–107; api.js
+primeira_alternativa,api_result.data.journeys não vazio,Resposta observada,Não prova renderização nem validade da tarefa; ta exige observação visual,"Disponibilidade de resposta, não alternativa visível","api.js:39,43"
+termino_calculo,api_result.data.complete=true,Resposta terminal observada,Só atribuir ao contexto com evidência; não equivale a tela estável,Não substituir tc visual automaticamente,api.js; BoardDialog.jsx
+selecao_alternativa,action target=route; trace click; app_state.journey,Ação e estado; possível reconstrução,onJourney escolhe primeiro resultado automaticamente; journey sozinho não prova escolha,Exigir ação explícita correlacionada,usability.js; BoardDialog.jsx:90–103
+detalhes,app_state.mode=map; selectedLeg; visual autorizado,Estado/reprodução,map/journey pode ser automático; abertura estável exige evidência visual,Marco incerto sem observação,SaoPaulo.jsx:66
+alteracao_od,diferenças app_state.session.origin/destination,Reconstrução de transição,"Pode ser correção, exploração, GPS ou reconfiguração; não é erro por si",Registrar causa desconhecida,SaoPaulo.jsx
+cancelamento,action target=cancel; transição de estado,Intenção; confirmação reconstruída,Botão abre confirmação; clique não prova cancelar. Ausência final não prova abandono,Só confirmar com sequência suficiente,SaoPaulo.jsx; usability.js
+feedback,"messages kind=feedback, receipt de research.feedback","Envio persistido, separado da telemetria",Pode existir sem sessão; diálogo data-private; não abrir mensagem sem autorização,Não deduzir de abertura do formulário,Feedback.jsx; research.py
+erro_aplicacao,error uncaught/promise; api status; notice,Evento técnico observado,Erro capturado pela UI pode não emitir error; code=0 pode ser cancelamento de rede,Problema de tarefa precisa contexto,usability.js; api.js
+gestos,trace pointer/click/scroll/input,Eventos de baixo nível,Scroll amostrado a 150 ms; vários eventos por gesto; não são toques mínimos,Contagem manual ou reconstrução validada,usability.js:attach
