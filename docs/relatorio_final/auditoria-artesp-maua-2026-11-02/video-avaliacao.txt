@@ -1,0 +1,55 @@
+AVALIAÇÃO DO VÍDEO — AMPLIAÇÃO ARTESP EM MAUÁ — 02/11/2026
+
+Versão examinada:
+/home/avale/Documentos/univesp/PI2/entrega-2026-11-02-volume-bruno/PaP_integral_gravacoes_PT_EN.mp4
+MD5: ebfca59d6ca04daaa903396c82766121
+Duração: 09:48,867. A faixa corrigida de Bruno permanece como referência.
+
+Há espaço narrativo sem aumentar a duração nem regravar vozes.
+O intervalo 04:44,433–04:52,718 já diz: “ônibus, metrô e trens integram o
+planejamento. As linhas ferroviárias mantêm suas cores e ficam opacas.
+Inclusive com a lâmpada apagada.” A imagem atual é o exemplo ferroviário
+Mauá–Trianon. A ampliação ARTESP pode ser apresentada substituindo a imagem
+da primeira frase por uma consulta ônibus–trem, preservando a demonstração
+das cores ferroviárias durante a segunda frase.
+
+Evidência visual preparada, sem simular dados:
+- captura-maua-bras-consulta.png: interface pública atual, consulta real
+  iniciada em 02/11/2026 às 02h19 (America/Sao_Paulo), origem artesp:7700,
+  R. Oscarito, Mauá, destino 1010053, Brás, ônibus 157 e CPTM L10.
+- captura-maua-bras-mapa.png: mapa dessa mesma viagem.
+- live-capture.json: parâmetros, horário de execução e respostas HTTP integrais.
+- capture-live.cjs: roteiro da captura. Um favorito temporário do Brás foi
+  preparado no perfil descartável do navegador; itinerários e horários não
+  foram interceptados ou alterados. A participação na pesquisa foi recusada.
+
+A captura noturna mostra 4h06min48s desde a consulta, chegada às 06h26 e
+busca parcial. Não ocultar o aviso nem apresentar esse tempo como viagem típica.
+Não trocar os valores pelos 95,5 minutos da consulta programada às 08h de
+03/11/2026: são instantes e cenários diferentes. O endereço local do navegador
+não é um QR acessível em outros aparelhos.
+
+Montagem recomendada para a próxima versão:
+04:44,433–04:48,824: consulta real ampliada; título “Mauá ao Brás: ônibus
+metropolitano + trem”; indicar “Consulta de 02/11, 02h19 · programação,
+busca parcial”. Preservar o cartão com os modos e a origem/destino.
+04:48,824–04:52,718: manter a demonstração aprovada das cores e da lâmpada,
+ou recapturar essa mesma ação real antes de substituir a imagem. A captura
+de mapa preparada não documenta, por si só, a ação de apagar a lâmpada.
+Não sobrecarregar esses oito segundos com a tabela completa de 705/427/359.
+
+Conclusão que merece ajuste visual localizado:
+09:35,390–09:37,390 diz “Não houve implantação em Mauá”. Especificar na tela
+“Implantação física de QR Codes e integração municipal pendentes”.
+09:37,470–09:43,670 diz que a adaptação depende de dados locais e articulação.
+Qualificar visualmente: “Rede municipal ainda pendente; cobertura metropolitana
+ARTESP já funcional”. Não apresentar a frase antiga como ausência de qualquer
+funcionalidade atual em Mauá. Se uma revisão posterior exigir reformulação
+falada, preservar o apresentador atribuído e as autorizações existentes.
+
+Participação: a cena utiliza Leonardo com avatar e voz sintética identificados;
+isso não comprova gravação pessoal. Não foi alterada nenhuma atribuição de fala.
+O vídeo principal e suas legendas não foram modificados nesta atualização:
+o pedido desta etapa foi avaliar o espaço narrativo e priorizar evidência real.
+As capturas e este plano deixam a substituição concreta e revisável, sem
+produzir outra exportação do vídeo já aprovado.

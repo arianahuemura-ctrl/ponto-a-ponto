@@ -1,0 +1,11 @@
+ec66201a7c8d9e508b4a7a0ef2360655  ../PaP_relatorio_2026-11-02_multimodal.pdf
+f07a0e4c84599996954fd19907570b4f  database-inspection.json
+8528448c00f8ac2e159c8774b1d3de2c  endpoint-query.json
+b4449f0841000f56f895c11c61887f0c  endpoint-response.json
+1f60100d36ae57da88a2e02527e08632  feed-provenance.json
+2354a0efb7619c649f948c5d743a59a5  pdf-validation.json
+36fe8149678320640602f83708eb93ba  preservacao.json
+5e95a74f6907133f04d17a4420efe7df  queries.json
+466cc2b1aaeeb8875b7b087ae515d38b  sptrans.routing.sqlite3.schema.json
+bcb98cd2605b15c8b975944e36ba75d7  sptrans.staged-walks.sqlite3.schema.json
+db4ec16bb5af9ff1ffee71be7c9cd8dc  sptrans.staged.sqlite3.schema.json

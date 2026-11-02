@@ -1,0 +1,14 @@
+[
+  {
+    "name": "walk_edge",
+    "sql": "CREATE TABLE walk_edge(origin TEXT,destination TEXT,air_meters REAL,\n                distance_meters REAL,seconds REAL,geometry TEXT,source TEXT,checked_at TEXT,status TEXT,\n                PRIMARY KEY(origin,destination))"
+  },
+  {
+    "name": "walk_meta",
+    "sql": "CREATE TABLE walk_meta(id INTEGER PRIMARY KEY CHECK(id=1),value TEXT)"
+  },
+  {
+    "name": "stop_snap",
+    "sql": "CREATE TABLE stop_snap(id TEXT PRIMARY KEY,distance_meters REAL,lat REAL,lon REAL,hint TEXT)"
+  }
+]

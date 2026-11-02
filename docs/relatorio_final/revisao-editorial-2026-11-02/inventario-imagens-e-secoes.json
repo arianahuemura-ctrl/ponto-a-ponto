@@ -1,0 +1,1660 @@
+{
+  "before": {
+    "path": "/home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/PaP_relatorio_2026-11-02_revisao_tecnico_cientifica.pdf",
+    "pages": 168,
+    "bytes": 27556752,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "",
+      "author": "",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "LuaTeX-1.22.0",
+      "creationDate": "D:20261102094056-03'00'",
+      "modDate": "D:20261102094056-03'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "toc": [
+      [
+        1,
+        "Folha de rosto",
+        2
+      ],
+      [
+        1,
+        "Resumo",
+        3
+      ],
+      [
+        1,
+        "Introdução",
+        6
+      ],
+      [
+        1,
+        "Desenvolvimento",
+        9
+      ],
+      [
+        2,
+        "Objetivos",
+        9
+      ],
+      [
+        2,
+        "Justificativa e delimitação do problema",
+        10
+      ],
+      [
+        2,
+        "Fundamentação teórica",
+        11
+      ],
+      [
+        2,
+        "Aplicação das disciplinas estudadas no projeto integrador",
+        30
+      ],
+      [
+        2,
+        "Metodologia",
+        32
+      ],
+      [
+        1,
+        "Resultados: solução final",
+        34
+      ],
+      [
+        2,
+        "Fluxo implementado e evidência visual",
+        36
+      ],
+      [
+        2,
+        "Escopos da solução e níveis de cobertura",
+        51
+      ],
+      [
+        2,
+        "Desempenho: distribuições e comparação pareada",
+        52
+      ],
+      [
+        2,
+        "Ampliação metropolitana em Mauá com dados ARTESP",
+        54
+      ],
+      [
+        3,
+        "Distribuição cadastral e evidência de integração",
+        57
+      ],
+      [
+        2,
+        "Avaliação, participação e privacidade",
+        60
+      ],
+      [
+        2,
+        "Legibilidade da rede ferroviária: revisão a partir de feedback",
+        69
+      ],
+      [
+        2,
+        "IHC, limitações e ameaças à validade",
+        71
+      ],
+      [
+        3,
+        "Ameaças à validade e alcance das conclusões",
+        72
+      ],
+      [
+        1,
+        "Considerações finais",
+        73
+      ],
+      [
+        1,
+        "Referências",
+        75
+      ],
+      [
+        1,
+        "GLOSSÁRIO",
+        81
+      ],
+      [
+        1,
+        "Percurso metodológico detalhado",
+        85
+      ],
+      [
+        1,
+        "Protocolo pendente de leitura física do QR Code",
+        98
+      ],
+      [
+        1,
+        "Evolução e propostas de continuidade",
+        99
+      ],
+      [
+        1,
+        "Integração dos dados de transporte: SPTrans e ARTESP",
+        108
+      ],
+      [
+        2,
+        "Cadastro GTFS e informação operacional",
+        109
+      ],
+      [
+        2,
+        "Importação e organização do banco",
+        110
+      ],
+      [
+        2,
+        "Correspondência com a API Olho Vivo",
+        111
+      ],
+      [
+        2,
+        "Busca de paradas, geometrias e caminhadas",
+        113
+      ],
+      [
+        2,
+        "Reprodução e limites",
+        114
+      ],
+      [
+        2,
+        "Ampliação ARTESP e conferência territorial de Mauá em 2 de novembro",
+        115
+      ],
+      [
+        1,
+        "Modelagem da rede e estratégias de busca de itinerários",
+        117
+      ],
+      [
+        2,
+        "Atualização técnica e medições de 1 de novembro de 2026",
+        118
+      ],
+      [
+        3,
+        "Materialização compacta e cobertura",
+        119
+      ],
+      [
+        3,
+        "Entrega assíncrona e protocolo de desempenho",
+        120
+      ],
+      [
+        3,
+        "Evidência visual da integração ferroviária",
+        122
+      ],
+      [
+        3,
+        "Rastreabilidade",
+        124
+      ],
+      [
+        2,
+        "Registro histórico da arquitetura em 28 de outubro",
+        125
+      ],
+      [
+        3,
+        "Preparação estrutural e bancos especializados",
+        126
+      ],
+      [
+        3,
+        "Consulta temporal e acionamento do fallback",
+        129
+      ],
+      [
+        3,
+        "Protocolo do benchmark definitivo",
+        132
+      ],
+      [
+        2,
+        "Situação dos benchmarks em 23 de outubro de 2026",
+        135
+      ],
+      [
+        2,
+        "Representação e composição do custo",
+        136
+      ],
+      [
+        2,
+        "Dijkstra, A* e busca por rodadas",
+        137
+      ],
+      [
+        2,
+        "Dominância, poda e encerramento",
+        138
+      ],
+      [
+        2,
+        "Validação das caminhadas e retorno progressivo",
+        139
+      ],
+      [
+        2,
+        "Alcance dos resultados e reprodução",
+        140
+      ],
+      [
+        1,
+        "Documentação de engenharia de software do PaP",
+        141
+      ],
+      [
+        2,
+        "Atores e casos de uso",
+        142
+      ],
+      [
+        2,
+        "Consulta progressiva de alternativas",
+        144
+      ],
+      [
+        2,
+        "Estados da navegação",
+        146
+      ],
+      [
+        2,
+        "Rastreabilidade e evidências",
+        147
+      ],
+      [
+        2,
+        "Verificação funcional da revisão 79dd798",
+        148
+      ],
+      [
+        1,
+        "Comunicação com a Alameda Solutions",
+        149
+      ],
+      [
+        1,
+        "Estudo analítico de cliques",
+        153
+      ],
+      [
+        2,
+        "Procedimento e condições",
+        154
+      ],
+      [
+        2,
+        "Resultados consolidados",
+        155
+      ],
+      [
+        2,
+        "Interpretação e alcance",
+        157
+      ],
+      [
+        2,
+        "Protocolo ampliado de avaliação da eficiência e compreensão",
+        158
+      ],
+      [
+        1,
+        "Registro de feedback de Thiago Almeida Amorim — Alameda Solutions",
+        162
+      ]
+    ],
+    "sections": [
+      {
+        "name": "Fundamentação teórica",
+        "start": 11,
+        "end": 29,
+        "pages": 19
+      },
+      {
+        "name": "Fluxo implementado e evidência visual",
+        "start": 36,
+        "end": 50,
+        "pages": 15
+      },
+      {
+        "name": "Evolução e propostas de continuidade",
+        "start": 99,
+        "end": 107,
+        "pages": 9
+      },
+      {
+        "name": "Registro histórico da arquitetura em 28 de outubro",
+        "start": 125,
+        "end": 134,
+        "pages": 10
+      }
+    ],
+    "images": {
+      "7": {
+        "width": 2406,
+        "height": 1417,
+        "colorspace": "DeviceRGB",
+        "smask": 18,
+        "decoded_sha256": "2e73ca4c50fc9e0fd2e2b2ffa299cb6d02e64c2c4c17fd89b87307f5553ab71a",
+        "encoded_bytes": 39760,
+        "pages": [
+          1
+        ]
+      },
+      "308": {
+        "width": 1720,
+        "height": 2337,
+        "colorspace": "DeviceRGB",
+        "smask": 323,
+        "decoded_sha256": "5f439ce2199487f45c73a75d144fe8cd95889dd73b9e1a45c3d15d7d31232e59",
+        "encoded_bytes": 369514,
+        "pages": [
+          15,
+          16
+        ]
+      },
+      "354": {
+        "width": 1011,
+        "height": 1035,
+        "colorspace": "DeviceRGB",
+        "smask": 366,
+        "decoded_sha256": "5453da6729d820e30e49c5b164064f641163df8bef9336cdd9ed2ba51bd47ed8",
+        "encoded_bytes": 343954,
+        "pages": [
+          18
+        ]
+      },
+      "355": {
+        "width": 1047,
+        "height": 1289,
+        "colorspace": "DeviceRGB",
+        "smask": 367,
+        "decoded_sha256": "408026a9c0fb80801cb0e7514936c17cf6d0381cc9e8f6f0883d7177b24e6a48",
+        "encoded_bytes": 137490,
+        "pages": [
+          18
+        ]
+      },
+      "356": {
+        "width": 1046,
+        "height": 221,
+        "colorspace": "DeviceRGB",
+        "smask": 368,
+        "decoded_sha256": "9ac44391e40151c60d1b710346329c93d3e600b77871a9a0a19709c06fcbc00f",
+        "encoded_bytes": 28734,
+        "pages": [
+          18
+        ]
+      },
+      "370": {
+        "width": 1046,
+        "height": 740,
+        "colorspace": "DeviceRGB",
+        "smask": 378,
+        "decoded_sha256": "3b48bc7712a2b979958d390c64927ed2e82b9fd0a6aec0b9027266aeff8631b2",
+        "encoded_bytes": 77850,
+        "pages": [
+          19
+        ]
+      },
+      "380": {
+        "width": 920,
+        "height": 3143,
+        "colorspace": "DeviceRGB",
+        "smask": 391,
+        "decoded_sha256": "aacb3849b33f0afc4f66f5086edacb8012c7e561f21f1a2f23dfc7bf1d266bfc",
+        "encoded_bytes": 295487,
+        "pages": [
+          20
+        ]
+      },
+      "394": {
+        "width": 920,
+        "height": 1257,
+        "colorspace": "DeviceRGB",
+        "smask": 403,
+        "decoded_sha256": "83dbe2fc75ef3a600672c3580a7d2df9dafb73af665e455cc295787fdc9ed764",
+        "encoded_bytes": 1019907,
+        "pages": [
+          21
+        ]
+      },
+      "409": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "71a60987b722bd39d4cb16231783d067f318e2f373b37e7e102a2615a75fb619",
+        "encoded_bytes": 136475,
+        "pages": [
+          22
+        ]
+      },
+      "410": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "bb152482bbab5ae0f0a75973db454790e30243a154329767a574f1b684fbfd75",
+        "encoded_bytes": 98363,
+        "pages": [
+          22
+        ]
+      },
+      "421": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c584aa6922452a167b17330f93bb5e4f4fa740729c713a2e96af7a0e5664782d",
+        "encoded_bytes": 91449,
+        "pages": [
+          23
+        ]
+      },
+      "422": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "a9dd03fe6afbfc92a3c3aa28ff355a45f1c6e4440cfaa247cd539932ee59e972",
+        "encoded_bytes": 138920,
+        "pages": [
+          23
+        ]
+      },
+      "431": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "57e115470a458141eee7a9e8b93142dcb9ff9f53c5d8b2de6546ba9e26a11da4",
+        "encoded_bytes": 66111,
+        "pages": [
+          24
+        ]
+      },
+      "432": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "f53ed5884758f898baba379eb3c85be8cf0bcc1fd9d825c3a4200e42cf000e5c",
+        "encoded_bytes": 79347,
+        "pages": [
+          24
+        ]
+      },
+      "441": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "440915a939c9d338ed3c8a83b86beb148062fef1ccced124e5b55b7f1efa874a",
+        "encoded_bytes": 105587,
+        "pages": [
+          25
+        ]
+      },
+      "442": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "7fdc65757824ef7dbdfc496360dc53ad6242ed661ba626e094616023bb6b1364",
+        "encoded_bytes": 119821,
+        "pages": [
+          25
+        ]
+      },
+      "617": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "0b0c2c676ba8b1d89823637b54e571b2bae0facdbce30f7275ee13395efbf29a",
+        "encoded_bytes": 206661,
+        "pages": [
+          39
+        ]
+      },
+      "628": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "e57cd8838ee6f6bd73476d33b76747d35a1ce1f49adbedc5b2125020c1d7021c",
+        "encoded_bytes": 1515440,
+        "pages": [
+          40
+        ]
+      },
+      "629": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "45c2434ce87b2a19285e8f79ce7f8bb8044dcc48989b3249947f277cbb309a86",
+        "encoded_bytes": 1149186,
+        "pages": [
+          40
+        ]
+      },
+      "636": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "b89609ed5022078fc43211e59a26f89eded0f33c39d66eb8d2d9fe29e66ce0fa",
+        "encoded_bytes": 282459,
+        "pages": [
+          41
+        ]
+      },
+      "646": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c2556d9b5973ec54c7526df2f872ba14bac0d0dd7eff34f9e1bdd045471a1570",
+        "encoded_bytes": 263267,
+        "pages": [
+          42
+        ]
+      },
+      "653": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "edef4ddaf95aa9b5761e9210c8d0cc3941bc17b48305227a8e6bc889fcef56f2",
+        "encoded_bytes": 358222,
+        "pages": [
+          43
+        ]
+      },
+      "662": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "e406a74f0b9ec962e6f8bc46d90960db82cb47c9715ad5b2fd366a8b3500b542",
+        "encoded_bytes": 1940626,
+        "pages": [
+          44
+        ]
+      },
+      "669": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "4946e61080ae8725a45f8378ffe55601176dd9c74361044f62306cb83e4aba76",
+        "encoded_bytes": 1970603,
+        "pages": [
+          45
+        ]
+      },
+      "676": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "0d0b9b406d57193f48aefc929cc9e180dd261ffd29ec347ebd9af2353f5a9222",
+        "encoded_bytes": 1179547,
+        "pages": [
+          46
+        ]
+      },
+      "683": {
+        "width": 2732,
+        "height": 2000,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "052f68e60aae385e0804674209ff9f742eebef0535a3f8397d933f21736f9531",
+        "encoded_bytes": 3450782,
+        "pages": [
+          47
+        ]
+      },
+      "690": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "8fa81f848699fb1f4c309c577bda01427bea721255b0a2573cd6282360702071",
+        "encoded_bytes": 1149591,
+        "pages": [
+          48
+        ]
+      },
+      "697": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "fea7ced1d96e090e3a39a93dd5d5451aab19634db5e67194b87fc4539cd745ac",
+        "encoded_bytes": 337821,
+        "pages": [
+          49
+        ]
+      },
+      "704": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "29c7a48e111ef7264163049ad68d7419eed1dc9a97c370b9416123ded94bcf8f",
+        "encoded_bytes": 237534,
+        "pages": [
+          50
+        ]
+      },
+      "786": {
+        "width": 1920,
+        "height": 1080,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c56c63df35b982a40b7460d0c4fa702e148d540b3f1d6f5d836c107354ba5308",
+        "encoded_bytes": 2296738,
+        "pages": [
+          58
+        ]
+      },
+      "821": {
+        "width": 1920,
+        "height": 1080,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "a61e1c04e4d964dc66f93703c249a110378bcb5950216d5ee545f0dad1a2e098",
+        "encoded_bytes": 1017957,
+        "pages": [
+          59
+        ]
+      },
+      "841": {
+        "width": 2732,
+        "height": 2000,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "07d33ecbf921d92a14790910405ea20ae9060782c4ea5a29b348d79bec21ccd5",
+        "encoded_bytes": 1487661,
+        "pages": [
+          61
+        ]
+      },
+      "854": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "3e2eae2d26614ce136705271bbeb2abef15829d551bd91309b26d1dce7667006",
+        "encoded_bytes": 417251,
+        "pages": [
+          63
+        ]
+      },
+      "855": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "831bc69eed4310db05de8b7dc2405280ce020a9cf3e9effeff3bee4b3a64a45d",
+        "encoded_bytes": 485866,
+        "pages": [
+          63
+        ]
+      },
+      "895": {
+        "width": 1600,
+        "height": 1050,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "08dc1d3945aa11f2ec309456f222111c3a5789f108b0d2ae2814a100788cdf3a",
+        "encoded_bytes": 990669,
+        "pages": [
+          69
+        ]
+      },
+      "896": {
+        "width": 1600,
+        "height": 1050,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "50bfa80a0ad8434ece35432c9713fe03930f76a09d4225f3a1d7dba6c7849787",
+        "encoded_bytes": 1233130,
+        "pages": [
+          70
+        ]
+      },
+      "1341": {
+        "width": 1280,
+        "height": 760,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c636cfa48369762c4e651296d11174ff25dd123fc33ec9ff5e5ea951be136b90",
+        "encoded_bytes": 1196257,
+        "pages": [
+          122
+        ]
+      },
+      "1342": {
+        "width": 1280,
+        "height": 760,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "4d3aeaf29ab6f77188d2552d12fab99d5578451dba811c3bc06f7674e990bca7",
+        "encoded_bytes": 411921,
+        "pages": [
+          123
+        ]
+      },
+      "1620": {
+        "width": 370,
+        "height": 320,
+        "colorspace": "DeviceGray",
+        "smask": 1624,
+        "decoded_sha256": "4dcc97b341ab5e1daf007601b05e45e2af1e570fe44003603e4c248d343bfef4",
+        "encoded_bytes": 990,
+        "pages": [
+          163,
+          164,
+          165,
+          166,
+          167,
+          168
+        ]
+      }
+    },
+    "references": {
+      "7": 1,
+      "308": 2,
+      "354": 1,
+      "355": 1,
+      "356": 1,
+      "370": 1,
+      "380": 2,
+      "394": 1,
+      "409": 1,
+      "410": 1,
+      "421": 1,
+      "422": 1,
+      "431": 1,
+      "432": 1,
+      "441": 1,
+      "442": 1,
+      "617": 1,
+      "628": 1,
+      "629": 1,
+      "636": 2,
+      "646": 1,
+      "653": 2,
+      "662": 1,
+      "669": 1,
+      "676": 1,
+      "683": 1,
+      "690": 1,
+      "697": 1,
+      "704": 1,
+      "786": 1,
+      "821": 1,
+      "841": 1,
+      "854": 1,
+      "855": 1,
+      "895": 1,
+      "896": 1,
+      "1341": 1,
+      "1342": 1,
+      "1620": 6
+    },
+    "duplicate_image_objects": []
+  },
+  "compiled": {
+    "path": "/home/avale/Projetos/maua_bus_map-relatorio/.cache/setup/editorial-20261102/build/relatorio_final_pi2_v2.pdf",
+    "pages": 167,
+    "bytes": 27258623,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus",
+      "author": "André Meneghelli Vale; Ariana Harumi Uemura; Bruno Gabriel Migliari de Souza; Caio Wellington Procopio Ferreira; Ingrid Emanuelle Sousa Dias; Leonardo Souza Leite; Maurício Gonçalves Marques; Nathalia Almeida Amorim",
+      "subject": "Relatório Técnico-Científico Final — Projeto Integrador em Computação II — UNIVESP — 2026",
+      "keywords": "transporte público; QR Code; informação ao passageiro; mobilidade urbana; pontos de interesse",
+      "creator": "LaTeX with hyperref",
+      "producer": "LuaTeX-1.22.0",
+      "creationDate": "D:20261102105320-03'00'",
+      "modDate": "D:20261102105320-03'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "toc": [
+      [
+        1,
+        "Folha de rosto",
+        2
+      ],
+      [
+        1,
+        "Resumo",
+        3
+      ],
+      [
+        1,
+        "Lista de figuras",
+        4
+      ],
+      [
+        1,
+        "Lista de tabelas",
+        6
+      ],
+      [
+        1,
+        "1 Introdução",
+        9
+      ],
+      [
+        1,
+        "2 Desenvolvimento",
+        12
+      ],
+      [
+        2,
+        "2.1 Objetivos",
+        12
+      ],
+      [
+        2,
+        "2.2 Justificativa e delimitação do problema",
+        13
+      ],
+      [
+        2,
+        "2.3 Fundamentação teórica",
+        14
+      ],
+      [
+        2,
+        "2.4 Aplicação das disciplinas estudadas no projeto integrador",
+        31
+      ],
+      [
+        2,
+        "2.5 Metodologia",
+        33
+      ],
+      [
+        1,
+        "3 Resultados: solução final",
+        35
+      ],
+      [
+        2,
+        "3.1 Fluxo implementado e evidência visual",
+        37
+      ],
+      [
+        2,
+        "3.2 Escopos da solução e níveis de cobertura",
+        51
+      ],
+      [
+        2,
+        "3.3 Desempenho: distribuições e comparação pareada",
+        52
+      ],
+      [
+        2,
+        "3.4 Ampliação metropolitana em Mauá com dados ARTESP",
+        54
+      ],
+      [
+        3,
+        "3.4.1 Distribuição cadastral e evidência de integração",
+        57
+      ],
+      [
+        2,
+        "3.5 Avaliação, participação e privacidade",
+        60
+      ],
+      [
+        2,
+        "3.6 Legibilidade da rede ferroviária: revisão a partir de feedback",
+        69
+      ],
+      [
+        2,
+        "3.7 IHC, limitações e ameaças à validade",
+        71
+      ],
+      [
+        3,
+        "3.7.1 Ameaças à validade e alcance das conclusões",
+        72
+      ],
+      [
+        1,
+        "4 Considerações finais",
+        73
+      ],
+      [
+        1,
+        "Referências",
+        75
+      ],
+      [
+        1,
+        "GLOSSÁRIO",
+        81
+      ],
+      [
+        1,
+        "A Percurso metodológico detalhado",
+        85
+      ],
+      [
+        1,
+        "B Protocolo pendente de leitura física do QR Code",
+        98
+      ],
+      [
+        1,
+        "C Evolução e propostas de continuidade",
+        99
+      ],
+      [
+        1,
+        "D Integração dos dados de transporte: SPTrans e ARTESP",
+        107
+      ],
+      [
+        2,
+        "D.1 Cadastro GTFS e informação operacional",
+        108
+      ],
+      [
+        2,
+        "D.2 Importação e organização do banco",
+        109
+      ],
+      [
+        2,
+        "D.3 Correspondência com a API Olho Vivo",
+        110
+      ],
+      [
+        2,
+        "D.4 Busca de paradas, geometrias e caminhadas",
+        112
+      ],
+      [
+        2,
+        "D.5 Reprodução e limites",
+        113
+      ],
+      [
+        2,
+        "D.6 Ampliação ARTESP e conferência territorial de Mauá em 2 de novembro",
+        114
+      ],
+      [
+        1,
+        "E Modelagem da rede e estratégias de busca de itinerários",
+        116
+      ],
+      [
+        2,
+        "E.1 Atualização técnica e medições de 1 de novembro de 2026",
+        117
+      ],
+      [
+        3,
+        "E.1.1 Materialização compacta e cobertura",
+        118
+      ],
+      [
+        3,
+        "E.1.2 Entrega assíncrona e protocolo de desempenho",
+        119
+      ],
+      [
+        3,
+        "E.1.3 Evidência visual da integração ferroviária",
+        121
+      ],
+      [
+        3,
+        "E.1.4 Rastreabilidade",
+        123
+      ],
+      [
+        2,
+        "E.2 Registro histórico da arquitetura em 28 de outubro",
+        124
+      ],
+      [
+        3,
+        "E.2.1 Preparação estrutural e bancos especializados",
+        125
+      ],
+      [
+        3,
+        "E.2.2 Consulta temporal e acionamento do fallback",
+        128
+      ],
+      [
+        3,
+        "E.2.3 Protocolo do benchmark definitivo",
+        131
+      ],
+      [
+        2,
+        "E.3 Situação dos benchmarks em 23 de outubro de 2026",
+        134
+      ],
+      [
+        2,
+        "E.4 Representação e composição do custo",
+        135
+      ],
+      [
+        2,
+        "E.5 Dijkstra, A* e busca por rodadas",
+        136
+      ],
+      [
+        2,
+        "E.6 Dominância, poda e encerramento",
+        137
+      ],
+      [
+        2,
+        "E.7 Validação das caminhadas e retorno progressivo",
+        138
+      ],
+      [
+        2,
+        "E.8 Alcance dos resultados e reprodução",
+        139
+      ],
+      [
+        1,
+        "F Documentação de engenharia de software do PaP",
+        140
+      ],
+      [
+        2,
+        "F.1 Atores e casos de uso",
+        141
+      ],
+      [
+        2,
+        "F.2 Consulta progressiva de alternativas",
+        143
+      ],
+      [
+        2,
+        "F.3 Estados da navegação",
+        145
+      ],
+      [
+        2,
+        "F.4 Rastreabilidade e evidências",
+        146
+      ],
+      [
+        2,
+        "F.5 Verificação funcional da revisão 79dd798",
+        147
+      ],
+      [
+        1,
+        "G Comunicação com a Alameda Solutions",
+        148
+      ],
+      [
+        1,
+        "H Estudo analítico de cliques",
+        152
+      ],
+      [
+        2,
+        "H.1 Procedimento e condições",
+        153
+      ],
+      [
+        2,
+        "H.2 Resultados consolidados",
+        154
+      ],
+      [
+        2,
+        "H.3 Interpretação e alcance",
+        156
+      ],
+      [
+        2,
+        "H.4 Protocolo ampliado de avaliação da eficiência e compreensão",
+        157
+      ],
+      [
+        1,
+        "A Registro de feedback de Thiago Almeida Amorim — Alameda Solutions",
+        161
+      ]
+    ],
+    "sections": [
+      {
+        "name": "Fundamentação teórica",
+        "start": 14,
+        "end": 30,
+        "pages": 17
+      },
+      {
+        "name": "Fluxo implementado e evidência visual",
+        "start": 37,
+        "end": 50,
+        "pages": 14
+      },
+      {
+        "name": "Evolução e propostas de continuidade",
+        "start": 99,
+        "end": 106,
+        "pages": 8
+      },
+      {
+        "name": "Registro histórico da arquitetura em 28 de outubro",
+        "start": 124,
+        "end": 133,
+        "pages": 10
+      }
+    ],
+    "images": {
+      "7": {
+        "width": 2406,
+        "height": 1417,
+        "colorspace": "DeviceRGB",
+        "smask": 18,
+        "decoded_sha256": "2e73ca4c50fc9e0fd2e2b2ffa299cb6d02e64c2c4c17fd89b87307f5553ab71a",
+        "encoded_bytes": 39760,
+        "pages": [
+          1
+        ]
+      },
+      "462": {
+        "width": 1720,
+        "height": 2337,
+        "colorspace": "DeviceRGB",
+        "smask": 476,
+        "decoded_sha256": "5f439ce2199487f45c73a75d144fe8cd95889dd73b9e1a45c3d15d7d31232e59",
+        "encoded_bytes": 369514,
+        "pages": [
+          17,
+          18
+        ]
+      },
+      "505": {
+        "width": 1011,
+        "height": 1035,
+        "colorspace": "DeviceRGB",
+        "smask": 515,
+        "decoded_sha256": "5453da6729d820e30e49c5b164064f641163df8bef9336cdd9ed2ba51bd47ed8",
+        "encoded_bytes": 343954,
+        "pages": [
+          20
+        ]
+      },
+      "506": {
+        "width": 1047,
+        "height": 1289,
+        "colorspace": "DeviceRGB",
+        "smask": 516,
+        "decoded_sha256": "408026a9c0fb80801cb0e7514936c17cf6d0381cc9e8f6f0883d7177b24e6a48",
+        "encoded_bytes": 137490,
+        "pages": [
+          20
+        ]
+      },
+      "507": {
+        "width": 1046,
+        "height": 221,
+        "colorspace": "DeviceRGB",
+        "smask": 517,
+        "decoded_sha256": "9ac44391e40151c60d1b710346329c93d3e600b77871a9a0a19709c06fcbc00f",
+        "encoded_bytes": 28734,
+        "pages": [
+          20
+        ]
+      },
+      "519": {
+        "width": 1046,
+        "height": 740,
+        "colorspace": "DeviceRGB",
+        "smask": 528,
+        "decoded_sha256": "3b48bc7712a2b979958d390c64927ed2e82b9fd0a6aec0b9027266aeff8631b2",
+        "encoded_bytes": 77850,
+        "pages": [
+          21
+        ]
+      },
+      "530": {
+        "width": 920,
+        "height": 1257,
+        "colorspace": "DeviceRGB",
+        "smask": 537,
+        "decoded_sha256": "83dbe2fc75ef3a600672c3580a7d2df9dafb73af665e455cc295787fdc9ed764",
+        "encoded_bytes": 1019907,
+        "pages": [
+          22
+        ]
+      },
+      "543": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "71a60987b722bd39d4cb16231783d067f318e2f373b37e7e102a2615a75fb619",
+        "encoded_bytes": 136475,
+        "pages": [
+          23
+        ]
+      },
+      "544": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "bb152482bbab5ae0f0a75973db454790e30243a154329767a574f1b684fbfd75",
+        "encoded_bytes": 98363,
+        "pages": [
+          23
+        ]
+      },
+      "554": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c584aa6922452a167b17330f93bb5e4f4fa740729c713a2e96af7a0e5664782d",
+        "encoded_bytes": 91449,
+        "pages": [
+          24
+        ]
+      },
+      "555": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "a9dd03fe6afbfc92a3c3aa28ff355a45f1c6e4440cfaa247cd539932ee59e972",
+        "encoded_bytes": 138920,
+        "pages": [
+          24
+        ]
+      },
+      "563": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "57e115470a458141eee7a9e8b93142dcb9ff9f53c5d8b2de6546ba9e26a11da4",
+        "encoded_bytes": 66111,
+        "pages": [
+          25
+        ]
+      },
+      "564": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "f53ed5884758f898baba379eb3c85be8cf0bcc1fd9d825c3a4200e42cf000e5c",
+        "encoded_bytes": 79347,
+        "pages": [
+          25
+        ]
+      },
+      "572": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "440915a939c9d338ed3c8a83b86beb148062fef1ccced124e5b55b7f1efa874a",
+        "encoded_bytes": 105587,
+        "pages": [
+          26
+        ]
+      },
+      "573": {
+        "width": 738,
+        "height": 1600,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "7fdc65757824ef7dbdfc496360dc53ad6242ed661ba626e094616023bb6b1364",
+        "encoded_bytes": 119821,
+        "pages": [
+          26
+        ]
+      },
+      "740": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "0b0c2c676ba8b1d89823637b54e571b2bae0facdbce30f7275ee13395efbf29a",
+        "encoded_bytes": 206661,
+        "pages": [
+          40
+        ]
+      },
+      "750": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "e57cd8838ee6f6bd73476d33b76747d35a1ce1f49adbedc5b2125020c1d7021c",
+        "encoded_bytes": 1515440,
+        "pages": [
+          41
+        ]
+      },
+      "751": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "45c2434ce87b2a19285e8f79ce7f8bb8044dcc48989b3249947f277cbb309a86",
+        "encoded_bytes": 1149186,
+        "pages": [
+          41
+        ]
+      },
+      "758": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "b89609ed5022078fc43211e59a26f89eded0f33c39d66eb8d2d9fe29e66ce0fa",
+        "encoded_bytes": 282459,
+        "pages": [
+          42
+        ]
+      },
+      "766": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c2556d9b5973ec54c7526df2f872ba14bac0d0dd7eff34f9e1bdd045471a1570",
+        "encoded_bytes": 263267,
+        "pages": [
+          43
+        ]
+      },
+      "772": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "edef4ddaf95aa9b5761e9210c8d0cc3941bc17b48305227a8e6bc889fcef56f2",
+        "encoded_bytes": 358222,
+        "pages": [
+          44
+        ]
+      },
+      "780": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "e406a74f0b9ec962e6f8bc46d90960db82cb47c9715ad5b2fd366a8b3500b542",
+        "encoded_bytes": 1940626,
+        "pages": [
+          45
+        ]
+      },
+      "781": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "4946e61080ae8725a45f8378ffe55601176dd9c74361044f62306cb83e4aba76",
+        "encoded_bytes": 1970603,
+        "pages": [
+          45
+        ]
+      },
+      "788": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "0d0b9b406d57193f48aefc929cc9e180dd261ffd29ec347ebd9af2353f5a9222",
+        "encoded_bytes": 1179547,
+        "pages": [
+          46
+        ]
+      },
+      "794": {
+        "width": 2732,
+        "height": 2000,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "052f68e60aae385e0804674209ff9f742eebef0535a3f8397d933f21736f9531",
+        "encoded_bytes": 3450782,
+        "pages": [
+          47
+        ]
+      },
+      "800": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "8fa81f848699fb1f4c309c577bda01427bea721255b0a2573cd6282360702071",
+        "encoded_bytes": 1149591,
+        "pages": [
+          48
+        ]
+      },
+      "806": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "fea7ced1d96e090e3a39a93dd5d5451aab19634db5e67194b87fc4539cd745ac",
+        "encoded_bytes": 337821,
+        "pages": [
+          49
+        ]
+      },
+      "812": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "29c7a48e111ef7264163049ad68d7419eed1dc9a97c370b9416123ded94bcf8f",
+        "encoded_bytes": 237534,
+        "pages": [
+          50
+        ]
+      },
+      "887": {
+        "width": 1920,
+        "height": 1080,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c56c63df35b982a40b7460d0c4fa702e148d540b3f1d6f5d836c107354ba5308",
+        "encoded_bytes": 2296738,
+        "pages": [
+          58
+        ]
+      },
+      "921": {
+        "width": 1920,
+        "height": 1080,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "a61e1c04e4d964dc66f93703c249a110378bcb5950216d5ee545f0dad1a2e098",
+        "encoded_bytes": 1017957,
+        "pages": [
+          59
+        ]
+      },
+      "939": {
+        "width": 2732,
+        "height": 2000,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "07d33ecbf921d92a14790910405ea20ae9060782c4ea5a29b348d79bec21ccd5",
+        "encoded_bytes": 1487661,
+        "pages": [
+          61
+        ]
+      },
+      "951": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "3e2eae2d26614ce136705271bbeb2abef15829d551bd91309b26d1dce7667006",
+        "encoded_bytes": 417251,
+        "pages": [
+          63
+        ]
+      },
+      "952": {
+        "width": 860,
+        "height": 1864,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "831bc69eed4310db05de8b7dc2405280ce020a9cf3e9effeff3bee4b3a64a45d",
+        "encoded_bytes": 485866,
+        "pages": [
+          63
+        ]
+      },
+      "992": {
+        "width": 1600,
+        "height": 1050,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "08dc1d3945aa11f2ec309456f222111c3a5789f108b0d2ae2814a100788cdf3a",
+        "encoded_bytes": 990669,
+        "pages": [
+          69
+        ]
+      },
+      "993": {
+        "width": 1600,
+        "height": 1050,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "50bfa80a0ad8434ece35432c9713fe03930f76a09d4225f3a1d7dba6c7849787",
+        "encoded_bytes": 1233130,
+        "pages": [
+          70
+        ]
+      },
+      "1427": {
+        "width": 1280,
+        "height": 760,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "c636cfa48369762c4e651296d11174ff25dd123fc33ec9ff5e5ea951be136b90",
+        "encoded_bytes": 1196257,
+        "pages": [
+          121
+        ]
+      },
+      "1428": {
+        "width": 1280,
+        "height": 760,
+        "colorspace": "DeviceRGB",
+        "smask": 0,
+        "decoded_sha256": "4d3aeaf29ab6f77188d2552d12fab99d5578451dba811c3bc06f7674e990bca7",
+        "encoded_bytes": 411921,
+        "pages": [
+          122
+        ]
+      },
+      "1697": {
+        "width": 370,
+        "height": 320,
+        "colorspace": "DeviceGray",
+        "smask": 1701,
+        "decoded_sha256": "4dcc97b341ab5e1daf007601b05e45e2af1e570fe44003603e4c248d343bfef4",
+        "encoded_bytes": 990,
+        "pages": [
+          162,
+          163,
+          164,
+          165,
+          166,
+          167
+        ]
+      }
+    },
+    "references": {
+      "7": 1,
+      "462": 2,
+      "505": 1,
+      "506": 1,
+      "507": 1,
+      "519": 1,
+      "530": 1,
+      "543": 1,
+      "544": 1,
+      "554": 1,
+      "555": 1,
+      "563": 1,
+      "564": 1,
+      "572": 1,
+      "573": 1,
+      "740": 1,
+      "750": 1,
+      "751": 1,
+      "758": 2,
+      "766": 1,
+      "772": 2,
+      "780": 1,
+      "781": 1,
+      "788": 1,
+      "794": 1,
+      "800": 1,
+      "806": 1,
+      "812": 1,
+      "887": 1,
+      "921": 1,
+      "939": 1,
+      "951": 1,
+      "952": 1,
+      "992": 1,
+      "993": 1,
+      "1427": 1,
+      "1428": 1,
+      "1697": 6
+    },
+    "duplicate_image_objects": []
+  }
+}

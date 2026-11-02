@@ -1,0 +1,72 @@
+{
+  "all": {
+    "before": {
+      "n": 1637,
+      "median": 0.2819807429914363,
+      "p95": 5.6984987200121395,
+      "max": 10.711868940037675
+    },
+    "after": {
+      "n": 1637,
+      "median": 0.5987390789669007,
+      "p95": 5.142689216998406,
+      "max": 5.935714265040588
+    }
+  },
+  "by_hour": {
+    "2": {
+      "before": {
+        "n": 519,
+        "median": 0.25319859600858763,
+        "p95": 0.7385424830135889,
+        "max": 10.284603426989634
+      },
+      "after": {
+        "n": 519,
+        "median": 0.5896185630117543,
+        "p95": 1.2810673890053295,
+        "max": 5.935714265040588
+      }
+    },
+    "8": {
+      "before": {
+        "n": 557,
+        "median": 0.3075804690015502,
+        "p95": 5.760464600054547,
+        "max": 10.619996903988067
+      },
+      "after": {
+        "n": 557,
+        "median": 0.6018288469640538,
+        "p95": 5.214851522992831,
+        "max": 5.859278679010458
+      }
+    },
+    "14": {
+      "before": {
+        "n": 561,
+        "median": 0.2797935709822923,
+        "p95": 5.766408174997196,
+        "max": 10.711868940037675
+      },
+      "after": {
+        "n": 561,
+        "median": 0.6044006889569573,
+        "p95": 5.204386529047042,
+        "max": 5.882535180018749
+      }
+    }
+  },
+  "paired_differences": {
+    "median": 0.2277831620303914,
+    "improved": 431,
+    "worse": 1206,
+    "equal": 0
+  },
+  "inputs": {
+    "/home/avale/Projetos/maua_bus_map/artifacts/benchmarks/async-comparison-20261101/paired-results.csv": "3db7c79615f701e51eafe4ebedef2828ae16656faccc5fc9c1a9bda88df5dab2",
+    "/home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/auditoria-artesp-maua-2026-11-02/stops.csv": "878139d0b9f1218953006afdef3af77d1537b71b4b213fb2275253a62e92536a",
+    "/home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/auditoria-artesp-maua-2026-11-02/summary.json": "83abaa29936fbb0c0dc4b45b7bdbbb65d1be7f2e40c5e119cd84edeb435a54cd",
+    "/home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/auditoria-artesp-maua-2026-11-02/maua-ibge-2024.geojson": "66fe1687a3a14aa4825807a1847fe0b86178f26a6e0799ce48654f9e24a2924d"
+  }
+}

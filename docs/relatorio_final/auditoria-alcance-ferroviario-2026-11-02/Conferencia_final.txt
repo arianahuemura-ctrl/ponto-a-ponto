@@ -1,0 +1,38 @@
+AUDITORIA DO ALCANCE FERROVIÁRIO — 02/11/2026
+
+PDF: /home/avale/Projetos/maua_bus_map-relatorio/docs/relatorio_final/PaP_relatorio_2026-11-02_multimodal.pdf
+MD5: ec66201a7c8d9e508b4a7a0ef2360655
+SHA-256: 58d8858b83d1ced3e0c938aae0424975420fd1f4d67668f2cf5e918211336a65
+147 páginas; exportação LuaLaTeX sem recompressão das figuras. Fontes Times New Roman/Arial mantidas. Não há referências indefinidas nem caixas excedendo margens na compilação. Revisão visual das páginas físicas 43, 65–66 e 77–79 (folhas numeradas 38, 60–61 e 72–74).
+
+BASE E ESCOPO
+Referência confirmada: PaP_relatorio_2026-11-01.pdf, MD5 fcf136604ea3aa13ea58bd884cc628b1. O worktree acadêmico já tinha a revisão de consistência de 01/11 (PDF 87bdf923c09bafb6c5f60ed81c284738), que foi preservada como base de edição. Na fonte atual, o parágrafo que antes tratava Metrô/CPTM como futuro já estava corrigido; foi mantido e complementado, especificando que o Olho Vivo atende aos ônibus municipais de São Paulo.
+Somente Resultados e Considerações Finais foram alterados. Conteúdo-fonte anterior a Resultados e posterior às Considerações Finais é idêntico byte a byte. O patch desta revisão e a cópia anterior da fonte estão nesta pasta. Não houve alteração do código da aplicação, importação, materialização ou commit.
+
+CONFIRMAÇÃO FUNCIONAL
+Mauá: stop_id 18935, coordenadas -23.668016, -46.461769.
+Guapituba: stop_id 18937, coordenadas -23.691321, -46.449263.
+Ambas constam em CPTM L10-0 (sentido Rio Grande da Serra) e CPTM L10-1 (sentido Barra Funda), route_id CPTM L10, route_type 2, service_id USD. Traçados 17852/17853, 247 pontos cada.
+A rede é carregada com include_rail=True e o leitor de candidatos reavalia calendário, frequência e disponibilidade temporal. A interface dispõe de consulta ferroviária; a verificação reproduzida aqui usa o código de produção local diretamente, não apenas a presença de marcadores no mapa.
+
+PROCEDÊNCIA
+Pacote local fonts/sptrans_gtfs, identificado como SPTRANS em agency.txt; agency_url contém versao=051026. Importação registrada em 06/10/2026 às 20:20:21 UTC (17:20:21 no fuso de São Paulo). O registro de importação não contém comprovante de download nem manifesto assinado da distribuição; não foi atribuída procedência mais forte que a evidência disponível.
+Todos os registros selecionados da Linha 10 nos arquivos stops, routes, trips, calendar, frequencies, stop_times e shapes coincidem com o SQLite importado. Hashes dos arquivos-fonte em feed-provenance.json. SHA-256 do GTFS SQLite: c8fa1ef430b0e5b5e5ce8d022568ab02603e09ca2d057983486975db435aa4c4.
+
+COBERTURA TEMPORAL E CONDIÇÕES
+Calendário USD: 01/10/2023 a 01/05/2027 inclusive, todos os dias habilitados; nenhuma exceção cadastrada. Frequências nas origens dos sentidos entre 04:00 e 23:59, com headway de 300, 480 ou 600 segundos, exact_times vazio. A fase desconhecida é estimada pelo planejador, não tratada como partida exata; os tempos de passagem dependem dos deslocamentos na sequência.
+Código rail-1: novos embarques Linha 10 em [04:00,24:00); Linha 2 em [04:40,24:00). Não confundir esses limites conservadores do software com validação dos horários efetivos de operação. Horizonte de busca 21.600 s. As estações podem ser escolhidas diretamente ou alcançadas por caminhada externa verificada até o limite de 1.000 m; transferências internas cadastradas usam estimativas. Não existe cadastro individualizado do tempo entre a coordenada da estação e a plataforma.
+Datas, sentido, partida alcançável, acesso e transferência viáveis são condições necessárias. O cálculo não garante atendimento de qualquer endereço, cobertura da população nem disponibilidade em qualquer horário. Após o fim da vigência, o controle executado em 03/05/2027 às 08h retornou zero candidatos temporalmente válidos.
+
+CONSULTAS E RASTREABILIDADE
+Revisão de desenvolvimento: 34a46f29c2b541af495a0b7c86eb565071b37116, branch feat/busca-bidirecional, com alterações locais. O hash do HEAD sozinho é insuficiente; queries.json preserva SHA-256 dos módulos, effective_config e estado dos bancos; development-code.diff e development-status.txt registram o estado local. Todos os conectores SQLite do processo foram forçados a URI mode=ro e PRAGMA query_only=ON. Rede bloqueada, sem fornecimento de respostas artificiais.
+1. Leitor materializado, relógio real 02/11/2026 00:46:29-03:00: Mauá → Trianon-Masp, cinco alternativas; primeira com CPTM L10 → METRÔ L2, embarque 04:26, chegada 05:32:30. O resultado considera espera até a abertura; não promete embarque imediato na madrugada.
+2. View de produção /api/sptrans/board/, invocada via RequestFactory às 00:47:30-03:00, com origin=18935, destination=18859, max_transfers=4, route_only=1: resposta 200, uma viagem L10 → L2, chegada 05:32:30, sem search_limited nem walking_incomplete. Essa execução percorreu a view real, mas não mediu transporte HTTP, middleware ou renderização no celular. Resposta completa preservada em endpoint-response.json.
+3. Partida de referência fixada em 02/11/2026 08:00-03:00: Mauá ↔ Trianon-Masp, 68 minutos; Guapituba ↔ Trianon-Masp, 75 minutos, em ambos os sentidos. Troca interna em Tamanduateí entre os registros 18927 e 3305856. Esses horários são solicitações de planejamento, não viagens observadas ou confirmação operacional. Respostas progressivas completas em queries.json.
+Não se usa o tempo de execução dessas verificações como benchmark ou promessa de desempenho.
+
+LIMITES EXPLICITADOS NO RELATÓRIO
+Cobertura ferroviária funcional no território de Mauá não equivale a integração operacional dos ônibus municipais. Essa integração e a implantação física de QR Codes continuam não realizadas/comprovadas nesta entrega. O acesso por mapa ou link dispensa placas instaladas. Não há percentuais de habitantes atendidos nem inferência de cobertura integral ou validação operacional. Resultados técnicos e avaliações com passageiros continuam separados.
+
+PRESERVAÇÃO
+Tamanho e mtime de todos os bancos sptrans*.sqlite3 e db.sqlite3 são idênticos antes/depois; GTFS também conferido por SHA-256. O banco compacto de aproximadamente 88 GiB não foi integralmente hasheado, mas todas as conexões usadas na auditoria foram somente leitura. Fontes e respostas estão preservadas nesta pasta. PDFs anteriores mantidos, sem commit automático.

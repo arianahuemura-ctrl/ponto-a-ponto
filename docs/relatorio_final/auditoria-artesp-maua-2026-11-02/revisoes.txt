@@ -1,0 +1,3 @@
+Aplicação: 34a46f29c2b541af495a0b7c86eb565071b37116
+Relatório: e5077b9c12b89c099f900cad0911f7498dafb06d
+Ambas com alterações locais preservadas. Sem commit automático.

@@ -1,0 +1,30 @@
+PONTO A PONTO — GRUPO 17 — REVISÃO ARTESP — 02/11/2026
+
+Alterações localizadas; duração mantida em 09:48,867.
+
+00:23–00:49 — apresentação: atualizada a identificação do Procópio para gravação real e síntese autorizada; os oito participantes e suas atribuições foram preservados. A abertura foi recomposta a partir dos mesmos elementos originais para manter a estrutura de quadros-chave.
+04:44–04:53 — consulta real da R. Oscarito, em Mauá, ao Brás: ônibus 157, caminhada e CPTM Linha 10. Captura em 02/11/2026 às 02h52, com chegada programada às 06h26 e aviso de busca parcial preservado. Não é operação observada em campo nem consulta das 08h da tabela acadêmica.
+04:53–05:15 — mapa real da conexão e materialização. Nova fala do Procópio distingue política com teto de custo 4 e base ampliada com etapas 0 e 1 concluídas. Preservados máximo de cinco alternativas, prioridade ao menor custo e complemento até mínimo + 1.
+05:15–05:35 — mesma fala original sobre custos ponderados e caminhadas; slide recomposto dos elementos-fonte.
+05:35–05:51 — cobertura de 99,666% identificada como censo de 01/11/2026 da base anterior, não cobertura ARTESP nem populacional. Narração original preservada.
+05:51–06:09 — esquema de preparação, candidatos, buscas concorrentes e publicação progressiva. Busca inspirada no RAPTOR preservada.
+06:09–06:49 — benchmark identificado como experimento anterior à ampliação ARTESP. Valores, voz do Maurício e distinção entre mediana pareada e total de consultas preservados.
+09:18,667–09:25,133 — capturas dos temas claro e escuro com contornos, números e identificação de modalidade. Narração da Nathalia sobre verificação técnica e avaliação com passageiros preservada.
+09:25,270–09:43,670 — nova fala do André sobre retorno funcional a Mauá com ARTESP, 337 paradas metropolitanas e ferrovia; QR Codes físicos, integração municipal e avaliação com passageiros permanecem pendentes. Slide também registra 16 linhas/variantes e 705/427/359 viagens programadas, com datas e fonte. Agradecimento original preservado.
+
+VOZ E IMAGEM
+Duas falas sintetizadas localmente, com autorização explícita, usando referências dos próprios participantes. Procópio: referência de sua gravação técnica. André: modelo local previamente ajustado com suas gravações e referência de sua própria voz. Sem envio a serviço de voz externo.
+Recortes de vídeo são das gravações anteriores dos próprios participantes sobre os mesmos temas, com ajuste monotônico de cadência orientado pelo envelope do áudio. Isso não garante sincronismo labial exato e não representa nova gravação. A síntese e a reutilização da imagem são identificadas na tela. Fundo transparente, área normalizada da cabeça e posição dos nomes preservados.
+Gravação real de imagem e voz disponível para André, Ariana, Bruno e Procópio; alguns trechos têm síntese explicitamente indicada. Ingrid, Leonardo e Nathalia permanecem representados por avatar e voz sintética, sem comprovação de gravação individual. Maurício mantém fotografia e voz sintética, com dispensa informada anteriormente. Nenhuma justificativa pessoal foi divulgada.
+O ajuste de +2 dB do Bruno foi preservado. Não houve redistribuição de falas entre integrantes.
+
+LIMITES ACADÊMICOS
+Os dados metropolitanos não equivalem à totalidade da rede municipal de Mauá. São serviços programados, sujeitos a calendário, acessos e horários; não foi afirmada cobertura populacional ou validação operacional. O calendário ARTESP é de 2026, sem exceções de feriados. Os números de cobertura e desempenho da base anterior não foram extrapolados para a base ampliada.
+O relatório documenta o feedback visual e as verificações técnicas; a eficácia de acessibilidade ainda precisa de avaliação com usuários.
+A consulta real desta revisão teve uma primeira tentativa sem retorno em 60 segundos; a repetição retornou alternativa e teve o aviso de busca parcial preservado. Essa captura não é um novo benchmark nem prova garantia de resposta em 30 segundos.
+Endereço público definitivo do vídeo ainda não confirmado; link provisório do relatório preservado. Não houve publicação, implantação física de QR Codes ou commit.
+A aceitação acadêmica das representações sintéticas e a participação individual pendente dependem das orientações da disciplina; esta edição não substitui gravações reais ausentes.
+
+ENTREGA
+Vídeo integral com 1920 × 1080, 30 fps, áudio AAC, duas faixas PT/EN. Legendas SRT e VTT conferidas contra as incorporadas. Falas revistas e guias em Falas_revisadas/. Roteiro_atual_PT.txt acompanha a montagem atual.
+Versões anteriores preservadas. Hashes MD5 e SHA-256 e validação técnica acompanham a entrega.

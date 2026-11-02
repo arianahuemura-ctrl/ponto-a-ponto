@@ -1,0 +1,4 @@
+Package babel Warning: Name 'brazil' is deprecated.
+Class memoir Warning: \settocpreprocessor is marked deprecated and will be
+Class memoir Warning: \addtodef is marked deprecated and will be
+Underfull \hbox (badness 10000) in paragraph at lines 1117--1117

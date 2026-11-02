@@ -1,0 +1,15 @@
+{
+  "pages": 147,
+  "review_pages": [
+    4,
+    43,
+    65,
+    77
+  ],
+  "md5": "ec66201a7c8d9e508b4a7a0ef2360655",
+  "sha256": "58d8858b83d1ced3e0c938aae0424975420fd1f4d67668f2cf5e918211336a65",
+  "outside_authorized_chapters_source_identical": true,
+  "expected_evidence_in_pdf": true,
+  "unresolved_references": false,
+  "bytes": 21876310
+}

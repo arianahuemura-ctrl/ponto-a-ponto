@@ -1,0 +1,617 @@
+{
+  "observed_at": "2026-11-02T03:46:09.172915+00:00",
+  "db": "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+  "db_sha256": "c8fa1ef430b0e5b5e5ce8d022568ab02603e09ca2d057983486975db435aa4c4",
+  "metadata": [
+    {
+      "value": "{\"imported_at\": \"2026-10-06T20:20:21.669191+00:00\", \"counts\": {\"stops\": 22274, \"routes\": 1365, \"trips\": 2272, \"stop_times\": 99128, \"frequencies\": 40406, \"calendar\": 6, \"calendar_dates\": 0, \"shapes\": 1144943}}"
+    }
+  ],
+  "stations": [
+    {
+      "stop_id": "18935",
+      "stop_name": "Mauá",
+      "stop_desc": "",
+      "stop_lat": -23.668016,
+      "stop_lon": -46.461769
+    },
+    {
+      "stop_id": "18937",
+      "stop_name": "Guapituba",
+      "stop_desc": "",
+      "stop_lat": -23.691321,
+      "stop_lon": -46.449263
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "CPTM L10",
+      "agency_id": "1",
+      "route_short_name": "CPTM L10",
+      "route_long_name": "RIO GRANDE DA SERRA - BARRA FUNDA",
+      "route_type": "2",
+      "route_color": "049FC3"
+    }
+  ],
+  "trips": [
+    {
+      "route_id": "CPTM L10",
+      "service_id": "USD",
+      "trip_id": "CPTM L10-0",
+      "trip_headsign": "RIO GRANDE DA SERRA",
+      "direction_id": "0",
+      "shape_id": "17852"
+    },
+    {
+      "route_id": "CPTM L10",
+      "service_id": "USD",
+      "trip_id": "CPTM L10-1",
+      "trip_headsign": "BARRA FUNDA",
+      "direction_id": "1",
+      "shape_id": "17853"
+    }
+  ],
+  "calendar": [
+    {
+      "service_id": "USD",
+      "monday": "1",
+      "tuesday": "1",
+      "wednesday": "1",
+      "thursday": "1",
+      "friday": "1",
+      "saturday": "1",
+      "sunday": "1",
+      "start_date": "20231001",
+      "end_date": "20270501"
+    }
+  ],
+  "exceptions": [],
+  "frequencies": [
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "04:00:00",
+      "end_time": "04:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "05:00:00",
+      "end_time": "05:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "06:00:00",
+      "end_time": "06:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "07:00:00",
+      "end_time": "07:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "08:00:00",
+      "end_time": "08:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "09:00:00",
+      "end_time": "09:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "10:00:00",
+      "end_time": "10:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "11:00:00",
+      "end_time": "11:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "12:00:00",
+      "end_time": "12:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "13:00:00",
+      "end_time": "13:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "14:00:00",
+      "end_time": "14:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "15:00:00",
+      "end_time": "15:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "16:00:00",
+      "end_time": "16:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "17:00:00",
+      "end_time": "17:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "18:00:00",
+      "end_time": "18:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "19:00:00",
+      "end_time": "19:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "20:00:00",
+      "end_time": "20:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "21:00:00",
+      "end_time": "21:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "22:00:00",
+      "end_time": "22:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "start_time": "23:00:00",
+      "end_time": "23:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "04:00:00",
+      "end_time": "04:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "05:00:00",
+      "end_time": "05:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "06:00:00",
+      "end_time": "06:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "07:00:00",
+      "end_time": "07:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "08:00:00",
+      "end_time": "08:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "09:00:00",
+      "end_time": "09:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "10:00:00",
+      "end_time": "10:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "11:00:00",
+      "end_time": "11:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "12:00:00",
+      "end_time": "12:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "13:00:00",
+      "end_time": "13:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "14:00:00",
+      "end_time": "14:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "15:00:00",
+      "end_time": "15:59:00",
+      "headway_secs": 480.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "16:00:00",
+      "end_time": "16:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "17:00:00",
+      "end_time": "17:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "18:00:00",
+      "end_time": "18:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "19:00:00",
+      "end_time": "19:59:00",
+      "headway_secs": 300.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "20:00:00",
+      "end_time": "20:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "21:00:00",
+      "end_time": "21:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "22:00:00",
+      "end_time": "22:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "start_time": "23:00:00",
+      "end_time": "23:59:00",
+      "headway_secs": 600.0,
+      "exact_times": ""
+    }
+  ],
+  "stop_times": [
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:00:00",
+      "departure_time": "04:00:00",
+      "stop_id": "18920",
+      "stop_sequence": 1.0,
+      "stop_name": "Palmeiras - Barra Funda"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:07:00",
+      "departure_time": "04:07:00",
+      "stop_id": "18940",
+      "stop_sequence": 2.0,
+      "stop_name": "Luz"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:14:00",
+      "departure_time": "04:14:00",
+      "stop_id": "1010053",
+      "stop_sequence": 3.0,
+      "stop_name": "Brás"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:21:00",
+      "departure_time": "04:21:00",
+      "stop_id": "18941",
+      "stop_sequence": 4.0,
+      "stop_name": "Moóca"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:28:00",
+      "departure_time": "04:28:00",
+      "stop_id": "18942",
+      "stop_sequence": 5.0,
+      "stop_name": "Ipiranga"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:35:00",
+      "departure_time": "04:35:00",
+      "stop_id": "18927",
+      "stop_sequence": 6.0,
+      "stop_name": "Tamanduateí"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:42:00",
+      "departure_time": "04:42:00",
+      "stop_id": "18928",
+      "stop_sequence": 7.0,
+      "stop_name": "São Caetano"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:49:00",
+      "departure_time": "04:49:00",
+      "stop_id": "18929",
+      "stop_sequence": 8.0,
+      "stop_name": "Utinga"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "04:56:00",
+      "departure_time": "04:56:00",
+      "stop_id": "18930",
+      "stop_sequence": 9.0,
+      "stop_name": "Prefeito Saladino"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:03:00",
+      "departure_time": "05:03:00",
+      "stop_id": "18936",
+      "stop_sequence": 10.0,
+      "stop_name": "Prefeito Celso Daniel - Santo André"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:10:00",
+      "departure_time": "05:10:00",
+      "stop_id": "18934",
+      "stop_sequence": 11.0,
+      "stop_name": "Capuava"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:17:00",
+      "departure_time": "05:17:00",
+      "stop_id": "18935",
+      "stop_sequence": 12.0,
+      "stop_name": "Mauá"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:24:00",
+      "departure_time": "05:24:00",
+      "stop_id": "18937",
+      "stop_sequence": 13.0,
+      "stop_name": "Guapituba"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:31:00",
+      "departure_time": "05:31:00",
+      "stop_id": "18931",
+      "stop_sequence": 14.0,
+      "stop_name": "Ribeirão Pires"
+    },
+    {
+      "trip_id": "CPTM L10-0",
+      "arrival_time": "05:38:00",
+      "departure_time": "05:38:00",
+      "stop_id": "18932",
+      "stop_sequence": 15.0,
+      "stop_name": "Rio Grande Da Serra"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:00:00",
+      "departure_time": "04:00:00",
+      "stop_id": "18932",
+      "stop_sequence": 1.0,
+      "stop_name": "Rio Grande Da Serra"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:07:00",
+      "departure_time": "04:07:00",
+      "stop_id": "18931",
+      "stop_sequence": 2.0,
+      "stop_name": "Ribeirão Pires"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:14:00",
+      "departure_time": "04:14:00",
+      "stop_id": "18937",
+      "stop_sequence": 3.0,
+      "stop_name": "Guapituba"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:21:00",
+      "departure_time": "04:21:00",
+      "stop_id": "18935",
+      "stop_sequence": 4.0,
+      "stop_name": "Mauá"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:28:00",
+      "departure_time": "04:28:00",
+      "stop_id": "18934",
+      "stop_sequence": 5.0,
+      "stop_name": "Capuava"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:35:00",
+      "departure_time": "04:35:00",
+      "stop_id": "18936",
+      "stop_sequence": 6.0,
+      "stop_name": "Prefeito Celso Daniel - Santo André"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:42:00",
+      "departure_time": "04:42:00",
+      "stop_id": "18930",
+      "stop_sequence": 7.0,
+      "stop_name": "Prefeito Saladino"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:49:00",
+      "departure_time": "04:49:00",
+      "stop_id": "18929",
+      "stop_sequence": 8.0,
+      "stop_name": "Utinga"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "04:56:00",
+      "departure_time": "04:56:00",
+      "stop_id": "18928",
+      "stop_sequence": 9.0,
+      "stop_name": "São Caetano"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:03:00",
+      "departure_time": "05:03:00",
+      "stop_id": "18927",
+      "stop_sequence": 10.0,
+      "stop_name": "Tamanduateí"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:10:00",
+      "departure_time": "05:10:00",
+      "stop_id": "18942",
+      "stop_sequence": 11.0,
+      "stop_name": "Ipiranga"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:17:00",
+      "departure_time": "05:17:00",
+      "stop_id": "18941",
+      "stop_sequence": 12.0,
+      "stop_name": "Moóca"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:24:00",
+      "departure_time": "05:24:00",
+      "stop_id": "1010053",
+      "stop_sequence": 13.0,
+      "stop_name": "Brás"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:31:00",
+      "departure_time": "05:31:00",
+      "stop_id": "18940",
+      "stop_sequence": 14.0,
+      "stop_name": "Luz"
+    },
+    {
+      "trip_id": "CPTM L10-1",
+      "arrival_time": "05:38:00",
+      "departure_time": "05:38:00",
+      "stop_id": "18920",
+      "stop_sequence": 15.0,
+      "stop_name": "Palmeiras - Barra Funda"
+    }
+  ],
+  "shapes": [
+    {
+      "shape_id": "17852",
+      "points": 247
+    },
+    {
+      "shape_id": "17853",
+      "points": 247
+    }
+  ],
+  "metro_calendar": [
+    {
+      "service_id": "USD",
+      "monday": "1",
+      "tuesday": "1",
+      "wednesday": "1",
+      "thursday": "1",
+      "friday": "1",
+      "saturday": "1",
+      "sunday": "1",
+      "start_date": "20231001",
+      "end_date": "20270501"
+    }
+  ]
+}

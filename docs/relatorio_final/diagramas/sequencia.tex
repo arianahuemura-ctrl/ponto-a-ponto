@@ -1,13 +1,11 @@
 \begin{tikzpicture}[>=Stealth,font=\small,
-seqstage/.style={draw,rounded corners=3pt,align=left,text width=12cm,inner sep=9pt,fill=blue!3},
-arr/.style={->,thick},note/.style={align=left,text width=12cm,font=\footnotesize}]
-\node[seqstage] (a) at (0,0) {\textbf{1. Receber a consulta}\\A interface React envia origem, destino e instante ao backend Django.};
-\node[seqstage,below=.4cm of a] (b) {\textbf{2. Recuperar candidatos}\\Django consulta o consolidado materializado, o índice direto e componentes auxiliares. A composição online limita-se a até dois ônibus, com cotas e prazos. Se o contexto estiver indisponível ou incompatível, segue para a condição da etapa 6.};
-\node[seqstage,below=.4cm of b] (c) {\textbf{3. Validar e avaliar cada candidato}\\O serviço pedestre verifica as caminhadas. Django avalia os tempos e descarta alternativas incompatíveis.};
-\node[seqstage,below=.4cm of c] (d) {\textbf{4. Refinar com dados operacionais, quando disponíveis}\\A API Olho Vivo fornece previsões compatíveis. Sem previsão utilizável, mantém-se a informação programada.};
-\node[seqstage,fill=green!6,below=.4cm of d] (e) {\textbf{5. Mostrar alternativas conforme ficam disponíveis}\\Django envia resultados progressivamente à interface (NDJSON). As etapas 3 a 5 se repetem dentro dos limites da consulta.};
-\foreach \a/\b in {a/b,b/c,c/d,d/e}{\draw[arr] (\a.south)--(\b.north);}
-\node[seqstage,fill=orange!8,below=1.5cm of e] (f) {\textbf{6. Usar o planejador por rodadas somente se necessário}\\Acionar se as rodadas forem permitidas e ocorrer uma das situações:\\• contexto inutilizável na etapa 2; ou\\• término do caminho principal sem alternativas válidas.\\Os resultados do fallback também são enviados à interface.};
-\node[note,anchor=north,yshift=-.2cm] at (e.south) {\textbf{Ao terminar:} se há alternativa válida, concluir sem rodadas.\\Se não há, verificar as condições abaixo.};
-\node[note,below=.35cm of f] {\textbf{Regras de leitura:} não há execução simultânea dos dois planejadores. O fallback não serve para completar uma lista válida. A ausência isolada de previsão não o aciona. Caminhada direta validada inferior a 1 km dispensa rodadas.};
+seqstage/.style={draw,rounded corners=3pt,align=left,text width=12cm,inner sep=7pt,fill=blue!3},
+arr/.style={->,thick}]
+\node[seqstage] (a) {\textbf{1. Receber origem, destino e instante}\\React solicita a consulta ao Django. Uma caminhada curta já materializada pode ser publicada imediatamente, sem encerrar a busca.};
+\node[seqstage,below=.3cm of a] (b) {\textbf{2. Selecionar fontes e iniciar tarefas concorrentes}\\Candidatos preparados e conexões de ônibus; rodadas quando habilitadas; caminhada externa apenas se não houver caminhada direta inicial. A disponibilidade e a configuração condicionam cada fonte.};
+\node[seqstage,below=.3cm of b] (c) {\textbf{3. Avaliar independentemente em cada produtor}\\Recuperar candidatos, validar horários e caminhadas e preparar a geometria da alternativa a publicar. Serviços externos podem afetar uma fonte sem obrigar as outras a esperar.};
+\node[seqstage,fill=green!6,below=.3cm of c] (d) {\textbf{4. Consumir a fila e publicar a primeira opção válida}\\Deduplicar e aplicar os filtros de trechos, caminhada e custo. Enviar alternativas por SSE/NDJSON com \texttt{complete=false}, sem aguardar todos os produtores. Refinamento operacional quando disponível.};
+\node[seqstage,fill=green!6,below=.3cm of d] (e) {\textbf{5. Incorporar novas alternativas e progresso}\\Repetir a avaliação e publicação, podendo reordenar até cinco opções. Pools separados: quatro threads para preparados e oito para complementos, com admissão limitada a 16 e 24 tarefas por processo servidor.};
+\node[seqstage,fill=orange!8,below=.3cm of e] (f) {\textbf{6. Finalizar ou sinalizar busca limitada}\\Encerrar após conclusão das fontes admitidas ou prazo do agregador de 30 s. Falha, saturação e prazo preservam resultados e indicam limites. Fechar o fluxo cancela tarefas em fila; as ativas cooperam na próxima publicação. Revisão opcional final tem orçamento próprio. O prazo não garante latência no celular.};
+\foreach \a/\b in {a/b,b/c,c/d,d/e,e/f}{\draw[arr] (\a.south)--(\b.north);}
 \end{tikzpicture}

@@ -1,0 +1,18 @@
+\section{Legibilidade da rede ferroviária: revisão a partir de feedback}
+\label{sec:legibilidade-ferroviaria}
+Em 2 de novembro de 2026, um retorno durante a revisão do aplicativo apontou dificuldade para distinguir o traçado do Metrô e dos trens sobre o mapa, nos temas claro e escuro. O relato mencionou a percepção de cores como possível fator; não foi realizada avaliação clínica nem ensaio com uma amostra de pessoas daltônicas. O problema foi tratado como requisito de legibilidade da interface.
+
+Na versão registrada nas capturas, a implementação preservou as cores oficiais e a opacidade das linhas, acrescentou contornos claro e escuro ao traçado e identificadores textuais de modalidade e número, como ``Metrô 2'' e ``Trem 10''. Ao apagar a lâmpada dos pontos, a camada cartográfica passa a tons de cinza, mantendo as linhas coloridas. A distinção deixa de depender apenas da cor. A distribuição dos rótulos evita sobreposições; em escalas abrangentes, alguns identificadores podem ser omitidos por falta de espaço. As camadas ferroviárias permanecem abaixo dos pontos selecionáveis, preservando a escolha de embarque e destino.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{auditoria-apresentacao-artesp-2026-11-02/capturas/light.png}
+\caption{Legibilidade ferroviária no tema claro, na versão registrada em 2 de novembro.}\label{fig:contraste-ferroviario}
+\fonte{Captura original do grupo, 2 nov. 2026; lâmpada apagada e mapa em tons de cinza na versão examinada.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{auditoria-apresentacao-artesp-2026-11-02/capturas/dark.png}
+\caption{Legibilidade ferroviária no tema escuro, na mesma revisão de interface.}\label{fig:contraste-ferroviario-escuro}
+\fonte{Captura original do grupo, 2 nov. 2026; apresentação ampliada sem alteração dos pixels da evidência.}
+\end{figure}
+
+A conferência técnica incluiu opacidade, identificadores, mudança de tema, enquadramento e interação com os pontos, além de captura em tela móvel. Os testes automatizados executados não substituem avaliação de compreensão, conforto visual ou acessibilidade com passageiros. Trata-se de correção implementada e verificada tecnicamente, ainda sujeita à avaliação por tarefas prevista para a continuidade do projeto. As Figuras~\ref{fig:contraste-ferroviario} e~\ref{fig:contraste-ferroviario-escuro} documentam o estado daquela revisão da interface, sem alterar os resultados históricos dos estudos anteriores.

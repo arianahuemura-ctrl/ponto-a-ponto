@@ -1,0 +1,33 @@
+{
+  "begun": "2026-11-02T05:52:21.181Z",
+  "finished": "2026-11-02T05:52:37.532Z",
+  "origin": {
+    "id": "artesp:7700",
+    "name": "R. Oscarito, 1213 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",
+    "address": "R. Oscarito, 1213 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",
+    "lat": -23.636506,
+    "lon": -46.474311,
+    "code": "artesp:7700"
+  },
+  "destination": {
+    "route_type": "2",
+    "mode": "rail",
+    "id": "1010053",
+    "name": "Brás",
+    "address": "Brás",
+    "lat": -23.545582,
+    "lon": -46.616314,
+    "code": "1010053"
+  },
+  "options": [
+    "1. 3 h 33 min 36 s no planejamento · 1 baldeação🚌 157 → 🚆 CPTM L10412.591041006 m a pé · 5 min 30 s de caminhada totalCaminhada até o embarque: 0 minPrevisão de embarque indisponívelChegada ao destino · planejamento06:26"
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8001/api/sptrans/board/?origin=artesp%3A7700",
+      "status": 200,
+      "text": "{\"origin\": {\"id\": \"artesp:7700\", \"name\": \"R. Oscarito, 1213 - Jardim Sonia Maria, Mau\\u00e1 - SP, 09380-428, Brasil\", \"address\": \"R. Oscarito, 1213 - Jardim Sonia Maria, Mau\\u00e1 - SP, 09380-428, Brasil\", \"lat\": -23.636506, \"lon\": -46.474311, \"code\": \"artesp:7700\"}, \"destination\": null, \"lines\": [{\"route_type\": \"3\", \"mode\": \"bus\", \"trip_id\": \"artesp:7030_WD_0_633184\", \"route_id\": \"artesp:157\", \"code\": \"157\", \"name\": \"MAUA (SILVIA MARIA) - SANTO ANDRE (TERMINAL RODOVIARIO DE PREFEITO SALADINO)\", \"headsign\": \"SANTO ANDRE (TERMINAL RODOVIARIO DE PREFEITO SALADINO)\", \"direction\": \"0\", \"color\": \"#005cec\", \"programme\": [{\"start\": \"2026-11-02T04:50:00-03:00\", \"end\": \"2026-11-02T04:50:00-03:00\", \"kind\": \"scheduled\"}, {\"start\": \"2026-11-02T05:25:00-03:00\", \"end\": \"2026-11-02T05:25:00-03:00\", \"kind\": \"scheduled\"}, {\"start\": \"2026-11-02T05:55:00-03:00\", \"end\": \"2026-11-02T05:55:00-03:00\", \"kind\": \"scheduled\"}], \"arrivals\": [], \"realtime_status\": \"Linha ARTESP: hor\\u00e1rios programados, sem previs\\u00e3o ao vivo dispon\\u00edvel.\"}, {\"route_type\": \"3\", \"mode\": \"bus\", \"trip_id\": \"artesp:7031_WD_0_633185\", \"route_id\": \"artesp:157\", \"code\": \"157\", \"name\": \"MAUA (SILVIA MARIA) - SANTO ANDRE (TERMINAL RODOVIARIO DE PREFEITO SALADINO)\", \"headsign\": \"MAUA (SILVIA MARIA)\", \"direction\": \"1\", \"color\": \"#005cec\", \"programme\": [{\"start\": \"2026-11-02T06:05:00-03:00\", \"end\": \"2026-11-02T06:05:00-03:00\", \"kind\": \"scheduled\"}, {\"start\": \"2026-11-02T06:45:00-03:00\", \"end\": \"2026-11-02T06:45:00-03:00\", \"kind\": \"scheduled\"}, {\"start\": \"2026-11-02T07:25:00-03:00\", \"end\": \"2026-11-02T07:25:00-03:00\", \"kind\": \"scheduled\"}], \"arrivals\": [], \"realtime_status\": \"Linha ARTESP: hor\\u00e1rios programados, sem previs\\u00e3o ao vivo dispon\\u00edvel.\"}], \"queried_at\": \"2026-11-02T05:52:21.701757+00:00\", \"warning\": \"\", \"source\": \"SPTrans GTFS / Olho Vivo\", \"direct_only\": false, \"journeys\": [], \"selected_journey\": null, \"walking_incomplete\": false, \"max_transfers\": 4, \"transfer_policy\": {\"unit\": \"third\", \"ceiling\": 4, \"extra_over_minimum\": 1, \"max_routes\": 5, \"minimum_found\": null, \"maximum_allowed\": 4.0, \"internal_rail_weight\": 0.3333333333333333}, \"search_limited\": false, \"planning\": {\"horizon_hours\": 6, \"transfer_minutes\": 2, \"waiting\": \"half_headway\", \"same_stop_only\": false}}"
+    }
+  ],
+  "note": "Real public application queried at actual server time; no route, timetable or response interception. Recording consent declined. Local address is not a remotely accessible QR destination."
+}

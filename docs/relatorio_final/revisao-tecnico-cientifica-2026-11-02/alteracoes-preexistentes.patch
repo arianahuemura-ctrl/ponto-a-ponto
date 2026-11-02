@@ -1,0 +1,434 @@
+diff --git a/docs/relatorio_final/README.md b/docs/relatorio_final/README.md
+index 59f161d..262c625 100644
+--- a/docs/relatorio_final/README.md
++++ b/docs/relatorio_final/README.md
+@@ -1,3 +1,51 @@
++# Revisão de apresentação e legibilidade — 2 de novembro de 2026
++
++PDF atual: [PaP_relatorio_2026-11-02_ARTESP_revisado.pdf](PaP_relatorio_2026-11-02_ARTESP_revisado.pdf), 155 páginas.
++MD5: `65f4ca925b0e719c1101e6e18a584492`.
++
++Feedback de legibilidade ferroviária documentado, com capturas reais dos temas claro e escuro e distinção entre verificação técnica e avaliação com passageiros. A ampliação ARTESP já documentada foi preservada. Vídeo atualizado na entrega `entrega-2026-11-02-artesp-revisado`; fonte, validação e versões anteriores preservadas. Link público definitivo continua pendente; não houve publicação ou commit.
++
++Auditoria: [auditoria-apresentacao-artesp-2026-11-02](auditoria-apresentacao-artesp-2026-11-02/).
++
++---
++
++# Ampliação ARTESP em Mauá — 2 de novembro de 2026
++
++PDF atual: [PaP_relatorio_2026-11-02_ARTESP.pdf](PaP_relatorio_2026-11-02_ARTESP.pdf), 154 páginas.
++MD5: `e5066437612956ffc0eda173dace0f40`.
++
++Confirmadas no GTFS original 337 paradas, 16 linhas ou variantes e 705/427/359
++viagens programadas distintas em dia útil/sábado/domingo. Ao fim de semana,
++324 paradas constam na programação. Capuava, Mauá e Guapituba são adicionais.
++Foram examinadas 14 consultas temporais e preservada uma captura real da
++interface pública com ônibus 157 e CPTM L10; seu aviso de busca parcial foi mantido.
++
++Resumo, Metodologia, Resultados, Tabela 5, Considerações Finais e apêndice de
++integração atualizados; ajuste pontual da delimitação para distinguir os três
++estágios. Fontes, respostas, capturas, validação e hashes:
++[auditoria-artesp-maua-2026-11-02](auditoria-artesp-maua-2026-11-02/).
++O vídeo não foi modificado; avaliação e plano de substituição visual em
++[video-avaliacao.txt](auditoria-artesp-maua-2026-11-02/video-avaliacao.txt).
++Versões anteriores preservadas. Nenhum commit automático.
++
++---
++
++# Revisão corretiva de 1 de novembro de 2026
++
++PDF revisado: `PaP_relatorio_2026-11-01_revisado.pdf`, 145 páginas, 9,875,597 bytes, MD5 `87bdf923c09bafb6c5f60ed81c284738`. Compilação LuaLaTeX/latexmk concluída.
++
++Fontes e evidências da revisão: `revisao-consistencia-2026-11-01/`. Original de referência (MD5 fcf136604ea3aa13ea58bd884cc628b1) preservado. Foram corrigidos resumo, resultados, universo de paradas, recorte da tabela de latências e consulta concorrente; acrescentadas evidências visuais reais e rastreabilidade com lacunas explícitas. O protocolo A/B/C permanece proposto. A capa aguarda confirmação do endereço definitivo do vídeo.
++
++O histórico abaixo mantém as datas de suas versões. Metrô e trens estão implementados no planejamento atual; previsão ferroviária ao vivo, integração tarifária e validação operacional permanecem pendentes.
++
++---
++
++# Atualização de 1 de novembro de 2026
++
++Fonte vigente: `relatorio_final_pi2_v2.tex`. Nova seção B.1 e tabela 9: cobertura, integração ferroviária, publicação concorrente e desempenho por baldeação. PDF de envio conferido: `relatorio_final_pi2_v2_envio.pdf` (9.809.687 bytes). Original sem recompressão preservado. Evidências em `atualizacao-2026-11-01/`.
++
++---
++
+ # Relatório final — Projeto Integrador II
+ 
+ Revisão de 7 de outubro de 2026. Versão da aplicação documentada: 4992027, branch sptrans. O modelo da facilitadora está em Modelo_Relatorio_Final.docx; o relatório parcial foi preservado em ../relatorio_parcial/.
+@@ -8,7 +56,7 @@ O relatório reúne fundamentação de IHC, aplicação das disciplinas, metodol
+ 
+ Funcionalidades documentadas: localização contínua ou simulada, enquadramento inicial de 250 m, seleção por toque prolongado, alteração de embarque preservando destino, caminhadas de até 1 km por segmento, filtro de alternativas dominadas, recálculo manual sem cache de resultados, ampulheta de carregamento, seletor Trecho, posições de ônibus e previsões por alternativa a cada 15 s, filtro de previsão incompatível com caminhada, URL raiz com precedência sobre sessão, clique externo ao painel para retornar ao mapa e agrupamento de faixas consecutivas com a mesma frequência.
+ 
+-Metrô/CPTM, implantação física e avaliação com passageiros permanecem como evoluções ou pendências. Os testes técnicos não comprovam usabilidade nem disponibilidade operacional em todas as condições.
++Na revisão histórica de 7 de outubro, Metrô/CPTM eram evolução prevista. Em 1 de novembro, o planejamento multimodal está implementado; implantação física e avaliação sistemática com passageiros permanecem pendentes. Os testes técnicos não comprovam usabilidade nem disponibilidade operacional em todas as condições.
+ 
+ ## Imagens e rastreabilidade
+ 
+diff --git a/docs/relatorio_final/diagramas/arquitetura.tex b/docs/relatorio_final/diagramas/arquitetura.tex
+index a839939..df45307 100644
+--- a/docs/relatorio_final/diagramas/arquitetura.tex
++++ b/docs/relatorio_final/diagramas/arquitetura.tex
+@@ -1,30 +1,13 @@
+-\begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
+-box/.style={draw,rounded corners,align=center,text width=4.4cm,minimum height=.85cm,fill=white},
+-arr/.style={->,thick,rounded corners=3pt},
+-label/.style={font=\scriptsize,fill=green!4,inner sep=3pt}]
+-\draw[rounded corners,fill=blue!4] (-2.6,.8) rectangle (2.6,-7.3);
+-\draw[rounded corners,fill=green!4] (3.4,.8) rectangle (13.4,-11);
+-\node[font=\bfseries] at (0,.35) {PREPARAÇÃO OFFLINE};
+-\node[font=\bfseries] at (8.4,.35) {CONSULTA ONLINE};
+-\node[box] (fonte) at (0,-.7) {GTFS SPTrans e OSM/OSRM};
+-\node[box] (grafo) at (0,-2.2) {Conexões dirigidas\\e caminhadas verificadas};
+-\node[box] (comp) at (0,-3.7) {Componentes reutilizáveis\\Índices diretos e reversos};
+-\node[box] (bi) at (0,-5.2) {Composição bidirecional\\Um, dois ou três ônibus};
+-\node[box] (mat) at (0,-6.7) {Candidatos materializados\\Um ou dois ônibus};
+-\node[box] (entrada) at (6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
+-\node[box] (rec) at (6,-2.2) {Recuperar candidatos compatíveis\\Consolidado e índices auxiliares};
+-\node[box,fill=orange!10] (ctx) at (6,-3.7) {Contexto utilizável?};
+-\node[box] (av) at (6,-5.2) {Validar caminhadas; avaliar tempos\\Refinar com dados operacionais};
+-\node[box,fill=orange!10] (cond) at (6,-6.9) {Há alternativa válida ao final?};
+-\node[box,text width=3.2cm,fill=orange!6] (fallback) at (11.4,-8.9) {Fallback por rodadas\\somente quando permitido};
+-\node[box] (res) at (6,-10) {Alternativas progressivas\\Identificação do produtor};
+-\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/ctx,av/cond}{\draw[arr] (\a.south)--(\b.north);}
+-\draw[arr] (mat.east)--(3,-6.7)--(3,-2.2)--(rec.west);
+-\draw[arr] (ctx.south)--node[right,label]{sim}(av.north);
+-\draw[arr] (ctx.east)--node[above,label]{não: antecipado}(11.4,-3.7)--(fallback.north);
+-\draw[arr] (cond.east)--(9.3,-6.9)--node[label,align=center,pos=.3]{não:\\posterior}(9.3,-8.9)--(fallback.west);
+-\draw[arr] (cond.south)--node[right,label]{sim}(res.north);
+-\draw[arr] (fallback.south)--(11.4,-10)--(res.east);
+-\node[align=left,text width=4.4cm,font=\scriptsize] at (0,-8.8) {\textbf{Recuperação online:} inclui índice direto e componentes auxiliares, com composição limitada a até dois ônibus.};
+-\node[align=center,text width=15cm,font=\scriptsize] at (5.4,-12.2) {Os dois desvios convergem para o mesmo fallback, pertencente à consulta online.\\Não há execução paralela nem fallback apenas para completar uma lista válida.\\Caminhada direta validada inferior a 1 km dispensa o fallback por rodadas.\\O caminho principal publica resultados durante a avaliação, antes de concluir.};
++\begin{tikzpicture}[>=Stealth,font=\small,
++box/.style={draw,rounded corners,align=center,execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000},text width=5.4cm,minimum height=1cm,fill=blue!4},arr/.style={->,thick}]
++\node[box] (orig) at (0,0) {GTFS, rede ferroviária e malha pedestre\\Fontes e parâmetros versionados};
++\node[box] (prep) at (0,-2.0) {Preparação offline\\Conexões dirigidas e caminhadas verificadas};
++\node[box] (mat) at (0,-4.3) {Materialização compacta\\por etapas\\Até 5 alternativas por par; custo até 4};
++\node[box] (entrada) at (7,0) {Origem, destino e horário\\React/Leaflet $\leftrightarrow$ Django};
++\node[box] (fontes) at (7,-2.0) {Produtores concorrentes\\Preparados e buscas complementares/RAPTOR};
++\node[box] (av) at (7,-4.3) {Avaliação temporal e pedestre\\Limites próprios e dependências externas};
++\node[box,fill=green!8] (res) at (7,-6.8) {Publicação progressiva\\da primeira rota\\Continuação das demais alternativas};
++\foreach \a/\b in {orig/prep,prep/mat,entrada/fontes,fontes/av,av/res}{\draw[arr] (\a)--(\b);}
++\draw[arr] (mat.east)--(3.5,-4.3)--(3.5,-2.0)--(fontes.west);
++\node[align=center,text width=13cm,font=\footnotesize] at (3.5,-9.0) {Estado de 1 de novembro de 2026. Troca envolvendo ônibus: custo 1;\\troca interna metrô/trem: $1/3$. Cobertura estrutural não garante viagem em todo horário.\\Uma fonte externa não precisa bloquear a publicação de outra fonte válida.};
+ \end{tikzpicture}
+diff --git a/docs/relatorio_final/diagramas/sequencia.tex b/docs/relatorio_final/diagramas/sequencia.tex
+index fdd353b..e885da3 100644
+--- a/docs/relatorio_final/diagramas/sequencia.tex
++++ b/docs/relatorio_final/diagramas/sequencia.tex
+@@ -1,13 +1,11 @@
+ \begin{tikzpicture}[>=Stealth,font=\small,
+-seqstage/.style={draw,rounded corners=3pt,align=left,text width=12cm,inner sep=9pt,fill=blue!3},
+-arr/.style={->,thick},note/.style={align=left,text width=12cm,font=\footnotesize}]
+-\node[seqstage] (a) at (0,0) {\textbf{1. Receber a consulta}\\A interface React envia origem, destino e instante ao backend Django.};
+-\node[seqstage,below=.4cm of a] (b) {\textbf{2. Recuperar candidatos}\\Django consulta o consolidado materializado, o índice direto e componentes auxiliares. A composição online limita-se a até dois ônibus, com cotas e prazos. Se o contexto estiver indisponível ou incompatível, segue para a condição da etapa 6.};
+-\node[seqstage,below=.4cm of b] (c) {\textbf{3. Validar e avaliar cada candidato}\\O serviço pedestre verifica as caminhadas. Django avalia os tempos e descarta alternativas incompatíveis.};
+-\node[seqstage,below=.4cm of c] (d) {\textbf{4. Refinar com dados operacionais, quando disponíveis}\\A API Olho Vivo fornece previsões compatíveis. Sem previsão utilizável, mantém-se a informação programada.};
+-\node[seqstage,fill=green!6,below=.4cm of d] (e) {\textbf{5. Mostrar alternativas conforme ficam disponíveis}\\Django envia resultados progressivamente à interface (NDJSON). As etapas 3 a 5 se repetem dentro dos limites da consulta.};
+-\foreach \a/\b in {a/b,b/c,c/d,d/e}{\draw[arr] (\a.south)--(\b.north);}
+-\node[seqstage,fill=orange!8,below=1.5cm of e] (f) {\textbf{6. Usar o planejador por rodadas somente se necessário}\\Acionar se as rodadas forem permitidas e ocorrer uma das situações:\\• contexto inutilizável na etapa 2; ou\\• término do caminho principal sem alternativas válidas.\\Os resultados do fallback também são enviados à interface.};
+-\node[note,anchor=north,yshift=-.2cm] at (e.south) {\textbf{Ao terminar:} se há alternativa válida, concluir sem rodadas.\\Se não há, verificar as condições abaixo.};
+-\node[note,below=.35cm of f] {\textbf{Regras de leitura:} não há execução simultânea dos dois planejadores. O fallback não serve para completar uma lista válida. A ausência isolada de previsão não o aciona. Caminhada direta validada inferior a 1 km dispensa rodadas.};
++seqstage/.style={draw,rounded corners=3pt,align=left,text width=12cm,inner sep=7pt,fill=blue!3},
++arr/.style={->,thick}]
++\node[seqstage] (a) {\textbf{1. Receber origem, destino e instante}\\React solicita a consulta ao Django. Uma caminhada curta já materializada pode ser publicada imediatamente, sem encerrar a busca.};
++\node[seqstage,below=.3cm of a] (b) {\textbf{2. Selecionar fontes e iniciar tarefas concorrentes}\\Candidatos preparados e conexões de ônibus; rodadas quando habilitadas; caminhada externa apenas se não houver caminhada direta inicial. A disponibilidade e a configuração condicionam cada fonte.};
++\node[seqstage,below=.3cm of b] (c) {\textbf{3. Avaliar independentemente em cada produtor}\\Recuperar candidatos, validar horários e caminhadas e preparar a geometria da alternativa a publicar. Serviços externos podem afetar uma fonte sem obrigar as outras a esperar.};
++\node[seqstage,fill=green!6,below=.3cm of c] (d) {\textbf{4. Consumir a fila e publicar a primeira opção válida}\\Deduplicar e aplicar os filtros de trechos, caminhada e custo. Enviar alternativas por SSE/NDJSON com \texttt{complete=false}, sem aguardar todos os produtores. Refinamento operacional quando disponível.};
++\node[seqstage,fill=green!6,below=.3cm of d] (e) {\textbf{5. Incorporar novas alternativas e progresso}\\Repetir a avaliação e publicação, podendo reordenar até cinco opções. Pools separados: quatro threads para preparados e oito para complementos, com admissão limitada a 16 e 24 tarefas por processo servidor.};
++\node[seqstage,fill=orange!8,below=.3cm of e] (f) {\textbf{6. Finalizar ou sinalizar busca limitada}\\Encerrar após conclusão das fontes admitidas ou prazo do agregador de 30 s. Falha, saturação e prazo preservam resultados e indicam limites. Fechar o fluxo cancela tarefas em fila; as ativas cooperam na próxima publicação. Revisão opcional final tem orçamento próprio. O prazo não garante latência no celular.};
++\foreach \a/\b in {a/b,b/c,c/d,d/e,e/f}{\draw[arr] (\a.south)--(\b.north);}
+ \end{tikzpicture}
+diff --git a/docs/relatorio_final/planejador_hibrido.tex b/docs/relatorio_final/planejador_hibrido.tex
+index 4f45724..364a041 100644
+--- a/docs/relatorio_final/planejador_hibrido.tex
++++ b/docs/relatorio_final/planejador_hibrido.tex
+@@ -1,4 +1,7 @@
+-\section{Preparação estrutural e bancos especializados}
++\section{Registro histórico da arquitetura em 28 de outubro}
++Esta seção preserva a arquitetura, o diagnóstico de disco e o protocolo proposto em 28 de outubro de 2026. As afirmações sobre execução condicional, cotas e base parcial descrevem aquela versão, não o fluxo concorrente e o banco compacto de 1 de novembro, apresentados na Seção~\ref{sec:atualizacao-20261101}.
++
++\subsection{Preparação estrutural e bancos especializados}
+ A construção separa dados de origem, relações estruturais e candidatos prontos para consulta. O arquivo GTFS alimenta o grafo e as ligações diretas. A malha OSM, processada pelo OSRM com perfil pedestre, fornece distâncias verificadas entre paradas; essas distâncias complementam as ligações de ônibus. O fluxo de dependências é: cadastro GTFS, grafo, conexões diretas e caminhadas, componentes reutilizáveis e, por fim, materialização seletiva. Alterações das fontes ou dos parâmetros relevantes exigem verificar as assinaturas dos derivados e reconstruir os artefatos afetados, sem refazer essa estrutura estática a cada consulta operacional.
+ 
+ Os seis bancos SQLite especializados têm as seguintes responsabilidades. Os nomes abaixo indicam os sufixos usados pelo conjunto de artefatos \texttt{sptrans}; não incluem o banco Django do cenário histórico de Mauá.
+@@ -25,9 +28,11 @@ O marcador \texttt{city\_complete=false} permanece: processamento por categoria,
+ % TODO-BENCHMARK: Inserir armazenamento final dos bancos.
+ % TODO-BENCHMARK: Inserir cobertura das paradas e pares.
+ 
+-\section{Consulta temporal e acionamento do fallback}
++\subsection{Consulta temporal e acionamento do fallback}
+ Com o seletor configurado para conexões e até duas baldeações, o despachante utiliza o adaptador materializado. Este recupera candidatos de um ou dois ônibus cuja respectiva categoria esteja \texttt{ready}, após validar os artefatos e selecionar paradas de acesso e saída. A recuperação parcial não exige as duas categorias prontas, uma terceira categoria ou cobertura municipal completa. As assinaturas do materializado, do índice direto e do grafo foram aceitas na conferência somente de leitura; isso não comprova sucesso de uma viagem.
+ 
++Na atualização de 29 de outubro de 2026, a seleção de acessos passou a considerar todas as paradas com serviço de ônibus em um raio de 200 m em linha reta de cada extremidade. Somente quando esse conjunto está vazio são selecionadas até três paradas mais próximas dentro do limite geométrico de 1 km; uma ou duas paradas no raio não são completadas com outras mais distantes. A regra vale para origem e destino, definidos por parada ou coordenada, no adaptador de conexões e na busca por rodadas. A distância efetiva do percurso pedestre continua sujeita ao limite de 1 km e à validação temporal. A seleção de todas as paradas do raio não remove os orçamentos de consulta nem garante examinar todos os itinerários possíveis.
++
+ A função estrita \nolinkurl{materialized_connections.query}, distinta do caminho utilizado pelo passageiro, exige ambas as categorias prontas e admite somente cotas para o conjunto $\{1,2\}$, sem consulta isolada de uma categoria. O esquema atual impede armazenar três ônibus; sua ausência não bloqueia candidatos de um ou dois.
+ 
+ O adaptador complementa o consolidado com o índice direto municipal e componentes de um ônibus com caminhada final. Para pares sem a categoria de dois ônibus pronta, consulta componentes de dois ônibus, limitados a oito candidatos, com prazo de cinco segundos para essa consulta estrutural. Uma categoria pronta e vazia não é recomposta. Há, portanto, composição limitada a partir dos componentes na consulta, sem materialização municipal nem gravação de novos pares. O indicador \texttt{materialized=true}, isoladamente, não comprova que todos os candidatos vieram do consolidado.
+@@ -44,8 +49,10 @@ No fluxo de ônibus, o despachante aciona a busca por rodadas quando a preparaç
+ 
+ Os dois planejadores não são executados simultaneamente nem têm seus resultados obrigatoriamente unidos. O identificador do produtor acompanha o retorno; o retorno de fallback pode conservar a razão de indisponibilidade ou apresentar uma mensagem genérica. Para os benchmarks, será necessário registrar motivos discriminados no instrumento de medição, sem deduzi-los apenas dessa mensagem. As cotas por distância, os limites de validação e o filtro de alternativas distintas não constituem uma fronteira de Pareto completa. As regras de poda por chegada descritas a seguir pertencem ao planejador por rodadas; não se atribui à consulta materializada uma poda global pelo melhor tempo que ela não executa.
+ 
+-\section{Protocolo do benchmark definitivo}\label{sec:benchmark-hibrido}
+-O protocolo será executado após a conclusão e verificação da materialização. A configuração A do estudo principal é o caminho completo de conexões, sem fallback: consolidado materializado, índice direto, componentes auxiliares e composição estrutural limitada na consulta, conforme B.2. Inclui as validações pedestres e temporais e o refinamento operacional, mantendo como vazio um resultado sem alternativas válidas. Permanecem B, planejador por rodadas isolado, e C, arquitetura integrada com fallback. Cada resultado deverá identificar o mecanismo que efetivamente o produziu. Uma consulta estrita apenas aos candidatos previamente materializados, se investigada, será uma análise auxiliar distinta de A. O plano não constitui resultado experimental.
++\subsection{Protocolo do benchmark definitivo}\label{sec:benchmark-hibrido}
++\textbf{Estado do protocolo em 1 de novembro.} O texto a seguir preserva o plano A/B/C de 28 de outubro, ainda não concluído como experimento controlado. Ele não se confunde com o censo estrutural do banco compacto nem com a comparação local de 3.264 consultas entre versões, apresentados em B.1. Para uma execução atual, será necessário atualizar previamente o escopo comum para ônibus, metrô e trens, custos ponderados, acessos e limites equivalentes, distinguindo A (conexões), B (rodadas) e C (integração concorrente). A procedência de cada candidato, o controle de cache e as respostas externas congeladas continuam requisitos; os dados de B.1 não antecipam a conclusão dessa comparação.
++
++\textbf{Plano histórico preservado.} O protocolo será executado após a conclusão e verificação da materialização. A configuração A do estudo principal é o caminho completo de conexões, sem fallback: consolidado materializado, índice direto, componentes auxiliares e composição estrutural limitada na consulta, conforme B.2. Inclui as validações pedestres e temporais e o refinamento operacional, mantendo como vazio um resultado sem alternativas válidas. Permanecem B, planejador por rodadas isolado, e C, arquitetura integrada com fallback. Cada resultado deverá identificar o mecanismo que efetivamente o produziu. Uma consulta estrita apenas aos candidatos previamente materializados, se investigada, será uma análise auxiliar distinta de A. O plano não constitui resultado experimental.
+ 
+ Antes da coleta, o instrumento deverá registrar separadamente a procedência dos candidatos: consolidado materializado por categoria, índice direto, componentes de um ônibus e componentes de dois ônibus. Quando houver deduplicação, deverá preservar todas as origens de um mesmo candidato e distinguir quantidades recuperadas, avaliadas e válidas. O indicador genérico \texttt{materialized=true} não substitui esse registro; essa instrumentação é requisito do estudo proposto, não uma coleta já concluída.
+ 
+@@ -53,7 +60,7 @@ O consolidado e o caminho de conexões atuais atendem somente a um ou dois ônib
+ 
+ As três configurações utilizarão os mesmos pares origem--destino, instantes de partida e fuso, pacote e calendários GTFS, velocidade de caminhada de 4,5 km/h, limites de distância, número máximo de embarques, critérios temporais e informações operacionais. O instrumento deverá equalizar também o tratamento de caminhadas iniciais e finais e o refinamento temporal; apenas aplicar os parâmetros aos fluxos existentes não comprova equivalência. Serão registrados a revisão do código, eventuais alterações locais, assinaturas dos bancos, configuração, hardware e versões dos serviços. A amostra deverá incluir viagens diretas, baldeações, caminhadas de acesso e saída, períodos diurnos e noturnos e casos sem rota. Selecionar somente pares com sucesso no materializado impediria medir sua cobertura e a necessidade do fallback.
+ 
+-\textbf{Teste controlado.} As respostas operacionais e pedestres serão congeladas e reutilizadas. As consultas serão repetidas em execuções isoladas, alternando a ordem dos planejadores. Serão separadas condições de cache frio e quente, documentando quais caches foram reiniciados ou preservados, inclusive os do sistema operacional. O número de repetições e a amostra serão definidos antes da coleta; percentis extremos exigem quantidade suficiente de observações. Serão medidos latência até a primeira alternativa e até o término, memória e atividade de preparação separadamente. A materialização e outros trabalhos intensivos não deverão competir com as consultas medidas.
++\textbf{Teste controlado.} As respostas operacionais e pedestres serão congeladas e reutilizadas. As consultas serão repetidas em execuções isoladas, alternando a ordem dos planejadores. Serão separadas condições de cache frio e quente, documentando quais caches foram reiniciados ou preservados, inclusive os do sistema operacional. O número de repetições e a amostra serão definidos antes da coleta; percentis extremos exigem quantidade suficiente de observações. Serão~medidos latência até a primeira alternativa e até o término, memória e atividade de preparação separadamente. A materialização e outros trabalhos intensivos não deverão competir com as consultas medidas.
+ 
+ \textbf{Teste operacional.} Os planejadores serão consultados sequencialmente em instantes próximos, com dados atuais da SPTrans, alternando sua ordem e registrando os instantes de requisição e das informações retornadas. A comparação examinará viabilidade dos embarques, alternativas e sensibilidade à atualização dos dados. Respostas diferentes entre duas consultas serão explicitadas, não tratadas como se fossem a mesma observação congelada. Eventual concorrência por recursos ou variação da rede não será interpretada como diferença intrínseca entre algoritmos.
+ 
+diff --git a/docs/relatorio_final/relatorio_final_pi2_v2.tex b/docs/relatorio_final/relatorio_final_pi2_v2.tex
+index 56f1611..d271d49 100644
+--- a/docs/relatorio_final/relatorio_final_pi2_v2.tex
++++ b/docs/relatorio_final/relatorio_final_pi2_v2.tex
+@@ -96,7 +96,7 @@ Polos: São Bernardo do Campo; Suzano; Francisco Morato; Osasco -- SP.
+ \SingleSpacing
+ \noindent VALE, André Meneghelli; UEMURA, Ariana Harumi; SOUZA, Bruno Gabriel Migliari de; FERREIRA, Caio Wellington Procopio; DIAS, Ingrid Emanuelle Sousa; LEITE, Leonardo Souza; MARQUES, Maurício Gonçalves; AMORIM, Nathalia Almeida. \textit{\imprimirtitulo}. \ztotpages{} f. Relatório Técnico-Científico. Bacharelado em Tecnologia da Informação -- Universidade Virtual do Estado de São Paulo. Facilitadora: Me. Aline Monteiro Campos Garcia. Polos: São Bernardo do Campo; Suzano; Francisco Morato; Osasco -- SP. 2026.
+ \par\medskip
+-Este trabalho apresenta o Ponto a Ponto (PaP), protótipo web desenvolvido no Projeto Integrador em Computação II da UNIVESP para apoiar a consulta ao transporte público. O objetivo é facilitar a identificação do embarque por QR Code e a escolha do deslocamento por destino, sem exigir conhecimento prévio das linhas. A metodologia articula escuta da gestão do transporte de Mauá, pesquisa bibliográfica, análise de serviços existentes, prototipação, implementação, testes técnicos e apreciação externa, orientadas pelo Design Thinking e pela Interação Humano--Computador. A aplicação utiliza Django, React e SQLite. O cenário histórico de Mauá reúne catálogo público e operação simulada; a implementação funcional em São Paulo integra GTFS da SPTrans, planejamento de viagens e consultas à API Olho Vivo quando disponíveis. Os resultados incluem alternativas por destino, visualização de trechos, favoritos, feedback e participação voluntária na pesquisa. Testes e capturas documentam comportamentos de versões identificadas. Segundo confirmação do grupo, Thiago Almeida Amorim, da Alameda Solutions, avaliou o aplicativo e o relatório em 21 e 25 de outubro de 2026, com apreciação qualitativa favorável às melhorias. A avaliação específica com passageiros permanece pendente, assim como a comprovação de redução do esforço de interação e da precisão operacional. Conclui-se que o protótipo viabiliza investigar a continuidade entre identificação da parada e escolha do percurso, distinguindo implementação, apreciação profissional e benefícios ainda não mensurados com a comunidade.
++Este trabalho apresenta o Ponto a Ponto (PaP), protótipo web desenvolvido no Projeto Integrador em Computação II da UNIVESP para apoiar o acesso contextualizado ao transporte público por QR Code em pontos de ônibus. O objetivo é facilitar a identificação do embarque e a escolha do deslocamento por destino, sem exigir conhecimento prévio das linhas. A metodologia articula escuta da gestão do transporte de Mauá, pesquisa bibliográfica, análise de serviços, prototipação, testes técnicos e apreciação externa, orientadas pelo Design Thinking e pela Interação Humano--Computador. A aplicação utiliza Django, React e SQLite. O cenário histórico de Mauá reúne catálogo público e operação simulada; a implementação funcional original combina dados da SPTrans, ônibus, metrô e trens. A ampliação com GTFS da ARTESP confirmou 337 paradas metropolitanas em Mauá, 16 linhas ou variantes e 705 viagens programadas distintas em dia útil, além de três estações ferroviárias, sem equivaler à rede municipal completa. Em 1 de novembro de 2026, a materialização compacta cobria estruturalmente 99,666\% dos pares examinados, sem garantir viagens em todos os horários. A publicação concorrente permite apresentar alternativas antes de concluir todas as buscas. Na comparação local de 1.637 consultas com rota nas duas versões, a mediana aumentou de 0,282 para 0,599 segundo e o percentil 95 diminuiu de 5,698 para 5,143 segundos; não se demonstra ganho generalizado nem latência no celular. A avaliação profissional de Thiago Almeida Amorim, da Alameda Solutions, e a exploração por usuários convidados documentam apreciações qualitativas e ajustes, sem validar automaticamente as mudanças posteriores. Permanecem pendentes a avaliação sistemática com passageiros e a validação operacional das estimativas ferroviárias. Conclui-se que o protótipo permite investigar a continuidade entre identificação da parada e escolha multimodal do percurso, distinguindo implementação, cobertura estrutural e benefícios ainda não mensurados com a comunidade.
+ 
+ \par\vfill
+ \noindent\textbf{Palavras-chave}: transporte público; QR Code; informação ao passageiro; mobilidade urbana; pontos de interesse.
+@@ -163,7 +163,7 @@ A proposta parte da necessidade de aproximar as informações do transporte da s
+ 
+ A motivação local é a distância entre a existência de informações operacionais e a facilidade de acessá-las no momento do embarque. Na entrevista, o interlocutor descreveu serviços de monitoramento já disponíveis e avaliou positivamente a consulta iniciada por QR Code na parada  (entrevista com Osmar Junior, 739--853 s; 961--983 s). O PaP pretende complementar esse acesso, sem pressupor inexistência de tecnologia em Mauá. A iniciativa anterior em São Paulo oferece uma referência para o desenvolvimento; a adequação do fluxo proposto ao passageiro local ainda exige avaliação.
+ 
+-O escopo reúne o cenário histórico de Mauá, com catálogo rastreável de fontes públicas e operação simulada para apresentação ao interlocutor, e a implementação funcional no cenário São Paulo, integrada ao GTFS da SPTrans e à API Olho Vivo. Mauá permanece a comunidade externa originalmente delimitada. Após a análise do Cittamobi e dos registros sobre Santos, o escopo foi delimitado como a integração entre reconhecimento do ponto físico por QR Code e escolha do deslocamento por destino em uma consulta web. A escolha por destino, com informação sobre linhas, sentido, espera e trocas, complementa esse acesso e permanece no escopo do protótipo, sem ser apresentada como diferencial exclusivo. A hipótese de melhoria da compreensão deverá ser testada localmente; a literatura orienta o projeto, mas não comprova seus resultados em Mauá.
++O escopo distingue três etapas: o cenário histórico de Mauá, com catálogo público e operação simulada para apresentação ao interlocutor; a implementação funcional original com GTFS e Olho Vivo da SPTrans; e a ampliação metropolitana de 2 de novembro de 2026, com GTFS da ARTESP e conexões ferroviárias utilizáveis no planejador a partir de Mauá. Essa ampliação não equivale à integração da totalidade dos ônibus municipais. Mauá permanece a comunidade externa originalmente delimitada. Após a análise do Cittamobi e dos registros sobre Santos, o escopo foi delimitado como a integração entre reconhecimento do ponto físico por QR Code e escolha do deslocamento por destino em uma consulta web. A escolha por destino, com informação sobre linhas, sentido, espera e trocas, complementa esse acesso e permanece no escopo do protótipo, sem ser apresentada como diferencial exclusivo. A hipótese de melhoria da compreensão deverá ser testada localmente; a literatura orienta o projeto, mas não comprova seus resultados em Mauá.
+ 
+ No cenário histórico de Mauá, o planejamento demonstrativo e o catálogo importado são camadas distintas: possuir uma linha ou uma coordenada no banco não assegura itinerário completo, horário vigente ou conexão operacional válida. Não integram a entrega atual, para o cenário de Mauá, previsões operacionais reais de chegada, cobertura integral validada da cidade, implantação autorizada de placas, aplicativo Android ou levantamento populacional de origem e destino. O retorno do interlocutor sobre a bilhetagem motivou uma investigação futura de consultas agregadas de origem e destino, descrita nos resultados e na discussão, sem equipará-las a deslocamentos efetivamente realizados. Favoritos já são armazenados no navegador, sem conta nem sincronização entre dispositivos. O acesso inicial pelo QR Code permanece independente dessa personalização.
+ 
+@@ -243,6 +243,8 @@ Na verificação técnica de 23 de setembro de 2026, os cabeçalhos HTTP dos arq
+ 
+ Na mesma verificação, a página da parada respondeu por HTTP, mas as tentativas de conexão HTTPS expiraram por tempo limite. Não foi possível obter um certificado para verificar sua validade. Esse resultado descreve a condição observada naquele acesso e não permite afirmar que havia um certificado vencido.
+ 
++Em tentativa de uso relatada por um integrante do grupo, não foi possível concluir a consulta no QRCodeAdesivo. O relato não permite distinguir falha do serviço de dificuldade de interação: a resposta por HTTP não assegura o funcionamento do fluxo completo.
++
+ As datas dos recursos e a dificuldade de acesso por HTTPS são indícios exploratórios que motivam a hipótese do grupo de defasagem tecnológica e possível descontinuidade da evolução do QRCodeAdesivo. A página ainda respondeu por HTTP na verificação, de modo que não se afirma encerramento do serviço nem descontinuação oficialmente confirmada. Essa hipótese se restringe ao QRCodeAdesivo; os testes de seu domínio não avaliam a manutenção ou a disponibilidade do Olho Vivo.
+ 
+ As datas de \texttt{Last-Modified} são metadados de arquivos específicos e não um histórico de desenvolvimento. Elas não estabelecem a última atualização do backend ou dos dados do QRCodeAdesivo, e arquivos antigos podem continuar adequados ao seu uso. Também não permitem datar atualizações do Olho Vivo, que constitui outro objeto de análise. A confirmação de redução ou interrupção da manutenção dependeria de histórico de versões, observações repetidas ou informação dos responsáveis pelo sistema. Para o PI, os indícios motivam incluir atualização dos dados, manutenção da interface e clareza das mensagens entre os aspectos de avaliação do protótipo.
+@@ -431,7 +433,7 @@ A alternância entre mapa, linhas e destino exige uma interface organizada em el
+ 
+ As ações realizadas na interface dependem de regras de consulta e persistência no servidor. Django é um framework web em Python que oferece uma camada de modelos e ORM para acesso ao banco \citep{django}. No PaP, o backend concentra regras de negócio, persistência, importações e respostas à interface React.
+ 
+-A consulta a diferentes fontes exige preservar as relações entre os registros e sua procedência. No cenário histórico de Mauá, a implementação utiliza SQLite, no arquivo \texttt{db.sqlite3}, acessado pelo ORM do Django, para guardar paradas, linhas, sequências, documentos de origem, estimativas de localização e controles da simulação. No cenário São Paulo, seis bancos SQLite especializados separam cadastro GTFS, grafo, conexões diretas, caminhadas, componentes reutilizáveis e candidatos materializados. O Apêndice~\ref{ap:rotas} descreve suas dependências; previsões e posições operacionais são consultadas no Olho Vivo. PostgreSQL/PostGIS poderá ser considerado se a implantação exigir consultas espaciais ou concorrência mais complexas, mas não compõe a arquitetura atual \citep{postgis}.
++A consulta a diferentes fontes exige preservar as relações entre os registros e sua procedência. No cenário histórico de Mauá, a implementação utiliza SQLite, no arquivo \texttt{db.sqlite3}, acessado pelo ORM do Django, para guardar paradas, linhas, sequências, documentos de origem, estimativas de localização e controles da simulação. Na arquitetura histórica de São Paulo, seis bancos SQLite especializados separam cadastro GTFS, grafo, conexões diretas, caminhadas, componentes reutilizáveis e candidatos materializados. O Apêndice~\ref{ap:rotas} descreve suas dependências; previsões e posições operacionais são consultadas no Olho Vivo. PostgreSQL/PostGIS poderá ser considerado se a implantação exigir consultas espaciais ou concorrência mais complexas, mas não compõe a arquitetura atual \citep{postgis}.
+ 
+ A integração depende tanto do acesso às fontes quanto da compatibilidade entre seus registros. No PaP, a aplicação importa OSM/Overpass e documentos públicos de catálogos complementares, com normalização antes da gravação no SQLite. Documentos históricos e páginas de conferência não são automaticamente tratados como cadastro operacional. No cenário de Mauá, GTFS e APIs de localização continuam como possibilidades de integração, sem fornecimento operacional confirmado. Nesse cenário, a API Olho Vivo constitui referência técnica e não é fonte dos veículos simulados. Na extensão de São Paulo, ela é efetivamente consultada para previsões e posições quando a correspondência com os registros GTFS pode ser estabelecida com segurança \citep{sptransapi}.
+ 
+@@ -467,6 +469,8 @@ A revisão de Haylett acrescenta critérios de clareza da informação e um prot
+ 
+ A comparação foi ampliada por registros sobre Santos fornecidos pelo grupo: a resposta ao protocolo 7657-2026, uma conversa informal com uma passageira e a descrição de um vídeo de leitura do QR Code. Esses materiais foram tratados como fontes distintas. A resposta institucional informa a oferta do serviço; a conversa registra uma experiência individual; a descrição do vídeo delimita um fluxo observado pelo grupo. A síntese documental preserva essa distinção e a ausência de data e identificação do setor remetente na resposta reproduzida. Nenhum desses registros corresponde a uma sessão de avaliação do PaP.
+ 
++\input{artesp_metodologia_20261102.tex}
++
+ \label{sec:escuta-comunidade}
+ Na etapa de ouvir e interpretar o contexto, Osmar Junior, gerente de Transportes Públicos de Mauá, foi escolhido como interlocutor da comunidade externa por sua experiência no setor, pelo conhecimento da operação local e pela disponibilidade para colaborar com o projeto. Na entrevista, relatou atuação no transporte público desde 1985, predominantemente em Mauá, com trajetória na administração pública e em empresas operadoras  (entrevista com Osmar Junior, 257--284 s; 424--447 s).
+ 
+@@ -634,10 +638,10 @@ RQ02 & Reduzir esforço de interação preservando compreensão e controle.\\\hl
+ \begin{figure}[H]
+ \centering\resizebox{\textwidth}{!}{\input{diagramas/arquitetura.tex}}
+ \caption{Arquitetura híbrida do planejamento no cenário São Paulo.}\label{fig:arquitetura-pap}
+-\fonte{Elaboração do grupo, documentação da implementação iniciada em 8 out. 2026; diagrama revisado em 25 out. 2026; recuperação de candidatos esclarecida em 28 out. 2026.}
++\fonte{Elaboração do grupo; arquitetura concorrente e legibilidade revisadas em 1 nov. 2026.}
+ \end{figure}
+ 
+-A interface consome a API do backend e o mapa-base; os favoritos permanecem no navegador. O backend recupera candidatos preparados, valida os percursos a pé e avalia a viabilidade temporal, consultando serviços externos sem transferir credenciais operacionais para a interface. A composição bidirecional pertence ao pré-processamento; a busca por rodadas é acionada nas condições de fallback descritas no Apêndice~\ref{ap:rotas}. As setas resumem dependências lógicas e não descrevem uma topologia de implantação em produção. A integração externa está sujeita a indisponibilidade, que deve ser comunicada sem transformar informações programadas em previsões operacionais.
++A interface consome a API do backend e o mapa-base; os favoritos permanecem no navegador. O backend recupera candidatos preparados, valida os percursos a pé e avalia a viabilidade temporal, consultando serviços externos sem transferir credenciais operacionais para a interface. A composição bidirecional pertence ao pré-processamento; a busca por rodadas integra os produtores concorrentes quando habilitada, conforme a atualização de 1 de novembro no Apêndice~\ref{ap:rotas}. As setas resumem dependências lógicas e não descrevem uma topologia de implantação em produção. A integração externa está sujeita a indisponibilidade, que deve ser comunicada sem transformar informações programadas em previsões operacionais.
+ 
+ A verificação técnica abrange importação, preservação das sequências, estimativas por endereço, cálculo de trajetos, API, preferências e fluxos da interface. Em 29 de setembro de 2026, foram executados com sucesso 65 testes Django, dez testes JavaScript e 13 testes de navegador com Playwright, totalizando 88 testes sem falhas. A execução de navegador incluiu a compilação do frontend e utilizou SQLite temporário, sem alterar o banco principal. Foram utilizados os comandos \texttt{python backend/manage.py test transit}, \texttt{npm test} e \texttt{npm run test:e2e}, sobre o código da revisão \texttt{a60f290}. O ambiente utilizou Python 3.14.4, Django 6.0.8 e Node.js 22.22.1; este último difere da versão 24 indicada pelo projeto, embora a compilação e os testes tenham sido concluídos nesse ambiente. Os resultados e comandos estão registrados em \nolinkurl{docs/verificacoes/2026-09-29/README.md}. Esses resultados verificam comportamentos programados, não a precisão das coordenadas ou a utilidade do sistema para passageiros.
+ 
+@@ -676,15 +680,15 @@ Obj. & Situação & Resultado e limite\\\hline\noalign{\vskip 4pt}\endfirsthead
+ \hline
+ \multicolumn{3}{p{\dimexpr\linewidth-2\tabcolsep\relax}}{\footnotesize Fonte: Elaboração do grupo (2026), com base nos objetivos, nos registros internos de implementação e na apreciação externa relatada no Apêndice~\ref{ap:feedback-alameda}. A classificação de atendimento é uma síntese do grupo.}\\
+ \endlastfoot
+-a & Parcial & Escuta da gestão local e referências sobre informação ao passageiro; levantamento direto com passageiros de diferentes graus de familiaridade ainda não concluído.\\ \noalign{\vskip 8pt}
+-b & Alcançado & Fontes públicas importadas e documentadas; catálogo histórico de Mauá separado do GTFS de São Paulo. A procedência não assegura completude operacional.\\ \noalign{\vskip 8pt}
+-c & Alcançado no escopo exploratório & Estimativas de coordenadas registradas com incertezas; precisão em campo não verificada. São Paulo utiliza coordenadas GTFS.\\ \noalign{\vskip 8pt}
+-d & Alcançado & Aplicação Django/React, SQLite, acesso contextualizado e histórico Git. Instalação física de placas não integra o resultado comprovado.\\ \noalign{\vskip 8pt}
+-e & Alcançado no cenário controlado & Dijkstra no demonstrador de Mauá; a extensão São Paulo evoluiu para o planejamento híbrido. Não se demonstra ótimo global nem precisão operacional.\\ \noalign{\vskip 8pt}
+-f & Parcial & Alternativas, trechos e favoritos implementados; redução de buscas e preservação do controle têm apoio funcional e apreciação qualitativa, sem medição com passageiros.\\ \noalign{\vskip 8pt}
+-g & Alcançado & Simulação histórica identificada e controlada pela administração, distinta da integração operacional de São Paulo.\\ \noalign{\vskip 8pt}
+-h & Parcial & Verificações técnicas e avaliação profissional de Thiago registradas; compreensão do fluxo por passageiros e pelo interlocutor original ainda não verificada.\\ \noalign{\vskip 8pt}
+-i & Parcial & Necessidades e limitações discutidas com a gestão de Mauá; cadastro operacional validado, atualização pactuada e integração com o fornecedor ainda não assegurados.\\ \noalign{\vskip 4pt}
++a & Parcial & Escuta da gestão local e referências sobre informação ao passageiro; levantamento direto com passageiros de diferentes graus de familiaridade ainda não concluído.\\ \noalign{\vskip 3pt}
++b & Alcançado & Fontes públicas importadas e documentadas; catálogo histórico de Mauá separado dos GTFS SPTrans e ARTESP. Confirmadas 337 paradas metropolitanas em Mauá; não se assegura completude da rede municipal.\\ \noalign{\vskip 3pt}
++c & Alcançado no escopo exploratório & Estimativas históricas de coordenadas registradas com incertezas; SPTrans e ARTESP utilizam coordenadas GTFS. Recorte de Mauá conferido com malha IBGE; precisão em campo não verificada.\\ \noalign{\vskip 3pt}
++d & Alcançado & Aplicação Django/React, SQLite, acesso contextualizado e histórico Git. Instalação física de placas não integra o resultado comprovado.\\ \noalign{\vskip 3pt}
++e & Alcançado no cenário controlado & Dijkstra no demonstrador histórico; planejamento híbrido SPTrans ampliado com ARTESP, com consultas metropolitanas e multimodais válidas nos horários examinados em Mauá. Não se demonstra ótimo global nem precisão operacional.\\ \noalign{\vskip 3pt}
++f & Parcial & Alternativas, trechos e favoritos implementados; redução de buscas e preservação do controle têm apoio funcional e apreciação qualitativa, sem medição com passageiros.\\ \noalign{\vskip 3pt}
++g & Alcançado & Simulação histórica identificada e controlada pela administração, distinta dos horários programados SPTrans/ARTESP e das previsões Olho Vivo quando disponíveis.\\ \noalign{\vskip 3pt}
++h & Parcial & Verificações técnicas e avaliação profissional de Thiago registradas; compreensão do fluxo por passageiros e pelo interlocutor original ainda não verificada.\\ \noalign{\vskip 3pt}
++i & Parcial & Necessidades e limitações discutidas com a gestão de Mauá; cadastro operacional validado, atualização pactuada e integração com o fornecedor dos ônibus municipais ainda não assegurados.\\ \noalign{\vskip 4pt}
+ \end{longtable}
+ \endgroup
+ Quanto à origem das melhorias, os ajustes resultaram de fontes diferentes, que não devem ser confundidas com uma única avaliação. A entrevista e os esclarecimentos de Osmar ajudaram a delimitar o problema e as condições dos dados. A revisão bibliográfica e a análise de serviços existentes orientaram as escolhas de interação. Os testes internos e as navegações relatadas pelo grupo motivaram ajustes, posteriormente apreciados por Thiago. O Apêndice~\ref{ap:feedback-alameda} conserva os 26 itens e as duas datas de retorno; a Tabela~\ref{tab:origem-melhorias} sintetiza casos com evidências identificáveis.
+@@ -703,6 +707,8 @@ Relatos ao grupo: estado da gravação pouco claro e falhas no acesso ou na inic
+ Revisão interna do relatório: divergências de fluxo, legibilidade dos diagramas e limites pouco explícitos. & Conferência com o aplicativo, revisão das figuras e distinção entre implementação, avaliação qualitativa e medições pendentes. & Itens 22 a 26 apreciados no registro de 25/10. A consolidação editorial posterior não é atribuída retroativamente ao parecer nem ao commit de referência.\\ \noalign{\vskip 4pt}
+ \end{longtable}
+ \endgroup
++Os ajustes posteriores aos relatos de 25 de outubro são apresentados separadamente na Tabela~\ref{tab:feedback-ajustes}, preservando o alcance histórico desta tabela.
++
+ Esses casos evidenciam três aprendizados: um traçado visualmente ambíguo pode corresponder a um retorno real da linha; confirmar ou interromper uma ação exige explicitar seus efeitos; e a participação em pesquisa deve permanecer separada do acesso ao transporte. A apreciação externa acrescenta uma perspectiva profissional sobre as mudanças, enquanto os testes técnicos verificam comportamentos determinados. Nenhum desses registros, isoladamente, substitui a avaliação por tarefas com passageiros.
+ 
+ % Conteúdo independente da versão v2: solução visual e fluxograma.
+@@ -840,7 +846,7 @@ O toque prolongado por aproximadamente 0,65 segundo permite selecionar coordenad
+ 
+ A tela de rotas utiliza uma ampulheta animada durante o cálculo e disponibiliza o recálculo manual ao concluir. Reiniciar a busca ignora o cache de resultados e executa novamente o planejamento. A consulta de rotas não é reiniciada automaticamente a cada 30 segundos nem a cada atualização do GPS; a atualização periódica permanece na consulta de próximos ônibus. No mapa, o seletor Trecho alterna a viagem completa e suas etapas, com legenda de ônibus e caminhada em coluna. A consulta de próximos ônibus apresenta a frequência como intervalo entre veículos e a faixa em que ele vigora, unindo faixas consecutivas de mesma frequência. Essa apresentação evita confundir frequência com contagem regressiva para a chegada. A identidade visual utiliza ícone próprio, mantendo a identificação das fontes de dados na documentação e nas informações da aplicação.
+ 
+-O protótipo implementa a consulta iniciada no ponto de ônibus e permite apresentar esse fluxo à comunidade. A evolução partiu de um cenário demonstrativo de Mauá, com fontes públicas incompletas, coordenadas parcialmente estimadas e operação simulada. A implementação funcional apresentada neste capítulo utiliza o cenário São Paulo, com cadastro GTFS da SPTrans e integração com a API Olho Vivo para previsões e posições operacionais quando disponíveis. O acesso por QR Code, a seleção de origem e destino, o planejamento de alternativas, os favoritos e a visualização dos percursos estão implementados. A entrevista inicial documenta participação da comunidade na definição da proposta. A demonstração e a avaliação da solução desenvolvida ainda precisam ser registradas; o retorno sobre a ideia e os mockups produzidos não substituem essa evidência.
++O protótipo implementa a consulta iniciada no ponto de ônibus e permite apresentar esse fluxo à comunidade. A evolução partiu de um cenário demonstrativo de Mauá, com fontes públicas incompletas, coordenadas parcialmente estimadas e operação simulada. A implementação funcional apresentada neste capítulo utiliza o cenário São Paulo, com cadastro GTFS da SPTrans e integração com a API Olho Vivo para previsões e posições operacionais quando disponíveis. O acesso por QR Code, a seleção de origem e destino, o planejamento de alternativas, os favoritos e a visualização dos percursos estão implementados. A entrevista inicial documenta participação da comunidade na definição da proposta. A demonstração funcional, a apreciação profissional externa e a avaliação exploratória com usuários convidados estão documentadas, incluindo feedbacks de 25 de outubro e correções técnicas verificadas pelo grupo em 29 de outubro, além das verificações automatizadas. Essas evidências têm escopos distintos: os testes e as correções posteriores não são atribuídos ao profissional externo. Permanece pendente a avaliação sistemática com passageiros, com tarefas e critérios definidos; não houve implantação operacional em Mauá.
+ 
+ A contribuição investigada é a continuidade do acesso contextualizado pelo ponto físico até a escolha de uma alternativa por destino, com identificação da origem por QR Code e abertura no navegador. As novas capturas do Cittamobi confirmam que escolha por destino e planejamento com conexões já são oferecidos por esse aplicativo; no PaP, esses recursos dão continuidade à consulta, sem constituírem novidade funcional comprovada. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O PaP busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
+ 
+@@ -861,7 +867,30 @@ Depois de reconhecer a parada, o passageiro ainda precisa relacionar as linhas d
+ 
+ A arquitetura reúne os recursos necessários para apresentar o percurso ao passageiro e manter os dados que sustentam a consulta. A interface utiliza React para seleção de origem e destino, listas, preferências locais e mapa Leaflet. Django/Python oferece a API, o planejamento, a importação e a administração. O SQLite armazena os registros utilizados na montagem dos dados da interface, sua procedência e as estimativas geográficas.
+ 
+-A arquitetura híbrida separa a preparação estrutural da consulta ao passageiro (Figura~\ref{fig:arquitetura-pap}). A composição bidirecional offline produz candidatos seletivamente materializados; o fluxo online recupera percursos, valida caminhadas, avalia sua compatibilidade temporal e acrescenta previsões operacionais quando há correspondência segura. Alternativas válidas são apresentadas progressivamente. A busca por rodadas permanece disponível como fallback, sem combinação obrigatória dos resultados dos dois planejadores. A cobertura materializada permanece parcial por limitação de espaço em disco no ambiente de desenvolvimento. A comparação definitiva de cobertura, latência e qualidade das alternativas depende de infraestrutura compatível e da execução dos benchmarks propostos.
++A arquitetura híbrida separa a preparação estrutural da consulta ao passageiro (Figura~\ref{fig:arquitetura-pap}). A versão de 1 de novembro de 2026 combina materialização compacta, ônibus, metrô e trens, com avaliação temporal na consulta. Produtores concorrentes publicam alternativas assim que disponíveis; uma dependência externa em uma fonte não bloqueia necessariamente outra. O planejador por rodadas permanece como recurso complementar. O censo completo e a comparação por amostragem documentam cobertura, ganhos e regressões de latência na Seção~\ref{sec:atualizacao-20261101}, sem prova de ótimo global ou de desempenho no celular.
++
++A Tabela~\ref{tab:sintese-20261101} reúne os resultados atuais, sem substituir as evidências detalhadas do Apêndice~\ref{ap:rotas}. O censo estrutural, o teste local entre versões e o protocolo controlado de comparação dos planejadores são estudos distintos; este último permanece proposto.
++\begin{table}[htbp]
++\centering\small
++\caption{Síntese da implementação e dos levantamentos de 1 de novembro de 2026.}
++\label{tab:sintese-20261101}
++\begin{tabular}{p{4.1cm}p{10.4cm}}
++\hline
++Aspecto & Resultado e escopo\\
++\hline
++Modos incorporados & Ônibus, metrô e trens; transferências ponderadas.\\
++Universo do censo & 22.274 paradas; 496.108.802 pares dirigidos distintos.\\
++Cobertura estrutural & 494.451.148 pares (99,666\%); não é cobertura temporal.\\
++Alternativas e arquivo & 2.472.099.208 alternativas; 94.961.283.072 bytes (88,44 GiB) no banco compacto.\\
++Comparação local & 3.264 consultas por versão, 32 processos; 1.637 sucessos pareados.\\
++Mediana pareada & 0,282 s antes; 0,599 s depois.\\
++Percentil 95 pareado & 5,698 s antes; 5,143 s depois.\\
++Limites & Amostra estratificada; chamadas externas bloqueadas; sem medir HTTP, túnel ou celular. Não demonstra ganho generalizado ou avaliação sistemática com passageiros.\\
++\hline
++\end{tabular}
++\fonte{Censo e comparação local do projeto; detalhamento na Seção~\ref{sec:atualizacao-20261101}.}
++\end{table}
++
+ % TODO-BENCHMARK: Comparar latência p50/p95/p99.
+ % TODO-BENCHMARK: Comparar qualidade das alternativas.
+ % TODO-BENCHMARK: Registrar acionamentos do fallback.
+@@ -879,7 +908,17 @@ Para abrir especificamente uma parada no Cittamobi, será necessário confirmar
+ 
+ Em deslocamentos recorrentes, informar novamente o mesmo destino pode acrescentar etapas à consulta. Para explorar uma forma de simplificar esse uso, o protótipo permite salvar destinos com nomes como Casa, Trabalho e Escola, com seleção de paradas favoritas na escolha de embarque ou destino. Os dados ficam no navegador, sem conta ou sincronização entre aparelhos. O recurso é opcional: o passageiro ocasional pode iniciar uma consulta pelo QR Code e escolher um destino no mapa sem cadastrar favoritos.
+ 
+-Como evolução futura, propõe-se ampliar o planejamento para viagens combinadas com Metrô e CPTM. Essa ampliação dependerá da obtenção e verificação de dados de estações, linhas, sentidos, horários ou intervalos, além da representação de acessos e transferências entre plataformas. O cálculo deverá incorporar caminhada interna, espera e integração entre ônibus e trilhos, com identificação clara dos modos na interface. Informações em tempo real dos sistemas ferroviários e regras tarifárias exigirão avaliação própria das fontes disponíveis; não integram a implementação atual. A consulta de previsões e posições dos ônibus municipais pela API Olho Vivo já está implementada.
++Na implementação de 1 de novembro de 2026, o planejamento combina ônibus, metrô e trens, incluindo Metrô e CPTM. A interface identifica linhas ferroviárias por cores e padrões próprios e representa estações, trechos e transferências entre linhas e modos. A avaliação inclui acessos a pé, espera, circulação e conexões internas estimadas nos complexos cadastrados. Os tempos ferroviários utilizam horários programados ou estimativas de frequência e circulação; o modelo considera paradas, aceleração e frenagem como parâmetros de planejamento, sem equivaler a medição operacional. Permanecem pendentes a validação desses tempos em operação, previsões e posições ferroviárias em tempo real e integração tarifária. Para os ônibus municipais de São Paulo, a consulta de previsões e posições pela API Olho Vivo está implementada, quando o serviço e a correspondência cadastral estão disponíveis. A Seção~\ref{sec:atualizacao-20261101} registra os resultados e limites desta versão.
++
++A conferência ferroviária inicial de 2 de novembro de 2026 confirmou que esse planejamento alcança também o município de Mauá pelas estações Mauá (identificador \texttt{18935}) e Guapituba (\texttt{18937}). Ambas integram as sequências dos dois sentidos da rota \texttt{CPTM L10}, Linha 10--Turquesa, cadastrada como Rio Grande da Serra--Barra Funda. Os dados procedem do pacote GTFS da SPTrans preservado em \nolinkurl{fonts/sptrans_gtfs/} e importado em 6 de outubro de 2026. Os registros de estações, viagens, frequências, calendário e traçados conferem com o banco \nolinkurl{sptrans.sqlite3}; o leitor da materialização compacta também retornou alternativas válidas para esses pontos. Portanto, trata-se de cobertura ferroviária funcional do planejador em Mauá, distinta do demonstrador histórico dos ônibus municipais.
++
++A cobertura temporal depende do cadastro e das regras da consulta. No arquivo examinado, o serviço \texttt{USD} da Linha 10 tem vigência de 1 de outubro de 2023 a 1 de maio de 2027, com os sete dias da semana habilitados e sem exceções cadastradas. As frequências, sem partidas exatas, variam entre 5, 8 e 10 minutos em faixas de 04h00 a 23h59 na origem de cada sentido; a disponibilidade em cada estação depende também do deslocamento temporal na sequência. O código limita novos embarques ferroviários à janela anterior à meia-noite, com abertura às 04h para a Linha 10 e às 04h40 para a Linha 2, e usa horizonte de busca de seis horas. Esses são limites do modelo inspecionado, não horários de operação confirmados em campo. Calendários ativos, partidas alcançáveis e transferências compatíveis continuam necessários; a existência de um par materializado não garante viagem em qualquer horário.
++
++Foi executada uma consulta ao código da API com os bancos reais, em modo somente leitura e sem chamadas externas, entre Mauá e Trianon--Masp (\texttt{18859}), iniciada em 2 de novembro às 00h47min30s, no fuso de São Paulo. A resposta retornou Linha 10 até Tamanduateí e Linha 2 até Trianon--Masp, com primeiro embarque calculado às 04h26 e chegada estimada às 05h32min30s. Em consultas adicionais ao leitor de candidatos, com partida de referência fixada às 08h do mesmo dia, foram obtidas viagens de ida e volta entre Trianon--Masp e Mauá, com duração estimada de 68 minutos, e entre Trianon--Masp e Guapituba, com 75 minutos. Esses horários de referência não são instantes de observação de veículos. Uma consulta de controle após a vigência do calendário não encontrou alternativa temporalmente válida. A revisão de código \texttt{34a46f29}, suas alterações locais, hashes dos fontes, respostas, parâmetros e horários estão preservados em \nolinkurl{auditoria-alcance-ferroviario-2026-11-02/}, junto ao relatório; o identificador Git isolado não reproduz as alterações locais.
++
++O uso a partir de Mauá requer selecionar uma dessas estações como origem ou destino, ou dispor de acesso externo a pé verificado dentro do limite de 1.000 metros do modelo. Esse limite de busca não define uma área de atendimento populacional. O percurso entre a coordenada GTFS e a plataforma não tem tempos de acesso individualmente cadastrados; as transferências internas utilizam estimativas. A consulta ferroviária não depende de placa instalada: pode ser iniciada por seleção no mapa ou link da estação. Não houve implantação física comprovada dos QR Codes, integração operacional com os ônibus municipais de Mauá ou validação operacional dos tempos ferroviários. Também não se inferem cobertura integral do território, percentual de habitantes atendidos ou benefício mensurado para a população a partir dessas verificações técnicas.
++
++\input{artesp_resultados_20261102.tex}
+ 
+ Como possibilidade de trabalho futuro, ainda não implementada, propõe-se investigar relatos voluntários dos passageiros sobre a lotação dos veículos. A proposta retoma uma ideia levantada na entrevista inicial, agora considerada à luz da identificação do veículo disponibilizada pela integração com o Olho Vivo. Essa informação seria colaborativa e autodeclarada, não fornecida pela API Olho Vivo, cuja documentação pública não apresenta dados de ocupação. Os relatos poderiam ser associados ao veículo específico pelo prefixo disponibilizado pela API \citep{sptransapi}. Eventuais categorias de lotação e seus critérios dependeriam de definição e avaliação posteriores. A proposta precisaria considerar validade temporal, agregação de múltiplos relatos, qualidade da informação, prevenção de abuso e privacidade, além de avaliar sua utilidade com passageiros.
+ 
+@@ -923,7 +962,7 @@ O protótipo registra eventos de navegação para diagnóstico de usabilidade, i
+ 
+ A interlocução técnica externa foi ampliada com Thiago Almeida Amorim, da Alameda Solutions, conforme o registro a seguir. Permanece necessária a avaliação específica com passageiros, documentando sua relação com o transporte local e os critérios de seleção. A ausência de resposta aos contatos recentes com o interlocutor inicial constitui uma limitação de continuidade, sem invalidar suas contribuições à definição do problema. O grupo poderá revisar a experiência de uso e aprimorar diretamente a aplicação funcional conforme as observações recebidas. O Figma permanece como registro histórico da prototipação. A avaliação de compreensão com passageiros ainda será realizada, com planejamento e registro próprios. As capturas da aplicação avaliada deverão identificar revisão e cenário; as alterações decorrentes do feedback serão documentadas. A avaliação deve verificar especialmente se o usuário reconhece a natureza das informações apresentadas, distinguindo dados cadastrais, coordenadas aproximadas, horários programados, previsões operacionais e, quando aplicável ao cenário histórico de Mauá, informações simuladas.
+ 
+-Caso o projeto retome a implantação em Mauá, será necessário obter e confrontar seu cadastro operacional e revisar os registros sem coordenadas e as estimativas daquele levantamento. Essas pendências históricas não bloqueiam a implementação funcional no cenário São Paulo, que utiliza o cadastro GTFS da SPTrans. Cobertura, duplicidades entre fontes, lado da via, acessibilidade de embarque, vigência e sentido precisam ser conferidos antes de habilitar planejamento com dados operacionais de Mauá. Nesse cenário, o processo de atualização e de revisão das divergências deve preceder a substituição dos dados simulados.
++Para incorporar a rede municipal de ônibus de Mauá, ainda será necessário obter e confrontar seu cadastro operacional e revisar os registros sem coordenadas e as estimativas do levantamento histórico. Essa pendência não bloqueia a cobertura metropolitana programada já habilitada com ARTESP e ferrovia. Cobertura, duplicidades entre fontes, lado da via, acessibilidade, vigência e sentido exigem conferência antes de ampliar a base municipal. A instalação física de QR Codes e a articulação com a gestão local permanecem etapas distintas da ativação técnica do aplicativo.
+ 
+ \begingroup\setlength{\parskip}{8pt}
+ A interlocução externa foi realizada com Thiago Almeida Amorim, da Alameda Solutions, CNPJ 60.184.290/0001-00, por intermédio da integrante Nathalia Almeida Amorim. Essa identificação substitui a designação provisória utilizada nos registros preparatórios. O escopo compreendeu o aplicativo Ponto a Ponto e o relatório técnico, excluindo ferramentas e requisitos de produção audiovisual.
+@@ -946,24 +985,34 @@ Os relatos acrescentaram a percepção dos avaliadores. Uma captura de 25 de out
+ 
+ Em 26 de outubro, às 13h17--13h18, uma sessão em Android com Chrome avançou da consulta de parada ao mapa de uma viagem. A inspeção identificou a mesma parada como origem e destino, de modo que a abertura do percurso comprova exploração da funcionalidade, não atendimento a uma necessidade real de deslocamento. Em conjunto, os registros sustentam a realização de avaliação exploratória por usuários reais convidados e o reconhecimento de benefícios e oportunidades de melhoria. Não permitem estimar taxa de sucesso, satisfação geral ou fluidez cotidiana dos passageiros. Sugestões, problemas técnicos e exploração são evidências distintas; comentários alheios ao produto foram desconsiderados.
+ 
++\input{feedbacks_20261029.tex}
++
++\input{legibilidade_ferroviaria_20261102.tex}
++
+ \chapter{Considerações finais}
+-O Ponto a Ponto materializou uma proposta de consulta ao transporte público iniciada pela identificação do embarque e continuada pela escolha do destino. O projeto articulou pesquisa bibliográfica, escuta da gestão de Mauá, análise de serviços existentes, prototipação e desenvolvimento de uma aplicação web. A implementação funcional em São Paulo integra dados GTFS, planejamento de viagens, consulta ao Olho Vivo quando disponível, visualização dos trechos, favoritos, feedback e participação voluntária na pesquisa. O demonstrador histórico de Mauá permanece identificado como simulação e não deve ser confundido com essa integração.
++O Ponto a Ponto materializou uma proposta de consulta ao transporte público iniciada pela identificação do embarque e continuada pela escolha do destino. O projeto articulou pesquisa bibliográfica, escuta da gestão de Mauá, análise de serviços existentes, prototipação e desenvolvimento de uma aplicação web. A implementação baseada no GTFS da SPTrans integra planejamento de viagens, consulta ao Olho Vivo quando disponível, visualização dos trechos, favoritos, feedback e participação voluntária na pesquisa. A ampliação com ARTESP permitiu aplicar essa arquitetura à região que motivou o projeto: foram confirmadas 337 paradas metropolitanas em Mauá, 16 linhas ou variantes e viagens programadas utilizáveis, com consultas diretas e conexões entre ônibus e ferrovia. Capuava, Mauá e Guapituba integram a Linha 10--Turquesa no cadastro. O demonstrador histórico dos ônibus municipais permanece identificado como simulação, separado da implementação funcional original de São Paulo e dessa ampliação metropolitana.
+ 
+-O objetivo geral foi parcialmente alcançado. A construção do protótipo, a apreciação profissional e a avaliação exploratória por usuários reais convidados foram realizadas, mas a redução do esforço de interação ainda não foi demonstrada em avaliação com passageiros. Conforme a Tabela~\ref{tab:objetivos-atendimento}, importação e documentação de fontes, implementação e controle de versão, estimativas exploratórias de coordenadas, planejamento controlado e separação da simulação apresentam entregas técnicas. A escuta direta dos passageiros, a compreensão das alternativas, a precisão das estimativas e a integração operacional em Mauá permanecem parciais ou ainda não verificadas.
++O objetivo geral foi parcialmente alcançado. A construção do protótipo, a apreciação profissional e a avaliação exploratória por usuários reais convidados foram realizadas, mas a redução do esforço de interação ainda não foi demonstrada em avaliação com passageiros. Conforme a Tabela~\ref{tab:objetivos-atendimento}, importação e documentação de fontes, implementação e controle de versão, estimativas exploratórias de coordenadas, planejamento controlado e separação da simulação apresentam entregas técnicas. A escuta direta dos passageiros, a compreensão das alternativas, a precisão das estimativas e a integração operacional com os ônibus municipais de Mauá permanecem parciais ou ainda não verificadas.
+ 
+-A interlocução com Osmar contribuiu para esclarecer a operação local e os limites da bilhetagem. A análise dos serviços existentes delimitou a contribuição pretendida como continuidade entre a identificação do ponto e a escolha do deslocamento, sem atribuir novidade ao QR Code ou ao planejamento por destino. O uso do GTFS em São Paulo permitiu avançar na implementação, mas não resolveu a ausência de cadastro operacional validado para Mauá. Esses resultados mostram que a viabilidade técnica depende das condições concretas de disponibilidade e qualidade dos dados.
++A interlocução com Osmar contribuiu para esclarecer a operação local e os limites da bilhetagem. A análise dos serviços existentes delimitou a contribuição pretendida como continuidade entre a identificação do ponto e a escolha do deslocamento, sem atribuir novidade ao QR Code ou ao planejamento por destino. O GTFS da SPTrans permitiu desenvolver a arquitetura multimodal; a nova fonte ARTESP trouxe dados programados metropolitanos para sua aplicação funcional em Mauá. A mudança supera parte da limitação de dados que motivou o uso inicial de São Paulo, mas não resolve a ausência de cadastro operacional validado da totalidade dos ônibus municipais de Mauá. Esses resultados mostram que a viabilidade técnica depende das condições concretas de disponibilidade e qualidade dos dados.
+ 
+ Os retornos de Thiago Almeida Amorim, da Alameda Solutions, em 21 e 25 de outubro de 2026 acrescentaram uma avaliação profissional do aplicativo e do relatório. Segundo a confirmação do grupo, o parecer foi confirmado e assinado, com apreciação favorável das melhorias examinadas quanto à clareza, visibilidade do estado, controle da navegação, prevenção de erros e redução de esforço. As propostas foram levantadas pelo grupo e pelas navegações de usuários por ele relatadas; o exame posterior não transforma automaticamente Thiago em autor de cada sugestão. A cronologia, as versões e a procedência documental estão no Apêndice~\ref{ap:feedback-alameda}. O documento recebido em 26 de outubro, com assinatura visível, é reproduzido integralmente no Anexo~\ref{an:parecer-thiago}, preservando a apreciação qualitativa e as ressalvas do próprio registro.
+ 
+ O ciclo de desenvolvimento permitiu aprender com dificuldades concretas: distinguir o sentido de passagens pela mesma via, explicitar as consequências do cancelamento e manter a consulta ao transporte independente da gravação de pesquisa. As mudanças foram confrontadas com capturas, código e testes das versões documentadas. A apreciação profissional favorável sustenta uma conclusão qualitativa sobre as melhorias; não equivale a uma medição de usabilidade com passageiros nem comprova redução de espera, precisão de previsão ou cobertura integral. Os registros técnicos detalhados permanecem no Apêndice~\ref{ap:engenharia}.
+ 
++Os relatos dos usuários convidados também motivaram os ajustes sintetizados na Tabela~\ref{tab:feedback-ajustes}: rótulos visíveis de embarque e destino, correção direcionada da correspondência de endereços, ampliação das paradas candidatas e tratamento das falhas de envio de feedback. A implementação foi conferida por testes técnicos com bases temporárias, respostas controladas e verificações de interface. Esse ciclo documenta encaminhamento e verificação das correções, sem comprovar benefício de usabilidade ou resolução definitiva do episódio original do Terminal Sacomã. Permanece necessária a avaliação sistemática por tarefas com passageiros para verificar compreensão, eficácia e esforço de interação.
++
++A revisão de legibilidade ferroviária acrescentou contornos contrastantes, identificação por modalidade e número e redução da interferência visual do mapa, conforme a Seção~\ref{sec:legibilidade-ferroviaria}. A alteração responde ao feedback recebido e foi verificada tecnicamente; seu benefício para pessoas com diferentes percepções de cor ainda requer avaliação com usuários.
++
+ O estudo complementar do Apêndice~\ref{ap:cliques}, sintetizado na Tabela~\ref{tab:cliques-celular}, registrou no PaP três ações até abrir a rota pelo favorito comum, contra duas pelos atalhos Casa e Trabalho. Essa economia de uma ação vale para as condições examinadas. Os percursos analíticos de favoritos do Cittamobi e Quanto Tempo Falta levam à consulta de linhas, com resultados diferentes do planejamento até um destino. A contagem contribui para examinar o custo de interação, conforme a perspectiva de \citet{card1980}, mas não comprova superioridade geral, menor tempo de uso ou maior satisfação.
+ 
+-A avaliação exploratória com usuários convidados acrescentou relatos de benefícios na integração do Olho Vivo e sugestões sobre busca e escolha de embarque e destino, sem confundir exploração deliberada com dificuldade de uso. A continuidade deve priorizar a avaliação por tarefas com passageiros, o registro das dificuldades e a revisão do protótipo a partir desses resultados. A materialização completa mostrou-se incompatível com o espaço em disco disponível no ambiente de desenvolvimento, segundo a estimativa de armazenamento; a comparação definitiva de desempenho permanece pendente, condicionada a infraestrutura compatível e ao protocolo proposto. Em Mauá, implantação física e integração com fornecedores ainda dependem de acordos e validação cadastral; em São Paulo, a disponibilidade de previsões continua condicionada às fontes operacionais. O projeto entrega uma solução funcional, uma apreciação externa favorável e critérios para verificar os benefícios ainda não mensurados com a comunidade.
++A avaliação exploratória com usuários convidados acrescentou relatos de benefícios na integração do Olho Vivo e sugestões sobre busca e escolha de embarque e destino, sem confundir exploração deliberada com dificuldade de uso. A continuidade deve priorizar a avaliação por tarefas com passageiros, o registro das dificuldades e a revisão do protótipo a partir desses resultados. A limitação de disco identificada em 28 de outubro motivou uma representação compacta por etapas. O censo de 1 de novembro encontrou cobertura estrutural de 99,666\% dos pares, sem equivaler a disponibilidade em todos os horários. A repetição de 3.264 consultas mostrou redução do maior tempo observado, de 10,71 para 5,94 segundos, mas aumento da mediana pareada de 0,28 para 0,60 segundo sob carga de 32 processos. As medições locais e suas limitações estão na Seção~\ref{sec:atualizacao-20261101}; a latência completa no celular permanece não aferida. A contagem ARTESP em Mauá distingue 705 viagens em dia útil, 427 aos sábados e 359 aos domingos, sem repetir uma mesma viagem por parada. São 337 paradas atendidas no dia útil examinado e 324 em cada dia de fim de semana examinado. A base ARTESP cobre o calendário de 2026, sem exceções de feriados; os horários intermediários são interpolados. Esses números de oferta programada não demonstram execução real. A cobertura metropolitana e ferroviária confirmada está condicionada à vigência dos calendários, às janelas de embarque, ao horizonte da busca e à viabilidade dos acessos e transferências; não equivale a cobertura integral da população nem a validação operacional. A instalação física dos QR Codes e a integração operacional com os ônibus municipais permanecem pendentes e dependem de acordos e validação cadastral. As estimativas ferroviárias não são previsões ao vivo, enquanto as previsões dos ônibus de São Paulo continuam condicionadas às fontes operacionais. O projeto entrega uma solução funcional, uma apreciação externa favorável e critérios para verificar os benefícios ainda não mensurados com a comunidade.
+ 
+ \postextual
+ \begin{thebibliography}{99}
+ \SingleSpacing\raggedright
++\bibitem[{ARTESP}(2026)]{artespgtfs2026} ARTESP. \textit{GTFS: dados de transporte metropolitano}. Pacote versão 20261007. São Paulo, 2026. Disponível em: \url{https://dadosabertos.artesp.sp.gov.br/dataset/gtfs}. Acesso em: 2 nov. 2026.
++\bibitem[{IBGE}(2024)]{ibgemalha2024} IBGE. \textit{Malha municipal 2024: São Paulo}. Rio de Janeiro, 2024. Disponível em: \url{https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/SP/SP_Municipios_2024.zip}. Acesso em: 2 nov. 2026.
+ \setlength{\bibsep}{\baselineskip}
+ \interlinepenalty=10000
+ \bibitem[{Barbosa \textit{et al.}}(2021)]{barbosa2021} BARBOSA, S. D. J.; SILVA, B. S.; SILVEIRA, M. S.; GASPARINI, I.; DARIN, T.; BARBOSA, G. D. J. \textit{Interação Humano-Computador e Experiência do Usuário}. Rio de Janeiro: Autopublicação, 2021. Disponível em: \url{https://leanpub.com/ihc-ux}. Acesso em: 7 out. 2026.
+@@ -1054,9 +1103,9 @@ Este glossário reúne os principais termos técnicos e siglas utilizados no rel
+ \end{description}
+ 
+ \begin{apendicesenv}
+-\chapter{Integração dos dados da SPTrans}
++\chapter{Integração dos dados de transporte: SPTrans e ARTESP}
+ \label{ap:importacao}
+-Este apêndice documenta a base utilizada no cenário São Paulo, examinada no código em 7 de outubro de 2026. Substitui a descrição de inferência de coordenadas desenvolvida para o catálogo incompleto de Mauá. A inferência anterior não é requisito para consultar as paradas nem calcular as rotas da extensão SPTrans.
++Este apêndice preserva a documentação da base utilizada no cenário São Paulo, examinada no código em 7 de outubro de 2026, e acrescenta ao final a integração ARTESP conferida em 2 de novembro. Substitui a descrição de inferência de coordenadas desenvolvida para o catálogo incompleto de Mauá. A inferência anterior não é requisito para consultar as paradas nem calcular as rotas da extensão SPTrans.
+ 
+ \section{Cadastro GTFS e informação operacional}
+ A integração utiliza dois recursos distintos. O GTFS fornece o cadastro de paradas com coordenadas, linhas, viagens, sequências, horários, frequências, calendários e geometrias. A API Olho Vivo complementa a consulta com previsões e posições quando disponíveis \citep{gtfs,sptransapi}. Portanto, a localização cadastral das paradas e a rede de planejamento não dependem de estimar coordenadas por número de imóvel nem de encontrar todas as paradas na API de tempo real.
+@@ -1127,9 +1176,13 @@ O diretório deve conter os arquivos exigidos pelo importador; \texttt{calendar\
+ 
+ O GTFS é uma base programada e está sujeito a atualização. A API pode ter cobertura diferente do cadastro e não assegura previsão para toda parada. Caminhadas dependem de conectividade da malha consultada; condições físicas e acessibilidade exigem verificação própria. A disponibilidade desses recursos viabiliza o protótipo atual de São Paulo, mas não equivale a validação operacional ou de usabilidade com passageiros.
+ 
++\input{artesp_integracao_20261102.tex}
++
+ \chapter{Modelagem da rede e estratégias de busca de itinerários}
+ \label{ap:rotas}
+-Este apêndice apresenta a descrição do cenário São Paulo, com conferência técnica em 28 de outubro de 2026 do código na branch \nolinkurl{feat/busca-bidirecional}, base Git \texttt{85417bc} e alterações locais não consolidadas em commit. Essa conferência corrige as condições de aproveitamento dos candidatos, sem modificar o algoritmo ou executar benchmarks. O identificador Git isolado não reproduz todo o estado examinado; os hashes dos módulos e os registros da leitura estão em \nolinkurl{auditoria-materializacao-2026-10-28/}. A descrição anterior do planejador por rodadas, referente à revisão \texttt{4992027}, é preservada como explicação do mecanismo alternativo. Os módulos \nolinkurl{alternatives.py}, \nolinkurl{materialized_adapter.py}, \nolinkurl{materialized_connections.py}, \nolinkurl{city_connections.py}, \nolinkurl{offline_three.py}, \nolinkurl{connection_planner.py} e \nolinkurl{planner.py}, em \nolinkurl{backend/transit/sptrans/}, sustentam esta atualização. A tentativa de completar a materialização municipal foi interrompida em 28 de outubro de 2026 por limitação de espaço em disco no ambiente de desenvolvimento, conforme detalhado a seguir. A base permanece parcial; não se apresenta prova de ótimo global nem comparação definitiva de desempenho.
++Este apêndice apresenta a descrição do cenário São Paulo, com conferência técnica em 28 de outubro de 2026 do código na branch \nolinkurl{feat/busca-bidirecional}, base Git \texttt{85417bc} e alterações locais não consolidadas em commit. Essa conferência corrige as condições de aproveitamento dos candidatos, sem modificar o algoritmo ou executar benchmarks. O identificador Git isolado não reproduz todo o estado examinado; os hashes dos módulos e os registros da leitura estão em \nolinkurl{auditoria-materializacao-2026-10-28/}. A descrição anterior do planejador por rodadas, referente à revisão \texttt{4992027}, é preservada como explicação do mecanismo alternativo. Os módulos \nolinkurl{alternatives.py}, \nolinkurl{materialized_adapter.py}, \nolinkurl{materialized_connections.py}, \nolinkurl{city_connections.py}, \nolinkurl{offline_three.py}, \nolinkurl{connection_planner.py} e \nolinkurl{planner.py}, em \nolinkurl{backend/transit/sptrans/}, sustentam esta atualização. A tentativa de completar a materialização municipal foi interrompida em 28 de outubro de 2026 por limitação de espaço em disco no ambiente de desenvolvimento, conforme detalhado a seguir. Esse estado parcial refere-se ao artefato legado de 28 de outubro. A atualização seguinte documenta a representação compacta e os resultados medidos em 1 de novembro; os detalhes históricos são mantidos para rastreabilidade.
++
++\input{atualizacao_20261101.tex}
+ 
+ \input{planejador_hibrido.tex}
+ 
+@@ -1190,12 +1243,12 @@ Os painéis exigem usuário administrativo ativo, com permissão \texttt{is\_sta
+ \end{figure}
+ 
+ \section{Consulta progressiva de alternativas}
+-A sequência representa recuperação de candidatos, validação de caminhadas, avaliação temporal e refinamento operacional quando disponível, com retorno progressivo. O fallback, se habilitado, é acionado por contexto inutilizável (ausência de candidatos ou incompatibilidade dos artefatos) ou ausência de rotas válidas ao final, inclusive após rejeições temporais. Uma alternativa válida, mesmo com limitações, encerra pelo caminho principal: não se executa o fallback para completar a lista. A indisponibilidade isolada de previsão operacional não o aciona. Os limites estão no Apêndice~\ref{ap:rotas}.
++A Figura~\ref{fig:sequencia-pap} representa o fluxo multimodal concorrente inspecionado em 1 de novembro de 2026. A consulta pode publicar primeiro uma caminhada curta já materializada. Em seguida, fontes independentes avaliam candidatos preparados e buscas complementares. A busca por rodadas depende de habilitação: uma caminhada direta válida inferior a 1 km a dispensa. A busca externa de caminhada só é criada se não houver caminhada direta inicial. O produtor de conexões de ônibus depende da configuração e da disponibilidade de seu contexto; portanto, criar uma tarefa não significa obter candidatos. Sem base utilizável, permanece o caminho alternativo previsto no código. A primeira alternativa aprovada pelos filtros é publicada sem aguardar todas as fontes, e outras podem chegar posteriormente. Validação temporal, caminhada verificável e limites continuam necessários. O fluxo sequencial anterior está preservado como registro histórico em B.2 e na cópia do diagrama anterior que acompanha a revisão documental; não descreve a execução multimodal atual.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/sequencia.tex}
+-\caption{Etapas da consulta progressiva e condições de uso do planejador por rodadas.}\label{fig:sequencia-pap}
+-\fonte{Elaboração do grupo; representação explicativa revisada em 25 out. 2026; etapa 2 ajustada em 28 out. 2026.}
++\caption{Consulta multimodal: produtores concorrentes e publicação progressiva.}\label{fig:sequencia-pap}
++\fonte{Elaboração do grupo; inspeção de alternatives.py e concurrent\_sources.py em 1 nov. 2026.}
+ \end{figure}
+ 
+ \section{Estados da navegação}

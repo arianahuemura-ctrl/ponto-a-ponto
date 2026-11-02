@@ -3,14 +3,14 @@
 
 Este estudo compara as ações necessárias para consultar alternativas de transporte público e selecionar uma rota no PaP, Google Maps, Moovit, Cittamobi e Quanto Tempo Falta. São considerados endereço digitado, favorito comum, atalhos Casa e Trabalho e local selecionado no mapa. As contagens foram obtidas pelo grupo em 25 e 26 de outubro de 2026; não integram o parecer de Thiago nem constituem avaliação de usabilidade com passageiros.
 
-\papsection{Procedimento e condições}
+\section{Procedimento e condições}\label{sec:cliques-condicoes}
 O aparelho de referência foi um Samsung Galaxy S24 Ultra (SM-S928B), Android 16, com tela de 1080 por 2340 pixels. Foram utilizados Google Maps \nolinkurl{26.43.00.1002020710}, Moovit \nolinkurl{5.201.6.1811}, Cittamobi \nolinkurl{7.2.164}, Quanto Tempo Falta \nolinkurl{v2.0.2} e PaP no Chrome \nolinkurl{155.0.8059.84}. Os manifestos das sessões identificam a compilação do PaP e as capturas correspondentes.
 
 A contagem começa na tela inicial, com localização disponível, permissões respondidas e favoritos cadastrados. Cada toque em um controle, toque longo, gesto de rolagem ou arrasto do mapa conta como uma ação de navegação, com o mesmo peso. A tabela soma toques e rolagens; os registros preservam a distinção entre esses gestos. A digitação do endereço constitui um episódio separado, sem contar cada tecla. Instalação, autenticação e cadastro dos favoritos ficam fora da tarefa. O marco final é a abertura da rota selecionada ou, na consulta de favoritos de parada, do trajeto de uma linha. Não se conta o início do acompanhamento durante o deslocamento.
 
 Em São Paulo, a origem simulada foi a região do MASP, $(-23{,}561458; -46{,}656550)$, e o destino pesquisado foi Praça da Sé. O favorito de ponto usado nas medições do PaP foi \texttt{800016588}, na região da Sé/Praça Clóvis Beviláqua. No Quanto Tempo Falta, foi utilizada Santos, com origem $(-23{,}9675; -46{,}3336)$ e destino Praça Mauá. Os destinos resolvidos pelos aplicativos não são rigorosamente iguais; comparam-se ações de interface em áreas atendidas, não a qualidade dessas viagens. A localização foi simulada e o GPS restaurado ao concluir os testes.
 
-\papsection{Resultados consolidados}
+\section{Resultados consolidados}\label{sec:cliques-resultados}
 A Tabela~\ref{tab:cliques-celular} apresenta o total de ações até abrir a rota selecionada. Nos favoritos do Cittamobi e Quanto Tempo Falta, o marco é abrir o trajeto da linha: o percurso analítico informado pelo grupo é abrir Favoritos, escolher a parada e abrir a linha, totalizando três ações. Esses últimos valores representam a reconstrução do percurso descrito, sem nova medição integral no aparelho. Os resultados finais dessas tarefas são distintos e não sustentam uma classificação única dos aplicativos. As contagens dependem do estado inicial e não demonstram um mínimo universal.
 
 \begin{table}[H]
@@ -44,7 +44,7 @@ No Cittamobi, foram oito ações desde o mapa inicial: abrir o menu, acessar ``T
 
 \textbf{Cittamobi e Quanto Tempo Falta.} O total de três ações considera o acesso pela lista de favoritos, com a parada visível após abrir essa lista. Casa e Trabalho são nomes atribuídos a favoritos comuns, seguindo a mesma sequência; não representam atalhos especiais fixos. Abrir a linha mostra seu trajeto, sem comprovar planejamento da localização atual até o ponto salvo. Se o favorito estiver fora da área visível, as rolagens necessárias acrescentam ações ao total. O acesso direto a um cartão já exposto na tela inicial constitui outro estado inicial e não substitui essa sequência.
 
-\papsection{Interpretação e alcance}
+\section{Interpretação e alcance}\label{sec:cliques-interpretacao}
 Nas condições observadas, Casa e Trabalho reduziram uma ação em relação ao favorito comum do PaP. Google Maps e Moovit também apresentaram atalhos de acesso direto, condicionados à posição dos controles. Ao incluir a rolagem, o favorito comum do Moovit totalizou as mesmas três ações observadas no PaP. Os totais dos outros dois aplicativos descrevem consulta de linhas e não são equivalentes ao planejamento de viagem.
 
 As contagens por favorito dependem de sua posição na interface. Listas maiores podem exigir rolagens, abertura de listas ou busca; cada toque e cada gesto de rolagem acrescenta uma ação. O ensaio com cartões fora da tela não constitui teste de listas com 5, 10 ou 20 favoritos. Não foi medido o efeito dessas grandes quantidades, e os valores não devem ser generalizados para esse cenário.
