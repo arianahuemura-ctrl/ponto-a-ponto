@@ -215,9 +215,11 @@ class ConnectionsTests(SimpleTestCase):
             with store.connection() as db:
                 origin=store.get_stop(db,'A');destination=store.get_stop(db,'D')
                 chunks=list(alternatives.progressive(db,origin,destination,now=fixtures.NOW))
-        self.assertEqual(chunks[-1]['planner'],'connections')
+        self.assertEqual(chunks[-1]['planner'],'multimodal')
         self.assertTrue(chunks[-1]['complete'])
-        self.assertEqual(chunks[-1]['journeys'][0]['duration_minutes'],40)
+        # Preserve a opção mais rápida mesmo com uma baldeação; 40 min exigiriam três ônibus.
+        self.assertEqual(chunks[-1]['journeys'][0]['duration_minutes'],55)
+        self.assertEqual([leg['code'] for leg in chunks[-1]['journeys'][0]['legs']],['R1','ONE'])
 
     def test_mandatory_walk_is_safe_bound(self):
         with self.db() as db:
@@ -278,6 +280,7 @@ class ConnectionsTests(SimpleTestCase):
             response=self.client.get('/api/sptrans/board/',{'origin':'A','destination':'D','stream':'1','nearby':'1'})
             chunks=[json.loads(chunk) for chunk in response.streaming_content]
         self.assertEqual(response.status_code,200)
-        self.assertEqual(chunks[-1]['planner'],'connections')
+        self.assertEqual(chunks[-1]['planner'],'multimodal')
         self.assertTrue(chunks[-1]['complete'])
-        self.assertEqual(chunks[-1]['journeys'][0]['duration_minutes'],40)
+        self.assertEqual(chunks[-1]['journeys'][0]['duration_minutes'],55)
+        self.assertEqual([leg['code'] for leg in chunks[-1]['journeys'][0]['legs']],['R1','ONE'])

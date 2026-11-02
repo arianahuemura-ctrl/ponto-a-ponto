@@ -142,7 +142,11 @@ class CompletionTests(SimpleTestCase):
                     self.assertEqual(raptor.called,meters is None or meters>=1000)
                     self.assertEqual(prepare.called,selected=='connections')
                     self.assertTrue(result['complete'])
-                    self.assertEqual(result['journeys'],[foot] if foot else [])
+                    self.assertEqual(len(result['journeys']),1 if foot else 0)
+                    if foot:
+                        self.assertEqual(result['journeys'][0]['id'],'foot')
+                        self.assertEqual(result['journeys'][0]['walking_meters'],meters)
+                        self.assertEqual(result['journeys'][0]['transfer_cost_units'],0)
 
     def test_walking_total_preserves_same_precision_as_details(self):
         result=completion.normalize_walks({'legs':[], 'walking_minutes':12.1,
@@ -157,6 +161,27 @@ class CompletionTests(SimpleTestCase):
              patch.object(alternatives,'_bus_progressive',return_value=iter([{'journeys':[], 'complete':True}])):
             list(alternatives.progressive(None,self.a,self.b,now=self.now))
         reviewer.assert_called_once_with(None,self.b,origin=self.a)
+
+    def test_verified_routes_are_published_before_optional_completion(self):
+        from transit.sptrans import alternatives
+        bus={'id':'ready','legs':[{'code':'R1','trip_id':'T','headsign':'Destino'}],
+             'walks':[], 'duration_minutes':20, 'walking_meters':0, 'transfers':0}
+        improved={**bus,'id':'improved','duration_minutes':19}
+        with patch.object(completion,'direct_walk',return_value=None), \
+             patch.object(completion.Completion,'improve',return_value=improved) as review, \
+             patch.object(alternatives,'_bus_progressive',return_value=iter([
+                 {'journeys':[bus],'complete':False,'planner':'connections'},
+                 {'journeys':[bus],'complete':True,'planner':'connections'}])):
+            stream=alternatives.progressive(None,self.a,self.b,now=self.now)
+            first=next(stream)
+            self.assertEqual(first['journeys'][0]['id'],'ready')
+            self.assertFalse(first['complete'])
+            review.assert_not_called()
+            final=next(stream)
+            self.assertTrue(final['complete'])
+            self.assertEqual(final['journeys'][0]['id'],'improved')
+            review.assert_called_once()
+            stream.close()
 
     def test_walk_directly_to_second_boarding_removes_backtracking_bus(self):
         legs=[{'origin':self.a,'destination':self.b,'departure':'2026-10-08T05:01:00+00:00','arrival':'2026-10-08T05:05:00+00:00'},

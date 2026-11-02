@@ -1,6 +1,7 @@
-"""Listas exatas por distância preparadas offline; consultas online nunca compõem transferências.
+"""Listas por distância preparadas offline; consultas online nunca compõem transferências.
 
-Somente os trajetos finais TOP 16/8 são retidos por OD, sem truncar trechos intermediários.
+Até cinco sequências finais por OD, priorizando o menor número de trocas de ônibus.
+O planejador multimodal aplica a política ponderada aos candidatos verificados.
 Horários e previsões ao vivo permanecem em uma etapa separada de avaliação temporal.
 """
 from contextlib import closing
@@ -123,6 +124,44 @@ def _compact(origin,destination,n,rank,path):
             path['distancia_onibus_m'],path['distancia_caminhada_m'],path['caminhada_s'],path['distancia_m'])
 
 
+def retain_five(path):
+    """Retenção do artefato de ônibus existente; não declara cobertura ferroviária.
+
+    Uma sequência de padrões ocupa uma vaga. O ranking offline usa distância,
+    pois a duração e a disponibilidade dependem do horário da consulta.
+    """
+    with sqlite3.connect(path) as db:
+        meta=_read_meta(db);_validate(meta)
+        db.execute('ATTACH DATABASE ? AS components',
+                   (Path(meta['signature']['source'][0]).as_uri()+'?mode=ro',))
+        before=db.execute('SELECT count(*) FROM conexoes').fetchone()[0]
+        with db:
+            db.execute('''CREATE TEMP TABLE retained AS
+                WITH sequences AS (
+                    SELECT c.origin,c.destination,c.boardings,c.rank,c.distance_meters,
+                        ROW_NUMBER() OVER (PARTITION BY c.origin,c.destination,e1.pattern_id,e2.pattern_id
+                            ORDER BY c.boardings,c.distance_meters,c.rank) AS duplicate_rank
+                    FROM conexoes c JOIN components.ride_edge e1 ON e1.id=c.edge1
+                    LEFT JOIN components.ride_edge e2 ON e2.id=c.edge2
+                ), ranked AS (
+                    SELECT *,ROW_NUMBER() OVER (PARTITION BY origin,destination
+                        ORDER BY boardings,distance_meters,rank) AS position
+                    FROM sequences WHERE duplicate_rank=1
+                ) SELECT origin,destination,boardings,rank FROM ranked WHERE position<=5''')
+            db.execute('CREATE UNIQUE INDEX retained_key ON retained(origin,destination,boardings,rank)')
+            db.execute('''DELETE FROM conexoes WHERE NOT EXISTS (SELECT 1 FROM retained r
+                WHERE r.origin=conexoes.origin AND r.destination=conexoes.destination
+                  AND r.boardings=conexoes.boardings AND r.rank=conexoes.rank)''')
+            db.execute('''UPDATE materialization_status SET path_count=(SELECT count(*) FROM conexoes c
+                WHERE c.origin=materialization_status.origin AND c.destination=materialization_status.destination
+                  AND c.boardings=materialization_status.boardings)''')
+            meta['retention_policy']='five_lowest_bus_transfer_cost_then_distance_v1'
+            meta['max_paths_per_pair']=5
+            db.execute('UPDATE materialization_meta SET value=? WHERE id=1',(json.dumps(meta),))
+        after=db.execute('SELECT count(*) FROM conexoes').fetchone()[0]
+        return {'before':before,'after':after,'removed':before-after,'max_paths_per_pair':5}
+
+
 def materialize(pairs, source=None, target=None, seconds=config.ROUTE_SECONDS, progress=None, min_free_bytes=config.MIN_FREE_GIB*1024**3, experimental=False):
     """Retoma por OD/categoria. Uma lista que excedeu o prazo nunca é publicada como pronta."""
     if not math.isfinite(seconds) or seconds<=0:raise ValueError('Prazo offline inválido.')
@@ -166,7 +205,9 @@ def materialize(pairs, source=None, target=None, seconds=config.ROUTE_SECONDS, p
                                      f'{"excluído pela política" if category.get("policy_skipped") else "pronto" if category["complete"] else "PENDENTE"}, {time.perf_counter()-before:.3f}s')
         count=db.execute('SELECT count(*) FROM conexoes').fetchone()[0]
         ready=db.execute("SELECT count(*) FROM (SELECT origin,destination FROM materialization_status WHERE state='ready' GROUP BY origin,destination HAVING count(*)=2)").fetchone()[0]
-    return {'selection_policy':meta['signature'].get('selection_policy','reference'),'database':str(target),'built_categories':built,'skipped_categories':skipped,
+    retention=retain_five(target)
+    count=retention['after']
+    return {'selection_policy':meta['signature'].get('selection_policy','reference'),'retention':retention,'database':str(target),'built_categories':built,'skipped_categories':skipped,
             'timed_out_categories':timed_out,'ready_pairs':ready,'stored_paths':count,
             'seconds':time.perf_counter()-started,'bytes':target.stat().st_size}
 

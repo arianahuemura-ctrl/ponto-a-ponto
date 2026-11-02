@@ -1,0 +1,4 @@
+# Preserve original benchmark CSV bytes and accept the CSV writer's CRLF.
+artifacts/benchmarks/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Video inventories are generated CSV evidence too.
+docs/inventario-videos-*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

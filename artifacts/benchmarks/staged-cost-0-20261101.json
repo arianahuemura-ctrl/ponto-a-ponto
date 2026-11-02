@@ -1,0 +1,12 @@
+{
+  "stage": 0,
+  "complete": true,
+  "origins": 22274,
+  "pairs": 13540228,
+  "routes": 24195933,
+  "build_seconds": 17.786259607993998,
+  "elapsed_seconds": 265.4570007480215,
+  "bytes": 683163648,
+  "free_bytes": 243755118592,
+  "integrity": "ok"
+}

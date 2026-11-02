@@ -31,7 +31,7 @@ for(const width of [390,1440])test(`Casa e Trabalho persistem e selecionam desti
  await expect(button(page,'Ir para Casa')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.screenshot({path:`test-results/quick-destinations-${width}.png`});
- await button(page,'Ativar modo escuro').click();await page.screenshot({path:`test-results/quick-destinations-dark-${width}.png`});
+ await page.getByRole('button',{name:'Configurações',exact:true}).click();await page.getByRole('combobox',{name:'Aparência',exact:true}).selectOption('dark');await page.getByRole('button',{name:'Fechar configurações',exact:true}).click();await page.screenshot({path:`test-results/quick-destinations-dark-${width}.png`});
 });
 test('alterar, retirar atalho e remover favorito não deixam destino obsoleto',async({page})=>{
  await setup(page);await assign(page,'Casa','1');

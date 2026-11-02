@@ -1,0 +1,56 @@
+{
+  "catalogue_stops": 47379,
+  "artesp_stops": 25105,
+  "maua_stops": 337,
+  "catalogue_seconds": 2.517627490044106,
+  "revision": "aa630c9a43500b095583c385",
+  "stop_detail_available": true,
+  "combined": {
+    "first_route_seconds": 7.204210077004973,
+    "journeys": 3,
+    "costs": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "routes": [
+      [
+        "artesp:158",
+        "METRÔ L2"
+      ],
+      [
+        "artesp:158",
+        "477A-10"
+      ],
+      [
+        "artesp:158",
+        "478P-10"
+      ]
+    ]
+  },
+  "preserved": {
+    "first_route_seconds": 0.35938149195862934,
+    "journeys": 1,
+    "costs": [
+      3.0
+    ],
+    "routes": [
+      [
+        "METRÔ L2",
+        "5362-10",
+        "6061-10",
+        "6063-42"
+      ]
+    ]
+  },
+  "live_activated": true,
+  "activation_blocked_by": null,
+  "focused_tests_passed": 60,
+  "preexisting_concurrency_test_failures": 3,
+  "live_catalogue": {
+    "status": 200,
+    "stops": 47379,
+    "artesp": 25105,
+    "etag": "\"stops-v1-aa630c9a43500b095583c385\""
+  }
+}

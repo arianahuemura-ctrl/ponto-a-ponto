@@ -62,5 +62,5 @@ for(const width of [390,1200])test(`ônibus pode ser acompanhado sem destino em 
  await page.getByRole('dialog',{name:'Remover favorito?'}).getByRole('button',{name:'Remover favorito',exact:true}).click();
  await expect(page.getByRole('button',{name:'Adicionar local aos favoritos'})).toHaveAttribute('aria-pressed','false');
  await page.getByRole('button',{name:'Alterar destino',exact:true}).click();
- await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+ await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).not.toBeVisible();
 });

@@ -6,7 +6,7 @@ from transit.sptrans import materialized_connections as materialized
 
 
 class Command(BaseCommand):
-    help='Materializa TOP 16/8 conexões físicas offline, com retomada por par/categoria.'
+    help='Materializa até cinco sequências por par, priorizando menos baldeações, com retomada.'
 
     def add_arguments(self,p):
         p.add_argument('--experimental',action='store_true',help='Heurísticas de cobertura/convergência; saída separada .materialized.heuristics.sqlite3.')

@@ -33,7 +33,7 @@ for(const long of [false,true])test(`origem permanece no mapa e destino abre rot
  await expect(page.locator('dialog[open]')).toHaveCount(0);
  expect(boards).toHaveLength(0);
  await select(1);
- await expect(page.getByRole('dialog').getByRole('heading',{name:'Ônibus da sua rota'})).toBeVisible();
+ await expect(page.getByRole('dialog').getByRole('heading',{name:'Opções da sua rota'})).toBeVisible();
  await expect.poll(()=>boards.length).toBeGreaterThan(0);
  expect(boards[0].get('origin')).toBe('1');expect(boards[0].get('destination')).toBe('2');
 });

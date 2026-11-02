@@ -34,7 +34,7 @@ def street_key(value):
 
 def suggest(query):
     base=getattr(settings,'PHOTON_URL','https://photon.komoot.io/api/').rstrip('/')+'/'
-    key='pap.address.v2:'+hashlib.sha256((base+query.casefold()).encode()).hexdigest()
+    key='pap.address.v3:'+hashlib.sha256((base+query.casefold()).encode()).hexdigest()
     cached=cache.get(key)
     if cached is not None:return cached
     street_query,number=split_number(query)
@@ -51,6 +51,9 @@ def suggest(query):
         street=p.get('street') or p.get('name')
         if not street:continue
         if number and str(p.get('housenumber','')).casefold()!=number.casefold():continue
+        requested_street=street_key(street_query)
+        explicit_street=requested_street.split(' ',1)[0] in {'rua','avenida','alameda','travessa','praca','estrada','rodovia','largo'}
+        if number and explicit_street and street_key(street)!=requested_street:continue
         name=', '.join(str(v) for v in (street,p.get('housenumber')) if v)
         district=p.get('district') or p.get('locality') or p.get('suburb') or ''
         city=p.get('city') or p.get('town') or p.get('municipality') or ''

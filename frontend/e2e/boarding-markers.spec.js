@@ -9,7 +9,7 @@ for(const width of [390,1200])test(`alterar embarque exibe pontos e preserva des
  await page.goto('/?stop=1');
  await page.getByRole('button',{name:'Selecionar destino',exact:true}).click();
  await page.locator('.sp-stop[title^="Destino · 3"]').click();
- await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toBeVisible();
+ await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).toBeVisible();
  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
  await expect(page.locator('.sp-stop')).toHaveCount(2);
  await expect(page.getByRole('button',{name:'Alterar embarque',exact:true})).toContainText('Definido');
@@ -43,7 +43,7 @@ for(const width of [390,1200])test(`alterar embarque exibe pontos e preserva des
  await expect(newStop).toHaveCSS('opacity','0.25');
  await newStop.click();
  await expect(transparency).toHaveCount(0);
- await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toContainText('Novo embarque');
+ await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).toContainText('Novo embarque');
  const session=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')));
  expect(session.origin.id).toBe('2');expect(session.destination.id).toBe('3');
  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();

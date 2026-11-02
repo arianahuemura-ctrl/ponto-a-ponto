@@ -19,6 +19,32 @@ class MaterializedConnectionsTests(SimpleTestCase):
     def build(self,pairs=(('A','D'),),**kw):
         return m.materialize(pairs,source=self.cp,target=self.mp,min_free_bytes=0,**kw)
 
+    def test_retention_keeps_five_and_fills_only_missing_slots_from_next_cost(self):
+        self.build()
+        # Synthetic distinct service patterns isolate the retention policy from generation.
+        with sqlite3.connect(self.cp) as source:
+            edge=source.execute('SELECT * FROM ride_edge LIMIT 1').fetchone()
+            for i in range(1,20):
+                source.execute('INSERT INTO ride_edge VALUES (?,?,?,?,?,?,?,?)',
+                    (10000+i,*edge[1:3],10000+i,*edge[4:]))
+        with sqlite3.connect(self.mp) as db:
+            db.execute('DELETE FROM conexoes')
+            for origin,minimum_count in [('A',3),('B',6)]:
+                for n,count in [(1,minimum_count),(2,5)]:
+                    for i in range(1,count+1):
+                        db.execute('INSERT INTO conexoes VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                            (origin,'D',n,i,10000+i,10010+i if n==2 else None,None,None,None,None,1000,0,0,1000+i))
+                db.executemany('INSERT OR REPLACE INTO materialization_status VALUES (?,?,?,?,?,?,?)',
+                    [(origin,'D',n,'ready',10,0,'2026-11-01') for n in (1,2)])
+            # Same sequence, longer path: must not take a second slot.
+            db.execute('INSERT INTO conexoes SELECT origin,destination,boardings,99,edge1,edge2,edge3,walk1,walk2,final_walk,bus_meters,walk_meters,walk_seconds,9999 FROM conexoes WHERE origin=\'A\' AND boardings=1 AND rank=1')
+        with patch.object(m,'_validate'):
+            result=m.retain_five(self.mp)
+        self.assertEqual(result['after'],10)
+        with sqlite3.connect(self.mp) as db:
+            self.assertEqual(db.execute('SELECT origin,boardings,count(*) FROM conexoes GROUP BY origin,boardings ORDER BY origin,boardings').fetchall(),[('A',1,3),('A',2,2),('B',1,5)])
+            self.assertEqual(db.execute("SELECT path_count FROM materialization_status WHERE origin='A' AND boardings=2").fetchone()[0],2)
+
     def test_exact_top_categories_with_intermediate_and_final_walks(self):
         self.build((('A','D'),('A','E'),('D','A')))
         for a,b in [('A','D'),('A','E'),('D','A')]:

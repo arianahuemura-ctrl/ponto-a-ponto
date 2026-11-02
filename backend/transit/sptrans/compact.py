@@ -14,7 +14,8 @@ def encode(rows, revision):
     packed = []
     for stop in sorted(rows, key=lambda s: (s['lat'], s['lon'], s['id'])):
         lat, lon = round(stop['lat'] * 100000), round(stop['lon'] * 100000)
-        packed.append([str(stop['id']), lat-previous_lat, lon-previous_lon, stop['name']])
+        packed.append([str(stop['id']), lat-previous_lat, lon-previous_lon, stop['name']]
+                      + ([stop['mode']] if stop.get('mode','bus')!='bus' else []))
         previous_lat, previous_lon = lat, lon
     return json.dumps(dict(version=1, revision=revision, scale=100000, rows=packed), ensure_ascii=False, separators=(',', ':')).encode()
 

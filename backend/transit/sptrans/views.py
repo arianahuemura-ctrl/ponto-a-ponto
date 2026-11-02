@@ -5,7 +5,7 @@ from io import BytesIO
 from django.http import JsonResponse, HttpResponse, StreamingHttpResponse
 from django.views.decorators.http import require_GET
 from django.utils import timezone
-from . import store, realtime, planner, directions, walking, viewport, alternatives, tracking
+from . import store, realtime, planner, directions, walking, viewport, alternatives, tracking, rail, transfer_policy
 from .client import APIError
 
 
@@ -19,6 +19,11 @@ def endpoint(fn):
         except (ValueError, KeyError, TypeError):
             return JsonResponse({'error':'Consulta inválida ou GTFS ainda não importado. Execute import_sptrans no servidor.'},status=400)
     return wrapped
+
+@endpoint
+def rail_network(request,db):
+    from .rail_network import catalogue
+    return catalogue(db)
 
 @endpoint
 def stops(request,db):
@@ -49,10 +54,14 @@ def board(request,db):
     origin=store.get_stop(db,request.GET['origin'])
     destination=store.get_stop(db,request.GET['destination']) if request.GET.get('destination') else None
     rows=[] if destination and destination['id']==origin['id'] else store.alternatives(db,origin['id'],destination['id'] if destination else None)
-    max_transfers=int(request.GET.get('max_transfers','2'))
-    if not 0<=max_transfers<=3: raise ValueError()
-    connections=planner.journeys(db,origin['id'],destination['id'],max_transfers) if destination else []
+    max_transfers=int(request.GET.get('max_transfers','4'))
+    if not 0<=max_transfers<=4: raise ValueError()
+    planning_context={}
+    connections=planner.journeys(db,origin['id'],destination['id'],max_transfers,
+        transfer_paths=rail.internal_transfers({r['stop_id']:store.stop(r) for r in db.execute('SELECT * FROM stops')}),
+        known_transfers_only=True,include_rail=True,weighted_transfers=True,context=planning_context) if destination and request.GET.get('nearby')!='1' else []
     walking_incomplete=False
+    search_limited=bool(planning_context.get('weighted_search_limited'))
     if destination and request.GET.get('nearby')=='1':
         anchors=[]
         for prefix,point in (('from',origin),('to',destination)):
@@ -64,6 +73,8 @@ def board(request,db):
             anchors.append(anchor)
         planned=alternatives.alternatives(db,*anchors,max_transfers=max_transfers)
         connections=planned['journeys'];walking_incomplete=planned['walking_incomplete']
+        search_limited=planned.get('search_limited',False)
+    connections, policy = transfer_policy.select(connections, max_transfers)
     selected=next((j for j in connections if j.get('id')==request.GET.get('journey')),connections[0] if connections else None)
 
     points = {s['id']:s for journey in connections for leg in journey['legs'] for s in [leg['origin'],leg['destination']]}
@@ -73,7 +84,7 @@ def board(request,db):
             for key in ('origin','destination'): leg[key]=points[leg[key]['id']]
     route_only=request.GET.get('route_only')=='1' and destination is not None
     if route_only:
-        rows=[{'trip_id':leg['trip_id'],'code':leg['code'],'headsign':leg['headsign'],
+        rows=[{'mode':leg.get('mode','bus'),'route_type':leg.get('route_type','3'),'timing_detail':leg.get('timing_detail'),'trip_id':leg['trip_id'],'code':leg['code'],'headsign':leg['headsign'],
                'origin':leg['origin'],'destination':leg['destination'],'transfer':index,
                'arrivals':[],'programme':[],'planned_departure':leg['departure'],
                'wait_minutes':leg['wait_minutes']} for index,leg in enumerate(selected['legs'])] if selected else []
@@ -81,6 +92,7 @@ def board(request,db):
     started=time.monotonic()
     # Limite consultas externas em terminais grandes.
     for index,row in enumerate(rows):
+        if row.get('mode','bus')!='bus':continue
         if warning or index>=12 or time.monotonic()-started>8:
             row['realtime_status']=warning or 'Previsão não consultada nesta atualização.'
             continue
@@ -96,21 +108,21 @@ def board(request,db):
         return (minute(row['arrivals'][0]['time'])-minute(row.get('api_time') or '00:00'))%1440
     if not route_only: rows.sort(key=next_arrival)
     return {'origin':origin,'destination':destination,'lines':rows,'queried_at':timezone.now().isoformat(),'warning':warning,'source':'SPTrans GTFS / Olho Vivo','direct_only':max_transfers==0,'journeys':connections,'selected_journey':selected.get('id') if selected else None,'walking_incomplete':walking_incomplete,'max_transfers':max_transfers,
-            'planning':{'horizon_hours':6,'transfer_minutes':2,'waiting':'half_headway','same_stop_only':True}}
+            'transfer_policy':policy,'search_limited':search_limited,'planning':{'horizon_hours':6,'transfer_minutes':2,'waiting':'half_headway','same_stop_only':False}}
 
 @endpoint
 def trip(request,db,trip_id):
     wait_seconds=float(request.GET.get('min_wait_seconds','0'))
     if not math.isfinite(wait_seconds) or not 0<=wait_seconds<=21600: raise ValueError()
-    row=db.execute('''SELECT t.*,r.route_short_name,r.route_long_name,r.route_color FROM trips t JOIN routes r USING(route_id) WHERE trip_id=? AND r.route_type='3' ''',(trip_id,)).fetchone()
+    row=db.execute('''SELECT t.*,r.route_short_name,r.route_long_name,r.route_color,r.route_type FROM trips t JOIN routes r USING(route_id) WHERE trip_id=? AND r.route_type IN ('1','2','3') ''',(trip_id,)).fetchone()
     if not row: raise ValueError()
-    line={'trip_id':trip_id,'code':row['route_short_name'],'name':row['route_long_name'],'headsign':row['trip_headsign'],'arrivals':[]}
+    line={'route_type':row['route_type'],'mode':{'1':'metro','2':'rail'}.get(row['route_type'],'bus'),'trip_id':trip_id,'code':row['route_short_name'],'name':row['route_long_name'],'headsign':row['trip_headsign'],'arrivals':[]}
     stops=[store.stop(s) for s in db.execute('SELECT s.* FROM stop_times st JOIN stops s USING(stop_id) WHERE trip_id=? ORDER BY stop_sequence',(trip_id,))]
     shape=[[s[0],s[1]] for s in db.execute('SELECT shape_pt_lat,shape_pt_lon FROM shapes WHERE shape_id=? ORDER BY shape_pt_sequence',(row['shape_id'],))]
     vehicles=[];status='';warning=''
     try:
-        if request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']),ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
-        vehicles,status=realtime.positions(line,ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
+        if row['route_type']=='3' and request.GET.get('origin'): realtime.add_predictions(line,store.get_stop(db,request.GET['origin']),ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
+        if row['route_type']=='3':vehicles,status=realtime.positions(line,ttl=5 if request.GET.get('boarding_index') is not None or request.GET.get('vehicle') or request.GET.get('next')=='1' else 30)
     except APIError as error: warning=str(error)
     except (ValueError,KeyError,TypeError): warning='Resposta inesperada da SPTrans; posições indisponíveis.'
     approach=None;passed_approaches=[];approaches=[]
@@ -139,6 +151,7 @@ def trip(request,db,trip_id):
         approach=tracking.approaching(trip_id,index,vehicles,line['arrivals'],require_prediction=wait_seconds>0 or supplied)
         passed_approaches=tracking.passed(trip_id,index,vehicles)
     itinerary=tracking.itinerary(trip_id,stops,request.GET['origin'],int(request.GET['boarding_index']) if request.GET.get('boarding_index') is not None else None) if request.GET.get('origin') else None
+    if itinerary:itinerary.update(mode=line['mode'],route_type=row['route_type'],color='#'+(row['route_color'] or '005cec'))
     return {'itinerary':itinerary,'line':line,'stops':stops,'shape':shape,'vehicles':vehicles,'vehicle_status':status,'warning':warning,'approach':approach,'passed_approaches':passed_approaches,'approaches':approaches}
 
 @require_GET
@@ -175,7 +188,7 @@ def destination(request, db):
     if not math.isfinite(lat) or not math.isfinite(lon) or not -90<=lat<=90 or not -180<=lon<=180: raise ValueError()
     rows=db.execute("""SELECT s.* FROM stops s WHERE EXISTS
         (SELECT 1 FROM stop_times st JOIN trips t USING(trip_id) JOIN routes r USING(route_id)
-         WHERE st.stop_id=s.stop_id AND r.route_type='3')""")
+         WHERE st.stop_id=s.stop_id AND r.route_type IN ('1','2','3'))""")
     candidates=[]
     for row in rows:
         point=store.stop(row)
@@ -232,7 +245,7 @@ def destination(request, db):
                 pairs=db.execute(f"""SELECT DISTINCT a.stop_id,b.stop_id FROM stop_times a
                     JOIN stop_times b ON a.trip_id=b.trip_id AND a.stop_sequence<b.stop_sequence
                     JOIN trips t ON t.trip_id=a.trip_id JOIN routes r USING(route_id)
-                    WHERE r.route_type='3' AND a.stop_id IN ({','.join('?' for _ in starts)})
+                    WHERE r.route_type IN ('1','2','3') AND a.stop_id IN ({','.join('?' for _ in starts)})
                     AND b.stop_id IN ({','.join('?' for _ in ends)})""",[*starts,*ends])
                 for start_id,end_id in pairs:
                     routes=planner.journeys(db,start_id,end_id,0,now=now)
@@ -268,8 +281,8 @@ def stream_board(request):
                 else:
                     origin=store.get_stop(db,request.GET['origin'])
                 destination=store.get_stop(db,request.GET['destination'])
-                limit=int(request.GET.get('max_transfers','2'))
-                if not 0<=limit<=3:raise ValueError()
+                limit=int(request.GET.get('max_transfers','4'))
+                if not 0<=limit<=4:raise ValueError()
                 anchors=[]
                 for prefix,point in (('from',origin),('to',destination)):
                     anchor=dict(point)
@@ -281,13 +294,14 @@ def stream_board(request):
                 for result in alternatives.progressive(db,*anchors,max_transfers=limit,refresh=request.GET.get('refresh')=='1'):
                     journeys=result['journeys']
                     selected=next((j for j in journeys if j['id']==request.GET.get('journey')),journeys[0] if journeys else None)
-                    rows=[{'trip_id':leg['trip_id'],'code':leg['code'],'headsign':leg['headsign'],'origin':leg['origin'],'destination':leg['destination'],
+                    rows=[{'mode':leg.get('mode','bus'),'route_type':leg.get('route_type','3'),'timing_detail':leg.get('timing_detail'),'trip_id':leg['trip_id'],'code':leg['code'],'headsign':leg['headsign'],'origin':leg['origin'],'destination':leg['destination'],
                            'arrivals':[],'programme':[],'planned_departure':leg['departure']} for leg in selected['legs']] if selected else []
                     payload={**result,'origin':origin,'destination':destination,'lines':rows,'queried_at':timezone.now().isoformat(),'selected_journey':selected['id'] if selected else None}
                     yield json.dumps(payload)+'\n'
-                    if result['complete'] and rows and result.get('planner')!='connections':
+                    if result['complete'] and rows and result.get('planner') not in ('connections','multimodal'):
                         started=time.monotonic();warning=''
                         for row in rows[:12]:
+                            if row.get('mode','bus')!='bus':continue
                             if time.monotonic()-started>8:break
                             try:realtime.add_predictions(row,row['origin'])
                             except APIError as error:

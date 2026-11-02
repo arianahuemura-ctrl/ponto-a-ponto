@@ -726,7 +726,7 @@ Os PDFs são gerados ao lado dos respectivos arquivos `.tex`. PDFs e auxiliares 
 
 O planejamento usa rodadas de embarque sobre as sequências e calendários do GTFS. Retorna alternativas não dominadas em tempo estimado e número de trocas, dentro das próximas seis horas. A espera de serviços por frequência é estimada como metade do intervalo; `exact_times=1` usa a grade programada. Cada troca acrescenta margem mínima de dois minutos antes de buscar o próximo embarque. Datas excepcionais e horários após 24:00 são considerados. Esses valores são hipóteses de planejamento e não garantem conexões operacionais.
 
-As baldeações exigem o mesmo identificador de parada. Caminhadas entre pontos, plataformas distintas e integrações tarifárias não são calculadas. A interface detalha linhas, sentido, embarque, desembarque e espera por trecho. O mapa recorta a geometria GTFS entre as paradas de cada trecho e desenha o ônibus em azul contínuo. Os acessos a pé entre endereços e paradas usam o roteador de pedestres e aparecem em rosa tracejado. As cores têm contraste específico no modo escuro. Se uma geometria estiver ausente, a interface informa a limitação e não inventa uma ligação reta. As previsões ao vivo não são propagadas como garantia de conexão para os trechos seguintes.
+As baldeações exigem o mesmo identificador de parada. Caminhadas entre pontos, plataformas distintas e integrações tarifárias não são calculadas. A interface detalha linhas, sentido, embarque, desembarque e espera por trecho. O mapa recorta a geometria GTFS entre as paradas de cada trecho e desenha o ônibus em azul contínuo. Círculos marcam as paradas intermediárias da rota; toque em um círculo para consultar o nome e a linha sem alterar o embarque ou o destino. Os círculos também aparecem no trajeto completo de uma linha e permanecem disponíveis sem posições de veículos ao vivo. Embarque, baldeações e destino mantêm seus símbolos destacados. Os acessos a pé entre endereços e paradas usam o roteador de pedestres e aparecem em rosa tracejado. As cores têm contraste específico no modo escuro. Se uma geometria estiver ausente, a interface informa a limitação e não inventa uma ligação reta. As previsões ao vivo não são propagadas como garantia de conexão para os trechos seguintes.
 
 Semântica dos horários e frequências: [referência oficial GTFS Schedule](https://gtfs.org/documentation/schedule/reference/).
 
@@ -975,9 +975,18 @@ fictícias para preencher a ausência de dados históricos.
 
 Nesta branch, `SPTRANS_PLANNER=connections` é o padrão. A consulta progressiva lê a
 **tabela física `conexoes` do arquivo `sptrans.materialized.sqlite3`**, usando apenas
-pares com as três categorias concluídas. Os índices temporal e estrutural precisam
-corresponder ao mesmo GTFS. Não há composição nem materialização de conexões durante
-a requisição.
+as categorias de um ou dois ônibus marcadas como prontas. Os índices temporal e
+estrutural precisam corresponder ao mesmo GTFS. Pares ainda não preparados podem
+ser consultados no índice estrutural, sem gravar novas materializações.
+
+`GET /api/sptrans/board/?stream=1&destination=…` envia as rotas já verificadas antes
+de consultar os pares próximos pendentes. Essa consulta complementar envia cada
+par resolvido separadamente; seu orçamento de 5 segundos conta apenas o trabalho
+da consulta, sem incluir as caminhadas e os horários avaliados entre os envios.
+A avaliação prioriza uma opção de cada sequência de linhas antes de examinar outras
+paradas da mesma sequência. A revisão opcional de embarque/desembarque acontece no
+resultado final, mantendo `complete=false` enquanto houver trabalho. O contrato
+de horários e caminhadas verificadas vale também para os resultados parciais.
 
 A origem pode ser uma parada, a localização do passageiro ou uma coordenada escolhida
 no mapa. O planejador procura paradas próximas nas duas pontas e reutiliza o roteador
@@ -1391,6 +1400,12 @@ O novo arquivo não substitui automaticamente o banco usado pela aplicação.
 ### Ambiente da aplicação
 
 Defina `PAP_ENVIRONMENT=production` (padrão) ou `PAP_ENVIRONMENT=development` no `.env` da raiz. Em produção, a marca do RAPTOR e a medição de distâncias pelo botão direito ficam desativadas. Essas ferramentas estão disponíveis apenas em desenvolvimento. Após alterar, execute `npm --prefix frontend run build`; se estiver usando o Vite, reinicie o servidor de desenvolvimento. A variável não altera o `DEBUG` do Django.
+
+## Controles da interface de São Paulo
+
+Na interface de São Paulo, a barra do cabeçalho permite buscar endereços diretamente, com sugestões e confirmação no próprio mapa. A engrenagem abre **Configurações**, com aparência clara, escura ou conforme o aparelho, além do acesso à participação na pesquisa. O botão de tela cheia fica no canto superior direito do mapa quando o navegador oferece suporte. Os pontos comuns usam placas verdes com símbolo de ônibus. Avisos de localização, mapa e rota recolhem após 8 segundos e podem ser reabertos pelo ícone; o recolhimento pausa durante foco ou leitura com o ponteiro sobre a mensagem. Indicadores de cálculo continuam visíveis enquanto a busca estiver em andamento.
+
+Os controles de embarque e destino ficam recolhidos quando definidos, inclusive quando o embarque é “Minha localização”. Um toque exibe o nome/endereço completo; outro entra na seleção do local correspondente. Os valores anteriores ficam preservados até a substituição, sem limpar o outro extremo da viagem. Locais definidos usam borda sólida e não piscam. Detalhes podem recolher após 8 segundos, ao tocar fora ou com Escape; durante a seleção o controle permanece aberto.
 
 ## Participação voluntária na pesquisa
 

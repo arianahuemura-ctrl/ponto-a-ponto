@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "max_cost_exclusive": 3,
+  "max_cost_units": 8,
+  "only_vacancies": true,
+  "origins": 22274,
+  "new_pairs": 276986092,
+  "added_routes": 1541006976,
+  "changed_pairs": 342410903,
+  "elapsed_seconds": 2164.3854518319713,
+  "bytes": 82237661184,
+  "free_bytes": 161543614464,
+  "integrity": "ok"
+}

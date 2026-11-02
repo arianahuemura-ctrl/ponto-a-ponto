@@ -46,8 +46,8 @@ def build(base_url, network_id, source=None, target=None, workers=config.WALK_WO
         local=parsed.hostname=='localhost' or ipaddress.ip_address(parsed.hostname).is_loopback
     except ValueError:
         local=False
-    if not local or not network_id.strip() or not 1<=workers<=16:
-        raise ValueError('Requer roteador local, identificação da rede foot e 1–16 workers.')
+    if not local or not network_id.strip() or not 1<=workers<=32:
+        raise ValueError('Requer roteador local, identificação da rede foot e 1–32 workers.')
     base_url=base_url.rstrip('/')
     source=Path(source or graph.graph_path()).resolve()
     target=Path(target or database_path()).resolve()

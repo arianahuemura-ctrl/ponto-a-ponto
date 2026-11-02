@@ -40,10 +40,11 @@ def _prepare_materialized(db, origin, destination):
         return {'paths': [], 'unavailable_reason': str(error)}
 
 
-def prepare(db, origin, destination):
+def prepare(db, origin, destination, *, defer_pending=False):
     """Use também o índice municipal direto, independente da cobertura por pares."""
     from .alternatives import access_points
     context = _prepare_materialized(db, origin, destination)
+    supplementation_available = False
     paths = list((context or {}).get('paths', []))
     try:
         with direct.connection() as source:
@@ -65,6 +66,7 @@ def prepare(db, origin, destination):
         from . import city_connections
         source_path = city_connections.database_path()
         materialized._source_meta(source_path)
+        supplementation_available = True
         with direct.connection(source_path) as source:
             deadline = time.monotonic() + 5
             source.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
@@ -79,14 +81,31 @@ def prepare(db, origin, destination):
             paths.extend(expanded)
     except (ValueError, sqlite3.Error, OSError):
         pass
+    # O stream pode avaliar os resultados prontos antes da composição complementar.
+    if defer_pending and (paths or supplementation_available):
+        return {**(context or {}), 'paths': paths, 'unavailable_reason': None,
+                'city_complete': (context or {}).get('city_complete', False), 'pending_pairs': True}
+    paths.extend(_pending_paths(db, origin, destination, context))
+    if paths:
+        return {'paths': paths, 'city_complete': (context or {}).get('city_complete', False)}
+    return context
+
+
+def _pending_paths(db, origin, destination, context):
+    return [path for batch in _pending_path_batches(db, origin, destination, context) for path in batch]
+
+
+def _pending_path_batches(db, origin, destination, context):
     # Complete apenas pares cuja categoria de dois ônibus não está pronta.
     # Um resultado vazio já materializado é definitivo; não refaça essa busca.
+    from .alternatives import access_points
     try:
         from . import city_connections
         source_path = city_connections.database_path()
         materialized._source_meta(source_path)
         with direct.connection(source_path) as source:
-            deadline = time.monotonic() + 5
+            remaining = 5
+            deadline = time.monotonic() + remaining
             source.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
             starts, _ = access_points(db, origin, True, optimistic=True, endpoint_selection=True)
             ends, _ = access_points(db, destination, False, optimistic=True, endpoint_selection=True)
@@ -96,16 +115,23 @@ def prepare(db, origin, destination):
                     pair = (start['id'], end['id'])
                     if pair in ready:
                         continue
+                    started = time.monotonic()
+                    deadline = started + remaining
                     rows = source.execute('''SELECT * FROM conexoes_2 WHERE origin=? AND destination=?
                         ORDER BY distance_meters,edge1,edge2,edge3,final_walk LIMIT ?''',
                         (*pair, city_connections.QUOTAS[2])).fetchall()
                     expanded = [materialized._expand(row, source) for row in rows]
-                    paths.extend(expanded)
+                    remaining = max(0, remaining - (time.monotonic() - started))
+                    if expanded:
+                        yield expanded
     except (ValueError, sqlite3.Error, OSError):
         pass  # Preserve as categorias prontas; o RAPTOR continua disponível.
-    if paths:
-        return {'paths': paths, 'city_complete': (context or {}).get('city_complete', False)}
-    return context
+
+
+def _path_batches(db, origin, destination, context):
+    yield context['paths']
+    if context.get('pending_pairs'):
+        yield from _pending_path_batches(db, origin, destination, context)
 
 
 class Walks:
@@ -174,79 +200,93 @@ def progressive(db, origin, destination, max_transfers, now, context):
                           '(pattern_id,stop_id,api_line,api_stop,updated_at)')
             engine = Evaluator(index, now)
             api_remaining = max(0, engine.api_deadline - time.monotonic())
-            candidates = {}
-            for path in context['paths']:
-                buses = [leg for leg in path['trechos'] if leg['modo'] == 'onibus']
-                if len(buses) > max_transfers + 1:
-                    continue
-                ids = []
-                for leg in buses:
-                    row = index.execute('''SELECT id FROM ride_edge WHERE origin=? AND destination=?
-                        AND pattern_id=? AND boarding_index=? AND alighting_index=?''',
-                        (leg['origem'], leg['destino'], leg['padrao_id'], leg['embarque_indice'],
-                         leg['desembarque_indice'])).fetchone()
-                    if row is None:
-                        raise ValueError('Aresta materializada incompatível com o índice temporal.')
-                    ids.append(row[0])
-                signature = tuple(ids)
-                if signature in candidates:
-                    continue
-                # A caminhada final armazenada é substituída por desembarque -> destino real,
-                # não somada a esse trecho. Assim há uma única caminhada final sujeita ao limite.
-                middle = [leg for leg in path['trechos'][:-1] if leg['modo'] == 'caminhada']
-                for leg in middle:
-                    engine.walks[(leg['origem'], leg['destino'])] = {
-                        'seconds': leg['distancia_m'] / walking.WALK_METERS_PER_SECOND,
-                        'distance_meters': leg['distancia_m']}
-                candidate = {'id': 'connections-' + hashlib.sha256(json.dumps(ids).encode()).hexdigest()[:20],
-                             'edge_ids': json.dumps(ids), 'boardings': len(ids),
-                             'walk_seconds': sum(w['distancia_m'] for w in middle) / walking.WALK_METERS_PER_SECOND,
-                             'walk_meters': sum(w['distancia_m'] for w in middle),
-                             'distance_meters': path['distancia_onibus_m'] + sum(w['distancia_m'] for w in middle)}
-                start = store.get_stop(db, buses[0]['origem'])
-                end = store.get_stop(db, buses[-1]['destino'])
-                # Distância em linha reta é apenas um critério preliminar de ordenação, nunca uma caminhada publicada.
-                a = graph.distance((origin['lat'], origin['lon']), (start['lat'], start['lon'])) / walking.WALK_METERS_PER_SECOND
-                b = graph.distance((end['lat'], end['lon']), (destination['lat'], destination['lon'])) / walking.WALK_METERS_PER_SECOND
-                candidates[signature] = (engine.preliminary(candidate, a, b), candidate, start, end, middle)
-            ranked = sorted(candidates.values(), key=lambda item: (item[1]['boardings'], item[0], item[1]['id']))
-            base['candidate_count'] = len(ranked)
-            for _, candidate, start, end, middle in ranked:
-                if walks.limited:
-                    break
-                try:
-                    access = walks.route(origin, start, 'boarding')
-                    egress = walks.route(end, destination, 'destination')
-                    transfers = []
+            seen = set()
+            for paths in _path_batches(db, origin, destination, context):
+                candidates = {}
+                for path in paths:
+                    buses = [leg for leg in path['trechos'] if leg['modo'] == 'onibus']
+                    if len(buses) > max_transfers + 1:
+                        continue
+                    ids = []
+                    for leg in buses:
+                        row = index.execute('''SELECT id FROM ride_edge WHERE origin=? AND destination=?
+                            AND pattern_id=? AND boarding_index=? AND alighting_index=?''',
+                            (leg['origem'], leg['destino'], leg['padrao_id'], leg['embarque_indice'],
+                             leg['desembarque_indice'])).fetchone()
+                        if row is None:
+                            raise ValueError('Aresta materializada incompatível com o índice temporal.')
+                        ids.append(row[0])
+                    signature = tuple(ids)
+                    if signature in seen:
+                        continue
+                    seen.add(signature)
+                    # A caminhada final armazenada é substituída por desembarque -> destino real,
+                    # não somada a esse trecho. Assim há uma única caminhada final sujeita ao limite.
+                    middle = [leg for leg in path['trechos'][:-1] if leg['modo'] == 'caminhada']
                     for leg in middle:
-                        foot = walks.route(store.get_stop(db, leg['origem']), store.get_stop(db, leg['destino']), 'transfer')
-                        foot = foot or {'seconds': 0, 'distance_meters': 0, 'geometry': []}
                         engine.walks[(leg['origem'], leg['destino'])] = {
-                            **foot, 'origin': leg['origem'], 'destination': leg['destino']}
-                        transfers.append(foot)
-                except ValueError:
-                    continue
-                candidate['distance_meters'] += sum(w['distance_meters'] for w in transfers) - candidate['walk_meters']
-                candidate['walk_meters'] = sum(w['distance_meters'] for w in transfers)
-                candidate['walk_seconds'] = sum(w['seconds'] for w in transfers)
-                # A consulta de caminhadas não deve consumir o limite de consultas operacionais.
-                before = time.monotonic()
-                engine.api_deadline = before + api_remaining
-                result, _ = engine.evaluate(candidate, access['seconds'] if access else 0,
-                                            egress['seconds'] if egress else 0)
-                elapsed = time.monotonic() - before
-                # Mantenha um limite compartilhado para a API; exclua o tempo de obtenção das geometrias pedestres.
-                api_remaining = max(0, api_remaining - elapsed)
-                if not result:
-                    continue
-                item = journey(db, result)
-                endpoints = [p for p in (access, egress) if p]
-                item['walks'] = ([access] if access else []) + item['walks'] + ([egress] if egress else [])
-                item['walking_meters'] = round(result['walk_meters'] + sum(p['distance_meters'] for p in endpoints))
-                item['distance_meters'] += sum(p['distance_meters'] for p in endpoints)
-                best = distinct_routes([*best, item])
-                yield {**base, 'journeys': best[:], 'walking_incomplete': walks.incomplete,
-                       'search_limited': walks.limited}
+                            'seconds': leg['distancia_m'] / walking.WALK_METERS_PER_SECOND,
+                            'distance_meters': leg['distancia_m']}
+                    candidate = {'id': 'connections-' + hashlib.sha256(json.dumps(ids).encode()).hexdigest()[:20],
+                                 'edge_ids': json.dumps(ids), 'boardings': len(ids),
+                                 'walk_seconds': sum(w['distancia_m'] for w in middle) / walking.WALK_METERS_PER_SECOND,
+                                 'walk_meters': sum(w['distancia_m'] for w in middle),
+                                 'distance_meters': path['distancia_onibus_m'] + sum(w['distancia_m'] for w in middle)}
+                    start = store.get_stop(db, buses[0]['origem'])
+                    end = store.get_stop(db, buses[-1]['destino'])
+                    # Distância em linha reta é apenas um critério preliminar de ordenação, nunca uma caminhada publicada.
+                    a = graph.distance((origin['lat'], origin['lon']), (start['lat'], start['lon'])) / walking.WALK_METERS_PER_SECOND
+                    b = graph.distance((end['lat'], end['lon']), (destination['lat'], destination['lon'])) / walking.WALK_METERS_PER_SECOND
+                    candidates[signature] = (engine.preliminary(candidate, a, b), candidate, start, end, middle)
+                ranked = sorted(candidates.values(), key=lambda item: (item[1]['boardings'], item[0], item[1]['id']))
+                # Explore uma opção de cada sequência de linhas antes de outras paradas
+                # da mesma sequência. Todas as variantes continuam sendo avaliadas.
+                occurrences = {}
+                diversified = []
+                for item in ranked:
+                    edges = [engine.edge(eid) for eid in json.loads(item[1]['edge_ids'])]
+                    service = tuple((e['route_id'], e['direction'], e['headsign']) for e in edges)
+                    ordinal = occurrences.get(service, 0)
+                    occurrences[service] = ordinal + 1
+                    diversified.append((item[1]['boardings'], ordinal, item))
+                ranked = [item for _, _, item in sorted(diversified, key=lambda row: (row[0], row[1], row[2][0], row[2][1]['id']))]
+                base['candidate_count'] = len(seen)
+                for _, candidate, start, end, middle in ranked:
+                    if walks.limited:
+                        break
+                    try:
+                        access = walks.route(origin, start, 'boarding')
+                        egress = walks.route(end, destination, 'destination')
+                        transfers = []
+                        for leg in middle:
+                            foot = walks.route(store.get_stop(db, leg['origem']), store.get_stop(db, leg['destino']), 'transfer')
+                            foot = foot or {'seconds': 0, 'distance_meters': 0, 'geometry': []}
+                            engine.walks[(leg['origem'], leg['destino'])] = {
+                                **foot, 'origin': leg['origem'], 'destination': leg['destino']}
+                            transfers.append(foot)
+                    except ValueError:
+                        continue
+                    candidate['distance_meters'] += sum(w['distance_meters'] for w in transfers) - candidate['walk_meters']
+                    candidate['walk_meters'] = sum(w['distance_meters'] for w in transfers)
+                    candidate['walk_seconds'] = sum(w['seconds'] for w in transfers)
+                    # A consulta de caminhadas não deve consumir o limite de consultas operacionais.
+                    before = time.monotonic()
+                    engine.api_deadline = before + api_remaining
+                    result, _ = engine.evaluate(candidate, access['seconds'] if access else 0,
+                                                egress['seconds'] if egress else 0)
+                    elapsed = time.monotonic() - before
+                    # Mantenha um limite compartilhado para a API; exclua o tempo de obtenção das geometrias pedestres.
+                    api_remaining = max(0, api_remaining - elapsed)
+                    if not result:
+                        continue
+                    item = journey(db, result)
+                    endpoints = [p for p in (access, egress) if p]
+                    item['walks'] = ([access] if access else []) + item['walks'] + ([egress] if egress else [])
+                    item['walking_meters'] = round(result['walk_meters'] + sum(p['distance_meters'] for p in endpoints))
+                    item['distance_meters'] += sum(p['distance_meters'] for p in endpoints)
+                    best = distinct_routes([*best, item])
+                    yield {**base, 'journeys': best[:], 'walking_incomplete': walks.incomplete,
+                           'search_limited': walks.limited}
     except (ValueError, sqlite3.Error, OSError):
         base['artifact_unavailable'] = True
     yield {**base, 'journeys': best, 'complete': True, 'walking_incomplete': walks.incomplete,

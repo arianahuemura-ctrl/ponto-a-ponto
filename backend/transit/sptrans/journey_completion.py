@@ -9,27 +9,33 @@ import json
 import math
 import time
 
-from . import directions, planner, store, walking
+from . import directions, planner, store, walking, short_walks
 from .materialized_adapter import Walks
 from mbm import routing_config as config
 
 
-def direct_walk(origin, destination, now):
+def direct_walk(origin, destination, now, *, materialized_only=False):
     gap = directions.distance((origin['lat'], origin['lon']), (destination['lat'], destination['lon']))
-    if gap < .01 or gap > walking.MAX_DISTANCE:
+    if gap > walking.MAX_DISTANCE:
         return None
-    path = walking.route({**origin, 'id': 'walking-origin'}, destination, wait_for_slot=True)
+    path = short_walks.route(origin, destination)
+    if path is None:
+        if materialized_only:return None
+        if gap < .01:
+            return None
+        path = walking.route({**origin, 'id': 'walking-origin'}, destination, wait_for_slot=True)
     meters = path.get('distance_meters', float('inf'))
-    if not path.get('available') or not path.get('geometry') or not math.isfinite(meters) or not 0 <= meters <= walking.MAX_DISTANCE:
+    if not path.get('available') or (not path.get('geometry') and not path.get('materialized')) or not math.isfinite(meters) or not 0 <= meters <= walking.MAX_DISTANCE:
         return None
-    seconds = meters / walking.WALK_METERS_PER_SECOND
+    seconds = path['seconds'] if path.get('materialized') else meters / walking.WALK_METERS_PER_SECOND
     minutes = seconds / 60
     return {'id': 'walk-' + hashlib.sha256(json.dumps([origin, destination], sort_keys=True).encode()).hexdigest()[:20],
             'mode': 'walk', 'legs': [], 'transfers': 0, 'walks': [{**path, 'origin': origin,
             'destination': destination, 'accessType': 'destination', 'duration_minutes': minutes}],
             'duration_minutes': minutes, 'duration_seconds': seconds, 'walking_minutes': minutes,
             'walking_seconds': seconds, 'walking_meters': round(meters), 'distance_meters': round(meters),
-            'arrival': (now + timedelta(seconds=seconds)).isoformat(), 'estimated': True}
+            'arrival': (now + timedelta(seconds=seconds)).isoformat(), 'estimated': True,
+            'materialized': bool(path.get('materialized')), 'transfer_cost': 0, 'transfer_cost_units': 0}
 
 
 class Completion:
@@ -205,6 +211,7 @@ class Completion:
 def has_short_bus_leg(journey):
     """Meça o percurso de ônibus, nunca apenas a distância entre os extremos."""
     for leg in journey.get('legs', []):
+        if leg.get('mode','bus')!='bus':continue
         geometry = leg.get('geometry') or []
         if len(geometry) < 2:
             continue
@@ -226,7 +233,9 @@ def normalize_walks(journey):
         elif legs and path.get('origin', {}).get('id') != legs[0]['origin']['id'] and path.get('destination', {}).get('id') == legs[0]['origin']['id']:
             path['accessType'] = 'boarding'
         # Distância verificada é a referência; não deixe um tempo ausente virar zero na interface.
-        if 'distance_meters' in path:
+        if path.get('internal_transfer'):
+            path['duration_minutes']=path['seconds']/60
+        elif 'distance_meters' in path:
             path['seconds'] = path['distance_meters'] / walking.WALK_METERS_PER_SECOND
             path['duration_minutes'] = path['seconds'] / 60
         paths.append(path)

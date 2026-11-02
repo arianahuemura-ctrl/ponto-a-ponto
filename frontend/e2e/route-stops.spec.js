@@ -1,0 +1,46 @@
+import {test,expect} from '@playwright/test';
+
+const stops=Array.from({length:5},(_,i)=>({id:String(i+1),name:`Parada ${i+1}`,lat:-23.55+i*.001,lon:-46.64+i*.002}));
+const [origin,,,,destination]=stops;
+for(const theme of ['light','dark'])test(`círculos da rota e dos trechos no tema ${theme}`,async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.addInitScript(({origin,destination,theme})=>{
+    sessionStorage.setItem('pap.sp.session',JSON.stringify({origin,destination}));
+    localStorage.setItem('pap.appearance',theme);
+  },{origin,destination,theme});
+  const leg=(points,code)=>({trip_id:code,code,origin:points[0],destination:points.at(-1),stops:points,geometry:points.map(s=>[s.lat,s.lon]),boarding_index:0});
+  const journey={id:'J',duration_minutes:20,transfers:1,walks:[],legs:[leg(stops.slice(0,3),'101'),leg(stops.slice(2),'202')]};
+  await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
+  await page.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
+  await page.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops}}));
+  await page.route('**/api/sptrans/trips/**',r=>r.fulfill({json:{line:{arrivals:[]}}}));
+  await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({json:{suggestions:[{...destination,label:destination.name}]}}));
+  await page.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:destination,distance_meters:0}}));
+  await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{journeys:new URL(r.request().url()).searchParams.has('destination')?[journey]:[],selected_journey:'J',complete:true,lines:[]}}));
+  await page.goto('/?stop=1');await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
+  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
+  await page.getByRole('combobox',{name:'Endereço ou coordenadas de destino',exact:true}).fill('Parada 5');
+  await page.getByRole('option').click();await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
+  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
+  const before=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')));
+  expect(before.destination.id).toBe(destination.id);
+  const dots=page.locator('.sp-route-stop');
+  await expect(dots).toHaveCount(2);
+  await expect(page.locator('html')).toHaveAttribute('data-theme',theme);
+  await expect(dots.first().locator('span')).toHaveCSS('border-top-color',theme==='dark'?'rgb(66, 200, 255)':'rgb(0, 118, 237)');
+  await expect(page.locator('.sp-origin')).toHaveCount(1);
+  await expect(page.locator('.sp-destination')).toHaveCount(1);
+  await expect(page.locator('.sp-transfer-stop')).toHaveCount(1);
+  const dot=page.locator('.sp-route-stop[title="Parada 2 · Linha 101"]');
+  await dot.focus();await dot.press('Enter');
+  await expect(page.locator('.leaflet-popup-content')).toHaveText('Parada 2 · Linha 101');
+  expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')))).toEqual(before);
+  await page.screenshot({path:`test-results/route-stops-${theme}.png`});
+  await page.getByRole('combobox',{name:'Trecho exibido no mapa'}).selectOption('1');
+  await expect(dots).toHaveCount(1);await expect(dots).toHaveAttribute('title','Parada 4 · Linha 202');
+  await page.getByRole('combobox',{name:'Trecho exibido no mapa'}).selectOption('all');
+  await expect(dots).toHaveCount(2);
+  await page.getByRole('button',{name:'Cancelar viagem',exact:true}).click();
+  await page.getByRole('button',{name:'Confirmar cancelamento',exact:true}).click();
+  await expect(dots).toHaveCount(0);
+});

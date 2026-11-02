@@ -1,0 +1,318 @@
+/home/avale/Projetos/maua_bus_map/artifacts/benchmarks/maua-artesp-20261102/audit.py:23: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  metric_boundary = transform(projection, boundary).boundary
+/home/avale/Projetos/maua_bus_map/artifacts/benchmarks/maua-artesp-20261102/audit.py:117: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  point = transform(projection, Point(s['stop_lon'],s['stop_lat']))
+/home/avale/Projetos/maua_bus_map/artifacts/benchmarks/maua-artesp-20261102/audit.py:124: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  distance = transform(projection,Point(s['stop_lon'],s['stop_lat'])).distance(metric_boundary)
+{
+  "boundary_source": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/SP/SP_Municipios_2024.zip",
+  "boundary_code": "3529401",
+  "boundary_crs": "SIRGAS 2000 EPSG:4674",
+  "boundary_geojson_sha256": "66fe1687a3a14aa4825807a1847fe0b86178f26a6e0799ce48654f9e24a2924d",
+  "feed_version": "20261007",
+  "feed_calendar": "2026-01-01/2026-12-31",
+  "artesp_stop_ids_inside": 337,
+  "artesp_distinct_coordinates_inside": 337,
+  "served_artesp_stop_ids": 337,
+  "unused_artesp_stop_ids": [],
+  "routes": 16,
+  "trip_templates": 1491,
+  "valid_trip_templates": 1491,
+  "invalid_trips": {},
+  "daily": {
+    "weekday": {
+      "date": "2026-11-03",
+      "trips": 705,
+      "routes": 16,
+      "boarding_stops": 337,
+      "alighting_stops": 337,
+      "served_stops": 337,
+      "trips_with_boarding": 705,
+      "trips_with_alighting": 705,
+      "civil_day_boarding_windows": {
+        "madrugada_00_04": {
+          "distinct_trip_occurrences": 22,
+          "boarding_stops": 194,
+          "routes": 10
+        },
+        "pico_07_09": {
+          "distinct_trip_occurrences": 103,
+          "boarding_stops": 337,
+          "routes": 16
+        },
+        "entrepico_12_14": {
+          "distinct_trip_occurrences": 81,
+          "boarding_stops": 337,
+          "routes": 15
+        },
+        "pico_17_19": {
+          "distinct_trip_occurrences": 92,
+          "boarding_stops": 337,
+          "routes": 16
+        }
+      }
+    },
+    "saturday": {
+      "date": "2026-11-07",
+      "trips": 427,
+      "routes": 12,
+      "boarding_stops": 324,
+      "alighting_stops": 324,
+      "served_stops": 324,
+      "trips_with_boarding": 427,
+      "trips_with_alighting": 427,
+      "civil_day_boarding_windows": {
+        "madrugada_00_04": {
+          "distinct_trip_occurrences": 19,
+          "boarding_stops": 182,
+          "routes": 10
+        },
+        "pico_07_09": {
+          "distinct_trip_occurrences": 66,
+          "boarding_stops": 324,
+          "routes": 12
+        },
+        "entrepico_12_14": {
+          "distinct_trip_occurrences": 48,
+          "boarding_stops": 324,
+          "routes": 12
+        },
+        "pico_17_19": {
+          "distinct_trip_occurrences": 56,
+          "boarding_stops": 324,
+          "routes": 12
+        }
+      }
+    },
+    "sunday": {
+      "date": "2026-11-08",
+      "trips": 359,
+      "routes": 12,
+      "boarding_stops": 324,
+      "alighting_stops": 324,
+      "served_stops": 324,
+      "trips_with_boarding": 359,
+      "trips_with_alighting": 359,
+      "civil_day_boarding_windows": {
+        "madrugada_00_04": {
+          "distinct_trip_occurrences": 14,
+          "boarding_stops": 176,
+          "routes": 9
+        },
+        "pico_07_09": {
+          "distinct_trip_occurrences": 54,
+          "boarding_stops": 324,
+          "routes": 12
+        },
+        "entrepico_12_14": {
+          "distinct_trip_occurrences": 44,
+          "boarding_stops": 324,
+          "routes": 12
+        },
+        "pico_17_19": {
+          "distinct_trip_occurrences": 45,
+          "boarding_stops": 324,
+          "routes": 12
+        }
+      }
+    }
+  },
+  "by_route": [
+    {
+      "route_id": "artesp:040",
+      "name": "SANTO ANDRE (PARANAPIACABA) - SANTO ANDRE (TERMINAL METROPOLITANO SANTO ANDRE LESTE)",
+      "weekday": 29,
+      "saturday": 26,
+      "sunday": 26
+    },
+    {
+      "route_id": "artesp:040EX1",
+      "name": "SANTO ANDRE (PARQUE ANDREENSE) - SANTO ANDRE (TERMINAL METROPOLITANO DE SANTO ANDRE LESTE)",
+      "weekday": 8,
+      "saturday": 0,
+      "sunday": 0
+    },
+    {
+      "route_id": "artesp:063",
+      "name": "RIBEIRAO PIRES (OURO FINO PAULISTA) - SAO PAULO (TERMINAL SACOMA)",
+      "weekday": 32,
+      "saturday": 20,
+      "sunday": 20
+    },
+    {
+      "route_id": "artesp:063EX1",
+      "name": "RIO GRANDE DA SERRA (SANTA TEREZA) - SAO PAULO (TERMINAL SACOMA)",
+      "weekday": 6,
+      "saturday": 0,
+      "sunday": 0
+    },
+    {
+      "route_id": "artesp:064",
+      "name": "MAUA (JARDIM GUAPITUBA) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 63,
+      "saturday": 46,
+      "sunday": 36
+    },
+    {
+      "route_id": "artesp:107",
+      "name": "SANTO ANDRE (TERMINAL METROPOLITANO SANTO ANDRE-LESTE) - SAO PAULO (JARDIM ESTHER)",
+      "weekday": 114,
+      "saturday": 63,
+      "sunday": 48
+    },
+    {
+      "route_id": "artesp:157",
+      "name": "MAUA (SILVIA MARIA) - SANTO ANDRE (TERMINAL RODOVIARIO DE PREFEITO SALADINO)",
+      "weekday": 50,
+      "saturday": 40,
+      "sunday": 22
+    },
+    {
+      "route_id": "artesp:158",
+      "name": "MAUA (JARDIM ZAIRA) - SAO PAULO (TERMINAL SACOMA)",
+      "weekday": 46,
+      "saturday": 38,
+      "sunday": 32
+    },
+    {
+      "route_id": "artesp:158BI1",
+      "name": "MAUA (JARDIM ZAIRA) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 38,
+      "saturday": 0,
+      "sunday": 0
+    },
+    {
+      "route_id": "artesp:160",
+      "name": "MAUA (JARDIM ADELINA) - SAO PAULO (TERMINAL SACOMA)",
+      "weekday": 52,
+      "saturday": 34,
+      "sunday": 26
+    },
+    {
+      "route_id": "artesp:160EX1",
+      "name": "MAUA  (JARDIM ITAPEVA) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 26,
+      "saturday": 0,
+      "sunday": 0
+    },
+    {
+      "route_id": "artesp:177",
+      "name": "RIBEIRAO PIRES (TERMINAL RODOVIARIO DE RIBEIRAO PIRES) - SANTO ANDRE (TERMINAL METROPOLITANO SANTO ANDRE-LESTE)",
+      "weekday": 54,
+      "saturday": 34,
+      "sunday": 34
+    },
+    {
+      "route_id": "artesp:336",
+      "name": "RIBEIRAO PIRES (TERMINAL RODOVIARIO DE RIBEIRAO PIRES) - MAUA (CAPBURGO)",
+      "weekday": 25,
+      "saturday": 24,
+      "sunday": 23
+    },
+    {
+      "route_id": "artesp:382",
+      "name": "MAUA (BAIRRO FEITAL) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 48,
+      "saturday": 30,
+      "sunday": 24
+    },
+    {
+      "route_id": "artesp:382EX1",
+      "name": "MAUA (JARDIM ITAPEVA) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 40,
+      "saturday": 28,
+      "sunday": 28
+    },
+    {
+      "route_id": "artesp:403",
+      "name": "MAUA (VILA NOVA MAUA) - SAO CAETANO DO SUL (TERMINAL RODOVIARIO NICOLAU DELIC)",
+      "weekday": 74,
+      "saturday": 44,
+      "sunday": 40
+    }
+  ],
+  "rail_stations_already_present": [
+    {
+      "stop_id": "18934",
+      "stop_name": "Capuava",
+      "stop_desc": "",
+      "stop_lat": -23.65851,
+      "stop_lon": -46.490542
+    },
+    {
+      "stop_id": "18935",
+      "stop_name": "Mauá",
+      "stop_desc": "",
+      "stop_lat": -23.668016,
+      "stop_lon": -46.461769
+    },
+    {
+      "stop_id": "18937",
+      "stop_name": "Guapituba",
+      "stop_desc": "",
+      "stop_lat": -23.691321,
+      "stop_lon": -46.449263
+    }
+  ],
+  "stops_with_materialized_origin": 337,
+  "near_boundary_20m": [
+    {
+      "stop_id": "artesp:7692",
+      "name": "Rua Oratório, 4046 - RP6 (Regiões de Planejamento), Mauá - SP, 09380-240, Brasil",
+      "inside": true,
+      "distance_m": 4.57
+    },
+    {
+      "stop_id": "artesp:9420",
+      "name": "Av. Adélia Chohfi, 5223 - Parque Sao Rafael, São Paulo - SP, 08320-390, Brasil",
+      "inside": false,
+      "distance_m": 12.27
+    },
+    {
+      "stop_id": "artesp:48811",
+      "name": "Rua das Margaridas, 155-243 - Jardim Primavera, Mauá - SP, 09361-330, Brasil - Jardim Santa Ines, Mauá - SP, 09361-301, Brasil",
+      "inside": false,
+      "distance_m": 1.74
+    },
+    {
+      "stop_id": "artesp:48946",
+      "name": "Av. José Ricardo Nalle, 127 - Guapituba, Ribeirão Pires - SP, 09361-340, Brasil",
+      "inside": true,
+      "distance_m": 12.48
+    },
+    {
+      "stop_id": "artesp:64885",
+      "name": "Rua Guatemala, 578 - Aliança, Ribeirão Pires - SP, 09351-090, Brasil",
+      "inside": true,
+      "distance_m": 15.39
+    },
+    {
+      "stop_id": "artesp:92117",
+      "name": "Estr. Mauá e Adutora Rio Claro, 2002 A - Jardim Paranavai, Mauá - SP, 09333-510, Brasil",
+      "inside": true,
+      "distance_m": 10.98
+    },
+    {
+      "stop_id": "artesp:92119",
+      "name": "Rua Carlos Sicardi, 02 - Parque das Flores, São Paulo - SP, 08391-585, Brasil - Parque das Flores, São Paulo - SP, 08391-585, Brasil",
+      "inside": false,
+      "distance_m": 2.9
+    },
+    {
+      "stop_id": "artesp:92423",
+      "name": "R. das Violetas, 630 - Jardim Primavera, Mauá - SP, 13154-312, Brasil",
+      "inside": true,
+      "distance_m": 16.2
+    }
+  ],
+  "definition": "Distinct GTFS trips with a valid full stop sequence and at least one boarding/alighting event inside the IBGE polygon. Each trip is counted once per service date, irrespective of local stop calls.",
+  "limitations": [
+    "Scheduled availability, not observed operations or realtime predictions.",
+    "No ARTESP holiday exceptions; ordinary weekday, Saturday and Sunday samples only.",
+    "Stop IDs are directional catalog records, not deduplicated physical boarding locations.",
+    "Boundary and stop coordinate uncertainty affects points very near municipal borders.",
+    "Does not include complete municipal Suzantur services.",
+    "New combined dataset not yet activated in public server.",
+    "Rail uses frequency templates and is listed separately, not added to bus trip counts."
+  ]
+}

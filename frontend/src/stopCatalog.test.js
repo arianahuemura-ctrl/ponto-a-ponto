@@ -9,3 +9,7 @@ test('rejects incompatible versions and invalid coordinates',async()=>{
  await assert.rejects(decodeCatalogue({version:2}));
  await assert.rejects(decodeCatalogue({version:1,scale:100000,revision:'a',rows:[['x',9100000,0,'x']]}));
 });
+test('preserves metro and rail modes in the compact catalogue',async()=>{
+ const stops=await decodeCatalogue({version:1,scale:100000,revision:'rail',rows:[['m',-2355000,-4673000,'Metrô','metro'],['r',5,-9,'Trem','rail']]});
+ assert.equal(stops.get('m').mode,'metro');assert.equal(stops.get('r').mode,'rail');
+});

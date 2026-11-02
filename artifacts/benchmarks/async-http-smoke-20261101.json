@@ -1,0 +1,7 @@
+{
+  "http_status": 200,
+  "first_route_seconds": 0.9550199960358441,
+  "complete": false,
+  "lines": [],
+  "scope": "Local HTTP SSE, actual current timetable; excludes Cloudflare and mobile network"
+}

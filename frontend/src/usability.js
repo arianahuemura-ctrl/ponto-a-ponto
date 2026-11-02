@@ -81,5 +81,5 @@ export function trace(kind,details){
   const id=crypto.randomUUID(),total=Math.ceil(payload.length/8000);
   for(let index=0;index<total;index++)record('trace',{payload:JSON.stringify({kind:'chunk',id,index,total,text:payload.slice(index*8000,(index+1)*8000)})});
 }
-export function prepareFeedback(category,message){return {id:crypto.randomUUID(),category,message};}
-export function submitFeedback(event){return researchPost('feedback',{...event,...(isRecording()?{token:session.token}:{})});}
+export function prepareFeedback(category,message,rating){return {id:crypto.randomUUID(),category,message,...(rating?{rating}:{}),...(isRecording()?{token:session.token}:{})};}
+export function submitFeedback(event){return researchPost('feedback',event);}

@@ -67,14 +67,15 @@ def body(request):
 def feedback(request):
     try:
         identifier,data=body(request)
-        if set(data) not in ({'id','category','message'},{'id','category','message','token'}):raise ValueError()
+        if not {'id','category','message'}<=set(data) or set(data)-{'id','category','message','token','rating'}:raise ValueError()
+        if 'rating' in data and (type(data['rating']) is not int or not 1<=data['rating']<=5):raise ValueError()
         if data['category'] not in ('problema','sugestao','elogio'):raise ValueError()
         session=None
         if 'token' in data:
             if not isinstance(data['token'],str) or len(data['token'])>512:raise ValueError()
             from .usability import SALT
             session=str(uuid.UUID(signing.loads(data['token'],salt=SALT,max_age=43200)))
-        return save_message(identifier,'feedback',{'category':data['category'],'message':text(data['message'],1),'session':session})
+        return save_message(identifier,'feedback',{'category':data['category'],'message':text(data['message'],0 if 'rating' in data else 1),'session':session,**({'rating':data['rating']} if 'rating' in data else {})})
     except (ValueError,TypeError,KeyError,signing.BadSignature):return JsonResponse({'error':'Relato inválido.'},status=400)
     except (sqlite3.Error,OSError):return JsonResponse({'error':'Canal temporariamente indisponível.'},status=503)
 
@@ -105,7 +106,7 @@ def inbox(request):
                     if request.POST.get('action')=='delete':db.execute('DELETE FROM messages WHERE id=?',(identifier,))
                     else:db.execute('UPDATE messages SET resolved=? WHERE id=?',(time.time(),identifier))
             for identifier,created,kind,data,_,resolved in db.execute('SELECT * FROM messages ORDER BY created DESC LIMIT 200'):
-                payload=json.loads(data);rows.append({'id':identifier,'kind':kind,'message':payload['message'],'session':payload.get('session'),'sessions':payload.get('sessions',[]),'resolved':bool(resolved)})
+                payload=json.loads(data);rows.append({'id':identifier,'kind':kind,'message':payload['message'],'rating':payload.get('rating'),'session':payload.get('session'),'sessions':payload.get('sessions',[]),'resolved':bool(resolved)})
         finally:db.close()
     return render(request,'transit/research_inbox.html',{**admin.site.each_context(request),'title':'Feedback voluntário e solicitações de pesquisa','rows':rows})
 

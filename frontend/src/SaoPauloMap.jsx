@@ -1,4 +1,6 @@
 import {directedPath} from './routeDirection.js';
+import {isRail,railLabel,railColor,railDash,stationSymbol} from './railStyle.js';
+import {drawRailNetwork} from './railNetworkLayer.js';
 import {trace} from './usability.js';
 import {developmentTools} from './environment.js';
 import destinationPointIcon from './assets/destination-point.png';
@@ -9,7 +11,29 @@ import Icon from './Icon.jsx';
 import {StopCanvas} from './StopCanvas.js';
 import StopTransparencyControl from './StopTransparencyControl.jsx';
 import {bindMapLongPress} from './mapLongPress.js';
+import {api} from './api.js';
 const EMPTY_LIST=Object.freeze([]);
+function drawRouteStops(group,routes,excluded=[]){
+  const hidden=new Set(excluded.filter(Boolean).map(stop=>stop.id));
+  const points=new Map();
+  for(const route of routes)for(const [index,stop] of (route.stops||[]).entries()){
+    if(hidden.has(stop.id)||!Number.isFinite(stop.lat)||!Number.isFinite(stop.lon))continue;
+    const key=JSON.stringify([stop.id,stop.lat,stop.lon]);
+    const past=route.split_available&&Number.isInteger(route.boarding_index)&&index<route.boarding_index;
+    const record=points.get(key)||{stop,past,labels:new Set(),color:isRail(route)?railColor(route):null,railway:isRail(route)||isRail(stop)};
+    record.past=record.past&&past;
+    record.labels.add(isRail(route)?railLabel(route):route.code?`Linha ${route.code}`:'Parada da rota');
+    points.set(key,record);
+  }
+  for(const {stop,past,labels,color,railway} of points.values()){
+    const name=`${stop.name||stop.id} · ${[...labels].join(' · ')}`;
+    const content=document.createElement('span');content.textContent=name;
+    L.marker([stop.lat,stop.lon],{pane:'routeStops',title:name,alt:name,
+      icon:L.divIcon({className:'sp-route-stop'+(past?' sp-route-stop-before':'')+(railway?' sp-route-station':''),html:`<span aria-hidden="true"${color?` style="border-color:${color}"`:''}></span>`,iconSize:[24,24],iconAnchor:[12,12]})})
+      .bindTooltip(()=>{const label=document.createElement('span');label.textContent=name;return label;})
+      .bindPopup(content).addTo(group);
+  }
+}
 export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequest=0, selectingPoint=false, preserveViewport=false, confirmDestination=false, approaches=[], approachFocusKey, approach, passengerFocus, coordinateFocus, passengerPosition, stops, routeSelected=false, focusStops, focusKey, origin, destination, detail, journey, fullJourney, walking, walks=EMPTY_LIST, center, onStop, onArea, onMapPoint, mapPointRole='destination', onFavoritePoint, isFavoritePoint }) {
   const [dimmerActive,setDimmerActive]=useState(false);
   const [transparentStops,setTransparentStops]=useState(false);
@@ -119,6 +143,16 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
     instance.on('click',e=>trace('map_click',{latlng:e.latlng}));
     updateArea();
     map.current=instance;
+    instance.createPane('networkContext');
+    instance.getPane('networkContext').style.zIndex='250';
+    instance.getPane('networkContext').style.pointerEvents='none';
+    instance.createPane('networkLabels');
+    instance.getPane('networkLabels').style.zIndex='410';
+    instance.getPane('networkLabels').style.pointerEvents='none';
+    instance.createPane('passengerLocation');
+    instance.getPane('passengerLocation').style.zIndex='750';
+    instance.createPane('routeStops');
+    instance.getPane('routeStops').style.zIndex='590';
     instance.createPane('busApproach');
     instance.getPane('busApproach').style.zIndex='390';
     instance.getPane('busApproach').style.pointerEvents='none';
@@ -145,13 +179,22 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
     alignLocationButton();
     return ()=>{host.current?.removeEventListener('contextmenu',measure);document.removeEventListener('keydown',clearOnEscape);measurement.clearLayers();longPress.destroy();instance.off('zoomstart',longPress.cancel);clearTimeout(timer);instance.off('moveend',updateArea);observer.disconnect();markerRecords.current.clear();stopCanvas.current.destroy();instance.remove();};
   },[]);
+  useEffect(()=>{
+    const controller=new AbortController();
+    let removeNetwork;
+    api('sptrans/rail-network',{},controller.signal).then(({lines})=>{
+      if(controller.signal.aborted)return;
+      removeNetwork=drawRailNetwork(map.current,lines||[],()=>stopCanvas.current?.visible||[]);
+    }).catch(()=>{/* A rede de contexto não bloqueia a seleção de pontos. */});
+    return()=>{controller.abort();removeNetwork?.();};
+  },[]);
   useEffect(()=>{stopCanvas.current?.setOpacity(selectingPoint&&transparentStops?1-stopTransparency/100:1);},[selectingPoint,transparentStops,stopTransparency]);
   useEffect(()=>{
     if(!passengerPosition)return;
     const {lat,lon,accuracy,simulated}=passengerPosition;
     const group=L.layerGroup().addTo(map.current);
     if(accuracy>0)L.circle([lat,lon],{radius:accuracy,color:'#0066ff',weight:1,fillOpacity:.1,interactive:false}).addTo(group);
-    L.marker([lat,lon],{zIndexOffset:1000,title:simulated?'Sua localização (simulada)':'Sua localização',icon:L.divIcon({className:'sp-passenger-position'+(simulated?' is-simulated':''),iconSize:[32,32],iconAnchor:[16,16],html:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>'})})
+    L.marker([lat,lon],{pane:'passengerLocation',zIndexOffset:1000,title:simulated?'Sua localização (simulada)':'Sua localização',icon:L.divIcon({className:'sp-passenger-position'+(simulated?' is-simulated':''),iconSize:[32,32],iconAnchor:[16,16],html:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>'})})
       .bindTooltip(simulated?'Sua localização (simulada)':'Sua localização').addTo(group);
     if(!located.current&&!preserveViewport&&(!origin||origin.useLocation)){
       located.current=true;
@@ -163,24 +206,27 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
     }
     return ()=>group.remove();
   },[passengerPosition,origin,journey,focusStops]);
+  useEffect(()=>{map.current?.fire('railLabelObstaclesChanged');},[passengerPosition,stops,origin,destination,journey,detail,itineraries]);
   useEffect(()=>{
     if(dimmerActive)return;
     const group=L.layerGroup().addTo(map.current);
-    const drawRoute=(geometry,foot=false)=>{
+    const drawRoute=(geometry,foot=false,leg=null)=>{
       if(!geometry?.length)return;
       const options={weight:6,opacity:1,lineCap:'round',lineJoin:'round',dashArray:foot?'9 10':undefined};
-      L.polyline(geometry,{...options,weight:10,color:'#ffffff',className:'sp-route-halo',interactive:false}).addTo(group);
-      L.polyline(geometry,{...options,color:foot?'#d52c94':'#0076ed',className:foot?'sp-route-walk':'sp-route-bus'}).bindTooltip(foot?'A pé':'Ônibus · trajeto GTFS').addTo(group);
+      if(isRail(leg))L.polyline(geometry,{...options,weight:12,color:'#111827',className:'sp-rail-outline',interactive:false}).addTo(group);
+      L.polyline(geometry,{...options,weight:10,color:'#ffffff',className:isRail(leg)?'sp-rail-halo':'sp-route-halo',interactive:false}).addTo(group);
+      L.polyline(geometry,{...options,color:foot?'#d52c94':isRail(leg)?railColor(leg):'#0076ed',className:foot?'sp-route-walk':isRail(leg)?'sp-route-rail':'sp-route-bus'}).bindTooltip(foot?'A pé':isRail(leg)?railLabel(leg):'Ônibus · trajeto GTFS').addTo(group);
     };
     const points=new Map((routeSelected?[]:stops).map(s=>[s.id,s]));
     for(const s of [origin,destination]) if(s) points.set(s.id,{...s,directions:points.get(s.id)?.directions||s.directions});
     for(const leg of journey?.legs||[]) {
-      for(const s of [leg.origin,leg.destination]) if(s.id!==destination?.id)points.set(s.id,{...s,directions:points.get(s.id)?.directions||s.directions});
-      drawRoute(leg.geometry);
+      for(const s of [leg.origin,leg.destination]) if(s.id!==destination?.id)points.set(s.id,{...s,mode:s.mode||leg.mode,directions:points.get(s.id)?.directions||s.directions});
+      drawRoute(leg.geometry,false,leg);
     }
     for(const path of [walking,...walks].filter(Boolean)) {
       if(path.geometry?.length)drawRoute(path.geometry,true);
     }
+    drawRouteStops(group,journey?.legs||[],[origin,destination,...(journey?.legs||[]).flatMap(leg=>[leg.origin,leg.destination])]);
     const ordinary=[];
     for(const s of points.values()) {
       const complete=fullJourney||journey;
@@ -189,27 +235,28 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
       const isTransfer=!isOrigin&&!isDestination&&transferIndex>0;
       if(!isOrigin&&!isDestination&&!isTransfer){ordinary.push(s);continue;}
       const markerText=isOrigin?'A':isDestination?'★':isTransfer?String.fromCharCode(65+transferIndex):'';
-      const directions=s.directions||[];
+      const station=isRail(s)&&!s.mapStop;
+      const directions=station?[]:s.directions||[];
       const departures=directions.filter(d=>d.kind!=='arrival');
       const markerDirections=departures.length?departures:directions;
       const radius=isOrigin||isDestination?18:isTransfer?14:8;
       const baseX=radius*Math.sqrt(3)/2;
       // A base côncava é um arco da própria circunferência externa do marcador.
       const tipPath=`M0 ${-radius-7} L${baseX} ${-radius/2} A${radius} ${radius} 0 0 0 ${-baseX} ${-radius/2} Z`;
-      const directionInfo=(s.directions||[]).map(d=>`${d.code} · ${d.headsign}${d.kind==='arrival'?' (chegada / fim de linha)':''}${d.approximate?' (sentido aproximado)':''}`).join('; ');
-      const label=document.createElement('span');label.textContent=(isOrigin?'Origem · ':isDestination?'Destino · ':isTransfer?`Baldeação ${markerText} · `:'')+s.name+(s.mapStop?' · Localização':' · '+s.id+' · '+(directionInfo||'Sentido indisponível no cadastro'));
+      const directionInfo=directions.map(d=>`${d.code} · ${d.headsign}${d.kind==='arrival'?' (chegada / fim de linha)':''}${d.approximate?' (sentido aproximado)':''}`).join('; ');
+      const label=document.createElement('span');label.textContent=(isOrigin?'Origem · ':isDestination?'Destino · ':isTransfer?`Baldeação ${markerText} · `:'')+s.name+(s.mapStop?' · Localização':' · '+s.id+' · '+(station?(s.mode==='metro'?'Estação de metrô':'Estação de trem'):directionInfo||'Sentido indisponível no cadastro'));
       const signature=JSON.stringify([s,isOrigin,isDestination,isTransfer,markerText]);
       const previous=markerRecords.current.get(s.id);
       if(!previous||previous.signature!==signature) {
         if(previous)markerLayer.current.removeLayer(previous.marker);
-        const marker=L.marker([s.lat,s.lon],{title:label.textContent,icon:L.divIcon({className:'sp-stop '+(isOrigin?'sp-origin':isDestination?'sp-destination':isTransfer?'sp-transfer-stop':''),html:(isOrigin?`<img class="sp-boarding-icon" src="${boardingPointIcon}" alt=""/>`:isDestination?`<img class="sp-destination-icon" src="${destinationPointIcon}" alt=""/>`:markerText)+[...new Set(markerDirections.map(d=>Math.round(d.bearing/20)*20))].map(angle=>`<span class="sp-heading" style="transform:rotate(${Number(angle)}deg)" aria-hidden="true"><svg viewBox="-30 -30 60 60" focusable="false"><path d="${tipPath}"/></svg></span>`).join(''),iconSize:[isOrigin||isDestination?36:isTransfer?28:16,isOrigin||isDestination?36:isTransfer?28:16]})}).bindTooltip(label).on('click',()=>click.current(s)).addTo(markerLayer.current);
+        const marker=L.marker([s.lat,s.lon],{title:label.textContent,icon:L.divIcon({className:'sp-stop '+(station?'sp-station ':'')+(isOrigin?'sp-origin':isDestination?'sp-destination':isTransfer?'sp-transfer-stop':''),html:(station?stationSymbol+`<span class="sp-station-role">${markerText}</span>`:isOrigin?`<img class="sp-boarding-icon" src="${boardingPointIcon}" alt=""/>`:isDestination?`<img class="sp-destination-icon" src="${destinationPointIcon}" alt=""/>`:markerText)+[...new Set(markerDirections.map(d=>Math.round(d.bearing/20)*20))].map(angle=>`<span class="sp-heading" style="transform:rotate(${Number(angle)}deg)" aria-hidden="true"><svg viewBox="-30 -30 60 60" focusable="false"><path d="${tipPath}"/></svg></span>`).join(''),iconSize:[isOrigin||isDestination?36:isTransfer?28:16,isOrigin||isDestination?36:isTransfer?28:16]})}).bindTooltip(label).on('click',()=>click.current(s)).addTo(markerLayer.current);
         markerRecords.current.set(s.id,{marker,signature});
       }
     }
     stopCanvas.current.setStops(ordinary);
     const ordinaryIds=new Set(ordinary.map(s=>s.id));
     for(const [id,record] of markerRecords.current)if(!points.has(id)||ordinaryIds.has(id)){markerLayer.current.removeLayer(record.marker);markerRecords.current.delete(id);}
-    if(detail?.shape?.length) L.polyline(detail.shape,{color:'#4c9aff',weight:5}).addTo(group);
+    if(detail?.shape?.length) L.polyline(detail.shape,{pane:'networkContext',interactive:false,opacity:isRail(detail.line)?1:.45,color:isRail(detail.line)?railColor({...detail.line,color:detail.line.color||detail.itinerary?.color}):'#4c9aff',weight:5,dashArray:isRail(detail.line)?railDash(false):undefined}).addTo(group);
     for(const v of detail?.vehicles||[]) {
       const label=document.createElement('span');label.textContent=`Ônibus ${v.id} · ${v.code} · posição recebida ${new Date(v.observed_at).toLocaleTimeString('pt-BR')}`;
       L.marker([v.lat,v.lon],{title:label.textContent,icon:L.divIcon({className:'sp-bus',html:'●',iconSize:[22,22]})}).bindTooltip(label).addTo(group);
@@ -225,29 +272,37 @@ export default function SaoPauloMap({ itineraries=EMPTY_LIST, highlightStopsRequ
         const draw=(points,past)=>{
           if(!points||points.length<2)return;
           const {path,arrows}=directedPath(points.map(p=>map.current.latLngToLayerPoint(p)));
-          const color=past?'#a58acb':'#0076ed';
-          L.polyline(path.map(p=>map.current.layerPointToLatLng(L.point(p.x,p.y))),{color,weight:past?4:5,opacity:.95,dashArray:past?'5 8':undefined,className:past?'sp-line-before':'sp-route-bus sp-line-after',interactive:false}).addTo(strokes);
+          const railway=isRail(route);
+          const color=railway?railColor(route):past?'#a58acb':'#0076ed';
+          const dashArray=railway?railDash(past):past?'5 8':undefined;
+          const coordinates=path.map(p=>map.current.layerPointToLatLng(L.point(p.x,p.y)));
+          if(railway)L.polyline(coordinates,{pane:'networkContext',color:'#475569',weight:past?8:9,opacity:.25,dashArray,interactive:false,className:'sp-rail-halo'}).addTo(strokes);
+          L.polyline(coordinates,{pane:'networkContext',color,weight:past?4:5,opacity:railway?1:.45,dashArray,className:(railway?'sp-route-rail ':'')+(past?'sp-line-before':railway?'sp-line-after':'sp-route-bus sp-line-after'),interactive:false}).addTo(strokes);
           for(const arrow of arrows){
             const at=map.current.layerPointToLatLng(L.point(arrow.x,arrow.y));
-            L.marker(at,{interactive:false,keyboard:false,icon:L.divIcon({className:`sp-direction-arrow ${past?'sp-direction-before':'sp-direction-after'}`,html:`<span style="transform:rotate(${arrow.angle}deg)">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]})}).addTo(strokes);
+            L.marker(at,{pane:'networkContext',opacity:railway?1:.45,interactive:false,keyboard:false,icon:L.divIcon({className:`sp-direction-arrow ${past?'sp-direction-before':'sp-direction-after'}`,html:`<span style="transform:rotate(${arrow.angle}deg)${railway?`;color:${color}`:''}">➤</span>`,iconSize:[18,18],iconAnchor:[9,9]})}).addTo(strokes);
           }
         };
         if(route.split_available){draw(route.before,true);draw(route.after,false);}else draw(route.geometry,true);
       }
     };
     redraw();map.current.on('zoomend',redraw);
+    drawRouteStops(group,itineraries,[origin,destination,...itineraries.map(route=>{
+      const end=route.endpoint||route.terminal;
+      return route.geometry?.length&&end?.kind!=='shape'?end:null;
+    })]);
     for(const route of itineraries){
       if(route.geometry?.length){
-        const label=document.createElement('span');label.textContent=`Início do traçado da linha ${route.code||''}`;
-        L.marker(route.geometry[0],{title:label.textContent,zIndexOffset:100,icon:L.divIcon({className:'sp-line-start',html:'<span aria-hidden="true">I</span>',iconSize:[30,30],iconAnchor:[15,15]})}).bindTooltip(label).addTo(group);
+        const label=document.createElement('span');label.textContent=`Início do traçado da linha ${isRail(route)?railLabel(route):route.code||''}`;
+        L.marker(route.geometry[0],{title:label.textContent,zIndexOffset:100,icon:L.divIcon({className:'sp-line-start'+(isRail(route)?' sp-stop sp-station':''),html:isRail(route)?stationSymbol+'<span class="sp-station-role">I</span>':'<span aria-hidden="true">I</span>',iconSize:[30,30],iconAnchor:[15,15]})}).bindTooltip(label).addTo(group);
       }
       if((route.endpoint||route.terminal)&&route.geometry?.length){
-        const end=route.endpoint||route.terminal,label=document.createElement('span');label.textContent=end.kind==='shape'?`Fim do traçado GTFS da linha ${route.code||''} · última parada cadastrada divergente`:`Último ponto da linha ${route.code||''} · ${end.name} · ${end.id}`;
-        L.marker([end.lat,end.lon],{title:label.textContent,icon:L.divIcon({className:'sp-stop sp-destination sp-line-terminal',html:`<img class="sp-destination-icon" src="${destinationPointIcon}" alt=""/>`,iconSize:[36,36]})}).bindTooltip(label).addTo(group);
+        const end=route.endpoint||route.terminal,label=document.createElement('span');label.textContent=end.kind==='shape'?`Fim do traçado GTFS da linha ${isRail(route)?railLabel(route):route.code||''} · última parada cadastrada divergente`:`Último ponto da linha ${isRail(route)?railLabel(route):route.code||''} · ${end.name} · ${end.id}`;
+        L.marker([end.lat,end.lon],{title:label.textContent,icon:L.divIcon({className:'sp-stop sp-destination sp-line-terminal'+(isRail(route)&&end.kind!=='shape'?' sp-station':''),html:isRail(route)&&end.kind!=='shape'?stationSymbol+'<span class="sp-station-role">★</span>':`<img class="sp-destination-icon" src="${destinationPointIcon}" alt=""/>`,iconSize:[36,36]})}).bindTooltip(label).addTo(group);
       }
     }
     return()=>{map.current.off('zoomend',redraw);group.remove();};
-  },[itineraries]);
+  },[itineraries,origin,destination]);
   const activeApproaches=useMemo(()=>[...(approach?[approach]:[]),...approaches].filter(a=>a?.vehicle),[approach,approaches]);
   const fittedApproach=useRef(null);
   useEffect(()=>{

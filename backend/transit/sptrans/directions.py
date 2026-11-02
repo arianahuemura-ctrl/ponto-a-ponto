@@ -44,7 +44,7 @@ def enrich(db, stops):
             (SELECT n.stop_id FROM stop_times n WHERE n.trip_id=st.trip_id
              AND n.stop_sequence<st.stop_sequence ORDER BY n.stop_sequence DESC LIMIT 1) AS previous_id
             FROM stop_times st JOIN trips t USING(trip_id) JOIN routes r USING(route_id)
-            WHERE st.stop_id=? AND r.route_type='3'""", (stop['id'],))
+            WHERE st.stop_id=? AND r.route_type IN ('1','2','3')""", (stop['id'],))
         for row in rows:
             shape_id = row['shape_id']
             if shape_id not in shapes:

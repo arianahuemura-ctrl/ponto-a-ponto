@@ -1,0 +1,231 @@
+{
+  "disk": {
+    "total": 502240575488,
+    "used": 231729938432,
+    "free": 244922974208
+  },
+  "databases": {
+    "sptrans.sqlite3": {
+      "bytes": 73437184,
+      "tables": [
+        "stops",
+        "routes",
+        "trips",
+        "stop_times",
+        "frequencies",
+        "calendar",
+        "calendar_dates",
+        "shapes",
+        "metadata",
+        "sqlite_stat1"
+      ],
+      "stops": 22274,
+      "modes": [
+        [
+          "1",
+          9
+        ],
+        [
+          "2",
+          7
+        ],
+        [
+          "3",
+          1349
+        ]
+      ],
+      "served_stops": 22274
+    },
+    "sptrans.materialized.sqlite3": {
+      "bytes": 117727232,
+      "tables": [
+        "materialization_meta",
+        "materialization_status",
+        "conexoes"
+      ],
+      "meta": {
+        "signature": {
+          "version": 2,
+          "source": [
+            "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3",
+            3048796160,
+            1791441764862412944
+          ],
+          "gtfs": [
+            "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+            73437184,
+            1791318021740218230
+          ],
+          "quotas": {
+            "1": 16,
+            "2": 8
+          },
+          "walk_speed_kmh": 4.5,
+          "coverage": {
+            "verified_walks": 952608,
+            "unknown_ride_distances": 42
+          }
+        },
+        "created_at": "2026-10-08T13:18:01.243564+00:00",
+        "city_complete": false
+      },
+      "counts": [
+        [
+          1,
+          28292
+        ],
+        [
+          2,
+          616650
+        ]
+      ],
+      "status": [
+        [
+          1,
+          "ready",
+          77988,
+          28292,
+          48.347608573462935
+        ],
+        [
+          2,
+          "ready",
+          77987,
+          616650,
+          7992.470227691547
+        ]
+      ],
+      "dbstat": [
+        [
+          "conexoes",
+          58662912,
+          49662216
+        ],
+        [
+          "conexoes_distancia",
+          26628096,
+          21338094
+        ],
+        [
+          "conexoes_reversas",
+          19238912,
+          15533616
+        ],
+        [
+          "materialization_meta",
+          4096,
+          433
+        ],
+        [
+          "materialization_status",
+          13189120,
+          11117619
+        ],
+        [
+          "sqlite_schema",
+          4096,
+          1506
+        ]
+      ]
+    },
+    "sptrans.connections.sqlite3": {
+      "bytes": 3048796160,
+      "tables": [
+        "graph_stop",
+        "pattern",
+        "timetable",
+        "calendar",
+        "calendar_dates",
+        "ride_edge",
+        "direct_meta",
+        "sqlite_stat1",
+        "occurrence",
+        "walking_link",
+        "transfer",
+        "connections_meta",
+        "bus_walk_exit"
+      ],
+      "meta": {
+        "version": 2,
+        "built_at": "2026-10-08T06:42:44.707377+00:00",
+        "representation": "factorized",
+        "source_gtfs": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+          73437184,
+          1791318021740218230
+        ],
+        "walk_revision": 0,
+        "walking_speed_kmh": 4.5,
+        "max_walk_meters": 1000.0,
+        "quotas": {
+          "1": 16,
+          "2": 8,
+          "3": 4
+        },
+        "walk_source": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.walks.sqlite3",
+          467996672,
+          1791441652656963075
+        ],
+        "walking_coverage": {
+          "version": 1,
+          "source_gtfs": [
+            "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+            73437184,
+            1791318021740218230
+          ],
+          "built_at": "2026-10-08T06:40:30.246502+00:00",
+          "network_id": "osrm-6.0.0-foot:8ed7c42b9ffbc56b8dcb47345fbaa2f7beb835de3dfab20713b4a430098e97ff",
+          "router": "http://127.0.0.1:50159",
+          "profile": "foot",
+          "max_meters": 1000.0,
+          "speed_kmh": 4.5,
+          "max_snap_meters": 20.0,
+          "configuration": {
+            "max_meters": 1000.0,
+            "speed_kmh": 4.5,
+            "max_snap_meters": 20.0,
+            "margin_degrees": 0.025,
+            "osrm_version": "6.0.0"
+          },
+          "geometry_materialized": false,
+          "candidate_pairs": 1687892,
+          "counts": {
+            "over_limit": 661940,
+            "unreachable": 31220,
+            "unsnappable": 42124,
+            "verified": 952608
+          },
+          "stops": 22061,
+          "source_graph": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+          "seconds": 26.655167250020895
+        },
+        "bus_walk_exits": 4267783,
+        "ride_edges": 2588077,
+        "patterns": 2239,
+        "same_stop_transfers": 815823,
+        "transfers": 22769860,
+        "verified_walks": 952608,
+        "unknown_ride_distances": 42,
+        "structural_only": true,
+        "all_od_paths_materialized": false,
+        "source": "/home/avale/Projetos/maua_bus_map/sptrans.direct.sqlite3",
+        "graph_source": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3"
+      }
+    }
+  },
+  "projection": {
+    "ordered_pairs": 496108802,
+    "observed_bytes_per_path_including_indexes": 162.07646579072227,
+    "observed_bytes_per_status": 84.55919217823369,
+    "scenarios_GiB": {
+      "1": 113.95488009365322,
+      "2": 188.84025707961032,
+      "4": 338.61101105152454,
+      "8": 638.1525189953529,
+      "16": 1237.23553488301,
+      "5": 413.49638803748167
+    },
+    "warning": "Cenários para todos os pares, não previsão de alcançabilidade nem de quantidade de caminhos. Viagens mais longas requerem mais campos; geração exige espaço temporário. O formato atual só aceita 1 ou 2 embarques."
+  }
+}

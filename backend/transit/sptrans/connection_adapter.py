@@ -5,7 +5,7 @@ from . import graph, planner, store, walking
 
 def prepare(db, origin, destination):
     from . import materialized_adapter
-    return materialized_adapter.prepare(db, origin, destination)
+    return materialized_adapter.prepare(db, origin, destination, defer_pending=True)
 
 
 def journey(db,result):

@@ -13,9 +13,15 @@ for(const mobile of [false,true])test(`fundo abre mapa; interior vazio mantém p
   await page.route('**/api/sptrans/destination/**',r=>{selections++;return r.fulfill({json:{stop:destination}});});
   const journey={id:'J',duration_minutes:20,walks:[],legs:[{trip_id:'T',boarding_index:0,code:'702C-10',origin,destination,geometry:[[origin.lat,origin.lon],[destination.lat,destination.lon]]}]};
   await page.route('**/api/sptrans/board/**',r=>{searches++;return r.fulfill({json:{journeys:[journey],selected_journey:'J',complete:true,lines:[]}});});
-  await page.goto('/?stop=1');
-  const panel=page.getByRole('dialog',{name:'Ônibus da sua rota'}),open=()=>page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
-  await open();await expect(page.locator('.sp-route-option')).toHaveCount(1);
+  await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({json:{suggestions:[{...destination,label:destination.name}]}}));
+ await page.goto('/?stop=1');
+  await page.getByRole('button',{name:'Continuar sem contribuir'}).click();
+  const panel=page.getByRole('dialog').filter({has:page.getByRole('heading',{name:'Opções da sua rota'})}),open=()=>page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
+  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
+ await page.getByRole('combobox',{name:'Endereço ou coordenadas de destino',exact:true}).fill(destination.name);
+ await page.getByRole('option').click();
+ await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
+ await expect(page.locator('.sp-route-option')).toHaveCount(1);
   const original=await page.evaluate(()=>sessionStorage.getItem('pap.sp.session'));
   const click=async(x,y)=>mobile?page.touchscreen.tap(x,y):page.mouse.click(x,y);
   // Os quatro quadrantes fora do painel se comportam como seu botão de mapa.
@@ -30,9 +36,9 @@ for(const mobile of [false,true])test(`fundo abre mapa; interior vazio mantém p
   const box=await panel.boundingBox();
   // Espaços internos e texto simples não têm ação, mesmo quando o diálogo recebe o clique.
   await click(box.x+6,box.y+box.height/2);await expect(panel).toBeVisible();
-  await panel.getByRole('heading',{name:'Ônibus da sua rota'}).click();await expect(panel).toBeVisible();
+  await panel.getByRole('heading',{name:'Opções da sua rota'}).click();await expect(panel).toBeVisible();
   await panel.locator('p').first().click();await expect(panel).toBeVisible();
-  expect(searches).toBe(1);expect(selections).toBe(0);
+  expect(searches).toBe(2);expect(selections).toBe(1);
   // Arrastar do conteúdo para o fundo não deve contar como clique externo.
   await page.mouse.move(box.x+8,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x-8,box.y+box.height/2,{steps:8});await page.mouse.up();await expect(panel).toBeVisible();
   await page.mouse.move(box.x+40,box.y-20);await page.mouse.down();await page.mouse.move(box.x+100,box.y-20,{steps:8});await page.mouse.up();await expect(panel).toBeVisible();

@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react';
 import {api} from './api.js';
 
 export function useApproachingBus(leg,enabled=true,walkingMinutes=0,earliestBoarding=null){
+  enabled=enabled&&(!leg?.mode||leg.mode==='bus');
   const [result,setResult]=useState(null);
   const trip=leg?.trip_id, origin=leg?.origin?.id, index=leg?.boarding_index, vehicle=leg?.vehicle;
   const key=trip+':'+origin+':'+index+':'+walkingMinutes+':'+earliestBoarding+':'+vehicle;
@@ -13,7 +14,7 @@ export function useApproachingBus(leg,enabled=true,walkingMinutes=0,earliestBoar
     let busy=false,itinerary=null;
     const keepPosition=retainLive(),keepForecast=retainLive();
     const publish=data=>{
-      itinerary=data.itinerary||itinerary;
+      if(data.itinerary)itinerary={...data.itinerary,stops:data.stops||itinerary?.stops||[]};
       const positions=keepPosition({approach:data.approach||null,passedApproaches:data.passed_approaches||[]},!!data.approach||!!data.passed_approaches?.length);
       const forecast=keepForecast({arrivals:data.line?.arrivals||[],noReachableArrival:!!data.line?.no_reachable_arrival,error:!!data.warning},!!data.line?.arrivals?.length&&!data.warning);
       if(!abort.signal.aborted)setResult({key,itinerary,...positions,...forecast});

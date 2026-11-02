@@ -13,7 +13,7 @@ _snapshots = OrderedDict()
 def revision():
     path=store.database_path().resolve()
     stat=path.stat()
-    return hashlib.sha256(f'{path}:{stat.st_ino}:{stat.st_size}:{stat.st_mtime_ns}'.encode()).hexdigest()[:24]
+    return hashlib.sha256(f'rail-1:{path}:{stat.st_ino}:{stat.st_size}:{stat.st_mtime_ns}'.encode()).hexdigest()[:24]
 
 
 def page(db, south, west, north, east, lat, lon, offset=0, limit=None):

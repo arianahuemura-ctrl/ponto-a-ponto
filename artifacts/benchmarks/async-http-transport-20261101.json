@@ -1,0 +1,9 @@
+{
+  "http_status": 200,
+  "first_route_seconds": 6.21982473594835,
+  "complete": false,
+  "lines": [
+    "5630-10"
+  ],
+  "scope": "Local HTTP SSE after concurrent publication and deferred geometry; actual timetable, excludes tunnel/mobile"
+}

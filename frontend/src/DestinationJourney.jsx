@@ -1,3 +1,4 @@
+import {isRail,railLabel} from './railStyle.js';
 import {humanDuration} from './duration.js';
 import {useEffect,useState} from 'react';
 import {api} from './api.js';
@@ -25,7 +26,7 @@ export default function DestinationJourney({origin,destination,onJourney,onStatu
       {error&&<p role="alert">{error} <button className="text-button" onClick={()=>setRetry(n=>n+1)}>Tentar novamente</button></p>}
       {result&&!journey&&<p>Nenhuma viagem encontrada até esta parada nas próximas 6 horas, com até 2 trocas.</p>}
       {journey&&<><p><strong>Cerca de {humanDuration(journey.duration_minutes)}</strong> · {journey.transfers?`${journey.transfers} troca(s)`:'Sem trocas'}</p>
-        <details><summary>Como chegar</summary><ol>{journey.legs.map((leg,i)=><li key={i}><strong>{leg.code} · {leg.headsign}</strong><p>{leg.origin.name} → {leg.destination.name}</p></li>)}</ol>
+        <details><summary>Como chegar</summary><ol>{journey.legs.map((leg,i)=><li key={i}><strong>{isRail(leg)?railLabel(leg):leg.code} · {leg.headsign}</strong><p>{leg.origin.name} → {leg.destination.name}</p></li>)}</ol>
         <p>Estimativa GTFS com espera média. Não é previsão ao vivo. Traçado esquemático entre paradas; até 2 trocas no mesmo ponto.</p></details></>}
     </>}
   </section>;

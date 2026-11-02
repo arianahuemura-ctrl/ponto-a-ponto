@@ -88,3 +88,34 @@ class ResearchTests(SimpleTestCase):
         self.assertContains(inbox(request('post',{'id':data['id'],'confirm':'yes'})),'Analisada')
         self.assertContains(inbox(request('post',{'id':data['id'],'confirm':'yes','action':'delete'})),'Nenhuma mensagem.')
         self.assertFalse((self.root/'events.sqlite3').exists())
+
+    def test_rating_only_and_legacy_messages_are_preserved(self):
+        for rating in range(1,6):
+            data=self.feedback(message='',rating=rating)
+            self.assertEqual(self.post('feedback',data).status_code,201)
+            self.assertEqual(self.post('feedback',data).status_code,200)
+            with sqlite3.connect(self.root/'messages.sqlite3') as db:
+                stored=json.loads(db.execute('SELECT data FROM messages WHERE id=?',(data['id'],)).fetchone()[0])
+            self.assertEqual(stored['rating'],rating)
+            self.assertEqual(stored['message'],'')
+        self.assertFalse((self.root/'events.sqlite3').exists())
+
+    def test_invalid_ratings_and_changed_rating(self):
+        for rating in [0,6,-1,True,False,2.5,'5',None,[],{}]:
+            with self.subTest(rating=rating):
+                self.assertEqual(self.post('feedback',self.feedback(rating=rating)).status_code,400)
+        data=self.feedback(rating=3)
+        self.assertEqual(self.post('feedback',data).status_code,201)
+        self.assertEqual(self.post('feedback',{**data,'rating':4}).status_code,409)
+
+    @patch('transit.research.admin.site.each_context',return_value={})
+    def test_rating_is_visible_in_admin_and_verified_link(self,context):
+        from django.test import RequestFactory
+        from django.contrib.auth.models import User
+        from transit.research import inbox,linked_feedback
+        session=str(uuid.uuid4());token=signing.dumps(session,salt=SALT)
+        self.assertEqual(self.post('feedback',self.feedback(message='',rating=4,token=token)).status_code,201)
+        self.assertEqual(linked_feedback(session)[0][1]['rating'],4)
+        request=RequestFactory().get('/admin/research/')
+        request.user=User(is_active=True,is_staff=True,is_superuser=True)
+        self.assertContains(inbox(request),'4 / 5 ★')

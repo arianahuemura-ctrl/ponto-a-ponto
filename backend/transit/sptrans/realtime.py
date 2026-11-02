@@ -11,7 +11,13 @@ def normalized(value):
     return re.sub(r'[^A-Z0-9]', '', unicodedata.normalize('NFKD',value.upper()).encode('ascii','ignore').decode())
 
 
+def is_artesp(row):
+    return any(str(row.get(key, '')).startswith('artesp:') for key in ('route_id', 'trip_id'))
+
+
 def line_mapping(row):
+    if is_artesp(row):
+        return None
     lines=client.get('Linha/Buscar',{'termosBusca':row['code']},86400)
     matches=[]
     for line in lines:
@@ -33,6 +39,9 @@ def stop_mapping(origin, line):
 
 
 def add_predictions(row, origin, ttl=30):
+    if is_artesp(row):
+        row['realtime_status']='Linha ARTESP: horários programados, sem previsão ao vivo disponível.'
+        return
     line=line_mapping(row)
     if not line:
         row['realtime_status']='Sentido sem correspondência inequívoca na API.'
@@ -77,6 +86,8 @@ def add_predictions(row, origin, ttl=30):
 
 
 def positions(row, ttl=30):
+    if is_artesp(row):
+        return [],'Linha ARTESP: posições ao vivo indisponíveis.'
     line=line_mapping(row)
     if not line: return [],'Sentido sem correspondência inequívoca na API.'
     payload=client.get('Posicao/Linha',{'codigoLinha':line['cl']},ttl)

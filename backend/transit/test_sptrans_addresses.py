@@ -55,3 +55,22 @@ class AddressTests(SimpleTestCase):
     def test_engineer_abbreviation_matches_full_avenue_name(self):
         from transit.sptrans.addresses import street_key
         self.assertEqual(street_key('Av. Eng. Heitor Antônio Eiras Garcia, 363'),street_key('Avenida Engenheiro Heitor Antônio Eiras Garcia'))
+
+    def test_numbered_query_rejects_unrelated_street(self):
+        features=[{'properties':{'street':name,'housenumber':'51','city':'São Paulo','osm_id':i},
+                   'geometry':{'coordinates':[-46.63,-23.55]}} for i,name in enumerate(['Rua Antônio de Camardo','Rua Antônio Gomes Ferreira'])]
+        with patch('transit.sptrans.addresses.urlopen',return_value=io.StringIO(json.dumps({'features':features}))):
+            result=self.client.get('/api/sptrans/addresses/',{'q':'Rua Antonio Gomes Ferreira, 51'}).json()
+        self.assertEqual([s['street'] for s in result['suggestions']],['Rua Antônio Gomes Ferreira'])
+
+    def test_numbered_query_accepts_abbreviations_and_district(self):
+        features=[{'properties':{'street':'Avenida Engenheiro Heitor Antônio Eiras Garcia','housenumber':'363'},'geometry':{'coordinates':[-46.63,-23.55]}}]
+        with patch('transit.sptrans.addresses.urlopen',return_value=io.StringIO(json.dumps({'features':features}))):
+            result=self.client.get('/api/sptrans/addresses/',{'q':'Av. Eng. Heitor Antonio Eiras Garcia, 363, Butantã'}).json()
+        self.assertEqual(len(result['suggestions']),1)
+
+    def test_places_without_number_keep_suggestions(self):
+        features=[{'properties':{'name':'Terminal Sacomã','street':'Rua Bom Pastor'},'geometry':{'coordinates':[-46.63,-23.55]}}]
+        with patch('transit.sptrans.addresses.urlopen',return_value=io.StringIO(json.dumps({'features':features}))):
+            result=self.client.get('/api/sptrans/addresses/',{'q':'Terminal Sacoma'}).json()
+        self.assertEqual(len(result['suggestions']),1)

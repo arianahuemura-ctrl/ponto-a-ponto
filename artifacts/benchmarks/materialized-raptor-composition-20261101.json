@@ -1,0 +1,2026 @@
+{
+  "candidate": {
+    "origin": 21000,
+    "destination": 12835,
+    "middle": 14286,
+    "ids": {
+      "21000": "9112409",
+      "12835": "5614789",
+      "14286": "6311287"
+    },
+    "left": {
+      "units": 6,
+      "legs": [
+        [
+          457254,
+          0
+        ],
+        [
+          449779,
+          320100
+        ],
+        [
+          2267637,
+          378233
+        ]
+      ],
+      "egress": 0
+    },
+    "right": {
+      "units": 9,
+      "legs": [
+        [
+          2265562,
+          964333
+        ],
+        [
+          1533368,
+          2448
+        ],
+        [
+          1510104,
+          0
+        ],
+        [
+          1721870,
+          201383
+        ]
+      ],
+      "egress": 0
+    },
+    "search_seconds": 3.6394861200242303
+  },
+  "origin": {
+    "id": "9112409",
+    "name": "Av. José Maria Fernandes, 480",
+    "address": "Ref.: R. Cb. Elizeu Pinhal",
+    "lat": -23.511958,
+    "lon": -46.567761,
+    "code": "9112409"
+  },
+  "destination": {
+    "id": "5614789",
+    "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+    "address": "Ref.: Rua Amaro Alves Do Rosário",
+    "lat": -23.812818,
+    "lon": -46.709925,
+    "code": "5614789"
+  },
+  "connection": {
+    "id": "6311287",
+    "name": "Pinheiros Metrô",
+    "address": "Pinheiros Metrô",
+    "lat": -23.56725,
+    "lon": -46.701925,
+    "code": "6311287",
+    "mode": "metro",
+    "route_type": "1"
+  },
+  "network_load_seconds": 0.29861279303440824,
+  "restricted_trips": 7,
+  "restricted_rides": 7,
+  "results": [
+    {
+      "departure": "2026-11-01T08:00:00-03:00",
+      "exact_composition": {
+        "duration_minutes": 271.2,
+        "arrival": "2026-11-01T12:31:12-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T08:05:00-03:00",
+            "arrival": "2026-11-01T08:06:33-03:00",
+            "wait_minutes": 5.0,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T08:32:02.806359-03:00",
+            "arrival": "2026-11-01T09:33:52.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T09:47:51.559632-03:00",
+            "arrival": "2026-11-01T10:03:41.559632-03:00",
+            "wait_minutes": 3.5,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T10:11:11.559632-03:00",
+            "arrival": "2026-11-01T10:40:41.559632-03:00",
+            "wait_minutes": 5.5,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T10:57:14.193889-03:00",
+            "arrival": "2026-11-01T11:34:21.193889-03:00",
+            "wait_minutes": 9.5,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T11:41:21.193889-03:00",
+            "arrival": "2026-11-01T12:06:25.193889-03:00",
+            "wait_minutes": 7.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T12:29:51-03:00",
+            "arrival": "2026-11-01T12:31:12-03:00",
+            "wait_minutes": 18.3,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      },
+      "exact_seconds": 0.021163204044569284,
+      "raptor_seconds": 0.001069809019099921,
+      "raptor_search_limited": false,
+      "raptor_journeys": 1,
+      "raptor_best": {
+        "duration_minutes": 271.2,
+        "arrival": "2026-11-01T12:31:12-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T08:05:00-03:00",
+            "arrival": "2026-11-01T08:06:33-03:00",
+            "wait_minutes": 5.0,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T08:32:02.806359-03:00",
+            "arrival": "2026-11-01T09:33:52.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T09:47:51.559632-03:00",
+            "arrival": "2026-11-01T10:03:41.559632-03:00",
+            "wait_minutes": 3.5,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T10:11:11.559632-03:00",
+            "arrival": "2026-11-01T10:40:41.559632-03:00",
+            "wait_minutes": 5.5,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T10:57:14.193889-03:00",
+            "arrival": "2026-11-01T11:34:21.193889-03:00",
+            "wait_minutes": 9.5,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T11:41:21.193889-03:00",
+            "arrival": "2026-11-01T12:06:25.193889-03:00",
+            "wait_minutes": 7.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T12:29:51-03:00",
+            "arrival": "2026-11-01T12:31:12-03:00",
+            "wait_minutes": 18.3,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      }
+    },
+    {
+      "departure": "2026-11-01T12:00:00-03:00",
+      "exact_composition": {
+        "duration_minutes": 274.9,
+        "arrival": "2026-11-01T16:34:53.132910-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T12:07:30-03:00",
+            "arrival": "2026-11-01T12:09:03-03:00",
+            "wait_minutes": 7.5,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T12:34:32.806359-03:00",
+            "arrival": "2026-11-01T13:36:22.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T13:50:21.559632-03:00",
+            "arrival": "2026-11-01T14:06:11.559632-03:00",
+            "wait_minutes": 3.5,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T14:13:41.559632-03:00",
+            "arrival": "2026-11-01T14:43:11.559632-03:00",
+            "wait_minutes": 5.5,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T15:02:14.193889-03:00",
+            "arrival": "2026-11-01T15:39:21.193889-03:00",
+            "wait_minutes": 12.0,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T15:46:21.193889-03:00",
+            "arrival": "2026-11-01T16:11:25.193889-03:00",
+            "wait_minutes": 7.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T16:33:32.132910-03:00",
+            "arrival": "2026-11-01T16:34:53.132910-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      },
+      "exact_seconds": 0.023147602973040193,
+      "raptor_seconds": 0.0009854670497588813,
+      "raptor_search_limited": false,
+      "raptor_journeys": 1,
+      "raptor_best": {
+        "duration_minutes": 274.9,
+        "arrival": "2026-11-01T16:34:53.132910-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T12:07:30-03:00",
+            "arrival": "2026-11-01T12:09:03-03:00",
+            "wait_minutes": 7.5,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T12:34:32.806359-03:00",
+            "arrival": "2026-11-01T13:36:22.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T13:50:21.559632-03:00",
+            "arrival": "2026-11-01T14:06:11.559632-03:00",
+            "wait_minutes": 3.5,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T14:13:41.559632-03:00",
+            "arrival": "2026-11-01T14:43:11.559632-03:00",
+            "wait_minutes": 5.5,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T15:02:14.193889-03:00",
+            "arrival": "2026-11-01T15:39:21.193889-03:00",
+            "wait_minutes": 12.0,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T15:46:21.193889-03:00",
+            "arrival": "2026-11-01T16:11:25.193889-03:00",
+            "wait_minutes": 7.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T16:33:32.132910-03:00",
+            "arrival": "2026-11-01T16:34:53.132910-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      }
+    },
+    {
+      "departure": "2026-11-01T18:00:00-03:00",
+      "exact_composition": {
+        "duration_minutes": 286.2,
+        "arrival": "2026-11-01T22:46:12-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T18:06:00-03:00",
+            "arrival": "2026-11-01T18:07:33-03:00",
+            "wait_minutes": 6.0,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T18:33:02.806359-03:00",
+            "arrival": "2026-11-01T19:34:52.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T19:48:21.559632-03:00",
+            "arrival": "2026-11-01T20:04:11.559632-03:00",
+            "wait_minutes": 3.0,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T20:10:11.559632-03:00",
+            "arrival": "2026-11-01T20:39:41.559632-03:00",
+            "wait_minutes": 4.0,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T20:56:14.193889-03:00",
+            "arrival": "2026-11-01T21:33:21.193889-03:00",
+            "wait_minutes": 9.5,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T21:41:21.193889-03:00",
+            "arrival": "2026-11-01T22:06:25.193889-03:00",
+            "wait_minutes": 8.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T22:44:51-03:00",
+            "arrival": "2026-11-01T22:46:12-03:00",
+            "wait_minutes": 33.3,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      },
+      "exact_seconds": 0.01971329702064395,
+      "raptor_seconds": 0.0009765690192580223,
+      "raptor_search_limited": false,
+      "raptor_journeys": 1,
+      "raptor_best": {
+        "duration_minutes": 286.2,
+        "arrival": "2026-11-01T22:46:12-03:00",
+        "transfers": 6,
+        "transfer_cost": 5.333333333333333,
+        "transfer_cost_units": 16,
+        "legs": [
+          {
+            "code": "271M-10",
+            "mode": "bus",
+            "origin": {
+              "id": "9112409",
+              "name": "Av. José Maria Fernandes, 480",
+              "address": "Ref.: R. Cb. Elizeu Pinhal",
+              "lat": -23.511958,
+              "lon": -46.567761,
+              "code": "9112409"
+            },
+            "destination": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "departure": "2026-11-01T18:06:00-03:00",
+            "arrival": "2026-11-01T18:07:33-03:00",
+            "wait_minutes": 6.0,
+            "ride_minutes": 1.6
+          },
+          {
+            "code": "271C-10",
+            "mode": "bus",
+            "origin": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "destination": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "departure": "2026-11-01T18:33:02.806359-03:00",
+            "arrival": "2026-11-01T19:34:52.806359-03:00",
+            "wait_minutes": 17.0,
+            "ride_minutes": 61.8
+          },
+          {
+            "code": "METRÔ L4",
+            "mode": "metro",
+            "origin": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "departure": "2026-11-01T19:48:21.559632-03:00",
+            "arrival": "2026-11-01T20:04:11.559632-03:00",
+            "wait_minutes": 3.0,
+            "ride_minutes": 15.8
+          },
+          {
+            "code": "CPTM L09",
+            "mode": "rail",
+            "origin": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "departure": "2026-11-01T20:10:11.559632-03:00",
+            "arrival": "2026-11-01T20:39:41.559632-03:00",
+            "wait_minutes": 4.0,
+            "ride_minutes": 29.5
+          },
+          {
+            "code": "6091-10",
+            "mode": "bus",
+            "origin": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "destination": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "departure": "2026-11-01T20:56:14.193889-03:00",
+            "arrival": "2026-11-01T21:33:21.193889-03:00",
+            "wait_minutes": 9.5,
+            "ride_minutes": 37.1
+          },
+          {
+            "code": "6072-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009230",
+              "name": "Av. Sen. Teotônio Vilela, 10960",
+              "address": "Ref.: Ac Anum Preto/ Pc Do Trabalhador",
+              "lat": -23.769899,
+              "lon": -46.718105,
+              "code": "560009230"
+            },
+            "destination": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "departure": "2026-11-01T21:41:21.193889-03:00",
+            "arrival": "2026-11-01T22:06:25.193889-03:00",
+            "wait_minutes": 8.0,
+            "ride_minutes": 25.1
+          },
+          {
+            "code": "6L07-10",
+            "mode": "bus",
+            "origin": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "destination": {
+              "id": "5614789",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.812818,
+              "lon": -46.709925,
+              "code": "5614789"
+            },
+            "departure": "2026-11-01T22:44:51-03:00",
+            "arrival": "2026-11-01T22:46:12-03:00",
+            "wait_minutes": 33.3,
+            "ride_minutes": 1.4
+          }
+        ],
+        "walks": [
+          {
+            "origin": {
+              "id": "9112473",
+              "name": "Av. José Maria Fernandes, 750",
+              "address": "Ref.: Rua Soldado Clóvis Rosa Da Silva/rua Soldado Francisco Gomes De Souza",
+              "lat": -23.509422,
+              "lon": -46.567665,
+              "code": "9112473"
+            },
+            "destination": {
+              "id": "910000811",
+              "name": "Av. Tte. Amaro Felicíssimo Da Silveira, 1792",
+              "address": "Ref.: R Gentil Bispo/ R Soldado Aristides Gouveia",
+              "lat": -23.50932,
+              "lon": -46.570891,
+              "code": "910000811"
+            },
+            "distance_meters": 637.257948245,
+            "seconds": 509.806358596,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 1,
+            "duration_minutes": 8.496772642930349
+          },
+          {
+            "origin": {
+              "id": "90011797",
+              "name": "Av. Tiradentes, 615",
+              "address": "Ref.: Pc Coronel Bonfim De Andrade/ R Bandeirantes",
+              "lat": -23.530136,
+              "lon": -46.632189,
+              "code": "90011797"
+            },
+            "destination": {
+              "id": "8010123",
+              "name": "Luz",
+              "address": "Luz",
+              "lat": -23.536598,
+              "lon": -46.634502,
+              "code": "8010123",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "distance_meters": 785.9415920629999,
+            "seconds": 628.7532736503999,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 2,
+            "duration_minutes": 10.479221228758494
+          },
+          {
+            "origin": {
+              "id": "6311287",
+              "name": "Pinheiros Metrô",
+              "address": "Pinheiros Metrô",
+              "lat": -23.56725,
+              "lon": -46.701925,
+              "code": "6311287",
+              "mode": "metro",
+              "route_type": "1"
+            },
+            "destination": {
+              "id": "18966",
+              "name": "Pinheiros",
+              "address": "Pinheiros",
+              "lat": -23.566631,
+              "lon": -46.703082,
+              "code": "18966",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "distance_meters": 0.0,
+            "seconds": 120.0,
+            "internal_transfer": true,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 3,
+            "duration_minutes": 2.0
+          },
+          {
+            "origin": {
+              "id": "18907",
+              "name": "Jurubatuba",
+              "address": "Jurubatuba",
+              "lat": -23.677465,
+              "lon": -46.702213,
+              "code": "18907",
+              "mode": "rail",
+              "route_type": "2"
+            },
+            "destination": {
+              "id": "160015620",
+              "name": "Av. Das Nações Unidas, 22462",
+              "address": "Ref.: R Arnaldo Magniccaro/ Av Octalles Marcondes Ferreira",
+              "lat": -23.676657,
+              "lon": -46.698715,
+              "code": "160015620"
+            },
+            "distance_meters": 528.2928213350001,
+            "seconds": 422.63425706800007,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 4,
+            "duration_minutes": 7.04390428463618
+          },
+          {
+            "origin": {
+              "id": "5614788",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5649",
+              "address": "Ref.: Rua Amaro Alves Do Rosário",
+              "lat": -23.813191,
+              "lon": -46.709618,
+              "code": "5614788"
+            },
+            "destination": {
+              "id": "560009103",
+              "name": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "address": "Av. Prof. Hermógenes De Freitas Leitão Filho, 5887",
+              "lat": -23.814613,
+              "lon": -46.706388,
+              "code": "560009103"
+            },
+            "distance_meters": 383.673775536,
+            "seconds": 306.9390204288,
+            "internal_transfer": false,
+            "available": true,
+            "accessType": "transfer",
+            "before_leg": 6,
+            "duration_minutes": 5.115650339921316
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Read-only pilot. RAPTOR restricted to saved spans and their verified walks; timetable estimates, not real-time; no global completeness claim."
+}

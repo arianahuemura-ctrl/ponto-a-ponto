@@ -18,7 +18,7 @@ async function setup(context,{failure=null}={}){
   return {requests,events};
 }
 async function decide(page,accept=false){await page.getByRole('button',{name:accept?'Contribuir com a pesquisa':'Continuar sem contribuir',exact:true}).click();await expect(page.locator('.sp-shell')).toBeVisible();}
-async function settings(page){await page.getByRole('button',{name:'Configurações',exact:true}).click();await expect(page.getByRole('dialog',{name:'Configurações → Participação na pesquisa'})).toBeVisible();}
+async function settings(page){await page.getByRole('button',{name:'Configurações',exact:true}).click();await page.getByRole('button',{name:'Participação na pesquisa',exact:true}).click();await expect(page.getByRole('dialog',{name:'Configurações → Participação na pesquisa'})).toBeVisible();}
 async function revoke(page){await settings(page);await page.getByRole('button',{name:'Interromper gravação',exact:true}).click();await page.getByRole('button',{name:'Fechar configurações'}).click();}
 
 test('recusa: navegação, busca, tema e feedback sem sessão ou replay',async({page,context})=>{

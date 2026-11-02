@@ -18,11 +18,12 @@ export async function decodeCatalogue(data){
   if(data?.version!==1||data.scale!==100000||!Array.isArray(data.rows)||typeof data.revision!=='string')throw new Error('Catálogo inválido');
   const stops=new Map();let lat=0,lon=0,i=0;
   for(const row of data.rows){
-    const [id,dy,dx,name]=row;
+    const [id,dy,dx,name,mode='bus']=row;
     if(typeof id!=='string'||!Number.isInteger(dy)||!Number.isInteger(dx)||typeof name!=='string')throw new Error('Ponto inválido');
     lat+=dy;lon+=dx;
     if(Math.abs(lat)>9000000||Math.abs(lon)>18000000)throw new Error('Coordenada inválida');
-    stops.set(id,{id,lat:lat/data.scale,lon:lon/data.scale,name});
+    if(!['bus','metro','rail'].includes(mode))throw new Error('Modal inválido');
+    stops.set(id,{id,lat:lat/data.scale,lon:lon/data.scale,name,...(mode!=='bus'?{mode}:{})});
     if(++i%500===0)await new Promise(resolve=>setTimeout(resolve,0));
   }
   return stops;

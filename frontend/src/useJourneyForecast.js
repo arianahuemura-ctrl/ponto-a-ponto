@@ -29,6 +29,7 @@ export function useJourneyForecast(trip,enabled) {
       busy=true;
       try {
         await Promise.all(trip.legs.slice(1).map(async(leg,offset)=>{
+          if(leg.mode&&leg.mode!=='bus')return;
           let forecast;
           try {
             const data=await api('sptrans/trips/'+encodeURIComponent(leg.trip_id),{origin:leg.origin.id,boarding_index:leg.boarding_index,min_wait_seconds:0},abort.signal);

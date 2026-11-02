@@ -9,6 +9,7 @@ SPTRANS_PLANNER = os.environ.get('SPTRANS_PLANNER', 'connections')
 SPTRANS_CONNECTION_API_BUDGET = float(os.environ.get('SPTRANS_CONNECTION_API_BUDGET', '20'))
 SPTRANS_TOKEN = os.environ.get('SPTRANS_TOKEN', '')
 SPTRANS_DATABASE = os.environ.get('SPTRANS_DATABASE', str(BASE_DIR / 'sptrans.sqlite3'))
+SPTRANS_LEGACY_DATABASE = os.environ.get('SPTRANS_LEGACY_DATABASE', '')
 sys.path.insert(0, str(BASE_DIR))
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-mbm-local")

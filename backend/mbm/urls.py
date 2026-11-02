@@ -16,6 +16,7 @@ urlpatterns = [
     path("api/sptrans/stop-catalogue/", stop_catalogue),
     path("api/location-config/", views.location_config),
     path("api/sptrans/stops/", sptrans.stops),
+    path("api/sptrans/rail-network/", sptrans.rail_network),
     path("api/sptrans/addresses/", suggestions),
     path("api/sptrans/destination/", sptrans.destination),
     path("api/sptrans/board/", sptrans.board),

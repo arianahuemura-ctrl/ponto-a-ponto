@@ -1,0 +1,1880 @@
+[
+  {
+    "origin": "4312115",
+    "destination": "750006135",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "4312115",
+    "destination": "750006135",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "external_required"
+  },
+  {
+    "origin": "4312115",
+    "destination": "750006135",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "420013602",
+    "destination": "3014803",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "420013602",
+    "destination": "3014803",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "700016620",
+    "destination": "1809554",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "external_required"
+  },
+  {
+    "origin": "7206792",
+    "destination": "670016642",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "7206792",
+    "destination": "670016642",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "50004828",
+    "destination": "800016488",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "7206792",
+    "destination": "670016642",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "external_required"
+  },
+  {
+    "origin": "50004828",
+    "destination": "800016488",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "external_required"
+  },
+  {
+    "origin": "700016628",
+    "destination": "300009076",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "N106-11",
+      "N801-11",
+      "N601-11",
+      "695D-10"
+    ],
+    "journey_id": "N106-11-1:700016628:670016425|N801-11-0:670016425:800016494|N601-11-1:800016494:220015526|695D-10-1:220015526:300009076"
+  },
+  {
+    "origin": "1603327",
+    "destination": "9412726",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "675P-10",
+      "5630-10",
+      "2123-10",
+      "271A-51"
+    ],
+    "journey_id": "675P-10-0:1603327:220015548|5630-10-0:220015548:800016588|2123-10-1:800016588:940000744|271A-51-1:940000744:9412726"
+  },
+  {
+    "origin": "830003862",
+    "destination": "3214702",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "no_route_completed"
+  },
+  {
+    "origin": "830003862",
+    "destination": "3214702",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "no_route_completed"
+  },
+  {
+    "origin": "420013602",
+    "destination": "3014803",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "N733-11",
+      "N738-11",
+      "6006-10",
+      "695D-10"
+    ],
+    "journey_id": "N733-11-0:420013602:420013068|N738-11-0:420013068:420013347|6006-10-0:420013347:1602608|695D-10-1:1602608:3014803"
+  },
+  {
+    "origin": "680010821",
+    "destination": "50007202",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "477P-10",
+      "N842-11",
+      "702C-10",
+      "2552-10",
+      "342C-10"
+    ],
+    "journey_id": "477P-10-0:680010821:680010794|N842-11-0:680010794:120010860|702C-10-0:120010860:80014491|2552-10-1:80014491:600012363|342C-10-1:600012363:50007202"
+  },
+  {
+    "origin": "450011568",
+    "destination": "230009721",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "N743-11",
+      "N738-11",
+      "6006-10",
+      "6071-10"
+    ],
+    "journey_id": "N743-11-0:450011568:450011574|N738-11-0:450011574:420013347|6006-10-0:420013347:160015586|6071-10-1:160015586:230009721"
+  },
+  {
+    "origin": "360004979",
+    "destination": "5013419",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "3010-10",
+      "2755-10",
+      "278A-10",
+      "971D-10",
+      "1722-10"
+    ],
+    "journey_id": "3010-10-1:360004979:760002808|2755-10-0:760002808:600012391|278A-10-1:600012391:710000653|971D-10-1:710000653:130005092|1722-10-1:130005092:5013419"
+  },
+  {
+    "origin": "40005595",
+    "destination": "7504800",
+    "group": "bus_direct",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "351F-10",
+      "407Y-10",
+      "3773-10"
+    ],
+    "journey_id": "351F-10-1:40005595:40008570|407Y-10-0:40008570:40012663|3773-10-1:40012663:7504800"
+  },
+  {
+    "origin": "700016628",
+    "destination": "300009076",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "300009278",
+    "destination": "640000386",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "440015161",
+    "destination": "7704154",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "no_route_completed"
+  },
+  {
+    "origin": "300009278",
+    "destination": "640000386",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "600005632",
+    "destination": "590013824",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "600005632",
+    "destination": "590013824",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "700016628",
+    "destination": "300009076",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "4312006",
+    "destination": "6009458",
+    "group": "bus_direct",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "3004-10",
+      "273G-10",
+      "2552-10"
+    ],
+    "journey_id": "3004-10-0:4312006:4312003|273G-10-0:4312003:890012086|2552-10-0:890012086:6009458"
+  },
+  {
+    "origin": "280004746",
+    "destination": "260015945",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "1603327",
+    "destination": "9412726",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "no_route_completed"
+  },
+  {
+    "origin": "210002247",
+    "destination": "7206791",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "280004746",
+    "destination": "260015945",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "6201791",
+    "destination": "250005915",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "450011568",
+    "destination": "230009721",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "440015161",
+    "destination": "7704154",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "no_route_completed"
+  },
+  {
+    "origin": "6201791",
+    "destination": "250005915",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "710000598",
+    "destination": "5914678",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "9309395",
+    "destination": "560008990",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "3737-31",
+      "3686-10",
+      "5630-10",
+      "6091-10",
+      "6073-10"
+    ],
+    "journey_id": "3737-31-0:9309395:9309428|3686-10-0:9309428:1010082|5630-10-1:1010082:160009790|6091-10-1:160009790:560009230|6073-10-1:560009230:560008990"
+  },
+  {
+    "origin": "450011568",
+    "destination": "230009721",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "4312006",
+    "destination": "6009458",
+    "group": "bus_direct",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "3004-10",
+      "273G-10",
+      "2552-10"
+    ],
+    "journey_id": "3004-10-0:4312006:4312003|273G-10-0:4312003:890012086|2552-10-0:890012086:6009458"
+  },
+  {
+    "origin": "210002247",
+    "destination": "7206791",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "external_required"
+  },
+  {
+    "origin": "9309395",
+    "destination": "560008990",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "3737-31",
+      "3686-10",
+      "5630-10",
+      "6091-10",
+      "6073-10"
+    ],
+    "journey_id": "3737-31-0:9309395:9309428|3686-10-0:9309428:1010076|5630-10-1:1010076:160009790|6091-10-1:160009790:560009230|6073-10-1:560009230:560008990"
+  },
+  {
+    "origin": "110001066",
+    "destination": "920015231",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "9784-10",
+      "971V-10",
+      "175T-10",
+      "502J-10"
+    ],
+    "journey_id": "9784-10-1:110001066:110001050|971V-10-0:110001050:710000969|175T-10-0:710000969:150010520|502J-10-0:150010520:920015231"
+  },
+  {
+    "origin": "360004979",
+    "destination": "5013419",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "external_required"
+  },
+  {
+    "origin": "1313549",
+    "destination": "2600700",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "148P-10",
+      "9653-10",
+      "917M-10",
+      "208M-10"
+    ],
+    "journey_id": "148P-10-1:1313549:130001472|9653-10-0:130001472:60016462|917M-10-0:60016462:260016851|208M-10-1:260016851:2600700"
+  },
+  {
+    "origin": "110001066",
+    "destination": "920015231",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "9784-10",
+      "971V-10",
+      "175T-10",
+      "502J-10"
+    ],
+    "journey_id": "9784-10-1:110001066:110001050|971V-10-0:110001050:710000969|175T-10-0:710000969:150010520|502J-10-0:150010520:920015231"
+  },
+  {
+    "origin": "940003981",
+    "destination": "200008704",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2032-10",
+      "172P-10",
+      "407A-10",
+      "3762-10"
+    ],
+    "journey_id": "2032-10-0:940003981:940003818|172P-10-0:940003818:80014533|407A-10-1:80014533:40005535|3762-10-0:40005535:200008704"
+  },
+  {
+    "origin": "110001066",
+    "destination": "920015231",
+    "group": "rail_or_mixed",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "N138-11",
+      "9784-10",
+      "118C-10",
+      "175T-10",
+      "502J-10"
+    ],
+    "journey_id": "N138-11-0:110001066:110001052|9784-10-0:110001052:130001453|118C-10-0:130001453:90011797|175T-10-0:90011797:150010520|502J-10-0:150010520:920015231"
+  },
+  {
+    "origin": "1903970",
+    "destination": "660010702",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6817-10",
+      "647A-10",
+      "8020-10",
+      "8073-10"
+    ],
+    "journey_id": "6817-10-0:1903970:1903881|647A-10-0:1903881:550015956|8020-10-0:550015956:120010856|8073-10-1:120010856:660010702"
+  },
+  {
+    "origin": "1207028",
+    "destination": "220010085",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "775V-10",
+      "856R-10",
+      "516N-10",
+      "5131-10"
+    ],
+    "journey_id": "775V-10-0:1207028:340015464|856R-10-0:340015464:340015467|516N-10-0:340015467:220015714|5131-10-1:220015714:220010085"
+  },
+  {
+    "origin": "800016521",
+    "destination": "6009465",
+    "group": "bus_direct",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "908T-10",
+      "2101-10",
+      "3459-10",
+      "2583-10"
+    ],
+    "journey_id": "908T-10-0:800016521:800016589|2101-10-0:800016589:100014412|3459-10-1:100014412:760002791|2583-10-0:760002791:6009465"
+  },
+  {
+    "origin": "940003981",
+    "destination": "200008704",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2032-10",
+      "172Y-10",
+      "407A-10",
+      "3762-10"
+    ],
+    "journey_id": "2032-10-0:940003981:940004150|172Y-10-0:940004150:80014533|407A-10-1:80014533:40005535|3762-10-0:40005535:200008704"
+  },
+  {
+    "origin": "810009819",
+    "destination": "530009975",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "5370-10",
+      "707A-10",
+      "4725-10"
+    ],
+    "journey_id": "5370-10-0:810009819:150015663|707A-10-0:150015663:7905860|4725-10-0:7905860:530009975"
+  },
+  {
+    "origin": "1207028",
+    "destination": "220010085",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "N836-11",
+      "N839-11",
+      "5131-10"
+    ],
+    "journey_id": "N836-11-0:1207028:1211381|N839-11-0:1211381:530015498|5131-10-1:530015498:220010085"
+  },
+  {
+    "origin": "1313549",
+    "destination": "2600700",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "148P-10",
+      "9653-10",
+      "917M-10",
+      "208M-10"
+    ],
+    "journey_id": "148P-10-1:1313549:130001472|9653-10-0:130001472:60016462|917M-10-0:60016462:260016851|208M-10-1:260016851:2600700"
+  },
+  {
+    "origin": "1207028",
+    "destination": "220010085",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "775V-10",
+      "875C-10",
+      "516N-10",
+      "5131-10"
+    ],
+    "journey_id": "775V-10-0:1207028:340015464|875C-10-0:340015464:340015467|516N-10-0:340015467:220015714|5131-10-1:220015714:220010085"
+  },
+  {
+    "origin": "1903970",
+    "destination": "660010702",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6817-10",
+      "647A-10",
+      "8020-10",
+      "8073-10"
+    ],
+    "journey_id": "6817-10-0:1903970:1903881|647A-10-0:1903881:550015956|8020-10-0:550015956:120010856|8073-10-1:120010856:660010702"
+  },
+  {
+    "origin": "1903970",
+    "destination": "660010702",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6836-10",
+      "5119-10",
+      "8020-10",
+      "8073-10"
+    ],
+    "journey_id": "6836-10-0:1903970:4504063|5119-10-0:4504063:550015969|8020-10-0:550015969:120010856|8073-10-1:120010856:660010702"
+  },
+  {
+    "origin": "900014675",
+    "destination": "190013498",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6262-10",
+      "775F-10",
+      "647A-10",
+      "6816-31"
+    ],
+    "journey_id": "6262-10-0:900014675:6311316|775F-10-1:6311316:960011322|647A-10-1:960011322:190011837|6816-31-1:190011837:190013498"
+  },
+  {
+    "origin": "230009609",
+    "destination": "200012235",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "677V-10",
+      "637J-10",
+      "5632-10",
+      "5630-10",
+      "2290-10"
+    ],
+    "journey_id": "677V-10-1:230009609:230009667|637J-10-0:230009667:230009652|5632-10-0:230009652:490016416|5630-10-0:490016416:100014556|2290-10-1:100014556:200012235"
+  },
+  {
+    "origin": "10014205",
+    "destination": "150010080",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "573H-10",
+      "2100-10",
+      "5630-10",
+      "509J-10"
+    ],
+    "journey_id": "573H-10-0:10014205:540014249|2100-10-0:540014249:1010107|5630-10-1:1010107:150015556|509J-10-0:150015556:150010080"
+  },
+  {
+    "origin": "810009819",
+    "destination": "530009975",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "5370-10",
+      "707A-10",
+      "4725-10"
+    ],
+    "journey_id": "5370-10-0:810009819:530015318|707A-10-0:530015318:7905860|4725-10-0:7905860:530009975"
+  },
+  {
+    "origin": "940003981",
+    "destination": "200008704",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "N243-11",
+      "172Y-10",
+      "407A-10",
+      "3762-10"
+    ],
+    "journey_id": "N243-11-0:940003981:940004150|172Y-10-0:940004150:80014533|407A-10-1:80014533:40005535|3762-10-0:40005535:200008704"
+  },
+  {
+    "origin": "900014675",
+    "destination": "190013498",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6262-10",
+      "775F-10",
+      "647A-10",
+      "6816-31"
+    ],
+    "journey_id": "6262-10-0:900014675:6311316|775F-10-1:6311316:960011322|647A-10-1:960011322:190011837|6816-31-1:190011837:190013498"
+  },
+  {
+    "origin": "230009609",
+    "destination": "200012235",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "677V-10",
+      "637J-10",
+      "5632-10",
+      "5630-10",
+      "2290-10"
+    ],
+    "journey_id": "677V-10-1:230009609:230009667|637J-10-0:230009667:230009652|5632-10-0:230009652:490016416|5630-10-0:490016416:100014556|2290-10-1:100014556:200012235"
+  },
+  {
+    "origin": "10014205",
+    "destination": "150010080",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "573H-10",
+      "2100-10",
+      "5630-10",
+      "509J-10"
+    ],
+    "journey_id": "573H-10-0:10014205:540014249|2100-10-0:540014249:1010107|5630-10-1:1010107:150015556|509J-10-0:150015556:150010080"
+  },
+  {
+    "origin": "800016521",
+    "destination": "6009465",
+    "group": "bus_direct",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "908T-10",
+      "2101-10",
+      "3459-10",
+      "2583-10"
+    ],
+    "journey_id": "908T-10-0:800016521:800016589|2101-10-0:800016589:100014412|3459-10-1:100014412:760002791|2583-10-0:760002791:6009465"
+  },
+  {
+    "origin": "1814671",
+    "destination": "770012138",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "211V-10",
+      "2076-10",
+      "354M-10",
+      "407H-10",
+      "3099-10"
+    ],
+    "journey_id": "211V-10-0:1814671:2814636|2076-10-1:2814636:760012066|354M-10-0:760012066:580007069|407H-10-1:580007069:3214657|3099-10-1:3214657:770012138"
+  },
+  {
+    "origin": "10014205",
+    "destination": "150010080",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "172U-10",
+      "2182-10",
+      "5630-10",
+      "509J-10"
+    ],
+    "journey_id": "172U-10-1:10014205:1009884|2182-10-0:1009884:8010212|5630-10-1:8010212:150015556|509J-10-0:150015556:150010080"
+  },
+  {
+    "origin": "1814671",
+    "destination": "770012138",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "211V-10",
+      "2076-10",
+      "354M-10",
+      "407H-10",
+      "3099-10"
+    ],
+    "journey_id": "211V-10-0:1814671:2814636|2076-10-1:2814636:760012066|354M-10-0:760012066:580007069|407H-10-1:580007069:3214657|3099-10-1:3214657:770012138"
+  },
+  {
+    "origin": "830003840",
+    "destination": "130001452",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "2023-10",
+      "1783-10",
+      "178Y-10",
+      "118C-10",
+      "9166-10"
+    ],
+    "journey_id": "2023-10-1:830003840:830003831|1783-10-0:830003831:710000567|178Y-10-1:710000567:510001697|118C-10-1:510001697:130001454|9166-10-0:130001454:130001452"
+  },
+  {
+    "origin": "230009609",
+    "destination": "200012235",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "6026-10",
+      "N638-11",
+      "6960-10",
+      "5630-10",
+      "2290-10"
+    ],
+    "journey_id": "6026-10-1:230009609:2314388|N638-11-0:2314388:230009867|6960-10-0:230009867:230009836|5630-10-0:230009836:100014556|2290-10-1:100014556:200012235"
+  },
+  {
+    "origin": "900014675",
+    "destination": "190013498",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "6262-10",
+      "775F-10",
+      "647A-10",
+      "6816-31"
+    ],
+    "journey_id": "6262-10-0:900014675:6311316|775F-10-1:6311316:960011322|647A-10-1:960011322:190011837|6816-31-1:190011837:190013498"
+  },
+  {
+    "origin": "130001589",
+    "destination": "380003927",
+    "group": "bus_direct",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "1756-10",
+      "1722-10",
+      "1778-10"
+    ],
+    "journey_id": "1756-10-0:130001589:5113473|1722-10-0:5113473:830004393|1778-10-0:830004393:380003927"
+  },
+  {
+    "origin": "130001589",
+    "destination": "380003927",
+    "group": "bus_direct",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "1756-10",
+      "1722-10",
+      "1778-10"
+    ],
+    "journey_id": "1756-10-0:130001589:5113473|1722-10-0:5113473:830004393|1778-10-0:830004393:380003927"
+  },
+  {
+    "origin": "706311",
+    "destination": "830003829",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "5154-10",
+      "107T-10",
+      "1783-10",
+      "2024-10"
+    ],
+    "journey_id": "5154-10-0:706311:800013000|107T-10-1:800013000:710000598|1783-10-1:710000598:830003831|2024-10-0:830003831:830003829"
+  },
+  {
+    "origin": "706311",
+    "destination": "830003829",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "7550-10",
+      "107T-10",
+      "1783-10",
+      "2024-10"
+    ],
+    "journey_id": "7550-10-0:706311:800013000|107T-10-1:800013000:710000598|1783-10-1:710000598:830003831|2024-10-0:830003831:830003829"
+  },
+  {
+    "origin": "830003840",
+    "destination": "130001452",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "2023-10",
+      "1783-10",
+      "178Y-10",
+      "118C-10",
+      "9166-10"
+    ],
+    "journey_id": "2023-10-1:830003840:830003831|1783-10-0:830003831:710000567|178Y-10-1:710000567:510001697|118C-10-1:510001697:130001454|9166-10-0:130001454:130001452"
+  },
+  {
+    "origin": "900014651",
+    "destination": "210002135",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "8038-10",
+      "178T-10",
+      "128Y-10"
+    ],
+    "journey_id": "8038-10-1:900014651:900014769|178T-10-1:900014769:480014957|128Y-10-1:480014957:210002135"
+  },
+  {
+    "origin": "400010485",
+    "destination": "130001431",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "8319-10",
+      "8019-31",
+      "7282-10",
+      "957T-10",
+      "128Y-10"
+    ],
+    "journey_id": "8319-10-0:400010485:400010487|8019-31-1:400010487:400010393|7282-10-0:400010393:900014661|957T-10-1:900014661:480012944|128Y-10-1:480012944:130001431"
+  },
+  {
+    "origin": "230009602",
+    "destination": "4814646",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "6110-10",
+      "875A-10",
+      "877T-10"
+    ],
+    "journey_id": "6110-10-0:230009602:1502886|875A-10-0:1502886:700016865|877T-10-1:700016865:4814646"
+  },
+  {
+    "origin": "740006725",
+    "destination": "690006875",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "364A-10",
+      "514T-10",
+      "5021-10",
+      "4732-10"
+    ],
+    "journey_id": "364A-10-0:740006725:780006332|514T-10-1:780006332:330016312|5021-10-1:330016312:270016265|4732-10-1:270016265:690006875"
+  },
+  {
+    "origin": "830003834",
+    "destination": "580004921",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "2023-10",
+      "1783-10",
+      "172U-10",
+      "4210-10",
+      "354M-10"
+    ],
+    "journey_id": "2023-10-1:830003834:830003831|1783-10-0:830003831:710000600|172U-10-0:710000600:100014499|4210-10-1:100014499:7504925|354M-10-1:7504925:580004921"
+  },
+  {
+    "origin": "830003834",
+    "destination": "580004921",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "2023-10",
+      "1783-10",
+      "172U-10",
+      "4210-10",
+      "354M-10"
+    ],
+    "journey_id": "2023-10-1:830003834:830003831|1783-10-0:830003831:710000605|172U-10-0:710000605:100014499|4210-10-1:100014499:7504925|354M-10-1:7504925:580004921"
+  },
+  {
+    "origin": "230009602",
+    "destination": "4814646",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "6110-10",
+      "875A-10",
+      "877T-10"
+    ],
+    "journey_id": "6110-10-0:230009602:1502886|875A-10-0:1502886:700016865|877T-10-1:700016865:4814646"
+  },
+  {
+    "origin": "740006725",
+    "destination": "690006875",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "364A-10",
+      "519M-10",
+      "4706-10",
+      "4732-10"
+    ],
+    "journey_id": "364A-10-0:740006725:780006818|519M-10-0:780006818:330016305|4706-10-1:330016305:690006900|4732-10-1:690006900:690006875"
+  },
+  {
+    "origin": "900014651",
+    "destination": "210002135",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "8038-10",
+      "178T-10",
+      "128Y-10"
+    ],
+    "journey_id": "8038-10-1:900014651:900014769|178T-10-1:900014769:480014957|128Y-10-1:480014957:210002135"
+  },
+  {
+    "origin": "900014651",
+    "destination": "210002135",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 1.0,
+    "lines": [
+      "N832-11",
+      "128Y-10"
+    ],
+    "journey_id": "N832-11-0:900014651:4814634|128Y-10-1:4814634:210002135"
+  },
+  {
+    "origin": "180005207",
+    "destination": "750006769",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2722-10",
+      "2765-10",
+      "342M-10",
+      "4030-10"
+    ],
+    "journey_id": "2722-10-0:180005207:280005156|2765-10-0:280005156:820012533|342M-10-1:820012533:40012292|4030-10-1:40012292:750006769"
+  },
+  {
+    "origin": "2515210",
+    "destination": "930012639",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 1.0,
+    "lines": [
+      "N435-11",
+      "407N-10"
+    ],
+    "journey_id": "N435-11-0:2515210:250005906|407N-10-0:250005906:930012639"
+  },
+  {
+    "origin": "870008573",
+    "destination": "900014670",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "407Y-10",
+      "4210-10",
+      "701A-10",
+      "917H-10",
+      "178T-10"
+    ],
+    "journey_id": "407Y-10-0:870008573:240012631|4210-10-0:240012631:100014329|701A-10-0:100014329:260016732|917H-10-1:260016732:9011771|178T-10-1:9011771:900014670"
+  },
+  {
+    "origin": "330016036",
+    "destination": "301746",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "407M-10",
+      "4111-10",
+      "508L-10",
+      "8622-10",
+      "1015-10"
+    ],
+    "journey_id": "407M-10-0:330016036:140016034|4111-10-0:140016034:800008374|508L-10-0:800008374:670009821|8622-10-1:670009821:30003160|1015-10-0:30003160:301746"
+  },
+  {
+    "origin": "330016036",
+    "destination": "301746",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "407M-10",
+      "4111-10",
+      "508L-10",
+      "8622-10",
+      "1015-10"
+    ],
+    "journey_id": "407M-10-0:330016036:140016034|4111-10-0:140016034:800008374|508L-10-0:800008374:670009821|8622-10-1:670009821:30003160|1015-10-0:30003160:301746"
+  },
+  {
+    "origin": "870008573",
+    "destination": "900014670",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "407Y-10",
+      "4210-10",
+      "701A-10",
+      "917H-10",
+      "178T-10"
+    ],
+    "journey_id": "407Y-10-0:870008573:240012631|4210-10-0:240012631:100014329|701A-10-0:100014329:260016732|917H-10-1:260016732:9011771|178T-10-1:9011771:900014670"
+  },
+  {
+    "origin": "400010485",
+    "destination": "130001431",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "8319-10",
+      "8019-31",
+      "7282-10",
+      "957T-10",
+      "128Y-10"
+    ],
+    "journey_id": "8319-10-0:400010485:400010487|8019-31-1:400010487:400010393|7282-10-0:400010393:900014661|957T-10-1:900014661:480012944|128Y-10-1:480012944:130001431"
+  },
+  {
+    "origin": "300009587",
+    "destination": "190013445",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "6055-10",
+      "6056-10",
+      "6091-10",
+      "745M-10",
+      "6824-10"
+    ],
+    "journey_id": "6055-10-0:300009587:3014362|6056-10-0:3014362:230009844|6091-10-0:230009844:1603327|745M-10-1:1603327:190011834|6824-10-1:190011834:190013445"
+  },
+  {
+    "origin": "300009587",
+    "destination": "190013445",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "6031-10",
+      "6057-10",
+      "6091-10",
+      "745M-10",
+      "6824-10"
+    ],
+    "journey_id": "6031-10-0:300009587:3015055|6057-10-0:3015055:230009844|6091-10-0:230009844:160015596|745M-10-1:160015596:190011834|6824-10-1:190011834:190013445"
+  },
+  {
+    "origin": "8506805",
+    "destination": "240007419",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "746C-10",
+      "857R-10",
+      "702C-10",
+      "4210-10",
+      "4037-10"
+    ],
+    "journey_id": "746C-10-1:8506805:1707399|857R-10-0:1707399:440015006|702C-10-0:440015006:100014499|4210-10-1:100014499:409048|4037-10-0:409048:240007419"
+  },
+  {
+    "origin": "350002452",
+    "destination": "509026",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "3459-10",
+      "307C-10",
+      "2730-10"
+    ],
+    "journey_id": "3459-10-1:350002452:350002386|307C-10-0:350002386:50004827|2730-10-0:50004827:509026"
+  },
+  {
+    "origin": "300009587",
+    "destination": "190013445",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "6055-10",
+      "6110-10",
+      "6091-10",
+      "745M-10",
+      "6824-10"
+    ],
+    "journey_id": "6055-10-0:300009587:3014909|6110-10-0:3014909:230009844|6091-10-0:230009844:1603327|745M-10-1:1603327:190011834|6824-10-1:190011834:190013445"
+  },
+  {
+    "origin": "940004151",
+    "destination": "330010914",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2010-10",
+      "172R-10",
+      "513L-10",
+      "477P-10"
+    ],
+    "journey_id": "2010-10-1:940004151:940003723|172R-10-0:940003723:80014533|513L-10-1:80014533:330016301|477P-10-0:330016301:330010914"
+  },
+  {
+    "origin": "940004151",
+    "destination": "330010914",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2010-10",
+      "172R-10",
+      "513L-10",
+      "477P-10"
+    ],
+    "journey_id": "2010-10-1:940004151:940003723|172R-10-0:940003723:80014533|513L-10-1:80014533:330016301|477P-10-0:330016301:330010914"
+  },
+  {
+    "origin": "180005207",
+    "destination": "750006769",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "2722-10",
+      "2765-10",
+      "342M-10",
+      "4030-10"
+    ],
+    "journey_id": "2722-10-0:180005207:280005156|2765-10-0:280005156:8210256|342M-10-1:8210256:40012292|4030-10-1:40012292:750006769"
+  },
+  {
+    "origin": "210005043",
+    "destination": "720015731",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "9162-10",
+      "148L-10",
+      "209P-10",
+      "856R-10"
+    ],
+    "journey_id": "9162-10-0:210005043:130005092|148L-10-0:130005092:500001754|209P-10-0:500001754:6311047|856R-10-0:6311047:720015731"
+  },
+  {
+    "origin": "2314562",
+    "destination": "330016292",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "5652-10",
+      "695D-10",
+      "5175-10",
+      "675N-10",
+      "475M-10"
+    ],
+    "journey_id": "5652-10-1:2314562:230009712|695D-10-0:230009712:220015543|5175-10-0:220015543:920015148|675N-10-0:920015148:920016702|475M-10-1:920016702:330016292"
+  },
+  {
+    "origin": "350002452",
+    "destination": "509026",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "3459-10",
+      "307C-10",
+      "2730-10"
+    ],
+    "journey_id": "3459-10-1:350002452:350002386|307C-10-0:350002386:50004827|2730-10-0:50004827:509026"
+  },
+  {
+    "origin": "500001977",
+    "destination": "780006363",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "128Y-10",
+      "971V-10",
+      "172U-10",
+      "373T-10"
+    ],
+    "journey_id": "128Y-10-1:500001977:210002133|971V-10-0:210002133:710000969|172U-10-0:710000969:540014160|373T-10-1:540014160:780006363"
+  },
+  {
+    "origin": "2914644",
+    "destination": "4814655",
+    "group": "bus_one_transfer",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "1024-10",
+      "9047-10",
+      "9785-10",
+      "978T-10",
+      "874T-10"
+    ],
+    "journey_id": "1024-10-1:2914644:110003348|9047-10-0:110003348:1114315|9785-10-0:1114315:614547|978T-10-1:614547:480014609|874T-10-0:480014609:4814655"
+  },
+  {
+    "origin": "350002452",
+    "destination": "509026",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "3459-10",
+      "N331-11",
+      "2730-10"
+    ],
+    "journey_id": "3459-10-1:350002452:350002417|N331-11-0:350002417:890004822|2730-10-0:890004822:509026"
+  },
+  {
+    "origin": "2914644",
+    "destination": "4814655",
+    "group": "bus_one_transfer",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "1024-10",
+      "9047-10",
+      "9785-10",
+      "809U-21",
+      "874T-10"
+    ],
+    "journey_id": "1024-10-1:2914644:110003348|9047-10-0:110003348:1114315|9785-10-0:1114315:614547|809U-21-0:614547:610016826|874T-10-0:610016826:4814655"
+  },
+  {
+    "origin": "410003636",
+    "destination": "330016036",
+    "group": "bus_multiple_transfers",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "9011-10",
+      "8006-10",
+      "8594-10",
+      "7550-10",
+      "4111-10"
+    ],
+    "journey_id": "9011-10-1:410003636:410003658|8006-10-0:410003658:640000371|8594-10-0:640000371:670012737|7550-10-1:670012737:670016862|4111-10-0:670016862:330016036"
+  },
+  {
+    "origin": "210005043",
+    "destination": "720015731",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "9162-10",
+      "148L-10",
+      "9653-10",
+      "609F-10",
+      "6913-10"
+    ],
+    "journey_id": "9162-10-0:210005043:130005092|148L-10-0:130005092:500005027|9653-10-0:500005027:6714612|609F-10-1:6714612:440015156|6913-10-1:440015156:720015731"
+  },
+  {
+    "origin": "8506805",
+    "destination": "240007419",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "746C-10",
+      "857R-10",
+      "702C-10",
+      "407A-10",
+      "3721-10"
+    ],
+    "journey_id": "746C-10-1:8506805:1707399|857R-10-0:1707399:440015006|702C-10-0:440015006:80014491|407A-10-1:80014491:2409160|3721-10-0:2409160:240007419"
+  },
+  {
+    "origin": "410003636",
+    "destination": "330016036",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "9011-10",
+      "N135-11",
+      "8594-10",
+      "2002-10",
+      "4111-10"
+    ],
+    "journey_id": "9011-10-1:410003636:410003658|N135-11-0:410003658:410003630|8594-10-0:410003630:6714586|2002-10-0:6714586:6714596|4111-10-0:6714596:330016036"
+  },
+  {
+    "origin": "500001977",
+    "destination": "780006363",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "128Y-10",
+      "971V-10",
+      "172U-10",
+      "373T-10"
+    ],
+    "journey_id": "128Y-10-1:500001977:210002133|971V-10-0:210002133:710000969|172U-10-0:710000969:540014160|373T-10-1:540014160:780006363"
+  },
+  {
+    "origin": "2314562",
+    "destination": "330016292",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "5652-10",
+      "695D-10",
+      "5175-10",
+      "5103-10",
+      "4706-10"
+    ],
+    "journey_id": "5652-10-1:2314562:230009712|695D-10-0:230009712:220015543|5175-10-0:220015543:790015146|5103-10-0:790015146:3305203|4706-10-0:3305203:330016292"
+  },
+  {
+    "origin": "210005043",
+    "destination": "720015731",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "9162-10",
+      "148L-10",
+      "209P-10",
+      "856R-10"
+    ],
+    "journey_id": "9162-10-0:210005043:130005092|148L-10-0:130005092:500001754|209P-10-0:500001754:6311047|856R-10-0:6311047:720015731"
+  },
+  {
+    "origin": "500001977",
+    "destination": "780006363",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 3.0,
+    "lines": [
+      "128Y-10",
+      "N206-11",
+      "172U-10",
+      "373T-10"
+    ],
+    "journey_id": "128Y-10-1:500001977:210002130|N206-11-1:210002130:710000605|172U-10-0:710000605:540014160|373T-10-1:540014160:780006363"
+  },
+  {
+    "origin": "2914644",
+    "destination": "4814655",
+    "group": "bus_one_transfer",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "1024-10",
+      "N141-11",
+      "9785-10",
+      "978T-10",
+      "874T-10"
+    ],
+    "journey_id": "1024-10-1:2914644:1114373|N141-11-0:1114373:110001188|9785-10-0:110001188:614547|978T-10-1:614547:480014609|874T-10-0:480014609:4814655"
+  },
+  {
+    "origin": "400010485",
+    "destination": "130001431",
+    "group": "bus_multiple_transfers",
+    "hour": 2,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 2.0,
+    "lines": [
+      "874C-10",
+      "N832-11",
+      "128Y-10"
+    ],
+    "journey_id": "874C-10-0:400010485:400010487|N832-11-0:400010487:4814634|128Y-10-1:4814634:130001431"
+  },
+  {
+    "origin": "410003636",
+    "destination": "330016036",
+    "group": "bus_multiple_transfers",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "9011-10",
+      "8006-10",
+      "8594-10",
+      "7550-10",
+      "4111-10"
+    ],
+    "journey_id": "9011-10-1:410003636:410003658|8006-10-0:410003658:640000371|8594-10-0:640000371:670012737|7550-10-1:670012737:670016862|4111-10-0:670016862:330016036"
+  },
+  {
+    "origin": "50004826",
+    "destination": "830004188",
+    "group": "rail_or_mixed",
+    "hour": 14,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "273X-10",
+      "1177-10",
+      "2026-10",
+      "172P-10",
+      "1764-10"
+    ],
+    "journey_id": "273X-10-1:50004826:6509449|1177-10-0:6509449:910001875|2026-10-1:910001875:380004373|172P-10-1:380004373:8313562|1764-10-1:8313562:830004188"
+  },
+  {
+    "origin": "50004826",
+    "destination": "830004188",
+    "group": "rail_or_mixed",
+    "hour": 8,
+    "state": "first_route",
+    "sources": [
+      "raptor"
+    ],
+    "cost": 4.0,
+    "lines": [
+      "273X-10",
+      "1177-10",
+      "2026-10",
+      "172P-10",
+      "1764-10"
+    ],
+    "journey_id": "273X-10-1:50004826:6509449|1177-10-0:6509449:910001875|2026-10-1:910001875:380004373|172P-10-1:380004373:8313562|1764-10-1:8313562:830004188"
+  }
+]

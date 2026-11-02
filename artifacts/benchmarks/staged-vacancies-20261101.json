@@ -1,0 +1,20 @@
+{
+  "pairs_with_routes": 451713249,
+  "pairs_with_five_routes": 438499398,
+  "pairs_with_one_to_four_routes": 13213851,
+  "pairs_without_materialized_route": 44395553,
+  "stops": 22274,
+  "routes": 2225732974,
+  "database_bytes": 82237661184,
+  "free_bytes": 161540620288,
+  "base": {
+    "rows": 174727157,
+    "full_pairs": 109286564
+  },
+  "expanded": {
+    "rows": 342410903,
+    "full_pairs": 329212834
+  },
+  "elapsed_seconds": 55.746496525011025,
+  "measured_at": "2026-11-01T04:50:09-0300"
+}

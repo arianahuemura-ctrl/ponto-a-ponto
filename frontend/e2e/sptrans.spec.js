@@ -1,5 +1,10 @@
 import { test, expect } from './coverage.js';
 const stop={id:'1',name:'Origem A',lat:-23.55,lon:-46.6333,directions:[{bearing:90,code:'1000-10',headsign:'Destino',kind:'departure'},{bearing:270,code:'1000-10',headsign:'Destino',kind:'arrival'}]};
+async function darkTheme(page){
+  await page.getByRole('button',{name:'Configurações',exact:true}).click();
+  await page.getByRole('combobox',{name:'Aparência',exact:true}).selectOption('dark');
+  await page.getByRole('button',{name:'Fechar configurações',exact:true}).click();
+}
 async function openOrigin(page,first=false){
   await (first?page.locator('.sp-stop').first():page.locator('.sp-stop')).click();
   await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
@@ -38,7 +43,7 @@ for(const width of [390,1440]) {
     expect(await page.locator('.sp-stop').getAttribute('style')).toBe(location);
     expect(requests.length-previous).toBe(1);
     expect(requests.every(u=>u.includes('/stops/'))).toBe(true);
-    await page.getByRole('button',{name:'Ativar modo escuro'}).click();
+    await darkTheme(page);
     await page.screenshot({path:`test-results/sp-clean-map-${width}.png`});
     expect(errors).toEqual([]);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -83,8 +88,8 @@ for(const width of [390,1440]) test(`autocomplete distingue bairros em ${width}p
   await expect(page.getByRole('option').last()).toContainText('Bela Vista');
   await page.screenshot({path:`test-results/sp-autocomplete-${width}.png`});
   await input.press('ArrowUp');await input.press('Enter');
-  await expect(page.getByRole('dialog')).toContainText('Rua de teste, Bela Vista');
-  await expect(page.getByRole('dialog')).toContainText('Parada do destino');
+  await expect(page.locator('.sp-search-popover')).toContainText('Rua de teste, Bela Vista');
+  await expect(page.locator('.sp-search-popover')).toContainText('Parada do destino');
   const confirm=page.getByRole('button',{name:'Usar como destino'});
   await expect(input).not.toBeFocused();
   await expect(confirm).toBeFocused();
@@ -97,16 +102,16 @@ for(const width of [390,1440]) test(`autocomplete distingue bairros em ${width}p
   await expect(confirm).toBeFocused();
   await expect(confirm).toBeInViewport();
   await confirm.press('Enter');
-  await expect(page.getByRole('dialog')).toContainText('Ônibus da sua rota');
+  await expect(page.getByRole('dialog')).toContainText('Opções da sua rota');
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).destination.id)).toBe('2');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('busca trata ausência de sugestões e falha do provedor',async({page})=>{
   await setup(page);await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({json:{suggestions:[]}}));
   await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();
-  await page.getByRole('combobox').fill('Não existe');await expect(page.getByRole('dialog')).toContainText('Nenhum endereço encontrado');
+  await page.getByRole('combobox').fill('Não existe');await expect(page.locator('.sp-search-popover')).toContainText('Nenhum endereço encontrado');
   await page.route('**/api/sptrans/addresses/**',r=>r.fulfill({status:502,json:{error:'Não foi possível buscar endereços agora.'}}));
-  await page.getByRole('combobox').fill('Outra rua');await expect(page.getByRole('dialog').getByRole('alert')).toContainText('Não foi possível');
+  await page.getByRole('combobox').fill('Outra rua');await expect(page.locator('.sp-search-popover').getByRole('alert')).toContainText('Não foi possível');
 });
 
 test('zoom e redimensionamento consultam os limites visíveis',async({page})=>{
@@ -168,14 +173,14 @@ for(const width of [390,1440]) test(`embarque, lista filtrada e cancelamento em 
   });
   const state=page.getByRole('region',{name:'Estado da navegação'});
   await page.goto('/');await expect(state).toContainText('Selecionar embarque');
-  await page.getByRole('button',{name:'Ativar modo escuro'}).click();await openOrigin(page,true);
+  await darkTheme(page);await openOrigin(page,true);
   const dialog=page.getByRole('dialog');
   await expect(dialog).toContainText('Próximos ônibus');await expect(dialog).toContainText('2000-10');
   await page.screenshot({path:`test-results/sp-board-${width}.png`});
   await page.getByRole('button',{name:'Selecionar destino',exact:true}).click();
   await expect(dialog).not.toBeVisible();await expect(state).toContainText('Selecionar destino');
   await page.locator('.sp-stop:not(.sp-origin)').click();
-  await expect(dialog).toContainText('Ônibus da sua rota');await expect(dialog).toContainText('1000-10');await expect(dialog).not.toContainText('2000-10');
+  await expect(dialog).toContainText('Opções da sua rota');await expect(dialog).toContainText('1000-10');await expect(dialog).not.toContainText('2000-10');
   await page.screenshot({path:`test-results/sp-route-${width}.png`});
   await dialog.getByRole('button',{name:'Cancelar viagem',exact:true}).click();
   await page.getByRole('button',{name:'Confirmar cancelamento'}).click();
@@ -220,7 +225,7 @@ test('ônibus sólido e caminhada tracejada têm contraste nos dois temas',async
   await expect(page.locator('.sp-route-bus')).not.toHaveAttribute('stroke-dasharray',/.+/);
   await expect(page.locator('.sp-route-walk')).toHaveAttribute('stroke-dasharray','9 10');
   for(const dark of [false,true]){
-    if(dark)await page.getByRole('button',{name:'Ativar modo escuro'}).click();
+    if(dark)await darkTheme(page);
     expect(await page.locator('.sp-route-bus').evaluate(el=>getComputedStyle(el).stroke)).toBe(dark?'rgb(66, 200, 255)':'rgb(0, 118, 237)');
     expect(await page.locator('.sp-route-walk').evaluate(el=>getComputedStyle(el).stroke)).toBe(dark?'rgb(255, 121, 203)':'rgb(213, 44, 148)');
     await page.screenshot({path:`test-results/sp-routes-${dark?'dark':'light'}.png`});
@@ -268,7 +273,7 @@ test('fechar lista antes da resposta não cancela rota nem reexibe paradas',asyn
   await expect(page.getByText('Calculando rota…',{exact:true})).toBeVisible();
   release();await expect(page.locator('.sp-route-bus')).toHaveCount(1);
   await expect(page.locator('.sp-stop')).toHaveCount(2);
-  await page.locator('.sp-origin').click();await expect(page.getByRole('dialog')).toContainText('Ônibus da sua rota');
+  await page.locator('.sp-origin').click();await expect(page.getByRole('dialog')).toContainText('Opções da sua rota');
 });
 
 test('nome do favorito persiste e pode ser alterado sem mudar a parada',async({page})=>{
@@ -306,7 +311,7 @@ test('selecionar destino oferece favoritos e preserva a referência para calcula
   await expect(page.locator('.sp-map')).toBeVisible();
   await page.getByRole('button',{name:'Favoritos',exact:true}).click();
   await page.getByRole('button',{name:'Casa · Lado de retorno · 8',exact:true}).click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toContainText('Lado de retorno');
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).toContainText('Lado de retorno');
   const data=await page.evaluate(()=>({session:JSON.parse(sessionStorage.getItem('pap.sp.session')),favorites:JSON.parse(localStorage.getItem('pap.sp.favorites'))}));
   expect(data.session.destination.id).toBe('8');expect(data.favorites[0].id).toBe('8');
 });
@@ -362,7 +367,7 @@ test('viagem direta oculta seletor e permite reabrir horários após fechar e Es
   await expect(page.getByLabel('Trecho exibido no mapa')).toHaveCount(0);
   await expect(page.locator('path.sp-route-bus')).not.toHaveCount(0);
   await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toContainText('1000-10');
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).toContainText('1000-10');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await page.getByRole('button',{name:'Horários de embarque'}).click();
@@ -448,7 +453,7 @@ test('três rotas mais rápidas, expansão e escolha preservam caminhada na bald
   await page.getByRole('button',{name:'Mostrar todas as 5 rotas calculadas'}).click();
   await expect(options.locator('.sp-route-option')).toHaveCount(5);
   await options.locator('.sp-route-option').nth(4).click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).not.toBeVisible();
   await expect(page.getByRole('combobox',{name:'Trecho exibido no mapa'})).toHaveValue('all');
   await expect(page.locator('path.sp-route-bus')).not.toHaveCount(0);
   await page.getByRole('button',{name:'Horários de embarque',exact:true}).click();
@@ -488,7 +493,7 @@ test('stream mostra a primeira rota antes do fim e preserva escolha com novas al
   await expect(options.locator('.sp-route-option')).toHaveCount(1);
   await expect(page.getByText(/As rotas aparecem conforme/)).toBeVisible();
   await options.locator('.sp-route-option').click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).not.toBeVisible();
   await page.locator('.leaflet-control-zoom-in').click();
   const mapBox=await page.locator('.sp-map').boundingBox();
   await page.mouse.move(mapBox.x+mapBox.width*.6,mapBox.y+mapBox.height*.5);
@@ -526,7 +531,7 @@ for(const width of [390,756,1440])test(`ações da rota na barra inferior e etap
   await expect(page.getByRole('dialog',{name:'Cancelar viagem?'})).toBeVisible();
   await page.getByRole('button',{name:'Continuar viagem'}).click();
   await bar.getByRole('button',{name:'Horários de embarque'}).click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).toBeVisible();
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).toBeVisible();
 });
 
 test('stream atualiza desembarque antecipado da rota escolhida sem resetar o mapa',async({page})=>{
@@ -553,7 +558,7 @@ test('stream atualiza desembarque antecipado da rota escolhida sem resetar o map
   await expect(options.locator('.sp-route-option')).toHaveCount(1);
   await expect(page.getByText(/As rotas aparecem conforme/)).toBeVisible();
   await options.locator('.sp-route-option').click();
-  await expect(page.getByRole('dialog',{name:'Ônibus da sua rota'})).not.toBeVisible();
+  await expect(page.getByRole('dialog',{name:'Opções da sua rota'})).not.toBeVisible();
   await page.locator('.leaflet-control-zoom-in').click();
   const mapBox=await page.locator('.sp-map').boundingBox();
   await page.mouse.move(mapBox.x+mapBox.width*.6,mapBox.y+mapBox.height*.5);

@@ -38,4 +38,9 @@ frontend/.nyc_output/
 # Ferramentas nativas e relatórios de geração
 .cache/osrm-*/
 .cache/setup/
+.cache/staged/
+.cache/staged-kernel/
 artifacts-backup-*/
+
+# GTFS, OSM and generated transport databases; summaries live in benchmarks.
+artifacts/transport/

@@ -59,6 +59,53 @@ class MaterializedAppTests(SimpleTestCase):
         self.assertEqual(best['walks'][-1]['destination']['id'],'address-to')
         for p,contents in originals.items():self.assertEqual(p.read_bytes(),contents)
 
+    def test_ready_routes_are_sent_before_pending_pairs_and_close_cancels_them(self):
+        self.build()
+        with store.connection() as db, \
+             patch.object(adapter,'_pending_path_batches') as pending:
+            a=store.get_stop(db,'A');b=store.get_stop(db,'D')
+            stream=alternatives._bus_progressive(db,a,b,now=fixtures.NOW)
+            next(stream)
+            first=next(stream)
+            self.assertTrue(first['journeys'])
+            self.assertFalse(first['complete'])
+            pending.assert_not_called()
+            stream.close()
+            pending.assert_not_called()
+
+    def test_pending_pairs_are_consumed_one_batch_at_a_time(self):
+        self.build()
+        with store.connection() as db:
+            a=store.get_stop(db,'A');b=store.get_stop(db,'D')
+            paths=adapter._prepare_materialized(db,a,b)['paths']
+            resumed=[]
+            def pending(*args):
+                yield paths
+                resumed.append(True)
+                yield paths  # Repetições entre pares não devem duplicar a avaliação.
+            context={'paths':[],'city_complete':False,'pending_pairs':True}
+            with patch.object(adapter,'_pending_path_batches',side_effect=pending):
+                stream=adapter.progressive(db,a,b,1,fixtures.NOW,context)
+                next(stream)
+                first=next(stream)
+                self.assertTrue(first['journeys'])
+                self.assertEqual(resumed,[])
+                remaining=list(stream)
+                self.assertEqual(resumed,[True])
+                self.assertTrue(remaining[-1]['complete'])
+                self.assertEqual(len(remaining[-1]['journeys']),len({j['id'] for j in remaining[-1]['journeys']}))
+
+    def test_empty_materialization_defers_complement_before_first_stream_chunk(self):
+        self.build()
+        with store.connection() as db, \
+             patch.object(adapter,'_prepare_materialized',return_value={'paths':[]}), \
+             patch.object(direct,'database_path',return_value=self.root/'missing.sqlite3'), \
+             patch.object(city_connections,'database_path',return_value=self.cp), \
+             patch.object(adapter,'_pending_paths',side_effect=AssertionError('blocking composition')):
+            context=connection_adapter.prepare(db,store.get_stop(db,'A'),store.get_stop(db,'D'))
+        self.assertEqual(context['paths'],[])
+        self.assertTrue(context['pending_pairs'])
+
     def test_no_routes_triggers_fallback_and_keeps_refresh(self):
         self.build()
         # A caminhada perde todas as primeiras partidas das 08:00. O fluxo novo vazio não deve fechar a interface.
@@ -144,7 +191,7 @@ class MaterializedAppTests(SimpleTestCase):
                 'from_lat':a['lat'],'from_lon':a['lon'],'to_lat':b['lat'],'to_lon':b['lon'],'stream':'1','nearby':'1'})
             chunks=[json.loads(c) for c in response.streaming_content]
         self.assertEqual(response.status_code,200)
-        self.assertEqual(chunks[-1]['planner'],'connections')
+        self.assertEqual(chunks[-1]['planner'],'multimodal')
         self.assertEqual(chunks[-1]['journeys'][0]['walking_meters'],150)
         self.assertEqual(chunks[-1]['journeys'][0]['mode'],'walk')
         # Neste fixture, caminhar diretamente custa menos que o acesso e saída do ônibus.

@@ -70,7 +70,7 @@ class TransferPlannerTests(SimpleTestCase):
         self.edit("UPDATE stop_times SET stop_id='5' WHERE trip_id='R2' AND stop_sequence=1")
         self.assertEqual(self.plan(),[])
     def test_invalid_limit_rejected(self):
-        self.assertEqual(self.client.get('/api/sptrans/board/',{'origin':'1','destination':'4','max_transfers':'4'}).status_code,400)
+        self.assertEqual(self.client.get('/api/sptrans/board/',{'origin':'1','destination':'4','max_transfers':'5'}).status_code,400)
     def test_api_returns_connections_without_realtime_credentials(self):
         from unittest.mock import patch
         with patch('transit.sptrans.planner.timezone.localtime',return_value=NOW):
@@ -223,16 +223,68 @@ class TransferPlannerTests(SimpleTestCase):
             point=store.get_stop(db,'1')
             for outgoing in (True,False):
                 fixed,_=alternatives.access_points(db,point,outgoing,optimistic=True,endpoint_selection=True)
-                self.assertEqual([p['id'] for p,w in fixed],['1','2','3'])
+                self.assertEqual([p['id'] for p,w in fixed],['1','2'])
                 self.assertIsNone(fixed[0][1])
                 for p,w in fixed[1:]:
                     self.assertEqual(w['accessType'],'boarding' if outgoing else 'destination')
                     self.assertEqual(w['origin']['id'] if outgoing else w['destination']['id'],'1')
                 anchor={**point,'id':'address-test','lat':point['lat']+.0001}
                 choices,_=alternatives.access_points(db,anchor,outgoing,optimistic=True,endpoint_selection=True)
-                self.assertEqual([p['id'] for p,w in choices],['1','2','3'])
+                self.assertEqual([p['id'] for p,w in choices],['1','2'])
                 for p,w in choices:
                     self.assertEqual(w['origin']['id'] if outgoing else w['destination']['id'],'address-test')
+
+    def test_endpoint_radius_keeps_all_nearby_bus_stops(self):
+        from transit.sptrans import alternatives
+        for sid,lat in [('5',-23.5012),('6',-23.5014),('7',-23.5016)]:
+            self.edit("INSERT INTO stops VALUES (?,?, '',?, -46.6)",(sid,'Plataforma '+sid,lat))
+            self.edit("INSERT INTO stop_times VALUES ('R1','07:01:00','07:01:00',?,?)",(sid,int(sid)))
+        self.edit("INSERT INTO stops VALUES ('8','Sem serviço de ônibus','',-23.5011,-46.6)")
+        with store.connection() as db:
+            anchor=store.get_stop(db,'1')
+            for outgoing in (True,False):
+                choices,incomplete=alternatives.access_points(db,anchor,outgoing,optimistic=True,endpoint_selection=True)
+                self.assertEqual([p['id'] for p,w in choices],['1','5','6','7','2'])
+                self.assertFalse(incomplete)
+
+    def test_empty_endpoint_radius_uses_three_nearest_stops(self):
+        from transit.sptrans import alternatives
+        with store.connection() as db:
+            anchor={**store.get_stop(db,'1'),'id':'passenger-location','lat':-23.498}
+            for outgoing in (True,False):
+                choices,_=alternatives.access_points(db,anchor,outgoing,optimistic=True,endpoint_selection=True)
+                self.assertEqual([p['id'] for p,w in choices],['1','2','3'])
+                self.assertTrue(all(w['distance_meters']>200 for p,w in choices))
+                self.assertTrue(all(w['accessType']==('boarding' if outgoing else 'destination') for p,w in choices))
+            anchor['lat']=-23.48
+            choices,_=alternatives.access_points(db,anchor,True,optimistic=True,endpoint_selection=True)
+            self.assertEqual(choices,[])  # Preserva o limite de caminhada de 1 km.
+
+    def test_endpoint_radius_is_inclusive_and_does_not_pad_to_three(self):
+        from transit.sptrans import alternatives
+        from unittest.mock import patch
+        with store.connection() as db:
+            anchor=store.get_stop(db,'1')
+            gaps={store.get_stop(db,str(i))['lat']:gap for i,gap in enumerate([0,200,200.01,400],1)}
+            with patch.object(alternatives.directions,'distance',side_effect=lambda a,b:gaps[b[0]]):
+                choices,_=alternatives.access_points(db,anchor,True,optimistic=True,endpoint_selection=True)
+            self.assertEqual([p['id'] for p,w in choices],['1','2'])
+
+    def test_endpoint_radius_still_validates_pedestrian_detours(self):
+        from transit.sptrans import alternatives
+        from unittest.mock import patch
+        with store.connection() as db:
+            anchor={**store.get_stop(db,'1'),'id':'passenger-location','lat':-23.5009}
+            for outgoing in (True,False):
+                for response in [{'available':False},{'available':True,'distance_meters':1001}]:
+                    with patch.object(alternatives.walking,'route',return_value=response) as foot:
+                        choices,incomplete=alternatives.access_points(db,anchor,outgoing,endpoint_selection=True)
+                    self.assertEqual(choices,[])
+                    self.assertEqual(incomplete,not response['available'])
+                    # A falha pedestre não expande silenciosamente o raio a outras paradas.
+                    self.assertEqual(foot.call_count,2)
+                    for call in foot.call_args_list:
+                        self.assertEqual(call.args[0 if outgoing else 1]['id'],'passenger-location')
 
     def test_access_uses_real_walking_distance_and_four_kmh(self):
         from transit.sptrans import alternatives
