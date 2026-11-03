@@ -1,9 +1,619 @@
 # Estado do projeto para continuidade
 
-Atualizado em **02/11/2026**, referência de data `America/Sao_Paulo`.
+Atualizado em **03/11/2026**, referência de data `America/Sao_Paulo`.
 Este é um resumo verificado do repositório, não uma recuperação da conversa.
 Na próxima sessão, leia [AGENTS.md](../AGENTS.md) e confira o Git novamente.
 Procedimento e diagnóstico: [CODEX_CONTINUITY.md](CODEX_CONTINUITY.md).
+
+## Versionamento autorizado — 03/11/2026
+
+- Responsável autorizou commits e pushes. Na branch `relatorio`, commit
+  `aef369c` reúne 56 arquivos: fontes ativos, 17 capturas, PDFs de 02/11 e
+  03/11 e auditorias/validações correspondentes. Referência anterior `f58078a`.
+- Na branch `feat/busca-bidirecional`, esta atualização versiona a continuidade
+  das revisões de vídeo e do relatório desde `78e3935`. Não modifica código.
+  Referências “sem commit” nas etapas abaixo registram o momento anterior a
+  esta publicação; consultar Git para o estado de versionamento atual.
+- `git diff --check` e verificação do índice aprovados em ambos os worktrees;
+  nenhuma recompilação ou teste de aplicação adicional, pois os artefatos já
+  haviam sido validados e seu conteúdo não mudou. Arquivos históricos não
+  relacionados e `:memory:.ses` preservados fora dos commits. Vídeos/fontes
+  externos em PI2 continuam no disco e não foram adicionados ao repositório.
+- Pushes autorizados às próprias branches, sem merge ou reescrita de histórico.
+  Logs desta publicação em `/tmp/pap-*-20261103.log`; conferir os hashes remotos
+  ao retomar. Pendências institucionais e verificações do YouTube permanecem.
+
+## Relatório com URL definitiva do vídeo — 03/11/2026
+
+- URL fornecida pelo responsável: https://www.youtube.com/watch?v=rSvuIWx8QAg
+- No worktree `maua_bus_map-relatorio`, branch `relatorio`, HEAD `f58078a`, atualizada a capa do fonte ativo e removido o aviso de versão provisória. Trabalho anterior preservado, sem commit/push.
+- [Novo PDF](../../maua_bus_map-relatorio/docs/relatorio_final/PaP_relatorio_2026-11-03_video_definitivo.pdf): 167 páginas, 30.158.763 bytes; MD5 `f7c3cedb7bb9d613c9819a77e16fe5cf`; SHA-256 `b3f141273264f7a2b198b50300972d704c15494bc47485de1d959fd5d9b0a488`.
+- LuaLaTeX/latexmk -norc saída 0. Capa/link clicável conferidos; páginas 2–167 idênticas por texto e pixels a 100 dpi à versão anterior, preservada por hash. Zero referências indefinidas/Overfull/caracteres ausentes; 13 Underfull preexistentes. `git diff --check` aprovado. [Auditoria](../../maua_bus_map-relatorio/docs/relatorio_final/video-definitivo-2026-11-03/ATUALIZACAO.md); logs no worktree acadêmico em `.cache/setup/video-definitivo-20261103/`.
+- Consulta web ao YouTube falhou; não foi possível conferir acesso, qualidade HD, legendas publicadas ou correspondência com o MP4 local. Próximo passo: conferir em janela anônima e confirmar exigências institucionais de abstract/keywords e orientação sobre avatares. QR físico/avaliação com passageiros continuam limitações documentadas. ZIP histórico não atualizado. Sem mudança no aplicativo/vídeo ou testes da aplicação.
+
+## Vídeo mais recente: recortes nativos dos demais participantes — 03/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; alterações anteriores e
+  `:memory:.ses` preservados, sem commit. Nova entrega:
+  [MP4](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/PaP_integral_gravacoes_PT_EN.mp4),
+  [comparativo de 16 s sem áudio](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/Comparativo_recortes_participantes_sem_audio.mp4)
+  e [tela de integrantes](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/Integrantes_recortes_nativos.png).
+- Refeito o alfa diretamente das câmeras de **Ariana, Bruno, Caio e Leonardo**,
+  antes da redução para o tamanho final. Preservado RGB original nas regiões
+  opacas; reamostragem com alfa pré-multiplicado, escala dos rostos mantida e
+  espaço superior ampliado para os cabelos existentes na fonte. Cor/exposição
+  ajustadas por grupos de quadros à montagem aprovada, sem ganho automático
+  por quadro. Ariana/Bruno/Caio têm fundos de ambiente, não tela verde.
+  Leonardo passou a usar recorte de fonte em 1440 × 960 antes do processamento.
+- Aplicado nas participações e na tela de integrantes. Conferidas as gravações
+  reais posteriores da apresentação de Ariana e de Bruno; tentativas baseadas
+  em versões históricas não foram usadas. Preservada a seleção de movimentos
+  já adotada nos trechos sintetizados, sem nova animação ou síntese. Ganho
+  visual mais evidente em Ariana/Bruno, discreto em Caio/Leonardo.
+- Alterados 2.411 quadros de Ariana, 1.550 de Bruno, 2.118 de Caio e 2.322 de
+  Leonardo, além de 641 quadros da grade. **54 quadros de Caio (1,8 s)** mantêm
+  o recorte anterior por correspondência insuficientemente segura com a
+  câmera: 05:20,300–05:21,833 e 05:22,200–05:22,467. Parte da captação de
+  Ariana já corta o alto do cabelo; não foi inventado conteúdo fora da câmera.
+  Resolução/foco/compressão originais continuam limitando o resultado.
+- André mantém a correção anterior. Maurício, Ingrid e Nathalia já têm fontes
+  transparentes e foram preservados; auditoria em `still-assets-audit.json`.
+  Mantida a correção do painel de Leonardo em 04:10,867–04:12,533.
+- `python3 .cache/setup/participantes-recortes-20261102/render.py`,
+  `validate.py` e `package.py`: saída 0. Logs completos no mesmo diretório e
+  em `PI2/producao_video/2026-11-03-recortes-participantes/`. Decodificação
+  integral aprovada; 71 amostras/limites, proteção dos pixels fora dos retratos
+  antes da codificação e oito verificações de fundo plano aprovadas. Comparativo
+  decodificado integralmente. Inspeção visual por amostras; não houve reprodução
+  humana contínua do vídeo. Geração inicial de Leonardo esperava 2.352 quadros,
+  mas a fonte tem 2.351; assertion final preservada no log, contagem corrigida,
+  todos os quadros utilizados conferidos; slot vazio nunca referenciado.
+- **09:46,833**, Full HD/30 fps, 17.605 quadros, 12 capítulos. Áudio e legendas
+  internas idênticos por hash de fluxo; SRT/VTT/MP4 equivalentes (169 PT/167 EN).
+  7.850 quadros copiados idênticos por hash; 9.755 reencodificados em H.264
+  medium/CRF 12. Conserva **−16,48 LUFS/−1,76 dBTP** medidos anteriormente,
+  sem nova medição. Master de áudio permanece
+  `2026-11-02-audio-restaurado/final-master.wav`.
+- MP4: **113.654.276 bytes**; MD5 `206af6c5fffff7777f5b1ac818b1cabf`;
+  SHA-256 `e4c3a8890e7eadbaa00ea6b28ae8e29b9aff1ecfa025b219990a9439c0265f79`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/validacao.json),
+  [detalhes e limites](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/LEIA-ME.md)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-03-recortes-participantes/hashes.json).
+  Bibliotecas e blocos volumosos preservados em
+  `.cache/setup/participantes-recortes-20261102/`; scripts/logs/provas exportados
+  para a pasta de produção acima. Cópias publicadas verificadas por SHA-256,
+  conforme `publication.json` (145 arquivos). O manifesto dos 13 arquivos
+  finais e os oito links locais desta seção foram conferidos; `git diff --check`
+  aprovado. Fontes e entregas anteriores intactas.
+  Aplicativo/relatório não alterados; testes do aplicativo não executados.
+  Próximo passo: revisar o comparativo e usar este MP4 como fonte visual atual.
+
+## Vídeo anterior: recorte nativo de André e painel de Leonardo — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; trabalho anterior e
+  `:memory:.ses` preservados, sem commit. Nova entrega:
+  [MP4](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/PaP_integral_gravacoes_PT_EN.mp4),
+  [comparativo curto sem áudio](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/Comparativo_recortes_sem_audio.mp4),
+  [André antes/depois](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/Andre_recorte_antes_depois.png)
+  e [Leonardo antes/depois](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/Leonardo_fundo_antes_depois.png).
+- Diagnóstico nos scripts antigos: retrato de André reduzido e recomposto,
+  depois novamente recortado de vídeo já montado e ampliado. Refeito o alfa
+  diretamente da câmera em 1080 × 1920, com estimativa local do verde,
+  descontaminação somente nas bordas parcialmente transparentes e
+  reamostragem com alfa pré-multiplicado. Detalhes reais de cabelo, rosto e
+  roupa recuperados; sem geração de imagem ou nova síntese de voz.
+- Aplicado na abertura, no primeiro cartão dos integrantes e no encerramento.
+  Escala/posição de referência preservadas; plano anterior de movimentos
+  dos trechos sintetizados mantido; agradecimento conferido com quadros da
+  câmera. Cor/exposição da fonte, sem ganho automático por quadro. Fios finos
+  continuam limitados pela captação; não afirmar recorte perfeito ou nova
+  sincronização labial. Grade/nome/aviso dos demais integrantes preservados.
+- Leonardo: removido o retângulo quase preto em **04:10,867–04:12,533**,
+  50 quadros. Um intervalo da montagem anterior usava cor fixa de slide
+  sobre a captura do aplicativo. Recuperado painel da mesma captura original,
+  inclusive borda e controle de fechar; referências faltantes preenchidas
+  com quadros vizinhos da mesma cena. Tema escuro mantido. Diferença mediana
+  de luminância na margem vazia versus painel adjacente entre −0,5 e +0,5.
+- `validate.py`: saída 0; decodificação integral, 26 amostras e limites,
+  proteção dos pixels fora das regiões recompostas antes da codificação,
+  SRT/VTT/MP4 equivalentes (169 PT/167 EN) e 12 capítulos aprovados.
+  **09:46,833**, Full HD/30 fps, 17.605 quadros; 2.555 reencodificados em
+  H.264 medium/CRF 12 e 15.050 copiados idênticos por hash de quadro.
+  Áudio e faixas internas de legenda idênticos por hash de fluxo. Conserva
+  **−16,48 LUFS/−1,76 dBTP** medidos na entrega anterior, sem nova medição.
+  Master de áudio continua `2026-11-02-audio-restaurado/final-master.wav`.
+- Render inicial interrompido por referência de fundo ausente; arquivo parcial
+  e log preservados, caso corrigido e render retomado com validação posterior.
+  A geração das bibliotecas também foi retomada após perda do processo entre
+  turnos. `package.py`: saída 0; comparativo decodificado integralmente.
+  Publicação em novas pastas: 89 arquivos copiados e conferidos por SHA-256.
+  Inspeção visual de amostras; não houve reprodução humana contínua do vídeo.
+- MP4: **98.387.122 bytes**; MD5 `2865459719124b260c00ac251c97d7d9`;
+  SHA-256 `5bd86593ab625c2906ab840decfa7d5fe4848487932065d12c8093547e02184a`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/validacao.json),
+  [detalhes e limites](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/LEIA-ME.md)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-recortes-refeitos/hashes.json).
+  Scripts/logs/amostras em `PI2/producao_video/2026-11-02-recortes-refeitos/`;
+  bibliotecas e blocos em `.cache/setup/andre-recorte-20261102/`.
+  Versões/fontes anteriores intactas. Aplicativo/relatório não alterados;
+  testes do aplicativo não executados. Próximo passo: revisar o comparativo
+  desta entrega e usar este MP4 como fonte das próximas alterações visuais.
+
+## Vídeo anterior: áudio real restaurado e impulsos atenuados — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; trabalho anterior preservado,
+  sem commit. Usuário identificou voz metálica e estalos em 00:11. Nova entrega:
+  [MP4](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/PaP_integral_gravacoes_PT_EN.mp4),
+  [comparativo da abertura com áudio](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/Comparativo_Andre_abertura.mp4)
+  e [comparativo do agradecimento](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/Comparativo_Andre_agradecimento.mp4).
+- Restauradas três falas reais de André diretamente da câmera original:
+  **00:06,000–00:09,120**, **00:09,133–00:15,013** e
+  **09:43,686–09:46,186**. Mesmas palavras e tempos; sem nova síntese ou
+  mudança de velocidade. Passa-altas de 65 Hz e ganho constante; limitador
+  de pico local somente no agradecimento, sem compressão global. RMS das
+  primeiras frases mantido; agradecimento −0,14 dB. Fontes e versões intactas.
+- Fidelidade à fonte melhorou: relação sinal/resíduo de 17,34 para 46,95 dB
+  na primeira frase e de 15,30 para 48,57 dB na segunda. Isso mede proximidade
+  da gravação, não naturalidade percebida nem elimina problemas da captação.
+  Cadeia antiga de recodificações/normalização documentada; não atribuir todo
+  som metálico exclusivamente a ela sem escuta. Varredura de 586,83 s sem
+  amostras acima de 0,98; 104 janelas adicionais comparadas com fontes reais.
+- Dois detectores selecionaram sete impulsos compatíveis com estalos:
+  **02:55,448; 03:12,068; 04:11,883; 05:35,080; 05:37,720;
+  06:59,773; 09:43,637**. Atenuação localizada em 21 instantes de amostragem,
+  sem filtro global de retirada de estalos. Candidatos fracos e efeito de borda
+  em 00:00 rejeitados. Não são sete defeitos confirmados por escuta humana.
+- `validate.py`, `fidelity.py`, `transcribe.py` e `package.py`: saída 0.
+  Decodificação integral aprovada; Whisper large-v3 confirmou as três frases
+  exportadas. **Vídeo e duas faixas internas de legenda idênticos por hash**;
+  SRT/VTT/MP4 equivalentes (169 PT/167 EN), 12 capítulos, 17.605 quadros,
+  Full HD/30 fps e **09:46,833** preservados. PCM fora das três falas/sete
+  impulsos idêntico antes do AAC; áudio completo recodificado uma vez a 320 kbps.
+  Nova medição: **−16,48 LUFS, −1,76 dBTP, LRA 4,1 LU**. Não houve escuta
+  humana de cada passagem; avaliação perceptual permanece necessária.
+- MP4: **95.175.915 bytes**; MD5 `91f1c5c9302ba3f18b2c8d1fd4c78453`;
+  SHA-256 `2ee07ee2139048ec41179cb9da1b652de3eae28e4e96c9f4429d9697798f37e6`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/validacao.json),
+  [revisão detalhada e limites](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/REVISAO_AUDIO.md)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-audio-restaurado/hashes.json).
+  Publicação conferida por hashes; scripts/logs/rascunhos no workspace
+  `.cache/setup/audio-distorcoes-20261102/`; produção em
+  `PI2/producao_video/2026-11-02-audio-restaurado/`.
+- **Novo master de continuidade do áudio**:
+  `PI2/producao_video/2026-11-02-audio-restaurado/final-master.wav` (sem perdas).
+  Futuras edições devem partir dele, incorporando as correções anteriores.
+  Rascunho com agradecimento baixo foi descartado da entrega, mas preservado.
+  Falhas iniciais de nome de módulo/importação e serialização foram corrigidas
+  localmente; logs mantidos, sem alterar configurações globais.
+  Aplicativo/relatório não alterados e testes do aplicativo não executados.
+  Próximo passo: avaliação auditiva do comparativo pelo usuário, especialmente
+  timbre/estalos; não presumir que artefatos da gravação original desapareceram.
+
+## Vídeo anterior: definição dos rostos recuperada das fontes — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; trabalho local anterior
+  preservado, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-rostos-qualidade/PaP_integral_gravacoes_PT_EN.mp4)
+  e [comparativo ampliado, 18 segundos, sem áudio](../../../Documentos/univesp/PI2/entrega-2026-11-02-rostos-qualidade/Previa_comparacao_rostos_sem_audio.mp4).
+- Diagnóstico confirmado nos scripts e fontes: recortes pequenos de montagens
+  anteriores eram ampliados para o tamanho final. Recuperados detalhes reais
+  das gravações de André, Ariana, Bruno e Caio, com correspondência de quadros;
+  Leonardo usa sua sequência transparente e Maurício sua fotografia original.
+  Ganho visual maior em André, Ariana e Caio; menor nas fontes já mais bem
+  aproveitadas. Nenhuma reconstrução generativa de rosto ou nova síntese de voz.
+- Transferência de detalhes de luminância somente no interior do rosto, com
+  máscara suave, iluminação local preservada e intensidade suavizada no tempo.
+  Cores e pixels fora da máscara mantidos antes da codificação. Quadros sem
+  correspondência segura preservados: 82 André, 515 Bruno e 52 Caio. Quadro
+  inicial dos integrantes, contornos/cabelos e avatares ilustrados preservados.
+  Resultado limitado à resolução real das fontes; exportação permanece Full HD.
+- `validate.py`: saída 0; decodificação integral de áudio/vídeo, 13 amostras,
+  duração e 12 capítulos aprovados. **09:46,833**, 30 fps, 17.605 quadros;
+  11.362 reencodificados H.264 medium/CRF 12 e 6.243 copiados com igualdade
+  exata dos quadros decodificados. Áudio com hash de fluxo idêntico; conserva
+  −16,48 LUFS/−1,62 dBTP medidos anteriormente, sem nova medição. Equivalência
+  exata SRT/VTT/MP4: 169 PT e 167 EN. Prévia decodificada integralmente.
+  Inspeção visual de amostras; não houve reprodução humana de todo o vídeo.
+- Render e montagem concluíram, mas a primeira escrita do manifesto falhou por
+  inteiro NumPy não serializável. Conversão corrigida e manifesto regenerado
+  por `finalize_plan.py`, saída 0, sem repetir a codificação; validação posterior
+  aprovada. Tentativas e logs preservados em `.cache/setup/rostos-qualidade-20261102/`.
+- MP4: **95.441.366 bytes**; MD5 `fc5a995ad53ef880064ae0bd8e0109d1`;
+  SHA-256 `285708fde2cd67985cf41fb0e2f48d3d07db126c08e58cbbd38b339a3f5ccb45`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-rostos-qualidade/validacao.json),
+  [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-rostos-qualidade/hashes.json)
+  e [escopo/limites](../../../Documentos/univesp/PI2/entrega-2026-11-02-rostos-qualidade/LEIA-ME.md).
+  Publicação verificada por hashes; versão anterior intacta. Scripts, mapas de
+  correspondência e hashes das fontes em `PI2/producao_video/2026-11-02-rostos-qualidade/`;
+  bibliotecas volumosas intermediárias permanecem no workspace ignorado.
+  Aplicativo e relatório não alterados; testes do aplicativo não executados.
+  Próximo passo: usar esta entrega para revisão visual; orientação acadêmica
+  sobre avatares continua pendente.
+
+## Vídeo anterior: frase e fundo da Ingrid corrigidos — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; trabalho anterior preservado,
+  sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-ingrid-frase-fundo/PaP_integral_gravacoes_PT_EN.mp4)
+  e [prévia de nove segundos](../../../Documentos/univesp/PI2/entrega-2026-11-02-ingrid-frase-fundo/Previa_Ingrid_frase_e_fundo.mp4).
+- Refeita a frase “Uma opção de ônibus pode ser removida se caminhar é mais
+  rápido sem andar mais”, entre 06:50,451 e 06:55,300, com OmniVoice local e
+  referência de Úrsula em `2026-10-28-ingrid-ursula/referencias/ursula.wav`.
+  Escolhida a segunda síntese: transcrição integral aprovada e maior semelhança
+  acústica com a referência (cosseno 0,641, contra 0,567 da primeira).
+  Sem acelerar; última palavra termina em 06:54,731; 0,48 s de cauda da síntese
+  preservados. Master anterior já incluía a correção da Úrsula em 02:43;
+  PCM fora deste novo intervalo mantido idêntico antes do mesmo limitador.
+- Reconstruído fundo do avatar e nome entre 06:44,233 e 06:55,367 com as 61
+  poses transparentes originais e composição em YUV. Removida faixa escura sob
+  a figura e diferença de cor atrás do nome. Mesma escala/posição; animação
+  de boca/queixo/pinta acompanhando a energia da nova fala, sem alegar visemas.
+  Aviso de personagem e voz artificiais preservado.
+- Legendas PT/EN mantêm o texto e os demais tempos; somente divisão e término
+  dos dois cues da frase ajustados. `validate.py`: saída 0, transcrição exata
+  da frase exportada, equivalência SRT/VTT/MP4 (169 PT/167 EN), decodificação
+  integral aprovada, 17.105 quadros copiados idênticos, 500 reencodificados
+  slow/CRF 14, 334 com recomposição. Sete amostras e dois limites exportados;
+  amostra final conferida. `audit_background.py`: saída 0, diferença mediana Y
+  zero entre fundo recomposto e referência nos 334 quadros.
+- **09:46,833**, Full HD/30 fps, 17.605 quadros, 12 capítulos preservados;
+  nova medição do MP4: **−16,48 LUFS, −1,62 dBTP**. Não houve revisão auditiva
+  humana; evidências são ASR, comparação acústica e inspeção visual. Comparação
+  acústica falhou no ambiente VoiceStudio por incompatibilidade do checkpoint;
+  executada com sucesso no ambiente Whisper (`compare-v3.log`), sem mudança
+  de configuração global. Rascunho da primeira voz preservado no workspace.
+- MD5 `a89af7f2592dfb75fffa804691fce3b3`; SHA-256
+  `78747d7794b0225980cde27b84d6d18a93a982ff11bbb9f9a0859d61fd0d7778`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-ingrid-frase-fundo/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-ingrid-frase-fundo/hashes.json).
+  Treze arquivos publicados e verificados; fonte anterior preservada.
+  Scripts, áudio e logs em `.cache/setup/ingrid-final-frase-20261102/` e
+  `PI2/producao_video/2026-11-02-ingrid-frase-fundo/`. Aplicativo e relatório
+  não alterados; suítes do aplicativo não executadas. Próximo passo: usar
+  esta entrega nas revisões; orientação acadêmica sobre avatares pendente.
+
+## Vídeo anterior: fundo do Caio corrigido — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; trabalho local anterior
+  preservado, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-caio-fundo-corrigido/PaP_integral_gravacoes_PT_EN.mp4)
+  e [prévia de oito segundos](../../../Documentos/univesp/PI2/entrega-2026-11-02-caio-fundo-corrigido/Previa_Caio_fundo_corrigido.mp4).
+- Identificado retângulo de fundo atrás de Caio com aproximadamente um nível
+  adicional de luminância Y nos quatro slides de preparação. Igualados os pixels
+  de fundo azul conectados à margem ao fundo adjacente, em YUV nativo, entre
+  **05:00,067 e 06:04,600**. Sem conversão global de cores. Preservados movimento,
+  posição, escala e avisos anteriores, inclusive “Voz corrigida artificialmente”.
+- `python3 .cache/setup/caio-fundo-20261102/validate.py`: saída 0; decodificação
+  integral aprovada, 15.669 quadros copiados idênticos, 1.936 reencodificados
+  slow/CRF 14. Sete amostras e dois limites exportados; rosto central e pixels
+  mais claros preservados na composição das amostras. A primeira asserção
+  de proteção incluía fundo ao lado do rosto; área de conferência corrigida
+  e verificação complementar dos pixels claros aprovada (`visuals-v2.log`).
+- `python3 .cache/setup/caio-fundo-20261102/audit_background.py`: saída 0;
+  nos **1.936 quadros** do trecho, diferença mediana Y zero entre a margem
+  vazia do antigo retângulo e o fundo adjacente. Amostra exportada conferida.
+  Áudio com hash de fluxo idêntico; conserva −16,48 LUFS e −1,62 dBTP medidos
+  anteriormente, sem nova medição. **09:46,833**, 17.605 quadros, Full HD/30 fps,
+  12 capítulos, 169 legendas PT e 167 EN; equivalência exata SRT/VTT/MP4 aprovada.
+- MD5 `547ca5231ce58bc19c66460ec4e0bd1a`; SHA-256
+  `184d685abb915eb95ba3ef4f115cb57def674de7997c89f6dd6d622537cc97d9`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-caio-fundo-corrigido/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-caio-fundo-corrigido/hashes.json).
+  Treze arquivos publicados e verificados; versões anteriores intactas.
+  Scripts/logs em `.cache/setup/caio-fundo-20261102/`, copiados também para
+  `PI2/producao_video/2026-11-02-caio-fundo-corrigido/`. Aplicativo e relatório
+  não alterados; suítes do aplicativo não executadas. Próximo passo: usar
+  esta entrega nas revisões; orientação acadêmica sobre avatares pendente.
+
+## Vídeo anterior: avisos de voz corrigida — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; alterações locais anteriores
+  preservadas, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-avisos-voz-corrigida/PaP_integral_gravacoes_PT_EN.mp4).
+- Aviso visual alterado para **Voz corrigida artificialmente** no trecho de
+  Caio Procópio de 04:52,233 a 05:13,200 e na fala final de André, de
+  09:25,267 a 09:43,667. Demais avisos preservados. Somente texto visual:
+  nenhuma nova sintetização ou alteração da fala.
+- `python3 .cache/setup/avisos-corrigida-20261102/validate.py`: saída 0;
+  decodificação integral de áudio/vídeo aprovada; 16.232 quadros copiados
+  idênticos, 1.373 reencodificados slow/CRF 14, 1.181 com aviso alterado.
+  Seis amostras e quatro limites exportados; prévias de Caio e André conferidas.
+  Áudio com hash de fluxo idêntico; mantém medições anteriores de −16,48 LUFS
+  e −1,62 dBTP, sem nova medição. Duração **09:46,833**, 17.605 quadros,
+  Full HD/30 fps, 12 capítulos; equivalência exata SRT/VTT/MP4 (169 PT, 167 EN).
+- MD5 `a4ac196c8c9d19f5ad946d2c4e025730`; SHA-256
+  `d5300b6648edad1aaed9dfa3d967eb730ea7621400b5a270169807d7cb5ed783`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-avisos-voz-corrigida/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-avisos-voz-corrigida/hashes.json).
+  Doze arquivos publicados e verificados; versões anteriores intactas.
+  Scripts/logs em `.cache/setup/avisos-corrigida-20261102/`, também copiados
+  para `PI2/producao_video/2026-11-02-avisos-voz-corrigida/`.
+  Aplicativo e relatório não alterados; suítes do aplicativo não executadas.
+  Próximo passo: usar esta entrega nas revisões; orientação acadêmica sobre
+  avatares continua pendente.
+
+## Vídeo anterior: capturas em visualização escura — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; alterações anteriores
+  preservadas, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-capturas-escuras/PaP_integral_gravacoes_PT_EN.mp4)
+  e [prévia da Nathalia](../../../Documentos/univesp/PI2/entrega-2026-11-02-capturas-escuras/Previa_Nathalia_tema_escuro.mp4).
+  Cinco PNGs de conferência também acompanham a entrega.
+- Inventariados todos os 17.605 quadros. Substituídas as capturas claras das
+  cenas ferroviárias de Leonardo (04:47,600–04:52,200) e Nathalia
+  (09:18,633–09:21,867) pela captura nativa escura de `mapas-coloridos/dark.png`.
+  Mesmo enquadramento e cores das linhas; recortes, movimentos, nomes e avisos
+  dos participantes preservados, incluindo chapéu completo e nome centralizado.
+- Comparação Google Maps/Moovit (04:12,533–04:20,800) e evidência de Mauá
+  (04:40,700–04:47,600) receberam conversão de paleta somente na apresentação.
+  Fundos claros viram escuros; textos escuros viram claros; destaques saturados
+  permanecem reconhecíveis. Geometria, textos, números e trajetos mantidos;
+  rodapé informa a adaptação. Não é nova consulta nem comprovação de tema
+  nativo dos terceiros. Fontes originais preservadas e hashes verificados.
+- `python3 .cache/setup/video-escuro-20261102/validate.py`: saída 0;
+  decodificação integral, 15 amostras de cena, seis limites e novo inventário
+  de luminosidade de todos os quadros aprovados. **690 quadros** alterados e
+  reencodificados slow/CRF 14; **16.915 quadros copiados idênticos**.
+  Regiões claras restantes de grande área são os muitos ícones de pontos
+  na demonstração da lâmpada, aproximadamente 01:27–01:34, já em tema escuro;
+  mantida a demonstração de acender/apagar/dimmer solicitada anteriormente.
+- Áudio copiado sem recodificação, hash de fluxo idêntico; correção da Úrsula,
+  −16,48 LUFS e −1,62 dBTP mantidos. **09:46,833**, Full HD/30 fps,
+  12 capítulos, 169 legendas PT e 167 EN; equivalência exata SRT/VTT/MP4 aprovada.
+- MD5 `94f67a98afc2a634e97f3166b73d431b`; SHA-256
+  `a9b11b49d5315690856f9743361bcc9f4f702b2aec7c82166eee7f76c154a74e`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-capturas-escuras/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-capturas-escuras/hashes.json).
+  Dezesseis arquivos de entrega copiados e verificados; versões anteriores
+  intactas. Produção `Documentos/univesp/PI2/producao_video/2026-11-02-capturas-escuras/`;
+  workspace `.cache/setup/video-escuro-20261102/`. Aplicativo e relatório
+  não alterados; suítes do aplicativo não executadas. Próximo passo: usar
+  esta entrega nas próximas revisões; orientação acadêmica sobre avatares pendente.
+
+## Vídeo anterior: comparação de mapas sem faixas — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; mudanças anteriores
+  preservadas, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-comparacao-sem-faixas/PaP_integral_gravacoes_PT_EN.mp4),
+  [prévia da cena](../../../Documentos/univesp/PI2/entrega-2026-11-02-comparacao-sem-faixas/Previa_comparacao_sem_faixas.mp4)
+  e [quadro de 04:15](../../../Documentos/univesp/PI2/entrega-2026-11-02-comparacao-sem-faixas/Comparacao_sem_faixas.png).
+- A correção anterior tratava somente o retângulo atrás do apresentador;
+  restavam artefatos no fundo da tela comparativa, junto a textos e capturas.
+  Reconstruídos os 248 quadros de 04:12,533–04:20,800 com fundo uniforme,
+  textos novamente renderizados e capturas originais do Google Maps/Moovit
+  em `PI2/pesquisa/comparacao-aplicativos/2026-10-23-6L10-41/`. Conteúdo,
+  recortes, escala, créditos e ressalvas mantidos conforme script histórico
+  `comparacao-mapas-v58/corrigir.py`; fontes e hashes preservados. Mesmo
+  recorte transparente, posição, tamanho e movimento de Leonardo.
+- `python3 .cache/setup/leonardo-linhas-20261102/validate.py`: saída 0;
+  decodificação integral aprovada, 17.262 quadros copiados idênticos e 343
+  reencodificados slow/CRF 14. Seis amostras da cena, dois limites e regiões
+  vazias do fundo conferidos; sem faixas escuras na tela reconstruída.
+  Áudio com hash de fluxo idêntico, mantendo correção da Úrsula, −16,48 LUFS
+  e −1,62 dBTP. **09:46,833**, 17.605 quadros, 12 capítulos, 169 legendas PT
+  e 167 EN; equivalência exata SRT/VTT/MP4 aprovada.
+- MD5 `804aaa6b0fb42182e81a07101e4ddf70`; SHA-256
+  `2cff73d5f4993ab987a4d10c40f3dc3e0c70d5b791d8425df8a7f31cfe0882f6`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-comparacao-sem-faixas/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-comparacao-sem-faixas/hashes.json).
+  Doze arquivos de entrega copiados e verificados; versões anteriores intactas.
+  Produção `Documentos/univesp/PI2/producao_video/2026-11-02-comparacao-sem-faixas/`;
+  workspace `.cache/setup/leonardo-linhas-20261102/`. Aplicativo e relatório
+  não alterados; suítes do aplicativo não executadas. Próximo passo: usar
+  esta entrega nas próximas revisões; orientação sobre avatares pendente.
+
+## Vídeo anterior: fundo do Leonardo corrigido — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; mudanças locais anteriores
+  preservadas, sem commit. [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-fundo/PaP_integral_gravacoes_PT_EN.mp4),
+  [prévia de 12 segundos](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-fundo/Previa_Leonardo_fundo.mp4)
+  e [quadro de 03:57](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-fundo/Leonardo_fundo_corrigido.png).
+- O retângulo mais claro atrás de Leonardo já existia no fundo usado para
+  remover o avatar antigo; não era resíduo do canal alfa da gravação nesse
+  local. Reconstruída toda a área 1560,675–1920,945 com as capturas de origem
+  ou a cor uniforme do slide, em lugar de corrigir somente a silhueta antiga.
+  Recomposto o mesmo recorte transparente, com escala, posição e movimento
+  preservados. Corrigidos 2.115 quadros nas duas participações; cenas de Mauá
+  já compostas sobre fundo novo preservadas. Grade de integrantes inalterada.
+- `python3 .cache/setup/leonardo-fundo-20261102/validate.py`: saída 0;
+  decodificação integral aprovada, 15.406 quadros copiados idênticos e 2.199
+  reencodificados slow/CRF 14. Doze amostras de cena e doze quadros de limites
+  exportados; quatro verificações de painel com diferença RGB zero na borda
+  antes problemática. Áudio copiado sem recodificação e hash de fluxo igual:
+  correção da Úrsula, −16,48 LUFS e −1,62 dBTP preservados. **09:46,833**,
+  17.605 quadros, 12 capítulos e legendas (169 PT, 167 EN) mantidos;
+  equivalência exata SRT/VTT/MP4 conferida.
+- MD5 `cf8dab4b42a8f16b05380d59893827b6`; SHA-256
+  `469963b0c0ba2d099c88f4b9497720e72e55b855146ed2dfcfc9964f22835b6c`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-fundo/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-fundo/hashes.json).
+  Versão anterior e fontes preservadas; 12 arquivos de entrega copiados e
+  verificados. Produção `Documentos/univesp/PI2/producao_video/2026-11-02-leonardo-fundo/`;
+  workspace `.cache/setup/leonardo-fundo-20261102/`. Aplicativo e relatório
+  não alterados; suítes do aplicativo não executadas. Próximo passo: usar
+  esta entrega como fonte de revisões posteriores; orientação acadêmica
+  sobre os avatares ainda pendente.
+
+## Vídeo anterior: frase da Úrsula corrigida — 02/11/2026
+
+- Branch `feat/busca-bidirecional`, HEAD `78e3935`; alterações anteriores
+  preservadas, sem commit. Nenhuma mudança no aplicativo ou no relatório.
+- [MP4 atualizado](../../../Documentos/univesp/PI2/entrega-2026-11-02-ursula-frase/PaP_integral_gravacoes_PT_EN.mp4)
+  e [prévia de dez segundos](../../../Documentos/univesp/PI2/entrega-2026-11-02-ursula-frase/Previa_Ursula.mp4).
+  Ressintetizada integralmente a frase em 02:43,238–02:46,236: “A lista mostra
+  alternativas; a escolha abre o percurso.” Referência original `ursula.wav`
+  da produção de 28/10, OmniVoice local; duas alternativas, escolhida a mais
+  próxima da referência e da fala vizinha por comparação acústica automática.
+  Essa comparação não equivale a revisão auditiva humana.
+- Texto e janela temporal preservados, sem acelerar a nova fala. Vídeo,
+  capítulos, nomes, avatares e avisos copiados sem alteração; não foi refeita
+  a animação labial. Demais amostras do master PCM anterior à limitação
+  preservadas, com a mesma limitação de picos e codificação AAC 320 kbit/s.
+- `python3 .cache/setup/ursula-frase-20261102/validate.py`: saída 0;
+  decodificação integral, fluxo de vídeo idêntico, 12 capítulos, 17.605 quadros,
+  equivalência exata SRT/VTT/MP4 (169 PT, 167 EN) e transcrição automática da
+  frase exportada aprovados. **09:46,833; −16,48 LUFS; −1,62 dBTP**.
+- MD5 `64007301965567556e9f4b0aafc64d57`; SHA-256
+  `a8d2f40cf99e679cb0e9f79600cbd2d74fc7c057247dd241e149330db97851ac`.
+  [Validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-ursula-frase/validacao.json)
+  e [hashes](../../../Documentos/univesp/PI2/entrega-2026-11-02-ursula-frase/hashes.json).
+  Fonte anterior com MD5 `f8fb02b73ae44d03ddc93926cf43a40a` preservada.
+  Produção e logs em `Documentos/univesp/PI2/producao_video/2026-11-02-ursula-frase/`;
+  workspace `.cache/setup/ursula-frase-20261102/`. Onze arquivos de entrega
+  copiados e verificados. Suítes do aplicativo não executadas nesta edição.
+  Próximo passo: apreciação auditiva da prévia pelo usuário; eventual decisão
+  acadêmica sobre os avatares continua pendente.
+
+## Vídeo anterior: revisão final validada — 02/11/2026
+
+- Referência Git: `feat/busca-bidirecional`, HEAD `78e3935`. Alterações locais
+  anteriores preservadas; sem commit, conforme pedido. Aplicativo, relatório,
+  bancos, configurações globais e sessões do Codex não alterados.
+- [MP4 final](../../../Documentos/univesp/PI2/entrega-2026-11-02-revisao-final-validada/PaP_integral_gravacoes_PT_EN.mp4),
+  [notas da revisão](../../../Documentos/univesp/PI2/entrega-2026-11-02-revisao-final-validada/LEIA-ME.md),
+  [validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-revisao-final-validada/validacao.json)
+  e [hashes de todos os arquivos de conteúdo](../../../Documentos/univesp/PI2/entrega-2026-11-02-revisao-final-validada/hashes.json).
+  Fonte local `entrega-2026-11-02-leonardo-real`: MD5
+  `fbddd732ff22e3a6bc16afd75b398e6b`, idêntico à referência do usuário chamada
+  `PaP_integral_gravacoes_PT_EN(2).mp4`. Original preservado integralmente.
+- **09:46,833**, 17.605 quadros, 1920 × 1080, 30 fps, 12 capítulos. Retirados
+  11,9 s de 17 pausas, sem acelerar ou retirar falas para reduzir duração.
+  Margens de silêncio de pelo menos 0,28 s por extremidade; maior pico nos
+  intervalos removidos −42,86 dBFS. Dados ARTESP e conclusões preservados.
+- **Áudio final medido no MP4: −16,48 LUFS, −1,62 dBTP, LRA 4,10 LU**.
+  Fonte: −16,49 LUFS, +0,36 dBTP, LRA 4,20 LU. Limitador de picos a 192 kHz,
+  sem ganho compensatório; teto PCM −1,6 dB. AAC 320 kbit/s: a primeira
+  tentativa a 192 kbit/s recriou picos acima do teto e não foi entregue.
+- “Custo ponderado de transferência” substitui “baldeações ponderadas” nas
+  falas técnicas, tabelas e legendas PT/EN. Mantidos todos os valores e as
+  limitações do experimento. Rodapés distinguem custo numérico de contagem
+  física e preservam pesos ⅓ e 1. Ressintetizados somente os dois parágrafos
+  de Maurício, com a mesma referência já existente; aviso de síntese mantido.
+- Substituídos 6,9 s da demonstração ferroviária pelas capturas originais do
+  relatório: Rua Oscarito → ARTESP 157 → caminhada até Prefeito Saladino →
+  CPTM Linha 10–Turquesa → Brás. Preservados aviso de busca parcial, natureza
+  programada dos horários e distinção de viagem observada. Leonardo mantém
+  gravação e voz reais. Sem aumento de duração ou alteração nas evidências.
+- `python3 .cache/setup/pap-revisao-final-20261102/validate.py`: saída 0;
+  decodificação integral, pico verdadeiro, capítulos e equivalência exata
+  de texto/tempos entre SRT, VTT e MP4 aprovados (169 legendas PT, 167 EN).
+  12.402 quadros copiados idênticos após remapeamento; 5.203 reencodificados
+  slow/CRF 14. 34 amostras visuais; valores das tabelas conferidos. Whisper
+  large-v3 local confirmou a terminologia e seis valores narrados no trecho
+  extraído do MP4 final. Não se afirma revisão auditiva humana integral.
+- Vídeo: 83.711.037 bytes; MD5 `f8fb02b73ae44d03ddc93926cf43a40a`;
+  SHA-256 `9a17bb77754a584492e5c75bb4fb8b43ae9262adaa8f9afb0ee8c81df8bfdcec`.
+  Produção em `Documentos/univesp/PI2/producao_video/2026-11-02-revisao-final-validada/`;
+  scripts, logs, planos de corte, WAV e evidências originais preservados.
+  `git diff --check` aprovado; suítes do aplicativo não executadas nesta edição.
+  Próximo passo: usar esta entrega como fonte de ajustes posteriores e aguardar
+  orientação acadêmica sobre os avatares, que não foram substituídos.
+
+## Vídeo anterior: gravação real do Leonardo — 02/11/2026
+
+- Referência: `feat/busca-bidirecional`, HEAD `78e3935`. Preservadas as mudanças
+  locais anteriores deste documento. Sem commit e sem alteração no aplicativo,
+  relatório, bancos, configurações globais ou sessões do Codex.
+- **Nova entrega:**
+  [PaP_integral_gravacoes_PT_EN.mp4](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-real/PaP_integral_gravacoes_PT_EN.mp4).
+  [Prévia](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-real/Leonardo_previa.png),
+  [notas e procedência](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-real/LEIA-ME.md)
+  e [validação](../../../Documentos/univesp/PI2/entrega-2026-11-02-leonardo-real/validacao.json).
+  Origem da montagem: entrega `integrantes-avisos-contextuais`, preservada.
+- Recebido `Downloads/WhatsApp Video 2026-11-02 at 10.59.35.mp4`, 78,383 s,
+  Full HD, 60 fps; SHA-256
+  `7b9b5f9db56d4d963b3607a16d32315b90f991997aaa7917ffc0a3b2d01838f1`.
+  Cópia integral preservada em `producao_video/2026-11-02-leonardo-real/fontes/`.
+- Substituído King Bradley pela gravação real na grade e nas duas participações.
+  Fundo removido com RVM temporal; tamanho facial e olhos normalizados à
+  referência existente. Imagem real, sem geração de rosto ou animação de boca.
+- Falas principais completas na gravação: 04:00,367–05:01,367 e
+  07:07,267–07:23,867 na nova montagem, em velocidade 1,0×. Cenas, legendas
+  PT/EN e capítulos retimados. Duração final **09:58,733**, 17.962 quadros,
+  1920 × 1080, 30 fps, 12 capítulos. Acréscimo de 15,367 s.
+- Faltava apenas “Leonardo explica a leitura do mapa.” Síntese local OmniVoice
+  autorizada pelo usuário, com referência da própria gravação; inserida em
+  00:40,267–00:42,507. Tomada real 00:37,267–00:39,600 selecionada por cadência
+  sonora e movimento da boca; correspondência aproximada, sem garantia de
+  sincronização fonética. Grade sem avisos conforme preferência anterior;
+  procedência registrada nas notas. Removido o aviso de personagem artificial
+  das duas participações, agora com imagem e voz reais.
+- Áudio recebido com canais quase em oposição (correlação −0,973); usado o
+  canal direito mais forte como mono nos dois canais. Redução leve de ruído,
+  passa-altas e ganho para normalização, pico PCM 0,773, sem recorte. Áudio dos
+  demais participantes preservado amostra a amostra na montagem PCM e deslocado
+  no tempo; faixa final recodificada em AAC 192 kbit/s.
+- `python3 .cache/setup/leonardo-real-20261102/validate.py`: saída 0;
+  decodificação integral de vídeo/áudio, capítulos, legendas internas versus
+  SRT, 33 amostras visuais e alinhamento AAC/PCM conferidos. 14.762 quadros
+  copiados idênticos após remapeamento; 3.200 reencodificados slow/CRF 14.
+  Whisper large-v3 local conferiu a fonte, a abertura sintetizada e as duas
+  participações extraídas do MP4 final. Verificação automática, não audição
+  editorial humana; nomes e números do ASR exigem interpretação contextual.
+- Entrega: 79.863.936 bytes; SHA-256
+  `6708ae296637bf2e342a5bc120310fbc3e71007041d87d5e98aa6a7d323cb264`.
+  Scripts, recorte RGBA, WAV, planos, logs e evidências em
+  `Documentos/univesp/PI2/producao_video/2026-11-02-leonardo-real/`;
+  workspace `.cache/setup/leonardo-real-20261102/`. Suítes do aplicativo não
+  executadas nesta edição. Próximo passo: revisar esta entrega e usá-la como
+  fonte dos próximos ajustes; preservar as versões anteriores.
+
+## Vídeo: integrantes e avisos contextuais — 02/11/2026
+
+- Referência verificada: branch `feat/busca-bidirecional`, HEAD `78e3935`.
+  Código do aplicativo e relatório não alterados nesta etapa. Preservadas as
+  alterações locais anteriores deste documento; não foi criado commit.
+- **Entrega anterior, fonte da inclusão do Leonardo:**
+  [PaP_integral_gravacoes_PT_EN.mp4](../../../Documentos/univesp/PI2/entrega-2026-11-02-integrantes-avisos-contextuais/PaP_integral_gravacoes_PT_EN.mp4).
+  Deriva da entrega `entrega-2026-11-02-mauricio-fundo-uniforme`, preservada.
+  [Prévia dos integrantes](../../../Documentos/univesp/PI2/entrega-2026-11-02-integrantes-avisos-contextuais/Integrantes_atualizados.png)
+  e [registro da edição](../../../Documentos/univesp/PI2/entrega-2026-11-02-integrantes-avisos-contextuais/LEIA-ME.md).
+- Grade inicial sem informações de síntese ou “Gravação individual pendente”,
+  conforme pedido explícito. Mantidos nomes, temas, polos, revelações e movimentos.
+  Rostos ampliados 20% por dimensão, normalizados pela área facial e pelos olhos;
+  preservado o chapéu completo da Arlequina. Fontes originais não alteradas.
+- Nos trechos de Ingrid, Leonardo e Nathalia: “Personagem e voz gerados
+  artificialmente”. Maurício mantém a fotografia real e o aviso “Voz gerada
+  artificialmente”; mesma distinção nas falas inteiras sintetizadas de André
+  e Caio, cujas imagens são gravações reais.
+- Intervenções pontuais de Bruno (“total”) e Caio (“99,7%”): “Correção de
+  pronúncia com sintetizador”, durante a frase correspondente para legibilidade.
+  Janelas exatas de áudio e de exibição documentadas separadamente no registro
+  da edição. Nenhum áudio foi alterado nesta etapa.
+- Validação: `python3 .cache/setup/integrantes-avisos-20261102/validar.py`,
+  saída 0. 17.501 quadros decodificados; 1920 × 1080, 30 fps, 583,367 s,
+  12 capítulos. Áudio, duas faixas de legendas, SRT/VTT externos, capítulos e
+  timestamps preservados. 5.186 quadros fora dos blocos reencodificados idênticos;
+  46 verificações de limites da composição e 34 amostras exportadas. Fora da
+  grade, apenas o rodapé é alterado antes da codificação. Fundo de Maurício
+  conferido em cinco amostras, com desnível residual de no máximo um nível RGB.
+- Vídeo: 74.270.893 bytes; SHA-256
+  `02c20611c652cf957c1c4f55d0094dc743ce80e824798aaccd22fc9508e0dfa4`;
+  MD5 `24280e43e292d359ec2c3fa729a4c6d0`.
+  [Validação completa](../../../Documentos/univesp/PI2/entrega-2026-11-02-integrantes-avisos-contextuais/validacao.json).
+- Scripts, procedência, hashes de 192 fontes e logs preservados em
+  `Documentos/univesp/PI2/producao_video/2026-11-02-integrantes-avisos-contextuais/`;
+  workspace local `.cache/setup/integrantes-avisos-20261102/`.
+  Revisão visual por amostras; não houve nova audição editorial integral nem
+  execução das suítes do aplicativo. Próximo passo: revisar a nova entrega;
+  usar esta versão como origem de eventuais ajustes posteriores.
+
+## Capturas do relatório atualizadas em 02/11/2026
+
+- Aplicativo de referência: `78e39355ce23aa545c4006978bcc59060f6db24f`, branch
+  `feat/busca-bidirecional`, árvore limpa antes da captura. Código sem alteração
+  nesta etapa; este registro de continuidade é a alteração documental local.
+- No worktree `maua_bus_map-relatorio`, branch `relatorio`, HEAD `f58078a`,
+  foram atualizadas 17 capturas e seus textos. Nova entrega de 167 páginas:
+  [PDF atualizado](../../maua_bus_map-relatorio/docs/relatorio_final/PaP_relatorio_2026-11-02_capturas_atualizadas.pdf).
+  [Auditoria e validação](../../maua_bus_map-relatorio/docs/relatorio_final/atualizacao-capturas-2026-11-02/ATUALIZACAO.md).
+- Capturas reais, sem respostas substituídas, sem envio de pesquisa/feedback;
+  localização simulada e favoritos preparados explicitamente documentados.
+  Consulta para Guaiaúna ainda parcial, sem comprovação de melhor itinerário.
+  Aviso inicial ainda menciona apenas SPTrans/São Paulo: pendência textual do
+  aplicativo, descoberta e registrada, sem correção nesta tarefa do relatório.
+- Instância temporária Django em 18082 encerrada após as capturas. Nenhuma
+  importação, materialização, alteração global ou implantação pública. Não foram
+  reexecutadas suítes da aplicação. Log: `.cache/setup/capturas-relatorio-20261102/server.log`.
+- LuaLaTeX e validação documental aprovados: 167 páginas, 17 imagens incorporadas
+  com pixels originais, evidências anteriores e parecer integral preservados.
+  As mudanças desta etapa não foram commitadas; publicação anterior concluída
+  nas branches próprias. Próximo passo: revisar a nova entrega, preservando os
+  artefatos históricos e as limitações registradas.
 
 ## Versionamento autorizado em 02/11/2026
 
@@ -703,7 +1313,7 @@ Capture saídas conforme o [procedimento de continuidade](CODEX_CONTINUITY.md).
   no aplicativo, bancos, relatório ou configurações globais. Testes do aplicativo
   não reexecutados. Esta entrega foi a fonte da revisão do percentual abaixo.
 
-## Vídeo mais recente — percentual do Caio em 02/11/2026
+## Vídeo — percentual do Caio em 02/11/2026
 
 - Entrega: `/home/avale/Documentos/univesp/PI2/entrega-2026-11-02-caio-997/PaP_integral_gravacoes_PT_EN.mp4`.
   Fonte `entrega-2026-11-02-nathalia-legenda` preservada por SHA-256;
@@ -735,3 +1345,36 @@ Capture saídas conforme o [procedimento de continuidade](CODEX_CONTINUITY.md).
   estado alterado no repositório nesta etapa; aplicativo, bancos, relatório,
   sessões anteriores e configurações globais preservados. Testes do aplicativo
   não reexecutados. Usar esta entrega como fonte da próxima edição.
+
+## Vídeo mais recente — fundo de Maurício em 02/11/2026
+
+- Entrega: `/home/avale/Documentos/univesp/PI2/entrega-2026-11-02-mauricio-fundo-uniforme/PaP_integral_gravacoes_PT_EN.mp4`.
+  Fonte `entrega-2026-11-02-caio-997`, preservada por SHA-256. Inclui trecho de
+  conferência, três comparações antes/depois, SRT/VTT, notas, validação e hashes.
+- Corrigido o retângulo mais claro na composição do retrato nas três cenas de
+  desempenho, **06:07,133–06:46,767**, quadros **11014–12202**. A luminância do
+  fundo foi igualada à área adjacente do próprio quadro; proteção da fotografia
+  pelo alpha original com margem de três pixels. Crominância e pixels protegidos
+  preservados na composição. Sem nova imagem, mudança da luz do rosto, escala,
+  animação ou reaplicação de nitidez; fotografia original intacta.
+- `python3 .cache/setup/mauricio-fundo-20261102/validar.py`: saída **0**.
+  Decodificação integral de vídeo/áudio aprovada; **11 amostras** do trecho
+  exportado com diferença mediana **zero** entre fundo do retângulo e entorno.
+  Outras aparições conferidas visualmente. A participação posterior foi também
+  amostrada a cada segundo: **90 amostras**, 59 com fundo uniforme sem degrau,
+  31 com mapa/fundo não uniforme separados dessa medição, sem alteração.
+- **1.189 quadros** recodificados em H.264 slow/CRF 14, trabalhando diretamente
+  em YUV para evitar conversão de cor do quadro inteiro. **16.312 quadros** fora
+  do intervalo idênticos após decodificação. Áudio e duas faixas de legendas
+  idênticos por hash dos fluxos; SRT/VTT, capítulos e timestamps preservados.
+  **17.501 quadros, 1920 × 1080, 30 fps, 09:43,367, 12 capítulos**.
+- Produção e scripts: `/home/avale/Documentos/univesp/PI2/producao_video/2026-11-02-mauricio-fundo-uniforme/`.
+  Logs locais: `.cache/setup/mauricio-fundo-20261102/`. Cópias da entrega
+  conferidas por hash. SHA-256 do vídeo:
+  `2726caa96b0bfddaf492f86be8e9f61c6bdedfe03e3b05e28c4737021d535603`.
+- Referência Git `feat/busca-bidirecional`, HEAD `78e3935`. Apenas este documento
+  alterado no repositório nesta etapa, preservando o registro anterior de
+  atualização das capturas do relatório. Sem commit ou push; aplicativo,
+  relatório, bancos, sessões Codex e configurações globais não alterados.
+  Testes da aplicação não reexecutados. Usar esta entrega nas próximas edições;
+  revisão humana disponível no trecho e nas comparações.
