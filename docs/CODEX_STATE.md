@@ -1,8 +1,37 @@
-# Estado do worktree acadêmico — 2 de novembro de 2026
+# Estado do worktree acadêmico — 3 de novembro de 2026
 
-Branch `relatorio`; HEAD `e5077b9c12b89c099f900cad0911f7498dafb06d`. Revisão editorial concluída; commits e push autorizados pelo responsável em 02/11/2026. Trabalho acadêmico restrito a este worktree; aplicativo e vídeo não foram alterados nesta etapa.
+Branch `relatorio`; HEAD `f58078abeed5a30e18c8de8d514d54a4dd0c215e`. Revisão editorial concluída; commits e push autorizados pelo responsável em 02/11/2026. Trabalho acadêmico restrito a este worktree; aplicativo e vídeo não foram alterados nesta etapa.
 
-## Entrega atual
+## Versionamento autorizado — 03/11/2026
+
+Responsável autorizou os commits e pushes das atualizações pendentes. Esta
+publicação reúne fontes ativos, 17 capturas atuais, dois PDFs de entrega e
+as auditorias correspondentes. Referência anterior `f58078a`; consultar o
+Git para o commit desta publicação. Os registros “sem commit” abaixo
+representam o estado ao concluir cada etapa, anterior a esta autorização.
+`git diff --check` aprovado; compilação e comparação visual do PDF já
+validadas na etapa de URL definitiva. Não houve nova alteração de conteúdo.
+Acervo histórico não relacionado preservado fora do commit. Nenhuma mudança
+no aplicativo ou nos vídeos; nenhum teste de aplicação necessário nesta etapa.
+
+## URL definitiva concluída — 03/11/2026, sem commit
+
+- Vídeo informado pelo responsável: https://www.youtube.com/watch?v=rSvuIWx8QAg
+- [Entrega atual](relatorio_final/PaP_relatorio_2026-11-03_video_definitivo.pdf): 167 páginas. Capa atualizada; aviso provisório removido. Autores/data documental preservados.
+- [Auditoria, hashes e limites](relatorio_final/video-definitivo-2026-11-03/ATUALIZACAO.md). LuaLaTeX saída 0; páginas 2–167 idênticas por texto/pixels a 100 dpi; link clicável e capa conferidos. PDF anterior intacto. `git diff --check` aprovado.
+- Consulta web ao YouTube falhou; disponibilidade, 1080p, legendas e correspondência do vídeo remoto ainda não verificadas. Conferir em janela anônima.
+- Confirmar abstract/keywords e orientação institucional sobre avatares. QR físico e avaliação com passageiros permanecem limitações documentadas. Pacote ZIP histórico não atualizado. Preservadas alterações anteriores, sem commit/push ou testes do aplicativo.
+
+## Atualização de capturas concluída — sem commit
+
+- Entrega atual: [PDF com capturas atuais](relatorio_final/PaP_relatorio_2026-11-02_capturas_atualizadas.pdf), **167 páginas**, **28.877.638 bytes**. MD5 `b253dea82eb68d251fee52a4fae225cf`; SHA-256 `7a93bb8d7e2820a72a261e435585b8ee75403e82a8556181e4d272a18f3bd77d`.
+- 17 imagens recapturadas na aplicação real `78e3935` e integradas em dois fontes TeX. Texto e legendas seguem os estados observados; consulta para Guaiaúna ainda parcial. Não interpretar cinco ônibus como melhor rota validada. Evidências ARTESP, estudos anteriores, imagens originais e PDFs preservados.
+- [Auditoria e limitações](relatorio_final/atualizacao-capturas-2026-11-02/ATUALIZACAO.md), [validação](relatorio_final/atualizacao-capturas-2026-11-02/VALIDACAO.json). LuaLaTeX código 0 (`build-3.log`); 167 páginas verificadas, 17 PNGs incorporados com pixels originais, zero Overfull/referências ausentes/páginas vazias. 13 Underfull e três avisos de compatibilidade preexistentes. Otimização sem perdas e seis páginas do parecer conferidas visualmente por pixels.
+- 1.202 arquivos anteriores conferidos por SHA-256; somente fontes solicitados e README alterados. Logs em `.cache/setup/capturas-atuais-20261102/`. `git diff --check` aprovado. Nenhum teste da aplicação, importação ou materialização executado. Servidor temporário 18082 encerrado; nenhuma publicação pública.
+- A aplicação ainda informa somente SPTrans/São Paulo no aviso inicial; pendência textual descoberta e documentada, não corrigida nesta tarefa acadêmica. Permanecem as pendências institucionais e de QR físico abaixo.
+- O commit e push `f58078a` concluíram a publicação anterior. As mudanças desta atualização e seus novos artefatos não foram commitados. Os 719 arquivos históricos não rastreados preexistentes continuam preservados.
+
+## Entrega editorial anterior
 
 - [PDF editorial](relatorio_final/PaP_relatorio_2026-11-02_revisao_editorial.pdf): **167 páginas**, **24998553 bytes**. MD5 `5bdbc062a2680394ea8d4f97d715caef`; SHA-256 `b24c37067fc84c389d21a79f97cef1eabc00d6921791bb6d7ad08a69e36b9e55`.
 - [Detalhes e conformidade](relatorio_final/revisao-editorial-2026-11-02/REVISAO_EDITORIAL.md), [validação](relatorio_final/revisao-editorial-2026-11-02/VALIDACAO.json), [patch próprio desta etapa](relatorio_final/revisao-editorial-2026-11-02/alteracoes-editoriais.patch).
@@ -26,7 +55,7 @@ Branch `relatorio`; HEAD `e5077b9c12b89c099f900cad0911f7498dafb06d`. Revisão ed
 
 ## Próximos passos
 
-Usar o PDF editorial como referência de nova revisão. Confirmar exigência institucional de abstract/keywords e link definitivo do vídeo na capa; não afirmar homologação institucional nem impressão verificada. Protocolo físico de QR e avaliação com passageiros seguem pendentes. Preservar trabalho local e histórico; novos commits dependem de autorização. Não alterar dados, sessões Codex ou configurações globais.
+Usar o PDF de 03/11/2026 com URL definitiva como referência de nova revisão. Confirmar exigência institucional de abstract/keywords; link definitivo atualizado em 03/11/2026; não afirmar homologação institucional nem impressão verificada. Protocolo físico de QR e avaliação com passageiros seguem pendentes. Preservar trabalho local e histórico; novos commits dependem de autorização. Não alterar dados, sessões Codex ou configurações globais.
 
 ## Publicação autorizada em 02/11/2026
 

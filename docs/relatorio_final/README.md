@@ -1,6 +1,27 @@
+# Vídeo definitivo — 3 de novembro de 2026
+
+Entrega atual: [PDF com URL definitiva](PaP_relatorio_2026-11-03_video_definitivo.pdf), **167 páginas**, **30158763 bytes**.
+Vídeo: https://www.youtube.com/watch?v=rSvuIWx8QAg
+
+Atualizada somente a capa; retirados indicação de versão provisória e aviso
+pendente. Páginas 2–167 preservadas por texto e pixels. [Validação e limites](video-definitivo-2026-11-03/ATUALIZACAO.md).
+MD5 `f7c3cedb7bb9d613c9819a77e16fe5cf`; SHA-256 `b3f141273264f7a2b198b50300972d704c15494bc47485de1d959fd5d9b0a488`. Atualização incluída na publicação Git autorizada em 03/11/2026; consultar o histórico da branch `relatorio`.
+
+---
+
+# Capturas atualizadas — 2 de novembro de 2026
+
+Entrega anterior: [PDF com 17 capturas atualizadas](PaP_relatorio_2026-11-02_capturas_atualizadas.pdf), **167 páginas**, 28.877.638 bytes. Interface real do aplicativo `78e3935`; mapas coloridos, nomes ferroviários completos, favoritos, controles e avaliação por estrelas. Legendas e exemplos ajustados aos estados observados, incluindo a busca parcial para Guaiaúna.
+
+[Registro da atualização](atualizacao-capturas-2026-11-02/ATUALIZACAO.md), [validação](atualizacao-capturas-2026-11-02/VALIDACAO.json) e [correspondência das capturas](atualizacao-capturas-2026-11-02/substituicoes.json). Preservados arquivos anteriores, estudos históricos, consulta ARTESP e parecer integral. Fonte ativa e comando LuaLaTeX abaixo permanecem válidos. Esta atualização está sem commit.
+
+MD5: `b253dea82eb68d251fee52a4fae225cf`. SHA-256: `7a93bb8d7e2820a72a261e435585b8ee75403e82a8556181e4d272a18f3bd77d`.
+
+---
+
 # Revisão editorial — 2 de novembro de 2026
 
-Entrega atual: [PDF revisado](PaP_relatorio_2026-11-02_revisao_editorial.pdf), **167 páginas**, 24998553 bytes. [Relatório da revisão](revisao-editorial-2026-11-02/REVISAO_EDITORIAL.md), [validação](revisao-editorial-2026-11-02/VALIDACAO.json) e [patch](revisao-editorial-2026-11-02/alteracoes-editoriais.patch).
+Entrega editorial anterior: [PDF revisado](PaP_relatorio_2026-11-02_revisao_editorial.pdf), **167 páginas**, 24998553 bytes. [Relatório da revisão](revisao-editorial-2026-11-02/REVISAO_EDITORIAL.md), [validação](revisao-editorial-2026-11-02/VALIDACAO.json) e [patch](revisao-editorial-2026-11-02/alteracoes-editoriais.patch).
 
 Fonte ativa: `relatorio_final_pi2_v2.tex`. Preservados Apêndices A–H, Anexo A integral, dados, capturas originais, oito autores e data documental. Listas de figuras/tabelas e metadados acrescentados; abstract depende de confirmação institucional. O PDF anterior de 168 páginas e seu ZIP continuam abaixo como referência histórica; esse ZIP não contém a revisão editorial atual.
 
@@ -24,7 +45,7 @@ Compilar o fonte ativo com LuaLaTeX em **diretório novo**, evitando o hook hist
 latexmk -norc -lualatex -interaction=nonstopmode -halt-on-error -outdir=/tmp/pap-relatorio-build-NOVO relatorio_final_pi2_v2.tex
 ```
 
-As referências de entrega e os comandos abaixo são registros históricos; não substituem a identificação da revisão acima. O link definitivo do vídeo na capa continua pendente.
+As referências de entrega e os comandos abaixo são registros históricos; não substituem a identificação da revisão acima. O link definitivo foi atualizado em 03/11/2026; ver entrega acima.
 
 ---
 

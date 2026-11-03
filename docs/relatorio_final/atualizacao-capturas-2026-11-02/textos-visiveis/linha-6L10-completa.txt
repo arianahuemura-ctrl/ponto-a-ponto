@@ -1,0 +1,44 @@
+Acompanhar ônibus
+Endereço ou coordenadas de destino
+I
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+➤
+CPTM Linha 9 Esmeralda
++
+−
+© OpenStreetMap
+✓
++
+1 linha acompanhada
+Atualização a cada 5 s
+6L10-41: trajeto disponível · posição do ônibus indisponível
+Antes do embarque
+Após o embarque
+Setas: sentido · separação visual de ida e volta
+I: início do traçado da linha
+Bandeira: fim do traçado GTFS. Última parada cadastrada divergente; desembarque final não confirmado.
+Navegação
+Favoritos
+Feedback

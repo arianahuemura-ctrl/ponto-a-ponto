@@ -60,9 +60,8 @@
     \vfill
     {\normalfont\bfseries\fontsize{14}{17}\selectfont\imprimirtitulo\par}
     \vfill
-    {\normalsize Vídeo de apresentação do Projeto Integrador (versão provisória):\par
-    \url{https://youtu.be/FDWkiNMvt4A}\par
-    \pendente{confirmar versão definitiva do vídeo}.\par}
+    {\normalsize Vídeo de apresentação do Projeto Integrador:\par
+    \url{https://www.youtube.com/watch?v=rSvuIWx8QAg}\par}
     \vspace{0.6cm}
     {\large\imprimirlocal\par}
     {\large\imprimirdata\par}
@@ -536,115 +535,103 @@ Os ícones de embarque e destino piscam suavemente enquanto os respectivos locai
 \clearpage
 As figuras a seguir começam pela apresentação da pesquisa, cuja participação é opcional. A navegação pode ser iniciada por ``Continuar sem contribuir'', sem gravação de pesquisa. Em seguida, distinguem o acesso comum, com ou sem localização, e o acesso pelo link de uma parada. A sequência documentada pelo link segue para favoritos, alternativas, mapa e confirmação de cancelamento. As telas adicionais são identificadas como cenários independentes; não representam uma única sessão contínua.
 
-As capturas documentam a aplicação local em desenvolvimento, não uma avaliação por participantes externos. Em 22 de outubro de 2026, o registro identifica o commit \texttt{aee66eb} e alterações locais: Chromium, tema escuro, emulação móvel de 430 por 932 pixels, densidade 2, localização simulada no Butantã e favoritos preparados. Foram usados serviços reais de transporte; somente a telemetria foi interceptada no navegador. A procedência está em \nolinkurl{capturas/2026-10-22/registro.json}.
+As capturas de navegação foram atualizadas em 2 de novembro de 2026, na aplicação local da revisão \texttt{78e3935}, com código consolidado em \texttt{80a3564}. Foi utilizado Chromium, tema escuro, janela móvel de 430 por 932 pixels e densidade 2; a linha 6L10-41 foi registrada em janela de 1366 por 1000 pixels. As respostas de transporte vieram dos serviços reais da aplicação, sem substituição nem retoque das imagens. Escolheu-se não contribuir com a pesquisa; nenhum feedback foi enviado. A posição no MASP foi simulada pelo parâmetro de localização da aplicação e os favoritos foram preparados apenas para documentar a interface.
 
-Em 23 de outubro, contextos novos sem localização autorizada conferiram o fluxo (\nolinkurl{capturas/2026-10-23/procedencia.json}). Entrada e acompanhamento foram recapturados após alterações do consentimento e dos percursos, escolhendo não contribuir com a pesquisa e sem substituir respostas de transporte. Foram mantidas as dimensões móveis; para a linha 6L10-41, usou-se 1366 por 1000 pixels, também com densidade 2. Roteiro, horários e hashes estão em \nolinkurl{capturas/2026-10-23-rotas/}.
+O roteiro, os horários de captura, os identificadores de origem e destino e os hashes estão em \nolinkurl{capturas/2026-11-02-interface-atual/}. As imagens documentam estados observados, inclusive buscas ainda em andamento; não constituem avaliação com passageiros nem comprovação de melhor itinerário. Consultas de momentos diferentes podem retornar horários e rotas diferentes.
 
-Em 25 de outubro, na revisão \texttt{85417bc}, foram recapturados entrada, navegação sem localização, configurações de pesquisa, feedback e linha 6L10-41. Os registros estão em \nolinkurl{capturas/2026-10-25/}; a procedência das cinco recapturas complementares sem substituição de respostas nem retoque está em \nolinkurl{capturas/2026-10-25-sem-aviso/}. Cada figura mantém sua data e cenário; as demais telas continuam identificadas como históricas.
+Os arquivos anteriores permanecem preservados. Capturas vinculadas aos estudos de outubro, ao histórico de arquitetura e à consulta ARTESP de madrugada mantêm sua data e procedência: são evidências dos respectivos registros, não telas apresentadas como atuais.
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio]{capturas/2026-10-25/pesquisa-inicial.png}
+\includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/pesquisa-inicial.png}
 \caption{Primeiro acesso: participação voluntária na pesquisa e acesso ao transporte sem contribuir.}\label{fig:print-02-informacoes}
-\fonte{Captura da aplicação em emulação móvel, revisão 85417bc, 25 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
 O aviso informa a cobertura da SPTrans em São Paulo e apresenta duas escolhas com destaque equivalente. Na captura, foi utilizado um navegador sem decisão anterior; em seguida, escolheu-se continuar sem contribuir. A decisão é persistida localmente com versão do aviso e data, separada dos identificadores de gravação, e pode ser revista nas configurações. Os limites da coleta são discutidos adiante neste capítulo.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-25-sem-aviso/sem-localizacao.png}\hfill
-\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-22/pap-09-localizacao.png}
+\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/sem-localizacao.png}\hfill
+\includegraphics[width=0.43\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/localizacao.png}
 \caption{Acesso comum após a escolha sobre pesquisa: sem localização autorizada (à esquerda) e com localização simulada como origem (à direita).}\label{fig:print-entrada-comum}
-\fonte{Capturas da aplicação em emulação móvel, 25 e 22 out. 2026, respectivamente.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-Estas telas representam cenários alternativos, não etapas sucessivas. Sem localização disponível e sem parada identificada, a interface solicita o embarque; a captura à esquerda registra a permissão de localização negada no navegador de teste. Com localização disponível, a origem pode ser definida automaticamente e o cabeçalho passa a solicitar o destino. À direita, a posição no Butantã foi simulada para a documentação. Selecionar manualmente um ponto como embarque mantém o mapa aberto para escolher o destino; a entrada pelo link do ponto segue o caminho apresentado a seguir.
+Estas telas representam cenários alternativos, não etapas sucessivas. Sem localização disponível e sem parada identificada, a interface solicita o embarque; a captura à esquerda registra a permissão de localização negada no navegador de teste. Com localização disponível, a origem pode ser definida automaticamente e o cabeçalho passa a solicitar o destino. À direita, a posição no MASP foi simulada para a documentação. Selecionar manualmente um ponto como embarque mantém o mapa aberto para escolher o destino; a entrada pelo link do ponto segue o caminho apresentado a seguir.
 \clearpage
 
 \begin{figure}[H]\centering
-\begin{minipage}[c]{0.36\textwidth}\centering
-\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-01-embarque.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{0.60\textwidth}\centering
-\includegraphics[width=\linewidth,trim=75bp 224bp 70bp 820bp,clip]{capturas/2026-10-22/pap-01-embarque.png}
-\small Detalhe ampliado da mesma captura.
-\end{minipage}
-\caption{Entrada pelo link da parada: próximos ônibus e detalhe das previsões (registro de 22 out. 2026).}\label{fig:print-01-embarque}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/embarque.png}
+\caption{Entrada pelo link da parada: próximos ônibus e previsões operacionais observadas.}\label{fig:print-01-embarque}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-Neste registro de 22 de outubro, anterior à reformulação do consentimento, após aceitar o aviso, a consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. Esse acesso reproduz o destino de um QR Code, sem leitura pela câmera. Diferentemente da escolha de embarque no mapa, o painel de próximos ônibus abre automaticamente. O painel distingue previsões operacionais e informações programadas. Os horários são os retornados na captura e não constituem promessa de chegada.
+Após escolher continuar sem contribuir com a pesquisa, a consulta foi aberta pelo endereço local da Parada Exclusiva (1211381), no Butantã. Esse acesso reproduz o destino de um QR Code, sem leitura pela câmera. Diferentemente da escolha de embarque no mapa, o painel de próximos ônibus abre automaticamente. Na captura de 2 de novembro, há previsões operacionais identificadas como SPTrans e consulta às 11h39; os horários são os retornados naquele instante e não constituem promessa de chegada.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-03-destino.png}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/favoritos.png}
 \caption{Após fechar a consulta para ver o mapa: favoritos disponíveis para escolher o destino.}\label{fig:print-03-destino}\label{fig:print-07-favoritos}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-Na sequência registrada, foi acionado Ver mapa e, em seguida, Favoritos. Os favoritos foram preparados para a documentação com pontos reais e nomes ilustrativos: Casa, Trabalho, UNIVESP e Guaiaúna. Os atalhos permitem escolher destino, embarque ou consulta de próximos ônibus, além de renomear ou remover pontos. Após rolar a lista até a ação de destino de Guaiaúna, sua seleção abre as alternativas da próxima figura; o cadastro dos favoritos é uma preparação da captura, não uma etapa obrigatória do primeiro acesso.
+Foi acionado Ver mapa e, em seguida, Favoritos. A lista foi preparada com paradas reais e nomes ilustrativos: Casa, UNIVESP Carrão e Guaiaúna. O atalho Casa referencia o favorito correspondente; Trabalho permanece disponível para adicionar. Os controles permitem escolher destino ou embarque, consultar próximos ônibus, renomear e remover favoritos. A seleção de Guaiaúna como destino abre o painel de alternativas; preparar favoritos não é uma etapa obrigatória do primeiro acesso.
 \clearpage
 
 \begin{figure}[H]\centering
-\begin{minipage}[c]{0.36\textwidth}\centering
-\includegraphics[width=\linewidth]{capturas/2026-10-22/pap-04-alternativas.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{0.60\textwidth}\centering
-\includegraphics[width=\linewidth,trim=75bp 504bp 70bp 850bp,clip]{capturas/2026-10-22/pap-04-alternativas.png}
-\small Detalhe ampliado da mesma captura.
-\end{minipage}
-\caption{Alternativas de viagem: tela completa e detalhe da alternativa selecionada.}\label{fig:print-04-alternativas}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/alternativas.png}
+\caption{Painel de alternativas durante a busca: resposta parcial e distinção entre previsão e planejamento.}\label{fig:print-04-alternativas}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-As capturas integram a mesma sequência registrada no roteiro de captura: acesso à Parada Exclusiva (1211381), retorno ao mapa e seleção de Guaiaúna como destino favorito. O painel de alternativas mostra o embarque do primeiro trecho da rota selecionada, na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). A caminhada de acesso exibida é de 72 m, estimada em 58 s; portanto, o embarque da alternativa difere do ponto usado para iniciar a consulta. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
+A consulta das 11h42 utiliza a Parada Exclusiva (1211381) como origem e a Rua Guaiaúna, 419 (600012585), como destino. O painel ainda informa ``Buscando alternativas'' e mostra cinco ônibus com quatro baldeações: essa resposta parcial não comprova o melhor itinerário. A previsão de embarque está identificada como SPTrans; a chegada permanece associada ao planejamento, sem previsões compatíveis para todos os trechos. Os mapas seguintes mostram essa opção.
 \clearpage
 
 \begin{figure}[H]\centering
 \begin{minipage}[t]{0.48\textwidth}\centering\vspace{0pt}
-\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-05-viagem-completa.png}
-\caption{Viagem completa, com embarque, baldeação e destino.}\label{fig:print-05-viagem-completa}
+\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/viagem-completa.png}
+\caption{Visão completa da opção exibida durante a busca, com embarque, baldeações e destino.}\label{fig:print-05-viagem-completa}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}\centering\vspace{0pt}
-\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-06-ultimo-trecho.png}
+\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/ultimo-trecho.png}
 \caption{Visualização do último trecho da viagem selecionada.}\label{fig:print-06-ultimo-trecho}
 \end{minipage}
-\fonte{Capturas da aplicação em emulação móvel, 22 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-A rota selecionada é representada no mapa, cuja legenda distingue ônibus e caminhada. O controle inferior permite retornar à lista ou examinar um trecho, inclusive a parte final, mantendo a referência da viagem escolhida.
+A opção exibida é representada no mapa, cuja legenda distingue ônibus e caminhada. O controle inferior permite retornar à lista ou examinar um trecho; o último corresponde à linha 403A-10, sentido Terminal Penha. As duas telas conservam o aviso de busca de outras alternativas. Elas documentam a navegação entre visões de uma resposta parcial, sem demonstrar viagem realizada ou encerramento da busca.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-08-confirmacao.png}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/confirmacao.png}
 \caption{Confirmação antes de cancelar a viagem.}\label{fig:print-08-confirmacao}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
 O diálogo explica que o trajeto e os locais de embarque e destino serão desmarcados, preservando os favoritos. O passageiro pode continuar a viagem ou confirmar o cancelamento.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=0.65\textheight,keepaspectratio]{capturas/2026-10-25-sem-aviso/linha-6L10-completa.png}
+\includegraphics[width=\textwidth,height=0.65\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/linha-6L10-completa.png}
 \caption{Acompanhamento da linha 6L10-41: traçado completo, setas de sentido e distinção dos trechos.}\label{fig:print-onibus-tempo-real}
-\fonte{Captura real da aplicação em navegador de computador, revisão 85417bc com recaptura após ajuste local da interface, 25 out. 2026.}
+\fonte{Captura da aplicação em navegador de computador, revisão 78e3935, 2 nov. 2026.}
 \end{figure}
 Em consulta independente da sequência anterior, foi selecionada a linha 6L10-41, sentido Messiânica, a partir da parada R. Matilde de Lutis Barbosa (5614798). A visualização não exige posição de ônibus disponível: nesta captura, o estado operacional informa sua ausência. O início do traçado aparece com ``I''; a bandeira indica seu final com ressalva sobre o cadastro da última parada. As setas mostram o sentido e o pequeno afastamento visual permite distinguir passagens opostas pela mesma via. O caso que motivou essa alteração é descrito na avaliação interna de uso.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-10-22/pap-10-alterar-embarque.png}
+\includegraphics[width=0.80\textwidth,height=0.60\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/alterar-embarque.png}
 \caption{Cenário alternativo: ativação da seleção manual de embarque a partir da localização simulada.}\label{fig:print-localizacao}
-\fonte{Capturas da aplicação em emulação móvel, 22 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-Esta captura retoma o cenário de localização simulada, independentemente da viagem por Guaiaúna. Após acionar Selecionar embarque, o marcador roxo permanece como referência da localização e o mapa aguarda a escolha manual da origem. O controle lateral permite escolher uma parada de embarque no mapa. O cabeçalho utiliza a expressão Selecionar embarque; a navegação inferior inclui o acesso ao feedback.
+Esta captura retoma o cenário de localização simulada, independentemente da viagem por Guaiaúna. Após expandir o controle de embarque e acionar Alterar embarque, o marcador roxo permanece como referência da localização e o mapa aguarda a escolha manual da origem. O controle lateral permite escolher uma parada de embarque no mapa. O cabeçalho utiliza a expressão Selecionar embarque; a navegação inferior inclui o acesso ao feedback.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-12-destino-livre.png}
-\caption{Destino definido por toque prolongado no mapa.}\label{fig:print-destino-livre}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/destino-livre.png}
+\caption{Toque prolongado no mapa: ações para usar o local como destino ou salvá-lo.}\label{fig:print-destino-livre}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
-Em um novo acesso pelo link da Parada Exclusiva, após aceitar o aviso e acionar Ver mapa, a busca por coordenadas centralizou a região desejada e o toque prolongado definiu um local de destino. O painel apresenta alternativas progressivamente e, no instante capturado, ainda consulta informações de embarque. A imagem não representa o encerramento de todas as consultas.
+Em um novo acesso pelo link da Parada Exclusiva, após escolher continuar sem contribuir e acionar Ver mapa, o toque prolongado abriu as ações ``Usar como destino'' e salvar o local como favorito. A captura registra esse menu antes da confirmação: o destino ainda não foi definido e a imagem não representa uma consulta de rotas concluída.
 \clearpage
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-14-qr-atual.png}
+\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/qr-atual.png}
 \caption{Informações da parada e QR Code de acesso à consulta.}\label{fig:print-qr-atual}
-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+\fonte{Captura da aplicação, revisão 78e3935, 2 nov. 2026; condições de registro descritas no texto.}
 \end{figure}
 Como recurso auxiliar, o botão Informações do ponto abre esta tela durante a consulta de próximos ônibus. Ela não é uma etapa posterior ao cancelamento ou ao destino por toque prolongado. A tela utiliza o identificador 1211381 e o endereço local de desenvolvimento. A captura documenta a geração do QR Code; não demonstra leitura física pela câmera. Para uso externo, é necessário um endereço HTTPS acessível aos passageiros.
 \clearpage
@@ -665,12 +652,12 @@ Para complementar a observação interna, na versão atualizada em 23 de outubro
 O aviso da Figura~\ref{fig:print-02-informacoes} permite ``Contribuir com a pesquisa'' ou ``Continuar sem contribuir''. A recusa mantém as funções de transporte disponíveis, sem iniciar sessão de telemetria ou reprodução visual. Falhas de gravação não devem bloquear a consulta. A escolha, sua versão e data são persistidas no navegador, sem prazo arbitrário de expiração; alterações relevantes no aviso exigem nova decisão. Ausência ou falha do armazenamento não equivale a consentimento. Em Configurações, o participante pode consultar ou alterar sua decisão, interromper a captura e solicitar exclusão. A interrupção descarta eventos não enviados e impede novos envios, mas não exclui automaticamente dados já recebidos. Consultas operacionais de transporte e logs do servidor são distintos da participação na pesquisa.
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-10-25-sem-aviso/pesquisa-configuracoes.png}\hfill
-\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-10-25-sem-aviso/feedback.png}
+\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/pesquisa-configuracoes.png}\hfill
+\includegraphics[width=0.43\textwidth,height=0.55\textheight,keepaspectratio]{capturas/2026-11-02-interface-atual/feedback.png}
 \caption{Decisão de não participar nas configurações e formulário de feedback voluntário.}\label{fig:pesquisa-voluntaria}
-\fonte{Capturas reais da aplicação em viewport móvel, revisão 85417bc com recaptura após ajuste local da interface, 25 out. 2026.}
+\fonte{Capturas da aplicação em emulação móvel, revisão 78e3935, 2 nov. 2026.}
 \end{figure}
-As configurações possuem conteúdo rolável: a captura mostra a parte inicial, não a integralidade das informações. O formulário de feedback foi aberto sem enviar mensagem. Essas telas documentam a separação entre consulta ao transporte, pesquisa e manifestação voluntária.
+As configurações possuem conteúdo rolável: a captura mostra a parte inicial, não a integralidade das informações. O formulário de feedback mostra a avaliação opcional de uma a cinco estrelas e foi aberto sem selecionar nota nem enviar mensagem. Essas telas documentam a separação entre consulta ao transporte, pesquisa e manifestação voluntária.
 
 O prazo de 30 dias informado na interface corresponde ao critério de remoção dos eventos antigos, contado a partir do recebimento no servidor. A limpeza é executada no processamento de um lote de telemetria validado, não por uma tarefa periódica independente. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Os blocos comprimidos reutilizados dentro de uma sessão são eliminados quando ela deixa de possuir eventos. Enquanto restar algum evento, blocos associados a registros já expirados podem permanecer. Arquivos exportados não são abrangidos automaticamente pela limpeza por idade. Assim, a implementação não assegura a eliminação de todas as cópias em até 30 dias. O acesso pela aplicação exige autenticação administrativa, e a configuração de acesso público bloqueia a administração. A exclusão manual de uma sessão, com confirmação, remove seus eventos e blocos associados e tenta remover o diretório de exportações em cache. Falhas nessa remoção de arquivos são ignoradas pelo código, de modo que o retorno da operação não garante a eliminação de todas as cópias. Cópias previamente baixadas precisam de tratamento próprio. A exclusão lógica no SQLite também não equivale a apagamento físico garantido nem reduz necessariamente o tamanho do arquivo. A interface permite solicitar exclusão, sujeita à análise da equipe; o protocolo de recebimento não significa eliminação imediata. Relatos voluntários e solicitações são armazenados separadamente, não são removidos pela exclusão da sessão e não possuem limpeza automática por prazo nesta versão. Sua exclusão administrativa é uma ação distinta; marcar uma solicitação como resolvida não elimina seus dados nem executa automaticamente a exclusão dos registros de navegação.
 

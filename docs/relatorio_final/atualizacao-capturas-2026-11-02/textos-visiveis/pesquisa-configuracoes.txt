@@ -1,0 +1,49 @@
+Selecionar embarque
+Endereço ou coordenadas de embarque
+Casa
+Adicionar
+Trabalho
+Adicionar
+Permissão de localização negada. Você pode continuar escolhendo os pontos no mapa.
++
+−
+© OpenStreetMap
+…
++
+Navegação
+Favoritos
+Feedback
+Configurações → Participação na pesquisa
+×
+
+Decisão atual: não participar. Registrada em 02/11/2026, 11:38:44.
+
+● Gravar
+
+Interromper não exclui automaticamente os dados já enviados.
+
+Dados e finalidade
+
+Com sua autorização, registramos reprodução visual da interface e do mapa, movimentos, toques, buscas digitadas, locais de origem e destino, rotas e respostas das consultas, falhas, favoritos e informações técnicas do dispositivo. A localização depende também da permissão do navegador. O objetivo é identificar dificuldades de uso e falhas. Os dados são agrupados por sessão, sem cadastro, mas podem revelar locais e hábitos pessoais: não são anônimos.
+
+Acesso, retenção e exclusão
+
+Os registros ficam no servidor do projeto, com acesso administrativo restrito. Eventos com mais de 30 dias são removidos quando uma nova gravação é recebida. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Blocos de gravação de sessões ainda existentes, exportações e cópias baixadas podem permanecer e exigem tratamento pelos responsáveis. Não garantimos exclusão de todas as cópias em 30 dias.
+
+Interromper a participação encerra a captura e descarta eventos ainda não enviados; não apaga automaticamente dados já recebidos. Uma transmissão já recebida pelo servidor não pode ser desfeita pela revogação. Você pode solicitar a exclusão abaixo. A solicitação será analisada pela equipe e não representa exclusão imediata.
+
+Sem participar, o PaP não inicia gravação de pesquisa. Consultas necessárias ao transporte e logs operacionais do servidor continuam funcionando. Feedback enviado voluntariamente é armazenado separadamente, mesmo sem gravação. Relatos e solicitações são tratados pela equipe, sem limpeza automática por prazo nesta versão.
+
+Sua decisão é salva neste navegador, separada dos identificadores da gravação. Não há vencimento por prazo nesta versão. Mudanças relevantes na coleta, finalidade, acesso ou retenção exigirão uma nova escolha. Você pode alterar sua participação a qualquer momento nestas configurações.
+
+Contato com a equipe
+
+25202874@aluno.univesp.br
+
+Use este formulário para entrar em contato ou solicitar exclusão. Não informe senhas. Se desejar resposta fora da aplicação, inclua um contato no texto.
+
+Assunto
+Contato sobre a pesquisa
+Solicitar exclusão dos registros já enviados
+Mensagem
+Enviar solicitação
