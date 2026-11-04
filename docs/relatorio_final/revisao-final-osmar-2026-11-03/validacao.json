@@ -1,0 +1,13 @@
+{
+  "pages": 168,
+  "bytes": 4901812,
+  "limit_bytes": 10000000,
+  "md5": "d5587abd48ab3daadf9f8bcd0b09ea67",
+  "sha256": "ac640c7c27e463cfe777e312a8849be2dc64411db0e66f19ac1ad27c0be4d4cf",
+  "original_sha256": "ec5d72ed74afc0b5cf7ad99c69efa628212fdd1f23db76e2869572fe9b7f0395",
+  "outline_entries": 65,
+  "external_uris": 84,
+  "text_all_pages_unchanged_ignoring_whitespace": true,
+  "compression": "Ghostscript; images 220 dpi JPEG quality95; monochrome400 dpi; text remains searchable",
+  "render_all_pages_passed": true
+}

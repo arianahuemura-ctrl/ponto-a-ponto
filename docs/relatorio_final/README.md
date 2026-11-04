@@ -1,3 +1,33 @@
+# Entrega atual — correção mínima da materialização
+
+[PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf](PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf) — **168 páginas, 4901874 bytes**. [Verificação e hashes](correcao-materializacao-2026-11-03/VERIFICACAO.md). Versões anteriores preservadas.
+
+---
+
+# Entrega atual — revisão final com Osmar
+
+[PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf](PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf) — **168 páginas, 4901812 bytes**. [Alterações, validação, hashes e pendências](revisao-final-osmar-2026-11-03/REVISAO.md). Versões anteriores preservadas abaixo.
+
+---
+
+# Entrega com manifestação de Osmar — 03/11/2026
+
+Versão atual: [PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf](PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf), **169 páginas, 4901476 bytes**. Inclui resposta de 02/11/2026 às 18h10 como transcrição no Anexo B e síntese na avaliação. [Validação](manifestacao-osmar-2026-11-03/ATUALIZACAO.md).
+
+---
+
+# Entrega revisada — acabamento de 03/11/2026
+
+Versão atual para envio: [PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf](PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf), **167 páginas, 4.897.140 bytes**. Correções pontuais de remissões e quebra de títulos; paginação e conteúdo técnico preservados. [Registro da revisão](acabamento-editorial-2026-11-03/REVISAO.md). Versões anteriores preservadas abaixo.
+
+---
+
+# Entrega para upload — 3 de novembro de 2026
+
+[PDF de entrega abaixo de 10 MB](PaP_relatorio_2026-11-03_ENTREGA.pdf): **4.897.221 bytes**, **167 páginas**. Conteúdo textual e URL definitiva preservados; imagens compactadas. Original de maior resolução mantido abaixo. [Validação e hashes](entrega-10mb-2026-11-03/VALIDACAO.md).
+
+---
+
 # Vídeo definitivo — 3 de novembro de 2026
 
 Entrega atual: [PDF com URL definitiva](PaP_relatorio_2026-11-03_video_definitivo.pdf), **167 páginas**, **30158763 bytes**.

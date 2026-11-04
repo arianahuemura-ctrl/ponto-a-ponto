@@ -1,4 +1,29 @@
+## Publicação final autorizada — 03/11/2026
+
+Esta publicação reúne as correções finais, a manifestação de Osmar, os PDFs compactados de entrega e suas auditorias. Referência anterior aef369c; registros “sem commit” abaixo descrevem as etapas anteriores à autorização atual. Validações já concluídas; git diff --check aprovado. Fonte e matriz final preservados, sem alterações no vídeo ou aplicativo.
+
+## Correção mínima da materialização — 03/11/2026
+
+Entrega atual: [PDF corrigido](relatorio_final/PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf), 168 páginas, 4901874 bytes; também em Downloads. Uma frase no Apêndice A esclarece o episódio histórico de 28/10 e remete à substituição por materialização compacta em E.1. Somente página física 93 alterada; outras 167 páginas idênticas por renderização a 72 dpi, incluindo Tabela 11 e anexos. LuaLaTeX e validação da compactação aprovados. [Auditoria](relatorio_final/correcao-materializacao-2026-11-03/VERIFICACAO.md). Referência relatorio/aef369c, sem commit/push.
+
+## Revisão final com Osmar — 03/11/2026
+
+Entrega atual: [PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf](relatorio_final/PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf), 168 páginas, 4901812 bytes, também em Downloads. Tabela 11 em duas páginas (67–68); referências à falta de resposta atualizadas com retorno de 02/11; menção nas conclusões; H.4 remete automaticamente a H.1. Anexos preservados com comparação visual, paginação/listas/remissões atualizadas, LuaLaTeX saída 0 e cópia compactada conferida. [Auditoria e hashes](relatorio_final/revisao-final-osmar-2026-11-03/REVISAO.md). Branch relatorio/aef369c; alterações sem commit. Limitações metodológicas e pendências institucionais anteriores mantidas. Próximo passo: entrega institucional.
+
+## Manifestação de Osmar incorporada — 03/11/2026
+
+Entrega atual: [PDF com Anexo B](relatorio_final/PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf), 169 páginas, 4901476 bytes; também em Downloads. Mensagem de 02/11/2026 às 18h10 confirmada por cabeçalho fornecido pelo responsável; transcrição identificada, síntese limitada à aprovação da concepção. Parecer do Anexo A preservado, conteúdo visual comparado; numeração atualizada. LuaLaTeX, renderização integral, marcadores/URIs e inspeção visual aprovados. [Auditoria](relatorio_final/manifestacao-osmar-2026-11-03/ATUALIZACAO.md). Referência relatorio/aef369c; alterações sem commit, upload pendente.
+
+## Acabamento editorial mínimo concluído — 03/11/2026
+
+Referência `relatorio` / `aef369c`. Entrega atual: [PDF revisado](relatorio_final/PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf), 167 páginas, 4.897.140 bytes; cópia em Downloads. Corrigidas duas remissões ao Apêndice A e hifenização de títulos. LuaLaTeX saída 0; sem Overfull/referências indefinidas. Paginação, sumário/listas e link definitivo preservados; seis páginas do parecer idênticas por pixels antes da compactação. [Auditoria](relatorio_final/acabamento-editorial-2026-11-03/REVISAO.md). Originais preservados; alterações sem commit/push. Próximo passo: envio institucional desta cópia revisada.
+
 # Estado do worktree acadêmico — 3 de novembro de 2026
+
+## Entrega abaixo de 10 MB — 03/11/2026
+
+Referência Git `relatorio` / `aef369c`. Nova cópia [ENTREGA](relatorio_final/PaP_relatorio_2026-11-03_ENTREGA.pdf), também em Downloads: 4.897.221 bytes, 167 páginas. Original de 30 MB preservado. Texto integral, 64 marcadores e 84 URIs conferidos; renderização integral aprovada e amostras visuais verificadas. [Validação, parâmetros e hashes](relatorio_final/entrega-10mb-2026-11-03/VALIDACAO.md). Compressão de imagens com perdas, sem mudança do conteúdo ou do fonte. Alterações desta etapa sem commit; próximo passo: enviar a cópia ENTREGA ao portal institucional. Upload não realizado.
+
 
 Branch `relatorio`; HEAD `f58078abeed5a30e18c8de8d514d54a4dd0c215e`. Revisão editorial concluída; commits e push autorizados pelo responsável em 02/11/2026. Trabalho acadêmico restrito a este worktree; aplicativo e vídeo não foram alterados nesta etapa.
 
