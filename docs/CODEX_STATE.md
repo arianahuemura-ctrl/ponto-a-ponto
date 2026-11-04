@@ -1,9 +1,62 @@
 # Estado do projeto para continuidade
 
+## Publicação final autorizada — 03/11/2026
+
+Commit acadêmico `8f6fb3a` na branch `relatorio` reúne fontes finais, cinco PDFs compactados de entrega, matriz final e auditorias de 03/11. Este commit de continuidade consolida o estado local e os links de teste para Osmar. Registros “sem commit” abaixo correspondem às etapas anteriores à autorização. Verificações finais documentadas e git diff --check aprovado; nenhum código ou vídeo alterado.
+
+
+## Correção mínima da materialização — 03/11/2026
+
+Entrega atual em Downloads: `PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf`, 168 páginas, 4.901.874 bytes. Uma frase do Apêndice A contextualiza o episódio de 28/10/2026 e remete à materialização compacta em E.1. Somente página 93 alterada; demais 167 páginas idênticas por renderização. Validação no worktree relatorio/aef369c: `docs/relatorio_final/correcao-materializacao-2026-11-03/VERIFICACAO.md`. Sem commit/push; aplicativo e vídeo não alterados.
+
+
+## Revisão final do relatório com Osmar — 03/11/2026
+
+Entrega atual em Downloads: `PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf`, 168 páginas, 4.901.812 bytes. Tabela 11 em duas páginas; retorno de Osmar contextualizado, menção nas conclusões e remissão H.4→H.1 corrigida. Anexos A/B preservados; compilação e validação estrutural/visual aprovadas. Auditoria no worktree relatorio/aef369c em `docs/relatorio_final/revisao-final-osmar-2026-11-03/REVISAO.md`. Sem commit/push; envio institucional pendente. Aplicativo e vídeo não modificados.
+
+
+## Links públicos para Osmar — 03/11/2026
+
+Servidor e pap-tunnel estavam parados; reiniciados com `docker start pap-tunnel` e `bash scripts/start_public.sh`, sem importações ou rebuild. Domínio atual: https://entire-posts-ago-weblog.trycloudflare.com (temporário; substitui fantastic-plants-sufficient-visitor). Gunicorn em 127.0.0.1:8001, DEBUG=False, check Django aprovado. Links testados: raiz (GPS), `?location=-23.561326733117216,-46.65615056649423` (MASP), `?location=-23.6674495,-46.4653444` (Prefeitura, coordenadas data-lat/data-lng do mapa oficial https://www.maua.sp.gov.br/Secretarias/Locais/42), `?stop=artesp%3A92450` (R. Oscarito, 629A, Mauá) e `?stop=440016922` (Av. Paulista, 1578). HTTP 200, localização simulada somente nos dois links fixos, saúde/assets e cadastros conferidos. Cinco mapas renderizados em Playwright viewport móvel sem pageErrors, após recusar pesquisa. GPS testado com localização emulada, não aparelho físico; previsões e planejamento completo não verificados. Primeiro teste esperou mapa antes do consentimento e expirou; fluxo corrigido no segundo. Evidências em `.cache/setup/links-osmar-20261103/`. Túnel deve permanecer ativo; não reiniciar desnecessariamente. Nenhuma mudança de código ou commit.
+
+
+## Manifestação de Osmar — 03/11/2026
+
+Entrega atual em Downloads: `PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf`, 169 páginas, abaixo de 10 MB. Resposta de 02/11/2026 às 18h10 transcrita no Anexo B e sintetizada na avaliação, distinguindo opinião de resultado medido. Parecer anterior preservado; validações LuaLaTeX, renderização, navegação e visual concluídas no worktree relatorio/aef369c. Auditoria em `../maua_bus_map-relatorio/docs/relatorio_final/manifestacao-osmar-2026-11-03/ATUALIZACAO.md`. Sem commit/push; envio institucional pendente.
+
+
+## Acabamento do relatório — 03/11/2026
+
+Nova entrega em Downloads: `PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf`, 167 páginas e 4.897.140 bytes. Correções pontuais nas remissões ao Apêndice A e hifenização dos títulos no worktree relatorio (aef369c). LuaLaTeX e validações visual/estrutural aprovados; parecer integral preservado e páginas comparadas por pixels antes da compactação. Auditoria: `../maua_bus_map-relatorio/docs/relatorio_final/acabamento-editorial-2026-11-03/REVISAO.md`. Versões anteriores mantidas. Sem commit/push ou upload institucional; aplicativo não alterado.
+
+
+## PDF de entrega abaixo de 10 MB — 03/11/2026
+
+No worktree acadêmico `relatorio` (referência `aef369c`), criada cópia `docs/relatorio_final/PaP_relatorio_2026-11-03_ENTREGA.pdf`, também em `/home/avale/Downloads/`: 4.897.221 bytes, 167 páginas. Original preservado; texto, 64 marcadores e 84 URIs conferidos. Imagens compactadas a 220 dpi/JPEG 95; renderização integral e amostras visuais verificadas. Auditoria em `../maua_bus_map-relatorio/docs/relatorio_final/entrega-10mb-2026-11-03/VALIDACAO.md`. Sem commit nesta etapa; upload institucional pendente. Aplicativo não alterado, testes de aplicação não necessários.
+
+
 Atualizado em **03/11/2026**, referência de data `America/Sao_Paulo`.
 Este é um resumo verificado do repositório, não uma recuperação da conversa.
 Na próxima sessão, leia [AGENTS.md](../AGENTS.md) e confira o Git novamente.
 Procedimento e diagnóstico: [CODEX_CONTINUITY.md](CODEX_CONTINUITY.md).
+
+## Autoavaliação atualizada — 03/11/2026
+
+- Acabamento posterior: `Downloads/Avaliacao_PI2_Grupo_17_Acabamento_2026-11-03.docx` e `.pdf`. Rodapé provisório, referências à restauração de notas e pedidos de validação removidos. Textos condensados em tom avaliativo, preservando atribuição aos relatos e limites materiais quando faltam contribuições individualizadas. Sem novas evidências nem declaração de plena fundamentação. Oito páginas/24 textos, notas (Nathalia 4,58), datas e cabeçalhos conferidos; página 8 inspecionada. Cache `.cache/setup/avaliacao-acabamento-20261103/`. Versões anteriores preservadas, sem commit/push.
+
+- Revisão posterior: `Downloads/Avaliacao_PI2_Grupo_17_Revisada_2026-11-03.docx` e `.pdf`, com resumo em `Resumo_revisao_autoavaliacao_2026-11-03.txt`. Usuário esclareceu que responsabilidades eram temas da apresentação, não confirmação de execução individual; justificativas revisadas distinguem relatos, registros e lacunas, sem atribuição fictícia. Título alinhado às notas consolidadas. Notas de Nathalia restauradas aos valores anteriores por autorização explícita; ODS não alterado. Oito páginas, nomes/ordem/datas, 24 textos e médias conferidos; amostra visual aprovada. Critério substantivo de todas as notas fundamentadas ainda depende de evidências/validação do grupo, explicitado na entrega. Cache `.cache/setup/autoavaliacao-revisao-final-20261103/`; sem commit/push.
+
+- Consolidação posterior autorizada: `Downloads/Autoavaliacao_PI2_Grupo_17_Consolidada_2026-11-03.docx` e `.pdf`. Quinze relatos dos formulários correspondentes a Ariana/Bruno/Caio/Ingrid/Nathalia incorporados, com rótulo de origem; nove sínteses editoriais das pontuações para André/Leonardo/Maurício, identificadas e sem inventar entregas. Notas alinhadas ao ODS atual (inclusive divergência de Nathalia). Oito páginas completas, 24 campos, datas/critério C6 conferidos; página 2 inspecionada. Procedência privada em `.cache/setup/autoavaliacao-consolidada-20261103/procedencia.json`. Fontes e versões anteriores preservadas, sem commit/push.
+
+- Cruzamento posterior solicitado: oito DOCX originais em Downloads comparados com as 24 notas por avaliador de `PI2/Notas.ods`, expandindo células repetidas do ODS. Há justificativas em outros arquivos; a falta de 18 campos referia-se somente ao documento usado antes. Correspondências, limites de autoria e divergências registrados privadamente em `.cache/setup/autoavaliacao-cruzamento-20261103/CRUZAMENTO.txt` e `audit.json`. Nenhuma nota ou documento modificado nesta auditoria; confirmar procedência dos arquivos ambíguos antes de consolidar justificativas.
+
+- Paginação corrigida posteriormente: `Downloads/Autoavaliacao_PI2_Grupo_17_Paginacao_corrigida_2026-11-03.docx` e `.pdf`, derivadas de Sem_observacao. Quebra explícita antes das fichas 2–8 e cabeçalho unido ao título. Validado: oito páginas, exatamente uma ficha/cabeçalho correspondente por página, médias e notas preservadas; página 2 inspecionada visualmente. Logs em `.cache/setup/autoavaliacao-paginacao-20261103/`. Versões anteriores preservadas.
+
+- Última cópia solicitada: `Downloads/Autoavaliacao_PI2_Grupo_17_Sem_observacao_2026-11-03.docx` e `.pdf`, derivada da versão Atualizada, com remoção dos campos de reflexão e das oito observações de proposta interna. Oito páginas, notas/médias/datas conferidas. PDF externo “Validada” não alterado. Fontes anteriores preservadas; logs em `.cache/setup/autoavaliacao-sem-observacao-20261103/`.
+
+- A pedido do responsável, usadas as oito fichas de `Downloads/Autoavaliacao_PI2_Grupo_17_8_Integrantes (3).docx`. Confirmada explicitamente a troca C8→C6. Notas e médias atualizadas conforme tabela fornecida, sem reproduzir dados individuais neste estado.
+- Novas cópias `Downloads/Autoavaliacao_PI2_Grupo_17_Atualizada_2026-11-03.docx` e `.pdf`; original preservado. Oito páginas, 24 notas e oito médias conferidas no PDF; arredondamento validado. Nomes, justificativas e demais componentes DOCX preservados. Data preenchida em todas as fichas: **03/11/2026**; período **10/08/2026 a 03/11/2026**, por solicitação explícita. Word/PDF em Downloads atualizados; cópias anteriores preservadas em `.cache/setup/autoavaliacao-datas-20261103/anteriores/`. PDF reexportado com oito páginas, datas conferidas nas oito fichas e restante do texto idêntico à versão anterior.
+- Scripts/logs locais em `.cache/setup/autoavaliacao-20261103/`. LibreOffice com perfil temporário; primeira execução bloqueada pelo sandbox, exportação posterior concluída. C6 dividido em runs do Word corrigido e revalidado. Sem commit/push desta etapa; aplicativo e relatório final não alterados.
 
 ## Versionamento autorizado — 03/11/2026
 
