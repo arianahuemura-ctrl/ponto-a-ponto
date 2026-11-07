@@ -1,0 +1,1003 @@
+--- a/README.md
++++ b/README.md
+@@ -1391,3 +1391,7 @@
+ ### Ambiente da aplicação
+ 
+ Defina `PAP_ENVIRONMENT=production` (padrão) ou `PAP_ENVIRONMENT=development` no `.env` da raiz. Em produção, a marca do RAPTOR e a medição de distâncias pelo botão direito ficam desativadas. Essas ferramentas estão disponíveis apenas em desenvolvimento. Após alterar, execute `npm --prefix frontend run build`; se estiver usando o Vite, reinicie o servidor de desenvolvimento. A variável não altera o `DEBUG` do Django.
++
++## Participação voluntária na pesquisa
++
++O passageiro pode contribuir com a pesquisa ou usar o transporte sem gravação. A decisão pode ser alterada em **Configurações → Participação na pesquisa**. Feedback continua disponível sem participar. Consulte [comportamento, retenção e testes](docs/CONSENTIMENTO_PESQUISA.md).
+
+--- a/backend/e2e_server.py
++++ b/backend/e2e_server.py
+@@ -17,6 +17,8 @@
+     from transit.models import Simulation
+     from transit.importing import import_demo
+     from django.conf import settings
++    settings.PAP_USABILITY_DB = Path(directory) / "telemetry.sqlite3"
++    settings.PAP_RESEARCH_DB = Path(directory) / "research.sqlite3"
+     import_demo(settings.BASE_DIR)
+ 
+     # Credenciais exclusivamente do servidor efêmero de testes.
+
+--- a/backend/mbm/settings.py
++++ b/backend/mbm/settings.py
+@@ -68,3 +68,6 @@
+         },
+     }
+ ]
++
++# Optional project contact; the in-app request form works without external email.
++PAP_RESEARCH_CONTACT = os.environ.get("PAP_RESEARCH_CONTACT", "25202874@aluno.univesp.br")
+
+--- a/backend/mbm/urls.py
++++ b/backend/mbm/urls.py
+@@ -2,12 +2,16 @@
+ from django.conf.urls.static import static
+ from django.urls import path
+ from django.contrib import admin
+-from transit import views, demo_views, catalogue, usability, usability_admin
++from transit import research, views, demo_views, catalogue, usability, usability_admin
+ from transit.sptrans import views as sptrans
+ from transit.sptrans.compact import catalogue as stop_catalogue
+ from transit.sptrans.addresses import suggestions
+ 
+ urlpatterns = [
++    path("api/research/info/", research.info),
++    path("api/research/feedback/", research.feedback),
++    path("api/research/requests/", research.requests),
++    path("admin/research/", research.inbox, name="research-inbox"),
+     path("api/usability/", usability.events),
+     path("api/sptrans/stop-catalogue/", stop_catalogue),
+     path("api/location-config/", views.location_config),
+
+--- a/backend/transit/usability.py
++++ b/backend/transit/usability.py
+@@ -98,7 +98,8 @@
+         try: session=signing.loads(token,salt=SALT,max_age=43200)
+         except signing.BadSignature:
+             session=str(uuid.uuid4());token=signing.dumps(session,salt=SALT)
+-        response=JsonResponse({'session':session,'token':token,'csrf':get_token(request)})
++        from .research import PROOF_SALT
++        response=JsonResponse({'session':session,'token':token,'csrf':get_token(request),'deletion_proof':signing.dumps(session,salt=PROOF_SALT)})
+         response['Cache-Control']='no-store'
+         return response
+     if len(request.body)>262144:return JsonResponse({'error':'Lote muito grande.'},status=413)
+
+--- a/backend/transit/usability_admin.py
++++ b/backend/transit/usability_admin.py
+@@ -63,6 +63,10 @@
+         instant=datetime.fromisoformat(data['at'].replace('Z','+00:00'))
+         offset=max(0,int(instant.timestamp()*1000-start_time)) if start_time is not None else None
+         feedbacks.append(dict(data,instant=instant,offset=offset))
++    from .research import linked_feedback
++    for received,data in linked_feedback(session):
++        offset=max(0,int(received*1000-start_time)) if start_time is not None else None
++        feedbacks.append(dict(data,instant=dt(received),offset=offset))
+     timeline=[]
+     for e in events:
+         if e['kind']=='visual':continue
+
+--- a/backend/transit/test_usability_admin.py
++++ b/backend/transit/test_usability_admin.py
+@@ -16,7 +16,7 @@
+     @patch("transit.usability_admin.admin.site.each_context",return_value={"available_apps":[],"site_header":"Administração PaP","site_title":"PaP","has_permission":True})
+     def test_list_details_player_and_missing_metadata(self,context):
+         sid=uuid.uuid4()
+-        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3'):
++        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3',PAP_RESEARCH_DB=Path(folder)/'messages.sqlite3'):
+             with connection() as db:
+                 db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(str(sid),1,1,'session_start',json.dumps({'width':390,'height':844})))
+                 for seq,event in enumerate([{'type':4,'timestamp':1000,'data':{'width':390,'height':844}},{'type':2,'timestamp':1100,'data':{'node':{}}}],2):
+@@ -36,7 +36,7 @@
+     def test_export_confirmation_and_scoped_delete(self,context):
+         import sqlite3
+         sid,other=uuid.uuid4(),uuid.uuid4()
+-        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3'):
++        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3',PAP_RESEARCH_DB=Path(folder)/'messages.sqlite3'):
+             with connection() as db:
+                 for identifier in [sid,other]:db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(str(identifier),1,1,'action',json.dumps({'target':'lamp'})))
+             def req(method='get',data=None,csrf=True):
+@@ -83,7 +83,7 @@
+ 
+     def test_video_cache_and_duplicate_job(self):
+         from transit import replay_video as video
+-        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3'),patch.dict(video._jobs,{},clear=True),patch.object(video.threading,'Thread') as thread:
++        with tempfile.TemporaryDirectory() as folder,override_settings(PAP_USABILITY_DB=Path(folder)/'events.sqlite3',PAP_RESEARCH_DB=Path(folder)/'messages.sqlite3'),patch.dict(video._jobs,{},clear=True),patch.object(video.threading,'Thread') as thread:
+             owner=('1',str(uuid.uuid4()));key='version1'
+             token=video.start([],owner,key)
+             self.assertEqual(video.start([],owner,key),token)
+
+--- a/backend/transit/templates/transit/usability_sessions.html
++++ b/backend/transit/templates/transit/usability_sessions.html
+@@ -1,5 +1,6 @@
+ {% extends "admin/base_site.html" %}
+-{% block content %}<p>Registros de pesquisa restritos à administração. {{ total }} sessões.</p>
++{% block content %}
++<p><a href="{% url 'research-inbox' %}">Feedback voluntário e solicitações de pesquisa</a></p><p>Registros de pesquisa restritos à administração. {{ total }} sessões.</p>
+ <p><a href=".">Atualizar lista</a></p><div style="overflow:auto"><table><thead><tr><th>Sessão</th><th>Início</th><th>Último recebimento</th><th>Intervalo de recebimento</th><th>Registros</th><th>Dados armazenados</th><th>Replay</th><th>Ações</th></tr></thead><tbody>
+ {% for s in sessions %}<tr><td><a href="{% url 'usability-detail' s.id %}">{{ s.id }}</a></td><td>{{ s.start|date:"d/m/Y H:i:s" }}</td><td>{{ s.end|date:"H:i:s" }}</td><td>{{ s.duration }} s</td><td>{{ s.count }}</td><td>{{ s.size|filesizeformat }}</td><td>{% if s.visual %}Detectado{% else %}Não detectado{% endif %}</td><td style="white-space:nowrap" class="export-actions"><a href="{% url 'usability-delete' s.id %}" title="Apagar sessão (solicita confirmação)" aria-label="Apagar sessão">🗑</a> <button type="button" data-export="json" data-url="{% url 'usability-export-json' s.id %}" title="Exportar JSON" aria-label="Exportar JSON">📄</button> {% if s.visual %}<button type="button" data-export="webm" data-url="{% url 'usability-export-video' s.id %}" title="Exportar vídeo WebM" aria-label="Exportar vídeo WebM">🎬</button>{% else %}<span title="Sessão sem replay visual" aria-label="Vídeo indisponível">—</span>{% endif %}</td></tr>{% empty %}<tr><td colspan="8">Nenhuma sessão registrada.</td></tr>{% endfor %}</tbody></table></div>
+ <p>{% if page > 1 %}<a href="?page={{ previous }}">Anterior</a> · {% endif %}Página {{ page }}{% if has_next %} · <a href="?page={{ next }}">Próxima</a>{% endif %}</p><form hidden>{% csrf_token %}</form><p id="export-status" role="status"></p>
+
+--- a/docs/ADMIN_USABILIDADE.md
++++ b/docs/ADMIN_USABILIDADE.md
+@@ -18,3 +18,14 @@
+ 
+ 
+ As ações da lista usam ícones com dicas e nomes acessíveis. Durante a exportação, o botão mostra uma ampulheta e fica desabilitado até o download estar pronto. JSON e WebM gerados ficam em `exports/<sessão>/` ao lado do banco de telemetria, em diretório privado. O cache usa uma assinatura de todos os registros: a mesma versão é reutilizada, inclusive após reinício; novos registros geram outra versão. Excluir a sessão pela administração remove seus arquivos de exportação. Esses arquivos ocupam espaço adicional e não são contabilizados na coluna de tamanho dos eventos.
++
++
++## Feedback independente e solicitações de pesquisa
++
++Com o consentimento voluntário, novos relatos são armazenados separadamente da telemetria. Acesse `/admin/research/` pelo link na lista de sessões: o painel apresenta os 200 registros mais recentes e permite marcar uma mensagem como analisada ou excluí-la, com confirmação. O acesso exige usuário administrativo e permanece bloqueado na instância pública.
++
++Relatos enviados com gravação ativa também aparecem no detalhe da sessão, posicionados pelo instante de recebimento do servidor. Sem pesquisa ativa, o relato não cria sessão nem replay e aparece apenas no painel de mensagens. Registros históricos de feedback continuam legíveis no replay.
++
++**Excluir uma sessão de telemetria não exclui as novas mensagens do banco separado.** No tratamento de uma solicitação, conferir também mensagens relacionadas, exportações e cópias baixadas. Marcar como analisada não executa exclusão. O exportador JSON existente contém os eventos de telemetria; as novas mensagens independentes devem ser consultadas no painel próprio.
++
++O contato configurado é `25202874@aluno.univesp.br`, substituível por `PAP_RESEARCH_CONTACT`. As decisões e limitações de retenção estão documentadas em [Consentimento voluntário de pesquisa](CONSENTIMENTO_PESQUISA.md).
+
+--- a/frontend/e2e/selection-flow.spec.js
++++ b/frontend/e2e/selection-flow.spec.js
+@@ -12,7 +12,7 @@
+  let requests=0,boards=[];
+  await page.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:stops[requests++],distance_meters:10}}));
+  await page.route('**/api/sptrans/board/**',r=>{boards.push(new URL(r.request().url()).searchParams);return r.fulfill({json:{lines:[],journeys:[]}});});
+- await page.goto('/');await page.getByRole('button',{name:'Concordo e continuar'}).click();
++ await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir'}).click();
+  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
+  const select=async(index)=>{
+   if(!long){
+@@ -37,6 +37,6 @@
+  expect(boards[0].get('origin')).toBe('1');expect(boards[0].get('destination')).toBe('2');
+ });
+ test('link direto abre próximos ônibus',async({page})=>{
+- await page.goto('/?stop=1');await page.getByRole('button',{name:'Concordo e continuar'}).click();
++ await page.goto('/?stop=1');await page.getByRole('button',{name:'Continuar sem contribuir'}).click();
+  await expect(page.getByRole('dialog',{name:'Próximos ônibus'})).toBeVisible();
+ });
+
+--- a/frontend/src/Feedback.jsx
++++ b/frontend/src/Feedback.jsx
+@@ -3,16 +3,16 @@
+ import './feedback.css';
+ export default function Feedback(){
+   const dialog=useRef(),trigger=useRef(),pending=useRef(),moment=useRef();
+-  const [message,setMessage]=useState(''),[category,setCategory]=useState('problema'),[status,setStatus]=useState('');
++  const [message,setMessage]=useState(''),[category,setCategory]=useState('problema'),[status,setStatus]=useState(''),[linked,setLinked]=useState(false);
+   function open(){trigger.current=document.activeElement;moment.current={at:new Date().toISOString(),elapsed:performance.now()};pending.current=null;setStatus('');dialog.current.showModal();}
+   function close(){if(status==='sending')return;dialog.current.close();trigger.current?.focus();}
+-  async function send(e){e.preventDefault();if(!message.trim()||status==='sending')return;setStatus('sending');try{pending.current??=prepareFeedback(category,message.trim(),moment.current.at,moment.current.elapsed);await submitFeedback(pending.current);setStatus('sent');setMessage('');}catch{setStatus('error');}}
++  async function send(e){e.preventDefault();if(!message.trim()||status==='sending')return;setStatus('sending');try{pending.current??=prepareFeedback(category,message.trim(),moment.current.at,moment.current.elapsed);const result=await submitFeedback(pending.current);setLinked(result.linked);setStatus('sent');setMessage('');}catch{setStatus('error');}}
+   useEffect(()=>{window.addEventListener('pap-open-feedback',open);return()=>window.removeEventListener('pap-open-feedback',open);},[]);
+   return <div className="pap-feedback">
+-    <dialog className="pap-feedback-dialog" ref={dialog} aria-labelledby="feedback-title" onCancel={e=>{if(status==='sending')e.preventDefault();}}>
++    <dialog data-private className="pap-feedback-dialog" ref={dialog} aria-labelledby="feedback-title" onCancel={e=>{if(status==='sending')e.preventDefault();}}>
+       <h2 id="feedback-title">Como foi usar o PaP?</h2>
+-      {status==='sent'?<><p role="status">Obrigado! Seu feedback foi salvo junto à sessão de navegação.</p><button onClick={close}>Concluir</button></>:<form onSubmit={send}>
+-        <p>Encontrou um problema ou tem uma sugestão? Seu relato será relacionado a este momento da navegação.</p>
++      {status==='sent'?<><p role="status">Obrigado! Seu feedback foi salvo.{linked?' Ele foi relacionado à sessão de pesquisa ativa.':' Nenhuma gravação de navegação foi iniciada.'}</p><button onClick={close}>Concluir</button></>:<form onSubmit={send}>
++        <p>Encontrou um problema ou tem uma sugestão? O envio é voluntário e não inicia gravação de navegação. Se a pesquisa estiver ativa, o relato será vinculado à sessão.</p>
+         <label>Tipo<select value={category} disabled={status==='sending'} onChange={e=>{setCategory(e.target.value);pending.current=null;}}><option value="problema">Relatar problema</option><option value="sugestao">Sugerir melhoria</option><option value="elogio">O que funcionou bem</option></select></label>
+         <label>Seu feedback<textarea required maxLength={2000} rows={5} value={message} disabled={status==='sending'} onChange={e=>{setMessage(e.target.value);pending.current=null;}} placeholder="Conte o que aconteceu e o que você esperava." /></label>
+         <small>{message.length}/2000 · Evite senhas ou dados pessoais.</small>
+
+--- a/frontend/src/SaoPaulo.jsx
++++ b/frontend/src/SaoPaulo.jsx
+@@ -244,7 +244,7 @@
+       <button type="button" className="sp-header-brand sp-about-button" aria-label={view==='more'?'Fechar Saiba mais pelo logo':'Saiba mais sobre o Ponto a Ponto'} aria-expanded={view==='more'} title={view==='more'?'Voltar ao mapa':'Saiba mais'} onClick={()=>setView(current=>current==='more'?'navigate':'more')}><span className="brand-mark app-brand-mark"><img src={appIcon} alt=""/></span></button>
+       {view==='navigate'&&<section className="sp-navigation-state" aria-label="Estado da navegação"><div className="sp-state-heading"><strong role="status">{stage}</strong>
+       </div></section>}
+-      <div className="sp-header-tools"><FullscreenButton onError={setNotice}/><button className="icon-button" aria-label="Buscar endereço" onClick={openSearch}><Icon name="search"/></button>
++      <div className="sp-header-tools"><button className="icon-button" data-private aria-label="Configurações" title="Participação na pesquisa" onClick={()=>window.dispatchEvent(new Event('pap-open-research'))}><Icon name="settings"/></button><FullscreenButton onError={setNotice}/><button className="icon-button" aria-label="Buscar endereço" onClick={openSearch}><Icon name="search"/></button>
+         <button className="icon-button" aria-label={resolvedTheme==='dark'?'Ativar modo claro':'Ativar modo escuro'} onClick={()=>setTheme(resolvedTheme==='dark'?'light':'dark')}><Icon name={resolvedTheme==='dark'?'sun':'moon'}/></button></div>
+     </header>
+     {locationError&&<div role="status" className="passenger-notice">{locationError}</div>}
+
+--- a/frontend/src/UsabilityConsent.jsx
++++ b/frontend/src/UsabilityConsent.jsx
+@@ -1,26 +1,78 @@
++import {useState,useEffect,useRef} from 'react';
+ import {startVisualRecording,stopVisualRecording} from './visualRecording.js';
+-import {useState,useEffect} from 'react';
+-import {startRecording,stopRecording,trace,flush} from './usability.js';
+-import {preloadStops} from './stopCatalog.js';
++import {startRecording,stopRecording,forgetSession,onRecordingStatus} from './usability.js';
++import {CHOICE_KEY,readChoice,writeChoice} from './researchChoice.js';
++import {availableProofs,researchInfo,researchPost} from './researchApi.js';
++import './research.css';
++
++function ResearchDetails(){
++  const [info,setInfo]=useState(null),[kind,setKind]=useState('contact'),[message,setMessage]=useState(''),[status,setStatus]=useState(''),[receipt,setReceipt]=useState('');const pending=useRef();
++  useEffect(()=>{let live=true;researchInfo().then(x=>{if(live)setInfo(x);}).catch(()=>{});return()=>{live=false;};},[]);
++  async function send(e){e.preventDefault();setStatus('sending');try{pending.current??={id:crypto.randomUUID(),kind,message:message.trim(),proofs:kind==='deletion'?availableProofs():[]};const result=await researchPost('requests',pending.current);setReceipt(result.receipt);setStatus('sent');}catch{setStatus('error');}}
++  return <section data-private aria-label="Informações da pesquisa"><h3>Dados e finalidade</h3>
++    <p>Com sua autorização, registramos reprodução visual da interface e do mapa, movimentos, toques, buscas digitadas, locais de origem e destino, rotas e respostas das consultas, falhas, favoritos e informações técnicas do dispositivo. A localização depende também da permissão do navegador. O objetivo é identificar dificuldades de uso e falhas. Os dados são agrupados por sessão, sem cadastro, mas podem revelar locais e hábitos pessoais: não são anônimos.</p>
++    <h3>Acesso, retenção e exclusão</h3><p>Os registros ficam no servidor do projeto, com acesso administrativo restrito. Eventos com mais de 30 dias são removidos quando uma nova gravação é recebida. Sem novas gravações, a remoção pode ocorrer depois desse prazo. Blocos de gravação de sessões ainda existentes, exportações e cópias baixadas podem permanecer e exigem tratamento pelos responsáveis. Não garantimos exclusão de todas as cópias em 30 dias.</p>
++    <p>Interromper a participação encerra a captura e descarta eventos ainda não enviados; não apaga automaticamente dados já recebidos. Uma transmissão já recebida pelo servidor não pode ser desfeita pela revogação. Você pode solicitar a exclusão abaixo. A solicitação será analisada pela equipe e não representa exclusão imediata.</p>
++    <p>Sem participar, o PaP não inicia gravação de pesquisa. Consultas necessárias ao transporte e logs operacionais do servidor continuam funcionando. Feedback enviado voluntariamente é armazenado separadamente, mesmo sem gravação. Relatos e solicitações são tratados pela equipe, sem limpeza automática por prazo nesta versão.</p>
++    <p>Sua decisão é salva neste navegador, separada dos identificadores da gravação. Não há vencimento por prazo nesta versão. Mudanças relevantes na coleta, finalidade, acesso ou retenção exigirão uma nova escolha. Você pode alterar sua participação a qualquer momento nestas configurações.</p>
++    <h3>Contato com a equipe</h3>{info?.contact&&<p>{info.contact}</p>}<p>Use este formulário para entrar em contato ou solicitar exclusão. Não informe senhas. Se desejar resposta fora da aplicação, inclua um contato no texto.</p>
++    {status==='sent'?<p role="status">Solicitação recebida. Protocolo: {receipt}. Guarde este número.</p>:<form onSubmit={send}>
++      <label>Assunto<select aria-label="Assunto" value={kind} onChange={e=>{setKind(e.target.value);pending.current=null;}} disabled={status==='sending'}><option value="contact">Contato sobre a pesquisa</option><option value="deletion">Solicitar exclusão dos registros já enviados</option></select></label>
++      {kind==='deletion'&&<p>Serão anexados {availableProofs().length} comprovantes de sessão disponíveis neste navegador (até os 50 mais recentes). Se usou outro aparelho ou apagou o armazenamento, descreva no texto como localizar seus registros. A equipe poderá precisar de mais informações.</p>}
++      <label>Mensagem<textarea aria-label="Mensagem" rows={3} maxLength={2000} required value={message} disabled={status==='sending'} onChange={e=>{setMessage(e.target.value);pending.current=null;}}/></label>
++      {status==='error'&&<p role="alert">Não foi possível enviar; o texto foi mantido. Tente novamente.</p>}
++      <button disabled={status==='sending'||!message.trim()}>{status==='sending'?'Enviando…':'Enviar solicitação'}</button>
++    </form>}
++  </section>;
++}
+ export default function UsabilityConsent({children}){
+-  const [status,setStatus]=useState('ask');
+-  useEffect(()=>{if(status==='on'){startVisualRecording();return stopVisualRecording;}},[status]);
+-  const accept=async()=>{
+-    setStatus('loading');
+-    try{await startRecording();trace('consent',{version:'research-v5',accepted:true});if(!await flush())throw new Error('Registro indisponível');preloadStops();setStatus('on');}
+-    catch{stopRecording();setStatus('error');}
+-  };
+-  if(status==='on')return children;
+-  return <main style={{minHeight:'100dvh',boxSizing:'border-box',display:'grid',placeItems:'center',padding:24,background:'#112136',color:'white',fontFamily:'sans-serif'}}>
+-    <section aria-labelledby="research-title" style={{maxWidth:620,lineHeight:1.6}}>
+-      <h1 id="research-title">PaP — protótipo em pesquisa</h1>
+-      <p>Os dados de transporte utilizados pelo PaP são fornecidos pela SPTrans. Por isso, atualmente o aplicativo funciona apenas na cidade de São Paulo.</p>
+-      <p>Durante esta etapa de desenvolvimento, registramos sua navegação para avaliar a usabilidade e identificar problemas.</p>
+-      <p>O registro inclui reprodução visual da interface e do mapa, movimentos e toques, ações, telas, buscas digitadas, pontos de origem e destino, localização quando autorizada no navegador, rotas consultadas, falhas e metadados do dispositivo (navegador, idioma e dimensões da tela). Os eventos ficam agrupados por sessão, sem associação a cadastro. Esses dados podem identificar locais e hábitos pessoais; não são anônimos.</p>
+-      <p>Os registros ficam no servidor do projeto, com acesso local restrito. São mantidos por até 30 dias, com limpeza na próxima gravação. Quando o armazenamento está cheio, novos registros são recusados para preservar os existentes.</p>
+-      <p>Ao escolher “Concordo e continuar”, você autoriza essa coleta durante a navegação. Se não concordar, feche esta página. Para encerrar a participação, feche o site; isso não apaga os eventos já enviados.</p>
+-      {status==='error'&&<p role="alert">Não foi possível iniciar o registro. Tente novamente.</p>}
+-      <button disabled={status==='loading'} onClick={accept} style={{padding:'12px 20px',fontSize:18}}>{status==='loading'?'Iniciando…':'Concordo e continuar'}</button>
+-    </section>
+-  </main>;
++  const [choice,setChoice]=useState(readChoice),[phase,setPhase]=useState('off'),[storageWarning,setStorageWarning]=useState(false),[details,setDetails]=useState(false),[settingsOpen,setSettingsOpen]=useState(false);
++  const params=new URLSearchParams(location.search);
++  const legacy=location.pathname==='/explorar/'||params.get('city')==='maua'||/^(way|node|relation):/.test(params.get('stop')||'');
++  const dialog=useRef(),trigger=useRef(),channel=useRef();
++  function halt(){stopVisualRecording();stopRecording();forgetSession();}
++  function choose(state){
++    if(state==='declined')halt();
++    const result=writeChoice(state);setStorageWarning(!result.saved);setChoice(result.choice);
++    if(state==='declined')channel.current?.postMessage({state:'declined'});
++  }
++  useEffect(()=>{
++    const un=onRecordingStatus(value=>{if(value!=='active')stopVisualRecording();setPhase(value);});return un;
++  },[]);
++  useEffect(()=>{
++    if(choice?.state!=='accepted'){halt();return;}
++    let live=true;setPhase('starting');
++    startRecording(choice).then(id=>{if(live&&id)startVisualRecording();}).catch(()=>{if(live){stopVisualRecording();stopRecording('unavailable');}});
++    return()=>{live=false;stopVisualRecording();stopRecording();};
++  },[choice]);
++  useEffect(()=>{
++    function sync(e){if(e.key!==CHOICE_KEY&&e.key!==null)return;halt();setChoice(readChoice());}
++    function open(){trigger.current=document.activeElement;setDetails(false);setSettingsOpen(true);dialog.current?.showModal();}
++    window.addEventListener('storage',sync);window.addEventListener('pap-open-research',open);
++    try{channel.current=new BroadcastChannel('pap-research-choice');channel.current.onmessage=e=>{if(e.data?.state==='declined'){halt();setChoice({state:'declined',version:'memory-revocation',decidedAt:new Date().toISOString()});}};}catch{/* storage event remains available */}
++    return()=>{window.removeEventListener('storage',sync);window.removeEventListener('pap-open-research',open);channel.current?.close();};
++  },[]);
++  const buttons=<div className="research-choices"><button onClick={()=>choose('accepted')}>Contribuir com a pesquisa</button><button onClick={()=>choose('declined')}>Continuar sem contribuir</button></div>;
++  const warning=storageWarning&&<p role="status">Não foi possível salvar sua escolha neste aparelho. Ela vale nesta página; ao recarregar, perguntaremos novamente.</p>;
++  return <>
++    {!choice?<main className="research-welcome" data-private><section><h1>Ponto a Ponto — Ajude a melhorar o transporte público</h1>
++      <p>O PaP é um projeto acadêmico da UNIVESP que facilita a consulta de ônibus e o planejamento de viagens.</p>
++      <p>Durante o desenvolvimento, estamos realizando uma pesquisa para identificar dificuldades de navegação e melhorar a experiência dos passageiros.</p>
++      <p>Se você optar por contribuir, poderemos registrar suas interações com a aplicação, incluindo movimentos no mapa, buscas, locais consultados e informações técnicas do dispositivo.</p>
++      <p>Sua participação é voluntária. Você poderá utilizar todas as funcionalidades do PaP mesmo sem participar da pesquisa.</p>
++      <p>Os dados de transporte são fornecidos pela SPTrans. Atualmente, o PaP funciona na cidade de São Paulo.</p>
++      {buttons}<button className="research-info-button" onClick={()=>setDetails(x=>!x)} aria-expanded={details}>Informações completas sobre a pesquisa</button>{details&&<ResearchDetails/>}
++    </section></main>:<>{children}{legacy&&<button className="research-settings-fallback" data-private onClick={()=>window.dispatchEvent(new Event('pap-open-research'))}>Configurações → Participação na pesquisa</button>}<div className="research-status" data-private role="status">
++      {phase==='active'?'Pesquisa: gravação ativa':phase==='unavailable'?'Pesquisa indisponível. O transporte continua funcionando.':phase==='starting'?'Iniciando pesquisa…':''}
++      {warning}
++    </div></>}
++    <dialog className="research-dialog" data-private ref={dialog} aria-labelledby="research-settings-title" onClose={()=>{setSettingsOpen(false);trigger.current?.focus();}}>
++      <header><h2 id="research-settings-title">Configurações → Participação na pesquisa</h2><button onClick={()=>dialog.current.close()} aria-label="Fechar configurações">×</button></header>
++      <p>Decisão atual: {choice?.state==='accepted'?'participar':'não participar'}.{choice?.decidedAt&&` Registrada em ${new Date(choice.decidedAt).toLocaleString('pt-BR')}.`}</p>
++      <p>{phase==='active'?'Gravação ativa.':phase==='unavailable'?'A pesquisa está indisponível. Você pode tentar ativá-la novamente.':'Gravação não ativa.'}</p>
++      {warning}<div className="research-choices"><button onClick={()=>choose('accepted')}>Ativar participação</button><button onClick={()=>choose('declined')}>Interromper participação</button></div>
++      <p>Interromper não exclui automaticamente os dados já enviados.</p>
++      {settingsOpen&&<ResearchDetails/>}
++    </dialog>
++  </>;
+ }
+
+--- a/frontend/src/usability.js
++++ b/frontend/src/usability.js
+@@ -1,89 +1,85 @@
+-let session=null, queue=[], sequence=0, sending=false, generation=0;
++import {NOTICE_VERSION,validChoice} from './researchChoice.js';
++import {rememberProof,researchPost} from './researchApi.js';
++let session=null,queue=[],sequence=0,generation=0,allowed=false,timer=null;
++const controllers=new Set(),listeners=new Set(),cleanup=[];
++let sending=null;
+ const read=key=>{try{return sessionStorage.getItem(key);}catch{return null;}};
+ const save=(key,value)=>{try{sessionStorage.setItem(key,value);}catch{/* memory only */}};
++export const isRecording=()=>allowed&&!!session;
++export const onRecordingStatus=fn=>{listeners.add(fn);return()=>listeners.delete(fn);};
++function status(value){for(const fn of listeners)fn(value);}
+ export function record(type,data){
+-  if(!session)return;
+-  sequence+=1;save('pap-usability-seq',String(sequence));
+-  queue.push({type,data,seq:sequence});if(queue.length>5000){queue.shift();console.warn('PaP: fila de pesquisa excedida; eventos podem ser perdidos.');}
++  if(!isRecording())return;
++  sequence++;save('pap-usability-seq',String(sequence));queue.push({type,data,seq:sequence});
++  if(queue.length>5000)queue.shift();
+ }
+-export async function startRecording(){
+-  const current=++generation;
+-  const response=await fetch('/api/usability/',{headers:{'X-Pap-Session':read('pap-usability-token')||''}});
+-  if(!response.ok)throw new Error('Registro indisponível.');
+-  const result=await response.json();
+-  if(current!==generation)return null;
+-  sequence=result.session===read('pap-usability-id')?Number(read('pap-usability-seq')||0):0;
+-  session=result;save('pap-usability-token',result.token);save('pap-usability-id',result.session);
+-  record('session_start',{width:innerWidth,height:innerHeight});
+-  trace('device',{schema:1,userAgent:navigator.userAgent,platform:navigator.userAgentData?.platform||navigator.platform,language:navigator.language,languages:navigator.languages,screen:{width:screen.width,height:screen.height,colorDepth:screen.colorDepth},viewport:{width:innerWidth,height:innerHeight},pixelRatio:devicePixelRatio,maxTouchPoints:navigator.maxTouchPoints,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone});
+-  return result.session;
++function listen(target,name,fn,capture=false){target.addEventListener(name,fn,capture);cleanup.push(()=>target.removeEventListener(name,fn,capture));}
++function target(el){const parts=[];while(el&&el!==document.body){const parent=el.parentElement;parts.unshift(el.tagName.toLowerCase()+':nth-child('+(parent?[...parent.children].indexOf(el)+1:1)+')');el=parent;}return parts.join(' > ');}
++function attach(){
++  timer=setInterval(flush,100);
++  listen(window,'pagehide',flush);
++  listen(document,'visibilitychange',()=>{if(document.hidden)flush();});
++  listen(window,'error',()=>record('error',{kind:'uncaught'}));
++  listen(window,'unhandledrejection',()=>record('error',{kind:'promise'}));
++  listen(document,'click',event=>{
++    if(event.target.closest?.('[data-private]'))return;
++    const el=event.target.closest?.('button');if(!el)return;
++    const action=el.dataset.kind||(el.matches('.sp-stop-transparency')?'lamp':el.matches('.sp-route-option')?'route':el.matches('.sp-map-cancel')?'cancel':null);
++    if(['origin','destination','lamp','route','cancel'].includes(action))record('action',{target:action});
++  },true);
++  const eligible=el=>el instanceof Element&&!!el.closest('.sp-shell')&&!el.closest('[data-private],input[type=password]');
++  for(const type of ['click','change','input','pointerdown','pointerup','pointercancel'])listen(document,type,e=>{
++    if(!isRecording()||!eligible(e.target))return;
++    trace(type,{target:target(e.target),text:e.target.closest('button')?.textContent,value:'value' in e.target?e.target.value:undefined,x:e.clientX,y:e.clientY,pointer:e.pointerType});
++  },true);
++  let last=0;listen(document,'scroll',e=>{if(!isRecording()||!eligible(e.target)||performance.now()-last<150)return;last=performance.now();trace('scroll',{target:target(e.target),top:e.target.scrollTop,left:e.target.scrollLeft});},true);
+ }
+-export function stopRecording(){generation++;session=null;queue=[];}
++export async function startRecording(choice){
++  if(!validChoice(choice)||choice.state!=='accepted')throw Error('Consentimento necessário.');
++  stopRecording();allowed=true;const current=generation;const controller=new AbortController();controllers.add(controller);
++  const timeout=setTimeout(()=>controller.abort(),8000);
++  try{
++    const response=await fetch('/api/usability/',{headers:{'X-Pap-Session':read('pap-usability-token')||''},signal:controller.signal});
++    if(!response.ok)throw Error('Registro indisponível.');
++    const result=await response.json();
++    if(current!==generation||!allowed)return null;
++    if(!result.session||!result.token||!result.csrf)throw Error('Registro inválido.');
++    sequence=result.session===read('pap-usability-id')?Number(read('pap-usability-seq')||0):0;
++    session=result;save('pap-usability-token',result.token);save('pap-usability-id',result.session);rememberProof(result.deletion_proof);
++    trace('consent',{version:NOTICE_VERSION,accepted:true,decidedAt:choice.decidedAt});
++    record('session_start',{width:innerWidth,height:innerHeight});
++    trace('device',{schema:1,userAgent:navigator.userAgent,platform:navigator.userAgentData?.platform||navigator.platform,language:navigator.language,languages:navigator.languages,screen:{width:screen.width,height:screen.height,colorDepth:screen.colorDepth},viewport:{width:innerWidth,height:innerHeight},pixelRatio:devicePixelRatio,maxTouchPoints:navigator.maxTouchPoints,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone});
++    if(!await flush())throw Error('Registro indisponível.');
++    if(current!==generation||!isRecording())return null;
++    attach();status('active');return result.session;
++  }catch(error){if(current===generation)stopRecording('unavailable');throw error;}
++  finally{clearTimeout(timeout);controllers.delete(controller);}
++}
++export function stopRecording(reason='off'){
++  generation++;allowed=false;session=null;queue=[];sending=null;
++  if(timer)clearInterval(timer);timer=null;while(cleanup.length)cleanup.pop()();
++  for(const c of controllers)c.abort();controllers.clear();status(reason);
++}
++export function forgetSession(){for(const k of ['pap-usability-token','pap-usability-id','pap-usability-seq'])try{sessionStorage.removeItem(k);}catch{/* unavailable */}}
+ export async function flush(){
+-  if(!session||sending||!queue.length)return;
+-  const active=session,batch=[];let bytes=0;
++  if(!isRecording()||sending||!queue.length)return false;
++  const active=session,current=generation,batch=[];let bytes=0;
+   while(queue.length&&batch.length<20){const size=new TextEncoder().encode(JSON.stringify(queue[0])).length;if(bytes+size>48000&&batch.length)break;bytes+=size;batch.push(queue.shift());}
+-  sending=true;
++  const controller=new AbortController();controllers.add(controller);sending=controller;const timeout=setTimeout(()=>controller.abort(),8000);
+   try{
+-    const response=await fetch('/api/usability/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':active.csrf},body:JSON.stringify({token:active.token,events:batch}),keepalive:true});
+-    if(!response.ok&&session===active&&(response.status>=500||response.status===429))queue.unshift(...batch);
+-    return response.ok;
+-  }catch{if(session===active)queue.unshift(...batch);}
+-  finally{queue=queue.slice(-5000);sending=false;}
++    const response=await fetch('/api/usability/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':active.csrf},body:JSON.stringify({token:active.token,events:batch}),signal:controller.signal});
++    if(current!==generation)return false;
++    if(!response.ok){stopRecording('unavailable');return false;}return true;
++  }catch{if(current===generation)stopRecording('unavailable');return false;}
++  finally{clearTimeout(timeout);controllers.delete(controller);if(sending===controller)sending=null;}
+ }
+-export async function observedFetch(url,options){
+-  const start=performance.now();let status=0;
+-  try{const response=await fetch(url,options);status=response.status;return response;}
+-  finally{
+-    const part=String(url).split('?')[0].split('/')[3];
+-    const endpoint=['board','trips','stops','destination','addresses','walk'].includes(part)?part:'other';
+-    record('api',{endpoint,status,ms:Math.min(3600000,Math.round(performance.now()-start))});
+-  }
+-}
+-if(typeof window!=='undefined'){
+-  setInterval(flush,100);
+-  window.addEventListener('pagehide',flush);
+-  document.addEventListener('visibilitychange',()=>{if(document.hidden)flush();});
+-  window.addEventListener('error',()=>record('error',{kind:'uncaught'}));
+-  window.addEventListener('unhandledrejection',()=>record('error',{kind:'promise'}));
+-  document.addEventListener('click',event=>{
+-    const el=event.target.closest?.('button');if(!el)return;
+-    const target=el.dataset.kind||(
+-      el.matches('.sp-stop-transparency')?'lamp':el.matches('.sp-route-option')?'route':
+-      el.matches('.sp-map-cancel')?'cancel':null);
+-    if(['origin','destination','lamp','route','cancel'].includes(target))record('action',{target});
+-  },true);
+-}
+-
++export async function observedFetch(url,options){const start=performance.now();let code=0;try{const r=await fetch(url,options);code=r.status;return r;}finally{if(isRecording()){const part=String(url).split('?')[0].split('/')[3];record('api',{endpoint:['board','trips','stops','destination','addresses','walk'].includes(part)?part:'other',status:code,ms:Math.min(3600000,Math.round(performance.now()-start))});}}}
+ export function trace(kind,details){
+-  if(!session)return;
++  if(!isRecording())return;
+   const payload=JSON.stringify({kind,at:new Date().toISOString(),elapsed:performance.now(),details});
+   if(payload.length<=10000){record('trace',{payload});return;}
+   const id=crypto.randomUUID(),total=Math.ceil(payload.length/8000);
+   for(let index=0;index<total;index++)record('trace',{payload:JSON.stringify({kind:'chunk',id,index,total,text:payload.slice(index*8000,(index+1)*8000)})});
+ }
+-function target(el){
+-  const parts=[];
+-  while(el&&el!==document.body){const parent=el.parentElement;parts.unshift(el.tagName.toLowerCase()+':nth-child('+(parent?[...parent.children].indexOf(el)+1:1)+')');el=parent;}
+-  return parts.join(' > ');
+-}
+-if(typeof window!=='undefined'){
+-  const eligible=el=>el instanceof Element&&!!el.closest('.sp-shell')&&!el.closest('input[type=password]');
+-  for(const type of ['click','change','input','pointerdown','pointerup','pointercancel'])document.addEventListener(type,e=>{
+-    if(!eligible(e.target))return;
+-    trace(type,{target:target(e.target),text:e.target.closest('button')?.textContent,value:'value' in e.target?e.target.value:undefined,x:e.clientX,y:e.clientY,pointer:e.pointerType});
+-  },true);
+-  let last=0;
+-  document.addEventListener('scroll',e=>{if(!eligible(e.target)||performance.now()-last<150)return;last=performance.now();trace('scroll',{target:target(e.target),top:e.target.scrollTop,left:e.target.scrollLeft});},true);
+-}
+-
+-export function prepareFeedback(category,message,at,elapsed){
+-  if(!session)throw new Error('Sessão indisponível. Recarregue a página.');
+-  sequence+=1;save('pap-usability-seq',String(sequence));
+-  return {type:'feedback',seq:sequence,data:{payload:JSON.stringify({category,message,at,elapsed})}};
+-}
+-export async function submitFeedback(event){
+-  if(!session)throw new Error('Sessão indisponível.');
+-  const response=await fetch('/api/usability/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':session.csrf},body:JSON.stringify({token:session.token,events:[event]})});
+-  if(!response.ok)throw new Error('Não foi possível salvar. Tente enviar novamente.');
+-}
++export function prepareFeedback(category,message){return {id:crypto.randomUUID(),category,message};}
++export function submitFeedback(event){return researchPost('feedback',{...event,...(isRecording()?{token:session.token}:{})});}
+
+--- a/frontend/src/visualRecording.js
++++ b/frontend/src/visualRecording.js
+@@ -1,8 +1,8 @@
+ import {record as rrrecord} from 'rrweb';
+-import {trace} from './usability.js';
++import {trace,isRecording} from './usability.js';
+ let stop;
+ export function startVisualRecording(){
+-  if(stop)return;
++  if(stop||!isRecording())return;
+   stop=rrrecord({emit:event=>trace('visual',event),recordCanvas:true,
+     sampling:{canvas:5,mousemove:50,scroll:100},inlineStylesheet:true,inlineImages:true,
+     maskInputOptions:{password:true},blockSelector:'[data-private],input[type="password"]',
+
+--- /dev/null
++++ b/backend/transit/research.py
+@@ -0,0 +1,118 @@
++"""Voluntary messages: independent of telemetry and inaccessible to public readers."""
++import hashlib
++import json
++import os
++import sqlite3
++import time
++import uuid
++from pathlib import Path
++from django.conf import settings
++from django.core import signing
++from django.http import JsonResponse
++from django.middleware.csrf import get_token
++from django.views.decorators.http import require_http_methods
++from django.contrib import admin
++from django.shortcuts import render
++
++PROOF_SALT='pap-research-deletion-proof-v1'
++
++def path():
++    return Path(getattr(settings,'PAP_RESEARCH_DB',Path.home()/'.local/state/pap/research/messages.sqlite3'))
++
++def connect():
++    p=path();p.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
++    fd=os.open(p,os.O_CREAT|os.O_WRONLY,0o600);os.close(fd)
++    db=sqlite3.connect(p,timeout=3)
++    db.execute('CREATE TABLE IF NOT EXISTS messages (id TEXT PRIMARY KEY, created REAL, kind TEXT, data TEXT, digest TEXT, resolved REAL)')
++    return db
++
++@require_http_methods(['GET'])
++def info(request):
++    response=JsonResponse({'csrf':get_token(request),'contact':getattr(settings,'PAP_RESEARCH_CONTACT','')})
++    response['Cache-Control']='no-store';return response
++
++def text(value,minimum=0):
++    if not isinstance(value,str) or not minimum<=len(value.strip())<=2000:raise ValueError()
++    return value.strip()
++
++def save_message(identifier,kind,data):
++    serialized=json.dumps(data,ensure_ascii=False,sort_keys=True,separators=(',',':'))
++    digest=hashlib.sha256((kind+serialized).encode()).hexdigest()
++    db=connect()
++    try:
++        with db:
++            db.execute('BEGIN IMMEDIATE')
++            existing=db.execute('SELECT digest FROM messages WHERE id=?',(identifier,)).fetchone()
++            if existing:
++                if existing[0]!=digest:return JsonResponse({'error':'Identificador já utilizado.'},status=409)
++                return JsonResponse({'receipt':identifier,**({'linked':bool(data.get('session'))} if kind=='feedback' else {})})
++            now=time.time()
++            if db.execute('SELECT COUNT(*) FROM messages WHERE created>?',(now-60,)).fetchone()[0]>=getattr(settings,'PAP_RESEARCH_MESSAGES_PER_MINUTE',30):
++                return JsonResponse({'error':'Muitas solicitações. Tente novamente mais tarde.'},status=429,headers={'Retry-After':'60'})
++            if db.execute('SELECT COUNT(*) FROM messages').fetchone()[0]>=getattr(settings,'PAP_RESEARCH_MAX_MESSAGES',10000):
++                return JsonResponse({'error':'Canal temporariamente indisponível.'},status=503)
++            db.execute('INSERT INTO messages VALUES (?,?,?,?,?,NULL)',(identifier,now,kind,serialized,digest))
++        return JsonResponse({'receipt':identifier,**({'linked':bool(data.get('session'))} if kind=='feedback' else {})},status=201)
++    finally:db.close()
++
++def body(request):
++    if len(request.body)>65536:raise ValueError()
++    data=json.loads(request.body)
++    if not isinstance(data,dict):raise ValueError()
++    if not isinstance(data.get('id'),str):raise ValueError()
++    identifier=str(uuid.UUID(data['id']))
++    return identifier,data
++
++@require_http_methods(['POST'])
++def feedback(request):
++    try:
++        identifier,data=body(request)
++        if set(data) not in ({'id','category','message'},{'id','category','message','token'}):raise ValueError()
++        if data['category'] not in ('problema','sugestao','elogio'):raise ValueError()
++        session=None
++        if 'token' in data:
++            if not isinstance(data['token'],str) or len(data['token'])>512:raise ValueError()
++            from .usability import SALT
++            session=str(uuid.UUID(signing.loads(data['token'],salt=SALT,max_age=43200)))
++        return save_message(identifier,'feedback',{'category':data['category'],'message':text(data['message'],1),'session':session})
++    except (ValueError,TypeError,KeyError,signing.BadSignature):return JsonResponse({'error':'Relato inválido.'},status=400)
++    except (sqlite3.Error,OSError):return JsonResponse({'error':'Canal temporariamente indisponível.'},status=503)
++
++@require_http_methods(['POST'])
++def requests(request):
++    try:
++        identifier,data=body(request)
++        if set(data)!={'id','kind','message','proofs'} or data['kind'] not in ('contact','deletion'):raise ValueError()
++        proofs=data['proofs']
++        if not isinstance(proofs,list) or len(proofs)>50 or any(not isinstance(p,str) or len(p)>512 for p in proofs):raise ValueError()
++        sessions=sorted({str(uuid.UUID(signing.loads(p,salt=PROOF_SALT))) for p in proofs})
++        return save_message(identifier,data['kind'],{'message':text(data['message'],1),'sessions':sessions})
++    except (ValueError,TypeError,KeyError,signing.BadSignature):return JsonResponse({'error':'Solicitação inválida.'},status=400)
++    except (sqlite3.Error,OSError):return JsonResponse({'error':'Canal temporariamente indisponível.'},status=503)
++
++@admin.site.admin_view
++@require_http_methods(['GET','POST'])
++def inbox(request):
++    rows=[]
++    if path().exists():
++        db=connect()
++        try:
++            if request.method=='POST':
++                if request.POST.get('confirm')!='yes':return JsonResponse({'error':'Confirmação necessária.'},status=400)
++                try:identifier=str(uuid.UUID(request.POST['id']))
++                except (ValueError,KeyError):return JsonResponse({'error':'Identificador inválido.'},status=400)
++                with db:
++                    if request.POST.get('action')=='delete':db.execute('DELETE FROM messages WHERE id=?',(identifier,))
++                    else:db.execute('UPDATE messages SET resolved=? WHERE id=?',(time.time(),identifier))
++            for identifier,created,kind,data,_,resolved in db.execute('SELECT * FROM messages ORDER BY created DESC LIMIT 200'):
++                payload=json.loads(data);rows.append({'id':identifier,'kind':kind,'message':payload['message'],'session':payload.get('session'),'sessions':payload.get('sessions',[]),'resolved':bool(resolved)})
++        finally:db.close()
++    return render(request,'transit/research_inbox.html',{**admin.site.each_context(request),'title':'Feedback voluntário e solicitações de pesquisa','rows':rows})
++
++
++def linked_feedback(session):
++    if not path().exists():return []
++    db=sqlite3.connect(path().as_uri()+'?mode=ro',uri=True)
++    try:
++        return [(created,json.loads(data)) for created,data in db.execute("SELECT created,data FROM messages WHERE kind='feedback' ORDER BY created") if json.loads(data).get('session')==str(session)]
++    finally:db.close()
+
+--- /dev/null
++++ b/backend/transit/test_research.py
+@@ -0,0 +1,90 @@
++import json
++import sqlite3
++import tempfile
++import time
++import uuid
++from pathlib import Path
++from unittest.mock import patch
++from django.core import signing
++from django.test import SimpleTestCase, Client, override_settings
++from transit.research import PROOF_SALT
++from transit.usability import SALT
++
++class ResearchTests(SimpleTestCase):
++    def setUp(self):
++        self.folder=tempfile.TemporaryDirectory();self.addCleanup(self.folder.cleanup)
++        self.root=Path(self.folder.name)
++        self.override=override_settings(PAP_USABILITY_DB=self.root/'events.sqlite3',PAP_RESEARCH_DB=self.root/'messages.sqlite3')
++        self.override.enable();self.addCleanup(self.override.disable)
++    def post(self,path,data,client=None,**kw):return (client or self.client).post('/api/research/'+path+'/',json.dumps(data),content_type='application/json',**kw)
++    def feedback(self,**kw):return {'id':str(uuid.uuid4()),'category':'problema','message':'Exemplo artificial',**kw}
++    def test_feedback_without_research_creates_no_telemetry_database(self):
++        data=self.feedback();self.assertEqual(self.post('feedback',data).status_code,201)
++        self.assertFalse((self.root/'events.sqlite3').exists())
++        with sqlite3.connect(self.root/'messages.sqlite3') as db:
++            stored=json.loads(db.execute('SELECT data FROM messages').fetchone()[0])
++        self.assertEqual(stored,{'category':'problema','message':'Exemplo artificial','session':None})
++    def test_idempotency_and_collision(self):
++        data=self.feedback();self.assertEqual(self.post('feedback',data).status_code,201)
++        self.assertEqual(self.post('feedback',data).status_code,200)
++        self.assertEqual(self.post('feedback',{**data,'message':'Outro'}).status_code,409)
++    def test_csrf_and_info_do_not_start_session(self):
++        c=Client(enforce_csrf_checks=True);info=c.get('/api/research/info/').json()
++        self.assertNotIn('session',info);self.assertFalse((self.root/'events.sqlite3').exists())
++        self.assertFalse((self.root/'messages.sqlite3').exists())
++        self.assertEqual(self.post('feedback',self.feedback(),c).status_code,403)
++        self.assertEqual(self.post('feedback',self.feedback(),c,HTTP_X_CSRFTOKEN=info['csrf']).status_code,201)
++    def test_feedback_links_only_verified_session(self):
++        session=str(uuid.uuid4());token=signing.dumps(session,salt=SALT)
++        r=self.post('feedback',self.feedback(token=token));self.assertTrue(r.json()['linked'])
++        from transit.research import linked_feedback
++        self.assertEqual(len(linked_feedback(session)),1)
++        self.assertEqual(self.post('feedback',self.feedback(token='forged')).status_code,400)
++    def test_privacy_request_is_not_a_delete_and_proofs_cannot_read_data(self):
++        info=self.client.get('/api/usability/').json()
++        self.client.post('/api/usability/',json.dumps({'token':info['token'],'events':[{'seq':1,'type':'action','data':{'target':'lamp'}}]}),content_type='application/json')
++        request={'id':str(uuid.uuid4()),'kind':'deletion','message':'Excluir sessão artificial','proofs':[info['deletion_proof']]}
++        self.assertEqual(self.post('requests',request).status_code,201)
++        self.assertEqual(self.post('requests',request).status_code,200)
++        with sqlite3.connect(self.root/'events.sqlite3') as db:self.assertEqual(db.execute('SELECT COUNT(*) FROM events').fetchone()[0],1)
++        self.assertEqual(self.post('requests',{**request,'id':str(uuid.uuid4()),'proofs':[info['session']]}).status_code,400)
++        self.assertEqual(self.client.get('/admin/research/').status_code,302)
++    def test_validation_limits_and_storage_failure(self):
++        for changes in [{'id':42},{'id':[]},{'token':{}},{'message':''},{'message':'x'*2001},{'category':'other'},{'extra':True}]:self.assertEqual(self.post('feedback',self.feedback(**changes)).status_code,400)
++        with override_settings(PAP_RESEARCH_MESSAGES_PER_MINUTE=1):
++            self.assertEqual(self.post('feedback',self.feedback()).status_code,201)
++            self.assertEqual(self.post('feedback',self.feedback()).status_code,429)
++        with patch('transit.research.connect',side_effect=sqlite3.OperationalError):self.assertEqual(self.post('feedback',self.feedback()).status_code,503)
++    def test_public_instance_has_contact_but_not_admin(self):
++        with override_settings(ROOT_URLCONF='mbm.public_urls'):
++            self.assertEqual(self.client.get('/api/research/info/').status_code,200)
++            self.assertEqual(self.client.get('/admin/research/').status_code,404)
++    def test_retention_contract_on_artificial_records_only(self):
++        from transit.usability import connection
++        from scripts.telemetry_storage import encode,collect,block_size
++        session=str(uuid.uuid4());db=connection()
++        with db:
++            db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(session,1,time.time()-31*86400,'trace',encode(db,session,'x'*3000)))
++            db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(session,2,time.time(),'action','{"target":"lamp"}'))
++            db.execute('DELETE FROM events WHERE received<?',(time.time()-30*86400,));collect(db)
++        self.assertGreater(block_size(db,session),0)  # documented: blocks survive a partially expired session
++        cache=self.root/'exports'/session;cache.mkdir(parents=True);(cache/'fake.webm').write_bytes(b'artificial')
++        with db:db.execute('DELETE FROM events WHERE session=?',(session,));collect(db)
++        self.assertEqual(block_size(db,session),0);self.assertTrue((cache/'fake.webm').exists())
++        db.close()  # cache isn't removed by ingest; notice must not promise otherwise
++
++    @patch('transit.research.admin.site.each_context',return_value={})
++    def test_admin_message_review_requires_confirmation_and_can_remove_message(self,context):
++        from django.test import RequestFactory
++        from django.contrib.auth.models import User
++        from transit.research import inbox
++        data=self.feedback(message='<script>exemplo artificial</script>');self.post('feedback',data)
++        def request(method='get',payload=None):
++            r=getattr(RequestFactory(),method)('/admin/research/',data=payload or {})
++            r.user=User(is_active=True,is_staff=True,is_superuser=True);r._dont_enforce_csrf_checks=True
++            return r
++        self.assertContains(inbox(request()),'&lt;script&gt;')
++        self.assertEqual(inbox(request('post',{'id':data['id']})).status_code,400)
++        self.assertContains(inbox(request('post',{'id':data['id'],'confirm':'yes'})),'Analisada')
++        self.assertContains(inbox(request('post',{'id':data['id'],'confirm':'yes','action':'delete'})),'Nenhuma mensagem.')
++        self.assertFalse((self.root/'events.sqlite3').exists())
+
+--- /dev/null
++++ b/backend/transit/templates/transit/research_inbox.html
+@@ -0,0 +1,6 @@
++{% extends "admin/base_site.html" %}
++{% block content %}<h1>{{ title }}</h1>
++<p>Até 200 mensagens mais recentes. Solicitações de exclusão exigem análise e tratamento de eventos, blocos, exportações e cópias baixadas. Marcar como analisada não apaga dados.</p>
++<table><thead><tr><th>Protocolo</th><th>Tipo</th><th>Mensagem</th><th>Sessões vinculadas</th><th>Acompanhamento</th></tr></thead><tbody>
++{% for row in rows %}<tr><td>{{ row.id }}</td><td>{{ row.kind }}</td><td style="white-space:pre-wrap">{{ row.message }}</td><td>{% if row.session %}<a href="{% url 'usability-detail' row.session %}">{{ row.session }}</a>{% endif %}{% for session in row.sessions %}<p><a href="{% url 'usability-detail' session %}">{{ session }}</a></p>{% endfor %}</td><td>{% if row.resolved %}Analisada{% endif %}<form method="post">{% csrf_token %}<input type="hidden" name="id" value="{{ row.id }}"><label><input type="checkbox" required name="confirm" value="yes"> Confirmo esta ação</label><button>Marcar como analisada</button><button name="action" value="delete">Excluir esta mensagem</button></form></td></tr>{% empty %}<tr><td colspan="5">Nenhuma mensagem.</td></tr>{% endfor %}
++</tbody></table>{% endblock %}
+
+--- /dev/null
++++ b/docs/CONSENTIMENTO_PESQUISA.md
+@@ -0,0 +1,87 @@
++# Consentimento voluntário de pesquisa
++
++## Contratos definidos antes da implementação
++
++- `GET /api/research/info/`: informação pública da pesquisa, contato configurável e token CSRF; não cria sessão de pesquisa nem abre o banco de telemetria.
++- `POST /api/research/feedback/`: JSON `{id, category, message, token?}`. ID UUID de idempotência, categoria problema/sugestao/elogio, mensagem de 1–2000 caracteres. Token opcional vincula uma sessão já existente; omiti-lo registra somente o relato voluntário. Nunca inicia replay. Retorna 201 `{receipt, linked}`; repetição idêntica retorna 200. CSRF obrigatório.
++- `POST /api/research/requests/`: JSON `{id, kind, message, proofs}`. kind contact/deletion; até 50 comprovantes assinados de sessões deste navegador, mensagem até 2000 caracteres. Recebe solicitação para análise administrativa, sem prometer exclusão imediata. Retorna 201 `{receipt}`; repetição idêntica retorna 200. CSRF obrigatório. Não aceita identificadores de sessão sem comprovante.
++- Erros desses POSTs: 400 entrada inválida; 403 CSRF; 409 reutilização de ID com conteúdo diferente; 429 limite de solicitações; 503 armazenamento indisponível/cheio. Conteúdo não é refletido em erros. Relatos e solicitações ficam em banco separado, restrito à administração.
++- `GET /api/usability/`: preserva contrato existente e acrescenta comprovante assinado para solicitar exclusão posteriormente. Só é solicitado pelo cliente após aceitar a pesquisa. O comprovante não autoriza ler nem apagar dados.
++
++## Limites de retenção atuais
++
++Não será executada limpeza de dados reais nesta tarefa. A implementação existente elimina eventos com mais de 30 dias quando recebe uma nova gravação; blocos de sessões ainda existentes e exportações podem permanecer. O aviso deve descrever esse critério, sem garantir exclusão completa em 30 dias. Relatos voluntários e solicitações terão tratamento administrativo e informação explícita sobre a ausência de limpeza automática. Cópias baixadas exigem tratamento pelos responsáveis.
++
++## Política da escolha
++
++Escolha aceita ou recusada, versão do aviso e instante ficam em chave própria no armazenamento local. Não há expiração temporal inventada. Mudanças relevantes de finalidade, categorias coletadas, acesso ou retenção exigem atualizar a versão e solicitar novamente a escolha. Falha ou ausência de armazenamento não significa aceite. A sessão de pesquisa é independente da escolha.
++
++
++## Comportamento anterior e correção de 23/10/2026
++
++Antes, só o estado de pesquisa ativa renderizava a aplicação. A aceitação dependia da criação da sessão e do primeiro envio; recusar ou falhar a gravação impedia o acesso ao transporte. A escolha não era persistida, listeners eram registrados ao importar o módulo e o feedback exigia sessão de telemetria.
++
++Agora, a tela inicial apresenta o projeto, a pesquisa e duas escolhas de destaque equivalente. Ambas liberam o transporte imediatamente. A recusa não cria sessão de pesquisa, não inicia rrweb e não instala listeners ou intervalos de captura. Instrumentação chamada pelas funções de transporte permanece inerte sem sessão. O contato informado é `25202874@aluno.univesp.br` (configurável por `PAP_RESEARCH_CONTACT`).
++
++A aceitação explícita registra a versão `research-v6-voluntary` e a data da decisão. Só então inicia a sessão; após o primeiro envio bem-sucedido, inicia rrweb com os parâmetros existentes (canvas a 5 fps, movimentos a cada 50 ms e rolagem a cada 100 ms). O indicador informa gravação ativa. Senhas, formulários de feedback e configurações de pesquisa ficam excluídos da captura visual e dos listeners genéricos pelo marcador `data-private`.
++
++Em falha de inicialização, rede ou resposta HTTP de erro, a pesquisa para e um aviso discreto mantém o transporte disponível. Não há reenvio automático depois de 429/503: isso evita insistência após a falha. É possível tentar novamente nas configurações. Os eventos não enviados são descartados, portanto podem existir lacunas no replay; não se promete captura completa quando a rede falha.
++
++## Persistência e revogação
++
++- `localStorage['pap.research.choice']`: `{state: accepted|declined, version, decidedAt}`. Ausência, versão antiga, objeto inválido ou erro de leitura apresentam novamente as duas escolhas, sem iniciar pesquisa.
++- `sessionStorage['pap-usability-*']`: token, identificador e sequência da gravação, separados da decisão. Não são critérios de consentimento.
++- `localStorage['pap.research.receipts']`: até 50 comprovantes assinados de sessões, para anexar a um pedido de exclusão. Não autorizam leitura de dados. Se o armazenamento estiver indisponível, os comprovantes ficam só na memória da página.
++- Sem prazo de validade artificial. Atualizar `NOTICE_VERSION` em mudanças relevantes de finalidade, dados, acesso ou retenção. Uma aba já aberta com código antigo precisa receber/recarregar a versão nova; não existe atualização remota forçada do aviso.
++- O botão de configurações no cabeçalho abre **Participação na pesquisa**. Telas legadas têm um acesso próprio ao mesmo diálogo. Permite consultar decisão, ativar, interromper, ler os detalhes e solicitar exclusão.
++- Revogar para rrweb imediatamente, remove listeners e timer, aborta requisições em andamento, limpa fila e credenciais da sessão. Guardas de geração impedem respostas tardias de reativar a captura. Recarregar após a recusa não reinicia a gravação.
++- Eventos `storage` sincronizam abas da mesma origem; `BroadcastChannel` também propaga a interrupção. Outras origens, navegadores e aparelhos têm decisões independentes. Trocar o domínio temporário do túnel gera uma nova origem e uma nova escolha.
++- Se não for possível persistir, a escolha explícita vale só na página atual; a tela avisa e pergunta novamente na recarga. Nenhuma falha equivale a aceite.
++
++## Feedback e solicitações
++
++O envio voluntário funciona em `/api/research/feedback/`, sem criar sessão. Apenas quando a pesquisa está ativa o cliente envia o token para vincular o relato a uma sessão já existente. A gravação não é pré-requisito para responder ao formulário.
++
++Os novos relatos e pedidos ficam em `~/.local/state/pap/research/messages.sqlite3`, separado do banco de aplicação e de telemetria, com diretório/arquivo privados na criação. A configuração Django `PAP_RESEARCH_DB` permite isolamento em testes. O painel `/admin/research/` exige autenticação administrativa e não é publicado pelo conjunto de URLs do túnel. Ele lista até 200 mensagens recentes, com confirmação para análise ou exclusão da mensagem. Existem limites globais de 30 mensagens/minuto e 10.000 mensagens (configurações Django `PAP_RESEARCH_MESSAGES_PER_MINUTE` e `PAP_RESEARCH_MAX_MESSAGES`).
++
++Uma solicitação gera protocolo e **não executa a exclusão dos registros de navegação**. A equipe deve localizar as sessões pelos comprovantes disponíveis ou pelas informações fornecidas, verificar o pedido e tratar cada armazenamento. Marcar o protocolo como analisado não apaga dados. Não há prazo de resposta aprovado nesta implementação.
++
++### Procedimento de retenção e exclusão
++
++| Categoria | Comportamento atual | Tratamento pendente da equipe |
++| --- | --- | --- |
++| Eventos de telemetria | Limpeza de eventos com mais de 30 dias durante novo recebimento válido | Sem agendamento independente; conferir expiração se não houver novos envios |
++| Blocos comprimidos | Removidos quando a sessão não tem mais eventos | Blocos de sessão parcialmente expirada podem permanecer |
++| Cache de JSON/WebM | Exclusão administrativa da sessão remove o diretório de exportações | Sem limpeza automática por idade; verificar tarefas de exportação em andamento |
++| Novos relatos e solicitações | Banco separado; exclusão manual de mensagem com confirmação | Sem limpeza automática por prazo; apagar mensagens associadas separadamente quando aplicável |
++| Cópias baixadas/backups | Fora da limpeza automática da aplicação | Responsáveis devem localizar e eliminar as cópias abrangidas pelo pedido |
++| SQLite | DELETE lógico permite reutilização de páginas | Não garante redução do arquivo nem eliminação física dos bytes |
++
++Nenhum dado real foi apagado, migrado ou compactado nesta tarefa. Não foi instalado agendamento ou serviço. O aviso informa as limitações acima e não garante eliminação de todas as cópias em 30 dias. Não há mudança automática da política para prometer prazo ainda não implementado.
++
++## Verificação
++
++Os testes usam banco principal, telemetria e mensagens em diretórios temporários. Rotas SPTrans e mapas são simulados nos testes de navegador; não há consultas a passageiros reais nem medição da disponibilidade da SPTrans.
++
++Comandos (ambiente Python `~/.virtualenvs/bus`):
++
++```sh
++~/.virtualenvs/bus/bin/python backend/manage.py test transit.test_research transit.test_usability transit.test_usability_admin --noinput
++npm test --prefix frontend
++cd frontend
++PATH="$HOME/.virtualenvs/bus/bin:$PATH" npm run test:e2e -- e2e/research-consent.spec.js e2e/selection-flow.spec.js --reporter=line
++```
++
++A matriz de testes e as evidências desta revisão estão em `evidencias/consentimento-2026-10-23/`. O build usado pelo teste E2E compila o React em `frontend/dist`. O aviso de bundle acima de 500 kB continua presente; custo de CPU/memória e rede em aparelhos físicos ainda não foi medido. A importação da biblioteca rrweb continua no bundle, mas sua captura só é iniciada depois do aceite.
++
++## Operação e limites restantes
++
++- Recarregar o frontend compilado para ver o novo aviso. Um Gunicorn já iniciado precisa recarregar/reiniciar sua instância para reconhecer as novas APIs; não houve reinício de servidores de desenvolvimento ou túneis nesta tarefa.
++- O consentimento controla a captura da aplicação. Logs operacionais do servidor e consultas aos provedores de transporte/geocodificação continuam existindo.
++- Revogação não desfaz um envio já recebido pelo servidor. Interrupção é imediata no cliente; remoção retroativa depende do pedido e do procedimento administrativo.
++- Comprovantes deste navegador não localizam automaticamente sessões antigas, de outros domínios ou de aparelhos diferentes.
++- Feedback novo é independente do exportador de eventos antigo: aparece no painel de mensagens e, quando vinculado, no detalhe do replay pelo horário de recebimento. Não é inserido retroativamente no JSON exportado da telemetria.
++- O painel administrativo mostra as 200 mensagens mais recentes; uma busca/paginação é evolução posterior se o volume justificar.
++- As métricas de rota, a coleta de avaliações externas e o relatório acadêmico não foram alterados.
++
++As orientações para uma futura atualização acadêmica estão em [ATUALIZACAO_RELATORIO_CONSENTIMENTO.md](ATUALIZACAO_RELATORIO_CONSENTIMENTO.md); nenhuma edição foi aplicada ao worktree `relatorio`.
+
+--- /dev/null
++++ b/docs/ATUALIZACAO_RELATORIO_CONSENTIMENTO.md
+@@ -0,0 +1,15 @@
++# Orientações para atualização posterior do relatório
++
++Documento preparatório na branch de desenvolvimento. Não aplica mudanças ao worktree acadêmico.
++
++1. Na branch `relatorio`, atualizar a descrição do primeiro acesso para distinguir **Contribuir com a pesquisa** de **Continuar sem contribuir**. Ambas permitem todas as funções de transporte.
++2. Descrever persistência de escolha, versão e data; mudanças relevantes do aviso exigem nova escolha. Não acrescentar validade temporal inexistente.
++3. Registrar a opção **Configurações → Participação na pesquisa**, com ativação, interrupção, informações e solicitação de exclusão. Diferenciar interrupção da gravação de exclusão dos dados previamente recebidos.
++4. Substituir a afirmação de feedback obrigatório/vinculado sempre a replay: o relato voluntário funciona sem pesquisa; só é relacionado a uma sessão quando há gravação ativa.
++5. Explicar que falhas de telemetria não bloqueiam consultas de transporte e podem produzir lacunas no replay.
++6. Manter explícitas as limitações de retenção. A regra existente é limpeza de eventos antigos durante um novo recebimento, com ressalvas para blocos, exportações, mensagens independentes e cópias baixadas. Não afirmar exclusão garantida em 30 dias.
++7. Refazer capturas reais da tela inicial, configurações e feedback na versão correspondente, com rastreabilidade. As capturas dos testes anexas são da interface real com dados artificiais e mapa simulado; não representam uso por passageiros externos.
++8. Citar testes automatizados como validação técnica interna. Não tratá-los como avaliação externa nem como evidência de usabilidade com passageiros.
++9. Preservar os diagramas, protocolo de benchmark, comunidade de Mauá e seção de avaliação técnica externa. Recompilar e conferir referências/paginação somente ao realizar a revisão acadêmica autorizada.
++
++Fonte técnica: `docs/CONSENTIMENTO_PESQUISA.md`, testes e diff da implementação de 23/10/2026. O e-mail de contato aprovado é `25202874@aluno.univesp.br`.
+
+--- /dev/null
++++ b/frontend/e2e/research-consent.spec.js
+@@ -0,0 +1,108 @@
++import {test,expect} from '@playwright/test';
++const KEY='pap.research.choice',VERSION='research-v6-voluntary';
++const stop={id:'1',name:'Origem teste',lat:-23.5505,lon:-46.6333};
++async function setup(context,{failure=null}={}){
++  const requests=[],events=[];
++  context.on('request',r=>{if(r.url().includes('/api/usability/'))requests.push(r);});
++  await context.route('https://tile.openstreetmap.org/**',r=>r.abort());
++  await context.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
++  await context.route('**/api/sptrans/stop-catalogue/**',r=>r.fulfill({status:503,body:''}));
++  await context.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops:[stop]}}));
++  await context.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[{trip_id:'T',code:'1000-10',headsign:'Centro',arrivals:[],programme:[]}],journeys:[],complete:true}}));
++  await context.route('**/api/usability/',async r=>{
++    if(failure==='network')return r.abort();
++    if(failure==='get'&&r.request().method()==='GET')return r.fulfill({status:503,json:{error:'Artificial'}});
++    if(r.request().method()==='POST'){events.push(...r.request().postDataJSON().events);return r.fulfill({json:{accepted:1}});}
++    return r.fulfill({json:{session:'11111111-1111-4111-8111-111111111111',token:'test-only',csrf:'test-only'}});
++  });
++  return {requests,events};
++}
++async function decide(page,accept=false){await page.getByRole('button',{name:accept?'Contribuir com a pesquisa':'Continuar sem contribuir',exact:true}).click();await expect(page.locator('.sp-shell')).toBeVisible();}
++async function settings(page){await page.getByRole('button',{name:'Configurações',exact:true}).click();await expect(page.getByRole('dialog',{name:'Configurações → Participação na pesquisa'})).toBeVisible();}
++async function revoke(page){await settings(page);await page.getByRole('button',{name:'Interromper participação',exact:true}).click();await page.getByRole('button',{name:'Fechar configurações'}).click();}
++
++test('recusa: navegação, busca, tema e feedback sem sessão ou replay',async({page,context})=>{
++  const {requests,events}=await setup(context);await page.setViewportSize({width:390,height:844});await page.goto('/?stop=1');await page.screenshot({path:'test-results/research-welcome-mobile.png'});await decide(page);
++  await expect(page.getByRole('dialog',{name:'Próximos ônibus'})).toBeVisible();
++  await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
++  await page.getByRole('button',{name:'Buscar endereço',exact:true}).click();await expect(page.getByRole('combobox')).toBeVisible();await page.keyboard.press('Escape');
++  await page.getByRole('button',{name:'Feedback',exact:true}).click();await page.getByLabel('Seu feedback', {exact:true}).fill('Relato voluntário artificial');
++  const sent=page.waitForRequest(r=>r.url().includes('/api/research/feedback/')&&r.method()==='POST');await page.getByRole('button',{name:'Enviar feedback'}).click();
++  expect((await sent).postDataJSON()).not.toHaveProperty('token');await expect(page.getByText('Nenhuma gravação de navegação foi iniciada.',{exact:false})).toBeVisible();
++  await page.getByRole('button',{name:'Concluir',exact:true}).click();await page.waitForTimeout(400);expect(requests).toHaveLength(0);expect(events).toHaveLength(0);
++  expect(await page.evaluate(()=>sessionStorage.getItem('pap-usability-id'))).toBeNull();
++  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
++  await page.screenshot({path:'test-results/research-refusal-mobile.png'});
++});
++test('aceitação explícita registra versão e inicia rrweb',async({page,context})=>{
++ const {requests,events}=await setup(context);await page.goto('/');expect(requests).toHaveLength(0);await decide(page,true);
++ await expect(page.locator('.research-status')).toContainText('gravação ativa');
++ await expect.poll(()=>events.some(e=>e.type==='trace'&&JSON.parse(e.data.payload).kind==='consent')).toBe(true);
++ const consent=events.find(e=>e.type==='trace'&&JSON.parse(e.data.payload).kind==='consent');expect(JSON.parse(consent.data.payload).details.version).toBe(VERSION);
++ await expect.poll(()=>events.some(e=>e.type==='trace'&&JSON.parse(e.data.payload).kind==='visual_config')).toBe(true);
++ await revoke(page);
++});
++for(const state of ['accepted','declined'])test(`persistência, recarga e nova aba: ${state}`,async({page,context})=>{
++ const {requests}=await setup(context);await page.goto('/');await decide(page,state==='accepted');
++ const choice=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY);expect(choice.state).toBe(state);expect(choice.version).toBe(VERSION);expect(Date.parse(choice.decidedAt)).toBeGreaterThan(0);
++ await page.reload();await expect(page.locator('.sp-shell')).toBeVisible();await expect(page.getByRole('heading',{name:'Ponto a Ponto — Ajude a melhorar o transporte público'})).toHaveCount(0);
++ const other=await context.newPage();await other.goto('/');await expect(other.locator('.sp-shell')).toBeVisible();
++ if(state==='declined')expect(requests).toHaveLength(0);else{await expect(other.locator('.research-status')).toContainText('gravação ativa');await revoke(page);await expect(other.locator('.research-status')).not.toContainText('gravação ativa');}
++ await other.close();
++});
++test('revogação limpa fila, interrompe envios e não reinicia ao recarregar',async({page,context})=>{
++ const {requests}=await setup(context);await page.goto('/');await decide(page,true);await expect(page.locator('.research-status')).toContainText('gravação ativa');await revoke(page);
++ const count=requests.length;await page.mouse.move(200,300);await page.getByRole('button',{name:'Favoritos',exact:true}).click();await page.waitForTimeout(700);expect(requests).toHaveLength(count);
++ expect(await page.evaluate(()=>sessionStorage.getItem('pap-usability-token'))).toBeNull();await page.reload();await expect(page.locator('.sp-shell')).toBeVisible();await page.waitForTimeout(300);expect(requests).toHaveLength(count);
++});
++test('mudança de versão solicita nova escolha sem capturar',async({page,context})=>{
++ const {requests}=await setup(context);await page.addInitScript(({key})=>localStorage.setItem(key,JSON.stringify({state:'accepted',version:'old',decidedAt:new Date().toISOString()})),{key:KEY});await page.goto('/');await expect(page.getByRole('button',{name:'Continuar sem contribuir',exact:true})).toBeVisible();expect(requests).toHaveLength(0);
++});
++for(const accept of [false,true])test(`armazenamento indisponível não presume consentimento (${accept})`,async({page,context})=>{
++ const {requests}=await setup(context);await page.addInitScript(()=>{Storage.prototype.getItem=()=>{throw Error('blocked')};Storage.prototype.setItem=()=>{throw Error('blocked')};});await page.goto('/');expect(requests).toHaveLength(0);await decide(page,accept);await expect(page.getByText('Não foi possível salvar sua escolha', {exact:false}).first()).toBeVisible();
++ if(accept){await expect(page.locator('.research-status')).toContainText('gravação ativa');await revoke(page);}else expect(requests).toHaveLength(0);
++ await page.reload();await expect(page.getByRole('button',{name:'Continuar sem contribuir',exact:true})).toBeVisible();
++});
++for(const failure of ['get','network'])test(`falha ${failure} permite consulta`,async({page,context})=>{
++ await setup(context,{failure});await page.goto('/?stop=1');await decide(page,true);await expect(page.locator('.research-status')).toContainText('Pesquisa indisponível');await expect(page.getByRole('dialog',{name:'Próximos ônibus'})).toBeVisible();
++});
++test('falha de rede depois do início interrompe pesquisa e preserva mapa',async({page,context})=>{
++ const {requests}=await setup(context);await page.goto('/');await decide(page,true);await expect(page.locator('.research-status')).toContainText('gravação ativa');await context.route('**/api/usability/',r=>r.abort());await page.getByRole('button',{name:'Favoritos',exact:true}).click();await expect(page.locator('.research-status')).toContainText('Pesquisa indisponível');const count=requests.length;await page.waitForTimeout(500);expect(requests).toHaveLength(count);await expect(page.locator('.sp-shell')).toBeVisible();
++});
++test('recusa pode ser alterada nas configurações e revogada em outra aba',async({page,context})=>{
++ const {requests}=await setup(context);await page.goto('/');await decide(page);expect(requests).toHaveLength(0);await settings(page);await page.getByRole('button',{name:'Ativar participação',exact:true}).click();await page.getByRole('button',{name:'Fechar configurações'}).click();await expect(page.locator('.research-status')).toContainText('gravação ativa');
++ const other=await context.newPage();await other.goto('/');await expect(other.locator('.research-status')).toContainText('gravação ativa');await revoke(page);await expect(other.locator('.research-status')).not.toContainText('gravação ativa');const count=requests.length;await other.reload();await expect(other.locator('.sp-shell')).toBeVisible();await page.waitForTimeout(300);expect(requests).toHaveLength(count);await other.close();
++});
++test('exclusão pode ser solicitada sem criar sessão',async({page,context})=>{
++ const {requests}=await setup(context);await page.goto('/');await decide(page);await settings(page);await page.screenshot({path:'test-results/research-settings.png'});await page.getByRole('combobox',{name:'Assunto',exact:true}).selectOption('deletion');await page.getByLabel('Mensagem',{exact:true}).fill('Solicitação artificial de exclusão de registros anteriores');await page.getByRole('button',{name:'Enviar solicitação'}).click();await expect(page.getByText('Solicitação recebida.',{exact:false})).toBeVisible();expect(requests).toHaveLength(0);
++});
++test('revogação durante inicialização não permite captura tardia',async({page,context})=>{
++ const {requests}=await setup(context);let release;const wait=new Promise(r=>release=r);await context.route('**/api/usability/',async r=>{await wait;try{await r.fulfill({json:{session:'test',token:'test',csrf:'test'}});}catch{}});await page.goto('/');await decide(page,true);await revoke(page);release();await page.waitForTimeout(500);expect(requests.filter(r=>r.method()==='POST')).toHaveLength(0);await expect(page.locator('.research-status')).not.toContainText('gravação ativa');
++});
++
++
++test('roteiro de transporte sem pesquisa: rota, mapa, favoritos e cancelamento',async({page,context})=>{
++ const {requests}=await setup(context);
++ const destination={id:'2',name:'Destino artificial',lat:-23.5515,lon:-46.6323};
++ await context.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:destination,distance_meters:10}}));
++ await context.route('**/api/sptrans/trips/**',r=>r.fulfill({json:{line:{arrivals:[]}}}));
++ await context.route('**/api/sptrans/board/**',r=>r.fulfill({json:{journeys:[{id:'J',arrival:'2026-10-23T19:00:00Z',duration_minutes:10,transfers:0,walks:[],legs:[{trip_id:'T',code:'1000-10',origin:stop,destination,boarding_index:0,departure:'2026-10-23T18:50:00Z',geometry:[[stop.lat,stop.lon],[destination.lat,destination.lon]]}]}],selected_journey:'J',complete:true,lines:[]}}));
++ await page.goto('/?stop=1');await decide(page);
++ await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
++ const box=await page.locator('.sp-map').boundingBox();
++ await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();
++ // O gesto existente suprime cliques por 1,2 s após disparar o toque longo.
++ await page.waitForTimeout(1250);
++ await expect(page.locator('.sp-route-option')).toHaveCount(1);
++ await page.locator('.sp-route-option').click();
++ await expect(page.locator('dialog[open]')).toHaveCount(0);
++ await expect(page.locator('.sp-route-bus')).toHaveCount(1);
++ await page.getByRole('button',{name:'Favoritos',exact:true}).click();
++ await expect(page.getByRole('dialog',{name:'Pontos favoritos'})).toBeVisible();
++ await page.getByRole('button',{name:'Fechar favoritos',exact:true}).click();
++ await page.getByRole('button',{name:'Cancelar viagem',exact:true}).click();
++ await page.getByRole('button',{name:'Confirmar cancelamento',exact:true}).click();
++ await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
++ expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')))).toEqual({origin:null,destination:null});
++ expect(requests).toHaveLength(0);
++});
+
+--- /dev/null
++++ b/frontend/src/researchChoice.js
+@@ -0,0 +1,11 @@
++export const NOTICE_VERSION='research-v6-voluntary';
++export const CHOICE_KEY='pap.research.choice';
++export function validChoice(value){
++  return !!value&&value.version===NOTICE_VERSION&&['accepted','declined'].includes(value.state)&&typeof value.decidedAt==='string'&&Number.isFinite(Date.parse(value.decidedAt));
++}
++export function readChoice(){try{const value=JSON.parse(localStorage.getItem(CHOICE_KEY));return validChoice(value)?value:null;}catch{return null;}}
++export function writeChoice(state){
++  const choice={state,version:NOTICE_VERSION,decidedAt:new Date().toISOString()};
++  let saved=false;try{localStorage.setItem(CHOICE_KEY,JSON.stringify(choice));saved=true;}catch{/* explicit decision remains in memory */}
++  return {choice,saved};
++}
+
+--- /dev/null
++++ b/frontend/src/researchApi.js
+@@ -0,0 +1,11 @@
++const PROOFS_KEY='pap.research.receipts';
++export function savedProofs(){try{const a=JSON.parse(localStorage.getItem(PROOFS_KEY)||'[]');return Array.isArray(a)?a.filter(x=>typeof x==='string').slice(-50):[];}catch{return [];}}
++let memoryProofs=[];
++export function rememberProof(proof){if(!proof)return;memoryProofs=[...new Set([...savedProofs(),...memoryProofs,proof])].slice(-50);try{localStorage.setItem(PROOFS_KEY,JSON.stringify(memoryProofs));}catch{/* keep current browser context proof */}}
++export function availableProofs(){return [...new Set([...savedProofs(),...memoryProofs])].slice(-50);}
++export async function researchInfo(){const r=await fetch('/api/research/info/',{cache:'no-store'});if(!r.ok)throw Error('Informações indisponíveis');return r.json();}
++export async function researchPost(path,data){
++  const info=await researchInfo();
++  const r=await fetch('/api/research/'+path+'/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':info.csrf},body:JSON.stringify(data)});
++  if(!r.ok)throw Error('Não foi possível enviar. Tente novamente.');return r.json();
++}
+
+--- /dev/null
++++ b/frontend/src/research.css
+@@ -0,0 +1,3 @@
++.research-welcome{min-height:100dvh;box-sizing:border-box;background:#112136;color:#fff;padding:24px;font:16px/1.6 system-ui;display:grid;place-items:center}.research-welcome>section{max-width:680px}.research-welcome h1{font-size:clamp(1.4rem,4.8vw,2rem);line-height:1.25}.research-choices{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}.research-choices button{flex:1 1 220px;min-height:52px;padding:12px;border:2px solid #7ca8d9;background:#193754;color:#fff;border-radius:8px;font:600 1rem system-ui;cursor:pointer}.research-info-button{background:transparent;color:inherit;border:1px solid currentColor;padding:10px;font:inherit;border-radius:6px;cursor:pointer}.research-dialog{box-sizing:border-box;width:min(700px,calc(100vw - 24px));max-height:90dvh;overflow:auto;border:1px solid #7089a4;border-radius:14px;padding:20px;background:var(--pap-surface,#fff);color:var(--pap-text,#162235);font:16px/1.5 system-ui}.research-dialog::backdrop{background:#0009}.research-dialog header{display:flex;align-items:start;gap:12px;justify-content:space-between}.research-dialog h2{margin:0;font-size:1.25rem}.research-dialog button,.research-welcome form button{min-height:44px;padding:8px 14px;font:inherit;cursor:pointer}.research-dialog textarea,.research-dialog select,.research-welcome textarea,.research-welcome select{box-sizing:border-box;display:block;width:100%;padding:10px;margin:8px 0 16px;font:inherit;color:inherit;background:transparent;border:1px solid #8192a6;border-radius:6px}.research-status:empty{display:none}.research-status{position:fixed;bottom:82px;left:8px;max-width:min(280px,70vw);z-index:900;background:#112136;color:#fff;border-radius:6px;padding:4px 8px;font:12px/1.3 system-ui;pointer-events:none}.research-status p{margin:4px 0}.research-welcome :focus-visible,.research-dialog :focus-visible{outline:3px solid #38bdf8;outline-offset:3px}
++
++.research-settings-fallback{position:fixed;bottom:8px;right:8px;z-index:1000;min-height:44px;padding:10px;background:#193754;color:white;border:1px solid #7ca8d9;border-radius:6px;cursor:pointer}
+
+--- /dev/null
++++ b/frontend/src/usability.test.js
+@@ -0,0 +1,36 @@
++import {test,beforeEach,afterEach} from 'node:test';
++import assert from 'node:assert/strict';
++import {startRecording,stopRecording,record,trace,flush,isRecording,observedFetch,onRecordingStatus} from './usability.js';
++import {NOTICE_VERSION} from './researchChoice.js';
++const choice={state:'accepted',version:NOTICE_VERSION,decidedAt:'2026-10-23T12:00:00Z'};
++const keys=['window','document','sessionStorage','localStorage','navigator','screen','innerWidth','innerHeight','devicePixelRatio','fetch'];
++let originals,hooks,calls;
++function storage(){const entries=new Map();return {getItem:key=>entries.get(key)||null,setItem:(key,value)=>entries.set(key,value),removeItem:key=>entries.delete(key)};}
++function target(){return {addEventListener:()=>hooks++,removeEventListener:()=>hooks--};}
++function ok(data){return {ok:true,status:200,json:async()=>data};}
++beforeEach(()=>{
++ originals=new Map(keys.map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));hooks=0;calls=[];
++ for(const [key,value] of Object.entries({window:target(),document:target(),sessionStorage:storage(),localStorage:storage(),navigator:{language:'pt-BR'},screen:{width:390,height:844},innerWidth:390,innerHeight:844,devicePixelRatio:1}))Object.defineProperty(globalThis,key,{value,configurable:true,writable:true});
++ globalThis.fetch=async(url,options={})=>{calls.push({url,options});return ok(options.method==='POST'?{}:{session:'fake',token:'fake',csrf:'fake'});};
++});
++afterEach(()=>{stopRecording();for(const [key,descriptor] of originals){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}});
++test('sem consentimento não há listeners, fila transmitida ou sessão',async()=>{
++ record('action',{});trace('input',{value:'artificial'});assert.equal(await flush(),false);assert.equal(isRecording(),false);assert.equal(hooks,0);assert.equal(calls.length,0);
++ await assert.rejects(startRecording({...choice,state:'declined'}));await assert.rejects(startRecording({...choice,version:'old'}));assert.equal(calls.length,0);
++});
++test('revogação aborta POST em andamento, remove listeners e descarta fila',async()=>{
++ await startRecording(choice);assert.ok(hooks>0);assert.equal(isRecording(),true);
++ const first=JSON.parse(calls[1].options.body);assert.equal(JSON.parse(first.events[0].data.payload).kind,'consent');
++ let aborted=false;
++ globalThis.fetch=(url,{signal})=>new Promise((resolve,reject)=>{signal.addEventListener('abort',()=>{aborted=true;reject(Error('aborted'));});});
++ record('action',{});const pending=flush();record('action',{target:'pending'});stopRecording();assert.equal(await pending,false);assert.equal(aborted,true);assert.equal(hooks,0);assert.equal(isRecording(),false);
++ globalThis.fetch=()=>{throw Error('Envio após revogação');};record('action',{});trace('input',{});assert.equal(await flush(),false);
++});
++test('resposta tardia da inicialização não reativa pesquisa após revogação',async()=>{
++ let resolve;globalThis.fetch=()=>new Promise(r=>resolve=r);const pending=startRecording(choice);stopRecording();resolve(ok({session:'late',token:'late',csrf:'late'}));assert.equal(await pending,null);assert.equal(isRecording(),false);assert.equal(hooks,0);
++});
++for(const code of [429,503])test(`falha ${code} encerra captura sem bloquear fetch do transporte`,async()=>{
++ await startRecording(choice);const states=[];const unsubscribe=onRecordingStatus(s=>states.push(s));
++ globalThis.fetch=async()=>({ok:false,status:code});record('action',{});assert.equal(await flush(),false);assert.equal(isRecording(),false);assert.equal(hooks,0);assert.ok(states.includes('unavailable'));
++ globalThis.fetch=async()=>ok({stops:[]});assert.deepEqual(await (await observedFetch('/api/sptrans/stops/')).json(),{stops:[]});assert.equal(await flush(),false);unsubscribe();
++});

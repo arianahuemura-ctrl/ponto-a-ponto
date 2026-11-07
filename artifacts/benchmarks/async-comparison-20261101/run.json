@@ -1,0 +1,6 @@
+{
+  "queries": 3264,
+  "workers": 32,
+  "wall_seconds_this_run": 664.130457022984,
+  "scope": "Paired original scenarios; local flow, external attempts blocked and tracked across threads; producer drain excluded from first-route timing"
+}

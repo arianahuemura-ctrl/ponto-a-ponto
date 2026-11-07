@@ -1,4 +1,4 @@
-// Pointer events support touch, pen and mouse without blocking Leaflet dragging.
+// Eventos de ponteiro aceitam toque, caneta e mouse sem bloquear o arrasto do Leaflet.
 export function bindMapLongPress(element, onSelect, {delay=650, tolerance=10}={}) {
   const pointers=new Set();
   let timer, start, suppressUntil=0;
@@ -21,7 +21,7 @@ export function bindMapLongPress(element, onSelect, {delay=650, tolerance=10}={}
   };
   const up=e=>{pointers.delete(e.pointerId);cancel();};
   const reset=()=>{pointers.clear();cancel();};
-  const click=e=>{if(Date.now()<suppressUntil){e.preventDefault();e.stopImmediatePropagation();}};
+  const click=e=>{if(Date.now()<suppressUntil&&element.contains(e.target)&&!e.target.closest?.('.leaflet-popup button')){e.preventDefault();e.stopImmediatePropagation();}};
   const context=e=>{e.preventDefault();}; // No native long-touch menu on mobile.
   const win=element.ownerDocument.defaultView;
   element.addEventListener('pointerdown',down,true);

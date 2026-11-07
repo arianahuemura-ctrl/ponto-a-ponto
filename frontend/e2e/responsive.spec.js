@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./coverage.js";
 
 const origin = "/?stop=way:1410074325";
 async function fits(page) {

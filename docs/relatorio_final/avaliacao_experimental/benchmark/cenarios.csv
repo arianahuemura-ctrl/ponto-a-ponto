@@ -1,0 +1,10 @@
+cenario_id,origin,destination,partida,estrutura,conectividade_padroes,classificacao_temporal,status
+S01_dia,100014307,100014548,2026-10-28T09:00:00-03:00,candidato_direto,a_qualificar,pendente_qualificacao,candidato_nao_executado
+S01_noite,100014307,100014548,2026-10-28T23:00:00-03:00,candidato_direto,a_qualificar,pendente_qualificacao,candidato_nao_executado
+S02_dia,100014307,10008715,2026-10-28T09:00:00-03:00,candidato_baldeacao,a_qualificar,pendente_qualificacao,candidato_nao_executado
+S02_noite,100014307,10008715,2026-10-28T23:00:00-03:00,candidato_baldeacao,a_qualificar,pendente_qualificacao,candidato_nao_executado
+S03_dia,100014349,800016609,2026-10-28T09:00:00-03:00,sem_par_baixa_conectividade,1,pendente_qualificacao,candidato_nao_executado
+S03_noite,100014349,800016609,2026-10-28T23:00:00-03:00,sem_par_baixa_conectividade,1,pendente_qualificacao,candidato_nao_executado
+S04_dia,190011837,800016609,2026-10-28T09:00:00-03:00,sem_par_alta_conectividade,45,pendente_qualificacao,candidato_nao_executado
+S04_noite,190011837,800016609,2026-10-28T23:00:00-03:00,sem_par_alta_conectividade,45,pendente_qualificacao,candidato_nao_executado
+S05_sem_servico,100014307,100014548,2027-05-04T09:00:00-03:00,controle_negativo_servico_fora_calendario,nao_aplicavel,verificar_calendar_dates_e_servicos_anteriores,candidato_nao_executado

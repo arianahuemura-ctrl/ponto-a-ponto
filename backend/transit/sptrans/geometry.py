@@ -1,4 +1,4 @@
-"""Clip GTFS shapes to the ordered stops of a trip, including curved segments."""
+"""Recorta traçados GTFS pela ordem das paradas da viagem, incluindo trechos curvos."""
 import math
 from functools import lru_cache
 from . import store
@@ -29,8 +29,8 @@ def trip_geometry(path, modified, size, trip_id):
         minimum=min(c[0] for c in candidates)
         if minimum>150:
             positions.append(None);continue
-        # Prefer the first passage at repeated coordinates: small GPS differences
-        # must not jump to the return segment of a circular itinerary.
+        # Prefira a primeira passagem por coordenadas repetidas: pequenas diferenças no GPS
+        # não devem saltar para o trecho de retorno de um itinerário circular.
         best=min((c for c in candidates if c[0]<=minimum+5),key=lambda c:c[1])
         previous=best[1];positions.append((previous,best[2]))
     return shape,positions

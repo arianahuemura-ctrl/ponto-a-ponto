@@ -1,0 +1,112 @@
+[
+  {
+    "origin": "280005195",
+    "destination": "600005442",
+    "names": [
+      "Av. Olavo Egídio De Souza Aranha, 847",
+      "R. Nilza, 480"
+    ],
+    "connections": 1,
+    "disk_ms": 0.208,
+    "ram_ms": 0.239
+  },
+  {
+    "origin": "840004384",
+    "destination": "830004170",
+    "names": [
+      "Av. Cel. Sezefredo Fagundes, 834",
+      "R. Ushikichi Kamiya, 1230"
+    ],
+    "connections": 4,
+    "disk_ms": 0.237,
+    "ram_ms": 0.261
+  },
+  {
+    "origin": "1506210",
+    "destination": "530015430",
+    "names": [
+      "Av. Washington Luiz, 6542",
+      "Av. Juriti, 541"
+    ],
+    "connections": 2,
+    "disk_ms": 0.219,
+    "ram_ms": 0.247
+  },
+  {
+    "origin": "690006906",
+    "destination": "790010961",
+    "names": [
+      "Av. Pe. Arlindo Vieira, 1391",
+      "R. Loefgreen, 672"
+    ],
+    "connections": 1,
+    "disk_ms": 0.209,
+    "ram_ms": 0.239
+  },
+  {
+    "origin": "3608989",
+    "destination": "50004515",
+    "names": [
+      "Av. Campanella, 2450",
+      "Pça. Arama, 91"
+    ],
+    "connections": 5,
+    "disk_ms": 0.24,
+    "ram_ms": 0.276
+  },
+  {
+    "origin": "350002420",
+    "destination": "860006080",
+    "names": [
+      "R. Itajuibe, 1157",
+      "R. Dario Ferreira Martins, 24"
+    ],
+    "connections": 1,
+    "disk_ms": 0.203,
+    "ram_ms": 0.239
+  },
+  {
+    "origin": "4715231",
+    "destination": "3608121",
+    "names": [
+      "R. Brig. Hardman, 49",
+      "R. Tomazzo Ferrara, 458"
+    ],
+    "connections": 1,
+    "disk_ms": 0.204,
+    "ram_ms": 0.237
+  },
+  {
+    "origin": "620003211",
+    "destination": "4114540",
+    "names": [
+      "R. Emb. Alexandre Conty, 582",
+      "Av. Raimundo Pereira De Magalhães, 10218"
+    ],
+    "connections": 2,
+    "disk_ms": 0.22,
+    "ram_ms": 0.246
+  },
+  {
+    "origin": "860006090",
+    "destination": "280005739",
+    "names": [
+      "R. Ananai, 256",
+      "R. Dr. Assis Ribeiro, 7750"
+    ],
+    "connections": 1,
+    "disk_ms": 0.203,
+    "ram_ms": 0.235
+  },
+  {
+    "origin": "690011065",
+    "destination": "690011073",
+    "names": [
+      "R. Epiacaba, 587",
+      "Estr. Das Lágrimas, 3239"
+    ],
+    "connections": 3,
+    "disk_ms": 0.227,
+    "ram_ms": 0.26
+  }
+]

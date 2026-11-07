@@ -1,0 +1,35 @@
+{
+  "active_tex": 27,
+  "labels": 95,
+  "missing_refs": [],
+  "duplicate_labels": [],
+  "cited_keys": 54,
+  "bibliography_items": 54,
+  "missing_citations": [],
+  "bibliography_unchanged_except_order": true,
+  "overfull": 0,
+  "underfull": 13,
+  "warnings": [
+    "Package babel Warning: Name 'brazil' is deprecated.",
+    "Class memoir Warning: \\settocpreprocessor is marked deprecated and will be",
+    "Class memoir Warning: \\addtodef is marked deprecated and will be"
+  ],
+  "figures": 40,
+  "tables": 21,
+  "preserved_inputs": 780,
+  "changed_existing_files": [
+    "docs/relatorio_final/legibilidade_ferroviaria_20261102.tex",
+    "docs/relatorio_final/feedbacks_20261029.tex",
+    "docs/relatorio_final/atualizacao_20261101.tex",
+    "docs/relatorio_final/estudo_cliques.tex",
+    "docs/relatorio_final/artesp_resultados_20261102.tex",
+    "docs/relatorio_final/relatorio_final_pi2_v2.tex",
+    "docs/relatorio_final/planejador_hibrido.tex",
+    "docs/relatorio_final/estudo_ihc_ampliado/protocolo.tex",
+    "docs/relatorio_final/avaliacoes_externas/alameda_solutions/comunicacao_thiago.tex"
+  ],
+  "missing_existing_files": [],
+  "new_figure_inputs_unchanged": true,
+  "baseline_pdf_unchanged": true,
+  "pdf_sha256": "2d2a3840bd717aa01b9ee9aa4b0a88883fc0adf9af8caf68b15e2f8b1ac0ff2d"
+}

@@ -1,0 +1,1 @@
+execucao_id,cenario_id,variante,repeticao,ordem,cache,status,primeira_alternativa_s,termino_s,validas,fallback,cpu_s,rss_pico_kib,erro_tipo,manifesto_sha256

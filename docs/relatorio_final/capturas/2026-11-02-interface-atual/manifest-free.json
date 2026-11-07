@@ -1,0 +1,61 @@
+{
+  "run": "free",
+  "started": "2026-11-02T14:39:57.158Z",
+  "appCommit": "78e39355ce23aa545c4006978bcc59060f6db24f",
+  "baseURL": "http://127.0.0.1:18082",
+  "transport": "Real application; no mocked or substituted responses",
+  "research": "Declined through UI; no feedback sent",
+  "captures": [
+    {
+      "file": "destino-livre.png",
+      "at": "2026-11-02T14:40:04.551Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Long press on map opens destination and save-location actions; destination not yet confirmed.",
+      "sha256": "8b4e198a2fe65785b4969b09356810fb58cdc886a2bea0e10c21c86e077377d2"
+    }
+  ],
+  "requests": [
+    {
+      "time": "2026-11-02T14:39:57.687Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:57.688Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:57.710Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?id=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:58.802Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:40:02.853Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:40:03.527Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.571264237328787&lon=-46.709232330322266&south=-23.577734625195404&west=-46.71384572982789&north=-23.564793530648632&east=-46.70461893081666&offset=0&batch_size=200",
+      "status": 200
+    }
+  ],
+  "ended": "2026-11-02T14:40:04.557Z"
+}

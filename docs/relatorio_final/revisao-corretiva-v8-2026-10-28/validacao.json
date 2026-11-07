@@ -1,0 +1,28 @@
+{
+  "branch": "relatorio",
+  "head": "c18556cb4a3f3bc733d9eab040f0d7f0755595b3",
+  "paginas_antes": 133,
+  "paginas_depois": 133,
+  "md5_antes": "99a9dd131d390ace229c5ebb7773d518",
+  "md5_depois": "cc9f063ec8ae7b225bdf0463d764cd19",
+  "sha256_pdf": "e09b4c1579646914171519411e49f18e097a057024abb6e32549cc52242a6e3f",
+  "B1_B2_identicos": true,
+  "arquivos_protegidos_preservados": 432,
+  "figura30_etapas_1_3_4_5_6_preservadas": true,
+  "tabelas_legendas_caminhos_imagens_preservados": true,
+  "fontes_incorporadas": true,
+  "referencias_indefinidas": false,
+  "overfull": false,
+  "diff_check": "ok",
+  "paragrafo_inteiro_pagina_pdf37": true,
+  "alteracoes_preexistentes_preservadas": true,
+  "pendencias": [
+    "Instrumentar a procedência dos candidatos antes do benchmark",
+    "Verificar equivalência e disponibilidade antes de comparar três embarques",
+    "Executar benchmark futuro, não realizado nesta revisão"
+  ],
+  "avisos_compilacao": [
+    "Obsolescência babel/memoir",
+    "Underfull na célula calendar/calendar_dates preexistente, linha 1078"
+  ]
+}

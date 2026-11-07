@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "built_at": "2026-10-08T02:08:24.130240+00:00",
+  "source_gtfs": [
+    "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+    73437184,
+    1791318021740218230
+  ],
+  "source_graph": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+  "patterns": 2239,
+  "stops": 22061,
+  "edges": 2588077,
+  "reverse_entries": 2588077,
+  "unique_pairs": 1732768,
+  "unknown_distances": 42,
+  "same_stop_pairs_excluded": 456,
+  "skipped_source_trips": 1,
+  "skipped_source_trip_ids": null,
+  "generation_seconds": 3.2849488469946664,
+  "total_build_seconds": 9.954904954996891,
+  "forward_index": "direct_out",
+  "reverse_index": "direct_in",
+  "structural_only": true,
+  "top_k_applied_at_build": false,
+  "invalid_directions": 0,
+  "orphan_edges": 0,
+  "integrity_check": "ok",
+  "integrity_seconds": 2.679022430005716,
+  "sqlite_page_bytes": {
+    "calendar": 4096,
+    "calendar_dates": 4096,
+    "calendar_service": 4096,
+    "direct_in": 103809024,
+    "direct_meta": 4096,
+    "direct_out": 103809024,
+    "exception_service": 4096,
+    "graph_stop": 1318912,
+    "pattern": 42827776,
+    "ride_edge": 119857152,
+    "sqlite_autoindex_graph_stop_1": 397312,
+    "sqlite_autoindex_ride_edge_1": 44085248,
+    "sqlite_autoindex_timetable_1": 49152,
+    "sqlite_schema": 4096,
+    "sqlite_stat1": 4096,
+    "timetable": 5521408,
+    "timetable_pattern": 28672
+  },
+  "database": "/home/avale/Projetos/maua_bus_map/sptrans.direct.sqlite3",
+  "database_bytes": 421732352,
+  "full_source_comparison": {
+    "mismatches": 0,
+    "seconds": 0.9868964470224455
+  },
+  "query_plans": {
+    "direct_forward": [
+      "SEARCH ride_edge USING INDEX direct_out (origin=?)"
+    ],
+    "direct_reverse": [
+      "SEARCH ride_edge USING INDEX direct_in (destination=?)"
+    ]
+  },
+  "example": {
+    "origin": "1211364",
+    "destination": "6714560",
+    "forward_reverse_identical": true,
+    "direct_services": 1,
+    "transfer_candidates": 8,
+    "transfer_search_complete": true,
+    "first_transfer": {
+      "transfer_stop": "260015039",
+      "distance_meters": 7816.270618061641,
+      "legs": [
+        {
+          "id": 1804485,
+          "origin": "1211364",
+          "destination": "260015039",
+          "pattern_id": 1615,
+          "boarding_index": 11,
+          "alighting_index": 19,
+          "distance_meters": 5271.138044778281,
+          "min_ride_seconds": 1208.0,
+          "route_id": "7411-10",
+          "code": "7411-10",
+          "direction": "0",
+          "headsign": "Pça. Da Sé",
+          "walking_meters": 0,
+          "walking_seconds": 0
+        },
+        {
+          "id": 2094904,
+          "origin": "260015039",
+          "destination": "6714560",
+          "pattern_id": 1876,
+          "boarding_index": 30,
+          "alighting_index": 35,
+          "distance_meters": 2545.1325732833593,
+          "min_ride_seconds": 810.0,
+          "route_id": "8705-10",
+          "code": "8705-10",
+          "direction": "0",
+          "headsign": "Anhangabaú",
+          "walking_meters": 0,
+          "walking_seconds": 0
+        }
+      ]
+    }
+  },
+  "test_suite": {
+    "backend_tests_passed": 217,
+    "new_direct_reverse_tests": 14
+  },
+  "branch": "feat/busca-bidirecional",
+  "scope": "All bus patterns in the prepared GTFS graph. Structural search only; no API calls or all-city transfer materialization."
+}

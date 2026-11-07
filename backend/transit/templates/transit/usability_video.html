@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+{% block content %}<h1>Exportar vídeo WebM</h1><p id="status" role="status">Preparando exportação…</p><p>A geração processa as mudanças visuais no servidor, sem aguardar os períodos parados. Esta página iniciará o download automaticamente. Não é necessário compartilhar a tela.</p><form hidden>{% csrf_token %}</form><a id="download" hidden>Baixar WebM</a><p><a href="{% url 'usability-sessions' %}">Voltar às sessões</a></p>
+<script>
+(async()=>{
+ const status=document.getElementById('status');
+ try{
+  const response=await fetch(location.pathname,{method:'POST',headers:{'X-CSRFToken':document.querySelector('[name=csrfmiddlewaretoken]').value}});
+  const data=await response.json();if(!response.ok)throw Error(data.error||'Não foi possível iniciar.');
+  status.textContent='Gerando vídeo… O download começará ao terminar.';
+  const url=location.pathname+'?job='+encodeURIComponent(data.job);
+  for(;;){await new Promise(r=>setTimeout(r,2000));const response=await fetch(url);if(!response.ok)throw Error('Exportação indisponível. Recarregue para tentar novamente.');const result=await response.json();
+   if(result.state==='error')throw Error('Falha na geração. Verifique a instalação do Chromium/Playwright no servidor.');
+   if(result.state==='ready'){const link=document.getElementById('download');link.href=url+'&download=1';link.hidden=false;link.click();status.textContent='Vídeo pronto. Se o download não iniciou, clique em Baixar WebM.';break;}
+  }
+ }catch(error){status.textContent=error.message;}
+})();
+</script>{% endblock %}

@@ -1,0 +1,322 @@
+{
+  "data": "2026-10-28T12:07:58.479246-03:00",
+  "git": "85417bccfb3b72ff287c5e2105840654e5b95ca1",
+  "banco_atual": {
+    "path": "/home/avale/Projetos/maua_bus_map/sptrans.materialized.sqlite3",
+    "bytes": 117727232,
+    "sha256": "bc2c2bab08a8fc67b62feffcf165723c90daf83b3fe00e1c6a9acb7c90cb0a6f",
+    "integridade": "ok",
+    "categorias": [
+      [
+        1,
+        "ready",
+        77988,
+        28292
+      ],
+      [
+        2,
+        "ready",
+        77987,
+        616650
+      ]
+    ],
+    "trajetos_por_categoria": [
+      [
+        1,
+        28292
+      ],
+      [
+        2,
+        616650
+      ]
+    ],
+    "pares_ambas_prontas": 77987,
+    "pares_com_candidato_pronto": 77956,
+    "categorias_prontas_vazias": [
+      [
+        1,
+        73493
+      ],
+      [
+        2,
+        31
+      ]
+    ],
+    "ultimo_registro": "2026-10-28T10:50:34.766401+00:00",
+    "meta": {
+      "signature": {
+        "version": 2,
+        "source": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3",
+          3048796160,
+          1791441764862412944
+        ],
+        "gtfs": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+          73437184,
+          1791318021740218230
+        ],
+        "quotas": {
+          "1": 16,
+          "2": 8
+        },
+        "walk_speed_kmh": 4.5,
+        "coverage": {
+          "verified_walks": 952608,
+          "unknown_ride_distances": 42
+        }
+      },
+      "created_at": "2026-10-08T13:18:01.243564+00:00",
+      "city_complete": false
+    }
+  },
+  "backup_anterior": {
+    "path": "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/materializado-antes.sqlite3",
+    "bytes": 117686272,
+    "sha256": "7801750f89d58b1c9a74b1abdc2a6d60eba3040d9e1311e16bab9c4ab9223b1b",
+    "integridade": "ok",
+    "categorias": [
+      [
+        1,
+        "ready",
+        77957,
+        28292
+      ],
+      [
+        2,
+        "ready",
+        77956,
+        616410
+      ]
+    ],
+    "trajetos_por_categoria": [
+      [
+        1,
+        28292
+      ],
+      [
+        2,
+        616410
+      ]
+    ],
+    "pares_ambas_prontas": 77956,
+    "pares_com_candidato_pronto": 77925,
+    "categorias_prontas_vazias": [
+      [
+        1,
+        73462
+      ],
+      [
+        2,
+        31
+      ]
+    ],
+    "ultimo_registro": "2026-10-08T16:23:58.728319+00:00",
+    "meta": {
+      "signature": {
+        "version": 2,
+        "source": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3",
+          3048796160,
+          1791441764862412944
+        ],
+        "gtfs": [
+          "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+          73437184,
+          1791318021740218230
+        ],
+        "quotas": {
+          "1": 16,
+          "2": 8
+        },
+        "walk_speed_kmh": 4.5,
+        "coverage": {
+          "verified_walks": 952608,
+          "unknown_ride_distances": 42
+        }
+      },
+      "created_at": "2026-10-08T13:18:01.243564+00:00",
+      "city_complete": false
+    }
+  },
+  "estimativa": {
+    "dados_registrados": {
+      "origens": 22011,
+      "amostra_estratificada": {
+        "100014307": 17018,
+        "1211268": 4329,
+        "170011190": 6469,
+        "190013420": 6899,
+        "210005073": 3617,
+        "2314508": 3109,
+        "2515500": 3238,
+        "290001373": 3111,
+        "3014896": 6638,
+        "330010892": 7529,
+        "350012100": 3072,
+        "370010102": 4959,
+        "40005564": 9445,
+        "420013214": 6762,
+        "450011823": 10363,
+        "4715132": 4020,
+        "50007330": 6628,
+        "5409999": 8122,
+        "580007320": 8518,
+        "6009690": 5658,
+        "640000338": 11782,
+        "6607572": 4155,
+        "6905462": 5676,
+        "720015730": 19681,
+        "750007490": 6479,
+        "780006287": 10131,
+        "80014594": 8934,
+        "8313627": 1891,
+        "870008658": 6345,
+        "910000869": 19116,
+        "9309483": 3527,
+        "9907473": 6956
+      },
+      "tempo_s": 0.7164366109999492,
+      "estimativa_pares_alcancaveis": 161077186,
+      "pares_prontos_observados": 77968,
+      "trajetos_observados": 644798,
+      "bytes_ocupados": 117702656,
+      "estimativa_gib_por_extrapolacao": 226.46653353279925,
+      "livre_gib": 54.14790344238281,
+      "limite": "Estimativa, não contagem completa. Quantidade de caminhos por par e tamanho final variam; banco existente contém principalmente as primeiras origens."
+    },
+    "media": 7318.03125,
+    "min": 1891,
+    "max": 19681,
+    "mediana": 6553.5,
+    "desvio_padrao_amostral": 4417.24652583028,
+    "pares_projetados_sem_arredondar": 161077185.84375,
+    "pares_arredondados": 161077186,
+    "gib_reproduzido": 226.46653353279922,
+    "diferenca_gib": -2.842170943040401e-14
+  },
+  "amostragem": {
+    "universo": 22011,
+    "indices": [
+      0,
+      710,
+      1420,
+      2130,
+      2840,
+      3550,
+      4260,
+      4970,
+      5680,
+      6390,
+      7100,
+      7810,
+      8520,
+      9230,
+      9940,
+      10650,
+      11360,
+      12070,
+      12780,
+      13490,
+      14200,
+      14910,
+      15620,
+      16330,
+      17040,
+      17750,
+      18460,
+      19170,
+      19880,
+      20590,
+      21300,
+      22010
+    ],
+    "selecao_sistematica_compativel": true,
+    "nota": "Padrão inferido dos identificadores; script original da seleção não está no diretório de evidências.",
+    "totais_reproduzidos": {
+      "100014307": 17018,
+      "1211268": 4329,
+      "170011190": 6469,
+      "190013420": 6899,
+      "210005073": 3617,
+      "2314508": 3109,
+      "2515500": 3238,
+      "290001373": 3111,
+      "3014896": 6638,
+      "330010892": 7529,
+      "350012100": 3072,
+      "370010102": 4959,
+      "40005564": 9445,
+      "420013214": 6762,
+      "450011823": 10363,
+      "4715132": 4020,
+      "50007330": 6628,
+      "5409999": 8122,
+      "580007320": 8518,
+      "6009690": 5658,
+      "640000338": 11782,
+      "6607572": 4155,
+      "6905462": 5676,
+      "720015730": 19681,
+      "750007490": 6479,
+      "780006287": 10131,
+      "80014594": 8934,
+      "8313627": 1891,
+      "870008658": 6345,
+      "910000869": 19116,
+      "9309483": 3527,
+      "9907473": 6956
+    },
+    "todos_iguais": true
+  },
+  "codigo": {
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/materialized_adapter.py": {
+      "sha256": "e3442e76b1d7e17cc2421a9081fb76fc5e8cf7aafe00edce52f4c0d51bb5daee"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/materialized_connections.py": {
+      "sha256": "7d22f251dfceb769bec31cdbe2be9cec73e0558b30c0524acfb6331dcabe6c32"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/connection_planner.py": {
+      "sha256": "f74f35f92887052e7ab2e2d90233483f61616469b55d09451d934dbf11810053"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/planner.py": {
+      "sha256": "9d4608fdcb342997752d6eef4299dce40d8366411b8d527d0591a8812117c7d0"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/alternatives.py": {
+      "sha256": "9735d9843e1a678beb7d0e8ddb53ed8235524ba4b9f2990265a7688e9cac954a"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/connection_adapter.py": {
+      "sha256": "ea3117c6f6beb63484ddb00f0c47b01cc3e3a2c19c76158068fff984e878bee1"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/city_connections.py": {
+      "sha256": "c645b234b3e56bb878fda591e1d76ae1a53425bb6c77085fc00ec948520a9026"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/catalog.py": {
+      "sha256": "7b6f19bc792b569b007cf8a383960cbba233dc17e00270045e1910641d9ac834"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/graph.py": {
+      "sha256": "1ce5019dddc387e704ea546394617b8ef521993bb0cf6075820ea276327311a3"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/direct.py": {
+      "sha256": "fc2543e5745c98ec3d27465e92306583639515e9090f5b5c27c5808c2cf282b1"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/walking.py": {
+      "sha256": "ded2aa57a9be0e38ef32934b5e61bc4242c9a400349e0776bdd6b7bc43e8ab12"
+    },
+    "/home/avale/Projetos/maua_bus_map/backend/transit/sptrans/journey_completion.py": {
+      "sha256": "e58641ead229d4a26c41da492c867ae0d856b2c4c6c4e699ee23adc8cf562c56"
+    }
+  },
+  "evidencias_origem": {
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/estado-antes-retomada.json": "e8f38d766b83ee6394faa5b9e18fd561ad092762bdaa6fce235bf1cfde785cc4",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/execucao.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/processo.json": "28339f2efd050940e08b13c917c238c61f4e6ab97be6404dff36325d2f5cc2a9",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/materializado-antes.sqlite3": "7801750f89d58b1c9a74b1abdc2a6d60eba3040d9e1311e16bab9c4ab9223b1b",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/executar.py": "d05efaf585e5334110609096a822cfe7ece8fc32f23becbf7f30c268c224e47b",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/LEIA-ME.txt": "dc478348142452e1cfc440286d95a1d0ce6c092652abd7335389504a853dd516",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/execucao.log": "4b439f5794af436cc72087a340a02946961e026d72ff0743ee2678873117cbff",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/estado.json": "0991761ca66647a2614fa4871fc2b640482ceb9347c0d19ebcb0c6f2ddff6e0e",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/estimativa-escala.json": "ec9b9597373b42f50e6a1afc8486bc6fb21fe8d74218694709ee591b62ccb94d",
+    "/home/avale/Documentos/univesp/PI2/artifacts/materializacao-completa-2026-10-28/retomada-2026-10-28.log": "3c6b73c6bb65654a62e89b52a74a8c3b5a7d9e59973a5f759394a879d6b3989a"
+  }
+}

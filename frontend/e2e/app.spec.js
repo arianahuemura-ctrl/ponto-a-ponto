@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./coverage.js";
 const elements = [
   {
     type: "node",

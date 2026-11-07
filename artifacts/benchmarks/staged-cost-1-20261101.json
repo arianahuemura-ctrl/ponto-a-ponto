@@ -1,0 +1,14 @@
+{
+  "stage": 1,
+  "complete": true,
+  "origins": 22274,
+  "pairs": 174727157,
+  "routes": 684725998,
+  "build_seconds": 823.7626738713006,
+  "elapsed_seconds": 118.50239623396192,
+  "bytes": 18968801280,
+  "free_bytes": 224813654016,
+  "resumed": true,
+  "elapsed_seconds_scope": "last_resume_only",
+  "integrity": "ok"
+}

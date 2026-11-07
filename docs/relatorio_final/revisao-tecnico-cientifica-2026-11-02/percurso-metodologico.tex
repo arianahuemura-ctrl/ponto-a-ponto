@@ -1,0 +1,208 @@
+\chapter{Percurso metodológico detalhado}\label{ap:percurso-metodologico}
+Este apêndice preserva o detalhamento do percurso histórico e dos procedimentos da versão de 2 de novembro. A síntese que distingue execução e proposta está na Seção~\ref{sec:metodologia-revisada}. A interrupção de materialização referida abaixo pertence ao desenho histórico de outubro; o censo compacto posterior está na Seção~\ref{sec:atualizacao-20261101}.
+
+A metodologia articula as etapas de ouvir e interpretar o contexto, criar e prototipar, implementar e testar, orientadas pelo Design Thinking. Essa abordagem parte das necessidades das pessoas, explora alternativas e utiliza protótipos para aprender por iteração, considerando também viabilidade técnica e condições de continuidade da solução \citep{ideo-designthinking}. O modelo Double Diamond distingue descoberta, definição, desenvolvimento e entrega, com possibilidade de retorno às etapas anteriores \citep{designcouncil}. Neste relatório, essas referências ajudam a organizar as decisões do PaP; não se afirma que o grupo tenha executado integralmente um protocolo formal dessas instituições.
+
+A revisão de Haylett acrescenta critérios de clareza da informação e um protocolo de avaliação por tarefas. A descrição a seguir sistematiza o percurso registrado do projeto, distinguindo relatos da comunidade, observações do grupo sobre interfaces e dados, hipóteses de uso e evidências de implementação. O ciclo de validação com passageiros permanece aberto. Não há registro, nesta etapa, de oficina formal de ideação, mapa de empatia ou personas produzidos com participantes, e esses instrumentos não são apresentados como atividades realizadas.
+
+A comparação foi ampliada por registros sobre Santos fornecidos pelo grupo: a resposta ao protocolo 7657-2026, uma conversa informal com uma passageira e a descrição de um vídeo de leitura do QR Code. Esses materiais foram tratados como fontes distintas. A resposta institucional informa a oferta do serviço; a conversa registra uma experiência individual; a descrição do vídeo delimita um fluxo observado pelo grupo. A síntese documental preserva essa distinção e a ausência de data e identificação do setor remetente na resposta reproduzida. Nenhum desses registros corresponde a uma sessão de avaliação do PaP.
+
+\input{artesp_metodologia_20261102.tex}
+
+\label{sec:escuta-comunidade}
+Na etapa de ouvir e interpretar o contexto, Osmar Junior, gerente de Transportes Públicos de Mauá, foi escolhido como interlocutor da comunidade externa por sua experiência no setor, pelo conhecimento da operação local e pela disponibilidade para colaborar com o projeto. Na entrevista, relatou atuação no transporte público desde 1985, predominantemente em Mauá, com trajetória na administração pública e em empresas operadoras  (entrevista com Osmar Junior, 257--284 s; 424--447 s).
+
+Sua experiência contribui para esclarecer os sistemas e dados disponíveis, discutir a viabilidade da proposta e dialogar com os responsáveis pela operação. A comunidade beneficiária compreende os passageiros do transporte público de Mauá; o interlocutor contribui com a perspectiva profissional da gestão e da operação. Sua participação complementa a escuta dos usuários, mas não substitui os testes com passageiros nem implica, por si só, formalização de parceria ou autorização institucional.
+
+A escuta inicial foi realizada em conversa remota entre um integrante do grupo, responsável pela entrevista, e o interlocutor. O registro foi incorporado ao projeto como transcrição com identificação de falantes e marcações temporais. O nome do arquivo indica 20 de agosto de 2026, às 14h00min44s, e a transcrição alcança 2.861 segundos, aproximadamente 47 minutos e 41 segundos. A data é a identificação do registro fornecido pelo grupo, não uma verificação independente dos metadados da gravação  (entrevista com Osmar Junior).
+
+A análise da entrevista utiliza sínteses temáticas e intervalos em segundos para permitir a localização das passagens citadas. Os relatos operacionais foram tratados como informações da entrevista, não como cadastro oficial.
+
+O interlocutor informou que o monitoramento dos veículos e a consulta pelo passageiro já existiam em Mauá. A conversa ajudou a delimitar a proposta como uma oportunidade de aprimorar o acesso contextualizado às informações disponíveis, sem pressupor a criação de um novo sistema de rastreamento. Ele avaliou favoravelmente a ideia de iniciar a consulta pelo QR Code da parada e sugeriu organizar a proposta por escrito e apresentá-la à empresa responsável pelo rastreamento  (entrevista com Osmar Junior, 447--589 s; 739--853 s; 1135--1163 s).
+
+Ao discutir integração, o interlocutor distinguiu informações destinadas ao público de dados utilizados pela prefeitura e pela operadora. Não confirmou a existência de API acessível ao projeto. Ao final, dispôs-se a procurar um contato da empresa e a colaborar com a continuidade do trabalho. Essas manifestações indicam encaminhamentos para articulação, sem comprovar entrega de credenciais, assinatura de parceria ou autorização de implantação  (entrevista com Osmar Junior, 861--919 s; 2293--2425 s).
+
+\clearpage
+A~Tabela~\ref{tab:entrevista-osmar} registra a relação entre os temas da entrevista e as decisões do grupo. As implicações de projeto são interpretações da equipe, não requisitos formalmente aprovados pelo interlocutor.
+
+\begingroup
+\small\SingleSpacing
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}>{\raggedright\arraybackslash}p{0.39\textwidth}}
+\caption{Contribuições da entrevista inicial e implicações para o PaP}\label{tab:entrevista-osmar}\\
+\hline
+Intervalo do registro & Tema discutido & Implicação delimitada pelo grupo \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\small Tabela \thetable{} -- continuação}\\
+\hline
+Intervalo do registro & Tema discutido & Implicação delimitada pelo grupo \\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{\small Continua na próxima página}\\
+\endfoot
+\hline
+\multicolumn{3}{p{0.95\textwidth}}{\footnotesize Fonte: síntese do grupo a partir da transcrição da entrevista  (entrevista com Osmar Junior); intervalos em segundos.}\\
+\endlastfoot
+181--222; 739--853 & Monitoramento existente e receptividade à consulta pelo ponto físico. & Priorizar QR Code associado à parada e acesso simples; avaliar a compreensão com passageiros.\\
+\hline
+773--795 & Referência aproximada a 1.600 paradas e distinção entre ponto de parada e abrigo. & Não condicionar o cadastro à existência de abrigo; conferir identificação, local e autorização da sinalização. A estimativa oral não valida a contagem importada.\\
+\hline
+861--919; 1135--1163; 2293--2425 & Separação entre informações públicas e internas; sugestão de apresentação e contato com o fornecedor. & Documentar a proposta, solicitar cadastro e condições de integração; manter, no cenário de Mauá, a simulação enquanto o acesso operacional não estiver confirmado.\\
+\hline
+1647--1785 & Discussão de anúncio das paradas e orientação de quem desconhece o percurso. & Considerar legibilidade e identificação de embarque e desembarque na avaliação; anúncio sonoro embarcado permanece fora da entrega atual.\\
+\hline
+2499--2543 & Programação por ordem de serviço e diferenças entre dias úteis, sábados e domingos. & Solicitar calendários e horários por tipo de dia para integração futura; o cenário demonstrativo de Mauá não representa a programação vigente.\\
+\hline
+2583--2679 & Efeitos do trânsito, chuva e alagamentos sobre a operação. & Distinguir horário programado de previsão; explicitar indisponibilidade e atualização dos dados. No cenário de Mauá, Dijkstra com tempos simulados não mede atrasos operacionais.\\
+\end{longtable}
+\endgroup
+
+Também foram levantadas, pelo entrevistador, ideias de relatos de lotação com pontuação e de orientação sonora de paradas. Essas possibilidades integram a exploração inicial de alternativas, mas não foram incorporadas como funcionalidades entregues ou compromissos de implementação. O recorte atual concentra-se no acesso web pelo ponto e no planejamento por destino  (entrevista com Osmar Junior, 112--153 s; 1647--1785 s).
+
+
+A entrevista com o interlocutor documenta receptividade à ideia, informações sobre o contexto operacional e sugestões de encaminhamento, anteriores à avaliação da interface. As capturas do QRCodeAdesivo e do Olho Vivo constituem observações documentais de fluxos específicos, enquanto a cobertura incompleta das fontes públicas é uma constatação técnica do levantamento. A hipótese de que o passageiro desconheça a linha adequada, tenha dificuldade para interpretar muitas opções ou necessite de ajuda em uma baldeação ainda deverá ser investigada com usuários. A familiaridade tratada por Haylett fundamenta essa investigação, sem substituir evidências locais.
+
+O desafio de projeto foi delimitado como: \textit{como ajudar uma pessoa que está no ponto de ônibus a reconhecer alternativas para chegar ao destino, sem precisar conhecer previamente linhas ou a identificação da parada?} A necessidade central é compreender o deslocamento. O QR Code é uma resposta proposta para identificar a origem; a seleção do destino, a comparação de alternativas e as instruções de troca respondem às decisões seguintes.
+
+Para ampliar a escuta, a próxima etapa deverá investigar com passageiros como escolhem o ônibus, reconhecem o sentido e lidam com conexões; com o interlocutor e responsáveis pelo serviço, deverá verificar quais dados existem e quem pode mantê-los. Datas, participantes, perguntas e observações deverão ser registrados com consentimento, distinguindo a fala ou o comportamento observado da interpretação do grupo.
+
+A análise das telas do Cittamobi complementou a entrevista inicial: enquanto a entrevista indicou a existência de monitoramento e consulta por aplicativo em Mauá, as capturas examinadas mostraram busca por destino e planejamento com conexões. O grupo reviu, assim, a interpretação de sua contribuição: essas funcionalidades passaram a compor o fluxo proposto, sem serem apresentadas como diferenciais inéditos. Nesse momento, a hipótese principal passou a ser a utilidade de identificar a parada física por QR Code e iniciar a consulta com esse contexto já definido. Os registros posteriores sobre Santos levaram a examinar a continuidade desse acesso até a seleção do destino. Essa revisão exemplifica o retorno da pesquisa à definição do problema; sua utilidade para os passageiros ainda deverá ser avaliada.
+
+Com esse recorte, a prototipação busca tornar a proposta compreensível e permitir que a comunidade discuta o fluxo, suas limitações e as condições de uso antes de uma implantação real.
+
+Foram produzidos mockups conceituais e implementado o PaP com Django, React, Leaflet e SQLite. O fluxo associa o QR Code à origem, apresenta alternativas e permite escolher o destino e consultar um percurso. As imagens geradas automaticamente documentam a intenção de interface, enquanto o código e os testes documentam a implementação. Favoritos locais apoiam consultas recorrentes; não se desenvolve aplicativo Android nesta etapa.
+
+Durante a etapa de prototipação, o grupo também utilizou o Figma para representar a navegação e discutir a organização inicial das telas. Esse mockup cumpriu uma função intermediária no desenvolvimento da solução. Com a evolução da aplicação Django/React para o protótipo funcional apresentado neste relatório, a própria aplicação passou a constituir a principal referência para revisão da experiência de uso e para as avaliações futuras. O mockup no Figma e as imagens conceituais permanecem como registros da evolução do projeto, e não como representação da versão final da interface.
+
+No levantamento histórico de Mauá, a preparação dos dados compreendeu coleta e preservação das fontes, normalização de identificadores e sequências, importação no banco e geolocalização aproximada dos registros sem coordenadas. Fonte, data, evidências e pendências são mantidas para revisão. Nesse cenário de Mauá, os horários e veículos utilizados na demonstração são mantidos separadamente do cadastro público. A administração controla a ativação, o relógio e a velocidade dessa simulação; a interface do passageiro informa a natureza demonstrativa desses dados.
+
+Na etapa de criar e prototipar, o grupo comparou alternativas de acesso, apresentação e integração. As decisões descritas a seguir resultaram do desenvolvimento e da pesquisa, sem constituírem uma oficina de cocriação com passageiros.
+Quanto ao acesso, priorizou-se o acesso web por QR Code para iniciar a consulta sem instalação. Android permanece uma evolução futura; favoritos locais atendem inicialmente às consultas recorrentes.
+
+Para apoiar a decisão de viagem, manteve-se a consulta das linhas do ponto, mas acrescentou-se o destino como filtro. A intenção é reduzir a exigência de conhecimento prévio, preservando a possibilidade de comparação.
+
+Na apresentação dos percursos, a comparação reúne alternativas relevantes; o mapa de uma linha permanece como detalhamento. A análise dos serviços da SPTrans motivou essa escolha, sem demonstrar superioridade de usabilidade do PaP.
+
+Na demonstração histórica de Mauá, adotaram-se geometrias viárias para tornar o caminho mais interpretável, sem homologação operacional desses percursos. No cenário São Paulo, o PaP utiliza as geometrias dos ônibus cadastradas no GTFS e o serviço de roteamento a pé para as caminhadas.
+
+Diante das lacunas dos dados disponíveis para Mauá, optou-se, naquele cenário, por uma simulação identificada, controlada na administração, para apresentar o fluxo sem tratar horários fictícios como previsões operacionais. No cenário São Paulo, essa dependência de simulação foi superada pelo cadastro GTFS da SPTrans e pela integração com a API Olho Vivo, respeitados os limites de cobertura e disponibilidade.
+
+Os critérios adotados foram acesso inicial simples, clareza para escolher o deslocamento, viabilidade com os dados disponíveis e possibilidade de repetir a demonstração. A manutenção do cadastro, a autorização para sinalização física e a disponibilidade de dados operacionais continuam condicionantes de implantação, e não resultados resolvidos pela escolha tecnológica.
+
+O material registra a passagem da concepção de acesso pelo ponto para mockups visuais e, em seguida, para uma aplicação web interativa. As revisões do cenário de Mauá acrescentaram a organização das alternativas por destino, trajetos sobre ruas, controle administrativo da simulação e favoritos no navegador. A incorporação de fontes públicas e de coordenadas aproximadas naquele cenário levou à separação entre catálogo, inferência geográfica e demonstração. Essas mudanças decorreram de decisões do desenvolvimento e de limitações técnicas identificadas; ainda não são resultados de testes com passageiros.
+
+A~Tabela~\ref{tab:design-thinking} relaciona as bases dessas decisões aos requisitos e à avaliação proposta. A coluna de validação descreve atividades futuras com a comunidade; a implementação existente, por si só, não confirma as hipóteses de uso.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.23\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}}
+\caption{Relação entre observações, necessidades, decisões e validação proposta}\label{tab:design-thinking}\\
+\hline
+Observação ou hipótese & Necessidade interpretada & Solução proposta ou implementada & Forma de validação prevista \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\small Tabela \thetable{} -- continuação}\\
+\hline
+Observação ou hipótese & Necessidade interpretada & Solução proposta ou implementada & Forma de validação prevista \\
+\hline
+\endhead
+\hline\multicolumn{4}{r}{\small Continua na próxima página}\\
+\endfoot
+\hline
+\multicolumn{4}{p{0.95\textwidth}}{\footnotesize Fonte: elaboração do grupo a partir da entrevista inicial, das capturas analisadas e das decisões documentadas do PaP (2026).}\\
+\endlastfoot
+Entrevista registra interesse do interlocutor no acesso pelo ponto; o desconhecimento da parada pelo passageiro permanece hipótese de uso.
+& Iniciar a consulta a partir do local físico.
+& QR Code identifica a origem e abre o navegador; acesso implementado, implantação física pendente.
+& Solicitar consulta sem fornecer nome da parada ou linha; observar conclusão e pedidos de ajuda.\\
+\hline
+Nas capturas do Olho Vivo, a lista por ponto apresenta várias linhas e o mapa mostra uma linha selecionada.
+& Reconhecer quais alternativas atendem ao destino, sem conhecer previamente seus códigos.
+& Filtragem por destino e comparação de alternativas; no cenário São Paulo, planejamento baseado no GTFS.
+& Pedir que o participante escolha uma opção e explique por que ela o leva ao destino.\\
+\hline
+Hipótese de dificuldade para interpretar sentido, percurso e trocas; motivada também pela leitura de Haylett.
+& Compreender onde embarcar, trocar e desembarcar.
+& Etapas e baldeações simuladas em Mauá; no cenário São Paulo, trajetos GTFS e caminhadas calculadas.
+& Solicitar explicação do percurso; registrar erros de sentido e de identificação da troca.\\
+\hline
+Hipótese de repetição de destinos como Casa, Trabalho e Escola.
+& Reutilizar consultas sem limitar destinos novos.
+& Favoritos opcionais no navegador; Android adiado.
+& Salvar e reutilizar um destino, depois escolher outro; observar ações e dificuldades.\\
+\hline
+Levantamento de Mauá constatou lacunas de coordenadas e ausência de integração operacional confirmada.
+& Distinguir informação disponível, aproximada e simulada.
+& Em Mauá, catálogo separado, posições sinalizadas como aproximadas e simulação administrada fora da tela principal.
+& Pedir que o participante identifique a natureza dos dados; com os responsáveis, conferir cadastro e atualização.\\
+\end{longtable}
+\endgroup
+
+\label{sec:conversao}
+A solução final utiliza o cadastro GTFS da SPTrans, importado em índice SQLite separado, e consultas ao Olho Vivo quando há correspondência segura de linha e parada. Essa escolha superou, no cenário de São Paulo, a dependência de reconstruir coordenadas por endereço encontrada no levantamento inicial de Mauá \citep{mbmimportacoes}. O Apêndice~\ref{ap:importacao} concentra a organização dos dados e a reprodução da importação. A busca de endereços e o roteamento a pé complementam o cadastro, sem substituir suas coordenadas ou confundir horários programados com previsões.
+
+\label{sec:implementar-testar}
+Na etapa de implementar e testar, o planejamento no cenário São Paulo começou pela busca por rodadas sobre viagens e horários GTFS, com caminhadas de acesso, transferência e saída. Os custos de processamento observados motivaram a investigação da materialização exaustiva dos percursos. A evolução adotou conexões estruturais reutilizáveis, índices diretos e reversos e composição bidirecional offline, seguida da materialização seletiva de candidatos. A consulta principal passou a recuperar esses candidatos para avaliação temporal, preservando o planejador por rodadas como fallback.
+
+% Ajuste local: manter o parágrafo completo, sem alterar margens ou espaçamento.
+\begin{samepage}
+Essa evolução descreve decisões de projeto e mecanismos implementados, não um ganho global de desempenho já demonstrado. A interrupção por falta de espaço em disco refere-se à arquitetura histórica de 28 de outubro de 2026, posteriormente substituída, no fluxo atual, pela materialização compacta documentada na Seção~\ref{sec:atualizacao-20261101}. O protocolo da Seção~\ref{sec:benchmark-hibrido} permanece proposto para uma comparação futura sob condições equivalentes, em infraestrutura compatível. Os critérios de custo, validação e encerramento estão no Apêndice~\ref{ap:rotas}; os registros de testes de cada versão permanecem no Apêndice~\ref{ap:engenharia}, separados da avaliação com passageiros.
+\par\end{samepage}
+
+% Conteúdo independente para a revisão estilística v2: engenharia_metodologia
+A documentação de engenharia foi organizada retrospectivamente a partir do código existente. A~Tabela~\ref{tab:requisitos-pap} sintetiza comportamentos e qualidades pretendidos, sem constituir uma especificação formal previamente aprovada. A Figura~\ref{fig:arquitetura-pap} apresenta as responsabilidades dos componentes. Diagramas comportamentais e a rastreabilidade detalhada estão no Apêndice~\ref{ap:engenharia}.
+\begin{table}[H]\centering\small
+\caption{Síntese dos requisitos da extensão São Paulo.}\label{tab:requisitos-pap}
+\begin{tabular}{p{1.5cm}p{11.5cm}}\hline
+ID & Comportamento ou qualidade pretendida\\\hline
+RF01 & Identificar o embarque pela localização, pelo QR Code ou pela seleção manual.\\
+RF02 & Consultar partidas e distinguir previsão operacional de horário ou frequência programados.\\
+RF03 & Planejar por destino com caminhada, espera e baldeações, aceitando coordenadas por toque prolongado.\\
+RF04 & Comparar alternativas e abrir a rota ou um trecho no mapa.\\
+RF05 & Salvar, renomear e remover favoritos locais, confirmando a remoção.\\
+RF06 & Cancelar mediante confirmação, desmarcando embarque e destino e preservando os favoritos; retornar à seleção de embarque.\\
+RF07 & Acompanhar posição do ônibus e previsão de embarque compatível com a caminhada, com atualização a cada 15 segundos.\\
+RQ01 & Informar progresso sem perder a seleção ou redefinir o zoom.\\
+RQ02 & Reduzir esforço de interação preservando compreensão e controle.\\\hline
+\end{tabular}\fonte{Síntese do grupo baseada na implementação e nos objetivos de IHC.}
+\end{table}
+
+\begin{figure}[H]
+\centering\resizebox{\textwidth}{!}{\input{diagramas/arquitetura.tex}}
+\caption{Arquitetura híbrida do planejamento no cenário São Paulo.}\label{fig:arquitetura-pap}
+\fonte{Elaboração do grupo; arquitetura concorrente e legibilidade revisadas em 1 nov. 2026.}
+\end{figure}
+
+A interface consome a API do backend e o mapa-base; os favoritos permanecem no navegador. O backend recupera candidatos preparados, valida os percursos a pé e avalia a viabilidade temporal, consultando serviços externos sem transferir credenciais operacionais para a interface. A composição bidirecional pertence ao pré-processamento; a busca por rodadas integra os produtores concorrentes quando habilitada, conforme a atualização de 1 de novembro no Apêndice~\ref{ap:rotas}. As setas resumem dependências lógicas e não descrevem uma topologia de implantação em produção. A integração externa está sujeita a indisponibilidade, que deve ser comunicada sem transformar informações programadas em previsões operacionais.
+
+A verificação técnica abrange importação, preservação das sequências, estimativas por endereço, cálculo de trajetos, API, preferências e fluxos da interface. Em 29 de setembro de 2026, foram executados com sucesso 65 testes Django, dez testes JavaScript e 13 testes de navegador com Playwright, totalizando 88 testes sem falhas. A execução de navegador incluiu a compilação do frontend e utilizou SQLite temporário, sem alterar o banco principal. Foram utilizados os comandos \texttt{python backend/manage.py test transit}, \texttt{npm test} e \texttt{npm run test:e2e}, sobre o código da revisão \texttt{a60f290}. O ambiente utilizou Python 3.14.4, Django 6.0.8 e Node.js 22.22.1; este último difere da versão 24 indicada pelo projeto, embora a compilação e os testes tenham sido concluídos nesse ambiente. Os resultados e comandos estão registrados em \nolinkurl{docs/verificacoes/2026-09-29/README.md}. Esses resultados verificam comportamentos programados, não a precisão das coordenadas ou a utilidade do sistema para passageiros.
+
+O planejamento deve permanecer verificável por cenários de viagem direta, baldeação, conexão perdida, permanência no mesmo veículo e ausência de caminho. A comparação com resultados calculados manualmente e o caso de uma partida posterior com chegada anterior permitem conferir a lógica temporal. Alterações futuras dos dados e do algoritmo exigirão repetição dos casos pertinentes.
+
+Após a entrevista, o grupo recebeu, em 2 de setembro de 2026, uma resposta por e-mail de Osmar sobre bilhetagem e estimativas de desembarque. Esse esclarecimento complementou o levantamento do problema, sem avaliar as telas do protótipo. Em 5 de outubro, as novas tentativas de contato permaneciam sem resposta. Posteriormente, em 2 de novembro de 2026, Osmar manifestou aprovação à concepção do PaP, conforme o Anexo~\ref{an:manifestacao-osmar}, sem documentar teste da implementação. A ampliação da interlocução ocorreu com Thiago Almeida Amorim, da Alameda Solutions, por intermédio de Nathalia Almeida Amorim, com retornos em 21 e 25 de outubro. O protótipo funcional e o relatório constituíram os objetos dessa apreciação; o Figma permanece como registro da prototipação.
+
+O procedimento de consolidação da avaliação externa reuniu o registro de feedback, a lista de melhorias levantadas pelo grupo, as navegações de usuários por ele relatadas e a documentação das versões. O registro contém 26 itens sobre navegação, leitura do mapa, informações de transporte, participação na pesquisa e clareza do relatório. Os critérios qualitativos foram clareza, visibilidade do estado, controle, prevenção de erros e redução de esforço. O grupo confirmou o exame dos itens e a assinatura do parecer. Não há, no acervo consultado, descrição suficiente do canal de envio dos materiais, duração da avaliação ou tarefas executadas por Thiago; esses elementos não são reconstruídos como se houvessem sido registrados.
+
+Para confrontar o retorno com a implementação, foram examinados os comportamentos descritos, os registros de testes, as capturas e os pontos pertinentes do código. Por exemplo, a confirmação do cancelamento foi conferida nos componentes \texttt{SaoPaulo.jsx} e \texttt{CancelTripDialog.jsx}. A atualização de 25 de outubro usa como referências o aplicativo \texttt{85417bc} e o relatório \texttt{c18556c}; os identificadores completos estão no Apêndice~\ref{ap:feedback-alameda}. O commit do primeiro retorno não está identificado. Essa conferência foi realizada para consolidar o relatório e não é atribuída ao avaliador como execução independente de testes.
+
+A análise separa a origem de cada ajuste da apreciação posterior de seu resultado. O registro disponível atribui as propostas ao grupo e às navegações por ele relatadas, e a avaliação favorável a Thiago. Na ausência de uma recomendação individualizada do avaliador, a alteração não é apresentada como tendo sido solicitada por ele. O ciclo documentado reúne identificação de dificuldades, implementação, verificação técnica e apreciação profissional; permanece aberta a avaliação sistemática com passageiros. A seguir, apresenta-se o protocolo previsto para essa continuidade.
+
+A avaliação futura do esforço de interação deverá usar tarefas com origem e destino equivalentes, comparando a entrada contextualizada por QR Code com a indicação manual da origem. O registro deverá separar leitura do código, toques, digitação, retornos, erros de seleção, pedidos de ajuda e tempo de conclusão. Deverá também verificar se o participante reconhece o embarque, o sentido, a caminhada e a baldeação, além de recolher sua percepção de facilidade. Uma redução no número de ações somente será interpretada como favorável quando não prejudicar a conclusão correta e a compreensão. O procedimento é uma proposta de avaliação, ainda não executada, orientada pela relação entre eficácia, eficiência e satisfação \citep{iso924111}.
+
+Uma nova consulta aos responsáveis pelo transporte de Mauá deverá registrar o que o interlocutor compreendeu da proposta, quais aspectos considerou úteis, o que modificaria, sua percepção de viabilidade e limitações, a contribuição do QR Code em relação ao acesso já oferecido pelo Cittamobi e as possibilidades de integração com o fornecedor. Para cada sugestão, o grupo deverá documentar a decisão de incorporá-la, adiá-la ou não adotá-la, com justificativa e indicação da alteração correspondente. Esses itens constituem um roteiro de coleta, não respostas já obtidas. O retorno profissional será analisado separadamente de testes de compreensão realizados com passageiros.
+
+A continuidade proposta prevê apresentação aos responsáveis pelo transporte local e uma avaliação exploratória com passageiros que relatem diferentes graus de familiaridade com os trajetos, sem tratar essa familiaridade como característica fixa de cada pessoa. O protocolo proposto começa pela leitura do QR Code, sem fornecer previamente nomes de pontos ou linhas, e pela indicação de um destino. A identificação da mesma parada no aplicativo existente permitirá comparar ações, tempo, erros de sentido e pedidos de ajuda. Em seguida, o participante deverá comparar uma alternativa direta com outra que contenha baldeação e explicar sua escolha, identificando linha, sentido, local de embarque, eventual troca e desembarque.
+
+A sessão prosseguirá com a alteração do destino, observando a coerência entre lista, mapa e detalhes e a atualização do resultado anterior. Também serão apresentadas uma posição aproximada e uma previsão indisponível, para verificar se são distinguidas de localização validada e ausência de ônibus. Por fim, o participante deverá salvar e reutilizar um favorito e demonstrar como escolher outro destino.
+
+Serão registrados conclusão sem ajuda, tempo por tarefa, erros de interpretação, pedidos de auxílio e compreensão das etapas. Uma breve explicação do percurso pelo participante e uma escala de confiança de 1 a 5 complementarão a observação; essa escala é proposta pelo grupo, não um instrumento validado pela tese. Os resultados serão descritivos, com indicação do número e perfil dos participantes e das limitações da amostra. Confiança elevada não será considerada sucesso quando a interpretação estiver incorreta. A participação deverá ser voluntária e os registros minimizados e apresentados sem identificação pessoal.
+
+Após cada sessão de avaliação, o grupo deverá registrar a versão do protótipo e o cenário utilizado, a tarefa proposta, o comportamento observado, a dificuldade relatada e a interpretação dos responsáveis pela análise. Cada alteração deverá indicar a evidência que a motivou e a tarefa a repetir. Erros que levem à escolha de sentido, embarque ou conexão inadequados terão prioridade sobre ajustes estéticos. Caso a dificuldade esteja na compreensão do problema ou na qualidade dos dados, o processo deverá retornar à escuta e à revisão dos requisitos, em vez de se limitar a modificar a interface.
+
+A entrevista inicial forneceu retorno sobre a ideia, e a apreciação de Thiago acrescentou uma avaliação profissional do aplicativo e do relatório. A manifestação posterior de Osmar, em 2 de novembro de 2026, aprovou a concepção da proposta (Anexo~\ref{an:manifestacao-osmar}). A avaliação funcional com Osmar e os testes sistemáticos com passageiros não estão documentados como realizados. Os resultados dessas etapas futuras deverão ser confrontados com os critérios de Haylett e poderão exigir novas alterações. A precisão das previsões operacionais não foi avaliada por esses procedimentos: simulação de Mauá, testes de software e capturas de consultas ao Olho Vivo. A validação operacional das paradas, dos sentidos e dos itinerários será uma atividade distinta, dependente de cadastro autorizado e conferência pelos responsáveis pelo serviço.

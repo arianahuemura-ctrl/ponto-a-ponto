@@ -79,3 +79,21 @@ class DirectPredictionTests(SimpleTestCase):
             with patch.object(realtime,'line_mapping',return_value={'cl':490}),patch.object(realtime,'stop_mapping',return_value=None),patch.object(realtime.client,'get',return_value={'p':point}):
                 realtime.add_predictions(row,origin)
             self.assertEqual(row['arrivals'],[])
+
+class PassedVehicleTests(SimpleTestCase):
+    def test_next_and_passed_are_separate_and_limit_uses_route_distance(self):
+        from transit.sptrans.tracking import select_passed
+        from transit.sptrans.directions import distance
+        shape=[(0,0),(0,.02)];anchor=(.5,(0,.01))
+        meter=1/distance((0,0),(0,1))
+        vehicles=[{'id':str(m),'lat':0,'lon':.01+m*meter} for m in (-100,100,499,501,800)]
+        result=select_passed(shape,anchor,vehicles)
+        self.assertEqual([v['vehicle']['id'] for v in result],['100','499'])
+        self.assertEqual(select_approach(shape,anchor,vehicles)['vehicle']['id'],'-100')
+        self.assertTrue(all(v['selection']=='passed' and v['geometry']==[] for v in result))
+
+    def test_return_path_and_missing_coordinates_are_not_guessed(self):
+        from transit.sptrans.tracking import select_passed
+        shape=[(0,0),(0,.01),(0,.02),(0,0)]
+        self.assertEqual(select_passed(shape,(1,(0,.01)),[{'id':'x','lat':0,'lon':.011}]),[])
+        self.assertEqual(select_passed(shape,(1,(0,.01)),[{'id':'x'}]),[])

@@ -1,5 +1,6 @@
-"""Pedestrian routes via the FOSSGIS OSRM foot instance (never the car profile)."""
+"""Percursos pedestres pela instância OSRM foot da FOSSGIS, nunca pelo perfil de automóvel."""
 import json
+from mbm import routing_config as config
 import math
 import hashlib
 import os
@@ -13,7 +14,7 @@ from django.core.cache import cache
 from .directions import distance
 
 def reserve_request():
-    """Share the public-provider rate limit between local Django workers."""
+    """Compartilha o limite de requisições do provedor público entre processos Django locais."""
     folder = Path(tempfile.gettempdir()) / f"pap-routing-{getattr(os, 'getuid', lambda: 'local')()}"
     folder.mkdir(mode=0o700, exist_ok=True)
     try:
@@ -28,9 +29,11 @@ def reserve_request():
     except sqlite3.Error:
         return False
 
-MAX_DISTANCE = 5000
-WALK_LIMIT = 1000
-WALK_METERS_PER_MINUTE = 4000 / 60
+MAX_DISTANCE = config.WALK_MAX_DISTANCE_METERS
+WALK_LIMIT = config.WALK_LIMIT_METERS
+WALK_SPEED_KMH = config.WALK_SPEED_KMH
+WALK_METERS_PER_SECOND = WALK_SPEED_KMH / 3.6
+WALK_METERS_PER_MINUTE = WALK_SPEED_KMH * 1000 / 60
 
 
 def route(origin, destination, wait_for_slot=False):
@@ -39,7 +42,7 @@ def route(origin, destination, wait_for_slot=False):
         return {'available':False,'message':'Você já está no ponto de destino.'}
     if distance(a,b)>MAX_DISTANCE:
         return {'available':False,'message':'A consulta de caminhada direta atende destinos a até 5 km em linha reta.'}
-    key = "pap.walk.v2:" + hashlib.sha256(f"{a}:{b}".encode()).hexdigest()
+    key = "pap.walk.v3:" + hashlib.sha256(f"{a}:{b}".encode()).hexdigest()
     cached = cache.get(key)
     if cached is not None: return cached
     try:
@@ -62,7 +65,7 @@ def route(origin, destination, wait_for_slot=False):
         access=distance(a,geometry[0])+distance(b,geometry[-1])
         meters=float(result['distance'])
         if not math.isfinite(meters) or meters<0 or (meters<5 and distance(a,b)>10): raise ValueError()
-        # Same assumed walking speed for all options; snapped access is explicitly separate.
+        # Mesma velocidade de caminhada para todas as opções; os acessos à rede são separados explicitamente.
         result={'available':True,'mode':'walk','geometry':geometry,'distance_meters':round(meters+access),
                 'duration_minutes':round((meters+access)/WALK_METERS_PER_MINUTE,1),'access_meters':round(access),
                 'origin':origin,'destination':destination,'source':'OpenStreetMap / FOSSGIS OSRM a pé'}

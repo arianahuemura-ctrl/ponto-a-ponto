@@ -1,0 +1,391 @@
+{
+  "run": "route",
+  "started": "2026-11-02T14:41:53.776Z",
+  "appCommit": "78e39355ce23aa545c4006978bcc59060f6db24f",
+  "baseURL": "http://127.0.0.1:18082",
+  "transport": "Real application; no mocked or substituted responses",
+  "research": "Declined through UI; no feedback sent",
+  "captures": [
+    {
+      "file": "alternativas.png",
+      "at": "2026-11-02T14:42:26.518Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Real progressive route query from 1211381 to 600012585; consult text log for displayed state.",
+      "sha256": "db70c73a70e267291ac2d02aa9205cd481146c0e922fb74284df806c548c1a04"
+    },
+    {
+      "file": "viagem-completa.png",
+      "at": "2026-11-02T14:42:31.372Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Selected route as calculated by actual application at capture time.",
+      "sha256": "e2f07457258b514a2a8662a83c15df854afbf5424b1cb76ed81209e99c714908"
+    },
+    {
+      "file": "ultimo-trecho.png",
+      "at": "2026-11-02T14:42:36.273Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Last segment of same selected route.",
+      "sha256": "3121c4143b7028e004bd853228c7629f91853110580f92ffba47fc851ef8ba09"
+    },
+    {
+      "file": "confirmacao.png",
+      "at": "2026-11-02T14:42:37.133Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Cancellation confirmation; same journey.",
+      "sha256": "eb57ed8d8e97affc7877341d69c91eb284c69cb51b9d6cbda0a8c527b2069675"
+    }
+  ],
+  "requests": [
+    {
+      "time": "2026-11-02T14:41:54.333Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:41:54.333Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:41:54.355Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?id=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:41:55.540Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:04.370Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/qr/1211381/?format=json",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:04.421Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/qr/1211381/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:05.404Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:05.406Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:05.445Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:10.537Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381&destination=600012585&route_only=1&nearby=1&stream=1&max_transfers=4",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:16.231Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/7002-10-0/?origin=1211381&boarding_index=24&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:16.477Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/403A-10-0/?origin=930008441&boarding_index=50&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:16.697Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/3459-10-1/?origin=200012487&boarding_index=16&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:16.772Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/701A-10-1/?origin=440014677&boarding_index=15&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:16.837Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/4210-10-1/?origin=80014491&boarding_index=6&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.228Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/7002-10-0/?origin=1211381&boarding_index=24&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.416Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/403A-10-0/?origin=930008441&boarding_index=50&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.416Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/4210-10-1/?origin=80014491&boarding_index=6&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.489Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/701A-10-1/?origin=440014677&boarding_index=15&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.564Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/3459-10-1/?origin=200012487&boarding_index=16&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.606Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/4210-10-1/?origin=80014491&boarding_index=6&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.618Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/701A-10-1/?origin=440014677&boarding_index=15&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.621Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/403A-10-0/?origin=930008441&boarding_index=50&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.646Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/7002-10-0/?origin=1211381&boarding_index=24&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:25.646Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/3459-10-1/?origin=200012487&boarding_index=16&min_wait_seconds=0",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:32.703Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/403A-10-0/?origin=930008441&boarding_index=50&min_wait_seconds=8738.587",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:42:36.419Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/403A-10-0/?origin=930008441&boarding_index=50&min_wait_seconds=8733.587",
+      "status": 200
+    }
+  ],
+  "preparedFavorites": [
+    {
+      "id": "680017148",
+      "name": "Av. Eng. Heitor Antônio Eiras Garcia, 434",
+      "address": "Ref.: R Manoel Alonso Esteves/ R Vicente Pelosi",
+      "lat": -23.575243,
+      "lon": -46.740088,
+      "code": "680017148",
+      "directions": [
+        {
+          "bearing": 236,
+          "code": "715M-10",
+          "headsign": "Jd. Maria Luiza",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 243,
+          "code": "775A-10",
+          "headsign": "Pinheiros",
+          "source": "stop_sequence",
+          "approximate": true,
+          "kind": "departure"
+        },
+        {
+          "bearing": 236,
+          "code": "778J-10",
+          "headsign": "Jd. Arpoador",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 243,
+          "code": "8021-10",
+          "headsign": "Butantã",
+          "source": "stop_sequence",
+          "approximate": true,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "Casa"
+    },
+    {
+      "id": "8210184",
+      "name": "R. Tijuco Preto, 1388",
+      "address": "Ref.: Oposto - Rua Apucarana",
+      "lat": -23.542105,
+      "lon": -46.562191,
+      "code": "8210184",
+      "directions": [
+        {
+          "bearing": 258,
+          "code": "3729-10",
+          "headsign": "Shop. Aricanduva",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "UNIVESP Carrão"
+    },
+    {
+      "id": "600012585",
+      "name": "R. Guaiaúna, 419",
+      "address": "Ref.: Rua Doutor Ismael Dias",
+      "lat": -23.530739,
+      "lon": -46.549921,
+      "code": "600012585",
+      "directions": [
+        {
+          "bearing": 307,
+          "code": "2713-10",
+          "headsign": "Chác. Bela Vista",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2726-10",
+          "headsign": "Limoeiro",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2728-10",
+          "headsign": "Jd. Do Castelo",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2755-10",
+          "headsign": "Guaianases",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3206-10",
+          "headsign": "Conj. Chaparral",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3901-10",
+          "headsign": "Jd. Danfer",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "403A-10",
+          "headsign": "Term. Penha",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "N303-11",
+          "headsign": "Term. Aricanduva",
+          "source": "shape",
+          "approximate": false,
+          "kind": "arrival"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "Guaiaúna"
+    }
+  ],
+  "segments": [
+    {
+      "value": "all",
+      "text": "Viagem completa"
+    },
+    {
+      "value": "0",
+      "text": "A → B · 7002-10 · Hosp. Das Clínicas"
+    },
+    {
+      "value": "1",
+      "text": "B → C · 701A-10 · Pq. Edu Chaves"
+    },
+    {
+      "value": "2",
+      "text": "C → D · 4210-10 · Term. Cid. Tiradentes"
+    },
+    {
+      "value": "3",
+      "text": "D → E · 3459-10 · Itaim Paulista"
+    },
+    {
+      "value": "4",
+      "text": "E → Destino · 403A-10 · Term. Penha"
+    }
+  ],
+  "ended": "2026-11-02T14:42:37.144Z"
+}

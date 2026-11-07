@@ -1,0 +1,36 @@
+diff --git a/docs/relatorio_final/relatorio_final_pi2_v2.tex b/docs/relatorio_final/relatorio_final_pi2_v2.tex
+index 4f8c972..bdd2c76 100644
+--- a/docs/relatorio_final/relatorio_final_pi2_v2.tex
++++ b/docs/relatorio_final/relatorio_final_pi2_v2.tex
+@@ -86,6 +86,13 @@
+ \renewcommand{\cftsubsectionfont}{\normalfont}
+ \renewcommand{\cftsubsectionpagefont}{\normalfont}
+ \begin{document}
++% Acabamento: impedir divisão de palavras apenas nos títulos de seções.
++\let\papSecheadstyle\secheadstyle
++\renewcommand{\secheadstyle}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\papSecheadstyle}
++\let\papSubsecheadstyle\subsecheadstyle
++\renewcommand{\subsecheadstyle}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\papSubsecheadstyle}
++\let\papSubsubsecheadstyle\subsubsecheadstyle
++\renewcommand{\subsubsecheadstyle}{\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\papSubsubsecheadstyle}
+ \selectlanguage{brazil}\frenchspacing
+ \imprimircapa
+ \pretextual
+@@ -151,7 +158,7 @@ Este trabalho apresenta o Ponto a Ponto (PaP), aplicação web do Projeto Integr
+ \chapter{Introdução}
+ Para quem está em um ponto de ônibus, decidir como chegar ao destino envolve reconhecer a parada, identificar as linhas e compreender o sentido do percurso e as eventuais trocas. Este trabalho investiga como facilitar essas decisões no transporte público de Mauá, especialmente quando o passageiro não conhece previamente a rede. Desenvolvido no Projeto Integrador em Computação II da UNIVESP, articula conhecimentos de computação e interlocução com a comunidade externa para propor e avaliar uma solução para esse contexto. Os passageiros constituem a comunidade beneficiária; suas dificuldades específicas e os benefícios da proposta ainda deverão ser investigados em testes de uso.
+ 
+-A proposta atual foi delimitada após interação com a comunidade externa, especialmente a entrevista com um interlocutor da gestão do transporte público local, cuja trajetória e participação são apresentadas na Apêndice~\ref{ap:percurso-metodologico}, registrada em arquivo identificado com a data de 20 de agosto de 2026. Segundo seu relato, a cidade já dispunha de rastreamento dos ônibus e consulta por aplicativo; a oportunidade discutida foi facilitar o acesso a essas informações a partir do ponto físico. O interlocutor considerou útil a proposta do QR Code e relatou não conhecer aplicação semelhante em seu contexto de atuação, o que não demonstra ausência em toda a cidade nem ineditismo da solução\footnote{Entrevista não publicada concedida por Osmar Junior a André Meneghelli Vale em conversa remota, identificada no registro como 20 ago. 2026. Transcrição preservada pelo grupo, com duração de 47min41s. Trechos: 181--222 s; 739--853 s. Os localizadores seguintes indicam segundos dessa transcrição.}.
++A proposta atual foi delimitada após interação com a comunidade externa, especialmente a entrevista com um interlocutor da gestão do transporte público local, cuja trajetória e participação são apresentadas no Apêndice~\ref{ap:percurso-metodologico}, registrada em arquivo identificado com a data de 20 de agosto de 2026. Segundo seu relato, a cidade já dispunha de rastreamento dos ônibus e consulta por aplicativo; a oportunidade discutida foi facilitar o acesso a essas informações a partir do ponto físico. O interlocutor considerou útil a proposta do QR Code e relatou não conhecer aplicação semelhante em seu contexto de atuação, o que não demonstra ausência em toda a cidade nem ineditismo da solução\footnote{Entrevista não publicada concedida por Osmar Junior a André Meneghelli Vale em conversa remota, identificada no registro como 20 ago. 2026. Transcrição preservada pelo grupo, com duração de 47min41s. Trechos: 181--222 s; 739--853 s. Os localizadores seguintes indicam segundos dessa transcrição.}.
+ 
+ A escuta do contexto local foi acompanhada de pesquisa bibliográfica e análise de serviços existentes. Esse percurso, organizado pelas etapas do Design Thinking, permitiu revisar o escopo antes da avaliação da solução: a existência de informação operacional não elimina a necessidade de investigar como o passageiro a encontra e a interpreta.
+ 
+@@ -222,7 +229,7 @@ Além de obter informações, uma aplicação de transporte precisa relacionar p
+ 
+ A relevância dessa padronização para o projeto está na possibilidade de integrar registros que descrevam a mesma operação. Ela não garante, por si só, cobertura, atualização ou disponibilidade local. Por isso, o PaP preserva a procedência dos catálogos consultados e trata a integração com um fornecimento GTFS operacional de Mauá como possibilidade futura, sem presumir que as fontes públicas coletadas já constituam esse fornecimento.
+ 
+-Grafos representam paradas e conexões por vértices e arestas. Dijkstra encontra caminhos de menor custo com pesos não negativos; no transporte, a avaliação temporal deve compatibilizar calendários, partidas, espera e transferências \citep{sedgewicksp,dijkstra1959,bast2015,transitplanner}. No demonstrador de Mauá, busca-se a chegada mais cedo com os tempos fornecidos, sem previsão autônoma de atrasos; parâmetros e limites estão na Seção~\ref{sec:implementar-testar}.
++Grafos representam paradas e conexões por vértices e arestas. Dijkstra encontra caminhos de menor custo com pesos não negativos; no transporte, a avaliação temporal deve compatibilizar calendários, partidas, espera e transferências \citep{sedgewicksp,dijkstra1959,bast2015,transitplanner}. No demonstrador de Mauá, busca-se a chegada mais cedo com os tempos fornecidos, sem previsão autônoma de atrasos; parâmetros e limites estão no Apêndice~\ref{sec:implementar-testar}.
+ 
+ O RAPTOR organiza a busca por rodadas associadas às transferências \citep{delling2012}, referência conceitual do planejador inicial do PaP, mantido como alternativa. O CSA utiliza varredura de conexões temporais \citep{dibbelt2018}. No PaP, conexão também designa uma estrutura reutilizável de percurso e não implica adoção do CSA.
+ 

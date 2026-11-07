@@ -1,0 +1,28 @@
+ M docs/relatorio_final/.latexmkrc
+ M docs/relatorio_final/avaliacoes_externas/alameda_solutions/Registro_feedback_Thiago_Alameda_Solutions.docx
+ M docs/relatorio_final/avaliacoes_externas/alameda_solutions/Registro_feedback_Thiago_Alameda_Solutions.pdf
+ M docs/relatorio_final/avaliacoes_externas/alameda_solutions/gerar_feedback_completo.py
+ M docs/relatorio_final/caso_rotas_sobrepostas.tex
+ M docs/relatorio_final/diagramas/arquitetura.tex
+ M docs/relatorio_final/diagramas/casos_uso.tex
+ M docs/relatorio_final/diagramas/estados.tex
+ M docs/relatorio_final/diagramas/fluxo_geral.tex
+ M docs/relatorio_final/diagramas/sequencia.tex
+ M docs/relatorio_final/gerar_pdf_envio.py
+ M docs/relatorio_final/planejador_hibrido.tex
+ M docs/relatorio_final/relatorio_final_pi2_v2.tex
+?? docs/relatorio_final/acabamento-final-2026-10-25/
+?? docs/relatorio_final/auditoria-bibliografia-2026-10-26/
+?? docs/relatorio_final/auditoria-materializacao-2026-10-28/
+?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/comunicacao_thiago.tex
+?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/documento_confirmado_2026-10-26/
+?? docs/relatorio_final/avaliacoes_externas/alameda_solutions/documento_recebido_2026-10-26/
+?? docs/relatorio_final/capturas/2026-10-25-sem-aviso/
+?? docs/relatorio_final/capturas/2026-10-25/
+?? docs/relatorio_final/estudo_cliques.tex
+?? docs/relatorio_final/estudo_cliques_evidencias/
+?? docs/relatorio_final/estudo_ihc_ampliado/
+?? docs/relatorio_final/revisao-consolidacao-2026-10-25/
+?? docs/relatorio_final/revisao-corretiva-final-2026-10-25/
+?? docs/relatorio_final/revisao-corretiva-v8-2026-10-28/
+?? docs/relatorio_final/validacao-final-2026-10-25/

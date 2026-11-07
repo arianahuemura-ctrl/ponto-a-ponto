@@ -1,0 +1,66 @@
+[
+  {
+    "geographic": false,
+    "query": {
+      "origin": "260016857",
+      "destination": "610006081",
+      "max_transfers": 2,
+      "refresh": 1
+    },
+    "total_s": 13.131269489997067,
+    "first_s": 1.283032784005627,
+    "exclusive_s": {
+      "caminhadas": 6.48559525195742,
+      "leitura_conexoes": 0.000735912995878607,
+      "raptor": 6.405221393913962,
+      "rede_sptrans": 0.22784896800294518
+    },
+    "calls": {
+      "caminhadas": 6,
+      "leitura_conexoes": 1,
+      "raptor": 5,
+      "rede_sptrans": 3
+    },
+    "errors": {},
+    "other_s": 0.011867963126860559,
+    "planner": "raptor",
+    "routes": 2,
+    "limited": false,
+    "fallback": "Conexões de até dois ônibus indisponíveis ou sem rotas válidas; usando o planejador por rodadas, inclusive para três ônibus.",
+    "warning": "",
+    "chunks": 7
+  },
+  {
+    "geographic": true,
+    "query": {
+      "origin": "260016857",
+      "destination": "610006081",
+      "max_transfers": 2,
+      "refresh": 1,
+      "from_lat": -23.551843,
+      "from_lon": -46.657399,
+      "to_lat": -23.536581,
+      "to_lon": -46.669077
+    },
+    "total_s": 24.028251234965865,
+    "first_s": 0.0017041069804690778,
+    "exclusive_s": {
+      "caminhadas": 14.897578716976568,
+      "leitura_conexoes": 0.0007064109668135643,
+      "raptor": 9.120296356966719
+    },
+    "calls": {
+      "caminhadas": 13,
+      "leitura_conexoes": 1,
+      "raptor": 6
+    },
+    "errors": {},
+    "other_s": 0.00966975005576387,
+    "planner": "raptor",
+    "routes": 2,
+    "limited": false,
+    "fallback": "Conexões de até dois ônibus indisponíveis ou sem rotas válidas; usando o planejador por rodadas, inclusive para três ônibus.",
+    "warning": "",
+    "chunks": 9
+  }
+]

@@ -1,0 +1,22 @@
+import {test,expect} from '@playwright/test';
+test('estrelas, falha e reabertura mantêm a mesma avaliação sem iniciar pesquisa',async({page,context})=>{
+  const sent=[],telemetry=[];
+  await context.route('**/api/location-config/**',r=>r.fulfill({json:{position:null}}));
+  await context.route('**/api/sptrans/stop-catalogue/**',r=>r.fulfill({status:503,body:''}));
+  await context.route('**/api/sptrans/stops/**',r=>r.fulfill({json:{stops:[]}}));
+  await context.route('https://tile.openstreetmap.org/**',r=>r.abort());
+  await context.route('**/api/research/info/',r=>r.fulfill({json:{csrf:'fixture'}}));
+  await context.route('**/api/usability/',r=>{telemetry.push(r.request());return r.abort();});
+  await context.route('**/api/research/feedback/',r=>{const d=r.request().postDataJSON();sent.push(d);return r.fulfill({status:sent.length===1?503:201,json:sent.length===1?{error:'fixture'}:{receipt:d.id,linked:false}});});
+  await page.goto('/');await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
+  await page.getByRole('button',{name:'Feedback',exact:true}).click();
+  await page.getByRole('radio',{name:'4 estrelas',exact:true}).check();
+  await page.getByRole('button',{name:'Enviar feedback',exact:true}).click();
+  await expect(page.locator('.pap-feedback-dialog [role=alert]')).toBeVisible();
+  await page.getByRole('button',{name:'Fechar feedback',exact:true}).click();
+  await page.getByRole('button',{name:'Feedback',exact:true}).click();
+  await expect(page.getByRole('radio',{name:'4 estrelas',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'Enviar feedback',exact:true}).click();
+  await expect(page.getByText('Obrigado! Seu feedback foi salvo.',{exact:false})).toBeVisible();
+  expect(sent[0]).toEqual(sent[1]);expect(sent[0].rating).toBe(4);expect(sent[0].message).toBe('');expect(sent[0]).not.toHaveProperty('token');expect(telemetry).toHaveLength(0);
+});

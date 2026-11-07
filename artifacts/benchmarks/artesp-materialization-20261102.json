@@ -1,0 +1,460 @@
+{
+  "completed_at": "2026-11-02T01:48:03.319445-03:00",
+  "source": {
+    "verified_by_source": [
+      {
+        "origin": "SPTrans/rail",
+        "destination": "SPTrans/rail",
+        "pairs": 964350,
+        "up_to_300m": 117078
+      },
+      {
+        "origin": "SPTrans/rail",
+        "destination": "ARTESP",
+        "pairs": 135596,
+        "up_to_300m": 15976
+      },
+      {
+        "origin": "ARTESP",
+        "destination": "SPTrans/rail",
+        "pairs": 135596,
+        "up_to_300m": 15976
+      },
+      {
+        "origin": "ARTESP",
+        "destination": "ARTESP",
+        "pairs": 445290,
+        "up_to_300m": 69188
+      }
+    ],
+    "source_url": "https://dadosabertos.artesp.sp.gov.br/dataset/gtfs",
+    "feed_version": "20261007",
+    "artesp_calendar": "20260101–20261231",
+    "git_revision": "34a46f29c2b541af495a0b7c86eb565071b37116",
+    "original_gtfs_sha256": "c8fa1ef430b0e5b5e5ce8d022568ab02603e09ca2d057983486975db435aa4c4",
+    "original_staged_bytes": 94961283072,
+    "original_staged_mtime_ns": 1793525123616762704
+  },
+  "import": {
+    "imported_at": "2026-11-02T04:17:06.325328+00:00",
+    "namespace": "artesp:",
+    "source_base": "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+    "archive": "/home/avale/Projetos/maua_bus_map/artifacts/transport/artesp-20261102/artesp_gtfs.zip",
+    "archive_sha256": "f3fdca9599e512e191f1bb78cebcafab1bac8a458fbdd5c5e71cc2d10d97d45a",
+    "added": {
+      "stops": 25105,
+      "routes": 823,
+      "trips": 86724,
+      "stop_times": 4555603,
+      "frequencies": 0,
+      "calendar": 3,
+      "calendar_dates": 0,
+      "shapes": 1889647
+    },
+    "trips_without_stop_times": 1872,
+    "counts": {
+      "stops": 47379,
+      "routes": 2188,
+      "trips": 88996,
+      "stop_times": 4654731,
+      "frequencies": 40406,
+      "calendar": 9,
+      "calendar_dates": 0,
+      "shapes": 3034590
+    },
+    "limitations": [
+      "ARTESP intermediate times are interpolated",
+      "ARTESP calendar lacks holiday exceptions",
+      "No realtime ARTESP feed imported"
+    ]
+  },
+  "workers": 32,
+  "walks": {
+    "version": 1,
+    "source_gtfs": [
+      "/home/avale/Projetos/maua_bus_map/artifacts/transport/artesp-20261102/network.sqlite3",
+      961331200,
+      1793593050361950914
+    ],
+    "built_at": "2026-11-02T04:21:01.767499+00:00",
+    "network_id": "osrm-6.0.0-foot:6a31c0f21d87a520f5f9c9000020d2c0d46e05a12bed35e1dcc1f0dcdc72da67",
+    "router": "http://127.0.0.1:50162",
+    "profile": "foot",
+    "max_meters": 1000.0,
+    "speed_kmh": 4.5,
+    "max_snap_meters": 20.0,
+    "configuration": {
+      "max_meters": 1000.0,
+      "speed_kmh": 4.5,
+      "max_snap_meters": 20.0,
+      "margin_degrees": 0.025,
+      "osrm_version": "6.0.0"
+    },
+    "geometry_materialized": false,
+    "candidate_pairs": 2916184,
+    "counts": {
+      "over_limit": 1107624,
+      "unreachable": 48358,
+      "unsnappable": 79370,
+      "verified": 1680832
+    },
+    "stops": 47379,
+    "source_graph": "/home/avale/Projetos/maua_bus_map/artifacts/transport/artesp-20261102/network.walking-graph.sqlite3",
+    "seconds": 58.55797329195775,
+    "bytes": 838639616,
+    "database": "/home/avale/Projetos/maua_bus_map/artifacts/transport/artesp-20261102/network.staged-walks.sqlite3"
+  },
+  "stage_zero": {
+    "stage": 0,
+    "complete": true,
+    "origins": 47379,
+    "pairs": 23277832,
+    "routes": 41430344,
+    "build_seconds": 21.454029760265257,
+    "elapsed_seconds": 329.0909205689677,
+    "bytes": 1232592896,
+    "free_bytes": 140787650560,
+    "workers": 32
+  },
+  "stage_zero_walks": {
+    "complete": true,
+    "max_meters": 300,
+    "only_vacancies": true,
+    "walking_routes": 165012,
+    "new_pairs": 5904,
+    "pairs_newly_full": 15625,
+    "by_previous_route_count": {
+      "0": 5904,
+      "1": 80533,
+      "2": 38457,
+      "3": 24493,
+      "4": 15625
+    },
+    "verified_candidates": 218218,
+    "skipped_full_pairs": 53206,
+    "database_bytes": 1266028544,
+    "added_bytes_this_run": 33435648,
+    "free_bytes": 140754206720,
+    "seconds": 2.04533947998425,
+    "integrity": "ok",
+    "geometry": "on_selection"
+  },
+  "stage_one_before_walking_reservations": {
+    "stage": 1,
+    "complete": true,
+    "origins": 47379,
+    "pairs": 338126156,
+    "routes": 1277198296,
+    "build_seconds": 2002.5270955754095,
+    "elapsed_seconds": 504.40803273703204,
+    "bytes": 35695374336,
+    "free_bytes": 106132262912,
+    "workers": 32
+  },
+  "walking_slots": {
+    "reserved_stage_zero_walks": 165012,
+    "transport_alternatives_replaced": 151283,
+    "walking": {
+      "complete": true,
+      "max_meters": 300,
+      "only_vacancies": true,
+      "walking_routes": 165012,
+      "new_pairs": 354,
+      "pairs_newly_full": 154647,
+      "by_previous_route_count": {
+        "0": 354,
+        "1": 794,
+        "2": 8017,
+        "3": 1200,
+        "4": 154647
+      },
+      "verified_candidates": 218218,
+      "skipped_full_pairs": 53206,
+      "database_bytes": 35731607552,
+      "added_bytes_this_run": 33398784,
+      "free_bytes": 106076463104,
+      "seconds": 4.432634502998553,
+      "integrity": "ok",
+      "geometry": "on_selection"
+    },
+    "seconds": 32.37491974502336
+  },
+  "validation_before_walking_reservations": {
+    "integrity": "ok",
+    "sample_origins": [
+      37127,
+      4347,
+      24718,
+      41300,
+      42004,
+      10447,
+      7970,
+      27173,
+      2929,
+      42580,
+      13300,
+      26559,
+      33811,
+      40429,
+      30597,
+      12633,
+      39219,
+      12203,
+      46108,
+      36650,
+      26703,
+      37029,
+      28999,
+      38825,
+      21230,
+      13058,
+      35803,
+      44004,
+      32838,
+      3616,
+      41508,
+      5657
+    ],
+    "sample_pairs": 233369,
+    "sample_routes": 882538,
+    "native_serial_equals_parallel": true,
+    "complete_stages": [
+      0,
+      1
+    ],
+    "bytes": 35698200576,
+    "free_bytes": 106110189568
+  },
+  "final": {
+    "integrity": "full quick_check before slot updates; modified tables and all reserved pairs verified afterwards",
+    "checked_reserved_pairs": 165012,
+    "sample_origins": [
+      5861,
+      9410,
+      10625,
+      10686,
+      12725,
+      40618,
+      40330,
+      8755,
+      3583,
+      34653,
+      16641,
+      34714,
+      44621,
+      46064,
+      33313,
+      7499,
+      11686,
+      29674,
+      12404,
+      21296,
+      42183,
+      32837,
+      11743,
+      20483,
+      21028,
+      29810,
+      22271,
+      29720,
+      13437,
+      15904,
+      34624,
+      7691
+    ],
+    "parallel_matches_serial_with_walking_slots": true,
+    "transport_pairs": 338126156,
+    "transport_alternatives": 1277047013,
+    "walking_alternatives": 165012,
+    "walking_only_new_pairs": 354,
+    "total_covered_pairs": 338126510,
+    "total_alternatives": 1277212025,
+    "database_bytes": 35731607552
+  },
+  "originals": {
+    "source_sha256": "c8fa1ef430b0e5b5e5ce8d022568ab02603e09ca2d057983486975db435aa4c4",
+    "source_unchanged": true,
+    "staged_bytes": 94961283072,
+    "staged_mtime_ns": 1793525123616762704,
+    "staged_unchanged": true
+  },
+  "queries": [
+    {
+      "label": "Maua bus 158 to metro Trianon",
+      "origin": "artesp:64476",
+      "destination": "18859",
+      "query_time": "2026-11-03T08:00:00-03:00",
+      "first_route_seconds": 9.455611082026735,
+      "elapsed_seconds": 9.500979727017693,
+      "journeys": [
+        {
+          "routes": [
+            "artesp:158",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 145.0
+        },
+        {
+          "routes": [
+            "artesp:158",
+            "477A-10"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 240.5
+        },
+        {
+          "routes": [
+            "artesp:158",
+            "478P-10"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 246.6
+        }
+      ]
+    },
+    {
+      "label": "Maua rail to Trianon",
+      "origin": "18935",
+      "destination": "18859",
+      "query_time": "2026-11-03T08:00:00-03:00",
+      "first_route_seconds": 0.47439134505111724,
+      "elapsed_seconds": 0.4856402780278586,
+      "journeys": [
+        {
+          "routes": [
+            "CPTM L10",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 0.3333333333333333,
+          "scheduled_duration_minutes": 68.0
+        },
+        {
+          "routes": [
+            "CPTM L10",
+            "METRÔ L4",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 0.6666666666666666,
+          "scheduled_duration_minutes": 91.0
+        },
+        {
+          "routes": [
+            "CPTM L10",
+            "CPTM L11",
+            "METRÔ L4",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 95.5
+        },
+        {
+          "routes": [
+            "CPTM L10",
+            "METRÔ L1",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 0.6666666666666666,
+          "scheduled_duration_minutes": 97.2
+        },
+        {
+          "routes": [
+            "CPTM L10",
+            "METRÔ L3",
+            "METRÔ L1",
+            "METRÔ L2"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 97.3
+        }
+      ]
+    },
+    {
+      "label": "ARTESP 064 direct",
+      "origin": "artesp:48804",
+      "destination": "artesp:5776",
+      "query_time": "2026-11-03T08:00:00-03:00",
+      "first_route_seconds": 0.3469989870209247,
+      "elapsed_seconds": 0.6910219059791416,
+      "journeys": [
+        {
+          "routes": [
+            "artesp:063EX1",
+            "artesp:063"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 98.5
+        },
+        {
+          "routes": [
+            "artesp:064"
+          ],
+          "transfer_cost": 0.0,
+          "scheduled_duration_minutes": 130.0
+        },
+        {
+          "routes": [
+            "artesp:040",
+            "artesp:063"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 203.5
+        },
+        {
+          "routes": [
+            "artesp:063",
+            "artesp:063"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 203.5
+        },
+        {
+          "routes": [
+            "artesp:040EX1",
+            "artesp:063"
+          ],
+          "transfer_cost": 1.0,
+          "scheduled_duration_minutes": 203.5
+        }
+      ]
+    }
+  ],
+  "query_method": "Production staged_adapter.progressive called locally; scheduled time, not HTTP or observed operations. First case includes cold source load.",
+  "files": {
+    "artesp_gtfs.zip": {
+      "bytes": 46662768
+    },
+    "network.sqlite3": {
+      "bytes": 961331200
+    },
+    "network.staged-walks.sqlite3": {
+      "bytes": 838639616
+    },
+    "network.staged.sqlite3": {
+      "bytes": 35731607552
+    },
+    "query-evidence.json": {
+      "bytes": 1259810,
+      "sha256": "ab1161a816af4346011c133540e8e9e3bb90cc2929a5337bc1208e194951ce0f"
+    }
+  },
+  "directory_bytes": 38802707718,
+  "disk_free_bytes": 106076418048,
+  "reserved_free_gib": 25,
+  "tests": {
+    "passed": 42,
+    "scope": "import, parallel materialization, short walks, existing staged and walking artifacts"
+  },
+  "server_source_changed": false,
+  "limitations": [
+    "ARTESP 2026 calendar; intermediate times interpolated; no holiday exceptions or live predictions.",
+    "1872 source trips have no stop_times and cannot generate ride edges.",
+    "Materialized coverage is structural; schedules are evaluated at query time.",
+    "Cost 1 means one bus/external transfer or up to three internal rail transfers, each costing one third.",
+    "Maximum five alternatives per directed pair, retaining eligible stage-zero walks up to 300 m.",
+    "Walking distances/times verified via local OSRM foot; geometry obtained on selection, not stored in matrix.",
+    "Stage-one elapsed_seconds describes the final resumed run, not total wall time.",
+    "Combined dataset is separate. Existing active catalog and higher-cost materializations were not replaced.",
+    "Does not add the complete municipal Suzantur network."
+  ]
+}

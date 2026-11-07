@@ -56,7 +56,7 @@ class OlhoVivo:
                 cache.set('sptrans:unavailable',str(error),20)
                 raise
             except (OSError, ValueError) as error:
-                # Never expose exception URLs: authentication URLs contain the token.
+                # Nunca exponha URLs de exceções: URLs de autenticação contêm o token.
                 message='SPTrans indisponível no momento. Tente novamente em instantes.'
                 cache.set('sptrans:unavailable',message,20)
                 raise APIError(message) from None

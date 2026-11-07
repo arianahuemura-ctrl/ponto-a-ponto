@@ -1,0 +1,217 @@
+{
+  "run": "static",
+  "started": "2026-11-02T14:38:44.061Z",
+  "appCommit": "78e39355ce23aa545c4006978bcc59060f6db24f",
+  "baseURL": "http://127.0.0.1:18082",
+  "transport": "Real application; no mocked or substituted responses",
+  "research": "Declined through UI; no feedback sent",
+  "captures": [
+    {
+      "file": "pesquisa-inicial.png",
+      "at": "2026-11-02T14:38:44.921Z",
+      "url": "http://127.0.0.1:18082/",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Fresh browser, no previous research choice.",
+      "sha256": "4c03ee2a340b1376626a3ff1630663b4bfdca1d29b2f2a035e7573c6d1bfd1f6"
+    },
+    {
+      "file": "sem-localizacao.png",
+      "at": "2026-11-02T14:38:51.567Z",
+      "url": "http://127.0.0.1:18082/",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Geolocation not authorized.",
+      "sha256": "538dd04a32d80c151b4962c9aca970645ec47912ed27fec83e0b7325dc562596"
+    },
+    {
+      "file": "pesquisa-configuracoes.png",
+      "at": "2026-11-02T14:38:52.400Z",
+      "url": "http://127.0.0.1:18082/",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Research declined, settings opened; no recording.",
+      "sha256": "cea882cb72e14cb55a340263cb0802c748aa894347172e6af3b8d651ed4ed0b8"
+    },
+    {
+      "file": "feedback.png",
+      "at": "2026-11-02T14:38:53.206Z",
+      "url": "http://127.0.0.1:18082/",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Empty feedback form; no rating or message submitted.",
+      "sha256": "899fb5038c85ce2c8f079de83d41ade15a6251f4c49e73c794540a0ae3b282da"
+    },
+    {
+      "file": "localizacao.png",
+      "at": "2026-11-02T14:38:59.461Z",
+      "url": "http://127.0.0.1:18082/?location=-23.561326733117216,-46.65615056649423",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Location simulated at MASP through supported URL parameter.",
+      "sha256": "cf3c3e3fe06cee48651393ad299b8e226402ebece35cf859dd9220d9463b2e1e"
+    },
+    {
+      "file": "alterar-embarque.png",
+      "at": "2026-11-02T14:39:00.317Z",
+      "url": "http://127.0.0.1:18082/?location=-23.561326733117216,-46.65615056649423",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Manual origin selection with simulated MASP location.",
+      "sha256": "1687c3ada2fd2d7bc799c0ba518f4a417c2912aac89397e03bbde95fa5e06283"
+    },
+    {
+      "file": "ferrovia-light.png",
+      "at": "2026-11-02T14:39:06.782Z",
+      "url": "http://127.0.0.1:18082/?location=-23.561326733117216,-46.65615056649423",
+      "viewport": {
+        "width": 1366,
+        "height": 1000
+      },
+      "scale": 2,
+      "note": "Simulated MASP location; lamp on; light theme; current rail labels.",
+      "sha256": "b4d6a0aab8c1e306e72ca3a8c6b7eb9f3b5c6e6605b99b325d478cb02993e846"
+    },
+    {
+      "file": "ferrovia-dark.png",
+      "at": "2026-11-02T14:39:13.292Z",
+      "url": "http://127.0.0.1:18082/?location=-23.561326733117216,-46.65615056649423",
+      "viewport": {
+        "width": 1366,
+        "height": 1000
+      },
+      "scale": 2,
+      "note": "Simulated MASP location; lamp on; dark theme; current rail labels.",
+      "sha256": "2a9103d9be1df792ed354b59692ec03cdd3af46feac7aaf073f63494dbd4234a"
+    }
+  ],
+  "requests": [
+    {
+      "time": "2026-11-02T14:38:45.310Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:45.354Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:45.669Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:46.108Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.550493908708926&lon=-46.63331508636475&south=-23.56343641191082&west=-46.642541885375984&north=-23.537550131111082&east=-46.624088287353516&offset=0&batch_size=200",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:46.446Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.550493908708926&lon=-46.63331508636475&south=-23.56343641191082&west=-46.642541885375984&north=-23.537550131111082&east=-46.624088287353516&offset=200&batch_size=200",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:51.679Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/research/info/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:53.683Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:53.683Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?location=-23.561326733117216%2C-46.65615056649423",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:54.014Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:38:54.555Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.561326733117216&lon=-46.65615056649423&south=-23.565123721828208&west=-46.65862199905822&north=-23.557534740840133&east=-46.653677479896025&offset=0&batch_size=200",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:00.799Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:00.799Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?location=-23.561326733117216%2C-46.65615056649423",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:01.136Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:01.596Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.561326733117216&lon=-46.65615056649423&south=-23.563653325114583&west=-46.66065546576384&north=-23.5590040184374&east=-46.65164710059872&offset=0&batch_size=200",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:07.261Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:07.302Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?location=-23.561326733117216%2C-46.65615056649423",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:07.624Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:08.085Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?lat=-23.561326733117216&lon=-46.65615056649423&south=-23.563653325114583&west=-46.66065546576384&north=-23.5590040184374&east=-46.65164710059872&offset=0&batch_size=200",
+      "status": 200
+    }
+  ],
+  "ended": "2026-11-02T14:39:13.297Z"
+}

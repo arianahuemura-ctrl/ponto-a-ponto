@@ -1,0 +1,19 @@
+{
+  "stops": 22274,
+  "directed_pairs": 496108802,
+  "histogram_routes_per_pair": [
+    1657654,
+    15078,
+    19879,
+    11646,
+    13291,
+    494391254
+  ],
+  "covered_pairs": 494451148,
+  "missing_pairs": 1657654,
+  "routes": 2472099208,
+  "workers": 32,
+  "wall_seconds": 27.55049279902596,
+  "rows_scanned": 573074566,
+  "scope": "Exhaustive counts; batch throughput is NOT time to first journey"
+}

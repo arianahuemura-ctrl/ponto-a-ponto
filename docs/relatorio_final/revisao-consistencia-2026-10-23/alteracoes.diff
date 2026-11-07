@@ -1,0 +1,185 @@
+--- antes/diagramas/arquitetura.tex
++++ depois/diagramas/arquitetura.tex
+@@ -1,7 +1,7 @@
+ \begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
+ box/.style={draw,rounded corners,align=center,text width=5cm,minimum height=.85cm,fill=white},arr/.style={->,thick}]
+-\draw[rounded corners,fill=blue!4] (-2.9,.7) rectangle (2.9,-10.7);
+-\draw[rounded corners,fill=green!4] (3.7,.7) rectangle (9.5,-10.7);
++\draw[rounded corners,fill=blue!4] (-2.9,.7) rectangle (2.9,-7.3);
++\draw[rounded corners,fill=green!4] (3.7,.7) rectangle (9.5,-10.2);
+ \node[font=\bfseries] at (0,.3) {PREPARAÇÃO OFFLINE};
+ \node[font=\bfseries] at (6.6,.3) {CONSULTA ONLINE};
+ \node[box] (fonte) at (0,-.7) {GTFS SPTrans e OSM/OSRM};
+@@ -9,17 +9,21 @@
+ \node[box] (comp) at (0,-3.7) {Componentes reutilizáveis\\Índices diretos e reversos};
+ \node[box] (bi) at (0,-5.2) {Composição bidirecional\\Um, dois ou três ônibus};
+ \node[box] (mat) at (0,-6.7) {Candidatos materializados};
+-\node[align=center,text width=5cm] at (0,-8.5) {Artefatos vinculados às fontes e parâmetros.\\Preparação separada de cada consulta.};
+ \node[box] (entrada) at (6.6,-.7) {Origem, destino e instante\\React/Leaflet $\leftrightarrow$ Django};
+ \node[box] (rec) at (6.6,-2.2) {Recuperar candidatos compatíveis};
+-\node[box] (av) at (6.6,-3.7) {Validar caminhadas e horários\\Refinar se houver dados operacionais};
+-\node[box,fill=orange!10] (cond) at (6.6,-5.4) {Sem contexto utilizável ou\\sem alternativa válida ao final?};
+-\node[box,fill=orange!6] (fallback) at (6.6,-7.3) {Fallback por rodadas\\quando habilitado};
+-\node[box] (res) at (6.6,-9.7) {Alternativas progressivas\\Identificação do produtor};
+-\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/av,av/cond}{\draw[arr] (\a)--(\b);}
++
++\node[box,fill=orange!10] (ctx) at (6.6,-3.6) {Contexto utilizável?};
++\node[box] (av) at (6.6,-5.1) {Validar caminhadas; avaliar tempos\\Refinar com dados operacionais};
++\node[box,fill=orange!10] (cond) at (6.6,-6.7) {Há alternativa válida ao final?};
++\node[box,fill=orange!6] (fallback) at (0,-9) {Fallback por rodadas\\somente quando permitido};
++\node[box] (res) at (6.6,-9) {Alternativas progressivas\\Identificação do produtor};
++\foreach \a/\b in {fonte/grafo,grafo/comp,comp/bi,bi/mat,entrada/rec,rec/ctx,av/cond}{\draw[arr] (\a)--(\b);}
+ \draw[arr] (mat.east)--(3.3,-6.7)--(3.3,-2.2)--(rec.west);
+-\draw[arr] (cond)--node[right]{sim}(fallback);
++\draw[arr] (ctx)--node[right]{sim}(av);
++\draw[arr] (ctx.east)--(10,-3.6)--(10,-8.3)--(-2.7,-8.3)--(-2.7,-9)--(fallback.west);
++\node[fill=white,font=\scriptsize,rotate=90] at (10,-5.2) {não: fallback antecipado};
++\draw[arr] (cond.south)--(6.6,-7.9)--node[above,font=\scriptsize]{não: fallback posterior}(0,-7.9)--(fallback.north);
++\draw[arr] (cond.east)--(9.2,-6.7)--node[right]{sim}(9.2,-9)--(res.east);
+ \draw[arr] (fallback)--(res);
+-\draw[arr] (cond.east)--(9.9,-5.4)--node[right]{não}(9.9,-9.7)--(res.east);
+-\node[align=center,text width=12cm,font=\scriptsize] at (3.5,-11.3) {O caminho principal pode publicar alternativas antes de terminar.\\Uma alternativa válida não aciona o fallback apenas para completar a lista.};
++\node[align=center,text width=12cm,font=\scriptsize] at (3.5,-11.5) {O fallback pertence à consulta online; os dois desvios convergem para o mesmo mecanismo.\\Não há execução paralela nem fallback apenas para completar uma lista válida.\\Caminhada direta validada inferior a 1 km dispensa o fallback por rodadas.\\O caminho principal publica resultados durante a avaliação, antes de concluir.};
+ \end{tikzpicture}
+--- antes/diagramas/fluxo_geral.tex
++++ depois/diagramas/fluxo_geral.tex
+@@ -1,31 +1,35 @@
+-\begin{tikzpicture}[>=Stealth,font=\fontsize{9}{11}\selectfont,
+-box/.style={draw,rounded corners,align=center,text width=4.8cm,minimum height=.9cm,fill=black!3},
+-arr/.style={->,thick},lab/.style={font=\fontsize{8}{10}\selectfont,fill=white,align=center}]
+-\node[box] (qr) at (0,0) {Acessar por QR Code\\ou link direto do ponto};
+-\node[box] (manual) at (7,0) {Selecionar embarque no mapa:\\clicar em ponto ou usar\\toque prolongado em um local};
+-\node[box,fill=blue!5] (times) at (0,-1.9) {Abrir os próximos ônibus\\do ponto identificado};
+-\node[box,fill=green!5] (stay) at (7,-1.9) {Definir embarque e\\permanecer no mapa\\para escolher o destino};
+-\draw[arr] (qr)--(times);
+-\draw[arr] (manual)--(stay);
+-\node[box,text width=5.4cm] (dest) at (3.5,-4.2) {Selecionar destino:\\clique em ponto, toque prolongado,\\busca ou favorito};
+-\draw[thick] (times.south)--(0,-3.1)--(3.5,-3.1);
+-\node[lab,fill=none,anchor=east] at (-0.15,-2.95) {se desejar\\planejar viagem};
+-\draw[arr] (3.5,-3.1)--(dest.north);
+-\draw[thick] (stay.south)--(7,-3.1)--(3.5,-3.1);
+-\node[box,text width=5.4cm] (calc) at (3.5,-6) {Abrir a lista de rotas e calcular\\alternativas progressivamente};
+-\draw[arr] (dest)--node[lab,right]{destino definido}(calc);
+-\node[box,text width=2.4cm] (fail) at (-1.3,-6) {Sem alternativa\\ou falha:\\revisar consulta};
+-\draw[arr] (calc.west)--(fail.east);
+-\draw[arr] (fail.west)--(-2.9,-6)--(-2.9,-4.2)--(dest.west);
+-\node[box,text width=5.4cm] (choice) at (3.5,-7.7) {Comparar e selecionar rota};
++\begin{tikzpicture}[>=Stealth,font=\fontsize{8}{10}\selectfont,
++box/.style={draw,rounded corners,align=center,text width=3.6cm,minimum height=.8cm,fill=black!3},arr/.style={->,thick},lab/.style={font=\scriptsize,fill=white,align=center}]
++\node[box] (qr) at (0,0) {QR Code ou link do ponto};
++\node[box] (manual) at (4.3,0) {Selecionar embarque no mapa\\(ponto ou toque prolongado)};
++\node[box] (gps) at (8.6,0) {Geolocalização disponível\\sem embarque manual ou QR};
++\node[box,fill=blue!5] (times) at (0,-1.4) {Abrir próximos ônibus\\do ponto identificado};
++\node[box] (stay) at (4.3,-1.4) {Definir embarque;\\permanecer no mapa};
++\node[box] (auto) at (8.6,-1.4) {Usar localização como origem};
++\foreach \a/\b in {qr/times,manual/stay,gps/auto}{\draw[arr] (\a)--(\b);}
++\node[box,text width=5cm] (check) at (4.3,-3.2) {Ao escolher destino no mapa:\\origem disponível?};
++\draw[arr] (times.south)--(0,-2.4)--node[lab,above]{se desejar planejar}(4.3,-2.4)--(check.north);
++\draw[thick] (stay)--(4.3,-2.4);
++\draw[thick] (auto.south)--(8.6,-2.4)--(4.3,-2.4);
++\node[box,text width=2.9cm] (missing) at (-.6,-3.2) {Não: alertar e solicitar embarque};
++\draw[arr] (check)--(missing);
++\draw[arr] (missing.west)--(-2.5,-3.2)--(-2.5,.7)--(4.3,.7)--(manual.north);
++\node[box,text width=5cm] (dest) at (4.3,-4.6) {Sim: definir destino\\ponto, toque prolongado, busca ou favorito};
++\draw[arr] (check)--(dest);
++\node[box,text width=5cm] (calc) at (4.3,-6) {Abrir lista de rotas;\\calcular alternativas progressivamente};
++\draw[arr] (dest)--(calc);
++\node[box,text width=2.5cm] (fail) at (-.6,-6) {Sem alternativa ou falha:\\revisar consulta};
++\draw[arr] (calc)--(fail);
++\draw[arr] (fail.north)--(-.6,-4.6)--(dest.west);
++\node[box,text width=5cm] (choice) at (4.3,-7.4) {Comparar e selecionar rota};
++\node[box,text width=5cm] (map) at (4.3,-8.8) {Ver viagem ou trecho no mapa};
+ \draw[arr] (calc)--(choice);
+-\node[box,text width=5.4cm] (map) at (3.5,-9.3) {Ver viagem completa ou\\trecho no mapa};
+-\draw[arr] (choice)--(map);
+-\draw[arr] (map.east)--(8.7,-9.3)--node[lab,right]{reabrir\\lista}(8.7,-7.7)--(choice.east);
+-\node[box,text width=5.4cm] (cancel) at (3.5,-10.9) {Cancelar viagem?\\Confirmar para encerrar};
++\draw[arr] (choice)--node[lab,right]{fechar painel / ver mapa}(map);
++\draw[arr] (map.east)--(8,-8.8)--node[lab,right]{reabrir lista}(8,-7.4)--(choice.east);
++\node[box,text width=5cm] (cancel) at (4.3,-10.3) {Solicitar cancelamento\\e confirmar?};
+ \draw[arr] (map)--(cancel);
+-\draw[arr] (cancel.west)--(-1,-10.9)--node[lab,left]{não}(-1,-9.3)--(map.west);
+-\node[box,text width=5.4cm] (end) at (3.5,-12.5) {Iniciar nova viagem\\(embarque e destino desmarcados)};
+-\draw[arr] (cancel)--node[lab,right]{sim}(end);
+-\node[align=center,font=\fontsize{8}{10}\selectfont,text width=12cm] at (3.5,-14.3) {Ícones de embarque e destino piscam enquanto seus dados estão pendentes.\\O planejamento exige embarque selecionado ou geolocalização como origem,\\além de destino definido. Com localização conhecida, iniciar pela seleção de destino.\\Próximos ônibus: previsões quando disponíveis; caso contrário,\\horários ou frequências programados.};
++\draw[arr] (cancel.west)--(.7,-10.3)--node[lab,left]{não: continuar\\sem cancelar}(.7,-8.8)--(map.west);
++\node[box,text width=5cm] (end) at (4.3,-11.8) {Sim: desmarcar embarque e destino;\\preservar favoritos e enquadramento};
++\draw[arr] (cancel)--(end);
++\node[align=center,font=\scriptsize,text width=12cm] at (4.3,-13.3) {Ícones de embarque e destino piscam enquanto seus dados estão pendentes.\\Favorito de destino sem origem: guardar destino pendente e solicitar embarque.\\Fechar o painel não cancela a viagem; desistir mantém a visualização anterior.\\Próximos ônibus: previsão disponível ou programação.};
+ \end{tikzpicture}
+--- antes/diagramas/sequencia.tex
++++ depois/diagramas/sequencia.tex
+@@ -1,21 +1,26 @@
+-\begin{tikzpicture}[>=Stealth,font=\footnotesize,msg/.style={fill=white,align=center,font=\scriptsize},seqbox/.style={draw,fill=white,align=center,text width=5.2cm,font=\scriptsize}]
+-\foreach \x/\name in {0/Interface,4.5/Backend,9.3/Artefatos e serviços}{\node[draw,align=center,text width=2.6cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-14);}
+-\draw[->] (0,-1)--node[msg,above]{1. Solicitar alternativas: origem e destino}(4.5,-1);
+-\draw[->] (4.5,-2)--node[msg,above]{2. Recuperar candidatos materializados}(9.3,-2);
+-\draw[->,dashed] (9.3,-2.8)--node[msg,above]{Candidatos / ausência ou incompatibilidade}(4.5,-2.8);
+-\draw (2.1,-3.3) rectangle (10.9,-10.5);
+-\node[msg,anchor=west] at (2.2,-3.3) {\textbf{opt} [contexto materializado utilizável]};
+-\draw[->] (4.5,-4.2)--node[msg,above]{3. Validar caminhadas candidatas}(9.3,-4.2);
+-\draw[->,dashed] (9.3,-5)--node[msg,above]{Percursos verificados / falha}(4.5,-5);
+-\node[seqbox] at (4.5,-6) {4. Avaliação temporal\\dos candidatos válidos};
+-\draw[->] (4.5,-7.1)--node[msg,above]{5. Consultar dados operacionais disponíveis}(9.3,-7.1);
+-\draw[->,dashed] (9.3,-7.9)--node[msg,above]{Previsão compatível / indisponibilidade}(4.5,-7.9);
+-\node[seqbox] at (4.5,-8.8) {Refinar se disponível;\\senão, manter programação};
+-\draw[->,dashed] (4.5,-10)--node[msg,above]{6. Alternativas progressivas (NDJSON)}(0,-10);
+-\node[msg,text width=3cm] at (9.1,-9.7) {Repetir dentro\\dos limites};
+-\draw (2.1,-10.8) rectangle (10.9,-13);
+-\node[msg,text width=8.2cm,anchor=north] at (6.5,-10.8) {\textbf{opt} [contexto inutilizável ou nenhuma rota válida ao final; habilitado]};
+-\node[seqbox] at (4.5,-12) {Planejador por rodadas};
+-\draw[->,dashed] (4.5,-12.7)--node[msg,above]{Alternativas do fallback (NDJSON)}(0,-12.7);
+-\node[msg,text width=10cm] at (4.8,-14.4) {A interface permite selecionar uma rota durante o retorno progressivo.\\Resultados válidos, mesmo limitados, não acionam fallback para completar a lista.\\Os mecanismos principal e alternativo não são executados simultaneamente.};
++\begin{tikzpicture}[>=Stealth,font=\scriptsize,msg/.style={fill=white,align=center,font=\scriptsize},seqbox/.style={draw,fill=white,align=center,text width=3.2cm,font=\scriptsize}]
++\foreach \x/\name in {0/Interface React,3/Backend Django,6/Bancos materializados,9/Serviço pedestre,12/API Olho Vivo}{\node[draw,align=center,text width=2cm] at (\x,0) {\name};\draw[dashed] (\x,-.5)--(\x,-14);}
++\draw[->] (0,-1)--node[msg,above]{Solicitar alternativas}(3,-1);
++\draw[->] (3,-1.8)--node[msg,above]{Recuperar candidatos}(6,-1.8);
++\draw[->,dashed] (6,-2.5)--node[msg,above]{Contexto / indisponibilidade}(3,-2.5);
++\draw (-1.1,-3) rectangle (13.1,-9.4);
++\node[msg,anchor=west] at (-1,-3) {\textbf{alt} [contexto utilizável]};
++\draw[->] (3,-3.9)--node[msg,above]{Validar caminhadas dos candidatos}(9,-3.9);
++\draw[->,dashed] (9,-4.6)--node[msg,above]{Percursos verificados / falha}(3,-4.6);
++\node[seqbox] at (3,-5.3) {Avaliar tempos dos candidatos válidos};
++\draw[->] (3,-6.2)--node[msg,above]{Refinamento operacional, quando disponível}(12,-6.2);
++\draw[->,dashed] (12,-6.9)--node[msg,above]{Previsões compatíveis; senão, manter programação}(3,-6.9);
++\draw[->,dashed] (3,-7.7)--node[msg,above]{NDJSON progressivo}(0,-7.7);
++\node[msg,text width=6cm] at (8,-7.5) {Repetir avaliação e publicação dentro dos limites.\\Registrar se restaram alternativas válidas.};
++\draw[dashed] (-1.1,-8.2)--(13.1,-8.2);
++\node[msg,anchor=west] at (-1,-8.2) {[contexto indisponível ou incompatível]};
++\node[seqbox] at (3,-8.9) {Marcar fallback antecipado};
++\draw (-1.1,-9.8) rectangle (13.1,-13.2);
++\node[msg,anchor=west] at (-1,-9.8) {\textbf{alt} [fallback antecipado OU término sem alternativas válidas; rodadas permitidas]};
++\node[seqbox] at (3,-10.6) {Executar planejador por rodadas};
++\draw[->,dashed] (3,-11.4)--node[msg,above]{NDJSON do fallback}(0,-11.4);
++\draw[dashed] (-1.1,-11.9)--(13.1,-11.9);
++\node[msg,anchor=west] at (-1,-11.9) {[há alternativas válidas OU rodadas dispensadas]};
++\node[msg,text width=9cm] at (6,-12.6) {Concluir sem executar o planejador por rodadas.};
++\node[msg,text width=13cm] at (6,-14.2) {Os caminhos são condicionais, sem execução simultânea dos planejadores.\\Uma lista válida não provoca fallback para completar resultados. Caminhada direta validada\\inferior a 1 km dispensa rodadas. A avaliação temporal incorpora o refinamento operacional.};
+ \end{tikzpicture}
+--- antes/diagramas/estados.tex
++++ depois/diagramas/estados.tex
+@@ -13,9 +13,11 @@
+ \draw[arr] (b)--node[lab,right]{selecionar destino}(c);
+ \draw[arr] (c)--node[lab,right]{destino definido}(e);
+ \draw[arr] (e)--node[lab,right]{selecionar rota}(f);
+-\draw[arr] (f.west)--(-2.6,-8)--node[lab,left]{horários}(-2.6,-6)--(e.west);
++\draw[arr] (f.west)--(-2.6,-8)--node[lab,left]{reabrir lista}(-2.6,-6)--(e.west);
+ \draw[arr] (f.south)--(0,-9.1)--node[lab,below]{cancelar viagem}(6.5,-9.1)--(conf.south);
+ \draw[arr] (conf.west)--node[lab,above]{continuar viagem}(f.east);
+ \draw[arr] (conf.east)--(9,-8)--node[lab,rotate=90,above]{confirmar: desmarcar embarque e destino}(9,.85)--(0,.85)--(a.north);
+-\node[align=center,text width=11.7cm,font=\scriptsize] at (2.5,-10.6) {A confirmação também pode ser aberta na lista. Continuar mantém a visualização anterior;\\confirmar preserva os favoritos e o enquadramento do mapa.};
++\draw[arr] (c.west)--(-4.6,-4)--node[lab,rotate=90,above]{sem origem: solicitar embarque}(-4.6,0)--(a.west);
++\draw[arr] ([yshift=-6pt]f.west)--(-5.7,-8.21)--node[lab,rotate=90,above]{alterar embarque: preservar destino}(-5.7,0)--(a.west);
++\node[align=center,text width=11.7cm,font=\scriptsize] at (1.5,-11.1) {A confirmação também pode ser aberta na lista. Continuar mantém a visualização anterior;\\confirmar preserva os favoritos e o enquadramento do mapa.};
+ \end{tikzpicture}
+--- antes/relatorio_final_pi2_v2.tex
++++ depois/relatorio_final_pi2_v2.tex
+@@ -653,7 +653,7 @@
+ % Conteúdo independente da versão v2: solução visual e fluxograma.
+ A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. O acesso por QR Code ou link direto atende à consulta dos próximos ônibus de um ponto já identificado. No mapa, clicar em um ponto durante a seleção de embarque define a origem e mantém o mapa aberto para escolher o destino; clicar durante a seleção de destino abre as alternativas de viagem. O toque prolongado em outro local segue a mesma distinção entre origem e destino. Esses comportamentos atendem a objetivos diferentes, sem obrigar a consulta de partidas antes de planejar uma viagem. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
+ 
+-Os ícones de embarque e destino piscam suavemente enquanto os respectivos locais não foram definidos, sinalizando os dados pendentes sem alterar a área de toque dos controles. A animação é desativada quando o dispositivo solicita redução de movimento. O início do planejamento depende de uma origem disponível: um embarque selecionado, inclusive por QR Code ou link, ou a geolocalização utilizada como origem. Ao tentar selecionar o destino no mapa sem embarque definido nem geolocalização disponível, o PaP exibe o alerta: ``Selecione o local de embarque antes de escolher o destino. Sua localização não está disponível. Após fechar o alerta, a interface retorna à seleção do embarque. O cálculo das alternativas também requer um destino definido.
++Os ícones de embarque e destino piscam suavemente enquanto os respectivos locais não foram definidos, sinalizando os dados pendentes sem alterar a área de toque dos controles. A animação é desativada quando o dispositivo solicita redução de movimento. O início do planejamento depende de uma origem disponível: um embarque selecionado, inclusive por QR Code ou link, ou a geolocalização utilizada como origem. Ao tentar selecionar o destino no mapa sem embarque definido nem geolocalização disponível, o PaP exibe o alerta: ``Selecione o local de embarque antes de escolher o destino. Sua localização não está disponível.'' Após fechar o alerta, a interface retorna à seleção do embarque. O cálculo das alternativas também requer um destino definido.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/fluxo_geral.tex}

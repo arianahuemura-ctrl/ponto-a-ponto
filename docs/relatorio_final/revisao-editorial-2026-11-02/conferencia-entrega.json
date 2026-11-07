@@ -1,0 +1,15 @@
+{
+  "pdf_hashes_verified": true,
+  "preserved_input_files": 1189,
+  "allowed_changed_files": [
+    "docs/relatorio_final/README.md",
+    "docs/relatorio_final/relatorio_final_pi2_v2.tex",
+    "docs/relatorio_final/revisao-tecnico-cientifica-2026-11-02/notas-historicas.tex"
+  ],
+  "links_valid": true,
+  "git_branch_and_head_preserved": true,
+  "git_diff_check": 0,
+  "untracked_tex_whitespace_diagnostics": [],
+  "untracked_noindex_status": 1,
+  "noindex_status_explanation": "1 indicates differing files; no whitespace errors"
+}

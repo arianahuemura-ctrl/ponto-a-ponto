@@ -1,0 +1,37 @@
+{
+  "serial_replay_origins": 477,
+  "coverage_validation": "ok",
+  "complete_stages": [
+    0,
+    1
+  ],
+  "coverage": [
+    [
+      0,
+      22274,
+      13540228,
+      24195933
+    ],
+    [
+      1,
+      22274,
+      174727157,
+      684725998
+    ]
+  ],
+  "pairs": 174727157,
+  "invalid_route_counts": 0,
+  "all_direct_pairs_present": true,
+  "sampled_origins": 477,
+  "sampled_routes": 6787,
+  "sample_cost_units": {
+    "0": 92,
+    "3": 6047,
+    "1": 135,
+    "2": 513
+  },
+  "database_bytes": 18968801280,
+  "walking_bytes": 475631616,
+  "free_bytes": 224812339200,
+  "validation_seconds": 77.64017825596966
+}

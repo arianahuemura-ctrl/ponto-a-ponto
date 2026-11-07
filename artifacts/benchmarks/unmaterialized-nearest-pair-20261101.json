@@ -1,0 +1,25 @@
+{
+  "distance_meters": 2.4992830932194527,
+  "distance_type": "great_circle_straight_line",
+  "origin": {
+    "index": 10564,
+    "stop_id": "460008313",
+    "name": "Terminal Cptm José Bonifácio Pl 1",
+    "lat": -23.539618,
+    "lon": -46.431353
+  },
+  "destination": {
+    "index": 10684,
+    "stop_id": "4614906",
+    "name": "Terminal Cptm José Bonifácio Pl 1",
+    "lat": -23.539631,
+    "lon": -46.431373
+  },
+  "reverse_has_materialization": true,
+  "spatial_chord_radius_meters": 25,
+  "candidate_unordered_pairs_in_radius": 4145,
+  "shorter_unordered_pairs_checked": 27,
+  "sql_lookups": 165,
+  "stops": 22274,
+  "elapsed_seconds": 0.5880984850227833
+}

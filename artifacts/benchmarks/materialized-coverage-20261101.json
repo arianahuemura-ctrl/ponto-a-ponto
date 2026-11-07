@@ -1,0 +1,19 @@
+{
+  "stops": 22274,
+  "directed_pairs": 496108802,
+  "covered_pairs": 494451148,
+  "coverage_percent": 99.66586885914595,
+  "missing_pairs": 1657654,
+  "no_boarding_stops": 50,
+  "no_alighting_stops": 9,
+  "endpoint_blocked_before_walks": 1313657,
+  "endpoint_blocked_filled_by_walks": 213,
+  "endpoint_blocked_remaining": 1313444,
+  "other_missing_pairs": 344210,
+  "topup_complete_units": 12,
+  "short_walk_complete": true,
+  "inaccessible_example": {
+    "origin": "1114089",
+    "destination": "100014307"
+  }
+}

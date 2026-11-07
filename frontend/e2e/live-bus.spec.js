@@ -1,5 +1,5 @@
-import {test,expect} from '@playwright/test';
-for(const width of [390,1366]) test(`ônibus atualiza em 15s sem recalcular nem mover mapa em ${width}px`,async({page})=>{
+import {test,expect} from './coverage.js';
+for(const width of [390,1366]) test(`ônibus atualiza em 5s sem recalcular nem mover mapa em ${width}px`,async({page})=>{
   await page.setViewportSize({width,height:844});
   const origin={id:'1',name:'Origem',lat:-23.55,lon:-46.64},destination={id:'2',name:'Destino',lat:-23.55,lon:-46.63};
   const journey={id:'J',duration_minutes:20,transfers:0,walking_meters:0,walking_minutes:0,arrival:new Date().toISOString(),walks:[{accessType:'boarding',duration_minutes:13.5,distance_meters:900}],legs:[{trip_id:'T',code:'1000-10',headsign:'Destino',origin,destination,boarding_index:1,geometry:[[-23.55,-46.64],[-23.55,-46.63]],departure:new Date().toISOString()}]};
@@ -24,7 +24,7 @@ for(const width of [390,1366]) test(`ônibus atualiza em 15s sem recalcular nem 
   expect(await page.locator('.leaflet-busApproach-pane').evaluate(el=>getComputedStyle(el).zIndex)).toBe('390');
   const before=await page.locator('.sp-live-bus').getAttribute('style'),center=await page.locator('.leaflet-map-pane').getAttribute('style');
   const initial=positions, searches=boards;
-  await expect.poll(()=>positions,{timeout:18000}).toBeGreaterThan(initial);
+  await expect.poll(()=>positions,{timeout:7000}).toBeGreaterThan(initial);
   expect(await page.locator('.sp-live-bus').getAttribute('style')).not.toBe(before);
   expect(await page.locator('.leaflet-map-pane').getAttribute('style')).toBe(center);
   expect(boards).toBe(searches);

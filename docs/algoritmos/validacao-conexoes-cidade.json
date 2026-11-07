@@ -1,0 +1,1753 @@
+{
+  "version": 1,
+  "built_at": "2026-10-08T02:23:45.737197+00:00",
+  "representation": "factorized",
+  "source_gtfs": [
+    "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+    73437184,
+    1791318021740218230
+  ],
+  "walk_revision": 4,
+  "walking_speed_kmh": 4.5,
+  "quotas": {
+    "1": 16,
+    "2": 8,
+    "3": 4
+  },
+  "ride_edges": 2588077,
+  "patterns": 2239,
+  "same_stop_transfers": 815823,
+  "transfers": 816476,
+  "verified_walks": 4,
+  "unknown_ride_distances": 42,
+  "structural_only": true,
+  "all_od_paths_materialized": false,
+  "source": "/home/avale/Projetos/maua_bus_map/sptrans.direct.sqlite3",
+  "graph_source": "/home/avale/Projetos/maua_bus_map/sptrans.routing.sqlite3",
+  "seconds": 5.465053527004784,
+  "bytes": 480645120,
+  "database": "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3",
+  "examples": [
+    {
+      "origem": "1211364",
+      "destino": "120010328",
+      "trajetos": [
+        {
+          "embarques": 1,
+          "baldeacoes": 0,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1804513,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211364",
+              "destino": "120010328",
+              "distancia_m": 21305.805634642522,
+              "embarque_indice": 11,
+              "desembarque_indice": 47
+            }
+          ],
+          "distancia_m": 21305.805634642522,
+          "distancia_onibus_m": 21305.805634642522,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968946,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010328",
+              "distancia_m": 1671.524026651339,
+              "embarque_indice": 0,
+              "desembarque_indice": 4
+            }
+          ],
+          "distancia_m": 1879.1732950914136,
+          "distancia_onibus_m": 1879.1732950914136,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1897849,
+              "padrao_id": 1690,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "1",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669449,
+              "embarque_indice": 19,
+              "desembarque_indice": 20
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1897490,
+              "padrao_id": 1689,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010328",
+              "distancia_m": 1557.4324566794376,
+              "embarque_indice": 0,
+              "desembarque_indice": 4
+            }
+          ],
+          "distancia_m": 1881.1313915463825,
+          "distancia_onibus_m": 1881.1313915463825,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1897849,
+              "padrao_id": 1690,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "1",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669449,
+              "embarque_indice": 19,
+              "desembarque_indice": 20
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1969136,
+              "padrao_id": 1771,
+              "linha": "8084-10",
+              "route_id": "8084-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010328",
+              "distancia_m": 1557.4324566794376,
+              "embarque_indice": 0,
+              "desembarque_indice": 4
+            }
+          ],
+          "distancia_m": 1881.1313915463825,
+          "distancia_onibus_m": 1881.1313915463825,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1969321,
+              "padrao_id": 1771,
+              "linha": "8084-10",
+              "route_id": "8084-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669458,
+              "embarque_indice": 18,
+              "desembarque_indice": 19
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1897490,
+              "padrao_id": 1689,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010328",
+              "distancia_m": 1557.4324566794376,
+              "embarque_indice": 0,
+              "desembarque_indice": 4
+            }
+          ],
+          "distancia_m": 1881.1313915463834,
+          "distancia_onibus_m": 1881.1313915463834,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177516,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010328",
+              "distancia_m": 1655.3198267406697,
+              "embarque_indice": 63,
+              "desembarque_indice": 67
+            }
+          ],
+          "distancia_m": 5632.592545407665,
+          "distancia_onibus_m": 5632.592545407665,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805361,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211351",
+              "destino": "120010328",
+              "distancia_m": 1655.3198267406697,
+              "embarque_indice": 43,
+              "desembarque_indice": 47
+            }
+          ],
+          "distancia_m": 5632.592545407665,
+          "distancia_onibus_m": 5632.592545407665,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985645,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "630015849",
+              "distancia_m": 3107.923369347066,
+              "embarque_indice": 30,
+              "desembarque_indice": 36
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752478,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "630015849",
+              "destino": "120010328",
+              "distancia_m": 2524.6691760606154,
+              "embarque_indice": 31,
+              "desembarque_indice": 36
+            }
+          ],
+          "distancia_m": 5632.592545407681,
+          "distancia_onibus_m": 5632.592545407681,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752501,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010328",
+              "distancia_m": 1655.319826740686,
+              "embarque_indice": 32,
+              "desembarque_indice": 36
+            }
+          ],
+          "distancia_m": 5632.592545407681,
+          "distancia_onibus_m": 5632.592545407681,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968943,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "1211419",
+              "distancia_m": 490.052566539621,
+              "embarque_indice": 0,
+              "desembarque_indice": 1
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177526,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211419",
+              "destino": "120010328",
+              "distancia_m": 1181.4714601117048,
+              "embarque_indice": 64,
+              "desembarque_indice": 67
+            }
+          ],
+          "distancia_m": 1879.1732950914004,
+          "distancia_onibus_m": 1879.1732950914004,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968943,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "1211419",
+              "distancia_m": 490.052566539621,
+              "embarque_indice": 0,
+              "desembarque_indice": 1
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805371,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211419",
+              "destino": "120010328",
+              "distancia_m": 1181.4714601117048,
+              "embarque_indice": 44,
+              "desembarque_indice": 47
+            }
+          ],
+          "distancia_m": 1879.1732950914004,
+          "distancia_onibus_m": 1879.1732950914004,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968945,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120015861",
+              "distancia_m": 983.179347701668,
+              "embarque_indice": 0,
+              "desembarque_indice": 3
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177543,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "120015861",
+              "destino": "120010328",
+              "distancia_m": 688.3446789496629,
+              "embarque_indice": 66,
+              "desembarque_indice": 67
+            }
+          ],
+          "distancia_m": 1879.1732950914056,
+          "distancia_onibus_m": 1879.1732950914056,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968945,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120015861",
+              "distancia_m": 983.179347701668,
+              "embarque_indice": 0,
+              "desembarque_indice": 3
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805388,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "120015861",
+              "destino": "120010328",
+              "distancia_m": 688.3446789496629,
+              "embarque_indice": 46,
+              "desembarque_indice": 47
+            }
+          ],
+          "distancia_m": 1879.1732950914056,
+          "distancia_onibus_m": 1879.1732950914056,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        }
+      ],
+      "categories": {
+        "1": {
+          "complete": true,
+          "count": 1,
+          "seconds": 5.238500307314098e-05
+        },
+        "2": {
+          "complete": true,
+          "count": 8,
+          "seconds": 0.014954591984860599
+        },
+        "3": {
+          "complete": true,
+          "count": 4,
+          "seconds": 0.6387393370096106
+        }
+      },
+      "structural_only": true,
+      "temporal_feasibility_checked": false,
+      "complete": true,
+      "coverage": {
+        "verified_walks": 4,
+        "unknown_ride_distances": 42
+      }
+    },
+    {
+      "origem": "1211364",
+      "destino": "120010329",
+      "trajetos": [
+        {
+          "embarques": 1,
+          "baldeacoes": 0,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1804514,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211364",
+              "destino": "120010329",
+              "distancia_m": 21890.950882639576,
+              "embarque_indice": 11,
+              "desembarque_indice": 48
+            }
+          ],
+          "distancia_m": 21890.950882639576,
+          "distancia_onibus_m": 21890.950882639576,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968947,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010329",
+              "distancia_m": 2256.6692746483873,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            }
+          ],
+          "distancia_m": 2464.318543088462,
+          "distancia_onibus_m": 2464.318543088462,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1897849,
+              "padrao_id": 1690,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "1",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669449,
+              "embarque_indice": 19,
+              "desembarque_indice": 20
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1897491,
+              "padrao_id": 1689,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010329",
+              "distancia_m": 2142.577704676486,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            }
+          ],
+          "distancia_m": 2466.276639543431,
+          "distancia_onibus_m": 2466.276639543431,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1897849,
+              "padrao_id": 1690,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "1",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669449,
+              "embarque_indice": 19,
+              "desembarque_indice": 20
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1969137,
+              "padrao_id": 1771,
+              "linha": "8084-10",
+              "route_id": "8084-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010329",
+              "distancia_m": 2142.577704676486,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            }
+          ],
+          "distancia_m": 2466.276639543431,
+          "distancia_onibus_m": 2466.276639543431,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1969321,
+              "padrao_id": 1771,
+              "linha": "8084-10",
+              "route_id": "8084-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211364",
+              "destino": "1211391",
+              "distancia_m": 323.6989348669458,
+              "embarque_indice": 18,
+              "desembarque_indice": 19
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1897491,
+              "padrao_id": 1689,
+              "linha": "8012-10",
+              "route_id": "8012-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211391",
+              "destino": "120010329",
+              "distancia_m": 2142.577704676486,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            }
+          ],
+          "distancia_m": 2466.276639543432,
+          "distancia_onibus_m": 2466.276639543432,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177517,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010329",
+              "distancia_m": 2240.46507473772,
+              "embarque_indice": 63,
+              "desembarque_indice": 68
+            }
+          ],
+          "distancia_m": 6217.737793404715,
+          "distancia_onibus_m": 6217.737793404715,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805362,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211351",
+              "destino": "120010329",
+              "distancia_m": 2240.46507473772,
+              "embarque_indice": 43,
+              "desembarque_indice": 48
+            }
+          ],
+          "distancia_m": 6217.737793404715,
+          "distancia_onibus_m": 6217.737793404715,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985645,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "630015849",
+              "distancia_m": 3107.923369347066,
+              "embarque_indice": 30,
+              "desembarque_indice": 36
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752479,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "630015849",
+              "destino": "120010329",
+              "distancia_m": 3109.8144240576657,
+              "embarque_indice": 31,
+              "desembarque_indice": 37
+            }
+          ],
+          "distancia_m": 6217.737793404732,
+          "distancia_onibus_m": 6217.737793404732,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752502,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010329",
+              "distancia_m": 2240.4650747377364,
+              "embarque_indice": 32,
+              "desembarque_indice": 37
+            }
+          ],
+          "distancia_m": 6217.737793404732,
+          "distancia_onibus_m": 6217.737793404732,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968943,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "1211419",
+              "distancia_m": 490.052566539621,
+              "embarque_indice": 0,
+              "desembarque_indice": 1
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177527,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211419",
+              "destino": "120010329",
+              "distancia_m": 1766.6167081087551,
+              "embarque_indice": 64,
+              "desembarque_indice": 68
+            }
+          ],
+          "distancia_m": 2464.3185430884505,
+          "distancia_onibus_m": 2464.3185430884505,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968943,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "1211419",
+              "distancia_m": 490.052566539621,
+              "embarque_indice": 0,
+              "desembarque_indice": 1
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805372,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "1211419",
+              "destino": "120010329",
+              "distancia_m": 1766.6167081087551,
+              "embarque_indice": 44,
+              "desembarque_indice": 48
+            }
+          ],
+          "distancia_m": 2464.3185430884505,
+          "distancia_onibus_m": 2464.3185430884505,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968945,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120015861",
+              "distancia_m": 983.179347701668,
+              "embarque_indice": 0,
+              "desembarque_indice": 3
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 177544,
+              "padrao_id": 156,
+              "linha": "177H-10",
+              "route_id": "177H-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "120015861",
+              "destino": "120010329",
+              "distancia_m": 1273.4899269467132,
+              "embarque_indice": 66,
+              "desembarque_indice": 68
+            }
+          ],
+          "distancia_m": 2464.318543088456,
+          "distancia_onibus_m": 2464.318543088456,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968945,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120015861",
+              "distancia_m": 983.179347701668,
+              "embarque_indice": 0,
+              "desembarque_indice": 3
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1805389,
+              "padrao_id": 1615,
+              "linha": "7411-10",
+              "route_id": "7411-10",
+              "sentido": "0",
+              "letreiro": "Pça. Da Sé",
+              "origem": "120015861",
+              "destino": "120010329",
+              "distancia_m": 1273.4899269467132,
+              "embarque_indice": 46,
+              "desembarque_indice": 48
+            }
+          ],
+          "distancia_m": 2464.318543088456,
+          "distancia_onibus_m": 2464.318543088456,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        }
+      ],
+      "categories": {
+        "1": {
+          "complete": true,
+          "count": 1,
+          "seconds": 5.542600410990417e-05
+        },
+        "2": {
+          "complete": true,
+          "count": 8,
+          "seconds": 0.015010300994617864
+        },
+        "3": {
+          "complete": true,
+          "count": 4,
+          "seconds": 0.6830883650109172
+        }
+      },
+      "structural_only": true,
+      "temporal_feasibility_checked": false,
+      "complete": true,
+      "coverage": {
+        "verified_walks": 4,
+        "unknown_ride_distances": 42
+      }
+    },
+    {
+      "origem": "1211364",
+      "destino": "120010332",
+      "trajetos": [
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968948,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010332",
+              "distancia_m": 3130.06754885547,
+              "embarque_indice": 0,
+              "desembarque_indice": 6
+            }
+          ],
+          "distancia_m": 3337.7168172955444,
+          "distancia_onibus_m": 3337.7168172955444,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1917817,
+              "padrao_id": 1709,
+              "linha": "8022-10",
+              "route_id": "8022-10",
+              "sentido": "1",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211359",
+              "distancia_m": 267.2413446337705,
+              "embarque_indice": 17,
+              "desembarque_indice": 18
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1917336,
+              "padrao_id": 1708,
+              "linha": "8022-10",
+              "route_id": "8022-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211359",
+              "destino": "120010332",
+              "distancia_m": 6362.3943093328,
+              "embarque_indice": 0,
+              "desembarque_indice": 15
+            }
+          ],
+          "distancia_m": 6629.63565396657,
+          "distancia_onibus_m": 6629.63565396657,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968686,
+              "padrao_id": 1767,
+              "linha": "8082-10",
+              "route_id": "8082-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211359",
+              "distancia_m": 267.2413446337705,
+              "embarque_indice": 19,
+              "desembarque_indice": 20
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1917336,
+              "padrao_id": 1708,
+              "linha": "8022-10",
+              "route_id": "8022-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211359",
+              "destino": "120010332",
+              "distancia_m": 6362.3943093328,
+              "embarque_indice": 0,
+              "desembarque_indice": 15
+            }
+          ],
+          "distancia_m": 6629.63565396657,
+          "distancia_onibus_m": 6629.63565396657,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1760139,
+              "padrao_id": 1548,
+              "linha": "702U-10",
+              "route_id": "702U-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010332",
+              "distancia_m": 3113.8633489448166,
+              "embarque_indice": 16,
+              "desembarque_indice": 22
+            }
+          ],
+          "distancia_m": 7091.136067611812,
+          "distancia_onibus_m": 7091.136067611812,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985645,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "630015849",
+              "distancia_m": 3107.923369347066,
+              "embarque_indice": 30,
+              "desembarque_indice": 36
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752480,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "630015849",
+              "destino": "120010332",
+              "distancia_m": 3983.2126982647533,
+              "embarque_indice": 31,
+              "desembarque_indice": 38
+            }
+          ],
+          "distancia_m": 7091.136067611819,
+          "distancia_onibus_m": 7091.136067611819,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1985646,
+              "padrao_id": 1787,
+              "linha": "809R-10",
+              "route_id": "809R-10",
+              "sentido": "0",
+              "letreiro": "Term. Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 3977.2727186669954,
+              "embarque_indice": 30,
+              "desembarque_indice": 37
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752503,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010332",
+              "distancia_m": 3113.863348944824,
+              "embarque_indice": 32,
+              "desembarque_indice": 38
+            }
+          ],
+          "distancia_m": 7091.136067611819,
+          "distancia_onibus_m": 7091.136067611819,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1847835,
+              "padrao_id": 1647,
+              "linha": "775A-10",
+              "route_id": "775A-10",
+              "sentido": "0",
+              "letreiro": "Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 8717.937401404288,
+              "embarque_indice": 33,
+              "desembarque_indice": 51
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1760139,
+              "padrao_id": 1548,
+              "linha": "702U-10",
+              "route_id": "702U-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010332",
+              "distancia_m": 3113.8633489448166,
+              "embarque_indice": 16,
+              "desembarque_indice": 22
+            }
+          ],
+          "distancia_m": 11831.800750349104,
+          "distancia_onibus_m": 11831.800750349104,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 2,
+          "baldeacoes": 1,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1847835,
+              "padrao_id": 1647,
+              "linha": "775A-10",
+              "route_id": "775A-10",
+              "sentido": "0",
+              "letreiro": "Pinheiros",
+              "origem": "1211364",
+              "destino": "1211351",
+              "distancia_m": 8717.937401404288,
+              "embarque_indice": 33,
+              "desembarque_indice": 51
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1752503,
+              "padrao_id": 1537,
+              "linha": "701U-10",
+              "route_id": "701U-10",
+              "sentido": "0",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211351",
+              "destino": "120010332",
+              "distancia_m": 3113.863348944824,
+              "embarque_indice": 32,
+              "desembarque_indice": 38
+            }
+          ],
+          "distancia_m": 11831.800750349112,
+          "distancia_onibus_m": 11831.800750349112,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968947,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010329",
+              "distancia_m": 2256.6692746483873,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1760239,
+              "padrao_id": 1548,
+              "linha": "702U-10",
+              "route_id": "702U-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "120010329",
+              "destino": "120010332",
+              "distancia_m": 873.3982742070802,
+              "embarque_indice": 21,
+              "desembarque_indice": 22
+            }
+          ],
+          "distancia_m": 3337.716817295542,
+          "distancia_onibus_m": 3337.716817295542,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968946,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010328",
+              "distancia_m": 1671.524026651339,
+              "embarque_indice": 0,
+              "desembarque_indice": 4
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1760221,
+              "padrao_id": 1548,
+              "linha": "702U-10",
+              "route_id": "702U-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "120010328",
+              "destino": "120010332",
+              "distancia_m": 1458.5435222041306,
+              "embarque_indice": 20,
+              "desembarque_indice": 22
+            }
+          ],
+          "distancia_m": 3337.7168172955444,
+          "distancia_onibus_m": 3337.7168172955444,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968947,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120010329",
+              "distancia_m": 2256.6692746483873,
+              "embarque_indice": 0,
+              "desembarque_indice": 5
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1844801,
+              "padrao_id": 1646,
+              "linha": "7725-10",
+              "route_id": "7725-10",
+              "sentido": "1",
+              "letreiro": "Rio Pequeno",
+              "origem": "120010329",
+              "destino": "120010332",
+              "distancia_m": 873.3982742070848,
+              "embarque_indice": 16,
+              "desembarque_indice": 17
+            }
+          ],
+          "distancia_m": 3337.7168172955467,
+          "distancia_onibus_m": 3337.7168172955467,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        },
+        {
+          "embarques": 3,
+          "baldeacoes": 2,
+          "trechos": [
+            {
+              "modo": "onibus",
+              "aresta_id": 1968942,
+              "padrao_id": 1769,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "0",
+              "letreiro": "Metrô Butantã",
+              "origem": "1211364",
+              "destino": "1211373",
+              "distancia_m": 207.6492684400746,
+              "embarque_indice": 14,
+              "desembarque_indice": 15
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1968945,
+              "padrao_id": 1770,
+              "linha": "8083-10",
+              "route_id": "8083-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "1211373",
+              "destino": "120015861",
+              "distancia_m": 983.179347701668,
+              "embarque_indice": 0,
+              "desembarque_indice": 3
+            },
+            {
+              "modo": "onibus",
+              "aresta_id": 1760202,
+              "padrao_id": 1548,
+              "linha": "702U-10",
+              "route_id": "702U-10",
+              "sentido": "1",
+              "letreiro": "Cid. Universitária",
+              "origem": "120015861",
+              "destino": "120010332",
+              "distancia_m": 2146.8882011538044,
+              "embarque_indice": 19,
+              "desembarque_indice": 22
+            }
+          ],
+          "distancia_m": 3337.716817295547,
+          "distancia_onibus_m": 3337.716817295547,
+          "distancia_caminhada_m": 0,
+          "caminhada_s": 0
+        }
+      ],
+      "categories": {
+        "1": {
+          "complete": true,
+          "count": 0,
+          "seconds": 5.7218014262616634e-05
+        },
+        "2": {
+          "complete": true,
+          "count": 8,
+          "seconds": 0.015915329015115276
+        },
+        "3": {
+          "complete": true,
+          "count": 4,
+          "seconds": 0.2526005970139522
+        }
+      },
+      "structural_only": true,
+      "temporal_feasibility_checked": false,
+      "complete": true,
+      "coverage": {
+        "verified_walks": 4,
+        "unknown_ride_distances": 42
+      }
+    },
+    {
+      "origem": "1211364",
+      "destino": "600012584",
+      "trajetos": [],
+      "categories": {
+        "1": {
+          "complete": true,
+          "count": 0,
+          "seconds": 5.3252995712682605e-05
+        },
+        "2": {
+          "complete": true,
+          "count": 0,
+          "seconds": 0.016150211973581463
+        },
+        "3": {
+          "complete": true,
+          "count": 0,
+          "seconds": 0.09541850400273688
+        }
+      },
+      "structural_only": true,
+      "temporal_feasibility_checked": false,
+      "complete": true,
+      "coverage": {
+        "verified_walks": 4,
+        "unknown_ride_distances": 42
+      }
+    }
+  ],
+  "integrity": "ok",
+  "bad_transfers": 0,
+  "query_plan_three_buses": [
+    "SEARCH c USING INDEX direct_in (destination=?)",
+    "SEARCH u USING INDEX transfer_in (outgoing_pattern=? AND boarding_index=?)",
+    "SEARCH a USING INDEX direct_out (origin=?)",
+    "SEARCH t USING INDEX sqlite_autoindex_transfer_1 (incoming_pattern=? AND alighting_index=? AND outgoing_pattern=?)",
+    "SEARCH b USING INDEX sqlite_autoindex_ride_edge_1 (pattern_id=? AND boarding_index=? AND alighting_index=?)",
+    "SEARCH w USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN",
+    "SEARCH x USING INTEGER PRIMARY KEY (rowid=?) LEFT-JOIN",
+    "USE TEMP B-TREE FOR ORDER BY"
+  ],
+  "tests": {
+    "suite": "transit",
+    "passed": 226,
+    "new_tests": 9
+  },
+  "note": "Representação compartilhada; não materializa todas as combinações O/D como linhas independentes. Quatro caminhadas verificadas; viabilidade temporal não avaliada."
+}

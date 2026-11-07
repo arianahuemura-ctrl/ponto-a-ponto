@@ -1,0 +1,12 @@
+{
+  "origin": "840000672",
+  "destination": "940004126",
+  "hour": 8,
+  "first_route_seconds": 0.4229309700313024,
+  "complete_at_first_route": false,
+  "blocked_complementary_sources": true,
+  "journeys": 1,
+  "lines": [
+    "1732-10"
+  ]
+}

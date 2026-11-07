@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "max_cost_inclusive": 4,
+  "max_cost_units": 12,
+  "only_vacancies": true,
+  "origins": 22274,
+  "new_pairs": 42737644,
+  "added_routes": 246364897,
+  "changed_pairs": 55935169,
+  "total_pairs": 494450893,
+  "total_routes": 2472097871,
+  "pairs_with_five_routes": 494391013,
+  "pairs_with_one_to_four_routes": 59880,
+  "pairs_without_materialized_route": 1657909,
+  "serial_replay_origins": 38,
+  "updated_pairs_checked": 106434,
+  "sampled_paths": 7596,
+  "sample_cost_units": {
+    "6": 633,
+    "9": 6201,
+    "12": 300,
+    "10": 104,
+    "8": 305,
+    "7": 41,
+    "11": 12
+  },
+  "database_bytes": 94960996352,
+  "free_bytes": 148807307264,
+  "seconds": 123.50901206897106
+}

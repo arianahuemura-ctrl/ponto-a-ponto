@@ -1,0 +1,7 @@
+{
+  "arquivo": "../estudo_ihc_ampliado/ficha_coleta_vazia.csv",
+  "anterior_sha256": "d33626897525c25e0049aee1e53f92b4c0019b7eff6fb42a75aa3725bfa07206",
+  "novo_sha256": "30b97842f8f1a9309752d3dd5e3a16e2c3aa45ed5c529ae6c448f242b2fe695e",
+  "linhas_coletadas_modificadas": 0,
+  "modificacao": "Cabeçalho: nomenclatura T1–T6, MAN/QR, ordem MAN_QR/QR_MAN, novos campos de contexto/comparabilidade; nenhum participante preenchido."
+}

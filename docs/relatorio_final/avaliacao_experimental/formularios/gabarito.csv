@@ -1,0 +1,1 @@
+cenario_id,revisao,itinerario_id,linha_sentido,embarques_desembarques,partidas_chegadas,caminhadas,baldeacoes,continuidade_ok,servico_ativo_ok,tempo_ok,restricoes_ok,decisao,justificativa,conferente_codigo,evidencia_sha256

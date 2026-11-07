@@ -1,0 +1,29 @@
+{
+  "unique_queries": 3264,
+  "all_59_endpoints_tested_in_all_three_hours": true,
+  "all_batches_have_32_queries": true,
+  "groups_with_four_batches": 24,
+  "groups_with_one_batch": 6,
+  "successful_first_routes": 1652,
+  "first_route_max_seconds": 10.711868940037675,
+  "all_successful_first_routes_within_30s": true,
+  "external_required": 936,
+  "no_route_completed": 676,
+  "search_limited_without_route": 660,
+  "external_before_prepared_available": 89,
+  "workers_per_run": 32,
+  "timeout_count": 0,
+  "scope": "No HTTP/browser or public pedestrian service latency; not a representative success-rate estimate for all pairs.",
+  "sptrans.sqlite3": {
+    "bytes": 73437184,
+    "mtime_ns": 1791318021740218230
+  },
+  "sptrans.staged.sqlite3": {
+    "bytes": 94961283072,
+    "mtime_ns": 1793525123616762704
+  },
+  "sptrans.staged-walks.sqlite3": {
+    "bytes": 475631616,
+    "mtime_ns": 1793513375198599359
+  }
+}

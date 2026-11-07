@@ -1,0 +1,2 @@
+# Extração OSM offline opcional; não é necessária para a aplicação web.
+osmium==4.3.1

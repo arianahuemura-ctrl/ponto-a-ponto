@@ -1,0 +1,31 @@
+\section{IHC, limitações e ameaças à validade}\label{sec:validade}
+
+A matriz da Tabela~\ref{tab:ihc-evidencias} liga princípios discutidos na fundamentação às decisões observáveis. Não é uma avaliação heurística independente nem um escore de usabilidade: explicita a hipótese de benefício e a evidência necessária para verificá-la.
+\begingroup\small\SingleSpacing\setlength{\parskip}{0pt}\setlength{\tabcolsep}{4pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.8cm}p{4.0cm}p{4.2cm}p{3.5cm}}
+\caption{Princípios de IHC, decisões, evidências e limitações.}\label{tab:ihc-evidencias}\\\hline
+Princípio & Decisão implementada & Evidência & Limitação\\\hline\endfirsthead
+\hline Princípio & Decisão implementada & Evidência & Limitação\\\hline\endhead\hline\endfoot
+Reconhecimento em vez de memorização & Origem contextual e escolha por destino; favoritos locais. & Capturas de embarque, destino e favoritos; estudo de cliques no Apêndice~\ref{ap:cliques}. & Não mede compreensão ou esforço cognitivo dos passageiros.\\[4pt]
+Visibilidade do estado & Progresso da busca, resultados parciais e previsão indisponível explicitados. & Capturas, testes registrados e aviso na Figura~\ref{fig:artesp-onibus-trem}. & Usuário pode confundir programação com previsão; reconhecimento ainda deve ser medido.\\[4pt]
+Controle e recuperação & Recálculo manual, confirmação do cancelamento, preservação dos favoritos. & Requisitos e rastreabilidade no Apêndice~\ref{ap:engenharia}. & Teste automatizado não mede erros reais de uso ou compreensão do diálogo.\\[4pt]
+Prevenção de erros & Seleção por toque prolongado cancelada em arrasto; distinção de embarque, destino e sentido. & Relatos e correções da Tabela~\ref{tab:feedback-ajustes}. & Episódios exploratórios não equivalem a incidência de erro em uma amostra.\\[4pt]
+Hierarquia e redundância visual & Contraste, contornos e identificação textual ferroviária; controle de marcadores. & Seção~\ref{sec:legibilidade-ferroviaria}; capturas e verificações locais. & Não há validação de acessibilidade com participantes de diferentes percepções de cor.\\[4pt]
+Liberdade de participação & Consulta ao transporte independente da gravação e comando de interrupção. & Fluxo de pesquisa e inspeção do código; Figura~\ref{fig:pesquisa-voluntaria}. & Consentimento implementado não garante anonimato ou conformidade legal integral.\\
+\end{longtable}
+\fonte{Síntese do grupo a partir da fundamentação de IHC e das evidências indicadas; revisão de 2 nov. 2026.}
+\endgroup
+\subsection{Ameaças à validade e alcance das conclusões}\label{sec:ameacas-validade}
+\textbf{Validade interna.} Os benchmarks comparam consultas pareadas, mas não isolam variáveis de hardware, carga, cache do sistema operacional e escalonamento. A associação entre revisão e tempos observados não demonstra o efeito causal de uma técnica específica. Testes com respostas controladas verificam contratos, sem reproduzir toda a variabilidade de serviços externos.
+
+\textbf{Validade externa.} A seleção estratificada de casos difíceis não representa a distribuição de viagens do município. Medições locais excluem rede, túnel e celular; datas e horários escolhidos não cobrem toda a operação. Relatos de desenvolvedores e convidados, bem como a apreciação de um profissional, não generalizam benefícios à população.
+
+\textbf{Validade de construção.} Cliques não equivalem a esforço cognitivo; primeira rota não equivale a melhor rota; cobertura estrutural não equivale a viagem viável; intenção de deslocamento não equivale a embarque. Custo ponderado, quantidade de baldeações, frequência, programação e previsão são medidas diferentes. A redução de esforço requer sucesso correto, compreensão e observação de uso, não apenas menos ações.
+
+\textbf{Atualização e qualidade dos dados.} GTFS representa cadastro e programação. O recorte ARTESP usa calendário de 2026 sem exceções de feriados e horários intermediários interpolados. Limites territoriais e coordenadas próximos à divisa exigem leitura cuidadosa; o mapa não homologa localização ou acesso em campo. Previsões operacionais dependem de correspondência segura e disponibilidade da fonte. Dados novos exigirão nova auditoria; o censo de 1/11 não descreve a base ampliada de 2/11.
+
+\textbf{Reprodutibilidade.} Arquivos individuais, scripts e hashes permitem recalcular figuras e estatísticas. Entretanto, o HEAD observado com alterações locais não identifica sozinho o código executado, e não foi localizado manifesto contemporâneo completo da carga e de todos os fontes do benchmark. A revisão preserva essa lacuna. O apêndice técnico registra parâmetros e assinaturas disponíveis; não se reconstruíram medições nem condições ausentes.
+
+\textbf{Avaliação com passageiros.} A entrevista de gestão, a avaliação profissional e as navegações exploratórias são contribuições distintas. Não há avaliação sistemática concluída que demonstre redução de esforço, tempo, espera ou erros para passageiros. Permanecem necessários consentimento, definição de amostra, tarefas equivalentes e registro de compreensão. A leitura física do QR e a implantação autorizada da sinalização também exigem evidências próprias.
+
+Os limites de retenção, exclusão e exportação da pesquisa estão na Seção~\ref{sec:avaliacao-privacidade}; sua implementação não comprova anonimato ou conformidade legal integral.

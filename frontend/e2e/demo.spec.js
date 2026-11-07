@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./coverage.js";
 const origin = "way:1410074325";
 async function selectDestination(page, name = "Trabalho") {
   await page.getByRole("button", { name: /Buscar destino.*no mapa/ }).click();

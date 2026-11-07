@@ -1,0 +1,11 @@
+{
+  "sample_pairs": 250,
+  "found_pairs": 250,
+  "sql_statements": 498,
+  "median_ms": 0.2966354659292847,
+  "p95_ms": 0.5092860083095729,
+  "max_ms": 1.0586240096017718,
+  "mean_ms": 0.28815539786592126,
+  "scope": "Indexed pair retrieval across up to three tables; excludes schedule evaluation; full database integrity check running concurrently",
+  "database_bytes": 94960996352
+}

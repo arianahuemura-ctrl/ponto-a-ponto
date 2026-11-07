@@ -1,0 +1,25 @@
+{
+  "paginas_antes": 132,
+  "paginas_depois": 133,
+  "md5_antes": "2fdcb455617d4429293930e4ee3b3458",
+  "md5_depois": "99a9dd131d390ace229c5ebb7773d518",
+  "sha256_depois": "af9e57239b578269bf3f83a5237d965ff9075f69df9e13bc13d1adadb404d351",
+  "bytes": 20231950,
+  "git_diff_check": "ok",
+  "branch": "relatorio",
+  "head": "c18556cb4a3f3bc733d9eab040f0d7f0755595b3",
+  "fontes_incorporadas": true,
+  "referencias_indefinidas": false,
+  "overfull": false,
+  "protocolo_b3_preservado": true,
+  "demais_fontes_e_imagens_preservadas": 412,
+  "alteracoes_preexistentes_preservadas": true,
+  "banco_e_evidencias_inalterados": true,
+  "aplicacao_inalterada": true,
+  "widow_pagina_33_corrigida": true,
+  "avisos_remanescentes": [
+    "babel: brazil obsoleto",
+    "memoir: comandos obsoletos",
+    "Underfull hbox na célula calendar/calendar_dates, tabela preexistente do Apêndice A, linha 1078"
+  ]
+}

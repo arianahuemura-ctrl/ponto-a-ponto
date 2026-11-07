@@ -1,0 +1,19 @@
+{
+  "queries": 3264,
+  "same_pairs_hours_batches": true,
+  "unchanged_databases": true,
+  "workers": 32,
+  "old_first_route_count": 1652,
+  "new_first_route_count": 1728,
+  "paired_successes": 1637,
+  "new_successes": 91,
+  "lost_successes": 15,
+  "lost_to_external_required": 12,
+  "lost_to_limited_search": 3,
+  "all_1264_previously_materialized_options_served": true,
+  "all_89_external_blocked_materialized_cases_served": true,
+  "new_max_first_route_seconds": 5.935714265040588,
+  "source_failures": 0,
+  "source_saturation": 0,
+  "timeouts": 0
+}

@@ -23,3 +23,37 @@ test('13.5 minute access walk excludes the bus in 3 minutes and rounding does no
  assert.equal(boardingMinutes(arrivals,now,13.5),14);
  assert.equal(boardingMinutes(arrivals.slice(0,2),now,13.5),null);
 });
+
+
+test('next buses sort by live arrival; stale/missing estimates follow without mutating input',async()=>{
+ const {orderedBoardLines,humanBoarding}=await import('./boardingTime.js');
+ const now=Date.parse('2026-10-08T02:01:30-03:00');
+ const arrival=(time,observed_at='2026-10-08T02:01:00-03:00')=>({time,observed_at,vehicle:'81614'});
+ const lines=[{code:'none'},{code:'late',arrivals:[arrival('02:14'),arrival('02:10')]},
+   {code:'stale',arrivals:[arrival('02:02','2026-10-08T01:50:00-03:00')]},
+   {code:'early',arrivals:[arrival('02:02')]}];
+ const result=orderedBoardLines(lines,now);
+ assert.deepEqual(result.map(l=>l.code),['early','late','none','stale']);
+ assert.equal(result[0].live[0].seconds,30);
+ assert.equal(result[1].live[0].time,'02:10');
+ assert.equal(lines[0].code,'none');
+ assert.equal(humanBoarding(30),'Embarque em 30 s');
+ assert.equal(humanBoarding(60),'Embarque em 1 min');
+ assert.equal(humanBoarding(3660),'Embarque em 1 h 1 min');
+ assert.equal(humanBoarding(0),'Embarque agora');
+});
+
+
+test('board sorts destinations alphabetically and schedules by active or upcoming dated service',async()=>{
+ const {orderedBoardLines}=await import('./boardingTime.js');
+ const now=Date.parse('2026-10-08T02:00:00-03:00');
+ const lines=[
+  {code:'4',headsign:'Zoológico',programme:[{kind:'frequency',start:'2026-10-08T01:30:00-03:00',end:'2026-10-08T02:30:00-03:00'}]},
+  {code:'3',headsign:'Água',programme:[{start:'2026-10-08T05:00:00-03:00'}]},
+  {code:'2',headsign:'Centro',programme:[{start:'2026-10-09T01:00:00-03:00'}]},
+  {code:'1',headsign:'Bairro',programme:[{start:'invalid'},{start:'2026-10-08T01:00:00-03:00'}]},
+ ];
+ assert.deepEqual(orderedBoardLines(lines,now,'alphabetical').map(l=>l.code),['3','1','2','4']);
+ assert.deepEqual(orderedBoardLines(lines,now,'service').map(l=>l.code),['4','3','2','1']);
+ assert.equal(lines[0].code,'4');
+});

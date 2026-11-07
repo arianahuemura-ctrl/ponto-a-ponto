@@ -1,0 +1,10 @@
+{
+  "checked_walking_paths": 1337,
+  "total_pairs": 494451148,
+  "total_routes": 2472099208,
+  "pairs_without_materialized_route": 1657654,
+  "pairs_with_five_routes": 494391254,
+  "pairs_with_one_to_four_routes": 59894,
+  "integrity": "ok",
+  "base_transport_tables_preserved": true
+}

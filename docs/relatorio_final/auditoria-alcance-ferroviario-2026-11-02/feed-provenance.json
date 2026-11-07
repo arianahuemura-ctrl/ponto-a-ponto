@@ -1,0 +1,61 @@
+{
+  "source": "/home/avale/Projetos/maua_bus_map/fonts/sptrans_gtfs",
+  "raw_files_sha256": {
+    "agency.txt": "a78a3fabe66e067a780fd7b40766229a4ac8435e284cfb1f4dd1fa9ac28dcbbb",
+    "stops.txt": "011aa0c9a4cc501cf9fcd4859841b96ca50b20e1966149d375b8090d738c255e",
+    "routes.txt": "65a00b30bd39f18712170370bf35c2d550441893e451261f2e81ab81a1d0658c",
+    "trips.txt": "3804185261da1466bcbc3ab47744cba48a62c52bb4db7a9ad099411e45ab76c6",
+    "calendar.txt": "22596979886470dfd3e7a3cf6f550249803e92efbf8b683aad598de0fc70bc11",
+    "frequencies.txt": "0ec29afd1e0de64463cab03d6563b20ac46b13c0582ccd7fc73b1b300580d85a",
+    "stop_times.txt": "85701041651487bc588371cc558eada4dcd76af5e2be73416ad41be72ed99b4f",
+    "shapes.txt": "92d72e734ac773895ee855d4b0c56671e5a251d1dbab717d84abefe0df12dbdb"
+  },
+  "matching": {
+    "agency": {
+      "rows": [
+        {
+          "agency_id": "1",
+          "agency_name": "SPTRANS",
+          "agency_url": "http://www.sptrans.com.br/?versao=051026",
+          "agency_timezone": "America/Sao_Paulo",
+          "agency_lang": "pt"
+        }
+      ],
+      "comparison": "agency.txt not imported by store.TABLES"
+    },
+    "stops": {
+      "selected_rows": 2,
+      "all_selected_rows_match_imported_db": true
+    },
+    "routes": {
+      "selected_rows": 1,
+      "all_selected_rows_match_imported_db": true
+    },
+    "trips": {
+      "selected_rows": 2,
+      "all_selected_rows_match_imported_db": true
+    },
+    "calendar": {
+      "selected_rows": 1,
+      "all_selected_rows_match_imported_db": true
+    },
+    "frequencies": {
+      "selected_rows": 40,
+      "all_selected_rows_match_imported_db": true
+    },
+    "stop_times": {
+      "selected_rows": 30,
+      "all_selected_rows_match_imported_db": true
+    },
+    "shapes": {
+      "selected_rows": 494,
+      "all_selected_rows_match_imported_db": true
+    }
+  },
+  "import_metadata": [
+    {
+      "value": "{\"imported_at\": \"2026-10-06T20:20:21.669191+00:00\", \"counts\": {\"stops\": 22274, \"routes\": 1365, \"trips\": 2272, \"stop_times\": 99128, \"frequencies\": 40406, \"calendar\": 6, \"calendar_dates\": 0, \"shapes\": 1144943}}"
+    }
+  ],
+  "limit": "Import metadata records counts and import time, not the original download URL or a signed release manifest. agency_url carries versao=051026."
+}

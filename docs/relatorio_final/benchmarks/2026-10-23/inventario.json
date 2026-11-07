@@ -1,0 +1,89 @@
+{
+  "collected_at": "2026-10-23T17:21:24.039008-03:00",
+  "kind": "inventario_provisorio_nao_benchmark",
+  "commit": "aee66eb6761e868c0547c7454e7b259faae3a9fc",
+  "databases": [
+    {
+      "file": "sptrans.sqlite3",
+      "bytes": 73437184,
+      "sha256": "c8fa1ef430b0e5b5e5ce8d022568ab02603e09ca2d057983486975db435aa4c4",
+      "stable_during_hash": true
+    },
+    {
+      "file": "sptrans.routing.sqlite3",
+      "bytes": 624279552,
+      "sha256": "053497f03162ad7ab239b0bd54d869426c8ecc9289d9e44a5cec7284ae259e83",
+      "stable_during_hash": true
+    },
+    {
+      "file": "sptrans.direct.sqlite3",
+      "bytes": 421732352,
+      "sha256": "b142c8865e3c5b36005316141edb2e695f2b8da49929eb9552b7dce4cece99b8",
+      "stable_during_hash": true
+    },
+    {
+      "file": "sptrans.walks.sqlite3",
+      "bytes": 467996672,
+      "sha256": "abb9edeba033e57a9afc1e04544160f4b386d275af1a894a358188b6af7f6f01",
+      "stable_during_hash": true
+    },
+    {
+      "file": "sptrans.connections.sqlite3",
+      "bytes": 3048796160,
+      "sha256": "2b5f675b900147bda0738679bcfe054131432de53716931f581271ef0d20c415",
+      "stable_during_hash": true
+    },
+    {
+      "file": "sptrans.materialized.sqlite3",
+      "bytes": 117686272,
+      "sha256": "1e5ab50c51339a0aa39deeae0ab70769f03c54e0ba763521b8da46605cf24bfa",
+      "stable_during_hash": true
+    }
+  ],
+  "metadata": {
+    "signature": {
+      "version": 2,
+      "source": [
+        "/home/avale/Projetos/maua_bus_map/sptrans.connections.sqlite3",
+        3048796160,
+        1791441764862412944
+      ],
+      "gtfs": [
+        "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+        73437184,
+        1791318021740218230
+      ],
+      "quotas": {
+        "1": 16,
+        "2": 8
+      },
+      "walk_speed_kmh": 4.5,
+      "coverage": {
+        "verified_walks": 952608,
+        "unknown_ride_distances": 42
+      }
+    },
+    "created_at": "2026-10-08T13:18:01.243564+00:00",
+    "city_complete": false
+  },
+  "status": [
+    {
+      "boardings": 1,
+      "state": "ready",
+      "pairs": 77957
+    },
+    {
+      "boardings": 2,
+      "state": "ready",
+      "pairs": 77956
+    }
+  ],
+  "pairs_with_both_categories": 77956,
+  "stored_paths": 644702,
+  "notes": [
+    "ready indica processamento da categoria, não existência de itinerário viável",
+    "city_complete=false; três embarques não estão materializados neste artefato",
+    "Tamanhos atuais não representam armazenamento final municipal",
+    "Tempo total de preparação e métricas A/B/C não medidos nesta rodada"
+  ]
+}

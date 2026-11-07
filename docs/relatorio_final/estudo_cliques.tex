@@ -1,0 +1,60 @@
+\chapter{Estudo analítico de cliques}
+\label{ap:cliques}
+
+Este estudo compara as ações necessárias para consultar alternativas de transporte público e selecionar uma rota no PaP, Google Maps, Moovit, Cittamobi e Quanto Tempo Falta. São considerados endereço digitado, favorito comum, atalhos Casa e Trabalho e local selecionado no mapa. As contagens foram obtidas pelo grupo em 25 e 26 de outubro de 2026; não integram o parecer de Thiago nem constituem avaliação de usabilidade com passageiros.
+
+\section{Procedimento e condições}\label{sec:convencao-acoes}\label{sec:cliques-condicoes}
+O aparelho de referência foi um Samsung Galaxy S24 Ultra (SM-S928B), Android 16, com tela de 1080 por 2340 pixels. Foram utilizados Google Maps \nolinkurl{26.43.00.1002020710}, Moovit \nolinkurl{5.201.6.1811}, Cittamobi \nolinkurl{7.2.164}, Quanto Tempo Falta \nolinkurl{v2.0.2} e PaP no Chrome \nolinkurl{155.0.8059.84}. Os manifestos das sessões identificam a compilação do PaP e as capturas correspondentes.
+
+A contagem começa na tela inicial, com localização disponível, permissões respondidas e favoritos cadastrados. Cada toque em um controle, toque longo, gesto de rolagem ou arrasto do mapa conta como uma ação de navegação, com o mesmo peso. A tabela soma toques e rolagens; os registros preservam a distinção entre esses gestos. A digitação do endereço constitui um episódio separado, sem contar cada tecla. Instalação, autenticação e cadastro dos favoritos ficam fora da tarefa. O marco final é a abertura da rota selecionada ou, na consulta de favoritos de parada, do trajeto de uma linha. Não se conta o início do acompanhamento durante o deslocamento.
+
+Em São Paulo, a origem simulada foi a região do MASP, $(-23{,}561458; -46{,}656550)$, e o destino pesquisado foi Praça da Sé. O favorito de ponto usado nas medições do PaP foi \texttt{800016588}, na região da Sé/Praça Clóvis Beviláqua. No Quanto Tempo Falta, foi utilizada Santos, com origem $(-23{,}9675; -46{,}3336)$ e destino Praça Mauá. Os destinos resolvidos pelos aplicativos não são rigorosamente iguais; comparam-se ações de interface em áreas atendidas, não a qualidade dessas viagens. A localização foi simulada e o GPS restaurado ao concluir os testes.
+
+\section{Resultados consolidados}\label{sec:cliques-resultados}
+A Tabela~\ref{tab:cliques-celular} apresenta o total de ações até abrir a rota selecionada. Nos favoritos do Cittamobi e Quanto Tempo Falta, o marco é abrir o trajeto da linha: o percurso analítico informado pelo grupo é abrir Favoritos, escolher a parada e abrir a linha, totalizando três ações. Esses últimos valores representam a reconstrução do percurso descrito, sem nova medição integral no aparelho. Os resultados finais dessas tarefas são distintos e não sustentam uma classificação única dos aplicativos. As contagens dependem do estado inicial e não demonstram um mínimo universal.
+
+\begin{table}[H]
+\centering\small\SingleSpacing
+\caption{Total de ações até abrir a rota ou o trajeto da linha.}
+\label{tab:cliques-celular}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.22\linewidth}>{\centering\arraybackslash}p{0.12\linewidth}>{\centering\arraybackslash}p{0.15\linewidth}>{\centering\arraybackslash}p{0.08\linewidth}>{\centering\arraybackslash}p{0.11\linewidth}>{\centering\arraybackslash}p{0.17\linewidth}}
+\hline
+Aplicativo & Endereço & Favorito comum & Casa & Trabalho & Local no mapa \\\hline
+PaP & 4 & 3 & 2 & 2 & 3 \\[3pt]
+Google Maps & 4 & 4 & 2 & 4 & 3 \\[3pt]
+Moovit & 4 & 3 & 3 & 3 & 6 \\[3pt]
+Cittamobi & 5 & 3 & 3 & 3 & 8 \\[3pt]
+Quanto Tempo Falta & 4 & 3 & 3 & 3 & \textemdash \\\hline
+\end{tabular}
+\par\smallskip\begin{minipage}{0.96\linewidth}\footnotesize
+Fonte: Elaboração do grupo a partir dos registros de execução no celular em 25 e 26 out. 2026 e da reconstrução analítica do percurso de favoritos do Cittamobi e Quanto Tempo Falta.
+\end{minipage}
+\end{table}
+
+\textbf{Local no mapa.} No PaP, foram três ações: toque longo, confirmação do destino e seleção da rota a pé de 358 m. No Google Maps, foram três com transporte público mantido e quatro quando foi preciso mudar o modal. No Moovit, foram seis ações: cinco toques e um arrasto para posicionar o mapa; o fechamento de um anúncio elevou a execução observada a sete. A coluna mantém as seis ações de navegação, explicitando essa interrupção. Os destinos e enquadramentos foram diferentes; deslocamentos adicionais do mapa aumentam os totais.
+
+No Cittamobi, foram oito ações desde o mapa inicial: abrir o menu, acessar ``Traçar Rotas'', escolher um destino do histórico para entrar no planejador, editar o destino, acessar ``Selecione no mapa'', arrastar o mapa, confirmar em ``OK'' e selecionar uma rota. Foram sete toques e um arrasto, com os detalhes da linha 147 abertos em São Bernardo do Campo. A contagem descreve esse percurso observado, com histórico disponível, sem demonstrar um mínimo universal. No Quanto Tempo Falta, o traço indica que a seleção de local livre não foi encontrada nas telas testadas em Santos; não significa zero ações nem ausência comprovada em todas as versões.
+
+\textbf{PaP.} O favorito comum exigiu abrir Favoritos, usar o ponto como destino e selecionar a rota. Casa e Trabalho dispensaram a abertura da lista, reduzindo uma ação até a rota. As três medições utilizaram o mesmo ponto e não exigiram rolagem. A versão atual também permite salvar coordenadas de um local, inclusive pelo mapa ou pela localização atual, e associá-las a Casa ou Trabalho. As contagens da tabela foram medidas com favorito de ponto; o fluxo completo com favorito de coordenadas ainda precisa ser recontado no celular de referência. Por endereço, o percurso foi abrir a busca, digitar Praça da Sé, escolher a primeira sugestão, selecionar o ponto mostrado e selecionar a rota. Foram quatro ações até a rota da linha 715M-10 no mapa, sem rolagem e com um episódio de digitação. O destino selecionado foi o ponto \texttt{800016609}, Praça da Sé, 21.
+
+\textbf{Google Maps.} O transporte público estava mantido como modal. Por endereço, o percurso foi abrir a busca, escolher a sugestão, pedir Rotas e selecionar a alternativa. Pelo favorito comum, foi necessário abrir Salvos, escolher o lugar diretamente visível, pedir Rotas e selecionar a alternativa. Casa estava acessível na tela inicial; Trabalho foi acessado por Salvos. Se o modal inicial for automóvel, a mudança para transporte público acrescenta um toque ao total. Os destinos pessoais de Casa e Trabalho foram preservados, sem divulgação dos endereços; essas contagens descrevem os acessos examinados, não qualquer disposição dos atalhos.
+
+\textbf{Moovit.} Por endereço, foram necessários busca, sugestão, pedido de rotas e seleção da alternativa. O favorito comum e os atalhos Casa e Trabalho abriram diretamente as alternativas, mas uma rolagem foi necessária para alcançá-los na tela inicial. A seleção de rota acrescentou um toque. Os três favoritos apontavam para Praça da Sé. Conteúdos dinâmicos e anúncios podem acrescentar ações; a tabela apresenta os menores percursos concluídos, sem essas interrupções.
+
+\textbf{Cittamobi e Quanto Tempo Falta.} O total de três ações considera o acesso pela lista de favoritos, com a parada visível após abrir essa lista. Casa e Trabalho são nomes atribuídos a favoritos comuns, seguindo a mesma sequência; não representam atalhos especiais fixos. Abrir a linha mostra seu trajeto, sem comprovar planejamento da localização atual até o ponto salvo. Se o favorito estiver fora da área visível, as rolagens necessárias acrescentam ações ao total. O acesso direto a um cartão já exposto na tela inicial constitui outro estado inicial e não substitui essa sequência.
+
+\section{Interpretação e alcance}\label{sec:cliques-interpretacao}
+Nas condições observadas, Casa e Trabalho reduziram uma ação em relação ao favorito comum do PaP. Google Maps e Moovit também apresentaram atalhos de acesso direto, condicionados à posição dos controles. Ao incluir a rolagem, o favorito comum do Moovit totalizou as mesmas três ações observadas no PaP. Os totais dos outros dois aplicativos descrevem consulta de linhas e não são equivalentes ao planejamento de viagem.
+
+As contagens por favorito dependem de sua posição na interface. Listas maiores podem exigir rolagens, abertura de listas ou busca; cada toque e cada gesto de rolagem acrescenta uma ação. O ensaio com cartões fora da tela não constitui teste de listas com 5, 10 ou 20 favoritos. Não foi medido o efeito dessas grandes quantidades, e os valores não devem ser generalizados para esse cenário.
+
+O estudo mede ações de navegação, não tempo de resposta, esforço cognitivo, acessibilidade, precisão operacional ou qualidade das rotas. As diferenças de destinos, objetos salvos e estados iniciais limitam a comparação. A avaliação com passageiros continua necessária para verificar compreensão, eficácia e satisfação.
+
+O modelo KLM de \citet{card1980} relaciona operações de interação ao tempo de execução de tarefas, incluindo preparação mental e resposta do sistema. A contagem aqui adotada não aplica integralmente esse modelo: atribui o mesmo peso a toques e rolagens e não estima seus tempos. \citet{laubheimer2019} também ressalta que o número de cliques isolado não determina a facilidade de uso. Assim, menos ações constituem um indicador limitado de economia de navegação, não uma comprovação da qualidade global do produto.
+
+Os registros que sustentam a tabela, com versões, ações e hashes das capturas, estão em \mbox{\nolinkurl{estudo_cliques_evidencias/celular/}}; as sessões de Casa e Trabalho estão no subdiretório \mbox{\nolinkurl{atalhos-casa-trabalho/}}. Essas evidências permitem conferir as contagens e as condições de cada tarefa.
+
+O complemento de 26 de outubro está no subdiretório \mbox{\nolinkurl{favoritos-2026-10-26/}}.
+
+\input{estudo_ihc_ampliado/protocolo.tex}

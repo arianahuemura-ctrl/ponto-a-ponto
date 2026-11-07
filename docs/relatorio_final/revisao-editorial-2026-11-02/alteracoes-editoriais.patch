@@ -1,0 +1,198 @@
+--- antes/relatorio_final_pi2_v2.tex
++++ depois/relatorio_final_pi2_v2.tex
+@@ -22,7 +22,18 @@
+ \setlength{\bibsep}{\baselineskip}
+ \usepackage{zref-totpages,needspace,pdfpages}
+ \usepackage{hyperref}
+-\hypersetup{hypertexnames=false,hidelinks}
++% Metadados bibliográficos; nomes e data documental preservados.
++\hypersetup{
++  hypertexnames=false,hidelinks,unicode=true,
++  bookmarksnumbered=true,pdfdisplaydoctitle=true,
++  pdftitle={Sistema de acesso a informações do transporte público por QR Code em pontos de ônibus},
++  pdfauthor={André Meneghelli Vale; Ariana Harumi Uemura; Bruno Gabriel Migliari de Souza; Caio Wellington Procopio Ferreira; Ingrid Emanuelle Sousa Dias; Leonardo Souza Leite; Maurício Gonçalves Marques; Nathalia Almeida Amorim},
++  pdfsubject={Relatório Técnico-Científico Final — Projeto Integrador em Computação II — UNIVESP — 2026},
++  pdfkeywords={transporte público; QR Code; informação ao passageiro; mobilidade urbana; pontos de interesse}
++}
++% Compressão sem perdas dos fluxos e objetos; não altera as evidências.
++\pdfvariable compresslevel=9
++\pdfvariable objcompresslevel=3
+ \graphicspath{{imgs/}}
+ % Numeração no alto à direita, inclusive nas aberturas de capítulos.
+ \makepagestyle{papnumeracao}
+@@ -105,6 +116,20 @@
+ \par\medskip
+ \textbf{Palavras-chave}: transporte público; QR Code; informação ao passageiro; mobilidade urbana; pontos de interesse.
+ \end{resumo}
++% O modelo institucional prevê estas duas listas opcionais. Abstract não está
++% previsto nesse modelo; a exigência institucional permanece a confirmar.
++\begingroup
++\SingleSpacing
++\setlength{\beforechapskip}{0pt}
++\setlength{\afterchapskip}{12pt}
++\renewcommand{\listfigurename}{Lista de figuras}
++\pdfbookmark[0]{Lista de figuras}{listafiguras}
++\listoffigures*
++\clearpage
++\pdfbookmark[0]{Lista de tabelas}{listatabelas}
++\listoftables*
++\cleardoublepage
++\endgroup
+ % Ajuste local do espaço do título; preserva fonte e entradas do sumário.
+ \begingroup
+ \SingleSpacing
+@@ -114,6 +139,7 @@
+ \setpnumwidth{2em}
+ \setrmarg{3em}
+ \setlength{\cftbeforesubsectionskip}{-1.8pt}
++\pdfbookmark[0]{Sumário}{sumario}
+ \tableofcontents*
+ \endgroup
+ \cleardoublepage
+@@ -197,17 +223,13 @@
+ 
+ A relevância dessa padronização para o projeto está na possibilidade de integrar registros que descrevam a mesma operação. Ela não garante, por si só, cobertura, atualização ou disponibilidade local. Por isso, o PaP preserva a procedência dos catálogos consultados e trata a integração com um fornecimento GTFS operacional de Mauá como possibilidade futura, sem presumir que as fontes públicas coletadas já constituam esse fornecimento.
+ 
+-Uma vez organizadas as paradas e as viagens, é necessário representar quais deslocamentos são possíveis entre origem e destino. Grafos permitem descrever essas relações por vértices e arestas, associando custos às conexões. O algoritmo de Dijkstra encontra caminhos de menor custo em grafos com pesos não negativos; quando o custo representa duração, o objetivo pode ser minimizar o tempo do deslocamento \citep{sedgewicksp}.
+-
+-No transporte coletivo, a comparação precisa considerar também o momento em que cada viagem ocorre. Uma conexão geográfica entre duas linhas não assegura que o passageiro consiga realizar a troca: a próxima partida deve ser compatível com sua chegada. A representação por estados temporais permite incorporar espera e conexões ao planejamento \citep{transitplanner}.
+-
+-Esse fundamento orienta a escolha de Dijkstra no cenário demonstrativo de Mauá para buscar a chegada mais cedo no cenário consultado. O algoritmo compara os tempos fornecidos e não prevê, por si só, atrasos de trânsito. Os parâmetros, a composição do tempo total e os limites da implementação são descritos na metodologia, na Seção~\ref{sec:implementar-testar}.
+-
+-O planejamento em transporte coletivo depende do horário de partida, dos calendários e da compatibilidade entre conexões, diferentemente de um caminho mínimo com custos estáticos \citep{dijkstra1959,bast2015}. O RAPTOR organiza a busca por rodadas associadas às transferências \citep{delling2012}; essa é a referência conceitual do planejador inicial do PaP, mantido como alternativa. O CSA exemplifica outra organização, baseada na varredura de conexões temporais \citep{dibbelt2018}. No PaP, o termo conexão também designa estruturas reutilizáveis de percurso, e não implica adoção do CSA.
++Grafos representam paradas e conexões por vértices e arestas. Dijkstra encontra caminhos de menor custo com pesos não negativos; no transporte, a avaliação temporal deve compatibilizar calendários, partidas, espera e transferências \citep{sedgewicksp,dijkstra1959,bast2015,transitplanner}. No demonstrador de Mauá, busca-se a chegada mais cedo com os tempos fornecidos, sem previsão autônoma de atrasos; parâmetros e limites estão na Seção~\ref{sec:implementar-testar}.
++
++O RAPTOR organiza a busca por rodadas associadas às transferências \citep{delling2012}, referência conceitual do planejador inicial do PaP, mantido como alternativa. O CSA utiliza varredura de conexões temporais \citep{dibbelt2018}. No PaP, conexão também designa uma estrutura reutilizável de percurso e não implica adoção do CSA.
+ 
+ Separar preparação e consulta permite reutilizar relações da rede. O ULTRA investiga pré-processamento de transferências para consultas multimodais \citep{baum2019}; trabalhos sobre hierarquias de contração dependentes do tempo também tratam da preparação de estruturas para consultas temporais \citep{batz2013}. Essas referências fundamentam a discussão, sem atribuir ao PaP implementação integral de RAPTOR, ULTRA, CSA ou Contraction Hierarchies. A solução própria combina índices diretos e reversos na composição bidirecional offline e materializa seletivamente candidatos. Na consulta online, recupera esses candidatos, verifica caminhadas e avalia horários e previsões. As cotas por distância restringem a exploração e não garantem o ótimo temporal global; o Apêndice~\ref{ap:rotas} detalha esse compromisso.
+ 
+-O planejamento do percurso pressupõe que a origem esteja identificada. No ponto de ônibus, o QR Code pode fornecer essa informação pela leitura de um endereço vinculado ao local, reduzindo a necessidade de busca manual. Em Southampton, QR Codes únicos foram instalados em 44 pontos para acesso a informações de chegada \citep{southampton}. O caso da SPTrans documenta o uso do QR Code junto à sinalização física, com manutenção dos informativos tradicionais. A notícia de 2014 orientava instalar um aplicativo para ler o código; essa orientação se refere ao leitor de QR Code \citep{qrsptrans2014}. Neste PI, o QR Code é concebido como uma interface que estende o ambiente real com dados úteis ao passageiro: o próprio local fornece o contexto que, em uma busca convencional, precisaria ser informado manualmente. A proposta é que o código contenha um endereço web vinculado à parada, permitindo identificá-la sem exigir que o usuário conheça seu nome, endereço ou linhas atendidas. A consulta inicial deverá ocorrer no navegador, sem cadastro obrigatório ou instalação de aplicativo específico do projeto. O acesso pressupõe que o dispositivo disponha de um recurso capaz de ler QR Codes, além de conexão à internet.
++O QR Code pode identificar a origem por um endereço vinculado à parada. Em Southampton, códigos únicos foram instalados em 44 pontos para consultar chegadas \citep{southampton}; a SPTrans documentou sua adoção junto à sinalização física em 2014 \citep{qrsptrans2014}. A orientação daquela notícia para instalar um aplicativo referia-se ao leitor do código. No PaP, o acesso contextualizado abre a consulta no navegador, sem cadastro obrigatório nem aplicativo específico do projeto, mas depende de leitor de QR Code e conexão à internet. O fluxo implementado é apresentado na Seção~\ref{sec:fluxo-implementado}.
+ 
+ \clearpage
+ \label{sec:analise-qrcodeadesivo}
+@@ -304,27 +326,7 @@
+ 
+ Saber quais ônibus estão chegando não resolve, por si só, a escolha da viagem. No fluxo registrado, o passageiro precisa conhecer as linhas que atendem ao destino ou investigar seus trajetos. O nome do destino final de uma linha não esclarece necessariamente se ela passa pelo local intermediário desejado. A lista apresenta a oferta do ponto, mas transfere ao usuário a tarefa de reconhecer quais alternativas são úteis para seu deslocamento.
+ 
+-\clearpage
+-A captura (Figura~\ref{fig:olho-vivo-lista-extensa}) mostra uma consulta com numerosas linhas e previsões. Para preservar a legibilidade, a imagem foi dividida em dois recortes consecutivos, lidos da esquerda para a direita. O aviso de cookies foi mantido como aparece no registro original.
+-
+-\begin{figure}[H]
+-    \centering
+-    \begin{minipage}[t]{0.48\textwidth}
+-        \vspace{0pt}
+-        \includegraphics[width=\linewidth,trim=0 1543bp 0 0,clip]{olho_vivo7.png}
+-        \par\small (a) Parte superior da captura.
+-    \end{minipage}\hfill
+-    \begin{minipage}[t]{0.48\textwidth}
+-        \vspace{0pt}
+-        \includegraphics[width=\linewidth,trim=0 0 0 1600bp,clip]{olho_vivo7.png}
+-        \par\small (b) Continuação da mesma captura.
+-    \end{minipage}
+-    \caption{Olho Vivo, etapa 3: lista extensa de linhas e previsões, com informação disponível que ainda precisa ser selecionada conforme o destino do passageiro.}
+-    \label{fig:olho-vivo-lista-extensa}
+-    \fonte{SPTrans, sistema Olho Vivo; recortes consecutivos de captura fornecida pelo grupo.}
+-\end{figure}
+-
+-A quantidade de opções e a repetição de horários podem gerar sobrecarga visual, sobretudo para quem não conhece a rede. Essa é uma hipótese de usabilidade motivada pelas capturas, a ser avaliada com passageiros. A proposta do PI é reduzir esse esforço mediante a seleção do destino, mantendo visíveis as linhas e conexões relevantes.
++A consulta de várias linhas (Figura~\ref{fig:olho-vivo-previsoes}) também motiva a hipótese de sobrecarga visual, ainda não avaliada com passageiros. O registro complementar de uma lista extensa permanece no acervo, em \nolinkurl{imgs/olho_vivo7.png}; esse registro sustenta a mesma hipótese. A filtragem por destino proposta pelo PI deverá ser avaliada quanto à seleção das alternativas relevantes.
+ 
+ \clearpage
+ No fluxo observado, o acesso ``Mapa'' de uma linha leva à visualização de seu trajeto e veículos (Figura~\ref{fig:olho-vivo-mapa}). A consulta por ponto reúne linhas em uma lista; o mapa registrado acompanha uma linha por vez. Comparar espacialmente as alternativas exige alternar entre consultas. A captura apresenta o destino ``Est. Sto. Amaro/Guido Caloi'' e o cabeçalho ``LINHA null'', sem permitir confirmar o código da linha apenas pela imagem. Essa inconsistência pertence à tela observada do Olho Vivo e não é usada como evidência de descontinuidade do QRCodeAdesivo.
+@@ -332,7 +334,7 @@
+ \begin{figure}[H]
+     \centering
+     \includegraphics[width=0.95\textwidth,height=0.46\textheight,keepaspectratio]{olho_vivo6.png}
+-    \caption{Olho Vivo, etapa 4: mapa de um trajeto selecionado, sem visualização conjunta das demais linhas da lista.}
++    \caption{Olho Vivo, etapa 3: mapa de um trajeto selecionado, sem visualização conjunta das demais linhas da lista.}
+     \label{fig:olho-vivo-mapa}
+     \fonte{SPTrans, sistema Olho Vivo; captura de tela fornecida pelo grupo.}
+ \end{figure}
+@@ -534,7 +536,11 @@
+ \clearpage
+ As figuras a seguir começam pela apresentação da pesquisa, cuja participação é opcional. A navegação pode ser iniciada por ``Continuar sem contribuir'', sem gravação de pesquisa. Em seguida, distinguem o acesso comum, com ou sem localização, e o acesso pelo link de uma parada. A sequência documentada pelo link segue para favoritos, alternativas, mapa e confirmação de cancelamento. As telas adicionais são identificadas como cenários independentes; não representam uma única sessão contínua.
+ 
+-As capturas foram realizadas em 22 e 23 de outubro de 2026, conforme as fontes de cada figura, usando a aplicação local em desenvolvimento. O registro de 22 de outubro identifica o commit \texttt{aee66eb} e as alterações locais existentes na data. Foi utilizado Chromium com emulação móvel de 430 por 932 pixels e densidade 2, no tema escuro. As consultas de transporte utilizaram serviços reais. A localização no Butantã e os favoritos dos exemplos de 22 de outubro foram preparados para a documentação; a conferência de 23 de outubro usou contextos novos, sem localização autorizada. A telemetria foi interceptada somente no navegador de captura, sem substituir respostas de transporte. A procedência consta de \nolinkurl{capturas/2026-10-22/registro.json} e \nolinkurl{capturas/2026-10-23/procedencia.json}. As imagens documentam a interface, não avaliação por participantes externos. As telas de entrada e acompanhamento foram recapturadas em 23 de outubro após a reformulação do consentimento e da representação dos percursos. Nessa rodada, foi escolhida a navegação sem contribuir; nenhuma resposta de transporte foi substituída. As capturas móveis usam 430 por 932 pixels; as da linha 6L10-41 usam 1366 por 1000 pixels, ambas com densidade 2. O roteiro, os horários e os hashes estão em \nolinkurl{capturas/2026-10-23-rotas/}. Em 25 de outubro, foram recapturadas a entrada, a navegação sem localização, as configurações de pesquisa, o feedback e o acompanhamento da linha 6L10-41, na revisão 85417bc. O roteiro e os hashes estão em \nolinkurl{capturas/2026-10-25/}. As demais telas mantêm suas datas e cenários históricos explicitados; não são apresentadas como capturas realizadas em 25 de outubro. A procedência das cinco recapturas complementares de 25 de outubro, realizadas sem alteração das respostas de transporte ou retoque das imagens, está em \nolinkurl{capturas/2026-10-25-sem-aviso/}.
++As capturas documentam a aplicação local em desenvolvimento, não uma avaliação por participantes externos. Em 22 de outubro de 2026, o registro identifica o commit \texttt{aee66eb} e alterações locais: Chromium, tema escuro, emulação móvel de 430 por 932 pixels, densidade 2, localização simulada no Butantã e favoritos preparados. Foram usados serviços reais de transporte; somente a telemetria foi interceptada no navegador. A procedência está em \nolinkurl{capturas/2026-10-22/registro.json}.
++
++Em 23 de outubro, contextos novos sem localização autorizada conferiram o fluxo (\nolinkurl{capturas/2026-10-23/procedencia.json}). Entrada e acompanhamento foram recapturados após alterações do consentimento e dos percursos, escolhendo não contribuir com a pesquisa e sem substituir respostas de transporte. Foram mantidas as dimensões móveis; para a linha 6L10-41, usou-se 1366 por 1000 pixels, também com densidade 2. Roteiro, horários e hashes estão em \nolinkurl{capturas/2026-10-23-rotas/}.
++
++Em 25 de outubro, na revisão \texttt{85417bc}, foram recapturados entrada, navegação sem localização, configurações de pesquisa, feedback e linha 6L10-41. Os registros estão em \nolinkurl{capturas/2026-10-25/}; a procedência das cinco recapturas complementares sem substituição de respostas nem retoque está em \nolinkurl{capturas/2026-10-25-sem-aviso/}. Cada figura mantém sua data e cenário; as demais telas continuam identificadas como históricas.
+ 
+ \begin{figure}[H]\centering
+ \includegraphics[width=0.80\textwidth,height=0.69\textheight,keepaspectratio]{capturas/2026-10-25/pesquisa-inicial.png}
+@@ -590,19 +596,17 @@
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-05-viagem-completa.png}
++\begin{minipage}[t]{0.48\textwidth}\centering\vspace{0pt}
++\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-05-viagem-completa.png}
+ \caption{Viagem completa, com embarque, baldeação e destino.}\label{fig:print-05-viagem-completa}
+-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+-\end{figure}
+-A rota selecionada é representada no mapa. A legenda distingue trechos de ônibus e caminhada; o controle inferior permite retornar à lista ou selecionar um trecho quando houver baldeação.
+-\clearpage
+-
+-\begin{figure}[H]\centering
+-\includegraphics[width=0.80\textwidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-06-ultimo-trecho.png}
++\end{minipage}\hfill
++\begin{minipage}[t]{0.48\textwidth}\centering\vspace{0pt}
++\includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{capturas/2026-10-22/pap-06-ultimo-trecho.png}
+ \caption{Visualização do último trecho da viagem selecionada.}\label{fig:print-06-ultimo-trecho}
+-\fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+-\end{figure}
+-O seletor de trechos permite examinar a parte final do percurso sem perder a referência da viagem escolhida.
++\end{minipage}
++\fonte{Capturas da aplicação em emulação móvel, 22 out. 2026.}
++\end{figure}
++A rota selecionada é representada no mapa, cuja legenda distingue ônibus e caminhada. O controle inferior permite retornar à lista ou examinar um trecho, inclusive a parte final, mantendo a referência da viagem escolhida.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+--- antes/revisao-tecnico-cientifica-2026-11-02/notas-historicas.tex
++++ depois/revisao-tecnico-cientifica-2026-11-02/notas-historicas.tex
+@@ -1,21 +1,15 @@
+ \chapter{Evolução e propostas de continuidade}\label{ap:notas-historicas}
+ Os registros a seguir preservam a evolução descrita no relatório de referência, com suas datas e fontes. Propostas de integração, relatos de lotação e análises de intenção de viagem não são funcionalidades entregues. As sínteses atuais estão no capítulo de resultados e os limites na Seção~\ref{sec:validade}.
+ 
+-A apresentação conserva os registros históricos do cenário de Mauá e acrescenta a evolução técnica de São Paulo, examinada na revisão \texttt{4992027}, de 7 de outubro de 2026. Essa extensão utiliza o cadastro GTFS da SPTrans e consulta o Olho Vivo quando o serviço e a identificação de linha e parada permitem. Horários programados representam a programação do serviço e não previsões operacionais em tempo real. A extensão não altera a comunidade originalmente delimitada nem comprova disponibilidade de dados equivalentes em Mauá.
++A extensão de São Paulo, examinada na revisão \texttt{4992027}, de 7 de outubro de 2026, acrescentou GTFS/SPTrans e consultas ao Olho Vivo quando havia correspondência de linha e parada. Esse registro histórico não equivale ao fornecimento de dados operacionais de Mauá nem confunde programação com previsão em tempo real.
+ 
+-Na interface dessa extensão, a localização conhecida identifica automaticamente a origem e permite selecionar apenas o destino; o QR Code mantém a entrada por parada. O mapa inicia centrado no passageiro, com raio mínimo de 250 m no menor eixo, e permite recentrar pela ação de localização. Coordenadas simuladas configuráveis do passageiro substituem seu GPS para reprodução de cenários; quando ausentes, utiliza-se a localização autorizada pelo navegador. Além disso, os favoritos permitem reutilizar destinos e a seleção de uma alternativa abre seu percurso no mapa. O cálculo fornece resultados progressivos e preserva a seleção e o enquadramento do mapa durante atualizações. Essas escolhas procuram reduzir operações repetidas e tornar o estado da consulta perceptível, em consonância com os critérios de IHC discutidos. Sua implementação é um resultado técnico; a redução efetiva do esforço do passageiro permanece por medir.
++O fluxo de origem, destino, favoritos e resultados progressivos está documentado na Seção~\ref{sec:fluxo-implementado}. Na revisão histórica, o mapa iniciava no passageiro, com raio mínimo de 250 m no menor eixo e ação de recentralização. Coordenadas simuladas configuráveis substituíam o GPS nos cenários de reprodução; sem elas, utilizava-se a localização autorizada pelo navegador.
+ 
++O toque prolongado de aproximadamente 0,65 segundo selecionava coordenadas segundo a tarefa ativa (origem ou destino), cancelando a seleção em arrastos ou gestos com dois dedos. O cálculo incluía as caminhadas de acesso. As regras de alteração do embarque, confirmação de cancelamento e preservação de favoritos e enquadramento estão documentadas na Seção~\ref{sec:fluxo-implementado} e no Apêndice~\ref{ap:engenharia}. Fechar o painel apenas mudava a visualização.
+ 
+-O toque prolongado por aproximadamente 0,65 segundo permite selecionar coordenadas fora das paradas, respeitando a tarefa ativa: origem ao alterar o embarque ou destino ao escolher a chegada. Arrasto e gestos com dois dedos cancelam a seleção. O planejamento inclui as caminhadas entre essas coordenadas e as paradas utilizadas. Alterar o embarque conserva o destino e reenquadra o mapa na localização do passageiro ou, na sua ausência, no embarque anterior. Confirmar o cancelamento remove o trajeto e desmarca embarque e destino, retornando à seleção de embarque e preservando os favoritos e o enquadramento do mapa. Fechar o painel para ver o mapa apenas muda a visualização; não cancela a viagem.
++A ampulheta sinalizava o cálculo; ao concluir, o recálculo manual ignorava o cache. A busca não reiniciava automaticamente a cada 30 segundos nem a cada atualização do GPS: a atualização periódica pertencia à consulta de próximos ônibus. Nessa consulta, frequência significava intervalo entre veículos e faixa de vigência, com união de faixas consecutivas iguais, não contagem regressiva. A identidade visual própria mantinha a identificação das fontes na documentação e na aplicação.
+ 
+-A tela de rotas utiliza uma ampulheta animada durante o cálculo e disponibiliza o recálculo manual ao concluir. Reiniciar a busca ignora o cache de resultados e executa novamente o planejamento. A consulta de rotas não é reiniciada automaticamente a cada 30 segundos nem a cada atualização do GPS; a atualização periódica permanece na consulta de próximos ônibus. No mapa, o seletor Trecho alterna a viagem completa e suas etapas, com legenda de ônibus e caminhada em coluna. A consulta de próximos ônibus apresenta a frequência como intervalo entre veículos e a faixa em que ele vigora, unindo faixas consecutivas de mesma frequência. Essa apresentação evita confundir frequência com contagem regressiva para a chegada. A identidade visual utiliza ícone próprio, mantendo a identificação das fontes de dados na documentação e nas informações da aplicação.
+-
+-O protótipo implementa a consulta iniciada no ponto de ônibus e permite apresentar esse fluxo à comunidade. A evolução partiu de um cenário demonstrativo de Mauá, com fontes públicas incompletas, coordenadas parcialmente estimadas e operação simulada. A implementação funcional apresentada neste capítulo utiliza o cenário São Paulo, com cadastro GTFS da SPTrans e integração com a API Olho Vivo para previsões e posições operacionais quando disponíveis. O acesso por QR Code, a seleção de origem e destino, o planejamento de alternativas, os favoritos e a visualização dos percursos estão implementados. A entrevista inicial documenta participação da comunidade na definição da proposta. A demonstração funcional, a apreciação profissional externa e a avaliação exploratória com usuários convidados estão documentadas, incluindo feedbacks de 25 de outubro e correções técnicas verificadas pelo grupo em 29 de outubro, além das verificações automatizadas. Essas evidências têm escopos distintos: os testes e as correções posteriores não são atribuídos ao profissional externo. Permanece pendente a avaliação sistemática com passageiros, com tarefas e critérios definidos; não houve implantação operacional em Mauá.
+-
+-A contribuição investigada é a continuidade do acesso contextualizado pelo ponto físico até a escolha de uma alternativa por destino, com identificação da origem por QR Code e abertura no navegador. As novas capturas do Cittamobi confirmam que escolha por destino e planejamento com conexões já são oferecidos por esse aplicativo; no PaP, esses recursos dão continuidade à consulta, sem constituírem novidade funcional comprovada. Mantém-se a distinção entre as soluções examinadas da SPTrans: o QRCodeAdesivo oferece uma página de parada com links por linha; o Olho Vivo apresenta, nas capturas analisadas, previsões de várias linhas por ponto e mapa de uma linha selecionada. O PaP busca integrar comparação e filtragem no mesmo fluxo. A análise não estabelece superioridade do protótipo nem limitação de todos os serviços da SPTrans.
+-
+-
+-A base da solução final reúne paradas georreferenciadas, sequências de viagens e horários programados do GTFS. O planejamento considera o sentido, as conexões e as caminhadas verificadas, enquanto a API Olho Vivo pode complementar a consulta com informação operacional. As capturas apresentadas neste capítulo registram estados dessa versão funcional, conforme a procedência e as revisões indicadas junto às figuras. Os mockups anteriores permanecem como registros da etapa de prototipação e não são reproduzidos como evidência da solução final.
++A distinção entre o demonstrador simulado de Mauá, a implementação funcional, a apreciação profissional de outubro e as verificações posteriores é retomada no capítulo de resultados. O fluxo técnico implementado não comprova redução do esforço do passageiro; essa avaliação permanece pendente. A comparação com Cittamobi, QRCodeAdesivo e Olho Vivo está na fundamentação e não estabelece superioridade do PaP. Mockups anteriores são registros de prototipação, não evidências da solução final.
+ 
+ Os registros recebidos sobre Santos permitiram confrontar o recorte do projeto com uma solução em operação. No texto reproduzido pelo grupo e atribuído à resposta ao protocolo 7657-2026, o Município informa que todos os pontos de parada dispõem de QR Code para consulta das previsões de chegada e que o aplicativo Quanto Tempo Falta oferece linhas, itinerários, localização dos veículos e previsões. A resposta considera desnecessária a implantação de outra sistemática para a finalidade descrita na solicitação, mas reconhece a pertinência de estudos acadêmicos sobre dados e aprimoramento do transporte. Essa posição é registrada como manifestação recebida, sem representar autorização de implantação, parceria ou avaliação do PaP\footnote{Texto atribuído à resposta do Município de Santos ao protocolo 7657-2026, reproduzido pelo grupo. O documento original não integra o material consultado; data e setor remetente não foram informados. As afirmações são relatadas conforme essa reprodução, sem verificação independente da cobertura do serviço.}.
+ 
+@@ -29,14 +23,7 @@
+ 
+ À luz de Haylett, a interface de São Paulo já apresenta um resumo comparável das alternativas, com duração, sentido e quantidade de trocas, antes dos detalhes de cada trecho. A lista de próximas partidas deve preservar a distinção entre linha, variante e sentido, evitando que o agrupamento visual esconda diferenças de percurso. A verificação de compreensão dessas informações é parte da avaliação proposta, não um benefício já medido.
+ 
+-A arquitetura reúne os recursos necessários para apresentar o percurso ao passageiro e manter os dados que sustentam a consulta. A interface utiliza React para seleção de origem e destino, listas, preferências locais e mapa Leaflet. Django/Python oferece a API, o planejamento, a importação e a administração. O SQLite armazena os registros utilizados na montagem dos dados da interface, sua procedência e as estimativas geográficas.
+-
+-A arquitetura híbrida separa a preparação estrutural da consulta ao passageiro (Figura~\ref{fig:arquitetura-pap}). A versão de 1 de novembro de 2026 combina materialização compacta, ônibus, metrô e trens, com avaliação temporal na consulta. Produtores concorrentes publicam alternativas assim que disponíveis; uma dependência externa em uma fonte não bloqueia necessariamente outra. O planejador por rodadas permanece como recurso complementar. O censo completo e a comparação por amostragem documentam cobertura, ganhos e regressões de latência na Seção~\ref{sec:atualizacao-20261101}, sem prova de ótimo global ou de desempenho no celular.
+-
+-A síntese quantitativa está nas Seções~\ref{sec:cobertura-revisada} e~\ref{sec:desempenho-revisado}; o protocolo controlado histórico não equivale às medições locais de 1 de novembro.
+-
+-
+-O diagrama da Figura~\ref{fig:banco-mbm}, no Apêndice~\ref{ap:importacao}, apresenta as associações lógicas do índice GTFS usado na solução atual. Esse índice é separado dos modelos Django empregados no catálogo histórico e na auditoria de estimativas de Mauá.
++A arquitetura React/Leaflet, Django/Python e SQLite é apresentada na Figura~\ref{fig:arquitetura-pap}; o índice GTFS, separado dos modelos Django históricos de Mauá, na Figura~\ref{fig:banco-mbm}. A evolução concorrente de 1 de novembro está na Seção~\ref{sec:atualizacao-20261101}. Cobertura e desempenho são sintetizados nas Seções~\ref{sec:cobertura-revisada} e~\ref{sec:desempenho-revisado}; essas medições locais não substituem o protocolo controlado proposto.
+ 
+ No cenário histórico de Mauá, a simulação possui administração separada, com autenticação, para ativação, relógio e velocidade. O passageiro não precisa habilitá-la na tela principal. Quando desligada, veículos e previsões demonstrativas ficam indisponíveis; não há substituição automática por previsões ou posições operacionais de Mauá. O catálogo continua acessível. O isolamento dos cenários permite repetir a demonstração e comparar o comportamento após alterações.
+ 

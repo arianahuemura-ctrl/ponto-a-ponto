@@ -1,0 +1,134 @@
+ M .gitignore
+ M README.md
+ M backend/mbm/urls.py
+ M backend/transit/management/commands/materialize_sptrans_connections.py
+ M backend/transit/research.py
+ M backend/transit/sptrans/addresses.py
+ M backend/transit/sptrans/alternatives.py
+ M backend/transit/sptrans/compact.py
+ M backend/transit/sptrans/connection_adapter.py
+ M backend/transit/sptrans/directions.py
+ M backend/transit/sptrans/journey_completion.py
+ M backend/transit/sptrans/materialized_adapter.py
+ M backend/transit/sptrans/materialized_connections.py
+ M backend/transit/sptrans/planner.py
+ M backend/transit/sptrans/store.py
+ M backend/transit/sptrans/viewport.py
+ M backend/transit/sptrans/views.py
+ M backend/transit/templates/transit/research_inbox.html
+ M backend/transit/templates/transit/usability_detail.html
+ M backend/transit/test_journey_completion.py
+ M backend/transit/test_research.py
+ M backend/transit/test_sptrans_addresses.py
+ M backend/transit/test_sptrans_connections.py
+ M backend/transit/test_sptrans_integration.py
+ M backend/transit/test_sptrans_materialized.py
+ M backend/transit/test_sptrans_planner.py
+ M frontend/e2e/board-backdrop.spec.js
+ M frontend/e2e/boarding-markers.spec.js
+ M frontend/e2e/favorite-actions.spec.js
+ M frontend/e2e/line-itinerary.spec.js
+ M frontend/e2e/quick-destinations.spec.js
+ M frontend/e2e/research-consent.spec.js
+ M frontend/e2e/selection-flow.spec.js
+ M frontend/e2e/sptrans.spec.js
+ M frontend/e2e/watch-bus.spec.js
+ M frontend/src/BoardDialog.jsx
+ M frontend/src/DestinationSearch.jsx
+ M frontend/src/Feedback.jsx
+ M frontend/src/PointControl.jsx
+ M frontend/src/SaoPaulo.jsx
+ M frontend/src/SaoPauloMap.jsx
+ M frontend/src/SelectableBusLine.jsx
+ M frontend/src/StopCanvas.js
+ M frontend/src/feedback.css
+ M frontend/src/researchApi.js
+ M frontend/src/sao-paulo.css
+ M frontend/src/stopCatalog.js
+ M frontend/src/stopCatalog.test.js
+ M frontend/src/usability.js
+ M frontend/src/useApproachingBus.js
+ M frontend/src/useApproachingLines.js
+ M frontend/src/useJourneyForecast.js
+?? artifacts/benchmarks/async-comparison-20261101/
+?? artifacts/benchmarks/async-first-route-20261101.json
+?? artifacts/benchmarks/async-http-smoke-20261101.json
+?? artifacts/benchmarks/async-http-transport-20261101.json
+?? artifacts/benchmarks/cost-eight-feasibility-20261101.json
+?? artifacts/benchmarks/coverage-audit-20261101/
+?? artifacts/benchmarks/expanded-below-3-20261101.json
+?? artifacts/benchmarks/expanded-validation-20261101.json
+?? artifacts/benchmarks/materialization-capacity-20261101.json
+?? artifacts/benchmarks/materialized-composition-candidate-20261101.json
+?? artifacts/benchmarks/materialized-coverage-20261101.json
+?? artifacts/benchmarks/materialized-five-20261101.json
+?? artifacts/benchmarks/materialized-raptor-composition-20261101.json
+?? artifacts/benchmarks/short-walks-20261101.json
+?? artifacts/benchmarks/short-walks-validation-20261101.json
+?? artifacts/benchmarks/staged-cost-0-20261101.json
+?? artifacts/benchmarks/staged-cost-1-20261101.json
+?? artifacts/benchmarks/staged-vacancies-20261101.json
+?? artifacts/benchmarks/staged-validation-20261101.json
+?? artifacts/benchmarks/staged-walks-20261101.json
+?? artifacts/benchmarks/topup-pair-lookup-20261101.json
+?? artifacts/benchmarks/topup-pruning-validation-20261101.json
+?? artifacts/benchmarks/topup-reader-20261101.json
+?? artifacts/benchmarks/topup-smallsets-validation-20261101.json
+?? artifacts/benchmarks/topup-through-4-20261101.json
+?? artifacts/benchmarks/topup-validation-20261101.json
+?? artifacts/benchmarks/unmaterialized-nearest-pair-20261101.json
+?? backend/transit/management/commands/materialize_sptrans_expanded.py
+?? backend/transit/management/commands/materialize_sptrans_short_walks.py
+?? backend/transit/management/commands/materialize_sptrans_staged.py
+?? backend/transit/management/commands/materialize_sptrans_topup.py
+?? backend/transit/sptrans/concurrent_sources.py
+?? backend/transit/sptrans/expanded_kernel.cpp
+?? backend/transit/sptrans/expanded_materialized.py
+?? backend/transit/sptrans/rail.py
+?? backend/transit/sptrans/rail_network.py
+?? backend/transit/sptrans/short_walks.py
+?? backend/transit/sptrans/staged_adapter.py
+?? backend/transit/sptrans/staged_kernel.cpp
+?? backend/transit/sptrans/staged_materialized.py
+?? backend/transit/sptrans/topup_kernel.cpp
+?? backend/transit/sptrans/topup_materialized.py
+?? backend/transit/sptrans/transfer_policy.py
+?? backend/transit/sptrans/weighted_planner.py
+?? backend/transit/test_concurrent_sources.py
+?? backend/transit/test_expanded_materialized.py
+?? backend/transit/test_rail.py
+?? backend/transit/test_rail_network.py
+?? backend/transit/test_short_walks.py
+?? backend/transit/test_staged_materialized.py
+?? backend/transit/test_topup_materialized.py
+?? backend/transit/test_weighted_transfers.py
+?? docs/async-performance-comparison.md
+?? docs/async-route-stream.md
+?? docs/coverage-audit-20261101.md
+?? docs/coverage-audit-contract.md
+?? docs/endpoint-audit-20261101.md
+?? docs/feedback-rating.md
+?? docs/inventario-videos-pap-2026-11-01.csv
+?? docs/inventario-videos-pap-2026-11-01.html
+?? docs/limpeza-karaokes-pap-2026-11-01.json
+?? docs/materialized-raptor-pilot.md
+?? docs/rail-routing.md
+?? docs/staged-materialization.md
+?? docs/weighted-transfers.md
+?? frontend/e2e/async-routes.spec.js
+?? frontend/e2e/feedback-rating.spec.js
+?? frontend/e2e/materialized-walk.spec.js
+?? frontend/e2e/point-controls.spec.js
+?? frontend/e2e/rail-colors.spec.js
+?? frontend/e2e/rail-network.spec.js
+?? frontend/e2e/rail-routing.spec.js
+?? frontend/e2e/route-stops.spec.js
+?? frontend/e2e/stop-directions.spec.js
+?? frontend/e2e/ux-feedback.spec.js
+?? frontend/src/CollapsibleNotice.jsx
+?? frontend/src/RailKeys.jsx
+?? frontend/src/SettingsDialog.jsx
+?? frontend/src/railStyle.js
+?? frontend/src/transferCost.js
+?? frontend/src/transferCost.test.js
+?? scripts/experiments/

@@ -1,0 +1,12 @@
+{
+  "stops": 22274,
+  "origins_without_boarding_or_internal_access": 50,
+  "destinations_without_alighting_or_final_walk": 9,
+  "both": 0,
+  "missing_pairs_due_to_endpoint_constraints": 1313657,
+  "missing_pairs_remaining_for_connectivity_or_transfer_analysis": 344252,
+  "scope": "Current graph access rules: initial walking is internal only; final walking may be external",
+  "nearest_missing_origin_has_no_boarding": true,
+  "remaining_pairs_with_under_five_including_empty": 1717789,
+  "last_optimized_generation_seconds": 2050.3198929819628
+}

@@ -1,0 +1,338 @@
+stop_id,stop_name,stop_desc,stop_lat,stop_lon,boundary_distance_m,routes,valid_trip_templates
+artesp:7692,"Rua Oratório, 4046 - RP6 (Regiões de Planejamento), Mauá - SP, 09380-240, Brasil",,-23.624758,-46.484576,4.57,artesp:107|artesp:157,280
+artesp:7696,"R. Carmem Miranda, 442 - Jardim Sonia Maria, Mauá - SP, 09380-310, Brasil",,-23.629498,-46.480246,261.33,artesp:157,55
+artesp:7697,"R. Carmem Miranda, 762 - Jardim Sonia Maria, Mauá - SP, 09380-310, Brasil - Jardim Sonia Maria, Mauá - SP, 09380-325, Brasil",,-23.631824,-46.479549,373.84,artesp:157,55
+artesp:7698,"Rua Professora Maria Josefina Kuman Fláquer, 272 - Jardim Silvia Maria, Mauá - SP, 09380-310, Brasil",,-23.632076,-46.478105,264.89,artesp:157,55
+artesp:7699,"R. Oscarito, 642 - Jardim Sonia Maria, Mauá - SP, 09380-370, Brasil - Jardim Silvia Maria, Mauá - SP, 09380-425, Brasil",,-23.631809,-46.476614,113.2,artesp:157,55
+artesp:7700,"R. Oscarito, 1213 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",,-23.636506,-46.474311,62.08,artesp:157,112
+artesp:9685,"R. Oscarito, 955-1077 - Jardim Sonia Maria, Mauá - SP, 09380-370, Brasil - Jardim Silvia Maria, Mauá - SP, 09380-350, Brasil",,-23.635264,-46.475062,52.62,artesp:157,57
+artesp:9686,"R. Oscarito, 819 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",,-23.633259,-46.475714,34.2,artesp:157,57
+artesp:9688,"R. Profa. Maria Joséfina Kuman Fláquer, 272 - Jardim Silvia Maria, Mauá - SP, 09380-400, Brasil",,-23.631974,-46.478159,268.81,artesp:157,57
+artesp:9689,"R. Carmem Miranda, 703 - Jardim Sonia Maria, Mauá - SP, 09380-310, Brasil",,-23.63162,-46.47952,367.92,artesp:157,57
+artesp:9690,"Rua Carmem Miranda, 477 - Jardim Sonia Maria, Mauá - SP, 09380-310, Brasil",,-23.629624,-46.480088,276.97,artesp:157,57
+artesp:9691,"R. Jorge Monteleone, 43a - Jardim Sonia Maria, Mauá - SP, 09380-270, Brasil",,-23.624548,-46.482139,74.65,artesp:157,57
+artesp:38875,"Av. Cap. João, 2500 - Jardim Guapituba, Mauá - SP, 09360-330, Brasil",,-23.687633,-46.452231,1152.4,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,83
+artesp:44100,"Rua Alonso Vasconcelos Pacheco, 1249",,-23.674876,-46.447972,1721.32,artesp:160|artesp:160EX1|artesp:382,120
+artesp:44112,"Rua Geraldo Ranck, 206-214",,-23.677546,-46.432104,349.71,artesp:382,51
+artesp:44118,"Av. Joaquim Chavasco, 59 - Jardim Maua, Mauá - SP, 09340-190, Brasil",,-23.667874,-46.435118,1358.27,artesp:382,51
+artesp:44121,"Avenida Dona Benedita Franca da Veiga, 48a",,-23.66431,-46.431289,1538.3,artesp:382|artesp:382EX1,99
+artesp:44122,"Avenida Dona Benedita Franca da Veiga, 300-332",,-23.66206,-46.43061,1762.56,artesp:382|artesp:382EX1,99
+artesp:44123,"Av. Dona Benedita Franca da Veiga, 560 - Vila Lisboa, Mauá - SP, 09330-620, Brasil",,-23.660799,-46.428696,1870.92,artesp:382|artesp:382EX1,99
+artesp:44124,"Avenida Benedita Franco da Veiga, 962-1100",,-23.658495,-46.425355,1584.67,artesp:382|artesp:382EX1,99
+artesp:44125,"Av. Dona Benedita Franca da Veiga, 1186 - Vila Feital, Mauá - SP, 09330-620, Brasil",,-23.657053,-46.423962,1413.01,artesp:382|artesp:382EX1,99
+artesp:44127,"Av. Benedita Franco da Veiga, 1631-1649 - Vila Feital, Mauá - SP, 09330-705, Brasil - Vila Feital, Mauá - SP, 09330-620, Brasil",,-23.653469,-46.421859,1025.84,artesp:382|artesp:382EX1,99
+artesp:44128,"Av. Dona Benedita Franca da Veiga, 2018 - Vila Feital, Mauá - SP, 09330-765, Brasil",,-23.651033,-46.420895,781.57,artesp:382|artesp:382EX1,147
+artesp:44457,"R. Rogerio Rodrigues, 38 - Jardim Itaussu, Mauá - SP, Brasil - RP11 (Regiões de Planejamento), Mauá - SP, 09330-620, Brasil",,-23.648451,-46.41934,558.15,artesp:382|artesp:382EX1,147
+artesp:44458,"Av. Dona Benedita Franca Da Veiga, 2207 - Vila Lisboa, Mauá - SP, Brazil - Sítio Bela Vista, Mauá - SP, 09330-620, Brasil",,-23.649296,-46.420957,594.7,artesp:382|artesp:382EX1,147
+artesp:44459,"R. Reinaldo Dênis, 10 - Jardim Columbia, Mauá - SP, 09330-646, Brasil - RP11 (Regiões de Planejamento), Mauá - SP, 09330-620, Brasil",,-23.650998,-46.421035,774.02,artesp:382|artesp:382EX1,147
+artesp:44461,"Av. Dona Benedita Franca da Veiga, 1431 - Vila Feital, Mauá - SP, 09330-765, Brasil",,-23.655048,-46.423205,1189.62,artesp:382|artesp:382EX1,99
+artesp:44463,"Av. Dona Benedita Franca da Veiga, 851 - Vila Feital, Mauá - SP, 09330-620, Brasil",,-23.658689,-46.425996,1615.66,artesp:382|artesp:382EX1,99
+artesp:44464,"Av. Dona Benedita Franca da Veiga, 535 - Jardim Sao Gabriel, Mauá - SP, 09330-620, Brasil",,-23.660804,-46.429206,1875.99,artesp:382|artesp:382EX1,99
+artesp:44465,"Av. Dona Benedita Franca da Veiga, 269 - RP10 (Regiões de Planejamento), Mauá - SP, 09330-620, Brasil",,-23.661987,-46.430768,1773.91,artesp:382|artesp:382EX1,99
+artesp:44468,"Av. Barão de Mauá, 2793-2807 - RP10 (Regiões de Planejamento), Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09340-440, Brasil",,-23.66531,-46.435898,1636.6,artesp:160|artesp:160EX1|artesp:382|artesp:382EX1,168
+artesp:44469,"Av. Joaquim Chavasco, 92a - Jardim Maua, Mauá - SP, 09340-190, Brasil",,-23.667925,-46.435307,1365.45,artesp:382,51
+artesp:44471,"R. Inácio Barreta, 74 - Jardim Maua, Mauá - SP, 09340-180, Brasil",,-23.671414,-46.434184,1000.29,artesp:382,51
+artesp:44472,"Rua Caetano Aletto - Jardim Maua, Mauá - SP, 09351-105, Brasil",,-23.67356,-46.433704,808.83,artesp:382,51
+artesp:44474,"R. Caetano Aletto, 292 - Jardim Itapark Velho, Mauá - SP, 09351-510, Brasil",,-23.676135,-46.433501,560.94,artesp:382,51
+artesp:44475,"R. Geraldo Ranck, 153 - Jardim Itapark Velho, Mauá - SP, 09351-540, Brasil",,-23.677585,-46.432293,358.93,artesp:382,51
+artesp:44476,"R. Zina Batani Bernardi, 913 - Jardim Itapark, Mauá - SP, 09351-440, Brasil",,-23.67928,-46.433011,319.0,artesp:382,51
+artesp:44477,"Rua Caetano Aletto, 1038 - Jardim Itapark Novo, Mauá - SP, 09351-440, Brasil",,-23.678834,-46.434167,446.53,artesp:382,51
+artesp:44484,"Av. Itapark, 1988 - Jardim Itapark, Mauá - SP, 09350-000, Brasil",,-23.680561,-46.443259,952.38,artesp:160|artesp:160EX1|artesp:382,120
+artesp:44486,"Av. Itapark, 1593 - Vila Bocaina, Mauá - SP, 09350-000, Brasil",,-23.677246,-46.445627,1368.13,artesp:160|artesp:160EX1|artesp:382,120
+artesp:44533,"R. Lourival de Almeida, 11 - Jardim Itapeva, Mauá - SP, 09330-050, Brasil",,-23.676357,-46.415321,613.15,artesp:160|artesp:160EX1|artesp:382EX1,234
+artesp:44535,"Av. Barão de Mauá, 5556 - Jardim Itapeva, Mauá - SP, 09341-550, Brasil",,-23.673704,-46.414814,878.19,artesp:160|artesp:382EX1,104
+artesp:44536,"R. Sao Judas, 89 - Jardim Adelina, Mauá - SP, 09330-290, Brasil",,-23.667533,-46.412561,1188.35,artesp:382EX1,48
+artesp:44537,"Rua Rádio Amador, 70 - Jardim Luzitano, Mauá - SP, 09330-390, Brasil",,-23.666367,-46.412511,1285.49,artesp:382EX1,48
+artesp:44538,"R. Rubéns Nunes Campos, 349 - Jardim Luzitano, Mauá - SP, 09330-399, Brasil",,-23.663017,-46.413607,1653.27,artesp:382EX1,48
+artesp:44539,"Estr. do Luzitano, 15-37 - Jardim Luzitano, Mauá - SP, 09330-400, Brasil - RP11 (Regiões de Planejamento), Mauá - SP, 09330-550, Brasil",,-23.661871,-46.418537,1869.48,artesp:382EX1,48
+artesp:44543,"R. Cesário Verde, 102-146 - Vila Feital, Mauá - SP, 09330-695, Brasil - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.659422,-46.419609,1715.7,artesp:382EX1,48
+artesp:44544,"Rua Raul Leoni, 138 - RP11 (Regiões de Planejamento), Mauá - SP, 09330-710, Brasil",,-23.658196,-46.419312,1589.86,artesp:382EX1,48
+artesp:44545,"R. Raimundo Corrêa, 447 - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.656137,-46.419477,1364.86,artesp:382EX1,48
+artesp:44546,"Avenida Dona Benedita Franca da Veiga, 2483",,-23.647802,-46.418996,506.25,artesp:382|artesp:382EX1,147
+artesp:44550,"Av. Dona Benedita Franca da Veiga, 1101 - Vila Lisboa, Mauá - SP, 09330-765, Brasil",,-23.657449,-46.424535,1460.54,artesp:382|artesp:382EX1,99
+artesp:44553,"Av. Dona Benedita Franca da Veiga, 121 - Vila Lisboa, Mauá - SP, 09330-620, Brasil",,-23.663534,-46.43125,1619.74,artesp:382|artesp:382EX1,99
+artesp:44562,"R. Luís Mariani, 156 - Centro, Mauá - SP, 09390-050, Brasil - Centro, Mauá - SP, 09390-050, Brasil",,-23.66545,-46.459024,2408.84,artesp:158|artesp:158BI1|artesp:382EX1,125
+artesp:44566,"Av. Alberto Soares Sampaio, 692 - RP5 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.661264,-46.471827,1517.13,artesp:177|artesp:382|artesp:382EX1,160
+artesp:44569,"Av. Alberto Soares Sampaio, 1300-1334 - Capuava, Mauá - SP, Brasil - RP5 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.658563,-46.478106,1095.38,artesp:177|artesp:382|artesp:382EX1,160
+artesp:44570,"Av. Alberto Soares Sampaio, 2230-2280 - Capuava, Mauá - SP, Brasil - RP5 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.656165,-46.483945,742.39,artesp:177|artesp:382|artesp:382EX1,160
+artesp:44642,"Av. Barão de Mauá, 2720 - Jardim Maua, Mauá - SP, 09340-440, Brasil",,-23.665517,-46.436242,1637.13,artesp:160|artesp:160EX1|artesp:382|artesp:382EX1,168
+artesp:44649,"Av. Dona Benedita Franca da Veiga, 1520 - Vila Feital, Mauá - SP, 09330-765, Brasil",,-23.654653,-46.422635,1148.05,artesp:382|artesp:382EX1,99
+artesp:44651,"R. Raimundo Corrêa, 403 - Vila Feital, Mauá - SP, 09330-710, Brasil - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.656014,-46.419736,1344.94,artesp:382EX1,48
+artesp:44657,"R. Rádio Amador, 467 - Jardim Luzitano, Mauá - SP, 09330-390, Brasil",,-23.663226,-46.411686,1534.87,artesp:382EX1,48
+artesp:44658,"Av. Barão de Mauá, 6078 - Jardim Itapeva, Mauá - SP, 09330-165, Brasil",,-23.669838,-46.412754,1025.02,artesp:160|artesp:382EX1,104
+artesp:44659,"Rua Francisco Alves de Oliveira, 221-239",,-23.643737,-46.450964,106.04,artesp:403,79
+artesp:44660,"Estr. Mauá e Adutora Rio Claro, 1322 - Chacara Sao Lucido, Mauá - SP, 09333-510, Brasil - RP7 (Regiões de Planejamento), Mauá - SP, 09390-530, Brasil",,-23.645038,-46.453712,312.19,artesp:403,79
+artesp:44661,"Estr. Mauá e Adutora Rio Claro, 1145 - RP7 (Regiões de Planejamento), Mauá - SP, 09333-510, Brasil",,-23.646761,-46.453932,498.29,artesp:403,79
+artesp:44662,"Estr. Mauá e Adutora Rio Claro, 973 - RP7 (Regiões de Planejamento), Mauá - SP, 09390-530, Brasil",,-23.64813,-46.454264,653.1,artesp:403,79
+artesp:44663,"Estr. Mauá e Adutora Rio Claro, 725 - Jardim Ipe, Mauá - SP, 09390-500, Brasil",,-23.650057,-46.453664,848.05,artesp:403,79
+artesp:44664,"Estr. Mauá e Adutora Rio Claro, 635 - RP7 (Regiões de Planejamento), Mauá - SP, 09333-510, Brasil",,-23.650949,-46.453659,945.6,artesp:403,79
+artesp:44665,"R. da Amizade, 31 - Vila Nova Canaa, Mauá - SP, 09392-300, Brasil",,-23.652619,-46.454255,1137.86,artesp:403,79
+artesp:44666,"Estr. Mauá e Adutora Rio Claro, 193 - RP7 (Regiões de Planejamento), Mauá - SP, 09390-495, Brasil",,-23.654116,-46.452615,1259.35,artesp:403,79
+artesp:44667,"Av. Washington Luiz, 2520 - RP7 (Regiões de Planejamento), Mauá - SP, 09333-510, Brasil",,-23.655878,-46.452539,1442.81,artesp:403,79
+artesp:44668,"Av. Washington Luiz, 2786 - Vila Magini, Mauá - SP, 09390-140, Brasil - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.657883,-46.452187,1637.91,artesp:403,79
+artesp:44669,"Av. Washington Luiz, 3000 - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.659354,-46.452795,1812.21,artesp:403,79
+artesp:44671,"Av. Washington Luiz, 3384 - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.661197,-46.455589,2095.64,artesp:403,79
+artesp:44672,"Av. Washington Luiz, 3623 - Vila Magini, Mauá - SP, 09390-140, Brasil - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.661669,-46.457882,2181.68,artesp:403,79
+artesp:44673,"Av. Washington Luiz, 3890 - RP7 (Regiões de Planejamento), Mauá - SP, 09390-400, Brasil",,-23.662518,-46.459435,2281.71,artesp:403,79
+artesp:44675,"Av. Antônia Rosa Fioravanti, 605 - Centro, Mauá - SP, 09390-121, Brasil",,-23.662792,-46.463926,2064.02,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:177|artesp:382|artesp:382EX1|artesp:403,385
+artesp:48804,Terminal Rodoviário José Stella,,-23.695817,-46.446071,223.05,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,228
+artesp:48806,"Av. José Ricardo Nalle, 446b - Vila Mercedes, Mauá - SP, 09361-340, Brasil",,-23.698883,-46.447575,59.54,artesp:064,72
+artesp:48807,"Av. José Ricardo Nalle, 825 - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-340, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-340, Brasil",,-23.700309,-46.450816,168.09,artesp:064,72
+artesp:48808,"Av. Gianlucas Kawamura Alves Santos, 820-888 - Jardim Primavera, Mauá - SP, 09361-301, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-350, Brasil",,-23.701375,-46.452881,284.17,artesp:064,72
+artesp:48809,"Av. Gianlucas Kawamura Alves Santos, 636-716 - Jardim Primavera, Mauá - SP, 09361-301, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-301, Brasil",,-23.702356,-46.453508,196.43,artesp:064,72
+artesp:48810,"Rua das Margaridas - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-301, Brasil",,-23.703775,-46.454127,51.89,artesp:064,72
+artesp:48813,"R. das Violetas, 467 - Jardim Primavera, Mauá - SP, 13154-312, Brasil",,-23.703667,-46.456535,142.91,artesp:064,72
+artesp:48814,"R. das Violetas, 196-236 - Jardim Primavera, Mauá - SP, 09361-230, Brasil - RP4 (Regiões de Planejamento), Mauá - SP, 09361-220, Brasil",,-23.701822,-46.456967,350.01,artesp:064,72
+artesp:48815,"Rua das Violetas - RP4 (Regiões de Planejamento), Mauá - SP, 09361-220, Brasil",,-23.699715,-46.457037,573.96,artesp:064,72
+artesp:48816,"R. Pedro Eugênio Pereira, 1087 - Jardim Primavera, Mauá - SP, 09361-020, Brasil",,-23.698155,-46.457417,750.4,artesp:064,72
+artesp:48817,"Rua Pedro Eugênio Pereira - Jardim Camila, Mauá - SP, 09361-140, Brasil",,-23.696332,-46.457473,943.47,artesp:064,72
+artesp:48818,"Pedro Eugênio Pereira, 699 - Jardim Camila, Mauá - SP, 09361-020, Brasil",,-23.695073,-46.458313,1103.6,artesp:064,72
+artesp:48820,"R. Pedro Eugênio Pereira, 215 - Jardim Sao Judas, Mauá - SP, 09361-020, Brasil",,-23.69138,-46.460489,1559.41,artesp:064,72
+artesp:48823,"Rua José Scudeiro, 35 - Jardim Anchieta, Mauá - SP, 09360-580, Brasil",,-23.685983,-46.459333,1867.6,artesp:064,72
+artesp:48824,"Rua Manoel Franco - Jardim Sao Judas, Mauá - SP, 09360-590, Brasil",,-23.682883,-46.460391,2042.63,artesp:064,72
+artesp:48825,"Av. Dom José Gaspar, 1569 - Matriz, Mauá - SP, 09370-670, Brasil",,-23.681362,-46.460602,2007.18,artesp:064,72
+artesp:48826,"Av. Dom José Gaspar, 1317 - Jardim Pilar, Mauá - SP, 09370-670, Brasil",,-23.679193,-46.460569,2014.44,artesp:064,72
+artesp:48828,"Rua Carlo de Campo, 223 - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-030, Brasil",,-23.67923,-46.456508,2059.93,artesp:064,72
+artesp:48923,"Av. da Saudade, 366 - Vila Nossa Sra. das Vitorias, Mauá - SP, Brasil - Vila Nossa Sra. das Vitorias, Mauá - SP, 09370-070, Brasil",,-23.67602,-46.457155,2353.73,artesp:064,73
+artesp:48924,"Av. da Saudade, 526 - Vila Nossa Sra. das Vitorias, Mauá - SP, Brasil - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-030, Brasil",,-23.677323,-46.457311,2263.7,artesp:064,73
+artesp:48925,"R. Carlo de Campo, 67 - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-090, Brasil",,-23.679005,-46.457753,2172.26,artesp:064,73
+artesp:48926,"Rua Carlo de Campo, 606 - Jardim Pilar, Mauá - SP, 09360-090, Brasil",,-23.678672,-46.460179,2058.96,artesp:064,73
+artesp:48927,"Av. Dom José Gaspar, 1480 - Vila Assis Brasil, Mauá - SP, 09370-696, Brasil",,-23.680571,-46.46077,1988.28,artesp:064,73
+artesp:48928,"Avenida Dom Jose Gaspar - Vila Assis Brasil, Mauá - SP, 09370-670, Brasil",,-23.683747,-46.460625,2032.5,artesp:064,73
+artesp:48929,"Avenida Dom José Gaspar - Vila Assis Brasil, Mauá - SP, 09370-670, Brasil",,-23.685845,-46.460462,1977.25,artesp:064,73
+artesp:48930,"Av. Dom José Gaspar, 2084 - Vila Assis Brasil, Mauá - SP, 09360-580, Brasil",,-23.686986,-46.460289,1895.91,artesp:064,73
+artesp:48933,"R. Pedro Eugênio Pereira, 680 - Jardim Sao Judas, Mauá - SP, 09361-020, Brasil",,-23.695104,-46.458534,1106.83,artesp:064,73
+artesp:48936,"R. Pedro Eugênio Pereira, 1024 - RP4 (Regiões de Planejamento), Mauá - SP, Brasil - RP4 (Regiões de Planejamento), Mauá - SP, 09361-020, Brasil",,-23.697689,-46.457553,803.82,artesp:064,73
+artesp:48937,"R. das Violetas, 46 - Jardim Primavera, Mauá - SP, 13154-312, Brasil",,-23.699908,-46.457164,557.62,artesp:064,73
+artesp:48938,"R. das Violetas, 196-236 - Jardim Primavera, Mauá - SP, 09361-230, Brasil - RP4 (Regiões de Planejamento), Mauá - SP, 09361-220, Brasil",,-23.701648,-46.457094,372.39,artesp:064,73
+artesp:48939,"R. das Violetas, 371 - RP4 (Regiões de Planejamento), Mauá - SP, 09361-300, Brasil",,-23.703567,-46.456685,159.51,artesp:064,73
+artesp:48942,"Av. Gianlucas Kawamura Alves Santos, 498-570 - Jardim Primavera, Mauá - SP, 09361-301, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-301, Brasil",,-23.703581,-46.453844,64.68,artesp:064,73
+artesp:48944,"Av. José Ricardo Nalle, 799",,-23.700708,-46.451403,199.48,artesp:064,73
+artesp:48946,"Av. José Ricardo Nalle, 127 - Guapituba, Ribeirão Pires - SP, 09361-340, Brasil",,-23.697393,-46.444893,12.48,artesp:064,73
+artesp:63458,"Av. Cap. João, 3281 - Estação Guapituba - Jardim Guapituba, Mauá - SP, 09360-120, Brasil",,-23.692456,-46.448593,580.62,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,84
+artesp:63459,"Avenida Capitão João, 2781-2997 - Jardim Guapituba, Mauá - SP, 09360-120, Brasil",,-23.690523,-46.449827,775.54,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,84
+artesp:63461,"Av. Cap. João, 2301 - Matriz, Mauá - SP, 09360-120, Brasil",,-23.685734,-46.452646,1297.36,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,84
+artesp:63464,"Av. Cap. João, 135 - Matriz, Mauá - SP, 09360-120, Brasil",,-23.675143,-46.45456,2248.37,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63465,"Avenida Capitao João - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-000, Brasil",,-23.672617,-46.456655,2487.24,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63466,"Av. Cap. João, 161 - Estação CPTM Mauá - Matriz, Mauá - SP, 09390-070, Brasil",,-23.668795,-46.460965,2115.39,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63467,"Av. João Ramalho, 222 - Vila Noemia, Mauá - SP, 09371-520, Brasil",,-23.667002,-46.464205,1853.15,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63469,"Av. João Ramalho, 1430 - RP3 (Regiões de Planejamento), Mauá - SP, 09371-520, Brasil",,-23.663355,-46.478242,862.22,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:63507,"Av. Giovanni Battista Pirelli, 2096 - RP3 (Regiões de Planejamento), Mauá - SP, 09111-340, Brasil",,-23.66442,-46.486389,98.1,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:63509,"Av. João Ramalho, 1491 - RP3 (Regiões de Planejamento), Mauá - SP, 09371-520, Brasil",,-23.6637,-46.478938,781.65,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:63510,"Av. João Ramalho, 1233 - RP3 (Regiões de Planejamento), Mauá - SP, 09371-520, Brasil",,-23.66344,-46.476258,1033.11,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:63511,"Av. João Ramalho, 235 - Vila Noemia, Mauá - SP, 09371-520, Brasil",,-23.667,-46.464716,1803.86,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63512,"Av. Cap. João, 36 - Matriz, Mauá - SP, 09360-120, Brasil",,-23.668282,-46.462465,1984.21,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63513,"Av. Cap. João, 648 - Jardim Pilar, Mauá - SP, 09360-120, Brasil",,-23.671924,-46.458263,2328.87,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63514,Avenida Capitão João (Abaixo do Viaduto Prefeito Élio Bernardi),,-23.672992,-46.456584,2488.96,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63516,"Av. Cap. João, 1592 - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-120, Brasil",,-23.679188,-46.454451,1910.61,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,83
+artesp:63522,"Av. Humberto de Campos, 3869 - Guapituba, Ribeirão Pires - SP, Brasil",,-23.69661,-46.443862,58.74,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,83
+artesp:63562,"Av. Cap. João, 2059 - Matriz, Mauá - SP, 09360-120, Brasil",,-23.684022,-46.45348,1478.8,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,84
+artesp:63563,"Av. Cap. João, 1477 - Vila Nossa Sra. das Vitorias, Mauá - SP, 09360-120, Brasil",,-23.679037,-46.45422,1905.63,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:63565,"Av. João Ramalho, 1026 - RP3 (Regiões de Planejamento), Mauá - SP, 09371-520, Brasil",,-23.662982,-46.474196,1211.37,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:63566,"Av. João Ramalho, 1862 - RP3 (Regiões de Planejamento), Mauá - SP, 09371-520, Brasil",,-23.663887,-46.483931,329.38,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064|artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,381
+artesp:64458,"Av. Santa Catarina, 150 - Vila Santa Cecilia, Mauá - SP, 09371-030, Brasil",,-23.660979,-46.468912,1763.05,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,225
+artesp:64459,"Avenida Antônia Rosa Fioravanti, 804",,-23.663525,-46.45962,2394.33,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:177|artesp:382|artesp:382EX1|artesp:403,385
+artesp:64460,"Av. Antônia Rosa Fioravanti, 1272 - Centro, Mauá - SP, 09390-120, Brasil",,-23.664995,-46.454827,2469.97,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:177|artesp:382|artesp:382EX1,306
+artesp:64461,"Barão Office - Av. Barão de Mauá, 204 - Vila Bocaina, Mauá - SP, 09310-000, Brasil",,-23.666127,-46.453121,2536.33,artesp:158|artesp:158BI1|artesp:382EX1,125
+artesp:64462,"Av. Pres. Castelo Branco, 90 - RP8 (Regiões de Planejamento), Mauá - SP, 09320-590, Brasil",,-23.663985,-46.449701,2231.45,artesp:158|artesp:158BI1,77
+artesp:64463,"Av. Pres. Castelo Branco, 746 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.658701,-46.447913,1628.26,artesp:158|artesp:158BI1,77
+artesp:64464,"Av. Presidente Castelo Branco - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.657024,-46.447797,1442.26,artesp:158|artesp:158BI1,77
+artesp:64465,"Av. Pres. Castelo Branco, 1148 - Jardim Zaira, Mauá - SP, 09320-795, Brasil",,-23.655327,-46.447043,1249.15,artesp:158|artesp:158BI1,77
+artesp:64466,"Av. Pres. Castelo Branco, 1594 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.652458,-46.44382,946.09,artesp:158|artesp:158BI1,77
+artesp:64467,"Av. Pres. Castelo Branco, 1930 - Jardim Zaira, Mauá - SP, 09320-795, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.651337,-46.440853,851.83,artesp:158|artesp:158BI1,77
+artesp:64468,"Av. Pres. Castelo Branco, 2010 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.650554,-46.439945,799.41,artesp:158|artesp:158BI1,77
+artesp:64469,"Av. Pres. Castelo Branco, 2210 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.649078,-46.438583,723.24,artesp:158|artesp:158BI1,77
+artesp:64470,"Av. Pres. Castelo Branco, 2336 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.648242,-46.43783,698.27,artesp:158|artesp:158BI1,77
+artesp:64471,"Av. Pres. Castelo Branco, 2616 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-340, Brasil",,-23.647073,-46.435528,589.58,artesp:158|artesp:158BI1,77
+artesp:64476,"Av. Eugênio Negri, 540 - Ponto Final da Linha 158 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-190, Brasil",,-23.649345,-46.428743,767.88,artesp:158|artesp:158BI1,154
+artesp:64477,"Rua Melchor Barbosa, 111 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-230, Brasil",,-23.646743,-46.430518,598.74,artesp:158|artesp:158BI1,154
+artesp:64480,"Av. Pres. Castelo Branco, 3067 - Jardim Zaira, Mauá - SP, 09321-275, Brasil",,-23.645581,-46.431398,446.79,artesp:158|artesp:158BI1,154
+artesp:64481,"Avenida Presidente Castelo Branco - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.646788,-46.433784,544.36,artesp:158|artesp:158BI1,77
+artesp:64482,"Av. Pres. Castelo Branco, 2555 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-340, Brasil",,-23.647132,-46.435976,605.88,artesp:158|artesp:158BI1,77
+artesp:64483,"Av. Pres. Castelo Branco, 2293 - Jardim Zaira, Mauá - SP, 09321-375, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.648505,-46.43824,695.9,artesp:158|artesp:158BI1,77
+artesp:64484,"R. Ari Dória, 2149 - Jardim Zaira, Mauá - SP, 09321-375, Brasil",,-23.649428,-46.439107,725.86,artesp:158|artesp:158BI1,77
+artesp:64485,"Av. Pres. Castelo Branco, 1807-1885 - Jardim Zaira, Mauá - SP, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.651409,-46.441626,841.86,artesp:158|artesp:158BI1,77
+artesp:64486,"Av. Pres. Castelo Branco, 1445 - Jardim Zaira, Mauá - SP, 09320-795, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09321-375, Brasil",,-23.652859,-46.444744,987.6,artesp:158|artesp:158BI1,77
+artesp:64487,"Av. Pres. Castelo Branco, 1161 - RP8 (Regiões de Planejamento), Mauá - SP, 09320-640, Brasil",,-23.654985,-46.446962,1210.93,artesp:158|artesp:158BI1,77
+artesp:64489,"Av. Pres. Castelo Branco, 861 - Jardim Zaira, Mauá - SP, 09320-590, Brasil",,-23.657173,-46.44798,1460.59,artesp:158|artesp:158BI1,77
+artesp:64490,"Av. Pres. Castelo Branco, 713 - Jardim Zaira, Mauá - SP, 09321-375, Brasil",,-23.658559,-46.448047,1613.94,artesp:158|artesp:158BI1,77
+artesp:64491,"Av. Pres. Castelo Branco, 379 - Jardim Zaira, Mauá - SP, 09320-590, Brasil",,-23.66142,-46.448822,1937.74,artesp:158|artesp:158BI1,77
+artesp:64492,"Av. Pres. Castelo Branco, 225-247 - Jardim Zaira, Mauá - SP, 09320-590, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09320-590, Brasil",,-23.66341,-46.449308,2162.7,artesp:158|artesp:158BI1,77
+artesp:64493,"Av. Washington Luiz, 829 - Vila Magini, Mauá - SP, 09390-140, Brasil - Vila Ana Maria, Mauá - SP, 09390-140, Brasil",,-23.662803,-46.452026,2151.81,artesp:158|artesp:158BI1|artesp:382EX1,125
+artesp:64494,"Av. Barão de Mauá, 1001 - Vila America, Mauá - SP, 09320-130, Brasil",,-23.665587,-46.453194,2480.77,artesp:158|artesp:158BI1|artesp:382EX1,125
+artesp:64495,"Av. Barão de Mauá, 769 - Centro, Mauá - SP, Brasil - Vila Bocaina, Mauá - SP, 09310, Brasil",,-23.666191,-46.455371,2613.42,artesp:158|artesp:158BI1|artesp:382EX1,125
+artesp:64496,"Av. Gov. Mario Covas Júnior, 96 - Centro, Mauá - SP, 09390-040, Brasil",,-23.664938,-46.45897,2432.49,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:177|artesp:382|artesp:382EX1,306
+artesp:64497,"Av. Antônia Rosa Fioravanti, 805 - Centro, Mauá - SP, 09390, Brasil",,-23.662672,-46.460467,2308.7,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:177|artesp:382|artesp:382EX1|artesp:403,385
+artesp:64560,"Av. Barão de Mauá, 7079 - Ponto Final da Linha 160 - RP13 (Regiões de Planejamento), Mauá - SP, 09330-165, Brasil",,-23.668325,-46.410432,985.01,artesp:160,112
+artesp:64561,"Av. Barão de Mauá, 6024-6086 - RP13 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Adelina, Mauá - SP, 09330-165, Brasil",,-23.669989,-46.413032,1037.13,artesp:160|artesp:382EX1,104
+artesp:64562,"Av. Barão de Mauá, 5963 - Jardim Adelina, Mauá - SP, 09341-550, Brasil",,-23.671721,-46.413476,974.58,artesp:160|artesp:382EX1,104
+artesp:64564,"Av. Barão de Mauá, 5337 - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - RP12 (Regiões de Planejamento), Mauá - SP, 09340-760, Brasil",,-23.675371,-46.417328,581.17,artesp:160,56
+artesp:64565,"Av. Barão de Mauá, 5077 - RP12 (Regiões de Planejamento), Mauá - SP, 09340-760, Brasil",,-23.675831,-46.419509,396.68,artesp:160,56
+artesp:64566,"Av. Barão de Mauá, 4841a - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Canada, Mauá - SP, 09340-620, Brasil",,-23.674767,-46.4209,426.97,artesp:160|artesp:160EX1,69
+artesp:64567,"Av. Barão de Mauá, 4613-4665 - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Canada, Mauá - SP, 09340-440, Brasil",,-23.673281,-46.421785,566.49,artesp:160|artesp:160EX1,69
+artesp:64568,"Av. Barão de Mauá, 4305 - Jardim Canada, Mauá - SP, 09330-150, Brasil",,-23.670461,-46.423176,845.46,artesp:160|artesp:160EX1,69
+artesp:64569,"Av. Barão de Mauá, 3983 - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - São João, Mauá - SP, 09340-440, Brasil",,-23.668392,-46.425678,1022.69,artesp:160|artesp:160EX1,69
+artesp:64570,"Av. Barão de Mauá, 3599-3653 - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - São João, Mauá - SP, 09341-280, Brasil",,-23.666951,-46.428818,1196.32,artesp:160|artesp:160EX1,69
+artesp:64571,"Av. Barão de Mauá, 3289 - Jardim Maringá, Mauá - SP, 09340-440, Brasil",,-23.664999,-46.431026,1457.51,artesp:160|artesp:160EX1,69
+artesp:64572,"Av. Barão de Mauá, 3155 - Jardim Maringá, Mauá - SP, 09340-440, Brasil",,-23.664738,-46.432364,1528.91,artesp:160|artesp:160EX1|artesp:382|artesp:382EX1,168
+artesp:64573,"Av. Itapark, 4955 - Jardim Campo Verde, Mauá - SP, 09350-000, Brasil",,-23.666319,-46.440065,1823.75,artesp:160|artesp:160EX1,69
+artesp:64574,"Av. Itapark, 4551 - Jardim Maua, Mauá - SP, 09350-000, Brasil",,-23.669586,-46.439952,1539.96,artesp:160|artesp:160EX1,69
+artesp:64575,"Av. Itapark, 4268 - Jardim Itapark Velho, Mauá - SP, 09350-000, Brasil",,-23.672514,-46.44009,1325.79,artesp:160|artesp:160EX1,69
+artesp:64576,"Av. Itapark, 4023 - Vila Independencia, Mauá - SP, 09350-000, Brasil",,-23.674562,-46.439981,1187.55,artesp:160|artesp:160EX1,69
+artesp:64577,"Av. Itapark, 3642 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.676421,-46.438554,962.92,artesp:160|artesp:160EX1,69
+artesp:64578,"Av. Itapark, 3431 - Jardim Itapark Velho, Mauá - SP, Brasil - Jardim Itapark Novo, Mauá - SP, 09350-000, Brasil",,-23.67855,-46.436187,652.39,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64579,"Av. Itapark, 3302 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.67981,-46.435769,564.22,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64580,"Av. Itapark, 3152-3156 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.681048,-46.4361,458.19,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64581,"Av. Itapark, 2915 - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.682747,-46.437136,328.68,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64582,"Av. Itapark, 2711 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.683812,-46.438828,379.44,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64583,"Av. Itapark, 2350-2438 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.683119,-46.441341,643.66,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64584,"Av. Itapark, 1989 - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.68047,-46.44306,941.35,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64585,"Av. Itapark, 1761-1765 - Jardim Itapark Velho, Mauá - SP, Brasil - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.679048,-46.444251,1132.79,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64586,"Rua Alonso Vasconcelos Pacheco, 1193 - Vila Bocaina, Mauá - SP, 09310-370, Brasil - Vila Bocaina, Mauá - SP, 09350-000, Brasil",,-23.67444,-46.448089,1762.9,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64587,"Rua Alonso Vasconcelos Pacheco, 879-909 - Vila São Francisco, Mauá - SP, Brasil - Vila Bocaina, Mauá - SP, 09350-000, Brasil",,-23.673446,-46.450553,2023.41,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64589,"Rua Rio Branco, 365 - Centro, Mauá - SP, 09310-090, Brasil",,-23.669155,-46.459613,2239.74,artesp:160|artesp:160EX1|artesp:177|artesp:382,181
+artesp:64604,"Rua dos Bandeirantes, 450 - Vila Bocaina, Mauá - SP, 09310-020, Brasil",,-23.669014,-46.453707,2592.38,artesp:160|artesp:160EX1|artesp:177|artesp:382,181
+artesp:64605,"Rua dos Bandeirantes, 640 - Vila Bocaina, Mauá - SP, 09310-030, Brasil",,-23.670836,-46.453475,2437.95,artesp:160|artesp:160EX1|artesp:177|artesp:382,181
+artesp:64606,"Av. Itapark, 892 - Vila Bocaina, Mauá - SP, 09350-000, Brasil",,-23.673709,-46.450405,1993.02,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64607,"Av. Itapark, 1725 E - Jardim Itapark, Mauá - SP, 09350-000, Brasil - Vila Bocaina, Mauá - SP, 09350-450, Brasil",,-23.678374,-46.445156,1251.47,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64609,"Av. Itapark, 2300 - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.683016,-46.44166,677.99,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64610,"Av. Itapark, 2646 - RP10 (Regiões de Planejamento), Mauá - SP, 09350-000, Brasil",,-23.684173,-46.439233,399.92,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64611,"Av. Itapark, n°2838 - Jardim Itapark, Mauá - SP, 09350-000, Brasil",,-23.683276,-46.437368,298.2,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64612,"Av. Itapark, 3088 - Jardim Itapark Velho, Mauá - SP, 09350-000, Brasil",,-23.681364,-46.4361,424.54,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64614,"Av. Itapark, 3442-3456 - Jardim Itapark Velho, Mauá - SP, Brasil - Jardim Itapark Novo, Mauá - SP, 09350-000, Brasil",,-23.678354,-46.436082,648.57,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64615,"Av. Itapark, 3612 - Jardim Itapark, Mauá - SP, 09350-000, Brasil",,-23.676979,-46.437435,833.32,artesp:160|artesp:160EX1,69
+artesp:64616,"Av. Itapark, 4220 - Jardim Itapark, Mauá - SP, 09350-000, Brasil",,-23.672738,-46.439924,1297.1,artesp:160|artesp:160EX1,69
+artesp:64618,"Av. Barão de Mauá, 3056 - RP12 (Regiões de Planejamento), Mauá - SP, 09340-440, Brasil",,-23.664972,-46.432726,1518.66,artesp:160|artesp:160EX1,69
+artesp:64619,"Avenida Barão de Mauá - RP12 (Regiões de Planejamento), Mauá - SP, 09341-280, Brasil",,-23.665847,-46.430524,1353.12,artesp:160|artesp:160EX1,69
+artesp:64620,"Avenida Barão de Mauá - RP12 (Regiões de Planejamento), Mauá - SP, 09340-480, Brasil",,-23.66768,-46.427682,1103.01,artesp:160|artesp:160EX1,69
+artesp:64622,"Av. Barão de Mauá, 4000-4050 - RP12 (Regiões de Planejamento), Mauá - SP, Brasil - São João, Mauá - SP, 09340-440, Brasil",,-23.669297,-46.424274,940.49,artesp:160|artesp:160EX1,69
+artesp:64623,"Av. Barão de Mauá, 4200 - Jardim Canada, Mauá - SP, 09330-150, Brasil",,-23.670648,-46.423293,821.94,artesp:160|artesp:160EX1,69
+artesp:64624,"Av. Barão de Mauá, 4520 - Jardim Sao Jose, Mauá - SP, Brasil - Jardim Canada, Mauá - SP, 09340-440, Brasil",,-23.673325,-46.422104,558.39,artesp:160|artesp:160EX1,69
+artesp:64625,"Av. Barão de Mauá, 4714 - Jardim Sao Jose, Mauá - SP, 09330-150, Brasil",,-23.674614,-46.421229,433.75,artesp:160|artesp:160EX1,69
+artesp:64626,"Av. Barão de Mauá, 5060 - Jardim Santista, Mauá - SP, 09340-760, Brasil",,-23.675767,-46.419067,430.19,artesp:160,56
+artesp:64627,"Av. Barão de Mauá, 5160 - Jardim Santista, Mauá - SP, 09340-760, Brasil",,-23.675446,-46.417622,553.95,artesp:160,56
+artesp:64629,"Av. Barão de Mauá, 5580-5652 - RP13 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Itapeva, Mauá - SP, 09341-550, Brasil",,-23.67357,-46.414128,853.71,artesp:160|artesp:382EX1,104
+artesp:64630,"Av. Barão de Mauá, 5993 - RP13 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Adelina, Mauá - SP, 09341-550, Brasil",,-23.67161,-46.413266,961.07,artesp:160|artesp:382EX1,104
+artesp:64638,"Av. José Moreira, 939-1237 - Jardim Quarto Centenario, Mauá - SP, 09341-120, Brasil - Jardim Esperanca, Mauá - SP, 09341-491, Brasil",,-23.6817,-46.413743,197.54,artesp:160EX1,13
+artesp:64639,"Av. José Moreira, 675 - Jardim Quarto Centenario, Mauá - SP, 09341-120, Brasil",,-23.680989,-46.415502,161.74,artesp:160EX1,13
+artesp:64640,"Av. José Moreira, 421-435 - Jardim Quarto Centenario, Mauá - SP, Brasil - Jardim Esperanca, Mauá - SP, 09341-135, Brasil",,-23.68025,-46.417482,139.31,artesp:160EX1,13
+artesp:64641,"Av. José Moreira, 225 - Jardim Quarto Centenario, Mauá - SP, 09341-120, Brasil - Jardim Esperanca, Mauá - SP, 09341-120, Brasil",,-23.67873,-46.419087,191.87,artesp:160EX1,13
+artesp:64643,"Av. do Pilar Velho, 70-3286 - Jardim Esperanca, Mauá - SP, 09341-150, Brasil - Jardim Esperanca, Mauá - SP, 09341-150, Brasil",,-23.676436,-46.421564,230.32,artesp:160EX1,13
+artesp:64660,"Av. Barão de Mauá, 2442 - Jardim Bogus, Mauá - SP, 09340-270, Brasil",,-23.665521,-46.438932,1806.82,artesp:160|artesp:160EX1|artesp:382EX1,117
+artesp:64664,"Avenida José Moreira - Jardim Esperanca, Mauá - SP, 09341-491, Brasil",,-23.68185,-46.413675,189.74,artesp:160EX1,13
+artesp:64668,"R. Alfredo Figlia, 399 - Jardim Itapeva, Mauá - SP, 09330-070, Brasil",,-23.67752,-46.412974,424.4,artesp:160EX1,13
+artesp:64670,"Rua Alfredo Figlia, 161 - Jardim Itapeva, Mauá - SP, 09330-070, Brasil",,-23.676168,-46.414586,642.77,artesp:160EX1,13
+artesp:64843,Av. Manuel de Nóbrega,,-23.654185,-46.492549,173.21,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64844,"Av. Alberto Soares Sampaio, 1731-1743 - Capuava, Mauá - SP, Brasil - RP3 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.657272,-46.488777,502.07,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64845,"Av. Alberto Soares Sampaio, 2455 - RP3 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.656648,-46.486509,665.1,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64846,"Av. Alberto Soares Sampaio, 1764 - Capuava, Mauá - SP, 09380-000, Brasil",,-23.657091,-46.481063,851.97,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64847,"Avenida Alberto Soares Sampaio, 1211-1333",,-23.658984,-46.477676,1155.81,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64848,"Av. Alberto Soares Sampaio, 1002-1098 - Capuava, Mauá - SP, Brasil - RP3 (Regiões de Planejamento), Mauá - SP, 09380-110, Brasil",,-23.659946,-46.475447,1298.45,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64849,"Avenida Alberto Soares Sampaio, 691",,-23.661448,-46.471832,1502.74,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64852,"R. Rio Branco, 1108",,-23.675829,-46.454019,2159.37,artesp:177,61
+artesp:64853,"Rua José Polidoro, 125",,-23.67671,-46.451679,1907.13,artesp:177,61
+artesp:64854,"R. José Polidoro, 432 - Vila Bocaina, Mauá - SP, 09310-610, Brasil",,-23.677802,-46.448911,1602.69,artesp:177,61
+artesp:64856,"R. Peru, 144-286",,-23.679118,-46.44814,1461.94,artesp:177,61
+artesp:64857,"R. Colômbia, 58 - Parque das Américas, Mauá - SP, 09350-590, Brasil",,-23.683819,-46.447706,1066.14,artesp:177,61
+artesp:64858,"R. América do Norte, 2-112",,-23.686369,-46.447483,846.96,artesp:177,61
+artesp:64860,"R. Jamaica, 2-82",,-23.687712,-46.445451,594.49,artesp:177,61
+artesp:64862,"R. México, 368-456",,-23.691014,-46.442082,93.35,artesp:177,61
+artesp:64885,"Rua Guatemala, 578 - Aliança, Ribeirão Pires - SP, 09351-090, Brasil",,-23.692073,-46.441944,15.39,artesp:177,61
+artesp:64886,"Rua Guadalajara, 155 - RP9 (Regiões de Planejamento), Mauá - SP, 09351-160, Brasil",,-23.689776,-46.443804,316.02,artesp:177,61
+artesp:64888,"R. Jamaica, 07 - Parque das Américas, Mauá - SP, 09351-180, Brasil",,-23.687594,-46.445346,595.92,artesp:177,61
+artesp:64891,"Viela Brasilândia, 1 - Parque das Américas, Mauá - SP, 09350-599, Brasil",,-23.683635,-46.447533,1070.92,artesp:177,61
+artesp:64900,"Rua Fernão Dias, 46 - Jardim Santa Lidia, Mauá - SP, 09310-460, Brasil",,-23.674168,-46.453852,2244.02,artesp:177,61
+artesp:64901,"Rua São Tomé, 80 - RP9 (Regiões de Planejamento), Mauá - SP, 09310-400, Brasil",,-23.673528,-46.453464,2251.61,artesp:177,61
+artesp:64902,"Av. Itapark, 230-360 - Vila Augusto, Mauá - SP, Brasil - Vila Bocaina, Mauá - SP, 09310-370, Brasil",,-23.672008,-46.455694,2534.53,artesp:160|artesp:160EX1|artesp:382,120
+artesp:64907,"Av. Alberto Soares Sampaio, 1010 - RP3 (Regiões de Planejamento), Mauá - SP, 09380-110, Brasil",,-23.659901,-46.475092,1332.98,artesp:177|artesp:382|artesp:382EX1,160
+artesp:64909,"Av. Alberto Soares Sampaio, 2450 - Capuava, Mauá - SP, Brasil - RP5 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.65647,-46.486505,682.04,artesp:177|artesp:382|artesp:382EX1,160
+artesp:65249,"Estrada Sapopemba, 2202-2214",,-23.637833,-46.407558,489.78,artesp:336,72
+artesp:91807,"Av. Cap. João, 2034b - Matriz, Mauá - SP, 09360-120, Brasil",,-23.683252,-46.453972,1571.67,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1,83
+artesp:91933,"R. Oscarito, 846 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",,-23.633471,-46.47587,46.23,artesp:157,55
+artesp:91934,"R. Oscarito, 1078 - Jardim Sonia Maria, Mauá - SP, 09380-370, Brasil - Jardim Silvia Maria, Mauá - SP, 09380-350, Brasil",,-23.635432,-46.475166,73.34,artesp:157,55
+artesp:91947,"Av. Pres. Castelo Branco, 398-440 - Jardim Zaira, Mauá - SP, 09320-590, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09320-470, Brasil",,-23.66131,-46.448659,1923.62,artesp:158|artesp:158BI1,77
+artesp:91948,"R. São Judas Tadeu, 27 - Jardim Adelina, Mauá - SP, 09330-165, Brasil",,-23.668287,-46.412471,1120.35,artesp:160,56
+artesp:91949,"Av. Barão de Mauá, 85 - RP10 (Regiões de Planejamento), Mauá - SP, 09310-000, Brasil",,-23.665223,-46.437992,1769.99,artesp:160|artesp:160EX1|artesp:382EX1,117
+artesp:91952,"Av. Santa Catarina, 212-304 - Vila Santa Cecilia, Mauá - SP, Brasil - Vila Santa Cecilia, Mauá - SP, 09381-200, Brasil",,-23.660646,-46.469,1779.11,artesp:158|artesp:158BI1|artesp:160|artesp:160EX1|artesp:403,225
+artesp:91954,"Av. Barão de Mauá, 6266 - RP13 (Regiões de Planejamento), Mauá - SP, 09330-165, Brasil",,-23.668286,-46.412197,1101.39,artesp:160,56
+artesp:91956,"Av. do Pilar Velho, 115 - Jardim Esperanca, Mauá - SP, 09341-150, Brasil - Jardim Esperanca, Mauá - SP, 09341-150, Brasil",,-23.676364,-46.421725,233.5,artesp:160EX1,13
+artesp:91975,"Rua Rio Branco, 1190 - RP9 (Regiões de Planejamento), Mauá - SP, 09310-380, Brasil",,-23.674671,-46.454563,2275.38,artesp:177,61
+artesp:92083,"SPA-052/031 Ramal de Sapopemba, km 10,6 norte - Chácara São Lucido, Mauá - SP, 09432-300, Brasil",,-23.63693,-46.395798,115.99,artesp:336,35
+artesp:92098,"Av. Dona Benedita Franca da Veiga, 4475 - Vila Feital, Mauá - SP, 09330-705, Brasil",,-23.646202,-46.414318,648.65,artesp:382|artesp:382EX1,198
+artesp:92099,"R. Otacílio Gomes Pereira, 117 - Jardim Maua Mauá - SP 09340-110",,-23.66627,-46.435822,1544.22,artesp:382,51
+artesp:92101,"R. Rádio Amador, 174 - Jardim Luzitano, Mauá - SP, 09330-390, Brasil",,-23.665493,-46.411961,1331.89,artesp:382EX1,48
+artesp:92102,"R. Rádio Amador, 330 - Jardim Luzitano, Mauá - SP, 09330-390, Brasil",,-23.664163,-46.411389,1428.9,artesp:382EX1,48
+artesp:92103,"Av. Barão de Mauá, 2299 - Jardim Maringá, Mauá - SP, 09340-440, Brasil",,-23.665601,-46.44119,1961.79,artesp:382EX1,48
+artesp:92104,"Av. Barão de Mauá, 2069-2163 - RP8 (Regiões de Planejamento), Mauá - SP, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09340-440, Brasil",,-23.665322,-46.442794,2087.87,artesp:382EX1,48
+artesp:92105,"Av. Barão de Mauá, 1741 - RP8 (Regiões de Planejamento), Mauá - SP, 09340-440, Brasil",,-23.665219,-46.445821,2302.38,artesp:382EX1,48
+artesp:92106,"Av. Barão de Mauá, 1389 - RP8 (Regiões de Planejamento), Mauá - SP, 09310-190, Brasil",,-23.664688,-46.448473,2293.7,artesp:382EX1,48
+artesp:92107,"Av. Barão de Mauá, 1280 - Vila Guarani, Mauá - SP, 09310-240, Brasil",,-23.664611,-46.450327,2310.14,artesp:382EX1,48
+artesp:92108,"Av. Barão de Mauá, 1876 - RP10 (Regiões de Planejamento), Mauá - SP, 09340-440, Brasil",,-23.665233,-46.44439,2201.02,artesp:382EX1,48
+artesp:92109,"Estr. do Luzitano, 446 - Jardim Luzitano, Mauá - SP, 09330-388, Brasil",,-23.662942,-46.41497,1739.42,artesp:382EX1,48
+artesp:92110,"Rua Radioamador, 187 - Jardim Luzitano, Mauá - SP, 09330-390, Brasil",,-23.665485,-46.412097,1340.29,artesp:382EX1,48
+artesp:92115,"R. Washington Luiz, 1 - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.662175,-46.459132,2241.76,artesp:403,79
+artesp:92116,"Av. Washington Luiz, 3623 - Vila Magini, Mauá - SP, 09390-140, Brasil - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.661775,-46.457952,2193.46,artesp:403,79
+artesp:92117,"Estr. Mauá e Adutora Rio Claro, 2002 A - Jardim Paranavai, Mauá - SP, 09333-510, Brasil",,-23.641572,-46.453536,10.98,artesp:403,158
+artesp:92376,"Rua Cármen Miranda, 237 - Jardim Sonia Maria, Mauá - SP, 09380-310, Brasil",,-23.627273,-46.480118,227.72,artesp:157,57
+artesp:92406,"Av. Cap. João, 1140 - Matriz, Mauá - SP, 09360-120, Brasil",,-23.675277,-46.454731,2252.26,artesp:040|artesp:040EX1|artesp:063|artesp:063EX1|artesp:064,156
+artesp:92418,"Av. José Ricardo Nalle, 116 - RP4 (Regiões de Planejamento), Ribeirão Pires - SP, Brasil - Vila Morelli, Mauá - SP, 09361-420, Brasil",,-23.697171,-46.445028,40.34,artesp:064,72
+artesp:92419,"R. Pedro Eugênio Pereira, 501 - Jardim Sao Judas, Mauá - SP, 09361-020, Brasil",,-23.693943,-46.459701,1265.92,artesp:064,72
+artesp:92420,"R. Gérson Giotto, 17 - Jardim Anchieta, Mauá - SP, 09360-580, Brasil",,-23.688673,-46.460546,1772.38,artesp:064,72
+artesp:92421,"R. Gerson Giotto, 32 - Jardim Sao Judas, Mauá - SP, 09360-690, Brasil - Jardim Anchieta, Mauá - SP, 09360-580, Brasil",,-23.688794,-46.460681,1771.85,artesp:064,73
+artesp:92422,"R. Pedro Eugênio Pereira, 486 - Jardim Sao Judas, Mauá - SP, 09361-020, Brasil",,-23.693784,-46.459885,1288.56,artesp:064,73
+artesp:92423,"R. das Violetas, 630 - Jardim Primavera, Mauá - SP, 13154-312, Brasil",,-23.705535,-46.456934,16.2,artesp:064,73
+artesp:92425,"Av. Gianlucas Kawamura Alves Santos, 636-716 - Jardim Primavera, Mauá - SP, 09361-301, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-301, Brasil",,-23.702537,-46.453497,176.37,artesp:064,73
+artesp:92426,"Av. Gianlucas Kawamura Alves Santos, 819-887 - Jardim Primavera, Mauá - SP, 09361-301, Brasil - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-301, Brasil",,-23.701172,-46.4527,289.09,artesp:064,73
+artesp:92427,"Av. José Ricardo Nalle, 425 - Jardim Sao Jorge do Guapituba, Mauá - SP, 09361-340, Brasil",,-23.69893,-46.44728,41.55,artesp:064,73
+artesp:92450,"R. Oscarito, 629A - Jardim Sonia Maria, Mauá - SP, 09380-370, Brasil",,-23.631549,-46.476589,101.96,artesp:157,57
+artesp:92451,"R. Oscarito, 1274-1304 - Jardim Sonia Maria, Mauá - SP, 09380-370, Brasil - RP6 (Regiões de Planejamento), Mauá - SP, 09380-350, Brasil",,-23.63689,-46.474272,67.48,artesp:157,55
+artesp:92452,"R. Melchor Barbosa, 301 - Jardim Zaira, Mauá - SP, 09321-230, Brasil - RP8 (Regiões de Planejamento), Mauá - SP, 09321-230, Brasil",,-23.647934,-46.428925,673.37,artesp:158|artesp:158BI1,154
+artesp:92453,"Av. Itapark, 3992A - Jardim Itapark Velho, Mauá - SP, Brasil - Jardim Itapark, Mauá - SP, 09350-000, Brasil",,-23.674749,-46.439659,1148.75,artesp:160|artesp:160EX1,69
+artesp:92454,"Av. Itapark, 2-32 - RP10 (Regiões de Planejamento), Mauá - SP, Brasil - Jardim Maua, Mauá - SP, 09350-000, Brasil",,-23.666927,-46.439456,1732.34,artesp:160|artesp:160EX1,69
+artesp:92455,"R. Alfredo Figlia, 7443 - Jardim Itapeva, Mauá - SP, 09330-070, Brasil",,-23.679655,-46.411341,135.2,artesp:160EX1,13
+artesp:92456,"Rua Elza Jorge, 275 - Jardim Esperanca, Mauá - SP, 09341-491, Brasil",,-23.682257,-46.412194,36.55,artesp:160EX1,13
+artesp:92457,"Av. José Moreira, 42 - Jardim Esperanca, Mauá - SP, 09341-150, Brasil",,-23.677951,-46.420696,137.43,artesp:160EX1,13
+artesp:92458,"Av. José Moreira, 500 - Jardim Esperanca, Mauá - SP, 09341-135, Brasil",,-23.68063,-46.417075,107.33,artesp:160EX1,13
+artesp:92476,"R. América do Norte, 7 - Parque das Américas, Mauá - SP, 09351-200, Brasil",,-23.686072,-46.447306,856.73,artesp:177,61
+artesp:92477,"R. Peru, 180-184 - Jardim Santa Lidia, Mauá - SP, 09350-610, Brasil - RP9 (Regiões de Planejamento), Mauá - SP, 09350-550, Brasil",,-23.67908,-46.448025,1453.62,artesp:177,61
+artesp:92478,"R. Rio Branco, 1361a - Vila Augusto, Mauá - SP, 09310-110, Brasil",,-23.67602,-46.453677,2121.32,artesp:177,61
+artesp:92481,"R. América do Sul, 102a - Parque das Américas, Mauá - SP, 09350-580, Brasil",,-23.680307,-46.448114,1396.47,artesp:177,61
+artesp:92482,"R. América do Sul, 125 - Parque das Américas, Mauá - SP, 09350-580, Brasil",,-23.680202,-46.44809,1403.41,artesp:177,61
+artesp:92483,"R. Colômbia, 148 - Parque das Américas, Mauá - SP, 09350-590, Brasil",,-23.681561,-46.448524,1315.25,artesp:177,61
+artesp:92484,"R. Guadalajara, 186 - Parque das Américas, Mauá - SP, 09351-160, Brasil",,-23.689869,-46.443569,291.0,artesp:177,61
+artesp:92522,"Estrada de Sapopemba, 587 - Chácara São Lucido, Mauá - SP, Brasil",,-23.638028,-46.403992,690.89,artesp:336,35
+artesp:92523,"Estr. Sapopemba, 2176-2198 - Sítio Bela Vista, Mauá - SP, 09330-670, Brasil - Chácara São Lucido, Mauá - SP, Brasil",,-23.638131,-46.403346,642.27,artesp:336,37
+artesp:92534,"Av. Dona Benedita Franca da Veiga 1649 - RP11 (Regiões de Planejamento), Mauá - SP, 09330-620, Brasil",,-23.653426,-46.42199,1019.25,artesp:382|artesp:382EX1,99
+artesp:92535,"R. Caetano Aletto, 997 - Jardim Itapark Velho, Mauá - SP, 09351-510, Brasil",,-23.679239,-46.433731,390.54,artesp:382,51
+artesp:92536,"R. Caetano Aletto, 343 - Jardim Itapark Velho, Mauá - SP, 09351-510, Brasil",,-23.676231,-46.433157,530.52,artesp:382,51
+artesp:92537,"R. Caetano Aletto, 15 - Jardim Maua, Mauá - SP, 09351-510, Brasil",,-23.67362,-46.433516,790.96,artesp:382,51
+artesp:92538,"R. Inácio Barreta, 95 - Jardim Maua, Mauá - SP, 09340-180, Brasil",,-23.671544,-46.433988,975.91,artesp:382,51
+artesp:92539,"R. Horácio de Souza, 05 - Jardim Maua, Mauá - SP, 09340-120, Brasil",,-23.669346,-46.434632,1199.55,artesp:382,51
+artesp:92540,"Av. Dona Benedita Franca da Veiga, 2164 - Vila Feital, Mauá - SP, 09333-005, Brasil",,-23.649233,-46.420841,591.19,artesp:382|artesp:382EX1,147
+artesp:92541,"R. Horácio de Souza, 40 - Jardim Maua, Mauá - SP, 09340-120, Brasil",,-23.669661,-46.434757,1181.28,artesp:382,51
+artesp:92542,"Estr. do Luzitano, 449 - Jardim Éden, Mauá - SP, 09335-010, Brasil",,-23.662886,-46.414892,1739.69,artesp:382EX1,48
+artesp:92543,"R. Raimundo Corrêa, 259 - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.654799,-46.420364,1199.07,artesp:382EX1,48
+artesp:92544,"R. Raimundo Corrêa, 226 - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.654551,-46.420624,1166.52,artesp:382EX1,48
+artesp:92545,"Estr. do Luzitano, 238 - Jardim Luzitano, Mauá - SP, 09330-400, Brasil",,-23.661995,-46.416437,1912.76,artesp:382EX1,48
+artesp:92546,"R. Raul Leoni, 121-131 - Vila Feital, Mauá - SP, Brasil - Vila Feital, Mauá - SP, 09330-710, Brasil",,-23.658184,-46.419421,1585.97,artesp:382EX1,48
+artesp:92547,"R. Cassiano Ricardo, 108 - Vila Feital, Mauá - SP, 09330-680, Brasil",,-23.661521,-46.419005,1897.81,artesp:382EX1,48
+artesp:92548,"R. Luís Boscariol, 3222 - Vila Magini, Mauá - SP, 09390-180, Brasil",,-23.660044,-46.454601,1946.06,artesp:403,79
+artesp:92549,"Av. Washington Luiz, 3169 - Vila Magini, Mauá - SP, 09390-140, Brasil - RP7 (Regiões de Planejamento), Mauá - SP, 09390-220, Brasil",,-23.660215,-46.454278,1953.93,artesp:403,79
+artesp:92550,"Av. Washington Luiz, 2923 - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.659495,-46.452709,1823.76,artesp:403,79
+artesp:92551,"Av. Washington Luiz, 2755 - Vila Magini, Mauá - SP, 09390-140, Brasil - Vila Magini, Mauá - SP, 09390-140, Brasil",,-23.657985,-46.451996,1641.73,artesp:403,79
+artesp:92552,"Estr. Mauá e Adutora Rio Claro, 134 - Chácara São Lucido, Mauá - SP, 09390-500, Brasil",,-23.65451,-46.452506,1297.12,artesp:403,79
+artesp:92553,"Estr. Mauá e Adutora Rio Claro, 360 - RP7 (Regiões de Planejamento), Mauá - SP, 09390-500, Brasil",,-23.652892,-46.453486,1151.48,artesp:403,79
+artesp:92554,"Estr. Mauá e Adutora Rio Claro, 938 A - Jardim Ipe, Mauá - SP, 09390-500, Brasil",,-23.648364,-46.454228,676.95,artesp:403,79
+artesp:92555,"Estr. Mauá e Adutora Rio Claro, 1118 - Chácara São Lucido, Mauá - SP, 09390-500, Brasil",,-23.647048,-46.453762,523.81,artesp:403,79
+artesp:92556,"Estr. Mauá e Adutora Rio Claro, 1330 - Vila Nova Maua, Mauá - SP, 09390-500, Brasil",,-23.645049,-46.453514,305.35,artesp:403,79
+artesp:92557,"Estr. Mauá e Adutora Rio Claro, 1456 - Jardim Paranavai, Mauá - SP, 09390-500, Brasil",,-23.643883,-46.453587,194.89,artesp:403,158
+artesp:92558,"Estr. Mauá e Adutora Rio Claro, 1694 - Jardim Ipe, Mauá - SP, 09390-500, Brasil",,-23.642129,-46.454832,119.13,artesp:403,158
+artesp:93038,"Av. Alberto Soares Sampaio, 2700 - RP3 (Regiões de Planejamento), Mauá - SP, 09380-000, Brasil",,-23.657155,-46.489031,499.35,artesp:177|artesp:382|artesp:382EX1,160
+artesp:96094,Avenida Dona Benedita Franca da Veiga (oposto ao nº 2519),,-23.648254,-46.419016,551.26,artesp:382,102
+artesp:96118,Rua Francisco Alves de Oliveira,,-23.643734,-46.451179,114.39,artesp:403,158
+artesp:96906,"Rua José Polidoro, 227",,-23.676561,-46.451182,1871.99,artesp:177,61
+artesp:99083,"R. Eugênio Negri, 267 - RP8 (Regiões de Planejamento), Mauá - SP, 09321-190, Brasil",,-23.648415,-46.431341,751.05,artesp:158|artesp:158BI1,77
+artesp:99084,"R. Basílio, 127 - Jardim Zaira, Mauá - SP, 09321-280, Brasil",,-23.645601,-46.430026,509.29,artesp:158|artesp:158BI1,154
+artesp:99085,"Av. Pres. Castelo Branco, 3249 - Jardim Zaira - RP8 (Regiões de Planejamento), Mauá - SP, 09321-275, Brasil",,-23.644544,-46.430082,408.14,artesp:158|artesp:158BI1,154
+artesp:99095,"Estr. de Sapopemba, 26950 - Sítio Bela Vista, Mauá - SP, 09330-670, Brasil",,-23.637071,-46.398767,309.8,artesp:336,35
+artesp:99096,"Estr. de Sapopemba, 26950 - Sítio Bela Vista, Mauá - SP, 09330-670, Brasil",,-23.637226,-46.398875,310.87,artesp:336,37

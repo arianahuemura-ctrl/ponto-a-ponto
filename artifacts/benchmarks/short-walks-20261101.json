@@ -1,0 +1,23 @@
+{
+  "complete": true,
+  "max_meters": 300,
+  "only_vacancies": true,
+  "walking_routes": 1337,
+  "new_pairs": 255,
+  "pairs_newly_full": 241,
+  "by_previous_route_count": {
+    "0": 255,
+    "1": 114,
+    "2": 462,
+    "3": 265,
+    "4": 241
+  },
+  "verified_candidates": 117078,
+  "skipped_full_pairs": 115741,
+  "database_bytes": 94961283072,
+  "added_bytes_this_run": 286720,
+  "free_bytes": 148799832064,
+  "seconds": 1.906780654040631,
+  "integrity": "ok",
+  "geometry": "on_selection"
+}

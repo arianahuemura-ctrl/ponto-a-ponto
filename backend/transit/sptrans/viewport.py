@@ -1,4 +1,4 @@
-"""Revision-aware, process-local GTFS map cache and centre-first pagination."""
+"""Cache GTFS local ao processo, sensível à revisão, com paginação a partir do centro."""
 import hashlib
 import json
 import math
@@ -13,7 +13,7 @@ _snapshots = OrderedDict()
 def revision():
     path=store.database_path().resolve()
     stat=path.stat()
-    return hashlib.sha256(f'{path}:{stat.st_ino}:{stat.st_size}:{stat.st_mtime_ns}'.encode()).hexdigest()[:24]
+    return hashlib.sha256(f'rail-1:{path}:{stat.st_ino}:{stat.st_size}:{stat.st_mtime_ns}'.encode()).hexdigest()[:24]
 
 
 def page(db, south, west, north, east, lat, lon, offset=0, limit=None):
@@ -21,7 +21,7 @@ def page(db, south, west, north, east, lat, lon, offset=0, limit=None):
     with _lock:
         snapshot=_snapshots.get(version)
         if snapshot is None:
-            # Load once per imported database, not once per movement or batch.
+            # Carregue uma vez por banco importado, não a cada movimento ou lote.
             snapshot={'stops':store.in_bounds(db,-90,-180,90,180),
                       'metadata':json.loads(db.execute('SELECT value FROM metadata').fetchone()[0]),'enriched':{}}
             _snapshots[version]=snapshot

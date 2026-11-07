@@ -1,0 +1,81 @@
+REVISÃO CORRETIVA — VERSÃO 9 — 23/10/2026
+
+ESCOPO E LIMITES
+Worktree acadêmico: /home/avale/Projetos/maua_bus_map-relatorio, branch relatorio.
+Inspeção estática do código atual no worktree de desenvolvimento, sem edição, acesso aos registros pessoais ou execução de testes funcionais nesta tarefa.
+Nenhuma materialização ou medição de benchmark foi iniciada. Nenhum serviço foi instalado.
+
+1. INCONSISTÊNCIAS OBJETIVAS E CORREÇÕES
+Figura 29: os rótulos verticais e os longos retornos dificultavam a leitura. O novo arranjo aproxima estados relacionados, coloca próximos ônibus ao lado de embarque, separa as duas direções lista/mapa e mapa/confirmação e utiliza rótulos horizontais. Mantidos os mesmos seis estados e as mesmas transições, incluindo origem conhecida, falta de origem, alteração de embarque preservando destino e cancelamento confirmado. O retorno “sem origem” conduz ao estado “Selecionando embarque”; sua semântica não mudou.
+Figuras 11, 12 e 28: fontes preservadas integralmente, conferidas por SHA-256.
+Texto principal: preservado integralmente, inclusive telemetria e Nath's Brother.
+Benchmarks: as sete categorias estão no protocolo. Havia apenas três TODO-BENCHMARK explícitos; foram acrescentados quatro comentários LaTeX, sem efeito no PDF ou mudança metodológica.
+
+2. DIAGNÓSTICO DA TELEMETRIA — IMPLEMENTAÇÃO ATUAL
+frontend/src/UsabilityConsent.jsx:
+- status inicia em ask. Somente on renderiza a aplicação.
+- Não há opção para consultar sem participar; a recusa é orientada a fechar a página.
+- A aceitação depende de startRecording e do primeiro flush bem-sucedido. Falha na gravação mantém o usuário fora da navegação.
+- A decisão não é persistida entre carregamentos. O consentimento registra research-v5 como evento, mas não existe leitura de uma escolha persistida.
+frontend/src/usability.js:
+- sessionStorage guarda token, ID e sequência da telemetria; isso não equivale a guardar consentimento.
+- record só adiciona eventos com sessão ativa. stopRecording limpa sessão em memória e fila.
+- flush usa intervalo de 100 ms, lotes de até 20 eventos e aproximadamente 48 kB; um evento individual pode superar esse alvo.
+- Em 429/5xx e erros de rede, o lote retorna à fila. Não há espera progressiva nem interpretação de Retry-After nesse fluxo. A fila limita-se a 5.000 eventos, com possível descarte.
+- Falhas após a entrada não encerram necessariamente a aplicação, mas o circuito inicial continua acoplado ao registro.
+frontend/src/visualRecording.js:
+- rrweb captura canvas a 5 fps, mouse a cada 50 ms, rolagem a cada 100 ms, estilos e imagens inline. Há mascaramento de senhas e bloqueio de elementos data-private, não de todos os textos/locais.
+- Trata-se de configuração observada no código, não de medição de custo no celular.
+backend/transit/usability.py e scripts/telemetry_storage.py:
+- A limpeza de events anteriores a 30 dias ocorre em POST válido, durante a transação de recebimento. Não é agendamento independente.
+- collect remove blocos de sessões sem eventos; blocos antigos de sessão ainda ativa podem permanecer.
+- Os limites de volume e taxa podem rejeitar ingestão; armazenamento cheio retorna 503 e Retry-After.
+backend/transit/usability_admin.py e backend/transit/replay_video.py:
+- Exclusão administrativa exige POST com confirmação, apaga eventos da sessão, coleta blocos e remove o diretório de exportações em cache.
+- Não foi localizada limpeza automática por idade dos arquivos exportados nesse caminho; cópias baixadas estão fora dele.
+- Exclusão lógica no SQLite não implica redução imediata do arquivo nem apagamento físico garantido. Nenhuma operação de compactação/exclusão foi executada nesta revisão.
+
+A documentação do relatório já descreve essas limitações centrais. Não foi necessário alterar suas afirmações. O aviso “até 30 dias, com limpeza na próxima gravação” não assegura um prazo máximo de eliminação de todas as cópias; essa divergência operacional está explicitada no relatório.
+
+3. PROPOSTA PARA APROVAÇÃO — NÃO IMPLEMENTADA
+A. Consulta independente da pesquisa (prioridade alta)
+Separar a autorização de pesquisa da renderização da aplicação. Oferecer “Consultar sem participar” e “Participar da pesquisa”, com informação equivalente e sem sessão/replay quando houver recusa. É tecnicamente plausível porque record já é inerte sem sessão; requer revisar todos os iniciadores de gravação e a dependência do botão Feedback em uma sessão ativa. A consulta sem pesquisa não deve prometer ausência de logs operacionais do servidor.
+Critérios futuros: navegar, buscar e consultar rotas sem chamadas de telemetria; garantir que listeners e rrweb não sejam iniciados; distinguir feedback voluntário de captura automática.
+
+B. Persistência da decisão (prioridade alta)
+Persistir escolha aceita/recusada, versão do aviso e data em chave própria, separada do token de sessão. Definir prazo e mudanças que exigem nova escolha com os responsáveis pela pesquisa; não definir um prazo arbitrário como se aprovado. Disponibilizar revisão/revogação da decisão. Tratar armazenamento indisponível sem bloquear o transporte e sem assumir consentimento.
+Critérios futuros: recarga, nova aba, escolha recusada, aviso atualizado, expiração e falha do armazenamento. Revogar deve interromper rrweb e registro, esvaziar eventos não enviados e impedir reinício automático; exclusão de dados já enviados é ação distinta.
+
+C. Falhas de gravação independentes (prioridade alta)
+Renderizar o transporte mesmo se a pesquisa estiver indisponível. Limitar fila/reenvios, respeitar Retry-After e aplicar espera progressiva com limite. Informar o estado da gravação sem cobrir o mapa nem transformar falha de pesquisa em erro de rota. Não reenviar dados após revogação.
+Critérios futuros: 429, 503, token expirado, rede ausente, fila cheia e falha do primeiro envio, sem interrupção das funções de transporte.
+
+D. Retenção e exclusão (prioridade alta)
+Definir exatamente quais eventos, blocos, exportações e cópias estão abrangidos pelo prazo. Preparar comando de limpeza com modo de simulação, transações e testes em dados artificiais; eventual agendamento dependerá de autorização própria, sem instalar serviço nesta tarefa. Incluir cache de exportações e referências de blocos remanescentes. Disponibilizar procedimento de solicitação de exclusão sem abrir o admin público ou expor tokens. Definir responsáveis pelo tratamento das cópias baixadas.
+Critérios futuros: expiração sem nova gravação, sessão parcialmente expirada, exportação em andamento e exclusão completa de sessão, preservando outras sessões.
+
+E. Impacto da coleta (melhoria opcional, a medir)
+Avaliar envio por lotes maiores e menos frequentes, suspensão em aba oculta, amostragem adaptativa de movimento/canvas e reaproveitamento de imagens. Preservar a deduplicação e compressão já existentes. Minimizar textos/locais quando dispensáveis à tarefa de pesquisa. Comparar fidelidade do replay, uso de CPU/memória, bytes enviados e responsividade em celular antes de decidir limites. Não há ganho quantitativo demonstrado nesta revisão.
+
+4. BENCHMARK — MARCADORES E PENDÊNCIAS
+Todos permanecem sem resultados definitivos:
+- Tempo de preparação: TODO existente junto à descrição da materialização; métricas por etapa previstas.
+- Tamanho dos bancos: TODO existente; tamanho por banco e total previstos.
+- Cobertura: TODO existente; paradas/pares e ausência de rota previstos.
+- Latência: novo TODO; primeira alternativa/término, cache e percentis já previstos.
+- Qualidade: novo TODO; viabilidade, duração, caminhada e baldeações já previstas.
+- Frequência de fallback: novo TODO; motivos, frequência e custo já previstos.
+- Comparação com rodadas: novo TODO; configurações A materializado, B rodadas e C integrado já previstas.
+Aguardar conclusão/verificação da materialização e executar o protocolo posteriormente. Amostra, repetições e tolerâncias continuam a definir antes da coleta. Nenhum valor histórico foi promovido a resultado final.
+
+5. AVALIAÇÃO EXTERNA E OUTRAS DEPENDÊNCIAS
+Nath's Brother preservada como avaliação documental realizada em 21/10/2026. Não foi reaberta a confirmação da avaliação ou atribuída nova recomendação ao avaliador. Permanecem a identificação institucional/formal do responsável e a formalização/incorporação do parecer.
+A avaliação com passageiros e os dados de eventual implantação em Mauá são pendências distintas, já registradas no relatório; esta revisão não as substitui por testes internos.
+Mudanças propostas de consentimento/retencão dependem de aprovação dos responsáveis, implementação e verificação antes de atualizar as afirmações do relatório.
+
+6. VALIDAÇÃO
+LuaLaTeX/latexmk: PDF com 107 páginas; Figura 29 na página impressa 100 (104 do PDF).
+Sem referências/citações indefinidas, labels duplicados ou overfull boxes.
+16 underfull hboxes persistem em tabelas: calendar/calendar_dates (linha 1015) e tabela de rastreabilidade (linhas 1145–1155 do arquivo principal). São avisos de composição/justificação, fora da Figura 29. Melhorias opcionais: alinhamento à esquerda nas colunas estreitas e ajuste de larguras; não aplicadas para preservar o escopo.
+Figuras conferidas por renderização, fontes preservadas verificadas por hash; git diff --check aprovado.
+Diff desta rodada separado do diff acumulado anterior. Sem commit, merge ou rebase.

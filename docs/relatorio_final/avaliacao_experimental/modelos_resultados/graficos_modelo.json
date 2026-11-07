@@ -1,0 +1,74 @@
+[
+  {
+    "id": "acoes_tempos_pareados",
+    "fonte": "pares_man_qr.csv",
+    "x": "MAN e QR",
+    "y": "valor por par",
+    "apresentacao": "linhas pareadas; n por métrica; separar ordem",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "eficacia",
+    "fonte": "eficacia.csv",
+    "x": "condicao",
+    "y": "n_tentativas",
+    "apresentacao": "barras por conclusão; denominador explícito; falhas visíveis",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "compreensao",
+    "fonte": "compreensao.csv",
+    "x": "condicao/item",
+    "y": "n",
+    "apresentacao": "barras correto/parcial/incorreto; NA fora; ausências explícitas",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "facilidade",
+    "fonte": "seq_distribuicao.csv",
+    "x": "SEQ 1–7",
+    "y": "n",
+    "apresentacao": "barras por condição; ordinal; todas as tentativas",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "problemas",
+    "fonte": "problemas.csv",
+    "x": "categoria",
+    "y": "n_tentativas_afetadas",
+    "apresentacao": "problemas confirmados separados de hipóteses",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "cobertura",
+    "fonte": "cobertura.csv",
+    "x": "variante/cache",
+    "y": "n_com_rota_valida/n_cenarios_positivos",
+    "apresentacao": "controles negativos separados; censuras e falhas exibidas",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "latencia",
+    "fonte": "latencias.csv",
+    "x": "cenario/variante",
+    "y": "segundos",
+    "apresentacao": "pontos individuais+mediana; cache separado; timeout sinalizado",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "qualidade",
+    "fonte": "qualidade.csv",
+    "x": "itinerario/variante",
+    "y": "duracao/espera/caminhada/baldeacoes",
+    "apresentacao": "painéis separados; somente itinerários válidos; não misturar unidades",
+    "estado": "modelo_sem_dados"
+  },
+  {
+    "id": "fallback",
+    "fonte": "fallback.csv",
+    "x": "cenario/cache",
+    "y": "n_invocados/n_elegiveis_C",
+    "apresentacao": "censurados fora da taxa mas visíveis no denominador de tentativas",
+    "estado": "modelo_sem_dados"
+  }
+]

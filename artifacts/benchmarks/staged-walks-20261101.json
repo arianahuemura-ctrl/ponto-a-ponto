@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "source_gtfs": [
+    "/home/avale/Projetos/maua_bus_map/sptrans.sqlite3",
+    73437184,
+    1791318021740218230
+  ],
+  "built_at": "2026-11-01T06:09:13.344275+00:00",
+  "network_id": "osrm-6.0.0-foot:24e4b500eeaa63255d919335a462b5152378e0ad00dfd383d7b16bcb3f3ff064",
+  "router": "http://127.0.0.1:43909",
+  "profile": "foot",
+  "max_meters": 1000.0,
+  "speed_kmh": 4.5,
+  "max_snap_meters": 20.0,
+  "configuration": {
+    "max_meters": 1000.0,
+    "speed_kmh": 4.5,
+    "max_snap_meters": 20.0,
+    "margin_degrees": 0.025,
+    "osrm_version": "6.0.0"
+  },
+  "geometry_materialized": false,
+  "candidate_pairs": 1714618,
+  "counts": {
+    "over_limit": 669622,
+    "unreachable": 32694,
+    "unsnappable": 47956,
+    "verified": 964346
+  },
+  "stops": 22274,
+  "source_graph": "/home/avale/Projetos/maua_bus_map/.cache/staged/walking-graph.sqlite3",
+  "seconds": 27.07907008600887,
+  "bytes": 475631616,
+  "database": "/home/avale/Projetos/maua_bus_map/sptrans.staged-walks.sqlite3"
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "diretorio": "estudo_ihc_ampliado",
+    "arquivos": 12,
+    "extensoes": {
+      ".html": 1,
+      ".csv": 5,
+      ".json": 2,
+      ".txt": 1,
+      ".py": 2,
+      ".tex": 1
+    },
+    "leitura": "metadados de arquivos; protocolos/código/documentos acadêmicos; sem dados reais de navegação"
+  },
+  {
+    "diretorio": "estudo_cliques_evidencias",
+    "arquivos": 384,
+    "extensoes": {
+      ".png": 267,
+      ".json": 79,
+      ".cjs": 1,
+      ".py": 2,
+      ".txt": 3,
+      ".lock": 32
+    },
+    "leitura": "metadados de arquivos; protocolos/código/documentos acadêmicos; sem dados reais de navegação"
+  },
+  {
+    "diretorio": "auditoria-materializacao-2026-10-28",
+    "arquivos": 28,
+    "extensoes": {
+      ".json": 4,
+      ".txt": 9,
+      ".png": 8,
+      ".patch": 1,
+      ".log": 1,
+      ".py": 2,
+      ".tex": 2,
+      ".pdf": 1
+    },
+    "leitura": "metadados de arquivos; protocolos/código/documentos acadêmicos; sem dados reais de navegação"
+  },
+  {
+    "diretorio": "benchmarks/2026-10-23",
+    "arquivos": 3,
+    "extensoes": {
+      ".py": 1,
+      ".json": 1,
+      ".tex": 1
+    },
+    "leitura": "metadados de arquivos; protocolos/código/documentos acadêmicos; sem dados reais de navegação"
+  }
+]

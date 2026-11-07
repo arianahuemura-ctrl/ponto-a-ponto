@@ -1,0 +1,10 @@
+id,categoria,exigencia,momento,estado,consequencia
+D01,Autorização/ética,"Responsável, contato, termo e requisitos institucionais",Antes do recrutamento,pendente,Não iniciar com participantes
+D02,Consentimento,Aceite manual; opções separadas para mídia e telemetria,Antes de cada coleta,pendente,Recusa automática não impede observação manual
+D03,Telemetria real,Autorização expressa para escopo de exportações e finalidade,Antes de abrir dados reais,nao_autorizado_nesta_tarefa,Somente código/schema foram lidos
+D04,Cenário/gabarito,"Validar itinerários, serviço e equivalência; QR no celular",Antes do piloto/rodada,pendente,Modelos não são rotas verificadas
+D05,Fixtures,Respostas completas/hash + relógio congelado + rede bloqueada,Antes de comparar,pendente,"Fixture ausente invalida, não vira sem rota"
+D06,Infraestrutura,"Processo isolado, dados readonly, cache explícito, sem carga concorrente",Antes do benchmark,pendente,Não executar contra produção
+D07,Instrumentação,"Piloto de compatibilidade e procedência, deduplicação e overhead",Antes de medir planejadores,pendente,Instrumentação externa não testada em execução real
+D08,Retenção,Rotina manual para eventos/exportações/feedback/backups,Antes da coleta,pendente,Auto limpeza atual não garante prazo integral
+D09,Três ônibus,Disponibilidade e equivalência de A/B/C,Somente estudo futuro,fora_escopo,Principal até dois ônibus

@@ -1,0 +1,21 @@
+{
+  "video": "/home/avale/Documentos/univesp/PI2/entrega-2026-11-02-artesp-revisado/PaP_integral_gravacoes_PT_EN.mp4",
+  "report": "/home/avale/Documentos/univesp/PI2/entrega-2026-11-02-artesp-revisado/PaP_relatorio_2026-11-02_ARTESP_revisado.pdf",
+  "production": "/home/avale/Documentos/univesp/PI2/producao_video/2026-11-02-artesp-revisado",
+  "voice_changes": [
+    {
+      "speaker": "Caio Procópio",
+      "start": 293.8,
+      "end": 314.8
+    },
+    {
+      "speaker": "André",
+      "start": 565.27,
+      "end": 583.67
+    }
+  ],
+  "duration": "588.867000",
+  "md5": "7f7e73ef1ce62756bb1d82c158ce5788",
+  "sha256": "2f9b00194b69038766a2caab6ab97f7b22c282a71e6c83741a89cf0ec2df7b75",
+  "no_commit": true
+}

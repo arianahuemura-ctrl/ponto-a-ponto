@@ -13,10 +13,22 @@ export function trackLocation(position, navigatorObject, secure, onPosition, onE
 }
 
 export function boardingCoordinates(passengerPosition, origin) {
-  const point = origin?.manualBoarding ? origin.addressCoordinates : passengerPosition || origin?.addressCoordinates;
+  const point = origin?.useLocation ? passengerPosition || origin.addressCoordinates : origin?.addressCoordinates;
   return point ? {from_lat: point.lat, from_lon: point.lon} : {};
 }
 
 export function locationOrigin(position) {
   return {id:'passenger-location',name:'Minha localização',lat:position.lat,lon:position.lon,addressCoordinates:{lat:position.lat,lon:position.lon},useLocation:true};
+}
+
+// Encaminhe valores explícitos, inclusive pares vazios/incompletos, para validação no servidor.
+export function locationParams(search) {
+  const query = new URLSearchParams(search);
+  return Object.fromEntries(['location', 'latitude', 'longitude'].filter(key => query.has(key)).map(key => [key, query.get(key)]));
+}
+
+export function withLocationParams(path, search) {
+  const url = new URL(path, 'http://localhost');
+  for (const [key, value] of Object.entries(locationParams(search))) url.searchParams.set(key, value);
+  return url.pathname + url.search + url.hash;
 }

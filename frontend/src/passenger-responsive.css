@@ -1,4 +1,4 @@
-/* Shared passenger surfaces; route colors and the printable QR keep their identity. */
+/* Superfícies compartilhadas; cores das rotas e QR para impressão mantêm sua identidade. */
 :root {
   --pap-surface: #fff;
   --pap-soft: #f2f6fd;
@@ -107,7 +107,7 @@
   .screen-home, .screen-destination { overflow: auto; }
   .home-map-area, .destination-map-area { min-height: 260px; }
 }
-/* Theme changes only surfaces and text, never the QR pixels or route colors. */
+/* O tema altera apenas superfícies e texto, nunca pixels do QR ou cores das rotas. */
 [data-theme="dark"] .passenger-shell :is(.passenger-header, .home-sheet, .destination-sheet, .bottom-nav, .line-card, .map-float, .map-search, .map-instruction, .sub-header, input, select, textarea, .center-control, .route-legend, .map-key) { background: var(--pap-surface); color: var(--pap-text); border-color: var(--pap-border); }
 [data-theme="dark"] .passenger-shell :is(p, small, .detail-heading p, .point-summary span, .bottom-nav button) { color: var(--pap-muted); }
 [data-theme="dark"] .passenger-shell :is(.info-box, .secondary, .soft-icon, .point-summary, .chosen-destination, .duration-box, .detail-tabs, .destination-options > button.chosen, .data-label, .change-point) { background: var(--pap-soft); color: var(--pap-accent); }
@@ -129,3 +129,20 @@
 [data-theme="dark"] .passenger-shell .qr-poster :is(p, small) { color: #36465d; }
 :root[data-theme="dark"] .passenger-shell .detail-tabs button[aria-selected="true"] { color: #fff; }
 .passenger-shell input::placeholder { color: var(--pap-muted); opacity: 1; }
+
+/* Menus nativos precisam de fundo opaco: não herdar texto claro sobre popup branco. */
+:is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select {
+  color-scheme: light;
+}
+:root[data-theme="dark"] :is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select {
+  color-scheme: dark;
+}
+:is(.passenger-shell, .sp-shell, .pap-feedback, .research-dialog) select :is(option, optgroup) {
+  background-color: var(--pap-surface);
+  color: var(--pap-text);
+}
+.research-welcome select { color-scheme: dark; }
+.research-welcome select :is(option, optgroup) {
+  background-color: #193754;
+  color: #fff;
+}

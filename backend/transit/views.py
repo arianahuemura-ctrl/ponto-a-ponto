@@ -2,6 +2,7 @@ import math
 from django.conf import settings
 from django.http import FileResponse, HttpResponse, JsonResponse
 from django.views.decorators.http import require_GET
+from django.views.decorators.cache import never_cache
 from . import services
 
 STATES = set(
@@ -64,6 +65,7 @@ def nearby(request):
 
 
 @require_GET
+@never_cache
 def index(request):
     path = settings.BASE_DIR / "frontend/dist/index.html"
     if not path.exists():
@@ -77,16 +79,22 @@ def index(request):
 
 @require_GET
 def location_config(request):
-    lat, lon = settings.SIMULATED_LATITUDE, settings.SIMULATED_LONGITUDE
+    from_url = any(key in request.GET for key in ('location', 'latitude', 'longitude'))
     position = None
-    if lat or lon:
+    if from_url:
         try:
+            if 'location' in request.GET:
+                if 'latitude' in request.GET or 'longitude' in request.GET:
+                    raise ValueError()
+                lat, lon = request.GET['location'].split(',')
+            else:
+                lat, lon = request.GET.get('latitude'), request.GET.get('longitude')
             lat, lon = float(lat), float(lon)
             if not (math.isfinite(lat) and math.isfinite(lon) and -90 <= lat <= 90 and -180 <= lon <= 180):
                 raise ValueError()
             position = {"lat": lat, "lon": lon, "accuracy": 0, "simulated": True}
         except (ValueError, TypeError):
-            return JsonResponse({"error": "Coordenadas simuladas inválidas: configure latitude e longitude."}, status=400)
+            return JsonResponse({"error": "Coordenadas simuladas inválidas: use location=latitude,longitude ou latitude e longitude separados, sem misturar os formatos."}, status=400)
     response = JsonResponse({"position": position})
     response["Cache-Control"] = "no-store"
     return response

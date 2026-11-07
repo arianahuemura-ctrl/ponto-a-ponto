@@ -1,0 +1,20 @@
+{
+  "before": 644942,
+  "after": 222728,
+  "removed": 422214,
+  "max_paths_per_pair": 5,
+  "pairs_with_paths": 77956,
+  "paths_by_boardings": [
+    [
+      1,
+      7940
+    ],
+    [
+      2,
+      214788
+    ]
+  ],
+  "bytes_after": 43790336,
+  "bytes_before": 117727232,
+  "seconds": 2.7181935730041005
+}

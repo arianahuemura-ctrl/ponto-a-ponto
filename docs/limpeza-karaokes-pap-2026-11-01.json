@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-01T02:21:01.157012-03:00",
+  "removed": [
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-29-nathalia-feedbacks/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 33979065,
+      "allocated_bytes": 33980416
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-29-nathalia-feedbacks/Nathalia_falas_karaoke.mp4",
+      "size_bytes": 3235551,
+      "allocated_bytes": 3235840
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-29-nathalia-feedbacks/antes/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 34237416,
+      "allocated_bytes": 34242560
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-28-limite-materializacao/antes/Procopio_falas_karaoke.mp4",
+      "size_bytes": 4058576,
+      "allocated_bytes": 4059136
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-28-limite-materializacao/auxiliares/Procopio_falas_karaoke.mp4",
+      "size_bytes": 4053136,
+      "allocated_bytes": 4055040
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-28-limite-materializacao/karaoke/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 34237416,
+      "allocated_bytes": 34242560
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-28-limite-materializacao/antes/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 34245213,
+      "allocated_bytes": 34246656
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-29-nathalia-feedbacks/antes/Nathalia_falas_karaoke.mp4",
+      "size_bytes": 3474763,
+      "allocated_bytes": 3477504
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Bruno_falas_karaoke.mp4",
+      "size_bytes": 3964155,
+      "allocated_bytes": 3964928
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Ariana_falas_karaoke.mp4",
+      "size_bytes": 3983825,
+      "allocated_bytes": 3985408
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Andre_falas_karaoke.mp4",
+      "size_bytes": 3189182,
+      "allocated_bytes": 3190784
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-27-ihc-comparativo/karaoke/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 34245213,
+      "allocated_bytes": 34250752
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-27-ihc-comparativo/antes/PaP_karaoke_gravacao.mp4",
+      "size_bytes": 31780255,
+      "allocated_bytes": 31780864
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/producao_video/2026-10-23-final/ariana-fundamentacao-v90/karaoke/karaoke-celular.mp4",
+      "size_bytes": 31430271,
+      "allocated_bytes": 31436800
+    },
+    {
+      "path": "/home/avale/Downloads/teleprompter_karaoke_ponto_a_ponto.mp4",
+      "size_bytes": 4784640,
+      "allocated_bytes": 4788224
+    },
+    {
+      "path": "/home/avale/Downloads/teleprompter_ponto_a_ponto.mp4",
+      "size_bytes": 6362618,
+      "allocated_bytes": 6365184
+    }
+  ],
+  "kept": [
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/PaP_karaoke_gravacao.mp4",
+      "sha256": "52d32571c9af8116af59d564d977e096d8d0588736dcc48e2ccd494fa29acca7",
+      "size": 33979065,
+      "duration": "16:46"
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Nathalia_falas_karaoke.mp4",
+      "sha256": "9258ce3c64dbb527ee93b86e10660f5e514559a028045ad056f4b23157878239",
+      "size": 3235551,
+      "duration": "1:26"
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Procopio_falas_karaoke.mp4",
+      "sha256": "339837e383ad798f02f00dbf2d337d9f3f5be3fb39c5c3c092ad37644b8c4d2c",
+      "size": 4053136,
+      "duration": "1:46"
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Mauricio_falas_karaoke.mp4",
+      "sha256": "50e23d7c2d7792b98258e7b2b64623d1e6a3b094510ccd6084fdd75271dae107",
+      "size": 7071080,
+      "duration": "3:38"
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Leonardo_falas_karaoke.mp4",
+      "sha256": "9871d9c93cad690f82542a50ce3544e0b0d24517290ee64cdb3539f7d31fed30",
+      "size": 4085373,
+      "duration": "2:00"
+    },
+    {
+      "path": "/home/avale/Documentos/univesp/PI2/entrega-thiago-2026-10-25/videos/Ingrid_falas_karaoke.mp4",
+      "sha256": "baac6cd0b167859e4673aa69186daed7123266ea71685274b2ede727828cebe9",
+      "size": 4663959,
+      "duration": "2:25"
+    }
+  ],
+  "removed_count": 16,
+  "size_bytes": 271261295,
+  "allocated_bytes": 271302656,
+  "other_videos_verified_unchanged": 332
+}

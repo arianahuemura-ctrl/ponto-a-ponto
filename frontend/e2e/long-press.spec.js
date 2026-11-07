@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './coverage.js';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos não escolhem',async({page,context})=>{
   await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
@@ -14,6 +14,7 @@ test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos n�
     return r.fulfill({json:{lines:[],journeys:[]}});
   });
   await page.goto('/');
+  await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
   await expect(page.locator('.sp-passenger-position')).toBeVisible();
   const box=await page.locator('.sp-map').boundingBox();
   const x=Math.round(box.x+box.width*.7),y=Math.round(box.y+box.height*.4);
@@ -36,6 +37,7 @@ test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos n�
   await touch('touchStart',[point]);
   await page.waitForTimeout(750);
   await touch('touchEnd',[]);
+  await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
   await expect.poll(()=>destinations.length).toBe(1);
   await expect.poll(()=>boards.length).toBe(1);
   expect(boards[0].get('to_lat')).toBe(destinations[0].get('lat'));
@@ -43,13 +45,14 @@ test('toque prolongado escolhe coordenadas; toque curto, arrasto e dois dedos n�
   expect(boards[0].get('to_lat')).not.toBe('-23.551');
   await expect(page.getByRole('dialog')).toContainText('Local selecionado no mapa');
   const previousDestination=Object.fromEntries(['destination','to_lat','to_lon'].map(key=>[key,boards[0].get(key)]));
-  // Changing boarding from an already selected route must preserve its destination.
+  // Alterar embarque em uma rota já selecionada deve preservar o destino.
   await page.waitForTimeout(1250);
   await page.getByRole('button',{name:'Ver mapa',exact:true}).click();
   await page.getByRole('button',{name:'Alterar embarque',exact:true}).click();
   await touch('touchStart',[{...point,x:x-30}]);
   await page.waitForTimeout(750);
   await touch('touchEnd',[]);
+  await page.getByRole('button',{name:'Usar como embarque',exact:true}).click();
   await expect.poll(()=>destinations.length).toBe(2);
   await expect.poll(()=>boards.length).toBe(2);
   expect(boards[1].get('from_lat')).toBe(destinations[1].get('lat'));
@@ -71,10 +74,12 @@ test('clique longo com pequena oscilação do mouse seleciona o local',async({br
   await page.route('**/api/sptrans/destination/**',r=>{selections++;return r.fulfill({json:{stop:{id:'2',name:'Destino',lat:-23.551,lon:-46.631}}});});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[]}}));
   await page.goto('/');
+  await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
   await expect(page.locator('.sp-passenger-position')).toBeVisible();
   const box=await page.locator('.sp-map').boundingBox(),x=box.x+box.width*.7,y=box.y+box.height*.4;
   await page.mouse.move(x,y);await page.mouse.down();await page.waitForTimeout(100);
   await page.mouse.move(x+5,y+2,{steps:2});await page.waitForTimeout(800);await page.mouse.up();
+  await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
   await expect.poll(()=>selections).toBe(1);
   await context.close();
 });
@@ -90,10 +95,12 @@ for(const restored of [false,true]) test(`mapa conserva embarque ao escolher des
   await page.route('**/api/sptrans/destination/**',r=>r.fulfill({json:{stop:{id:'2',name:'Destino',lat:-23.551,lon:-46.631}}}));
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[]}}));
   await page.goto('/?stop=1');
+  await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
   if(!restored){await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Ver mapa',exact:true}).click();}
   await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar destino');
   const box=await page.locator('.sp-map').boundingBox();await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);
   await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();
+  await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
   await expect.poll(async()=>page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).destination?.id)).toBe('2');
   const session=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')));
   expect(session.origin.id).toBe('1');
@@ -111,13 +118,16 @@ test('sem geolocalização nem embarque, primeiro clique longo define origem e s
   await page.route('**/api/sptrans/destination/**',r=>{selections++;return r.fulfill({json:{stop:{id:String(selections),name:'Local '+selections,lat:-23.551,lon:-46.631}}});});
   await page.route('**/api/sptrans/board/**',r=>r.fulfill({json:{lines:[],journeys:[]}}));
   await page.goto('/');
-  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar local de embarque');
+  await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
+  await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar embarque');
   const hold=async()=>{const box=await page.locator('.sp-map').boundingBox();await page.mouse.move(box.x+box.width*.7,box.y+box.height*.4);await page.mouse.down();await page.waitForTimeout(800);await page.mouse.up();};
   await hold();
+  await page.getByRole('button',{name:'Usar como embarque',exact:true}).click();
   await expect(page.locator('.sp-navigation-state')).toContainText('Selecionar destino');
   const origin=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).origin);
   expect(origin.id).toBe('1');
   await hold();
+  await page.getByRole('button',{name:'Usar como destino',exact:true}).click();
   await expect.poll(async()=>page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).destination?.id)).toBe('2');
   expect(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')).origin)).toEqual(origin);
   await context.close();
@@ -135,7 +145,8 @@ for(const gps of [true,false]) test(`URL vazia ignora viagem antiga da sessão (
   let boardRequests=0;
   await page.route('**/api/sptrans/board/**',r=>{boardRequests++;return r.fulfill({json:{lines:[],journeys:[]}});});
   await page.goto('/');
-  await expect(page.locator('.sp-navigation-state')).toContainText(gps?'Selecionar destino':'Selecionar local de embarque');
+  await page.getByRole('button',{name:'Continuar sem contribuir',exact:true}).click();
+  await expect(page.locator('.sp-navigation-state')).toContainText(gps?'Selecionar destino':'Selecionar embarque');
   const session=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pap.sp.session')));
   expect(session.origin?.id??null).toBe(gps?'passenger-location':null);
   expect(session.destination).toBeNull();

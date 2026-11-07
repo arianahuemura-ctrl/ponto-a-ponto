@@ -1,0 +1,54 @@
+{
+  "previous_kernel": "340bef2193605a1cbbcf21f1290acd253cb0ef7a8742d2ab69fa4e553feb7324",
+  "current_kernel": "34adde8b85a920dacfc316758ad7bf767319452d1baf35449c7b71607d0fe695",
+  "compatible": true,
+  "byte_identical_real_origins": [
+    {
+      "new_pairs": 44,
+      "added_routes": 220,
+      "changed_pairs": 44,
+      "seconds": 0.14339379302691668,
+      "sid": "18859",
+      "origin": 2051,
+      "digest": "9b20fb4e8cab974ac00b3acdaaf9db4b5183fcb3a718e5be5ce0b2bbd270a478"
+    },
+    {
+      "new_pairs": 57,
+      "added_routes": 423,
+      "changed_pairs": 107,
+      "seconds": 0.5263612470007502,
+      "sid": "440016922",
+      "origin": 10009,
+      "digest": "46998ae84a78e8660932744c1b92a82631665c05075b5314781ab5557b981ca5"
+    },
+    {
+      "new_pairs": 708,
+      "added_routes": 4210,
+      "changed_pairs": 1007,
+      "seconds": 7.752609685994685,
+      "sid": "690017091",
+      "origin": 15768,
+      "digest": "63aa63f7f5a9b7e7a4872330d252a11f28f93069c123461440df5cb490478d29"
+    },
+    {
+      "new_pairs": 10717,
+      "added_routes": 61636,
+      "changed_pairs": 13168,
+      "seconds": 2.062528848007787,
+      "sid": "520008873",
+      "origin": 11968,
+      "digest": "3add085964e2d70e45128d8101ba5e2ef69161813f06a1eae06c046a2f7e3d37"
+    },
+    {
+      "new_pairs": 295,
+      "added_routes": 1550,
+      "changed_pairs": 327,
+      "seconds": 0.9638765699928626,
+      "sid": "100014307",
+      "origin": 0,
+      "digest": "07f5e18e3f31669a5844fa2e836198599a846d53c72472db28ea54e19fa1738e"
+    }
+  ],
+  "checkpoint_origins_preserved": 956,
+  "regression_tests_passed": 53
+}

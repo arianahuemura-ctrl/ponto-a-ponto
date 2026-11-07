@@ -1,0 +1,95 @@
+{
+  "source_url": "https://dadosabertos.artesp.sp.gov.br/dataset/92e8bb31-df66-4700-ad9a-42a48f04fb7f/resource/3918f5ec-206d-4826-8a88-5d9f6f791fe2/download/artesp_gtfs.zip",
+  "feed_info": [
+    {
+      "feed_publisher_name": "ARTESP",
+      "feed_publisher_url": "http://www.artesp.sp.gov.br",
+      "feed_lang": "pt",
+      "feed_start_date": "20260101",
+      "feed_end_date": "20261231",
+      "feed_version": "20261007",
+      "feed_contact_email": "ouvidoria@artesp.sp.gov.br"
+    }
+  ],
+  "calendars": [
+    {
+      "service_id": "WD",
+      "monday": "1",
+      "tuesday": "1",
+      "wednesday": "1",
+      "thursday": "1",
+      "friday": "1",
+      "saturday": "0",
+      "sunday": "0",
+      "start_date": "20260101",
+      "end_date": "20261231"
+    },
+    {
+      "service_id": "SAT",
+      "monday": "0",
+      "tuesday": "0",
+      "wednesday": "0",
+      "thursday": "0",
+      "friday": "0",
+      "saturday": "1",
+      "sunday": "0",
+      "start_date": "20260101",
+      "end_date": "20261231"
+    },
+    {
+      "service_id": "SUN",
+      "monday": "0",
+      "tuesday": "0",
+      "wednesday": "0",
+      "thursday": "0",
+      "friday": "0",
+      "saturday": "0",
+      "sunday": "1",
+      "start_date": "20260101",
+      "end_date": "20261231"
+    }
+  ],
+  "zip_md5": "8c26295e6895e38b407fd516520ccf4f",
+  "zip_sha256": "f3fdca9599e512e191f1bb78cebcafab1bac8a458fbdd5c5e71cc2d10d97d45a",
+  "stops": 337,
+  "routes": [
+    "040",
+    "040EX1",
+    "063",
+    "063EX1",
+    "064",
+    "107",
+    "157",
+    "158",
+    "158BI1",
+    "160",
+    "160EX1",
+    "177",
+    "336",
+    "382",
+    "382EX1",
+    "403"
+  ],
+  "distinct_trips": 1491,
+  "local_stop_calls_not_trip_count": 32277,
+  "days": {
+    "tuesday": {
+      "trips": 705,
+      "routes": 16,
+      "stops": 337
+    },
+    "saturday": {
+      "trips": 427,
+      "routes": 12,
+      "stops": 324
+    },
+    "sunday": {
+      "trips": 359,
+      "routes": 12,
+      "stops": 324
+    }
+  },
+  "all_raw_sequences_valid": true,
+  "raw_stop_and_trip_ids_equal_imported_census": true,
+  "calendar_dates": []
+}

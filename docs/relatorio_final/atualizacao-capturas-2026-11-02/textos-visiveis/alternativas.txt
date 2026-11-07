@@ -1,0 +1,60 @@
+Rota selecionada
+Endereço ou coordenadas de destino
+B
+C
+D
+E
+Metrô Linha Ouro
+CPTM Linha 13 Jade
+Metrô Linha Laranja
+Metrô Linha Prata
+Metrô Linha Azul
+CPTM Linha 10 Turquesa
+CPTM Linha 9 Esmeralda
++
+−
+© OpenStreetMap
+Buscando outras alternativas…
+Trecho
+Viagem completa
+A → B · 7002-10 · Hosp. Das Clínicas
+B → C · 701A-10 · Pq. Edu Chaves
+C → D · 4210-10 · Term. Cid. Tiradentes
+D → E · 3459-10 · Itaim Paulista
+E → Destino · 403A-10 · Term. Penha
+Ônibus
+A pé
+Opções da sua rota
+
+Embarque: Parada Exclusiva · 1211381
+
+Destino: R. Guaiaúna, 419 · parada 600012585
+
+✓
+Destino
+Guaiaúna · R. Guaiaúna, 419
+Ponto favorito
+
+Até 5 rotas: primeiro as de menor custo; se faltarem, completamos com até +1, respeitando o teto de 4. Trocas internas entre metrô e trem contam ⅓; as demais contam 1.
+
+Alternativas de viagem
+Ordenar rotas por
+Mais rápido
+Menor custo de baldeações
+Menos caminhada
+1. 3 h 48 s no planejamento · 4 baldeações
+🚌 7002-10 → 🚌 701A-10 → 🚌 4210-10 → 🚌 3459-10 → 🚌 403A-10
+0 m a pé · 0 min de caminhada total
+Caminhada até o embarque: 0 min
+Embarque em 7 min
+Embarque previsto às 11:49 · SPTrans
+Chegada ao destino · planejamento
+14:43
+Aguardando previsões compatíveis para todos os trechos. Horário acima corresponde ao planejamento.
+Consulta às 11:42
+
+Buscando alternativas… As rotas aparecem conforme são calculadas e a ordem ainda pode mudar.
+
+Navegação
+Favoritos
+Feedback

@@ -30,7 +30,7 @@ class WalkingTests(SimpleTestCase):
         result=walking.route(self.a,self.b)
         self.assertTrue(result['available'])
         self.assertEqual(result['distance_meters'],40)
-        self.assertEqual(result['duration_minutes'],0.6)
+        self.assertEqual(result['duration_minutes'],0.5)
         self.assertEqual(result['geometry'][0],[-23.55,-46.63])
         self.assertIn('/routed-foot/',fetch.call_args.args[0].full_url)
         self.assertEqual(walking.route(self.a,self.b),result)

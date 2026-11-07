@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "estado": "preparacao",
+  "estudo": "exploratorio_nao_municipal",
+  "max_transfers": 1,
+  "variantes": [
+    "A",
+    "B",
+    "C"
+  ],
+  "repeticoes": 5,
+  "ordens": [
+    "ABC",
+    "BCA",
+    "CAB",
+    "ACB",
+    "CBA"
+  ],
+  "cache": [
+    "aplicacao_fria",
+    "aplicacao_quente"
+  ],
+  "timeout_s": 120,
+  "fixture_sha256": null,
+  "gabarito_sha256": null,
+  "app_snapshot_sha256": null,
+  "gtfs_sha256": null,
+  "isolamento_validado": false,
+  "rede_bloqueada": false,
+  "piloto_instrumentacao_aprovado": false,
+  "dados_sao_publicos": true
+}

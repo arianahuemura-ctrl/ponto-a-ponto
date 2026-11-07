@@ -1,15 +1,11 @@
-\begin{tikzpicture}[>=Stealth,font=\footnotesize]
-\foreach \x/\name in {0/Passageiro,3/Interface,6/Backend,9/Roteamento a pé}{\node[draw,align=center,text width=2.3cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-10);}
-\draw[->] (0,-1)--node[above]{Origem e destino}(3,-1);
-\draw[->] (3,-2)--node[above]{Solicitar alternativas}(6,-2);
-\node[align=center,text width=4cm,fill=white] at (7.6,-3) {Busca por rodadas no GTFS};
-\draw[->,dashed] (6,-4)--node[above]{Resultado inicial}(3,-4);
-\draw[->] (3,-4.7)--node[above]{Apresentar alternativas}(0,-4.7);
-\draw[->] (6,-5.5)--node[above]{Validar caminhada candidata}(9,-5.5);
-\draw[->,dashed] (9,-6.3)--node[above]{Distância / falha}(6,-6.3);
-\draw[->,dashed] (6,-7.2)--node[above]{Novas alternativas (NDJSON)}(3,-7.2);
-\draw[->] (0,-8)--node[above]{Selecionar uma rota}(3,-8);
-\node[align=center,text width=3cm] at (3,-9) {Abrir mapa; preservar escolha e zoom nas atualizações};
-\draw[draw] (2.6,-5) rectangle (10.4,-7.6);
-\node[anchor=south west] at (2.6,-5) {\textbf{loop} [há candidatas e limites disponíveis]};
+\begin{tikzpicture}[>=Stealth,font=\small,
+seqstage/.style={draw,rounded corners=3pt,align=left,text width=12cm,inner sep=7pt,fill=blue!3},
+arr/.style={->,thick}]
+\node[seqstage] (a) {\textbf{1. Receber origem, destino e instante}\\React solicita a consulta ao Django. Uma caminhada curta já materializada pode ser publicada imediatamente, sem encerrar a busca.};
+\node[seqstage,below=.3cm of a] (b) {\textbf{2. Selecionar fontes e iniciar tarefas concorrentes}\\Candidatos preparados e conexões de ônibus; rodadas quando habilitadas; caminhada externa apenas se não houver caminhada direta inicial. A disponibilidade e a configuração condicionam cada fonte.};
+\node[seqstage,below=.3cm of b] (c) {\textbf{3. Avaliar independentemente em cada produtor}\\Recuperar candidatos, validar horários e caminhadas e preparar a geometria da alternativa a publicar. Serviços externos podem afetar uma fonte sem obrigar as outras a esperar.};
+\node[seqstage,fill=green!6,below=.3cm of c] (d) {\textbf{4. Consumir a fila e publicar a primeira opção válida}\\Deduplicar e aplicar os filtros de trechos, caminhada e custo. Enviar alternativas por SSE/NDJSON com \texttt{complete=false}, sem aguardar todos os produtores. Refinamento operacional quando disponível.};
+\node[seqstage,fill=green!6,below=.3cm of d] (e) {\textbf{5. Incorporar novas alternativas e progresso}\\Repetir a avaliação e publicação, podendo reordenar até cinco opções. Pools separados: quatro threads para preparados e oito para complementos, com admissão limitada a 16 e 24 tarefas por processo servidor.};
+\node[seqstage,fill=orange!8,below=.3cm of e] (f) {\textbf{6. Finalizar ou sinalizar busca limitada}\\Encerrar após conclusão das fontes admitidas ou prazo do agregador de 30 s. Falha, saturação e prazo preservam resultados e indicam limites. Fechar o fluxo cancela tarefas em fila; as ativas cooperam na próxima publicação. Revisão opcional final tem orçamento próprio. O prazo não garante latência no celular.};
+\foreach \a/\b in {a/b,b/c,c/d,d/e,e/f}{\draw[arr] (\a.south)--(\b.north);}
 \end{tikzpicture}
