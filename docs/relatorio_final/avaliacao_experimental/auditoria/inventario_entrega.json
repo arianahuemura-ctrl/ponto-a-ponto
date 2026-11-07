@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "revisao": "EXP-1",
+  "raiz_relativa": "docs/relatorio_final",
+  "arquivos": [
+    {
+      "arquivo": "avaliacao_experimental/LEIA-ME.md",
+      "bytes": 3177,
+      "sha256": "198ef47f862003b4ca41fa20d673303cbe25a85f033ff2c423321dea3ff04d8d"
+    },
+    {
+      "arquivo": "avaliacao_experimental/analise.md",
+      "bytes": 4531,
+      "sha256": "3f509b3964c3473885b69a53261102aa61e0a600e873093e4f991002d01da5c9"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/alteracao_ficha.json",
+      "bytes": 433,
+      "sha256": "eae275b412fa50ff3d3918909beb7cdc81d98cc96d3fa8f05e770a5e61967d9e"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/entrega.md",
+      "bytes": 3725,
+      "sha256": "c1aef127e42fc62993abc8b392507632042430d3a9b4a3b8b1513aa7d9073e98"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/ficha_alteracoes.diff",
+      "bytes": 1232,
+      "sha256": "a51bbe55e1e2d1770dc90be70dbd55b7ca37e54023d381a9aa09aac3fa90539f"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/ficha_cabecalho_anterior.csv",
+      "bytes": 488,
+      "sha256": "d33626897525c25e0049aee1e53f92b4c0019b7eff6fb42a75aa3725bfa07206"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/git_estado_inicial.txt",
+      "bytes": 1688,
+      "sha256": "bda18e186dc3b98a8e3080417d818cb75876cf7aca4f71021fa0656c06ab96aa"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/inventario_metadata.json",
+      "bytes": 1258,
+      "sha256": "a7dda1cacee6cd84e7fd8589d87281e4df957bdc8862c235dbcdcdd445047af7"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/selecao_publica.json",
+      "bytes": 3189,
+      "sha256": "7448d19b2deaf9c20a2b3db873229bef7daf498512d3b4bb5dd6b87557617b93"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/testes_instrumentos.txt",
+      "bytes": 2458,
+      "sha256": "3c5ca6a2f4a14a779ed2513ab339deddc394dc561d564f7bb7e05fb54330e11f"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/validacao.json",
+      "bytes": 554,
+      "sha256": "71252334bbfdaf1a07438cfad37cbe409c02d0b7deb771bd8e8df32a20e8b346"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/validacao_final.json",
+      "bytes": 2477,
+      "sha256": "e3a640bf120eef5a4c215ca0ce857fa77a6bd1d3e31278b2da60211a1462d03f"
+    },
+    {
+      "arquivo": "avaliacao_experimental/auditoria/versoes.json",
+      "bytes": 2159,
+      "sha256": "42192e05b22157d3f3e5dac50d21ec9898efaf72f55563f946ab131c853bc004"
+    },
+    {
+      "arquivo": "avaliacao_experimental/benchmark/cenarios.csv",
+      "bytes": 1351,
+      "sha256": "d8e0982f323d0168bf1fcdb44d6c869fa60a100d292176e20abe832477268b23"
+    },
+    {
+      "arquivo": "avaliacao_experimental/benchmark/configuracao_modelo.json",
+      "bytes": 570,
+      "sha256": "76c2ce279d6c458612ac7fe634a7917e747b4282f6dd02e6959ba6039abcb495"
+    },
+    {
+      "arquivo": "avaliacao_experimental/benchmark.md",
+      "bytes": 12524,
+      "sha256": "b0bff95c5efc3500c1852131ae67d61efb4b38a217dbf2ea16f39c5b4fb3e26b"
+    },
+    {
+      "arquivo": "avaliacao_experimental/dependencias.csv",
+      "bytes": 1450,
+      "sha256": "afdbf46fa6bed528839fc978413aa9041b3691d56c91c9dbc264b4edb2c51145"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/LEIA-ME.md",
+      "bytes": 4071,
+      "sha256": "9fa8c5aabbc1a39cee06aca7f5b22670051e64ad933c49b8efe4de4a31d0c575"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/alteracoes_feedback.csv",
+      "bytes": 109,
+      "sha256": "ceb718a83614525a9f1657d6db919564f55224b3fb7851d689a91f7e8a2ab6c8"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/benchmark_execucoes.csv",
+      "bytes": 158,
+      "sha256": "71453737ab6719486263b1835a8f4d871e18eb5fda0791370824555da570c0a0"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/benchmark_itinerarios.csv",
+      "bytes": 129,
+      "sha256": "b038bea8053232b19ae7d72e48ab6b5087e236d1899c8e9b2f0ec5f54ba09b5c"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/cenarios_ihc.csv",
+      "bytes": 351,
+      "sha256": "2071f734f972a51dde293e28df624c802286d79f0a65c96db69169a2d2e6cc30"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/consentimento.csv",
+      "bytes": 169,
+      "sha256": "c437e38e0549802278bc17fc183928a97731a16f3139118f7e6c96fda58b7b9f"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/gabarito.csv",
+      "bytes": 224,
+      "sha256": "7240c32d3bd641f7ba44eef6859055ee90dc0931acf7ed0979376ef97d559ace"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/instrumentos.xlsx",
+      "bytes": 23234,
+      "sha256": "7ec65d7b541642bb091f9a328c48e87c4270af0210e2345ed0ac94929e8c30b0"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/marcos.csv",
+      "bytes": 114,
+      "sha256": "d47f460f052cbf26d413e3a46cddd8798828939c784d2c89a57cb143639279e5"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/ordem_planejada.csv",
+      "bytes": 391,
+      "sha256": "1d25c21cec8dd95153f471938b7ca79011a99d033bdf070b88cf65e2b89487a4"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/prevoo.csv",
+      "bytes": 83,
+      "sha256": "6faf4ec9f6acaed281111f73538e09df8e09ad6d9d21375702f8feac2b804ad3"
+    },
+    {
+      "arquivo": "avaliacao_experimental/formularios/problemas.csv",
+      "bytes": 213,
+      "sha256": "ba2906e3bdc7b98a124b8195e1c6294056f8770f6b36973b94fd0a251109ae44"
+    },
+    {
+      "arquivo": "avaliacao_experimental/indicadores_telemetria.csv",
+      "bytes": 3023,
+      "sha256": "cc52c643c47a72654d3b532548a5996ac053978517f5c7f12182f12a02fd0271"
+    },
+    {
+      "arquivo": "avaliacao_experimental/integracao_academica.md",
+      "bytes": 1871,
+      "sha256": "20eb12bedeb2ae2a336fd1ed7110b9d4e824fb6914b8075931be98adc611869f"
+    },
+    {
+      "arquivo": "avaliacao_experimental/manifesto_modelo.json",
+      "bytes": 954,
+      "sha256": "c33633216aa7ee694125b77caf5234f5f973ead5958c6964bcd7e46ef7dca5e6"
+    },
+    {
+      "arquivo": "avaliacao_experimental/matriz_avaliacoes.csv",
+      "bytes": 1988,
+      "sha256": "c6170018da9cfd013a1751bfeae648493d8c02d36b9c45bbc44a591f62eab878"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/cobertura.csv",
+      "bytes": 104,
+      "sha256": "5cbf3ca66bf97ec7d18c0dc542f22b60aa365fddef4c9a459ed58c0c671a5b93"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/compreensao.csv",
+      "bytes": 62,
+      "sha256": "fd1b4af3a658747b64fefc585cbfbea8749108fabfc352a26b9708488495e388"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/eficacia.csv",
+      "bytes": 45,
+      "sha256": "1970609982314beb2fa24c51fab65a17b369d8133e813aabba85ae1eee3e4778"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/fallback.csv",
+      "bytes": 79,
+      "sha256": "5ec452c2ae47e07703d62743f44f9a738b29387b1b3a1f653ea02bbea65a17c1"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/graficos_modelo.json",
+      "bytes": 2121,
+      "sha256": "faa7da24188f6840866146eaa5714f9b2e392050609f5bd3898e2a1f5665b6fd"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/latencias.csv",
+      "bytes": 90,
+      "sha256": "f4b27b4abfb1b267eb2b398c46a8747ab171746e455ac9056b3134cd759d90db"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/pares_man_qr.csv",
+      "bytes": 92,
+      "sha256": "3d2743ecd725d742da5a945bea002e3e3d3444c14eda1a1e02470cb3ef00cad7"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/problemas.csv",
+      "bytes": 84,
+      "sha256": "5a5cdad0a63b9f127183bcb8e1f1bdbd851388e4cf10a4dbb26d35379e8c594c"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/qualidade.csv",
+      "bytes": 97,
+      "sha256": "585ca18165f3d10789ea202b6208a882b84dadd2e010f555dacb763d27a826b7"
+    },
+    {
+      "arquivo": "avaliacao_experimental/modelos_resultados/seq_distribuicao.csv",
+      "bytes": 40,
+      "sha256": "a0346feaea4a70142408d3af1d34fefc5af4d5bd35571ab5a15d5b5fde70d188"
+    },
+    {
+      "arquivo": "avaliacao_experimental/privacidade.md",
+      "bytes": 5046,
+      "sha256": "b5a37abd8eefb27bc8915cfe76dcf0ef32a8f9e6a33d9cbced37ddcaedddf7a6"
+    },
+    {
+      "arquivo": "avaliacao_experimental/qr_man.md",
+      "bytes": 8878,
+      "sha256": "039c44ff5c46157fed839c161b61bf11f85df3d2b3150ec87e36c99f834e0a20"
+    },
+    {
+      "arquivo": "avaliacao_experimental/rastreabilidade.md",
+      "bytes": 2076,
+      "sha256": "cb9874a9722861ced59909d89f69eb68267d1e30f37cd060db131d2a2889e34b"
+    },
+    {
+      "arquivo": "avaliacao_experimental/schemas/evento_normalizado.json",
+      "bytes": 876,
+      "sha256": "7e99289df381e8e6fc59e56611cc01d53a1ac9fcc1cae59e857d3c3612282019"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/LEIA-ME.md",
+      "bytes": 1999,
+      "sha256": "1a407456a920c5443f034f59188b7ef6ce8b7c06c135eaa11f96db57d6b6c0ec"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/agregar_telemetria.py",
+      "bytes": 1774,
+      "sha256": "4f2fabc43b1667c926d07efb1969a8b70ddf64c33926dddcd6fe96ab26e0db66"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/analisar.py",
+      "bytes": 8259,
+      "sha256": "0bfbec867e0bfbb17d4028697da8e7458b3cc02dca91160e6c06a56013a96e3b"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/instrumentacao_benchmark.py",
+      "bytes": 10153,
+      "sha256": "7819ab72a0bfb131965eaa5f21e34b8668d14da847ff33574078bdd15b2dc160"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/manifesto.py",
+      "bytes": 1524,
+      "sha256": "cb1db412b7a2f1ffab9309c1b4f90f2f5b7592558ef4204f50c83e0d61cbcd72"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/prontidao.py",
+      "bytes": 1362,
+      "sha256": "5adc074cd75d26b00ddc5b529d96eaf9a45cb07d77d679c606ca816082bbcd31"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/resumir_benchmark.py",
+      "bytes": 4124,
+      "sha256": "1307a36251f73935cbc23293cf98563d770ec822ff88241a7d55c5eaddedf207"
+    },
+    {
+      "arquivo": "avaliacao_experimental/scripts/segmentar.py",
+      "bytes": 4562,
+      "sha256": "6edce4ab3cd456ae5fd5890fe87ec65f692bf0cd41b3e12b0a87c81a0e67a468"
+    },
+    {
+      "arquivo": "avaliacao_experimental/telemetria.md",
+      "bytes": 5659,
+      "sha256": "ad779ca5264977e7a9624004d77118bd6571863b25936b8a4a85e476fcc22df1"
+    },
+    {
+      "arquivo": "avaliacao_experimental/testes/test_instrumentos.py",
+      "bytes": 9387,
+      "sha256": "7d68f68fc0d00f913b1d8536d832aac82dc2100be226091633c0d5283a1bc4a3"
+    },
+    {
+      "arquivo": "estudo_ihc_ampliado/ficha_coleta_vazia.csv",
+      "bytes": 623,
+      "sha256": "30b97842f8f1a9309752d3dd5e3a16e2c3aa45ed5c529ae6c448f242b2fe695e"
+    }
+  ]
+}

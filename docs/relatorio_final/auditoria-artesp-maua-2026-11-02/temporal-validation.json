@@ -1,0 +1,9 @@
+{
+  "queries": 14,
+  "journeys_checked": 41,
+  "artesp_legs_checked_against_stop_times_and_calendar": 34,
+  "distinct_artesp_trip_ids": 22,
+  "chronology_walks_and_six_hour_horizon_valid": true,
+  "expired_calendar_control_empty": true,
+  "limitations": "Railway departures are frequency/engineering estimates, not exact observed train times. Validation does not imply exhaustive search or field operation."
+}

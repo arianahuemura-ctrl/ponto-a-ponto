@@ -10,16 +10,16 @@ O passageiro utiliza o fluxo de consulta sem cadastro obrigatório. O administra
 \end{figure}
 
 \section{Consulta progressiva de alternativas}
-A sequência representa uma consulta bem-sucedida. O backend pode emitir um primeiro resultado sem caminhada antes de validar alternativas; sua existência não é garantida. A consulta externa pode falhar e excluir conexões ainda não verificadas. A repetição está limitada conforme o Apêndice~\ref{ap:rotas}; seleção de rota e cálculo podem coexistir.
+A sequência representa recuperação de candidatos, validação de caminhadas, avaliação temporal e refinamento operacional quando disponível, com retorno progressivo. O fallback, se habilitado, é acionado por contexto inutilizável (ausência de candidatos ou incompatibilidade dos artefatos) ou ausência de rotas válidas ao final, inclusive após rejeições temporais. Uma alternativa válida, mesmo com limitações, encerra pelo caminho principal: não se executa o fallback para completar a lista. A indisponibilidade isolada de previsão operacional não o aciona. Os limites estão no Apêndice~\ref{ap:rotas}.
 
 \begin{figure}[H]
 \centering\input{diagramas/sequencia.tex}
 \caption{Sequência simplificada do cálculo e seleção de uma alternativa.}\label{fig:sequencia-pap}
-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
+\fonte{Elaboração do grupo, arquitetura híbrida revisada em 22 out. 2026.}
 \end{figure}
 
 \section{Estados da navegação}
-Cancelar a confirmação mantém a tela anterior; confirmar retorna à seleção de destino, preservando o embarque e enfocando o destino anterior. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
+Cancelar a confirmação mantém a tela anterior; confirmar remove o trajeto, o embarque e o destino e retorna à seleção de embarque, preservando os favoritos e o enquadramento do mapa. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
 
 \begin{figure}[H]
 \centering\input{diagramas/estados.tex}

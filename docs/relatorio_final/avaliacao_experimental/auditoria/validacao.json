@@ -1,0 +1,17 @@
+{
+  "syntax": "ok",
+  "unitarios": "23 testes; objetos artificiais, sem app/bancos/rede",
+  "modelo_bloqueia_execucao": true,
+  "cli_analise_e_svg": "ok; saídas artificiais apenas /tmp/ARTIFICIAL-PAP-validacao-EXP1",
+  "cli_benchmark_somente_csv": "ok; nenhum planejador executado",
+  "planilha": {
+    "abas": 21,
+    "resultados_preenchidos": false,
+    "vagas_planejadas": 8
+  },
+  "modelos_vazios": true,
+  "diff_preexistente_preservado": true,
+  "fontes_app_preservadas": 16,
+  "pdf_md5": "cc9f063ec8ae7b225bdf0463d764cd19",
+  "pdf_paginas": 133
+}

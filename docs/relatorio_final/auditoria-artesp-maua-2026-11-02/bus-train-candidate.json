@@ -1,0 +1,12 @@
+[
+  {
+    "origin": "artesp:7700",
+    "origin_name": "R. Oscarito, 1213 - Jardim Sonia Maria, Mauá - SP, 09380-428, Brasil",
+    "destination": "1010053",
+    "destination_name": "Brás",
+    "routes": [
+      "artesp:157",
+      "CPTM L10"
+    ]
+  }
+]

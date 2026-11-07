@@ -1,0 +1,114 @@
+{
+  "natureza": "seleção estrutural de cenários candidatos, não benchmark nem gabarito temporal",
+  "pairs": [
+    {
+      "origin": "100014307",
+      "destination": "100014548",
+      "boardings": 1,
+      "edge1": 480130,
+      "edge2": null,
+      "origin_public": {
+        "stop_id": "100014307",
+        "stop_name": "R. Silva Teles, 281",
+        "stop_lat": -23.534152,
+        "stop_lon": -46.61467
+      },
+      "destination_public": {
+        "stop_id": "100014548",
+        "stop_name": "R. Piratininga, 456",
+        "stop_lat": -23.54854,
+        "stop_lon": -46.618731
+      },
+      "selection_sql": "SELECT origin,destination,boardings,edge1,edge2 FROM conexoes c WHERE boardings=1 AND distance_meters>=4000 ORDER BY origin,destination,rank LIMIT 100",
+      "gap_approx_m": 1654,
+      "statuses": [
+        {
+          "boardings": 1,
+          "state": "ready",
+          "path_count": 5
+        },
+        {
+          "boardings": 2,
+          "state": "ready",
+          "path_count": 8
+        }
+      ]
+    },
+    {
+      "origin": "100014307",
+      "destination": "10008715",
+      "boardings": 2,
+      "edge1": 2455010,
+      "edge2": 903733,
+      "origin_public": {
+        "stop_id": "100014307",
+        "stop_name": "R. Silva Teles, 281",
+        "stop_lat": -23.534152,
+        "stop_lon": -46.61467
+      },
+      "destination_public": {
+        "stop_id": "10008715",
+        "stop_name": "Av. Ver. Abel Ferreira, 164",
+        "stop_lat": -23.555583,
+        "stop_lon": -46.574889
+      },
+      "selection_sql": "SELECT origin,destination,boardings,edge1,edge2 FROM conexoes c WHERE boardings=2 AND distance_meters>=5000 AND NOT EXISTS(SELECT 1 FROM conexoes d WHERE d.origin=c.origin AND d.destination=c.destination AND d.boardings=1) ORDER BY origin,destination,rank LIMIT 100",
+      "gap_approx_m": 4707,
+      "statuses": [
+        {
+          "boardings": 1,
+          "state": "ready",
+          "path_count": 0
+        },
+        {
+          "boardings": 2,
+          "state": "ready",
+          "path_count": 8
+        }
+      ]
+    },
+    {
+      "origin": "100014349",
+      "destination": "800016609",
+      "boardings": null,
+      "connectivity_patterns": 1,
+      "origin_public": {
+        "stop_id": "100014349",
+        "stop_name": "Lgo. Da Concordia",
+        "stop_lat": -23.541453,
+        "stop_lon": -46.616813
+      },
+      "destination_public": {
+        "stop_id": "800016609",
+        "stop_name": "Pça. Da Se, 21",
+        "stop_lat": -23.549007,
+        "stop_lon": -46.63329
+      },
+      "statuses": []
+    },
+    {
+      "origin": "190011837",
+      "destination": "800016609",
+      "boardings": null,
+      "connectivity_patterns": 45,
+      "origin_public": {
+        "stop_id": "190011837",
+        "stop_name": "Estr. De Itapecerica, 3646",
+        "stop_lat": -23.657532,
+        "stop_lon": -46.764518
+      },
+      "destination_public": {
+        "stop_id": "800016609",
+        "stop_name": "Pça. Da Se, 21",
+        "stop_lat": -23.549007,
+        "stop_lon": -46.63329
+      },
+      "statuses": []
+    }
+  ],
+  "calendar_bounds": [
+    "20231001",
+    "20270501"
+  ],
+  "db_bytes": 117727232
+}

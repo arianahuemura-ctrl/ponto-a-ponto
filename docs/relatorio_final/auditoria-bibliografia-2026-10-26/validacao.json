@@ -1,0 +1,34 @@
+{
+  "referencias_antes": 50,
+  "referencias_depois": 52,
+  "citadas": 52,
+  "sem_citacao": [],
+  "sem_referencia": [],
+  "paginas_antes": 131,
+  "paginas_depois": 132,
+  "git_diff_check": 0,
+  "branch": "relatorio",
+  "e1_e3_arquivo_preservado": true,
+  "avisos": [
+    "Package babel Warning: Name 'brazil' is deprecated.",
+    "Class memoir Warning: \\settocpreprocessor is marked deprecated and will be",
+    "Class memoir Warning: \\addtodef is marked deprecated and will be",
+    "Underfull \\hbox (badness 10000) in paragraph at lines 1075--1075"
+  ],
+  "inspecao_visual_paginas_pdf": [
+    4,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    122,
+    123,
+    124,
+    125
+  ],
+  "inspecao_visual": "Sem cortes, sobreposições ou páginas vazias nas páginas inspecionadas; sumário e E.4 coerentes.",
+  "pdf_sha256": "11b69acab60b42b3283a854bf081fa6f42d8ba8345bafe0b8e864a328aab974f",
+  "paginas_sem_texto": []
+}

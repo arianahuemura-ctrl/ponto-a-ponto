@@ -1,0 +1,17 @@
+{
+  "total": 780,
+  "changed": [
+    "docs/relatorio_final/legibilidade_ferroviaria_20261102.tex",
+    "docs/relatorio_final/feedbacks_20261029.tex",
+    "docs/relatorio_final/atualizacao_20261101.tex",
+    "docs/relatorio_final/estudo_cliques.tex",
+    "docs/relatorio_final/artesp_resultados_20261102.tex",
+    "docs/relatorio_final/relatorio_final_pi2_v2.tex",
+    "docs/relatorio_final/planejador_hibrido.tex",
+    "docs/relatorio_final/estudo_ihc_ampliado/protocolo.tex",
+    "docs/relatorio_final/avaliacoes_externas/alameda_solutions/comunicacao_thiago.tex"
+  ],
+  "missing": [],
+  "baseline_pdf_unchanged": true,
+  "index_unchanged": true
+}

@@ -1,3 +1,132 @@
+# Entrega atual — correção mínima da materialização
+
+[PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf](PaP_relatorio_2026-11-03_ENTREGA_correcao_materializacao.pdf) — **168 páginas, 4901874 bytes**. [Verificação e hashes](correcao-materializacao-2026-11-03/VERIFICACAO.md). Versões anteriores preservadas.
+
+---
+
+# Entrega atual — revisão final com Osmar
+
+[PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf](PaP_relatorio_2026-11-03_ENTREGA_Osmar_revisao_final.pdf) — **168 páginas, 4901812 bytes**. [Alterações, validação, hashes e pendências](revisao-final-osmar-2026-11-03/REVISAO.md). Versões anteriores preservadas abaixo.
+
+---
+
+# Entrega com manifestação de Osmar — 03/11/2026
+
+Versão atual: [PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf](PaP_relatorio_2026-11-03_ENTREGA_com_Osmar.pdf), **169 páginas, 4901476 bytes**. Inclui resposta de 02/11/2026 às 18h10 como transcrição no Anexo B e síntese na avaliação. [Validação](manifestacao-osmar-2026-11-03/ATUALIZACAO.md).
+
+---
+
+# Entrega revisada — acabamento de 03/11/2026
+
+Versão atual para envio: [PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf](PaP_relatorio_2026-11-03_ENTREGA_revisada.pdf), **167 páginas, 4.897.140 bytes**. Correções pontuais de remissões e quebra de títulos; paginação e conteúdo técnico preservados. [Registro da revisão](acabamento-editorial-2026-11-03/REVISAO.md). Versões anteriores preservadas abaixo.
+
+---
+
+# Entrega para upload — 3 de novembro de 2026
+
+[PDF de entrega abaixo de 10 MB](PaP_relatorio_2026-11-03_ENTREGA.pdf): **4.897.221 bytes**, **167 páginas**. Conteúdo textual e URL definitiva preservados; imagens compactadas. Original de maior resolução mantido abaixo. [Validação e hashes](entrega-10mb-2026-11-03/VALIDACAO.md).
+
+---
+
+# Vídeo definitivo — 3 de novembro de 2026
+
+Entrega atual: [PDF com URL definitiva](PaP_relatorio_2026-11-03_video_definitivo.pdf), **167 páginas**, **30158763 bytes**.
+Vídeo: https://www.youtube.com/watch?v=rSvuIWx8QAg
+
+Atualizada somente a capa; retirados indicação de versão provisória e aviso
+pendente. Páginas 2–167 preservadas por texto e pixels. [Validação e limites](video-definitivo-2026-11-03/ATUALIZACAO.md).
+MD5 `f7c3cedb7bb9d613c9819a77e16fe5cf`; SHA-256 `b3f141273264f7a2b198b50300972d704c15494bc47485de1d959fd5d9b0a488`. Atualização incluída na publicação Git autorizada em 03/11/2026; consultar o histórico da branch `relatorio`.
+
+---
+
+# Capturas atualizadas — 2 de novembro de 2026
+
+Entrega anterior: [PDF com 17 capturas atualizadas](PaP_relatorio_2026-11-02_capturas_atualizadas.pdf), **167 páginas**, 28.877.638 bytes. Interface real do aplicativo `78e3935`; mapas coloridos, nomes ferroviários completos, favoritos, controles e avaliação por estrelas. Legendas e exemplos ajustados aos estados observados, incluindo a busca parcial para Guaiaúna.
+
+[Registro da atualização](atualizacao-capturas-2026-11-02/ATUALIZACAO.md), [validação](atualizacao-capturas-2026-11-02/VALIDACAO.json) e [correspondência das capturas](atualizacao-capturas-2026-11-02/substituicoes.json). Preservados arquivos anteriores, estudos históricos, consulta ARTESP e parecer integral. Fonte ativa e comando LuaLaTeX abaixo permanecem válidos. Esta atualização está sem commit.
+
+MD5: `b253dea82eb68d251fee52a4fae225cf`. SHA-256: `7a93bb8d7e2820a72a261e435585b8ee75403e82a8556181e4d272a18f3bd77d`.
+
+---
+
+# Revisão editorial — 2 de novembro de 2026
+
+Entrega editorial anterior: [PDF revisado](PaP_relatorio_2026-11-02_revisao_editorial.pdf), **167 páginas**, 24998553 bytes. [Relatório da revisão](revisao-editorial-2026-11-02/REVISAO_EDITORIAL.md), [validação](revisao-editorial-2026-11-02/VALIDACAO.json) e [patch](revisao-editorial-2026-11-02/alteracoes-editoriais.patch).
+
+Fonte ativa: `relatorio_final_pi2_v2.tex`. Preservados Apêndices A–H, Anexo A integral, dados, capturas originais, oito autores e data documental. Listas de figuras/tabelas e metadados acrescentados; abstract depende de confirmação institucional. O PDF anterior de 168 páginas e seu ZIP continuam abaixo como referência histórica; esse ZIP não contém a revisão editorial atual.
+
+MD5: `5bdbc062a2680394ea8d4f97d715caef`. SHA-256: `b24c37067fc84c389d21a79f97cef1eabc00d6921791bb6d7ad08a69e36b9e55`.
+
+Compilar com LuaLaTeX/`latexmk -norc` em diretório novo, conforme instruções abaixo. Para reproduzir a otimização, ver `revisao-editorial-2026-11-02/optimize.py`; a versão compilada também é válida e preserva o conteúdo. Não executar o hook histórico de exportação. Sem commit automático.
+
+---
+
+# Revisão técnico-científica — 2 de novembro de 2026
+
+PDF revisado: [PaP_relatorio_2026-11-02_revisao_tecnico_cientifica.pdf](PaP_relatorio_2026-11-02_revisao_tecnico_cientifica.pdf), 168 páginas. Fontes: [ZIP](PaP_relatorio_2026-11-02_fontes_revisao_tecnico_cientifica.zip).
+
+Fonte ativa: `relatorio_final_pi2_v2.tex`. A revisão editorial e sua validação estão em `revisao-tecnico-cientifica-2026-11-02/`. Veja `AUDITORIA.md`, `ALTERACOES.md` e `VALIDACAO.md` nesse diretório para escopo, evidências, resultados e pendências.
+
+Referência Git original (inclui alterações locais): `refs/auditoria/relatorio-20261102-original-tecnico-cientifica`. É uma referência a árvore, sem novo commit. Exemplo de consulta: `git show refs/auditoria/relatorio-20261102-original-tecnico-cientifica:docs/relatorio_final/relatorio_final_pi2_v2.tex`.
+
+Compilar o fonte ativo com LuaLaTeX em **diretório novo**, evitando o hook histórico de exportação automática:
+
+```sh
+latexmk -norc -lualatex -interaction=nonstopmode -halt-on-error -outdir=/tmp/pap-relatorio-build-NOVO relatorio_final_pi2_v2.tex
+```
+
+As referências de entrega e os comandos abaixo são registros históricos; não substituem a identificação da revisão acima. O link definitivo foi atualizado em 03/11/2026; ver entrega acima.
+
+---
+
+# Revisão de apresentação e legibilidade — 2 de novembro de 2026
+
+PDF atual: [PaP_relatorio_2026-11-02_ARTESP_revisado.pdf](PaP_relatorio_2026-11-02_ARTESP_revisado.pdf), 155 páginas.
+MD5: `65f4ca925b0e719c1101e6e18a584492`.
+
+Feedback de legibilidade ferroviária documentado, com capturas reais dos temas claro e escuro e distinção entre verificação técnica e avaliação com passageiros. A ampliação ARTESP já documentada foi preservada. Vídeo atualizado na entrega `entrega-2026-11-02-artesp-revisado`; fonte, validação e versões anteriores preservadas. Link público definitivo continua pendente; não houve publicação ou commit.
+
+Auditoria: [auditoria-apresentacao-artesp-2026-11-02](auditoria-apresentacao-artesp-2026-11-02/).
+
+---
+
+# Ampliação ARTESP em Mauá — 2 de novembro de 2026
+
+PDF atual: [PaP_relatorio_2026-11-02_ARTESP.pdf](PaP_relatorio_2026-11-02_ARTESP.pdf), 154 páginas.
+MD5: `e5066437612956ffc0eda173dace0f40`.
+
+Confirmadas no GTFS original 337 paradas, 16 linhas ou variantes e 705/427/359
+viagens programadas distintas em dia útil/sábado/domingo. Ao fim de semana,
+324 paradas constam na programação. Capuava, Mauá e Guapituba são adicionais.
+Foram examinadas 14 consultas temporais e preservada uma captura real da
+interface pública com ônibus 157 e CPTM L10; seu aviso de busca parcial foi mantido.
+
+Resumo, Metodologia, Resultados, Tabela 5, Considerações Finais e apêndice de
+integração atualizados; ajuste pontual da delimitação para distinguir os três
+estágios. Fontes, respostas, capturas, validação e hashes:
+[auditoria-artesp-maua-2026-11-02](auditoria-artesp-maua-2026-11-02/).
+O vídeo não foi modificado; avaliação e plano de substituição visual em
+[video-avaliacao.txt](auditoria-artesp-maua-2026-11-02/video-avaliacao.txt).
+Versões anteriores preservadas. Nenhum commit automático.
+
+---
+
+# Revisão corretiva de 1 de novembro de 2026
+
+PDF revisado: `PaP_relatorio_2026-11-01_revisado.pdf`, 145 páginas, 9,875,597 bytes, MD5 `87bdf923c09bafb6c5f60ed81c284738`. Compilação LuaLaTeX/latexmk concluída.
+
+Fontes e evidências da revisão: `revisao-consistencia-2026-11-01/`. Original de referência (MD5 fcf136604ea3aa13ea58bd884cc628b1) preservado. Foram corrigidos resumo, resultados, universo de paradas, recorte da tabela de latências e consulta concorrente; acrescentadas evidências visuais reais e rastreabilidade com lacunas explícitas. O protocolo A/B/C permanece proposto. A capa aguarda confirmação do endereço definitivo do vídeo.
+
+O histórico abaixo mantém as datas de suas versões. Metrô e trens estão implementados no planejamento atual; previsão ferroviária ao vivo, integração tarifária e validação operacional permanecem pendentes.
+
+---
+
+# Atualização de 1 de novembro de 2026
+
+Fonte vigente: `relatorio_final_pi2_v2.tex`. Nova seção B.1 e tabela 9: cobertura, integração ferroviária, publicação concorrente e desempenho por baldeação. PDF de envio conferido: `relatorio_final_pi2_v2_envio.pdf` (9.809.687 bytes). Original sem recompressão preservado. Evidências em `atualizacao-2026-11-01/`.
+
+---
+
 # Relatório final — Projeto Integrador II
 
 Revisão de 7 de outubro de 2026. Versão da aplicação documentada: 4992027, branch sptrans. O modelo da facilitadora está em Modelo_Relatorio_Final.docx; o relatório parcial foi preservado em ../relatorio_parcial/.
@@ -8,7 +137,7 @@ O relatório reúne fundamentação de IHC, aplicação das disciplinas, metodol
 
 Funcionalidades documentadas: localização contínua ou simulada, enquadramento inicial de 250 m, seleção por toque prolongado, alteração de embarque preservando destino, caminhadas de até 1 km por segmento, filtro de alternativas dominadas, recálculo manual sem cache de resultados, ampulheta de carregamento, seletor Trecho, posições de ônibus e previsões por alternativa a cada 15 s, filtro de previsão incompatível com caminhada, URL raiz com precedência sobre sessão, clique externo ao painel para retornar ao mapa e agrupamento de faixas consecutivas com a mesma frequência.
 
-Metrô/CPTM, implantação física e avaliação com passageiros permanecem como evoluções ou pendências. Os testes técnicos não comprovam usabilidade nem disponibilidade operacional em todas as condições.
+Na revisão histórica de 7 de outubro, Metrô/CPTM eram evolução prevista. Em 1 de novembro, o planejamento multimodal está implementado; implantação física e avaliação sistemática com passageiros permanecem pendentes. Os testes técnicos não comprovam usabilidade nem disponibilidade operacional em todas as condições.
 
 ## Imagens e rastreabilidade
 

@@ -1,0 +1,192 @@
+--- antes/diagramas/estados.tex
++++ depois/diagramas/estados.tex
+@@ -7,7 +7,8 @@
+ \node[box] (f) at (0,-8) {Visualizando rota no mapa};
+ \draw[arr] (start)--(a);
+ \draw[arr] (start.west)--++(-3.3,0)|-node[pos=.65,lab,left]{localização\\conhecida}(c.west);
+-\draw[arr] (a)--node[lab,right]{embarque definido}(b);
++\draw[arr] (a)--node[lab,right]{QR Code ou link}(b);
++\draw[arr] (a.east)--++(1,0)|-node[pos=.7,lab,right]{embarque no mapa}(c.east);
+ \draw[arr] (b)--node[lab,right]{selecionar destino}(c);
+ \draw[arr] (c)--node[lab,right]{destino definido}(e);
+ \draw[arr] (e)--node[lab,right]{selecionar rota}(f);
+@@ -16,5 +17,5 @@
+ \node[box] (conf) at (6,-5.7) {Confirmando cancelamento};
+ \draw[arr] (f.east)-|node[pos=.25,lab,below]{cancelar viagem}(conf.south);
+ \draw[arr] (conf.west)--++(-.6,0)|-node[pos=.7,lab,above]{continuar viagem}(f.east);
+-\draw[arr] (conf.east)--++(.5,0)|-node[pos=.7,lab,above]{confirmar: manter embarque}(c.east);
++\draw[arr] (conf.east)--++(.5,0)|-node[pos=.7,lab,above]{confirmar: desmarcar locais}(a.east);
+ \end{tikzpicture}
+--- antes/diagramas/fluxo_geral.tex
++++ depois/diagramas/fluxo_geral.tex
+@@ -1,14 +1,14 @@
+ \begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4.3cm,minimum height=0.85cm,fill=black!3},arr/.style={->,thick},note/.style={align=center,font=\footnotesize,text width=3.6cm}]
+ 
+-\node[box] (qr) at (0,0) {Ler QR Code do ponto};
++\node[box] (qr) at (0,0) {QR Code ou link do ponto};
+ \node[box] (manual) at (7,0) {Abrir aplicação: localização\\ou embarque manual};
+ \node[box] (stop) at (3.5,-1.5) {Embarque identificado};
+-\draw[arr] (qr)--(stop); \draw[arr] (manual)--(stop);
++\draw[arr] (qr)--(stop);
+ \node[box] (times) at (3.5,-2.9) {Consultar próximos ônibus};
+ \draw[arr] (stop)--(times);
+ \node[note] at (8,-2.9) {Previsões quando disponíveis; caso contrário, estimativas programadas};
+ \node[box] (dest) at (3.5,-4.4) {Selecionar destino:\\busca, mapa ou favorito};\draw[arr] (times)--(dest);
+-\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{localização\\conhecida}(dest.east);
++\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{mapa ou\\localização}(dest.east);
+ \node[box] (calc) at (3.5,-5.9) {Calcular e apresentar\\alternativas progressivamente};\draw[arr] (dest)--(calc);
+ \node[box] (choice) at (3.5,-7.4) {Comparar e selecionar rota};\draw[arr] (calc)--(choice);
+ \node[box,text width=2.7cm] (fail) at (-1,-5.9) {Sem alternativa\\ou falha:\\revisar consulta};
+--- antes/diagramas/sequencia.tex
++++ depois/diagramas/sequencia.tex
+@@ -1,15 +1,21 @@
+-\begin{tikzpicture}[>=Stealth,font=\footnotesize]
+-\foreach \x/\name in {0/Passageiro,3/Interface,6/Backend,9/Roteamento a pé}{\node[draw,align=center,text width=2.3cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-10);}
+-\draw[->] (0,-1)--node[above]{Origem e destino}(3,-1);
+-\draw[->] (3,-2)--node[above]{Solicitar alternativas}(6,-2);
+-\node[align=center,text width=4cm,fill=white] at (7.6,-3) {Busca por rodadas no GTFS};
+-\draw[->,dashed] (6,-4)--node[above]{Resultado inicial}(3,-4);
+-\draw[->] (3,-4.7)--node[above]{Apresentar alternativas}(0,-4.7);
+-\draw[->] (6,-5.5)--node[above]{Validar caminhada candidata}(9,-5.5);
+-\draw[->,dashed] (9,-6.3)--node[above]{Distância / falha}(6,-6.3);
+-\draw[->,dashed] (6,-7.2)--node[above]{Novas alternativas (NDJSON)}(3,-7.2);
+-\draw[->] (0,-8)--node[above]{Selecionar uma rota}(3,-8);
+-\node[align=center,text width=3cm] at (3,-9) {Abrir mapa; preservar escolha e zoom nas atualizações};
+-\draw[draw] (2.6,-5) rectangle (10.4,-7.6);
+-\node[anchor=south west] at (2.6,-5) {\textbf{loop} [há candidatas e limites disponíveis]};
+-\end{tikzpicture}+\begin{tikzpicture}[>=Stealth,font=\footnotesize,msg/.style={fill=white,align=center,font=\scriptsize},seqbox/.style={draw,fill=white,align=center,text width=5.2cm,font=\scriptsize}]
++\foreach \x/\name in {0/Interface,4.5/Backend,9.3/Artefatos e serviços}{\node[draw,align=center,text width=2.6cm] at (\x,0) {\name};\draw[dashed] (\x,-0.4)--(\x,-14);}
++\draw[->] (0,-1)--node[msg,above]{1. Solicitar alternativas: origem e destino}(4.5,-1);
++\draw[->] (4.5,-2)--node[msg,above]{2. Recuperar candidatos materializados}(9.3,-2);
++\draw[->,dashed] (9.3,-2.8)--node[msg,above]{Candidatos / contexto indisponível}(4.5,-2.8);
++\draw (2.1,-3.3) rectangle (10.9,-10.5);
++\node[msg,anchor=west] at (2.2,-3.3) {\textbf{opt} [contexto materializado utilizável]};
++\draw[->] (4.5,-4.2)--node[msg,above]{3. Validar caminhadas candidatas}(9.3,-4.2);
++\draw[->,dashed] (9.3,-5)--node[msg,above]{Percursos verificados / falha}(4.5,-5);
++\node[seqbox] at (4.5,-6) {4. Avaliação temporal\\dos candidatos válidos};
++\draw[->] (4.5,-7.1)--node[msg,above]{5. Consultar dados operacionais disponíveis}(9.3,-7.1);
++\draw[->,dashed] (9.3,-7.9)--node[msg,above]{Previsão compatível / indisponibilidade}(4.5,-7.9);
++\node[seqbox] at (4.5,-8.8) {Refinar se disponível;\\senão, manter programação};
++\draw[->,dashed] (4.5,-10)--node[msg,above]{6. Alternativas progressivas (NDJSON)}(0,-10);
++\node[msg,text width=3cm] at (9.1,-9.7) {Repetir dentro\\dos limites};
++\draw (2.1,-10.8) rectangle (10.9,-13);
++\node[msg,text width=8.2cm,anchor=north] at (6.5,-10.8) {\textbf{opt} [sem contexto ou rotas válidas; fallback habilitado]};
++\node[seqbox] at (4.5,-12) {Planejador por rodadas};
++\draw[->,dashed] (4.5,-12.7)--node[msg,above]{Alternativas do fallback (NDJSON)}(0,-12.7);
++\node[msg,text width=10cm] at (4.8,-14.4) {A interface permite selecionar uma rota durante o retorno progressivo.\\Os mecanismos principal e alternativo não são executados simultaneamente.};
++\end{tikzpicture}
+--- antes/engenharia_apendice.tex
++++ depois/engenharia_apendice.tex
+@@ -10,16 +10,16 @@
+ \end{figure}
+ 
+ \section{Consulta progressiva de alternativas}
+-A sequência representa uma consulta bem-sucedida. O backend pode emitir um primeiro resultado sem caminhada antes de validar alternativas; sua existência não é garantida. A consulta externa pode falhar e excluir conexões ainda não verificadas. A repetição está limitada conforme o Apêndice~\ref{ap:rotas}; seleção de rota e cálculo podem coexistir.
++A sequência representa o caminho materializado da arquitetura híbrida: recuperação de candidatos, validação das caminhadas, avaliação temporal e refinamento operacional quando disponível. As alternativas válidas são retornadas progressivamente. Se não houver contexto materializado utilizável ou o caminho principal terminar sem rotas válidas, o despachante poderá acionar o planejador por rodadas como fallback, conforme a configuração. Os dois planejadores não são executados simultaneamente para unir resultados em produção. A indisponibilidade isolada de previsão operacional não aciona esse fallback. Os limites são descritos no Apêndice~\ref{ap:rotas}.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/sequencia.tex}
+ \caption{Sequência simplificada do cálculo e seleção de uma alternativa.}\label{fig:sequencia-pap}
+-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
++\fonte{Elaboração do grupo, arquitetura híbrida revisada em 22 out. 2026.}
+ \end{figure}
+ 
+ \section{Estados da navegação}
+-Cancelar a confirmação mantém a tela anterior; confirmar retorna à seleção de destino, preservando o embarque e enfocando o destino anterior. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
++Cancelar a confirmação mantém a tela anterior; confirmar remove o trajeto, o embarque e o destino e retorna à seleção de embarque, preservando os favoritos e o enquadramento do mapa. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/estados.tex}
+--- antes/relatorio_final_pi2_v2.tex
++++ depois/relatorio_final_pi2_v2.tex
+@@ -651,20 +651,20 @@
+ 
+ \chapter{Resultados: solução final}
+ % Conteúdo independente da versão v2: solução visual e fluxograma.
+-A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
++A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. O acesso por QR Code ou link direto atende à consulta dos próximos ônibus de um ponto já identificado. No mapa, clicar em um ponto durante a seleção de embarque define a origem e mantém o mapa aberto para escolher o destino; clicar durante a seleção de destino abre as alternativas de viagem. O toque prolongado em outro local segue a mesma distinção entre origem e destino. Esses comportamentos atendem a objetivos diferentes, sem obrigar a consulta de partidas antes de planejar uma viagem. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
+ 
+ \begin{figure}[H]
+ \centering\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,text width=4.3cm,minimum height=0.85cm,fill=black!3},arr/.style={->,thick},note/.style={align=center,font=\footnotesize,text width=3.6cm}]
+ 
+-\node[box] (qr) at (0,0) {Ler QR Code do ponto};
++\node[box] (qr) at (0,0) {QR Code ou link do ponto};
+ \node[box] (manual) at (7,0) {Abrir aplicação: localização\\ou embarque manual};
+ \node[box] (stop) at (3.5,-1.5) {Embarque identificado};
+-\draw[arr] (qr)--(stop); \draw[arr] (manual)--(stop);
++\draw[arr] (qr)--(stop);
+ \node[box] (times) at (3.5,-2.9) {Consultar próximos ônibus};
+ \draw[arr] (stop)--(times);
+ \node[note] at (8,-2.9) {Previsões quando\\disponíveis; caso\\contrário, horários ou\\frequências\\programados};
+ \node[box] (dest) at (3.5,-4.4) {Selecionar destino:\\busca, mapa ou favorito};\draw[arr] (times)--(dest);
+-\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{localização\\conhecida}(dest.east);
++\draw[arr] (manual.east)--++(1.4,0)|-node[pos=.45,right,font=\footnotesize,align=center]{mapa ou\\localização}(dest.east);
+ \node[box] (calc) at (3.5,-5.9) {Calcular e apresentar\\alternativas progressivamente};\draw[arr] (dest)--(calc);
+ \node[box] (choice) at (3.5,-7.4) {Comparar e selecionar rota};\draw[arr] (calc)--(choice);
+ \node[box,text width=2.7cm] (fail) at (-1,-5.9) {Sem alternativa\\ou falha:\\revisar consulta};
+@@ -714,7 +714,7 @@
+ \caption{Alternativas de viagem e horários estimados de chegada.}\label{fig:print-04-alternativas}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-A consulta parte da Parada Exclusiva e utiliza como destino a parada da Rua Guaiaúna, 419 (600012585). O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
++O acesso inicial utilizou a Parada Exclusiva (1211381), como mostra a Figura~\ref{fig:print-01-embarque}. Na alternativa exibida nesta captura, o painel identifica o embarque na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). Trata-se de identificadores distintos; a descrição acompanha os locais efetivamente apresentados no painel. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
+ \clearpage
+ 
+ \begin{figure}[H]\centering
+@@ -876,16 +876,16 @@
+ \interlinepenalty=10000
+ \bibitem[{Barbosa et al.}(2021)]{barbosa2021} BARBOSA, S. D. J.; SILVA, B. S.; SILVEIRA, M. S.; GASPARINI, I.; DARIN, T.; BARBOSA, G. D. J. \textit{Interação Humano-Computador e Experiência do Usuário}. Rio de Janeiro: Autopublicação, 2021. Disponível em: \url{https://leanpub.com/ihc-ux}. Acesso em: 7 out. 2026.
+ \bibitem[{Bast et al.}(2015)]{bast2015} BAST, Hannah et al. \textit{Route planning in transportation networks}. 2015. Preprint. arXiv:1504.05140. DOI: \url{https://doi.org/10.48550/arXiv.1504.05140}. Disponível em: \url{https://arxiv.org/abs/1504.05140}. Acesso em: 7 out. 2026.
++\bibitem[{Batz et al.}(2013)]{batz2013} BATZ, Gernot Veit; GEISBERGER, Robert; SANDERS, Peter; VETTER, Christian. Minimum time-dependent travel times with contraction hierarchies. \textit{Journal of Experimental Algorithmics}, [S. l.], v. 18, n. 1, art. 1.4, 2013. DOI: \url{https://doi.org/10.1145/2444016.2444020}. Disponível em: \url{https://publikationen.bibliothek.kit.edu/1000139527}. Acesso em: 8 out. 2026.
++\bibitem[{Baum et al.}(2019)]{baum2019} BAUM, Moritz; BUCHHOLD, Valentin; SAUER, Jonas; WAGNER, Dorothea; ZÜNDORF, Tobias. UnLimited TRAnsfers for Multi-Modal Route Planning: An Efficient Solution. In: ANNUAL EUROPEAN SYMPOSIUM ON ALGORITHMS (ESA), 27., 2019. \textit{Proceedings [...]}. Dagstuhl: Schloss Dagstuhl -- Leibniz-Zentrum für Informatik, 2019. (Leibniz International Proceedings in Informatics, v. 144). p. 14:1--14:16. DOI: \url{https://doi.org/10.4230/LIPIcs.ESA.2019.14}. Disponível em: \url{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2019.14}. Acesso em: 8 out. 2026.
+ \bibitem[{Brakewood; Watkins}(2019)]{brakewood2019} BRAKEWOOD, C.; WATKINS, K. A literature review of the passenger benefits of real-time transit information. \textit{Transport Reviews}, v. 39, n. 3, p. 327--356, 2019. DOI: \url{https://doi.org/10.1080/01441647.2018.1472147}. Disponível em: \url{https://candacebrakewood.com/wp-content/uploads/2019/05/brakewood-and-watkins-preprint-paper.pdf}. Acesso em: 5 out. 2026.
+ \bibitem[{C4 model}({[20\mbox{-}\mbox{-}]})]{c4container} C4 MODEL. \textit{Container diagram}. [20\mbox{-}\mbox{-}]. Disponível em: \url{https://c4model.com/diagrams/container}. Acesso em: 7 out. 2026.
+ \bibitem[{Chacon; Straub}(2014)]{git} CHACON, Scott; STRAUB, Ben. \textit{Pro Git}. 2. ed. Berkeley, CA: Apress, 2014. Disponível em: \url{https://git-scm.com/book/pt-br/v2}. Acesso em: 23 set. 2026.
+ \bibitem[{Cittamobi}(2022)]{cittamobiajuda} CITTAMOBI. \textit{Como o Cittamobi funciona?} Central de Ajuda. 2022. Disponível em: \url{https://cittamobi.zendesk.com/hc/pt-br/articles/9379145018519-Como-o-Cittamobi-funciona}. Acesso em: 24 set. 2026.
+ \bibitem[{Cittamobi}({[20\mbox{-}\mbox{-}]})]{cittamobimaua} CITTAMOBI. \textit{Suzantur -- Mauá: horários de ônibus, linhas, itinerários e paradas}. [20\mbox{-}\mbox{-}]. Disponível em: \url{https://linhas.cittamobi.com.br/linhas/estado/sao-paulo/maua/suzantur-maua}. Acesso em: 24 set. 2026.
+-\bibitem[{Baum et al.}(2019)]{baum2019} BAUM, Moritz; BUCHHOLD, Valentin; SAUER, Jonas; WAGNER, Dorothea; ZÜNDORF, Tobias. UnLimited TRAnsfers for Multi-Modal Route Planning: An Efficient Solution. In: ANNUAL EUROPEAN SYMPOSIUM ON ALGORITHMS (ESA), 27., 2019. \textit{Proceedings [...]}. Dagstuhl: Schloss Dagstuhl -- Leibniz-Zentrum für Informatik, 2019. (Leibniz International Proceedings in Informatics, v. 144). p. 14:1--14:16. DOI: \url{https://doi.org/10.4230/LIPIcs.ESA.2019.14}. Disponível em: \url{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ESA.2019.14}. Acesso em: 8 out. 2026.
+-\bibitem[{Batz et al.}(2013)]{batz2013} BATZ, Gernot Veit; GEISBERGER, Robert; SANDERS, Peter; VETTER, Christian. Minimum time-dependent travel times with contraction hierarchies. \textit{Journal of Experimental Algorithmics}, [S. l.], v. 18, n. 1, art. 1.4, 2013. DOI: \url{https://doi.org/10.1145/2444016.2444020}. Disponível em: \url{https://publikationen.bibliothek.kit.edu/1000139527}. Acesso em: 8 out. 2026.
+-\bibitem[{Dibbelt et al.}(2018)]{dibbelt2018} DIBBELT, Julian; PAJOR, Thomas; STRASSER, Ben; WAGNER, Dorothea. Connection scan algorithm. \textit{Journal of Experimental Algorithmics}, [S. l.], v. 23, art. 1.7, 2018. DOI: \url{https://doi.org/10.1145/3274661}. Disponível em: \url{https://publikationen.bibliothek.kit.edu/1000088435}. Acesso em: 8 out. 2026.
+ \bibitem[{Delling; Pajor; Werneck}(2012)]{delling2012} DELLING, Daniel; PAJOR, Thomas; WERNECK, Renato F. Round-based public transit routing. In: MEETING ON ALGORITHM ENGINEERING AND EXPERIMENTS (ALENEX), 14., 2012, Kyoto. \textit{Proceedings [...]}. Philadelphia: SIAM, 2012. p. 130--140. DOI: \url{https://doi.org/10.1137/1.9781611972924.13}. Disponível em: \url{https://www.microsoft.com/en-us/research/publication/round-based-public-transit-routing/}. Acesso em: 7 out. 2026.
+ \bibitem[{Design Council}({[20\mbox{-}\mbox{-}]})]{designcouncil} DESIGN COUNCIL. \textit{Framework for Innovation}. [20\mbox{-}\mbox{-}]. Disponível em: \url{https://www.designcouncil.org.uk/resources/framework-for-innovation/}. Acesso em: 24 set. 2026.
++\bibitem[{Dibbelt et al.}(2018)]{dibbelt2018} DIBBELT, Julian; PAJOR, Thomas; STRASSER, Ben; WAGNER, Dorothea. Connection scan algorithm. \textit{Journal of Experimental Algorithmics}, [S. l.], v. 23, art. 1.7, 2018. DOI: \url{https://doi.org/10.1145/3274661}. Disponível em: \url{https://publikationen.bibliothek.kit.edu/1000088435}. Acesso em: 8 out. 2026.
+ \bibitem[{Dijkstra}(1959)]{dijkstra1959} DIJKSTRA, E. W. A note on two problems in connexion with graphs. \textit{Numerische Mathematik}, v. 1, p. 269--271, 1959. DOI: \url{https://doi.org/10.1007/BF01386390}. Disponível em: \url{https://link.springer.com/article/10.1007/BF01386390}. Acesso em: 7 out. 2026.
+ \bibitem[{Django Software Foundation}({[20\mbox{-}\mbox{-}]})]{django} DJANGO SOFTWARE FOUNDATION. \textit{Django documentation}. [20\mbox{-}\mbox{-}]. Disponível em: \url{https://docs.djangoproject.com/en/6.0/}. Acesso em: 23 set. 2026.
+ \bibitem[{Equipe do Projeto Integrador II}(2026a)]{planoacao2026} EQUIPE DO PROJETO INTEGRADOR II. \textit{Plano de ação: Projeto Integrador em Computação II}. [S. l.]: Universidade Virtual do Estado de São Paulo, 2026a. Documento acadêmico não publicado.
+@@ -1086,16 +1086,16 @@
+ \end{figure}
+ 
+ \section{Consulta progressiva de alternativas}
+-A sequência representa uma consulta bem-sucedida. O backend pode emitir um primeiro resultado sem caminhada antes de validar alternativas; sua existência não é garantida. A consulta externa pode falhar e excluir conexões ainda não verificadas. A repetição está limitada conforme o Apêndice~\ref{ap:rotas}; seleção de rota e cálculo podem coexistir.
++A sequência representa o caminho materializado da arquitetura híbrida: recuperação de candidatos, validação das caminhadas, avaliação temporal e refinamento operacional quando disponível. As alternativas válidas são retornadas progressivamente. Se não houver contexto materializado utilizável ou o caminho principal terminar sem rotas válidas, o despachante poderá acionar o planejador por rodadas como fallback, conforme a configuração. Os dois planejadores não são executados simultaneamente para unir resultados em produção. A indisponibilidade isolada de previsão operacional não aciona esse fallback. Os limites são descritos no Apêndice~\ref{ap:rotas}.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/sequencia.tex}
+ \caption{Sequência simplificada do cálculo e seleção de uma alternativa.}\label{fig:sequencia-pap}
+-\fonte{Elaboração do grupo, documentação da implementação em 7 out. 2026.}
++\fonte{Elaboração do grupo, arquitetura híbrida revisada em 22 out. 2026.}
+ \end{figure}
+ 
+ \section{Estados da navegação}
+-Cancelar a confirmação mantém a tela anterior; confirmar retorna à seleção de destino, preservando o embarque e enfocando o destino anterior. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
++Cancelar a confirmação mantém a tela anterior; confirmar remove o trajeto, o embarque e o destino e retorna à seleção de embarque, preservando os favoritos e o enquadramento do mapa. A confirmação pode ser aberta tanto pela lista quanto pelo mapa. A visualização e o andamento do cálculo são dimensões distintas. Com localização conhecida, o fluxo inicia na seleção de destino. Alterar o embarque preserva o destino e aceita parada ou coordenada por toque prolongado. Uma falha de atualização não deve ser interpretada como cancelamento pelo usuário. Sem alternativa disponível, a interface permite revisar a consulta; as transições de recuperação complementam o caminho principal ilustrado.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/estados.tex}
+--- antes/solucao_visual.tex
++++ depois/solucao_visual.tex
+@@ -1,4 +1,4 @@
+-A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
++A Figura~\ref{fig:fluxo-pap} oferece uma leitura do funcionamento antes das telas. O caminho principal não exige salvar favorito; essa é uma ação auxiliar. O acesso por QR Code ou link direto atende à consulta dos próximos ônibus de um ponto já identificado. No mapa, clicar em um ponto durante a seleção de embarque define a origem e mantém o mapa aberto para escolher o destino; clicar durante a seleção de destino abre as alternativas de viagem. O toque prolongado em outro local segue a mesma distinção entre origem e destino. Esses comportamentos atendem a objetivos diferentes, sem obrigar a consulta de partidas antes de planejar uma viagem. Com localização conhecida, o fluxo pode começar diretamente pela seleção de destino. A chegada de novas alternativas não exige abandonar o mapa. O fluxograma sintetiza o uso e não representa todas as mensagens e transições internas.
+ 
+ \begin{figure}[H]
+ \centering\input{diagramas/fluxo_geral.tex}
+@@ -40,7 +40,7 @@
+ \caption{Alternativas de viagem e horários estimados de chegada.}\label{fig:print-04-alternativas}
+ \fonte{Captura da aplicação em emulação móvel, 22 out. 2026.}
+ \end{figure}
+-A consulta parte da Parada Exclusiva e utiliza como destino a parada da Rua Guaiaúna, 419 (600012585). O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
++O acesso inicial utilizou a Parada Exclusiva (1211381), como mostra a Figura~\ref{fig:print-01-embarque}. Na alternativa exibida nesta captura, o painel identifica o embarque na Av. Dr. Vital Brasil, 569 (1211364), e o destino na Rua Guaiaúna, 419 (600012585). Trata-se de identificadores distintos; a descrição acompanha os locais efetivamente apresentados no painel. O painel apresenta as alternativas calculadas no instante da consulta, com caminhada, baldeações e informações de embarque. Os resultados variam com o horário e com os dados disponíveis.
+ \clearpage
+ 
+ \begin{figure}[H]\centering

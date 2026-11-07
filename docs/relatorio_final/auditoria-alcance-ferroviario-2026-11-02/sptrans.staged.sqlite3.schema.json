@@ -1,0 +1,50 @@
+[
+  {
+    "name": "metadata",
+    "sql": "CREATE TABLE metadata(id INTEGER PRIMARY KEY,value TEXT)"
+  },
+  {
+    "name": "stops",
+    "sql": "CREATE TABLE stops(id INTEGER PRIMARY KEY,sid TEXT UNIQUE NOT NULL)"
+  },
+  {
+    "name": "patterns",
+    "sql": "CREATE TABLE patterns(id INTEGER PRIMARY KEY,service INTEGER,rail INTEGER,wait REAL,trips TEXT)"
+  },
+  {
+    "name": "rides",
+    "sql": "CREATE TABLE rides(id INTEGER PRIMARY KEY,pattern INTEGER,origin INTEGER,destination INTEGER,boarding INTEGER,alighting INTEGER,seconds REAL)"
+  },
+  {
+    "name": "paths",
+    "sql": "CREATE TABLE paths(origin INTEGER,destination INTEGER,data BLOB NOT NULL,PRIMARY KEY(origin,destination)) WITHOUT ROWID"
+  },
+  {
+    "name": "progress",
+    "sql": "CREATE TABLE progress(stage INTEGER,origin INTEGER,paths INTEGER,pairs INTEGER,seconds REAL,PRIMARY KEY(stage,origin)) WITHOUT ROWID"
+  },
+  {
+    "name": "walks",
+    "sql": "CREATE TABLE \"walks\"(\n  id,\n  origin INT,\n  destination INT,\n  internal INT,\n  seconds REAL,\n  meters REAL\n)"
+  },
+  {
+    "name": "expanded_paths",
+    "sql": "CREATE TABLE expanded_paths(origin INTEGER,destination INTEGER,data BLOB NOT NULL,\n            PRIMARY KEY(origin,destination)) WITHOUT ROWID"
+  },
+  {
+    "name": "expanded_progress",
+    "sql": "CREATE TABLE expanded_progress(origin INTEGER PRIMARY KEY,new_pairs INTEGER,added_routes INTEGER,changed_pairs INTEGER,seconds REAL)"
+  },
+  {
+    "name": "topup_paths",
+    "sql": "CREATE TABLE topup_paths(origin INTEGER,destination INTEGER,data BLOB NOT NULL,\n            PRIMARY KEY(origin,destination)) WITHOUT ROWID"
+  },
+  {
+    "name": "topup_progress",
+    "sql": "CREATE TABLE topup_progress(origin INTEGER PRIMARY KEY,new_pairs INTEGER,added_routes INTEGER,changed_pairs INTEGER,seconds REAL)"
+  },
+  {
+    "name": "short_walk_paths",
+    "sql": "CREATE TABLE short_walk_paths(\n                    origin INTEGER, destination INTEGER,\n                    meters REAL NOT NULL CHECK(meters>=0 AND meters<=300),\n                    seconds REAL NOT NULL CHECK(seconds>=0), source TEXT NOT NULL,\n                    previous_routes INTEGER NOT NULL CHECK(previous_routes>=0 AND previous_routes<5),\n                    origin_lat REAL, origin_lon REAL, destination_lat REAL, destination_lon REAL,\n                    PRIMARY KEY(origin,destination)) WITHOUT ROWID"
+  }
+]

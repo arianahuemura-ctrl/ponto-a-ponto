@@ -1,0 +1,4 @@
+# Preservar os bytes e hashes dos CSVs, inclusive suas terminações CRLF.
+*.csv -text whitespace=cr-at-eol
+# O patch de auditoria reproduz as linhas CRLF dos cabeçalhos originais.
+avaliacao_experimental/auditoria/ficha_alteracoes.diff -text whitespace=cr-at-eol

@@ -2,3 +2,11 @@
 artifacts/benchmarks/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Video inventories are generated CSV evidence too.
 docs/inventario-videos-*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Audit patches contain literal context spaces; preserve their original bytes.
+docs/relatorio_final/**/*.patch -text -whitespace
+docs/relatorio_final/**/*.diff -text -whitespace
+# pdftotext preserves layout/form-feed characters in these evidence files.
+docs/relatorio_final/auditoria-alcance-ferroviario-2026-11-02/pdf-text.txt -text -whitespace
+docs/relatorio_final/auditoria-apresentacao-artesp-2026-11-02/texto-final.txt -text -whitespace
+docs/relatorio_final/auditoria-artesp-maua-2026-11-02/pdf-text.txt -text -whitespace

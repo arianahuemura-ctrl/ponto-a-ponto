@@ -1,0 +1,9 @@
+Correção de 25/10/2026: cinco capturas substituídas nas figuras 14, 21, 25 e 26.
+Capturas diretas do Chromium, sem retoque; dados de transporte reais.
+Gravação parada ausente em todos os registros de texto capturados.
+Legenda inferior da linha 6L10-41 inspecionada e desobstruída.
+15 testes E2E de consentimento aprovados; build concluído.
+PDF recompilado com LuaLaTeX/latexmk: 115 páginas, sem erros, referências indefinidas ou overfull; avisos de depreciação e um underfull anterior permanecem.
+Inspeção visual das páginas impressas 42, 44, 51, 63 e 65 concluída.
+Git diff --check aprovado nos dois worktrees. Nenhum commit.
+Vídeos históricos não foram alterados nesta correção das capturas do relatório.

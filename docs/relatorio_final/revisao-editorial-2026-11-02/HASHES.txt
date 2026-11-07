@@ -1,0 +1,2 @@
+MD5 5bdbc062a2680394ea8d4f97d715caef  PaP_relatorio_2026-11-02_revisao_editorial.pdf
+SHA256 b24c37067fc84c389d21a79f97cef1eabc00d6921791bb6d7ad08a69e36b9e55  PaP_relatorio_2026-11-02_revisao_editorial.pdf

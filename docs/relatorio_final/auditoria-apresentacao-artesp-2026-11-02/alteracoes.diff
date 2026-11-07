@@ -1,0 +1,20 @@
+--- antes/relatorio_final_pi2_v2.tex
++++ relatorio_final_pi2_v2.tex
+@@ -987,6 +987,8 @@
+ 
+ \input{feedbacks_20261029.tex}
+ 
++\input{legibilidade_ferroviaria_20261102.tex}
++
+ \chapter{Considerações finais}
+ O Ponto a Ponto materializou uma proposta de consulta ao transporte público iniciada pela identificação do embarque e continuada pela escolha do destino. O projeto articulou pesquisa bibliográfica, escuta da gestão de Mauá, análise de serviços existentes, prototipação e desenvolvimento de uma aplicação web. A implementação baseada no GTFS da SPTrans integra planejamento de viagens, consulta ao Olho Vivo quando disponível, visualização dos trechos, favoritos, feedback e participação voluntária na pesquisa. A ampliação com ARTESP permitiu aplicar essa arquitetura à região que motivou o projeto: foram confirmadas 337 paradas metropolitanas em Mauá, 16 linhas ou variantes e viagens programadas utilizáveis, com consultas diretas e conexões entre ônibus e ferrovia. Capuava, Mauá e Guapituba integram a Linha 10--Turquesa no cadastro. O demonstrador histórico dos ônibus municipais permanece identificado como simulação, separado da implementação funcional original de São Paulo e dessa ampliação metropolitana.
+ 
+@@ -999,6 +1001,8 @@
+ O ciclo de desenvolvimento permitiu aprender com dificuldades concretas: distinguir o sentido de passagens pela mesma via, explicitar as consequências do cancelamento e manter a consulta ao transporte independente da gravação de pesquisa. As mudanças foram confrontadas com capturas, código e testes das versões documentadas. A apreciação profissional favorável sustenta uma conclusão qualitativa sobre as melhorias; não equivale a uma medição de usabilidade com passageiros nem comprova redução de espera, precisão de previsão ou cobertura integral. Os registros técnicos detalhados permanecem no Apêndice~\ref{ap:engenharia}.
+ 
+ Os relatos dos usuários convidados também motivaram os ajustes sintetizados na Tabela~\ref{tab:feedback-ajustes}: rótulos visíveis de embarque e destino, correção direcionada da correspondência de endereços, ampliação das paradas candidatas e tratamento das falhas de envio de feedback. A implementação foi conferida por testes técnicos com bases temporárias, respostas controladas e verificações de interface. Esse ciclo documenta encaminhamento e verificação das correções, sem comprovar benefício de usabilidade ou resolução definitiva do episódio original do Terminal Sacomã. Permanece necessária a avaliação sistemática por tarefas com passageiros para verificar compreensão, eficácia e esforço de interação.
++
++A revisão de legibilidade ferroviária acrescentou contornos contrastantes, identificação por modalidade e número e redução da interferência visual do mapa, conforme a Seção~\ref{sec:legibilidade-ferroviaria}. A alteração responde ao feedback recebido e foi verificada tecnicamente; seu benefício para pessoas com diferentes percepções de cor ainda requer avaliação com usuários.
+ 
+ O estudo complementar do Apêndice~\ref{ap:cliques}, sintetizado na Tabela~\ref{tab:cliques-celular}, registrou no PaP três ações até abrir a rota pelo favorito comum, contra duas pelos atalhos Casa e Trabalho. Essa economia de uma ação vale para as condições examinadas. Os percursos analíticos de favoritos do Cittamobi e Quanto Tempo Falta levam à consulta de linhas, com resultados diferentes do planejamento até um destino. A contagem contribui para examinar o custo de interação, conforme a perspectiva de \citet{card1980}, mas não comprova superioridade geral, menor tempo de uso ou maior satisfação.
+ 

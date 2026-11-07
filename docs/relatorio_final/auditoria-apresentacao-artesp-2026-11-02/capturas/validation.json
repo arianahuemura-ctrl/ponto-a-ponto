@@ -1,0 +1,48 @@
+[
+  {
+    "theme": "light",
+    "labels": [
+      "Metrô 17",
+      "Metrô 6",
+      "Trem 13",
+      "Metrô 4",
+      "Metrô 15",
+      "Metrô 1",
+      "Metrô 5",
+      "Metrô 3",
+      "Trem 7",
+      "Trem 12",
+      "Trem 9",
+      "Trem 10",
+      "Trem 8",
+      "Trem 11",
+      "Trem 9",
+      "Trem 10",
+      "Trem 11"
+    ],
+    "errors": []
+  },
+  {
+    "theme": "dark",
+    "labels": [
+      "Metrô 17",
+      "Metrô 6",
+      "Trem 13",
+      "Metrô 4",
+      "Metrô 15",
+      "Metrô 1",
+      "Metrô 5",
+      "Metrô 3",
+      "Trem 7",
+      "Trem 12",
+      "Trem 9",
+      "Trem 10",
+      "Trem 8",
+      "Trem 11",
+      "Trem 9",
+      "Trem 10",
+      "Trem 11"
+    ],
+    "errors": []
+  }
+]

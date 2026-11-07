@@ -1,0 +1,8 @@
+{
+  "commit_base": "85417bccfb3b72ff287c5e2105840654e5b95ca1",
+  "alteracao_local": "O indicador não é exibido quando a gravação está desligada; avisos de atividade, inicialização e falha são preservados.",
+  "diff": "ajuste-interface.diff",
+  "respostas_transporte": "reais, não substituídas",
+  "imagem": "captura direta do navegador, sem retoque",
+  "testes": "15 testes E2E de consentimento aprovados"
+}

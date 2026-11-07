@@ -1,0 +1,258 @@
+{
+  "run": "journey",
+  "started": "2026-11-02T14:39:01.508Z",
+  "appCommit": "78e39355ce23aa545c4006978bcc59060f6db24f",
+  "baseURL": "http://127.0.0.1:18082",
+  "transport": "Real application; no mocked or substituted responses",
+  "research": "Declined through UI; no feedback sent",
+  "captures": [
+    {
+      "file": "embarque.png",
+      "at": "2026-11-02T14:39:12.810Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Entry through stop 1211381 URL; no physical QR reading.",
+      "sha256": "cb0195cc6dc81bf5ed39e89598b0e4776a7bf78881658b0ab7a41a2a07c42cb5"
+    },
+    {
+      "file": "qr-atual.png",
+      "at": "2026-11-02T14:39:14.086Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Actual QR for the local development URL, not public deployment.",
+      "sha256": "de884434527fcbbd5ade0d83067f004f007e3375ba1e116e183a0a05dcf434ce"
+    },
+    {
+      "file": "favoritos.png",
+      "at": "2026-11-02T14:39:20.518Z",
+      "url": "http://127.0.0.1:18082/?stop=1211381",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "note": "Prepared favourites with real catalogued stops and illustrative labels; not participant data.",
+      "sha256": "21b416cbd7183c6007aff821cc44e85cb316b1ad67f2205fc786ae5da8111143"
+    }
+  ],
+  "requests": [
+    {
+      "time": "2026-11-02T14:39:02.077Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:02.078Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:02.105Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?id=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:06.585Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:12.860Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/qr/1211381/?format=json",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:12.917Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/qr/1211381/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:14.292Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stop-catalogue/",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:14.695Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:14.697Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:14.749Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:20.577Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=1211381&destination=600012585&route_only=1&nearby=1&stream=1&max_transfers=4",
+      "status": 200
+    }
+  ],
+  "preparedFavorites": [
+    {
+      "id": "680017148",
+      "name": "Av. Eng. Heitor Antônio Eiras Garcia, 434",
+      "address": "Ref.: R Manoel Alonso Esteves/ R Vicente Pelosi",
+      "lat": -23.575243,
+      "lon": -46.740088,
+      "code": "680017148",
+      "directions": [
+        {
+          "bearing": 236,
+          "code": "715M-10",
+          "headsign": "Jd. Maria Luiza",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 243,
+          "code": "775A-10",
+          "headsign": "Pinheiros",
+          "source": "stop_sequence",
+          "approximate": true,
+          "kind": "departure"
+        },
+        {
+          "bearing": 236,
+          "code": "778J-10",
+          "headsign": "Jd. Arpoador",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 243,
+          "code": "8021-10",
+          "headsign": "Butantã",
+          "source": "stop_sequence",
+          "approximate": true,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "Casa"
+    },
+    {
+      "id": "8210184",
+      "name": "R. Tijuco Preto, 1388",
+      "address": "Ref.: Oposto - Rua Apucarana",
+      "lat": -23.542105,
+      "lon": -46.562191,
+      "code": "8210184",
+      "directions": [
+        {
+          "bearing": 258,
+          "code": "3729-10",
+          "headsign": "Shop. Aricanduva",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "UNIVESP Carrão"
+    },
+    {
+      "id": "600012585",
+      "name": "R. Guaiaúna, 419",
+      "address": "Ref.: Rua Doutor Ismael Dias",
+      "lat": -23.530739,
+      "lon": -46.549921,
+      "code": "600012585",
+      "directions": [
+        {
+          "bearing": 307,
+          "code": "2713-10",
+          "headsign": "Chác. Bela Vista",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2726-10",
+          "headsign": "Limoeiro",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2728-10",
+          "headsign": "Jd. Do Castelo",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "2755-10",
+          "headsign": "Guaianases",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3206-10",
+          "headsign": "Conj. Chaparral",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "3901-10",
+          "headsign": "Jd. Danfer",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "403A-10",
+          "headsign": "Term. Penha",
+          "source": "shape",
+          "approximate": false,
+          "kind": "departure"
+        },
+        {
+          "bearing": 307,
+          "code": "N303-11",
+          "headsign": "Term. Aricanduva",
+          "source": "shape",
+          "approximate": false,
+          "kind": "arrival"
+        }
+      ],
+      "direction_status": "available",
+      "favoriteLabel": "Guaiaúna"
+    }
+  ],
+  "error": "locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.sp-route-option').first() to be visible\u001b[22m\n\n    at /tmp/pap-capture-current.cjs:63:47",
+  "ended": "2026-11-02T14:40:45.295Z"
+}

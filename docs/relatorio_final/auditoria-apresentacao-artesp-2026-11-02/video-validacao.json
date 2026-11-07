@@ -1,0 +1,73 @@
+{
+  "reference_md5": "ebfca59d6ca04daaa903396c82766121",
+  "final_md5": "7f7e73ef1ce62756bb1d82c158ce5788",
+  "final_sha256": "2f9b00194b69038766a2caab6ab97f7b22c282a71e6c83741a89cf0ec2df7b75",
+  "duration": "588.867000",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "frames": 17666,
+  "chapters": 12,
+  "audio_codec": "aac",
+  "video_rebuilt_intervals_frames": [
+    [
+      0,
+      1488
+    ],
+    [
+      8515,
+      12272
+    ],
+    [
+      16760,
+      17666
+    ]
+  ],
+  "all_other_decoded_frames_identical": true,
+  "audio": {
+    "unchanged_pcm_outside_two_intervals": true,
+    "bruno_gain_preserved": true,
+    "patches": [
+      {
+        "speaker": "Caio Procópio",
+        "start": 293.8,
+        "end": 314.8,
+        "gain_db": 4.226029898675229,
+        "peak": 0.763779878616333,
+        "source_visual": "015-alpha.mkv",
+        "visual_selection": "Gravação anterior do próprio participante, no mesmo tema; ajuste de cadência, não nova gravação."
+      },
+      {
+        "speaker": "André",
+        "start": 565.27,
+        "end": 583.67,
+        "gain_db": 1.0033262025940486,
+        "peak": 0.7762861847877502,
+        "source_visual": "human-4.mkv",
+        "visual_selection": "Gravação anterior do próprio participante, no mesmo tema; ajuste de cadência, não nova gravação."
+      }
+    ]
+  },
+  "new_speech_encoded_levels": [
+    {
+      "speaker": "Caio Procópio",
+      "lufs": "-16.74",
+      "true_peak_db": "-2.46"
+    },
+    {
+      "speaker": "André",
+      "lufs": "-18.06",
+      "true_peak_db": "-2.19"
+    }
+  ],
+  "subtitles": {
+    "pt": 169,
+    "en": 165
+  },
+  "embedded_srt_vtt_exact_match": true,
+  "full_decode_without_errors": true,
+  "prior_version_preserved": true,
+  "git_commit_created": false
+}

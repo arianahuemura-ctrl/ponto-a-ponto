@@ -1,0 +1,41 @@
+{
+  "descricao": "Contrato para extração restrita autorizada; não é schema original do aplicativo",
+  "campos": [
+    "session_alias",
+    "epoch",
+    "seq",
+    "elapsed_ms",
+    "kind",
+    "origin_alias",
+    "destination_alias",
+    "association",
+    "has_alternatives",
+    "complete"
+  ],
+  "kinds": [
+    "session_start",
+    "context",
+    "planning_explicit",
+    "api_result",
+    "selection_explicit",
+    "details_observed",
+    "cancel_intent",
+    "cancel_confirmed",
+    "feedback_saved",
+    "error"
+  ],
+  "association": [
+    "confirmed",
+    "ambiguous"
+  ],
+  "proibidos": [
+    "texto_busca",
+    "lat",
+    "lon",
+    "uuid_original",
+    "token",
+    "mensagem",
+    "userAgent"
+  ],
+  "nota": "api_result sem association confirmed não produz primeira/última latência atribuída à tentativa; não usar state journey para selection_explicit"
+}

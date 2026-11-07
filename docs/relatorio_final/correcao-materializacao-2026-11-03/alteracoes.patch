@@ -1,0 +1,11 @@
+--- antes/percurso-metodologico.tex
++++ depois/percurso-metodologico.tex
+@@ -152,7 +152,7 @@
+ 
+ % Ajuste local: manter o parágrafo completo, sem alterar margens ou espaçamento.
+ \begin{samepage}
+-Essa evolução descreve decisões de projeto e mecanismos implementados, não um ganho global de desempenho já demonstrado. A materialização municipal foi interrompida porque a necessidade estimada de armazenamento era incompatível com o espaço em disco disponível no ambiente de desenvolvimento. O protocolo da Seção~\ref{sec:benchmark-hibrido} permanece proposto para uma comparação futura sob condições equivalentes, em infraestrutura compatível. Os critérios de custo, validação e encerramento estão no Apêndice~\ref{ap:rotas}; os registros de testes de cada versão permanecem no Apêndice~\ref{ap:engenharia}, separados da avaliação com passageiros.
++Essa evolução descreve decisões de projeto e mecanismos implementados, não um ganho global de desempenho já demonstrado. A interrupção por falta de espaço em disco refere-se à arquitetura histórica de 28 de outubro de 2026, posteriormente substituída, no fluxo atual, pela materialização compacta documentada na Seção~\ref{sec:atualizacao-20261101}. O protocolo da Seção~\ref{sec:benchmark-hibrido} permanece proposto para uma comparação futura sob condições equivalentes, em infraestrutura compatível. Os critérios de custo, validação e encerramento estão no Apêndice~\ref{ap:rotas}; os registros de testes de cada versão permanecem no Apêndice~\ref{ap:engenharia}, separados da avaliação com passageiros.
+ \par\end{samepage}
+ 
+ % Conteúdo independente para a revisão estilística v2: engenharia_metodologia

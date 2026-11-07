@@ -1,0 +1,22 @@
+{
+  "data": "2026-10-23",
+  "viewport": [
+    430,
+    932
+  ],
+  "device_scale": 2,
+  "browser": "Chromium/Playwright",
+  "theme": "dark",
+  "geolocation": "não autorizada nos dois contextos novos",
+  "storage": "contextos novos, sem favoritos ou viagem restaurada; apenas tema definido",
+  "telemetry": "interceptada somente no navegador de documentação",
+  "transport": "respostas reais da aplicação local; sem substituição",
+  "files": {
+    "qr.png": "147f8871f1f316574dd337584ddbb1034942168659765241a23613a32486aa51",
+    "aceite-viewport.png": "44c214f57b8c3cefb74121156ea2c1528de1779b75cc525d3fd9c67444b02c59",
+    "aceite-completo.png": "44c214f57b8c3cefb74121156ea2c1528de1779b75cc525d3fd9c67444b02c59",
+    "sem-localizacao.png": "04f002188a314fcfb4bf18f58f932b128e9d9db9b2227c67a495a36440a10a63"
+  },
+  "application_base_commit": "aee66eb",
+  "source_note": "Aplicação servida na porta 8000; sem alteração ou recompilação do frontend nesta revisão. Capturas antigas mantêm a procedência de 22/10."
+}

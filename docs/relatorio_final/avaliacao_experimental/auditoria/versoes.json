@@ -1,0 +1,27 @@
+{
+  "revisao_instrumentos": "EXP-1",
+  "data": "2026-10-28",
+  "app_head": "85417bccfb3b72ff287c5e2105840654e5b95ca1",
+  "app_tem_alteracoes_locais": true,
+  "app_fontes_sha256": {
+    "frontend/src/usability.js": "6a6fcf727e20359c368a6b17a888076348ac918cec2768c6ee7c5a7c6894e555",
+    "frontend/src/researchChoice.js": "da65318d7af5cb2ab9f902ce4609884d3d3e65203bf8b5fbd8c14cd8a7bbb651",
+    "frontend/src/researchApi.js": "cc5a524db91da7b857f04addb149a5ae4d02462b9c2b2bd419caeee24d38916b",
+    "frontend/src/api.js": "9c324de96c4b4d5b5aa7305ab444e91d7b54d0ec170f03bca5b7f217933e72c8",
+    "frontend/src/SaoPaulo.jsx": "7ecfb533c0b6817f414aede492ba1d2328a4cfe8d1a3d31670af134e354cce52",
+    "frontend/src/BoardDialog.jsx": "fc6ca8c43c8c2178f892ccfe03a40add8d90b7cbca02e2581cefba3fbbe6cfa4",
+    "frontend/src/Feedback.jsx": "926200d801eb9820a55e01df68172adf8dcd69d0bbbbbd9d8cb1b33ab10c602d",
+    "backend/transit/usability.py": "567c8eeef0dae75ce296d2db5d30d96604c655892a1c2c4e88402a7b7124af62",
+    "backend/transit/research.py": "ceebbcd98dd2540e8426fedeba09f4a88060de3f8c4d6807f877c0d8efa0c303",
+    "backend/transit/usability_admin.py": "48e9e3a5a388312b7043c1173331bb1524ec1abee8da3cf7d45f3194f02a09cb",
+    "backend/transit/sptrans/alternatives.py": "9735d9843e1a678beb7d0e8ddb53ed8235524ba4b9f2990265a7688e9cac954a",
+    "backend/transit/sptrans/materialized_adapter.py": "e3442e76b1d7e17cc2421a9081fb76fc5e8cf7aafe00edce52f4c0d51bb5daee",
+    "backend/transit/sptrans/materialized_connections.py": "7d22f251dfceb769bec31cdbe2be9cec73e0558b30c0524acfb6331dcabe6c32",
+    "backend/transit/sptrans/connection_adapter.py": "ea3117c6f6beb63484ddb00f0c47b01cc3e3a2c19c76158068fff984e878bee1",
+    "backend/transit/sptrans/connection_planner.py": "f74f35f92887052e7ab2e2d90233483f61616469b55d09451d934dbf11810053",
+    "backend/transit/sptrans/planner.py": "9d4608fdcb342997752d6eef4299dce40d8366411b8d527d0591a8812117c7d0"
+  },
+  "pdf_md5": "cc9f063ec8ae7b225bdf0463d764cd19",
+  "bancos": "assinaturas históricas nas auditorias existentes; recolher hashes atuais estáveis no prevoo, não presumir igualdade pelo HEAD",
+  "dados_privados_abertos": false
+}

@@ -1,0 +1,28 @@
+test_benchmark_timeout_not_success_latency (test_instrumentos.Integrity.test_benchmark_timeout_not_success_latency) ... ok
+test_empty_readiness_blocks (test_instrumentos.Integrity.test_empty_readiness_blocks) ... ok
+test_manifest (test_instrumentos.Integrity.test_manifest) ... ok
+test_context_mismatch (test_instrumentos.Paired.test_context_mismatch) ... ok
+test_duplicate_rejected (test_instrumentos.Paired.test_duplicate_rejected) ... ok
+test_failure_kept_efficiency_excluded (test_instrumentos.Paired.test_failure_kept_efficiency_excluded) ... ok
+test_negative_or_bad_seq (test_instrumentos.Paired.test_negative_or_bad_seq) ... ok
+test_progressive_choice_before_completion (test_instrumentos.Paired.test_progressive_choice_before_completion) ... ok
+test_scroll_equals_tap_and_missing_tc_not_exclude (test_instrumentos.Paired.test_scroll_equals_tap_and_missing_tc_not_exclude) ... ok
+test_seq_and_comprehension_include_failure (test_instrumentos.Paired.test_seq_and_comprehension_include_failure) ... ok
+test_type7 (test_instrumentos.Paired.test_type7) ... ok
+test_abc_fallback_observed_and_restore (test_instrumentos.Provenance.test_abc_fallback_observed_and_restore) ... ok
+test_fixture_no_network_and_copy (test_instrumentos.Provenance.test_fixture_no_network_and_copy) ... ok
+test_hooks_preserve_results_and_restore (test_instrumentos.Provenance.test_hooks_preserve_results_and_restore) ... ok
+test_measure_requires_completion (test_instrumentos.Provenance.test_measure_requires_completion) ... ok
+test_merge_provenance (test_instrumentos.Provenance.test_merge_provenance) ... ok
+test_auto_selection_and_raw_pii_rejected (test_instrumentos.Segmentation.test_auto_selection_and_raw_pii_rejected) ... ok
+test_context_then_planning_one_attempt (test_instrumentos.Segmentation.test_context_then_planning_one_attempt) ... ok
+test_epochs_and_ambiguous_response (test_instrumentos.Segmentation.test_epochs_and_ambiguous_response) ... ok
+test_intent_not_confirmed (test_instrumentos.Segmentation.test_intent_not_confirmed) ... ok
+test_no_aggregate_from_one_session_many_attempts (test_instrumentos.Segmentation.test_no_aggregate_from_one_session_many_attempts) ... ok
+test_requery_and_inactivity (test_instrumentos.Segmentation.test_requery_and_inactivity) ... ok
+test_suppression_complement (test_instrumentos.Segmentation.test_suppression_complement) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.001s
+
+OK

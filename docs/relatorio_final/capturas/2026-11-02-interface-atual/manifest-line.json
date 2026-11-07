@@ -1,0 +1,67 @@
+{
+  "run": "line",
+  "started": "2026-11-02T14:39:57.408Z",
+  "appCommit": "78e39355ce23aa545c4006978bcc59060f6db24f",
+  "baseURL": "http://127.0.0.1:18082",
+  "transport": "Real application; no mocked or substituted responses",
+  "research": "Declined through UI; no feedback sent",
+  "captures": [
+    {
+      "file": "linha-6L10-completa.png",
+      "at": "2026-11-02T14:40:14.035Z",
+      "url": "http://127.0.0.1:18082/?stop=5614798",
+      "viewport": {
+        "width": 1366,
+        "height": 1000
+      },
+      "scale": 2,
+      "note": "Real 6L10-41 route from stop 5614798; availability as displayed.",
+      "sha256": "fd77804f4e23ebbfcdbb29df84280c8af618638f4df905953258d896ab120252"
+    }
+  ],
+  "requests": [
+    {
+      "time": "2026-11-02T14:39:57.971Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/rail-network/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:57.971Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/stops/?id=5614798",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:58.007Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/location-config/?",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:39:58.520Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/board/?origin=5614798",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:40:03.070Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/6L10-41-1/?origin=5614798&next=1&all=1",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:40:07.986Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/6L10-41-1/?origin=5614798&next=1&all=1",
+      "status": 200
+    },
+    {
+      "time": "2026-11-02T14:40:13.043Z",
+      "method": "GET",
+      "url": "http://127.0.0.1:18082/api/sptrans/trips/6L10-41-1/?origin=5614798&next=1&all=1",
+      "status": 200
+    }
+  ],
+  "ended": "2026-11-02T14:40:14.044Z"
+}

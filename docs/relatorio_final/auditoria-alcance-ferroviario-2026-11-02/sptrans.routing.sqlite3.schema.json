@@ -1,0 +1,66 @@
+[
+  {
+    "name": "graph_meta",
+    "sql": "CREATE TABLE graph_meta(id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL)"
+  },
+  {
+    "name": "graph_stop",
+    "sql": "CREATE TABLE graph_stop(id TEXT PRIMARY KEY, name TEXT, lat REAL, lon REAL)"
+  },
+  {
+    "name": "pattern",
+    "sql": "CREATE TABLE pattern(id INTEGER PRIMARY KEY, route_id TEXT, code TEXT, direction TEXT,\n      headsign TEXT, shape_id TEXT, stops TEXT, geometry TEXT, projections TEXT)"
+  },
+  {
+    "name": "timetable",
+    "sql": "CREATE TABLE timetable(trip_id TEXT PRIMARY KEY, pattern_id INTEGER, service_id TEXT,\n      times TEXT, frequencies TEXT)"
+  },
+  {
+    "name": "ride_edge",
+    "sql": "CREATE TABLE ride_edge(id INTEGER PRIMARY KEY, origin TEXT, destination TEXT,\n      pattern_id INTEGER, boarding_index INTEGER, alighting_index INTEGER,\n      distance_meters REAL, min_ride_seconds REAL CHECK(min_ride_seconds>=0),\n      UNIQUE(pattern_id,boarding_index,alighting_index))"
+  },
+  {
+    "name": "walk_edge",
+    "sql": "CREATE TABLE walk_edge(origin TEXT, destination TEXT, air_meters REAL,\n      distance_meters REAL, seconds REAL, geometry TEXT, source TEXT, checked_at TEXT,\n      status TEXT NOT NULL CHECK(status IN ('pending','verified','unavailable','over_limit')),\n      PRIMARY KEY(origin,destination))"
+  },
+  {
+    "name": "candidate_cache",
+    "sql": "CREATE TABLE candidate_cache(origin TEXT, destination TEXT, transfers INTEGER,\n      revision INTEGER, complete INTEGER, candidates TEXT,\n      PRIMARY KEY(origin,destination,transfers))"
+  },
+  {
+    "name": "calendar",
+    "sql": "CREATE TABLE calendar (service_id TEXT,monday TEXT,tuesday TEXT,wednesday TEXT,thursday TEXT,friday TEXT,saturday TEXT,sunday TEXT,start_date TEXT,end_date TEXT)"
+  },
+  {
+    "name": "calendar_dates",
+    "sql": "CREATE TABLE calendar_dates (service_id TEXT,date TEXT,exception_type TEXT)"
+  },
+  {
+    "name": "sqlite_stat1",
+    "sql": "CREATE TABLE sqlite_stat1(tbl,idx,stat)"
+  },
+  {
+    "name": "connection_pairs",
+    "sql": "CREATE TABLE connection_pairs (\n            origin TEXT, destination TEXT, revision INTEGER, version INTEGER,\n            complete INTEGER, built_at TEXT, stats TEXT,\n            PRIMARY KEY(origin,destination))"
+  },
+  {
+    "name": "connections",
+    "sql": "CREATE TABLE connections (\n            id TEXT PRIMARY KEY, origin TEXT, destination TEXT, boardings INTEGER,\n            rank INTEGER, distance_meters REAL NOT NULL, bus_meters REAL NOT NULL,\n            walk_meters REAL NOT NULL, walk_seconds REAL NOT NULL, edge_ids TEXT NOT NULL,\n            UNIQUE(origin,destination,boardings,rank))"
+  },
+  {
+    "name": "historical_profiles",
+    "sql": "CREATE TABLE historical_profiles (\n            pattern_id INTEGER, segment_index INTEGER, day_type TEXT,\n            start_second INTEGER, end_second INTEGER, speed_kmh REAL,\n            source TEXT NOT NULL, samples INTEGER NOT NULL,\n            PRIMARY KEY(pattern_id,segment_index,day_type,start_second))"
+  },
+  {
+    "name": "historical_days",
+    "sql": "CREATE TABLE historical_days (date TEXT PRIMARY KEY, day_type TEXT NOT NULL)"
+  },
+  {
+    "name": "connection_operational_mappings",
+    "sql": "CREATE TABLE connection_operational_mappings (\n            pattern_id INTEGER, stop_id TEXT, api_line INTEGER, api_stop INTEGER,\n            checked_at TEXT NOT NULL, PRIMARY KEY(pattern_id,stop_id))"
+  },
+  {
+    "name": "connection_segments",
+    "sql": "CREATE TABLE connection_segments (\n            pattern_id INTEGER, segment_index INTEGER, origin TEXT, destination TEXT,\n            distance_meters REAL, PRIMARY KEY(pattern_id,segment_index))"
+  }
+]

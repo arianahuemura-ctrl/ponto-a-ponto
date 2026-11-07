@@ -1,0 +1,10 @@
+Conferência em 25/10/2026
+Aplicativo: 85417bccfb3b72ff287c5e2105840654e5b95ca1, worktree sem alterações.
+Instância real: http://127.0.0.1:8001; assets iguais ao build local validado.
+32 imagens raster distintas, 35 inclusões: nenhum arquivo ausente. Conferidas as 30 páginas com figuras e os diagramas renderizados.
+7 novas capturas no Chromium; 6 utilizadas no relatório (consulta da linha mantida como evidência auxiliar). Sem consentimento de gravação, sem respostas de transporte simuladas.
+Figuras de aplicativos externos: registros fornecidos pelo grupo; não se afirma atualização desses serviços.
+Capturas de 22/10: preservadas como sequência histórica com dados operacionais daquele instante, não recapturadas nem revalidadas como estado atual.
+Diagramas: conferência visual; arquitetura e fluxo geral corrigidos anteriormente.
+Diferença encontrada: configurações de pesquisa agora têm botão único e indicador de estado.
+Limitação atual: indicador persistente Gravação parada sobrepõe parte da legenda inferior do mapa; não foi removido artificialmente.

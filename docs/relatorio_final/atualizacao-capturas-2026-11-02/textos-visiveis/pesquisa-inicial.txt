@@ -1,0 +1,15 @@
+Ponto a Ponto — Ajude a melhorar o transporte público
+
+O PaP é um projeto acadêmico da UNIVESP que facilita a consulta de ônibus e o planejamento de viagens.
+
+Durante o desenvolvimento, estamos realizando uma pesquisa para identificar dificuldades de navegação e melhorar a experiência dos passageiros.
+
+Se você optar por contribuir, poderemos registrar suas interações com a aplicação, incluindo movimentos no mapa, buscas, locais consultados e informações técnicas do dispositivo.
+
+Sua participação é voluntária. Você poderá utilizar todas as funcionalidades do PaP mesmo sem participar da pesquisa.
+
+Os dados de transporte são fornecidos pela SPTrans. Atualmente, o PaP funciona na cidade de São Paulo.
+
+Contribuir com a pesquisa
+Continuar sem contribuir
+Informações completas sobre a pesquisa

@@ -1,0 +1,76 @@
+REVISÃO CORRETIVA — RELATÓRIO PAP — VERSÃO 8
+28/10/2026
+
+Ambiente confirmado: /home/avale/Projetos/maua_bus_map-relatorio,
+branch relatorio, HEAD c18556cb4a3f3bc733d9eab040f0d7f0755595b3.
+Alterações locais preexistentes preservadas. Nenhum commit, merge, rebase,
+reset ou alteração de outro worktree foi realizado.
+
+Entrada: 133 páginas, MD5 99a9dd131d390ace229c5ebb7773d518.
+Saída: 133 páginas, MD5 cc9f063ec8ae7b225bdf0463d764cd19.
+LuaLaTeX/latexmk: compilação concluída em 28/10/2026 às 13:08:50,
+horário de Brasília. PDF: docs/relatorio_final/relatorio_final_pi2_v2.pdf.
+
+CONFIGURAÇÃO A
+Caminho completo de conexões, sem fallback: consolidado materializado,
+índice direto, componentes auxiliares e composição estrutural limitada,
+incluindo validações de caminhadas e horários e refinamento operacional.
+Resultado sem alternativas válidas permanece vazio.
+B permanece planejador por rodadas isolado; C, integração com fallback.
+A consulta estrita apenas ao consolidado, se investigada, será análise
+auxiliar distinta de A.
+
+O protocolo exige procedência separada dos candidatos, por categoria do
+consolidado, índice direto, componentes de um ônibus e de dois ônibus.
+A deduplicação deve preservar todas as origens do candidato; quantidades
+recuperadas, avaliadas e válidas serão distintas. Trata-se de requisito
+futuro de instrumentação, não de implementação ou medição concluída.
+A comparação principal A/B/C terá limite comum de dois ônibus, inclusive
+no fallback. Três embarques dependem de capacidade e condições equivalentes
+nas configurações. A cota de quatro para três ônibus permanece investigação
+futura, sem atribuir essa categoria ao consolidado atual.
+
+FONTES ALTERADOS (caminhos relativos a docs/relatorio_final)
+- planejador_hibrido.tex:48–52: definição de A, procedência e limite comum;
+  linha 63: identificação de A no TODO; linha 66: cotas atuais e extensão
+  futura condicionada para três ônibus.
+- diagramas/sequencia.tex:5: somente etapa 2 da Figura 30, agora incluindo
+  consolidado materializado, índice direto, componentes e composição
+  online limitada por profundidade, cotas e prazos. Etapas 1 e 3–6,
+  setas, nota de leitura e descrição de fallback foram preservadas.
+- diagramas/arquitetura.tex:13 e 15: identifica o consolidado de um/dois
+  ônibus e os índices auxiliares; linha 28: nota breve de recuperação
+  online, inserida no espaço livre à esquerda, sem reconstrução do diagrama.
+- relatorio_final_pi2_v2.tex:611–614: agrupamento local samepage mantém
+  inteiro o parágrafo na página física 37 (impressa 33). Fonte, margens,
+  espaçamento e texto preservados. Linhas 637 e 1198: datas dos ajustes
+  das Figuras 11 e 30, preservando as datas anteriores de procedência.
+
+PRESERVAÇÃO E VALIDAÇÃO
+B.1 e B.2 permaneceram byte a byte idênticas. Todos os valores, a metodologia
+e as conclusões da auditoria aprovada foram preservados, assim como B.4,
+Tabela 8, IHC, bibliografia, avaliação da Alameda, documentos assinados,
+capturas e demais resultados protegidos. Comparação por SHA-256 confirmou
+432 outros arquivos protegidos, incluindo imagens e PDFs assinados.
+
+Sumário e referências cruzadas resolvidos; contagem automática: 133 f.
+Fontes incorporadas; sem erro, referência indefinida ou Overfull.
+Inspeção visual das páginas 36–38, 99–100 e 112: figuras legíveis, sem
+sobreposição; parágrafo completo na página 37; B.3 em duas páginas, sem
+linha solta adicional. Mantidas as margens, Times New Roman e o espaçamento.
+Persistem avisos de obsolescência babel/memoir e Underfull em célula
+calendar/calendar_dates preexistente (linha 1078), fora do escopo.
+git diff --check aprovado. O PDF principal foi gerado normalmente; a
+exportação auxiliar abaixo de 10 MB não é criada porque o PDF tem 20,23 MB.
+
+PENDÊNCIAS EFETIVAS
+- Instrumentar procedência e deduplicação antes da coleta de benchmark.
+- Confirmar equivalência dos acessos, validações e profundidade das variantes.
+- Disponibilizar capacidade correspondente antes de comparar três embarques.
+- Executar futuramente o benchmark; nenhuma execução foi iniciada aqui.
+Não houve alterações no aplicativo, bancos, materialização ou evidências
+originais. Não há pendência impeditiva para entrega desta revisão editorial.
+
+Estado final: branch relatorio, HEAD inalterado, alterações locais sem commit.
+O diff exclusivo da revisão está em alteracoes.patch; validações e hashes em
+validacao.json. A versão de entrada foi preservada em antes/.

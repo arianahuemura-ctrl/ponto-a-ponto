@@ -1,0 +1,8 @@
+{
+  "started_at": "2026-11-02T00:47:30.266495-03:00",
+  "finished_at": "2026-11-02T00:47:32.879879-03:00",
+  "request": "/api/sptrans/board/?origin=18935&destination=18859&max_transfers=4&route_only=1",
+  "execution": "Django view via RequestFactory; no HTTP transport/middleware, actual clock; all SQLite connections read-only; network blocked",
+  "status": 200,
+  "seconds": 2.6133831259794533
+}

@@ -1,0 +1,42 @@
+\section{Ampliação metropolitana em Mauá com dados ARTESP}
+\label{sec:artesp-maua}
+A importação metropolitana acrescentou 25.105 registros de paradas ao cadastro combinado, que passou a conter 47.379 pontos. A base foi ativada no aplicativo público em 2 de novembro de 2026; a consulta ao catálogo confirmou os novos identificadores e a atualização da revisão de cache. A ativação técnica não constitui implantação física de QR Codes nem integração operacional com a gestão municipal. O recorte territorial de Mauá confirmou \textbf{337 paradas ARTESP, 16 linhas ou variantes e 1.491 registros distintos de viagens programadas}, distribuídos pelos três tipos de dia da Tabela~\ref{tab:artesp-maua-dias}. Todas as 337 paradas possuem horários utilizáveis em ao menos um serviço e alternativas estruturais materializadas como origem. Isso não significa atendimento de todas elas em qualquer dia ou horário.
+
+\begin{table}[H]\centering\small
+\caption{Oferta programada ARTESP com embarque ou desembarque em Mauá.}\label{tab:artesp-maua-dias}
+\begin{tabular}{p{4.7cm}rrr}\hline
+Dia de serviço & Paradas & Linhas/variantes & Viagens distintas\\\hline
+Dia útil: 03/11/2026 & 337 & 16 & 705\\
+Sábado: 07/11/2026 & 324 & 12 & 427\\
+Domingo: 08/11/2026 & 324 & 12 & 359\\\hline
+\end{tabular}
+\fonte{Censo do grupo nos CSV originais ARTESP, versão 20261007, e recorte IBGE 2024; conferência em 2 nov. 2026.}
+\end{table}
+
+As 16 entradas de \texttt{routes} são 040, 040EX1, 063, 063EX1, 064, 107, 157, 158, 158BI1, 160, 160EX1, 177, 336, 382, 382EX1 e 403. Extensões e variantes são mantidas como entradas distintas; não se afirma a existência de 16 linhas comerciais independentes. A seleção não se limita aos nomes: seis dessas entradas não mencionam Mauá. As 32.277 passagens por paradas locais presentes no arquivo correspondem a 1.491 viagens distintas, não a 32.277 viagens. Os totais não representam veículos únicos, passageiros ou operações observadas. O mesmo recorte geográfico identificou Capuava (\texttt{18934}), Mauá (\texttt{18935}) e Guapituba (\texttt{18937}), todas na Linha 10--Turquesa, adicionais às 337 paradas metropolitanas.
+
+Foram executadas quatro consultas representativas nos três tipos de dia, com início de planejamento às 08h, no fuso de São Paulo. A Tabela~\ref{tab:artesp-maua-consultas} apresenta uma alternativa identificada em cada cenário e o tempo total estimado desde a consulta, incluindo espera e caminhada. Esses resultados são cálculos com dados reais importados, e não tempos de viagens realizadas em campo.
+
+\begin{table}[H]\centering\small
+\caption{Alternativas temporalmente válidas nos horários examinados.}\label{tab:artesp-maua-consultas}
+\begin{tabular}{p{8.4cm}rrr}\hline
+Cenário e alternativa & Útil & Sábado & Domingo\\\hline
+Terminal José Stella (Mauá) ao Terminal Nicolau Delic (São Caetano): ônibus 064, sem baldeação & 130 min & 100 min & 120 min\\[5pt]
+Av. Eugênio Negri (Mauá) a Trianon--Masp: 158 e Linha 2, conexão no Sacomã & 145 min & 140 min & 175 min\\[5pt]
+R. Oscarito (Mauá) ao Brás: 157 e Linha 10, conexão em Prefeito Saladino & 95,5 min & 105,5 min & 90,5 min\\[5pt]
+Estação Mauá a Trianon--Masp: Linha 10 e Linha 2, conexão em Tamanduateí & 68 min & 68 min & 68 min\\\hline
+\end{tabular}
+\fonte{Leitor de materialização da aplicação, bancos reais, consultas de referência às 08h de 3, 7 e 8 nov. 2026; respostas preservadas na auditoria.}
+\end{table}
+
+As conexões envolvendo ônibus têm custo de baldeação 1; a troca interna entre Linha 10 e Linha 2 tem custo $1/3$. A alternativa direta 064 não foi sempre a mais rápida: no dia útil, o mesmo par também retornou 063EX1 e 063, com uma troca e caminhada final, totalizando 98,5 minutos. O leitor reavalia os serviços disponíveis e os horários alcançáveis; não basta existir uma sequência materializada.
+
+No cenário ônibus--trem do dia útil, a resposta calculou embarque no 157 às 08h05, desembarque às 08h43min57s, caminhada de aproximadamente 413 metros até Prefeito Saladino e embarque estimado na Linha 10 às 08h53min57s, com chegada ao Brás às 09h35min27s. O grafo pedestre também contém acesso da parada \texttt{artesp:93038}, na Av. Alberto Soares Sampaio, à estação Capuava: aproximadamente 312 metros e 4,2 minutos. Esse último resultado é a conexão verificada no artefato de caminhadas, não uma inspeção das condições físicas ou da acessibilidade da estação.
+
+Os controles temporais evidenciaram limites. Para Av. Eugênio Negri--Trianon--Masp, às 02h de 3 de novembro, a alternativa 158 e Linha 2 foi calculável, mas exigiu esperar até 04h para o primeiro ônibus; a chegada estimada foi às 06h05min30s. Para o mesmo par, às 08h de 2 de janeiro de 2027, não houve alternativa válida entre os candidatos examinados, após o término do calendário ARTESP. Isso não prova ausência de operação real nessa data. O arquivo cobre 2026 sem exceções de feriados, e a ARTESP informa interpolação linear dos horários nas paradas intermediárias \citep{artespgtfs2026}. A ferrovia mantém o calendário e as estimativas descritos anteriormente. Condições de embarque, acesso, transferência e horizonte de seis horas continuam necessárias.
+
+A materialização combinada, processada com 32 processos, concluiu as etapas de custo 0 e 1, incluindo caminhadas curtas verificadas. As 337 origens metropolitanas locais possuem destinos materializados; não se deduz daí viabilidade temporal para todos os pares. O artefato anterior com custos maiores permanece como fonte complementar para seus identificadores originais. O percentual de 99,666\% e o benchmark de 1 de novembro referem-se ao universo anterior: não são uma taxa de atendimento de Mauá nem uma medição desta expansão. Nas 12 consultas representativas às 08h, o primeiro resultado local variou de 0,295 a 7,830 segundos, com o maior valor observado na primeira carga da rede, sem isolamento causal desse fator; não se trata de benchmark pareado ou latência completa no celular.
+
+Uma consulta adicional pela interface pública, em 2 de novembro às 02h19, retornou 157 e Linha 10 entre R. Oscarito e Brás, com chegada calculada às 06h26. A interface exibiu aviso de busca parcial, preservado junto às capturas: o resultado comprova retorno de uma alternativa, sem assegurar exame de todas as opções ou melhor viagem. Essa captura noturna não representa a consulta programada às 08h da tabela nem demonstra operação de feriado em campo.
+
+A ampliação demonstra um retorno funcional à região que motivou o projeto, por meio de serviços metropolitanos e ferroviários programados. Não incorpora a totalidade da rede municipal de ônibus de Mauá, não fornece previsão ARTESP em tempo real e não comprova cobertura populacional, integração tarifária ou validação com passageiros. A instalação dos QR Codes e a articulação operacional com a gestão municipal permanecem pendentes.

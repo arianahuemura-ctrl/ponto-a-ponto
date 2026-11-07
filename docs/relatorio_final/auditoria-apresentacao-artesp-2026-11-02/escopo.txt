@@ -1,0 +1,1 @@
+Adição localizada do feedback de legibilidade ferroviária e seu encaminhamento técnico. Dados ARTESP, tabelas, referências e demais seções preservados. Link público definitivo do vídeo segue pendente de confirmação; não houve publicação. Nenhum commit.

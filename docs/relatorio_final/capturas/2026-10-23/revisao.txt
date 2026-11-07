@@ -1,0 +1,14 @@
+REVISÃO DA ORDEM DAS TELAS — 23/10/2026
+Aviso de pesquisa movido para a primeira figura de interface (Figura 13).
+Captura do aviso refeita; acrescentado cenário real de acesso sem autorização de localização.
+Captura nova de QR/link usada para conferir o comportamento; exemplo de 22/10 preservado no relatório para manter a sequência documental da viagem por Guaiaúna.
+Acesso comum e entrada por link explicitados como alternativas após o aceite.
+Favoritos apresentados uma única vez; a antiga referência print-07-favoritos resolve para a mesma figura de seleção por favoritos.
+Legendas e parágrafos distinguem a sequência QR/link -> favoritos -> alternativas -> mapa -> confirmação dos cenários auxiliares.
+A localização simulada, os favoritos previamente preparados e a ausência de leitura física de QR Code permanecem identificados.
+Código de UsabilityConsent.jsx examinado em modo somente leitura: status inicial ask; aceite não persistido entre carregamentos.
+Os 13 hashes das capturas de 22/10 foram conferidos e permanecem intactos.
+Testes de navegação em contextos Chromium novos; somente telemetria interceptada para evitar sessões artificiais na pesquisa.
+Não houve alteração de código da aplicação, commit, merge ou troca de branch.
+PDF final: 107 páginas; Figuras 13 a 17 nas páginas PDF 49 a 53 (impressas 45 a 49).
+Compilação latexmk/LuaLaTeX concluída; sem referências indefinidas, labels duplicados ou Overfull. git diff --check aprovado.

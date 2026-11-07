@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-22",
+  "application_inspection": "read only; no tests or private records read",
+  "base_commit": "aee66eb6761e868c0547c7454e7b259faae3a9fc",
+  "files": {
+    "frontend/src/SaoPaulo.jsx": "5d78abb7f227a8b57a095cdede09b6a6aecfb9cd8fc8c2fb77f80cf1dfe1ba93",
+    "frontend/src/CancelTripDialog.jsx": "82f3fb40ec029db6948cef9632a23d0d1cfb585ae5a464989c11570571ac5758",
+    "frontend/src/BoardDialog.jsx": "11c6df54be9dc7ae973320b10847b45654fe623daf396b36914f9c3b32ec292d",
+    "frontend/src/UsabilityConsent.jsx": "6eb080b3e4afd92b9025a8c56fbdcc2bf1c8318cbf0d358cec489d4b7405cd62",
+    "frontend/src/usability.js": "37eb4a8aecd7aa57d069f119abb7d5924f777e18b37981fb18dc3e9167f2b5fc",
+    "frontend/src/visualRecording.js": "0ba28079cb9607a0411ed108432d2a4b0a6377932b5afacd9d34a4dc2d7039cc",
+    "frontend/src/api.js": "1034876b0039561e62dd7d30f8e432746f0eeb0f69f53079e4a0a5f0923e75c3",
+    "backend/transit/usability.py": "f0d01c6c38f2f6c8c8771a77d5e9a25c5ae9c1f8e241be3ac3fbfc1a842e8e58",
+    "backend/transit/usability_admin.py": "d2e99a6ec71754b3e759ee793c898507bf3384728678bcf02ead70e71fbda6bb",
+    "backend/transit/replay_video.py": "e929d8cfbd2005b6fa20bde2f83aeb99033a13d5d92b25476d6e0852cb239085",
+    "scripts/telemetry_storage.py": "63039f3ef9a4b03c3a0b8d412e2bc5972b55de5d70fa96d47e2f15bc89828a20",
+    "backend/mbm/public_urls.py": "1f027d8f403248c6f61ebf6f23e92a4a545501b960eb6b0427bf8a4615ac048f",
+    "backend/mbm/public_boundary.py": "66603c9a50c751691e1797da7eeeb907200e9f76f8b8dc9f22eb822dc178a83a"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "only_results_and_conclusions_modified": true,
+  "outside_chapters_byte_identical": true,
+  "reference_pdf_md5": "fcf136604ea3aa13ea58bd884cc628b1",
+  "previous_worktree_pdf_md5": "87bdf923c09bafb6c5f60ed81c284738",
+  "before_source_sha256": "e7719deca108e0bc90e0d05631cca8148a08a1079ce79ea3518929836e0528a0",
+  "after_source_sha256": "b96809b7978624ca82cede62b97c19ac0c611b7be8c76161a51550cd7094c0bc",
+  "already_present_change": "The current worktree had already replaced the future-tense Metrô/CPTM paragraph in the 01/11 consistency revision; this revision preserves it and clarifies geographical scope."
+}
